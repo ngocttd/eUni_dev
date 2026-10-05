@@ -1,0 +1,156 @@
+/* Khối Đời sống — tông navy HUMG đồng bộ với các khối public, bố cục thiên về hình ảnh */
+.life-chiprow { display: flex; flex-wrap: wrap; gap: 8px; }
+.life-chiprow span { font-size: 12px; font-weight: 600; color: var(--humg-primary); background: #eef3fb; padding: 6px 12px; border-radius: 999px; }
+.life-check { display: grid; gap: 8px; }
+.life-check li { display: flex; align-items: flex-start; gap: 8px; font-size: 13.5px; line-height: 1.55; }
+.life-check li svg { color: var(--humg-primary); flex-shrink: 0; margin-top: 3px; }
+.life-cover, .life-map { display: block; }
+
+/* ---------- Hub: banner ảnh + tin nổi bật (PG-LIFE-01) ---------- */
+.life-banner { position: relative; border-radius: 16px; overflow: hidden; }
+.life-banner__img { display: block; }
+.life-banner__overlay {
+  position: absolute; left: 0; bottom: 0; right: 0;
+  padding: 22px; display: grid; gap: 8px; justify-items: start;
+  background: linear-gradient(0deg, rgba(8, 25, 55, 0.82), rgba(8, 25, 55, 0.15) 70%, transparent);
+  color: #fff;
+}
+.life-banner__overlay strong { font-size: 19px; line-height: 1.35; max-width: 30ch; }
+.life-banner__overlay p { margin: 0; font-size: 12.5px; color: rgba(255, 255, 255, 0.85); max-width: 52ch; }
+.life-banner__overlay .humg-btn { margin-top: 4px; }
+
+.life-events { display: grid; gap: 12px; }
+.life-events li { display: grid; grid-template-columns: 44px 1fr; gap: 12px; align-items: center; }
+.life-events__day { display: grid; justify-items: center; padding: 6px 0; border-radius: 10px; background: #eef3fb; }
+.life-events__day strong { font-size: 16px; font-weight: 800; color: var(--humg-primary); line-height: 1; }
+.life-events__day em { font-style: normal; font-size: 9px; font-weight: 700; text-transform: uppercase; color: var(--humg-text-secondary); }
+.life-events__body { display: grid; gap: 2px; }
+.life-events__body strong { font-size: 12.5px; font-weight: 600; line-height: 1.4; color: var(--humg-text); }
+.life-events__body em { font-style: normal; font-size: 11px; color: var(--humg-text-secondary); }
+
+.life-newscards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.life-newscard { position: relative; display: grid; gap: 4px; border: 1px solid var(--humg-border); border-radius: 14px; overflow: hidden; background: #fff; box-shadow: var(--humg-shadow-sm); transition: transform 0.16s ease, box-shadow 0.16s ease; }
+.life-newscard:hover { transform: translateY(-3px); box-shadow: 0 18px 34px -20px rgba(13, 71, 161, 0.3); }
+.life-newscard__img { display: block; }
+.life-newscard__tag { position: absolute; top: 10px; left: 10px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; background: var(--humg-primary); color: #fff; padding: 3px 9px; border-radius: 999px; }
+.life-newscard strong { font-size: 13px; color: var(--humg-primary); line-height: 1.4; padding: 12px 14px 0; }
+.life-newscard em { font-style: normal; font-size: 11px; color: var(--humg-text-secondary); padding: 0 14px 14px; }
+
+@media (max-width: 900px) { .life-newscards { grid-template-columns: 1fr; } }
+
+/* ---------- Hub: thẻ tính năng có ảnh ---------- */
+.life-features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.life-feature {
+  position: relative; display: flex; flex-direction: column; overflow: hidden;
+  border: 1px solid var(--humg-border); border-radius: 16px; background: #fff;
+  box-shadow: var(--humg-shadow-sm);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.life-feature:hover { transform: translateY(-4px); box-shadow: 0 20px 38px -20px rgba(13, 71, 161, 0.32); border-color: color-mix(in srgb, var(--humg-secondary) 45%, var(--humg-border)); }
+.life-feature__cover { display: block; border-radius: 0; }
+.life-feature__tag {
+  position: absolute; top: 12px; left: 12px; z-index: 1;
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase;
+  background: var(--humg-primary); color: #fff; padding: 4px 10px; border-radius: 999px;
+}
+.life-feature__body { padding: 16px; display: grid; gap: 6px; }
+.life-feature__ic {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border-radius: 12px; background: #eef3fb; color: var(--humg-primary); margin-bottom: 2px;
+}
+.life-feature__body strong { font-size: 15px; color: var(--humg-primary); }
+.life-feature__body p { margin: 0; font-size: 12.5px; color: var(--humg-text-secondary); line-height: 1.55; }
+
+/* ---------- Sidebar mini list ---------- */
+.life-mini { display: grid; gap: 12px; }
+.life-mini li { display: grid; gap: 3px; }
+.life-mini__tag { justify-self: start; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; background: #eef3fb; color: var(--humg-primary); padding: 2px 8px; border-radius: 999px; }
+.life-mini strong { font-size: 13px; font-weight: 600; line-height: 1.4; }
+.life-mini em { font-style: normal; font-size: 11.5px; color: var(--humg-text-secondary); }
+
+/* ---------- Hoạt động: feed ---------- */
+.life-feed { display: grid; gap: 14px; }
+.life-feed__item { display: grid; grid-template-columns: 150px 1fr; gap: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--humg-border); }
+.life-feed__item:last-child { border-bottom: 0; padding-bottom: 0; }
+.life-feed__thumb { display: block; align-self: start; }
+.life-feed__tag { display: inline-block; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; background: #eef3fb; color: var(--humg-primary); padding: 3px 10px; border-radius: 999px; margin-bottom: 6px; }
+.life-feed__item h3 { font-size: 15px; line-height: 1.4; margin: 0 0 5px; color: var(--humg-primary); }
+.life-feed__item p { font-size: 13px; color: var(--humg-text-secondary); margin: 0 0 8px; line-height: 1.55; }
+
+/* ---------- CLB: lưới thẻ có ảnh ---------- */
+.life-clubs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.life-club {
+  position: relative; display: flex; flex-direction: column; overflow: hidden;
+  border: 1px solid var(--humg-border); border-radius: 14px; background: #fff; box-shadow: var(--humg-shadow-sm);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.life-club:hover { transform: translateY(-4px); box-shadow: 0 18px 34px -20px rgba(13, 71, 161, 0.32); border-color: color-mix(in srgb, var(--humg-secondary) 45%, var(--humg-border)); }
+.life-club__cover { display: block; }
+.life-club__cat {
+  position: absolute; top: 12px; left: 12px;
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em;
+  background: color-mix(in srgb, var(--humg-primary) 92%, transparent); color: #fff; padding: 3px 9px; border-radius: 999px;
+}
+.life-club__body { padding: 14px 16px; display: grid; gap: 5px; }
+.life-club__body strong { font-size: 14.5px; color: var(--humg-primary); line-height: 1.35; }
+.life-club__body p { margin: 0; font-size: 12.5px; color: var(--humg-text-secondary); line-height: 1.5; }
+.life-club__meta { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; color: var(--humg-text-secondary); margin-top: 2px; }
+
+/* ---------- Cơ sở vật chất / khu KTX / def list ---------- */
+.life-facil { display: grid; gap: 10px; }
+.life-facil__item { display: grid; grid-template-columns: auto 1fr; gap: 12px; padding: 12px; border: 1px solid var(--humg-border); border-radius: 10px; }
+.life-facil__ic { display: inline-flex; width: 30px; height: 30px; border-radius: 8px; align-items: center; justify-content: center; background: #eef3fb; color: var(--humg-primary); }
+.life-facil strong { display: block; font-size: 13.5px; color: var(--humg-primary); }
+.life-facil em { font-style: normal; font-size: 12.5px; color: var(--humg-text-secondary); }
+
+.life-zones { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.life-zone { border: 1px solid var(--humg-border); border-top: 3px solid var(--humg-primary); border-radius: 12px; padding: 16px; display: grid; gap: 4px; }
+.life-zone strong { font-size: 15px; color: var(--humg-primary); }
+.life-zone span { font-size: 12.5px; font-weight: 600; color: var(--humg-primary); }
+.life-zone em { font-style: normal; font-size: 12px; color: var(--humg-text-secondary); }
+
+.life-deflist { display: grid; gap: 10px; }
+.life-deflist li { padding: 12px 14px; border: 1px solid var(--humg-border); border-radius: 10px; }
+.life-deflist strong { display: block; font-size: 13.5px; color: var(--humg-primary); margin-bottom: 3px; }
+.life-deflist span { font-size: 12.5px; color: var(--humg-text-secondary); line-height: 1.55; }
+
+/* ---------- Việc làm ---------- */
+.life-jobs { display: grid; gap: 8px; }
+.life-job { display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; padding: 13px 15px; border: 1px solid var(--humg-border); border-radius: 12px; border-left: 3px solid transparent; transition: border-color 0.18s ease, box-shadow 0.18s ease; }
+.life-job:hover { border-color: color-mix(in srgb, var(--humg-secondary) 45%, var(--humg-border)); border-left-color: var(--humg-primary); box-shadow: var(--humg-shadow-sm); }
+.life-job__ic { display: inline-flex; width: 34px; height: 34px; border-radius: 9px; align-items: center; justify-content: center; background: #eef3fb; color: var(--humg-primary); }
+.life-job__body strong { display: block; font-size: 13.5px; color: var(--humg-primary); }
+.life-job__body em { font-style: normal; font-size: 12px; color: var(--humg-text-secondary); }
+.life-job__deadline { font-size: 11.5px; font-weight: 700; color: var(--humg-accent-dark); white-space: nowrap; }
+
+.life-note { display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--humg-text-secondary); }
+.life-note svg { color: var(--humg-primary); }
+
+.life-tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 999px; }
+.life-tag.is-open { background: #eef3fb; color: var(--humg-primary); }
+.life-tag.is-done { background: var(--humg-surface-alt); color: var(--humg-text-secondary); }
+
+/* ---------- Chi tiết hoạt động ---------- */
+.life-agenda { display: grid; gap: 12px; }
+.life-agenda li { display: grid; grid-template-columns: 60px 1fr; gap: 14px; font-size: 13.5px; }
+.life-agenda__time { font-weight: 700; color: var(--humg-primary); }
+.life-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; }
+.life-gallery > span { display: block; border-radius: 8px; }
+
+/* ---------- Dịch vụ campus ---------- */
+.life-svc { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.life-svc__item { display: grid; grid-template-columns: auto 1fr; gap: 12px; padding: 14px; border: 1px solid var(--humg-border); border-radius: 12px; }
+.life-svc__ic { display: inline-flex; width: 40px; height: 40px; border-radius: 11px; align-items: center; justify-content: center; background: #eef3fb; color: var(--humg-primary); }
+.life-svc__item strong { display: block; font-size: 13.5px; color: var(--humg-primary); margin-bottom: 2px; }
+.life-svc__item span { font-size: 12px; color: var(--humg-text-secondary); line-height: 1.5; }
+
+/* ---------- Chi tiết việc làm ---------- */
+.life-jobhead { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+@media (max-width: 900px) {
+  .life-features, .life-clubs { grid-template-columns: 1fr; }
+  .life-feed__item { grid-template-columns: 1fr; }
+  .life-zones, .life-svc { grid-template-columns: 1fr; }
+  .life-job { grid-template-columns: auto 1fr; }
+  .life-job__deadline { grid-column: 2; }
+}

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" fill="none">
+  <defs>
+    <linearGradient id="dtG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e6e9f7"/><stop offset="1" stop-color="#f7f8fd"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="240" fill="url(#dtG)"/>
+  <circle cx="52" cy="50" r="60" fill="#3949ab" opacity="0.12"/>
+  <circle cx="350" cy="206" r="44" fill="#3949ab" opacity="0.12"/>
+  <path d="M330 40l4 10 10 1-7 7 2 11-9-6-9 6 2-11-7-7 10-1z" fill="#ff9800" opacity="0.65"/>
+  <!-- two overlapping circles -->
+  <circle cx="168" cy="126" r="52" fill="#3949ab" opacity="0.85"/>
+  <circle cx="232" cy="126" r="52" fill="#5c6bc0" opacity="0.7"/>
+  <!-- handshake -->
+  <path d="M150 128l24-16 26 14 24-14 24 16" stroke="#ffffff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M174 112l14 14M226 126l-14 14" stroke="#ffffff" stroke-width="9" stroke-linecap="round"/>
+  <path d="M120 196h160" stroke="#9aa4d8" stroke-width="6" stroke-linecap="round"/>
+</svg>

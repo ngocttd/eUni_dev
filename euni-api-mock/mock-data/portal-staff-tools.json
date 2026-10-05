@@ -1,0 +1,5552 @@
+{
+ "staffToolList": [
+  {
+   "key": "lop.danh-sach",
+   "path": "quan-ly-lop-hoc/danh-sach-sinh-vien",
+   "title": "Danh sách sinh viên lớp",
+   "sub": "DTC061A – Trắc địa đại cương (01) · HK2 2024 – 2025",
+   "back": {
+    "label": "Quản lý lớp học",
+    "to": "/euni/giang-vien/quan-ly-lop-hoc"
+   },
+   "blocks": [
+    {
+     "kind": "stats",
+     "items": [
+      {
+       "value": "45",
+       "label": "Sĩ số lớp"
+      },
+      {
+       "value": "43",
+       "label": "Đang học"
+      },
+      {
+       "value": "2",
+       "label": "Bảo lưu / tạm dừng"
+      },
+      {
+       "value": "41",
+       "label": "Đủ điều kiện dự thi"
+      }
+     ]
+    },
+    {
+     "kind": "form",
+     "title": "Lọc danh sách",
+     "icon": "grid",
+     "fields": [
+      {
+       "label": "Lớp học phần",
+       "type": "select",
+       "options": [
+        "DTC061A – Trắc địa đại cương (01)",
+        "DVM063B – Đo vẽ bản đồ số (02)",
+        "LGN048A – Hệ thống thông tin địa lý (01)"
+       ]
+      },
+      {
+       "label": "Trạng thái",
+       "type": "select",
+       "options": [
+        "Tất cả",
+        "Đang học",
+        "Bảo lưu",
+        "Đủ điều kiện thi"
+       ]
+      },
+      {
+       "label": "Từ khóa",
+       "type": "text",
+       "placeholder": "MSSV hoặc họ tên…"
+      }
+     ],
+     "submit": "Áp dụng"
+    },
+    {
+     "kind": "table",
+     "title": "Sinh viên trong lớp",
+     "icon": "users",
+     "columns": [
+      "STT",
+      "MSSV",
+      "Họ và tên",
+      "Lớp",
+      "Email",
+      "Chuyên cần",
+      "Trạng thái"
+     ],
+     "rows": [
+      [
+       "1",
+       "22DTC001",
+       "Nguyễn Minh Anh",
+       "DTC-K67A",
+       "anhnm.22@st.humg.edu.vn",
+       "100%",
+       "Đang học"
+      ],
+      [
+       "2",
+       "22DTC002",
+       "Trần Thị Bích Ngọc",
+       "DTC-K67A",
+       "ngocttb.22@st.humg.edu.vn",
+       "96%",
+       "Đang học"
+      ],
+      [
+       "3",
+       "22DTC003",
+       "Phạm Văn Cường",
+       "DTC-K67A",
+       "cuongpv.22@st.humg.edu.vn",
+       "88%",
+       "Đang học"
+      ],
+      [
+       "4",
+       "22DTC004",
+       "Lê Hoàng Dũng",
+       "DTC-K67B",
+       "dunglh.22@st.humg.edu.vn",
+       "92%",
+       "Đang học"
+      ],
+      [
+       "5",
+       "22DTC005",
+       "Vũ Thị Hải Yến",
+       "DTC-K67B",
+       "yenvth.22@st.humg.edu.vn",
+       "70%",
+       "Cảnh báo chuyên cần"
+      ],
+      [
+       "6",
+       "22DTC006",
+       "Đỗ Quang Huy",
+       "DTC-K67B",
+       "huydq.22@st.humg.edu.vn",
+       "—",
+       "Bảo lưu"
+      ]
+     ],
+     "foot": "Hiển thị 6 / 45 sinh viên"
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Xuất Excel",
+       "icon": "download"
+      },
+      {
+       "label": "Gửi email cả lớp",
+       "icon": "mail"
+      },
+      {
+       "label": "In danh sách ký",
+       "icon": "file"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "lop.diem-danh",
+   "path": "quan-ly-lop-hoc/diem-danh",
+   "title": "Điểm danh lớp học",
+   "sub": "Ghi nhận chuyên cần theo từng buổi học",
+   "back": {
+    "label": "Quản lý lớp học",
+    "to": "/euni/giang-vien/quan-ly-lop-hoc"
+   },
+   "blocks": [
+    {
+     "kind": "form",
+     "title": "Chọn buổi điểm danh",
+     "icon": "calendar",
+     "fields": [
+      {
+       "label": "Lớp học phần",
+       "type": "select",
+       "options": [
+        "DTC061A – Trắc địa đại cương (01)",
+        "DVM063B – Đo vẽ bản đồ số (02)"
+       ]
+      },
+      {
+       "label": "Buổi học",
+       "type": "select",
+       "options": [
+        "Buổi 8 – 16/05/2025",
+        "Buổi 7 – 09/05/2025",
+        "Buổi 6 – 02/05/2025"
+       ]
+      },
+      {
+       "label": "Hình thức",
+       "type": "select",
+       "options": [
+        "Trực tiếp",
+        "Trực tuyến"
+       ]
+      }
+     ],
+     "submit": "Mở buổi điểm danh"
+    },
+    {
+     "kind": "table",
+     "title": "Bảng điểm danh – Buổi 8 (16/05/2025)",
+     "icon": "check",
+     "columns": [
+      "MSSV",
+      "Họ và tên",
+      "Có mặt",
+      "Muộn",
+      "Vắng có phép",
+      "Vắng",
+      "Ghi chú"
+     ],
+     "rows": [
+      [
+       "22DTC001",
+       "Nguyễn Minh Anh",
+       "✓",
+       "",
+       "",
+       "",
+       ""
+      ],
+      [
+       "22DTC002",
+       "Trần Thị Bích Ngọc",
+       "✓",
+       "",
+       "",
+       "",
+       ""
+      ],
+      [
+       "22DTC003",
+       "Phạm Văn Cường",
+       "",
+       "✓",
+       "",
+       "",
+       "Vào lúc 07:45"
+      ],
+      [
+       "22DTC004",
+       "Lê Hoàng Dũng",
+       "✓",
+       "",
+       "",
+       "",
+       ""
+      ],
+      [
+       "22DTC005",
+       "Vũ Thị Hải Yến",
+       "",
+       "",
+       "✓",
+       "",
+       "Đơn xin nghỉ 15/05"
+      ],
+      [
+       "22DTC006",
+       "Đỗ Quang Huy",
+       "",
+       "",
+       "",
+       "✓",
+       ""
+      ]
+     ]
+    },
+    {
+     "kind": "stats",
+     "items": [
+      {
+       "value": "38",
+       "label": "Có mặt"
+      },
+      {
+       "value": "3",
+       "label": "Đi muộn"
+      },
+      {
+       "value": "2",
+       "label": "Vắng có phép"
+      },
+      {
+       "value": "2",
+       "label": "Vắng không phép"
+      }
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Lưu điểm danh",
+       "icon": "check"
+      },
+      {
+       "label": "Điểm danh bằng QR",
+       "icon": "grid"
+      },
+      {
+       "label": "Xuất báo cáo chuyên cần",
+       "icon": "download"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "lop.nhap-diem",
+   "path": "quan-ly-lop-hoc/nhap-diem",
+   "title": "Nhập điểm lớp học phần",
+   "sub": "Nhập, kiểm tra và gửi duyệt bảng điểm thành phần",
+   "back": {
+    "label": "Quản lý lớp học",
+    "to": "/euni/giang-vien/quan-ly-lop-hoc"
+   },
+   "blocks": [
+    {
+     "kind": "form",
+     "title": "Thiết lập",
+     "icon": "award",
+     "fields": [
+      {
+       "label": "Lớp học phần",
+       "type": "select",
+       "options": [
+        "DTC061A – Trắc địa đại cương (01)",
+        "DVM063B – Đo vẽ bản đồ số (02)"
+       ]
+      },
+      {
+       "label": "Đợt nhập",
+       "type": "select",
+       "options": [
+        "Điểm quá trình",
+        "Điểm giữa kỳ",
+        "Điểm cuối kỳ",
+        "Tổng kết"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "table",
+     "title": "Bảng điểm",
+     "icon": "file",
+     "columns": [
+      "MSSV",
+      "Họ và tên",
+      "Chuyên cần (10%)",
+      "Kiểm tra (20%)",
+      "Giữa kỳ (30%)",
+      "Cuối kỳ (40%)",
+      "Tổng kết",
+      "Xếp loại"
+     ],
+     "rows": [
+      [
+       "22DTC001",
+       "Nguyễn Minh Anh",
+       "9.0",
+       "7.5",
+       "8.0",
+       "8.5",
+       "8.20",
+       "Giỏi"
+      ],
+      [
+       "22DTC002",
+       "Trần Thị Bích Ngọc",
+       "8.5",
+       "8.0",
+       "7.5",
+       "8.0",
+       "7.95",
+       "Khá"
+      ],
+      [
+       "22DTC003",
+       "Phạm Văn Cường",
+       "7.5",
+       "6.5",
+       "7.0",
+       "7.5",
+       "7.15",
+       "Khá"
+      ],
+      [
+       "22DTC004",
+       "Lê Hoàng Dũng",
+       "8.0",
+       "7.5",
+       "7.0",
+       "8.0",
+       "7.65",
+       "Khá"
+      ],
+      [
+       "22DTC005",
+       "Vũ Thị Hải Yến",
+       "6.5",
+       "6.0",
+       "6.5",
+       "7.0",
+       "6.60",
+       "Trung bình"
+      ]
+     ]
+    },
+    {
+     "kind": "stats",
+     "items": [
+      {
+       "value": "45",
+       "label": "Sĩ số"
+      },
+      {
+       "value": "43",
+       "label": "Đã nhập"
+      },
+      {
+       "value": "7.26",
+       "label": "Điểm TB lớp"
+      },
+      {
+       "value": "95.6%",
+       "label": "Tỷ lệ đạt"
+      }
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Nhập từ Excel",
+       "icon": "download"
+      },
+      {
+       "label": "Lưu nháp",
+       "icon": "file"
+      },
+      {
+       "label": "Gửi duyệt Bộ môn",
+       "icon": "check"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "lop.bai-tap",
+   "path": "quan-ly-lop-hoc/bai-tap-de-thi",
+   "title": "Bài tập – Đề thi",
+   "sub": "Giao bài tập, quản lý ngân hàng đề và bài nộp của sinh viên",
+   "back": {
+    "label": "Quản lý lớp học",
+    "to": "/euni/giang-vien/quan-ly-lop-hoc"
+   },
+   "blocks": [
+    {
+     "kind": "table",
+     "title": "Bài tập đã giao",
+     "icon": "file",
+     "columns": [
+      "Tiêu đề",
+      "Loại",
+      "Ngày giao",
+      "Hạn nộp",
+      "Đã nộp",
+      "Trạng thái"
+     ],
+     "rows": [
+      [
+       "Bài tập tuần 8 – Bình sai lưới",
+       "Cá nhân",
+       "12/05/2025",
+       "19/05/2025",
+       "30/45",
+       "Đang mở"
+      ],
+      [
+       "Bài tập lớn – Đo vẽ khu vực A1",
+       "Nhóm",
+       "02/05/2025",
+       "23/05/2025",
+       "8/12 nhóm",
+       "Đang mở"
+      ],
+      [
+       "Kiểm tra giữa kỳ",
+       "Trắc nghiệm",
+       "18/04/2025",
+       "18/04/2025",
+       "45/45",
+       "Đã chấm"
+      ]
+     ]
+    },
+    {
+     "kind": "form",
+     "title": "Tạo bài tập / đề thi mới",
+     "icon": "grid",
+     "fields": [
+      {
+       "label": "Tiêu đề",
+       "type": "text",
+       "wide": true,
+       "placeholder": "Ví dụ: Bài tập tuần 9 – Chuyền độ cao"
+      },
+      {
+       "label": "Loại",
+       "type": "select",
+       "options": [
+        "Bài tập cá nhân",
+        "Bài tập nhóm",
+        "Trắc nghiệm",
+        "Đề thi cuối kỳ"
+       ]
+      },
+      {
+       "label": "Hạn nộp",
+       "type": "date"
+      },
+      {
+       "label": "Thang điểm",
+       "type": "select",
+       "options": [
+        "10",
+        "100",
+        "Đạt / Không đạt"
+       ]
+      },
+      {
+       "label": "Cho phép nộp muộn",
+       "type": "select",
+       "options": [
+        "Không",
+        "Có – trừ 10%/ngày"
+       ]
+      },
+      {
+       "label": "Mô tả / Yêu cầu",
+       "type": "textarea",
+       "wide": true
+      },
+      {
+       "label": "Tệp đính kèm",
+       "type": "file",
+       "wide": true
+      }
+     ],
+     "submit": "Giao cho lớp"
+    }
+   ]
+  },
+  {
+   "key": "lop.tai-lieu",
+   "path": "quan-ly-lop-hoc/tai-lieu-hoc-tap",
+   "title": "Tài liệu học tập của lớp",
+   "sub": "Chia sẻ bài giảng, tài liệu tham khảo tới sinh viên trong lớp",
+   "back": {
+    "label": "Quản lý lớp học",
+    "to": "/euni/giang-vien/quan-ly-lop-hoc"
+   },
+   "blocks": [
+    {
+     "kind": "table",
+     "title": "Tài liệu đã chia sẻ",
+     "icon": "layers",
+     "columns": [
+      "Tên tài liệu",
+      "Loại",
+      "Dung lượng",
+      "Ngày đăng",
+      "Lượt tải"
+     ],
+     "rows": [
+      [
+       "Bài giảng chương 5 – Lưới khống chế",
+       "PDF",
+       "3.2 MB",
+       "14/05/2025",
+       "41"
+      ],
+      [
+       "Video hướng dẫn sử dụng máy toàn đạc",
+       "MP4",
+       "186 MB",
+       "10/05/2025",
+       "38"
+      ],
+      [
+       "Bảng tra sai số cho phép",
+       "XLSX",
+       "240 KB",
+       "02/05/2025",
+       "44"
+      ],
+      [
+       "Đề cương ôn tập cuối kỳ",
+       "DOCX",
+       "520 KB",
+       "28/04/2025",
+       "45"
+      ]
+     ]
+    },
+    {
+     "kind": "form",
+     "title": "Tải lên tài liệu",
+     "icon": "download",
+     "fields": [
+      {
+       "label": "Tên hiển thị",
+       "type": "text",
+       "wide": true
+      },
+      {
+       "label": "Nhóm tài liệu",
+       "type": "select",
+       "options": [
+        "Bài giảng",
+        "Tài liệu tham khảo",
+        "Video",
+        "Đề cương / Hướng dẫn"
+       ]
+      },
+      {
+       "label": "Hiển thị cho",
+       "type": "select",
+       "options": [
+        "Cả lớp",
+        "Theo nhóm",
+        "Chỉ mình tôi (nháp)"
+       ]
+      },
+      {
+       "label": "Tệp",
+       "type": "file",
+       "wide": true
+      }
+     ],
+     "submit": "Đăng tài liệu"
+    }
+   ]
+  },
+  {
+   "key": "lop.thong-ke",
+   "path": "quan-ly-lop-hoc/thong-ke-lop",
+   "title": "Thống kê lớp học",
+   "sub": "Tổng hợp kết quả học tập và chuyên cần của lớp",
+   "back": {
+    "label": "Quản lý lớp học",
+    "to": "/euni/giang-vien/quan-ly-lop-hoc"
+   },
+   "blocks": [
+    {
+     "kind": "stats",
+     "items": [
+      {
+       "value": "7.26",
+       "label": "Điểm TB lớp"
+      },
+      {
+       "value": "95.6%",
+       "label": "Tỷ lệ đạt"
+      },
+      {
+       "value": "92%",
+       "label": "Chuyên cần trung bình"
+      },
+      {
+       "value": "12",
+       "label": "Sinh viên khá – giỏi"
+      }
+     ]
+    },
+    {
+     "kind": "table",
+     "title": "Phân bố xếp loại",
+     "icon": "grid",
+     "columns": [
+      "Xếp loại",
+      "Số lượng",
+      "Tỷ lệ"
+     ],
+     "rows": [
+      [
+       "Giỏi",
+       "8",
+       "17.8%"
+      ],
+      [
+       "Khá",
+       "22",
+       "48.9%"
+      ],
+      [
+       "Trung bình",
+       "13",
+       "28.9%"
+      ],
+      [
+       "Yếu / Không đạt",
+       "2",
+       "4.4%"
+      ]
+     ]
+    },
+    {
+     "kind": "table",
+     "title": "Chuyên cần theo tuần",
+     "icon": "calendar",
+     "columns": [
+      "Tuần",
+      "Có mặt",
+      "Muộn",
+      "Vắng",
+      "Tỷ lệ chuyên cần"
+     ],
+     "rows": [
+      [
+       "Tuần 5",
+       "44",
+       "1",
+       "0",
+       "99%"
+      ],
+      [
+       "Tuần 6",
+       "41",
+       "2",
+       "2",
+       "93%"
+      ],
+      [
+       "Tuần 7",
+       "40",
+       "3",
+       "2",
+       "91%"
+      ],
+      [
+       "Tuần 8",
+       "38",
+       "3",
+       "4",
+       "87%"
+      ]
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Xuất báo cáo (PDF)",
+       "icon": "download"
+      },
+      {
+       "label": "Gửi cố vấn học tập",
+       "icon": "mail"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "hp.de-cuong",
+   "path": "quan-ly-hoc-phan/de-cuong",
+   "title": "Đề cương học phần",
+   "sub": "IT3210 – Cơ sở dữ liệu nâng cao · 3 tín chỉ",
+   "back": {
+    "label": "Quản lý học phần",
+    "to": "/euni/giang-vien/quan-ly-hoc-phan"
+   },
+   "blocks": [
+    {
+     "kind": "kv",
+     "title": "Thông tin chung",
+     "icon": "file",
+     "rows": [
+      [
+       "Tên học phần",
+       "Cơ sở dữ liệu nâng cao"
+      ],
+      [
+       "Mã học phần",
+       "IT3210"
+      ],
+      [
+       "Số tín chỉ",
+       "3 (2 LT + 1 TH)"
+      ],
+      [
+       "Học kỳ áp dụng",
+       "HK1 · 2025 – 2026"
+      ],
+      [
+       "Bộ môn phụ trách",
+       "Bộ môn Hệ thống thông tin – Khoa CNTT"
+      ],
+      [
+       "Điều kiện tiên quyết",
+       "IT2011 – Cấu trúc dữ liệu và giải thuật"
+      ],
+      [
+       "Phiên bản đề cương",
+       "v2.1 · cập nhật 20/08/2025"
+      ]
+     ]
+    },
+    {
+     "kind": "table",
+     "title": "Chuẩn đầu ra học phần (CLO)",
+     "icon": "award",
+     "columns": [
+      "Mã",
+      "Nội dung",
+      "Trình độ",
+      "CĐR CTĐT"
+     ],
+     "rows": [
+      [
+       "CLO1",
+       "Phân tích và chuẩn hóa mô hình dữ liệu quan hệ",
+       "Vận dụng",
+       "PLO2"
+      ],
+      [
+       "CLO2",
+       "Thiết kế chỉ mục và tối ưu truy vấn SQL",
+       "Vận dụng",
+       "PLO3"
+      ],
+      [
+       "CLO3",
+       "Vận dụng cơ chế giao dịch, đồng thời, phục hồi",
+       "Phân tích",
+       "PLO3"
+      ],
+      [
+       "CLO4",
+       "Triển khai CSDL phân tán / NoSQL cho bài toán thực tế",
+       "Đánh giá",
+       "PLO4, PLO6"
+      ]
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Tải đề cương (PDF)",
+       "icon": "download"
+      },
+      {
+       "label": "Chỉnh sửa đề cương",
+       "icon": "file"
+      },
+      {
+       "label": "Gửi duyệt Bộ môn",
+       "icon": "check"
+      },
+      {
+       "label": "So sánh phiên bản",
+       "icon": "layers"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "hp.ke-hoach",
+   "path": "quan-ly-hoc-phan/ke-hoach-giang-day",
+   "title": "Kế hoạch giảng dạy",
+   "sub": "IT3210 – Cơ sở dữ liệu nâng cao · 15 tuần",
+   "back": {
+    "label": "Quản lý học phần",
+    "to": "/euni/giang-vien/quan-ly-hoc-phan"
+   },
+   "blocks": [
+    {
+     "kind": "table",
+     "title": "Kế hoạch chi tiết theo tuần",
+     "icon": "calendar",
+     "columns": [
+      "Tuần",
+      "Nội dung",
+      "Số tiết",
+      "Hình thức",
+      "CĐR",
+      "Tài liệu"
+     ],
+     "rows": [
+      [
+       "1 – 3",
+       "Mô hình quan hệ, đại số quan hệ, chuẩn hóa",
+       "9",
+       "LT + bài tập",
+       "CLO1",
+       "Giáo trình ch.1–3"
+      ],
+      [
+       "4 – 6",
+       "Chỉ mục B-Tree/Hash, kế hoạch thực thi, tối ưu truy vấn",
+       "9",
+       "LT + TH",
+       "CLO2",
+       "Giáo trình ch.4–5"
+      ],
+      [
+       "7",
+       "Kiểm tra giữa kỳ + chữa bài",
+       "3",
+       "Kiểm tra",
+       "CLO1, CLO2",
+       "—"
+      ],
+      [
+       "8 – 10",
+       "Giao dịch, khóa, mức cô lập, phục hồi sau sự cố",
+       "9",
+       "LT + TH",
+       "CLO3",
+       "Giáo trình ch.6–7"
+      ],
+      [
+       "11 – 14",
+       "CSDL phân tán, nhân bản, NoSQL, đồ án nhóm",
+       "12",
+       "TH + báo cáo",
+       "CLO4",
+       "Tài liệu tham khảo [2][3]"
+      ],
+      [
+       "15",
+       "Bảo vệ đồ án nhóm, ôn tập",
+       "3",
+       "Seminar",
+       "CLO4",
+       "—"
+      ]
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Xuất kế hoạch (DOCX)",
+       "icon": "download"
+      },
+      {
+       "label": "Sao chép từ kỳ trước",
+       "icon": "layers"
+      },
+      {
+       "label": "Đồng bộ lên LMS",
+       "icon": "grid"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "hp.hoc-lieu",
+   "path": "quan-ly-hoc-phan/hoc-lieu-can-thiet",
+   "title": "Học liệu cần thiết",
+   "sub": "Giáo trình, tài liệu tham khảo và phần mềm cho học phần",
+   "back": {
+    "label": "Quản lý học phần",
+    "to": "/euni/giang-vien/quan-ly-hoc-phan"
+   },
+   "blocks": [
+    {
+     "kind": "table",
+     "title": "Danh mục học liệu",
+     "icon": "layers",
+     "columns": [
+      "Loại",
+      "Tên tài liệu / Giáo trình",
+      "Tác giả – NXB",
+      "Năm",
+      "Yêu cầu"
+     ],
+     "rows": [
+      [
+       "Giáo trình",
+       "Cơ sở dữ liệu nâng cao",
+       "Bộ môn HTTT – NXB Bách khoa",
+       "2021",
+       "Bắt buộc"
+      ],
+      [
+       "Tham khảo",
+       "Database System Concepts",
+       "Silberschatz, Korth, Sudarshan",
+       "2020",
+       "Bắt buộc"
+      ],
+      [
+       "Tham khảo",
+       "Designing Data-Intensive Applications",
+       "Martin Kleppmann – O’Reilly",
+       "2017",
+       "Khuyến khích"
+      ],
+      [
+       "Phần mềm",
+       "PostgreSQL 16, DBeaver, Docker",
+       "—",
+       "2024",
+       "Bắt buộc (thực hành)"
+      ]
+     ]
+    },
+    {
+     "kind": "form",
+     "title": "Thêm học liệu",
+     "icon": "grid",
+     "fields": [
+      {
+       "label": "Loại",
+       "type": "select",
+       "options": [
+        "Giáo trình",
+        "Tài liệu tham khảo",
+        "Phần mềm / Công cụ",
+        "Học liệu số nội bộ"
+       ]
+      },
+      {
+       "label": "Tên tài liệu",
+       "type": "text",
+       "wide": true
+      },
+      {
+       "label": "Tác giả / Nguồn",
+       "type": "text"
+      },
+      {
+       "label": "Mức yêu cầu",
+       "type": "select",
+       "options": [
+        "Bắt buộc",
+        "Khuyến khích"
+       ]
+      },
+      {
+       "label": "Liên kết / Tệp",
+       "type": "file",
+       "wide": true
+      }
+     ],
+     "submit": "Thêm vào danh mục"
+    }
+   ]
+  },
+  {
+   "key": "hp.danh-gia",
+   "path": "quan-ly-hoc-phan/danh-gia",
+   "title": "Phương án đánh giá học phần",
+   "sub": "Rubric và tỷ trọng các thành phần điểm",
+   "back": {
+    "label": "Quản lý học phần",
+    "to": "/euni/giang-vien/quan-ly-hoc-phan"
+   },
+   "blocks": [
+    {
+     "kind": "table",
+     "title": "Thành phần đánh giá",
+     "icon": "award",
+     "columns": [
+      "Thành phần",
+      "Trọng số",
+      "Hình thức",
+      "CĐR đánh giá",
+      "Thời điểm"
+     ],
+     "rows": [
+      [
+       "Chuyên cần – thái độ",
+       "10%",
+       "Điểm danh, phát biểu",
+       "CLO1–CLO4",
+       "Cả kỳ"
+      ],
+      [
+       "Bài tập / thực hành",
+       "20%",
+       "Chấm bài trên LMS",
+       "CLO1, CLO2",
+       "Tuần 3, 6, 10"
+      ],
+      [
+       "Kiểm tra giữa kỳ",
+       "20%",
+       "Tự luận trên giấy",
+       "CLO1, CLO2",
+       "Tuần 7"
+      ],
+      [
+       "Đồ án nhóm",
+       "20%",
+       "Báo cáo + bảo vệ",
+       "CLO4",
+       "Tuần 15"
+      ],
+      [
+       "Thi cuối kỳ",
+       "30%",
+       "Tự luận + thực hành máy",
+       "CLO2, CLO3",
+       "Lịch chung"
+      ]
+     ]
+    },
+    {
+     "kind": "kv",
+     "title": "Quy định",
+     "icon": "file",
+     "rows": [
+      [
+       "Tổng trọng số",
+       "100%"
+      ],
+      [
+       "Điều kiện dự thi",
+       "Chuyên cần ≥ 80% và nộp đủ bài tập bắt buộc"
+      ],
+      [
+       "Điểm đạt học phần",
+       "Điểm tổng kết ≥ 4.0 và điểm thi cuối kỳ ≥ 3.0"
+      ],
+      [
+       "Phúc khảo",
+       "Trong 7 ngày kể từ khi công bố điểm"
+      ]
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Tải rubric chi tiết",
+       "icon": "download"
+      },
+      {
+       "label": "Chỉnh sửa phương án",
+       "icon": "file"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "hp.bao-cao",
+   "path": "quan-ly-hoc-phan/bao-cao",
+   "title": "Báo cáo học phần",
+   "sub": "Tổng kết kết quả giảng dạy và cải tiến chất lượng",
+   "back": {
+    "label": "Quản lý học phần",
+    "to": "/euni/giang-vien/quan-ly-hoc-phan"
+   },
+   "blocks": [
+    {
+     "kind": "table",
+     "title": "Báo cáo theo học kỳ",
+     "icon": "grid",
+     "columns": [
+      "Học kỳ",
+      "Số lớp",
+      "Tổng SV",
+      "Điểm TB",
+      "Tỷ lệ đạt",
+      "Mức đạt CĐR",
+      "Trạng thái"
+     ],
+     "rows": [
+      [
+       "HK1 2024 – 2025",
+       "2",
+       "96",
+       "7.31",
+       "94.8%",
+       "3.9 / 5",
+       "Đã duyệt"
+      ],
+      [
+       "HK2 2024 – 2025",
+       "1",
+       "48",
+       "7.05",
+       "91.7%",
+       "3.8 / 5",
+       "Đang soạn"
+      ]
+     ]
+    },
+    {
+     "kind": "text",
+     "title": "Ghi nhận cải tiến",
+     "icon": "file",
+     "body": [
+      "Bổ sung 2 buổi thực hành Docker/PostgreSQL sau phản hồi khảo sát giữa kỳ về khoảng cách giữa lý thuyết và triển khai thực tế.",
+      "Điều chỉnh trọng số đồ án nhóm từ 15% lên 20% nhằm tăng đánh giá năng lực vận dụng (CLO4)."
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Tạo báo cáo tổng kết",
+       "icon": "file"
+      },
+      {
+       "label": "Xuất PDF nộp Khoa",
+       "icon": "download"
+      },
+      {
+       "label": "Xem khảo sát sinh viên",
+       "icon": "eye"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "hls.bai-giang",
+   "path": "hoc-lieu-so/bai-giang",
+   "title": "Bài giảng",
+   "sub": "120 tài liệu · bài giảng điện tử theo học phần",
+   "back": {
+    "label": "Học liệu số",
+    "to": "/euni/giang-vien/hoc-lieu-so"
+   },
+   "blocks": [
+    {
+     "kind": "form",
+     "title": "Tìm bài giảng",
+     "icon": "grid",
+     "fields": [
+      {
+       "label": "Học phần",
+       "type": "select",
+       "options": [
+        "Tất cả",
+        "IT3210 – CSDL nâng cao",
+        "IT3105 – Lập trình Web",
+        "IT2011 – CTDL & GT"
+       ]
+      },
+      {
+       "label": "Định dạng",
+       "type": "select",
+       "options": [
+        "Tất cả",
+        "PDF",
+        "PPTX",
+        "DOCX"
+       ]
+      },
+      {
+       "label": "Từ khóa",
+       "type": "text",
+       "placeholder": "Tên chương, chủ đề…"
+      }
+     ],
+     "submit": "Tìm"
+    },
+    {
+     "kind": "table",
+     "title": "Danh sách bài giảng",
+     "icon": "book",
+     "columns": [
+      "Tên bài giảng",
+      "Học phần",
+      "Định dạng",
+      "Dung lượng",
+      "Cập nhật",
+      "Lượt xem"
+     ],
+     "rows": [
+      [
+       "Chương 5 – Cơ sở dữ liệu phân tán",
+       "IT3210",
+       "PPTX",
+       "8.4 MB",
+       "18/09/2025",
+       "312"
+      ],
+      [
+       "Chương 4 – Tối ưu truy vấn",
+       "IT3210",
+       "PPTX",
+       "6.1 MB",
+       "11/09/2025",
+       "287"
+      ],
+      [
+       "Bài 3 – React Hooks nâng cao",
+       "IT3105",
+       "PDF",
+       "2.7 MB",
+       "16/09/2025",
+       "198"
+      ],
+      [
+       "Chương 2 – Cây và cây nhị phân tìm kiếm",
+       "IT2011",
+       "PDF",
+       "3.9 MB",
+       "05/09/2025",
+       "451"
+      ]
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Tải lên bài giảng",
+       "icon": "download"
+      },
+      {
+       "label": "Tạo thư mục học phần",
+       "icon": "layers"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "hls.video",
+   "path": "hoc-lieu-so/video-hoc-phan",
+   "title": "Video học phần",
+   "sub": "36 video · bài giảng quay sẵn và hướng dẫn thực hành",
+   "back": {
+    "label": "Học liệu số",
+    "to": "/euni/giang-vien/hoc-lieu-so"
+   },
+   "blocks": [
+    {
+     "kind": "table",
+     "title": "Thư viện video",
+     "icon": "play",
+     "columns": [
+      "Tiêu đề",
+      "Học phần",
+      "Thời lượng",
+      "Ngày đăng",
+      "Lượt xem"
+     ],
+     "rows": [
+      [
+       "Hướng dẫn cài đặt Lab PostgreSQL + Docker",
+       "IT3210",
+       "18:24",
+       "18/09/2025",
+       "265"
+      ],
+      [
+       "Demo: Explain Analyze và đọc kế hoạch thực thi",
+       "IT3210",
+       "25:10",
+       "11/09/2025",
+       "241"
+      ],
+      [
+       "Live coding: REST API với Express",
+       "IT3105",
+       "42:37",
+       "16/09/2025",
+       "176"
+      ],
+      [
+       "Trực quan hóa thao tác trên cây AVL",
+       "IT2011",
+       "12:05",
+       "05/09/2025",
+       "389"
+      ]
+     ]
+    },
+    {
+     "kind": "form",
+     "title": "Thêm video",
+     "icon": "grid",
+     "fields": [
+      {
+       "label": "Tiêu đề",
+       "type": "text",
+       "wide": true
+      },
+      {
+       "label": "Học phần",
+       "type": "select",
+       "options": [
+        "IT3210 – CSDL nâng cao",
+        "IT3105 – Lập trình Web",
+        "IT2011 – CTDL & GT"
+       ]
+      },
+      {
+       "label": "Nguồn",
+       "type": "select",
+       "options": [
+        "Tải tệp MP4",
+        "Liên kết YouTube (ẩn danh sách)",
+        "Liên kết Panopto"
+       ]
+      },
+      {
+       "label": "Tệp / Liên kết",
+       "type": "file",
+       "wide": true
+      }
+     ],
+     "submit": "Đăng video"
+    }
+   ]
+  },
+  {
+   "key": "hls.slide",
+   "path": "hoc-lieu-so/slide",
+   "title": "Slide bài giảng",
+   "sub": "85 tệp · slide trình chiếu dùng trên lớp",
+   "back": {
+    "label": "Học liệu số",
+    "to": "/euni/giang-vien/hoc-lieu-so"
+   },
+   "blocks": [
+    {
+     "kind": "table",
+     "title": "Danh sách slide",
+     "icon": "file",
+     "columns": [
+      "Tên slide",
+      "Học phần",
+      "Số trang",
+      "Cập nhật",
+      "Chia sẻ SV"
+     ],
+     "rows": [
+      [
+       "Buổi 9 – Giao dịch & khóa",
+       "IT3210",
+       "38",
+       "16/09/2025",
+       "Có"
+      ],
+      [
+       "Buổi 8 – Chỉ mục",
+       "IT3210",
+       "31",
+       "09/09/2025",
+       "Có"
+      ],
+      [
+       "Buổi 5 – Routing & Middleware",
+       "IT3105",
+       "27",
+       "14/09/2025",
+       "Có"
+      ],
+      [
+       "Buổi 3 – Danh sách liên kết",
+       "IT2011",
+       "22",
+       "03/09/2025",
+       "Nháp"
+      ]
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Tải lên slide",
+       "icon": "download"
+      },
+      {
+       "label": "Xuất gói cả học phần (ZIP)",
+       "icon": "layers"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "hls.tham-khao",
+   "path": "hoc-lieu-so/tai-lieu-tham-khao",
+   "title": "Tài liệu tham khảo",
+   "sub": "64 tài liệu · sách, bài báo, chuẩn kỹ thuật",
+   "back": {
+    "label": "Học liệu số",
+    "to": "/euni/giang-vien/hoc-lieu-so"
+   },
+   "blocks": [
+    {
+     "kind": "table",
+     "title": "Kho tài liệu tham khảo",
+     "icon": "layers",
+     "columns": [
+      "Tên tài liệu",
+      "Loại",
+      "Nguồn",
+      "Năm",
+      "Định dạng"
+     ],
+     "rows": [
+      [
+       "Database System Concepts (7th ed.)",
+       "Sách",
+       "McGraw-Hill",
+       "2020",
+       "PDF"
+      ],
+      [
+       "Designing Data-Intensive Applications",
+       "Sách",
+       "O’Reilly",
+       "2017",
+       "PDF"
+      ],
+      [
+       "The Log: What every software engineer should know…",
+       "Bài viết",
+       "LinkedIn Engineering",
+       "2013",
+       "HTML"
+      ],
+      [
+       "PostgreSQL 16 Documentation",
+       "Tài liệu kỹ thuật",
+       "PostgreSQL Global Dev Group",
+       "2024",
+       "PDF"
+      ]
+     ]
+    },
+    {
+     "kind": "form",
+     "title": "Thêm tài liệu tham khảo",
+     "icon": "grid",
+     "fields": [
+      {
+       "label": "Tên tài liệu",
+       "type": "text",
+       "wide": true
+      },
+      {
+       "label": "Loại",
+       "type": "select",
+       "options": [
+        "Sách",
+        "Bài báo khoa học",
+        "Bài viết kỹ thuật",
+        "Tiêu chuẩn / Tài liệu kỹ thuật"
+       ]
+      },
+      {
+       "label": "Nguồn / DOI",
+       "type": "text"
+      },
+      {
+       "label": "Năm",
+       "type": "text"
+      },
+      {
+       "label": "Tệp / Liên kết",
+       "type": "file",
+       "wide": true
+      }
+     ],
+     "submit": "Lưu tài liệu"
+    }
+   ]
+  },
+  {
+   "key": "da.giao-de-tai",
+   "path": "huong-dan-do-an/giao-de-tai",
+   "title": "Giao đề tài mới",
+   "sub": "Tạo và phân công đề tài đồ án / khóa luận / luận văn",
+   "back": {
+    "label": "Hướng dẫn đồ án / luận văn",
+    "to": "/euni/giang-vien/huong-dan-do-an"
+   },
+   "blocks": [
+    {
+     "kind": "form",
+     "title": "Thông tin đề tài",
+     "icon": "file",
+     "fields": [
+      {
+       "label": "Sinh viên / Học viên (MSSV)",
+       "type": "text",
+       "placeholder": "2151000xxx"
+      },
+      {
+       "label": "Loại",
+       "type": "select",
+       "options": [
+        "Đồ án tốt nghiệp",
+        "Khóa luận tốt nghiệp",
+        "Luận văn thạc sĩ",
+        "Luận án tiến sĩ"
+       ]
+      },
+      {
+       "label": "Tên đề tài",
+       "type": "text",
+       "wide": true
+      },
+      {
+       "label": "Mục tiêu & phạm vi",
+       "type": "textarea",
+       "wide": true
+      },
+      {
+       "label": "Ngày bắt đầu",
+       "type": "date"
+      },
+      {
+       "label": "Hạn hoàn thành",
+       "type": "date"
+      },
+      {
+       "label": "Đồng hướng dẫn",
+       "type": "text"
+      },
+      {
+       "label": "Kết quả kỳ vọng",
+       "type": "text"
+      }
+     ],
+     "submit": "Giao đề tài"
+    },
+    {
+     "kind": "table",
+     "title": "Đề tài sinh viên đề xuất – chờ xử lý",
+     "icon": "grid",
+     "columns": [
+      "MSSV",
+      "Sinh viên",
+      "Tên đề xuất",
+      "Loại",
+      "Ngày gửi",
+      "Trạng thái"
+     ],
+     "rows": [
+      [
+       "2151000512",
+       "Bùi Anh Tú",
+       "Trợ lý ảo hỏi đáp quy chế đào tạo",
+       "Đồ án tốt nghiệp",
+       "02/09/2025",
+       "Chờ duyệt"
+      ],
+      [
+       "2151000488",
+       "Ngô Thảo Vy",
+       "Phân tích log học tập phát hiện SV nguy cơ",
+       "Khóa luận tốt nghiệp",
+       "30/08/2025",
+       "Chờ duyệt"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "key": "da.duyet-nhat-ky",
+   "path": "huong-dan-do-an/duyet-nhat-ky",
+   "title": "Duyệt nhật ký tiến độ",
+   "sub": "Xác nhận nhật ký làm việc hằng tuần của sinh viên",
+   "back": {
+    "label": "Hướng dẫn đồ án / luận văn",
+    "to": "/euni/giang-vien/huong-dan-do-an"
+   },
+   "blocks": [
+    {
+     "kind": "stats",
+     "items": [
+      {
+       "value": "5",
+       "label": "Nhật ký chờ duyệt"
+      },
+      {
+       "value": "9",
+       "label": "SV đang hướng dẫn"
+      },
+      {
+       "value": "2",
+       "label": "Quá hạn nộp"
+      },
+      {
+       "value": "86%",
+       "label": "Tỷ lệ nộp đúng hạn"
+      }
+     ]
+    },
+    {
+     "kind": "table",
+     "title": "Nhật ký tuần chờ duyệt",
+     "icon": "check",
+     "columns": [
+      "Sinh viên",
+      "Đề tài",
+      "Tuần",
+      "Nội dung thực hiện",
+      "Ngày nộp",
+      "Trạng thái"
+     ],
+     "rows": [
+      [
+       "Trần Văn A",
+       "Hệ khuyến nghị học liệu",
+       "Tuần 4",
+       "Hoàn thiện thu thập dữ liệu, tiền xử lý",
+       "15/09/2025",
+       "Chờ duyệt"
+      ],
+      [
+       "Lê Thị B",
+       "Phát hiện gian lận thi trực tuyến",
+       "Tuần 4",
+       "Cài đặt baseline CNN, đo độ chính xác",
+       "15/09/2025",
+       "Chờ duyệt"
+      ],
+      [
+       "Nguyễn Quang C",
+       "Nền tảng quản lý đồ án",
+       "Tuần 4",
+       "Thiết kế CSDL, dựng API khung",
+       "14/09/2025",
+       "Chờ duyệt"
+      ],
+      [
+       "Hoàng Văn E",
+       "Mô hình dự báo kết quả học tập",
+       "Tuần 3",
+       "(chưa nộp)",
+       "—",
+       "Quá hạn"
+      ]
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Duyệt các mục đã chọn",
+       "icon": "check"
+      },
+      {
+       "label": "Gửi nhắc nộp",
+       "icon": "bell"
+      },
+      {
+       "label": "Xuất nhật ký (PDF)",
+       "icon": "download"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "da.lich-bao-ve",
+   "path": "huong-dan-do-an/lich-bao-ve",
+   "title": "Lịch bảo vệ",
+   "sub": "Lịch bảo vệ đồ án / luận văn của sinh viên hướng dẫn",
+   "back": {
+    "label": "Hướng dẫn đồ án / luận văn",
+    "to": "/euni/giang-vien/huong-dan-do-an"
+   },
+   "blocks": [
+    {
+     "kind": "table",
+     "title": "Đợt bảo vệ tháng 10/2025",
+     "icon": "calendar",
+     "columns": [
+      "Thời gian",
+      "Sinh viên",
+      "Đề tài",
+      "Hội đồng",
+      "Phòng",
+      "Vai trò của tôi"
+     ],
+     "rows": [
+      [
+       "20/10 · 08:00",
+       "Nguyễn Quang C",
+       "Nền tảng quản lý đồ án tốt nghiệp",
+       "HĐ CNTT-03",
+       "A2-401",
+       "GV hướng dẫn"
+      ],
+      [
+       "20/10 · 09:30",
+       "Phạm Thu D",
+       "Tối ưu truy vấn trên CSDL phân tán",
+       "HĐ CNTT-03",
+       "A2-401",
+       "GV hướng dẫn"
+      ],
+      [
+       "21/10 · 14:00",
+       "Đặng Minh K (SV khác)",
+       "Ứng dụng RAG trong hỗ trợ học tập",
+       "HĐ CNTT-05",
+       "A2-403",
+       "Phản biện"
+      ]
+     ]
+    },
+    {
+     "kind": "kv",
+     "title": "Chuẩn bị",
+     "icon": "file",
+     "rows": [
+      [
+       "Hạn nộp quyển",
+       "13/10/2025 (trước bảo vệ 7 ngày)"
+      ],
+      [
+       "Hạn nộp bản mềm + mã nguồn",
+       "15/10/2025"
+      ],
+      [
+       "Thời lượng trình bày",
+       "15 phút + 10 phút hỏi đáp"
+      ],
+      [
+       "Biểu mẫu nhận xét",
+       "BM-HD-05, BM-PB-06"
+      ]
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Thêm vào lịch cá nhân",
+       "icon": "calendar"
+      },
+      {
+       "label": "Tải phiếu nhận xét",
+       "icon": "download"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "da.nhap-diem",
+   "path": "huong-dan-do-an/nhap-diem",
+   "title": "Nhập điểm hướng dẫn",
+   "sub": "Điểm của giảng viên hướng dẫn cho đồ án / luận văn",
+   "back": {
+    "label": "Hướng dẫn đồ án / luận văn",
+    "to": "/euni/giang-vien/huong-dan-do-an"
+   },
+   "blocks": [
+    {
+     "kind": "table",
+     "title": "Bảng điểm hướng dẫn",
+     "icon": "award",
+     "columns": [
+      "MSSV",
+      "Sinh viên",
+      "Đề tài",
+      "Thái độ (20%)",
+      "Tiến độ (30%)",
+      "Kết quả (50%)",
+      "Điểm HD"
+     ],
+     "rows": [
+      [
+       "2151000205",
+       "Nguyễn Quang C",
+       "Nền tảng quản lý đồ án tốt nghiệp",
+       "9.0",
+       "8.5",
+       "8.5",
+       "8.6"
+      ],
+      [
+       "CH2300145",
+       "Phạm Thu D",
+       "Tối ưu truy vấn trên CSDL phân tán",
+       "9.5",
+       "9.0",
+       "9.0",
+       "9.1"
+      ]
+     ]
+    },
+    {
+     "kind": "kv",
+     "title": "Lưu ý",
+     "icon": "file",
+     "rows": [
+      [
+       "Thang điểm",
+       "10, làm tròn 1 chữ số thập phân"
+      ],
+      [
+       "Hạn nhập điểm",
+       "Trước 18/10/2025"
+      ],
+      [
+       "Sau khi gửi",
+       "Điểm khóa, muốn sửa phải có đề nghị gửi Bộ môn"
+      ]
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Lưu nháp",
+       "icon": "file"
+      },
+      {
+       "label": "Gửi Bộ môn",
+       "icon": "check"
+      },
+      {
+       "label": "Xuất Excel",
+       "icon": "download"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "tt.tao-dot",
+   "path": "thuc-tap-doanh-nghiep/tao-dot",
+   "title": "Tạo đợt thực tập",
+   "sub": "Khởi tạo đợt thực tập doanh nghiệp mới cho lớp / khóa",
+   "back": {
+    "label": "Thực tập doanh nghiệp",
+    "to": "/euni/giang-vien/thuc-tap-doanh-nghiep"
+   },
+   "blocks": [
+    {
+     "kind": "form",
+     "title": "Thông tin đợt thực tập",
+     "icon": "briefcase",
+     "fields": [
+      {
+       "label": "Tên đợt",
+       "type": "text",
+       "wide": true,
+       "placeholder": "Ví dụ: Thực tập tốt nghiệp – Đợt 1 · 2025 – 2026"
+      },
+      {
+       "label": "Năm học",
+       "type": "select",
+       "options": [
+        "2025 – 2026",
+        "2026 – 2027"
+       ]
+      },
+      {
+       "label": "Đối tượng",
+       "type": "select",
+       "options": [
+        "D21CNTT (K66)",
+        "D21HTTT (K66)",
+        "Toàn khóa"
+       ]
+      },
+      {
+       "label": "Ngày bắt đầu",
+       "type": "date"
+      },
+      {
+       "label": "Ngày kết thúc",
+       "type": "date"
+      },
+      {
+       "label": "Số tín chỉ",
+       "type": "text"
+      },
+      {
+       "label": "Hạn đăng ký nguyện vọng",
+       "type": "date"
+      },
+      {
+       "label": "Yêu cầu & hướng dẫn",
+       "type": "textarea",
+       "wide": true
+      }
+     ],
+     "submit": "Tạo đợt thực tập"
+    },
+    {
+     "kind": "table",
+     "title": "Các đợt gần đây",
+     "icon": "grid",
+     "columns": [
+      "Tên đợt",
+      "Thời gian",
+      "Số SV",
+      "Số DN",
+      "Trạng thái"
+     ],
+     "rows": [
+      [
+       "Thực tập tốt nghiệp – Đợt 2 · 2024 – 2025",
+       "01/2025 – 04/2025",
+       "54",
+       "15",
+       "Đã kết thúc"
+      ],
+      [
+       "Thực tập cơ sở – Hè 2025",
+       "06/2025 – 08/2025",
+       "61",
+       "18",
+       "Đang tổng kết"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "key": "tt.xac-nhan-dn",
+   "path": "thuc-tap-doanh-nghiep/xac-nhan-dn",
+   "title": "Xác nhận tiếp nhận của doanh nghiệp",
+   "sub": "Duyệt phản hồi tiếp nhận sinh viên từ phía doanh nghiệp",
+   "back": {
+    "label": "Thực tập doanh nghiệp",
+    "to": "/euni/giang-vien/thuc-tap-doanh-nghiep"
+   },
+   "blocks": [
+    {
+     "kind": "stats",
+     "items": [
+      {
+       "value": "4",
+       "label": "Chờ xác nhận"
+      },
+      {
+       "value": "18",
+       "label": "Đã tiếp nhận"
+      },
+      {
+       "value": "1",
+       "label": "Bị từ chối"
+      },
+      {
+       "value": "12",
+       "label": "DN đối tác"
+      }
+     ]
+    },
+    {
+     "kind": "table",
+     "title": "Phản hồi từ doanh nghiệp",
+     "icon": "check",
+     "columns": [
+      "MSSV",
+      "Sinh viên",
+      "Doanh nghiệp",
+      "Vị trí",
+      "Người tiếp nhận",
+      "Ngày gửi",
+      "Trạng thái"
+     ],
+     "rows": [
+      [
+       "2151000205",
+       "Nguyễn Quang C",
+       "Viettel Solutions",
+       "Thực tập sinh Data",
+       "Ông Lê Sơn",
+       "10/09/2025",
+       "Chờ xác nhận"
+      ],
+      [
+       "2151000311",
+       "Đinh Thị Hoa",
+       "Công ty CP Công nghệ ABC",
+       "Fresher Backend",
+       "Bà Vũ Lan",
+       "11/09/2025",
+       "Chờ xác nhận"
+      ],
+      [
+       "2151000277",
+       "Lý Văn Nam",
+       "MISA",
+       "Thực tập sinh QA",
+       "Ông Trịnh Bách",
+       "09/09/2025",
+       "Từ chối – hết chỉ tiêu"
+      ]
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Xác nhận mục đã chọn",
+       "icon": "check"
+      },
+      {
+       "label": "Yêu cầu bổ sung",
+       "icon": "file"
+      },
+      {
+       "label": "Gửi lại email cho DN",
+       "icon": "mail"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "tt.bieu-mau",
+   "path": "thuc-tap-doanh-nghiep/bieu-mau",
+   "title": "Biểu mẫu thực tập",
+   "sub": "Bộ biểu mẫu dùng cho quá trình thực tập doanh nghiệp",
+   "back": {
+    "label": "Thực tập doanh nghiệp",
+    "to": "/euni/giang-vien/thuc-tap-doanh-nghiep"
+   },
+   "blocks": [
+    {
+     "kind": "table",
+     "title": "Danh mục biểu mẫu",
+     "icon": "file",
+     "columns": [
+      "Tên biểu mẫu",
+      "Mã",
+      "Đối tượng nộp",
+      "Định dạng",
+      "Cập nhật"
+     ],
+     "rows": [
+      [
+       "Giấy giới thiệu thực tập",
+       "BM-TT-01",
+       "Sinh viên",
+       "DOCX",
+       "08/2025"
+      ],
+      [
+       "Phiếu tiếp nhận của doanh nghiệp",
+       "BM-TT-02",
+       "Doanh nghiệp",
+       "PDF",
+       "08/2025"
+      ],
+      [
+       "Nhật ký thực tập (mẫu tuần)",
+       "BM-TT-03",
+       "Sinh viên",
+       "DOCX",
+       "08/2025"
+      ],
+      [
+       "Phiếu đánh giá của doanh nghiệp",
+       "BM-TT-04",
+       "Doanh nghiệp",
+       "PDF",
+       "08/2025"
+      ],
+      [
+       "Mẫu báo cáo thực tập",
+       "BM-TT-05",
+       "Sinh viên",
+       "DOCX",
+       "08/2025"
+      ]
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Tải toàn bộ (ZIP)",
+       "icon": "download"
+      },
+      {
+       "label": "Gửi bộ biểu mẫu cho lớp",
+       "icon": "mail"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "tt.nhap-diem",
+   "path": "thuc-tap-doanh-nghiep/nhap-diem",
+   "title": "Nhập điểm thực tập",
+   "sub": "Tổng hợp điểm doanh nghiệp, báo cáo và điểm giảng viên",
+   "back": {
+    "label": "Thực tập doanh nghiệp",
+    "to": "/euni/giang-vien/thuc-tap-doanh-nghiep"
+   },
+   "blocks": [
+    {
+     "kind": "table",
+     "title": "Bảng điểm thực tập",
+     "icon": "award",
+     "columns": [
+      "MSSV",
+      "Sinh viên",
+      "Doanh nghiệp",
+      "Điểm DN (40%)",
+      "Báo cáo (30%)",
+      "Điểm GV (30%)",
+      "Tổng kết"
+     ],
+     "rows": [
+      [
+       "2151000123",
+       "Trần Văn A",
+       "Công ty CP Công nghệ ABC",
+       "8.5",
+       "8.0",
+       "8.0",
+       "8.2"
+      ],
+      [
+       "2151000188",
+       "Lê Thị B",
+       "FPT Software",
+       "9.0",
+       "8.5",
+       "8.5",
+       "8.7"
+      ],
+      [
+       "2151000241",
+       "Phạm Thu D",
+       "Công ty TNHH Bản đồ số",
+       "8.0",
+       "7.5",
+       "8.0",
+       "7.8"
+      ]
+     ]
+    },
+    {
+     "kind": "kv",
+     "title": "Quy định",
+     "icon": "file",
+     "rows": [
+      [
+       "Điều kiện đạt",
+       "Không có thành phần điểm < 4.0 và tổng kết ≥ 5.0"
+      ],
+      [
+       "Minh chứng bắt buộc",
+       "Phiếu đánh giá DN (BM-TT-04) + Báo cáo thực tập"
+      ],
+      [
+       "Hạn nhập điểm",
+       "Trước 25/04/2026"
+      ]
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Nhập từ Excel",
+       "icon": "download"
+      },
+      {
+       "label": "Lưu & gửi Bộ môn",
+       "icon": "check"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "ei.lich-ca-nhan",
+   "path": "tien-ich-elearning/lich-ca-nhan",
+   "title": "Lịch cá nhân",
+   "sub": "Lịch làm việc riêng, đồng bộ với lịch giảng dạy và công tác",
+   "back": {
+    "label": "Tiện ích & E-learning",
+    "to": "/euni/giang-vien/tien-ich-elearning"
+   },
+   "blocks": [
+    {
+     "kind": "table",
+     "title": "Tuần này · 12/05 – 18/05/2025",
+     "icon": "calendar",
+     "columns": [
+      "Thời gian",
+      "Nội dung",
+      "Loại",
+      "Địa điểm"
+     ],
+     "rows": [
+      [
+       "T2 · 07:30",
+       "Giảng Trắc địa đại cương – DTC061A",
+       "Giảng dạy",
+       "A1-201"
+      ],
+      [
+       "T3 · 14:00",
+       "Họp nhóm nghiên cứu UAV",
+       "Nghiên cứu",
+       "VP Bộ môn"
+      ],
+      [
+       "T5 · 09:00",
+       "Dự giờ đồng nghiệp – LGN048A",
+       "Chuyên môn",
+       "A1-102"
+      ],
+      [
+       "T6 · 08:00",
+       "Họp Khoa tháng 5",
+       "Hành chính",
+       "A1-201"
+      ]
+     ]
+    },
+    {
+     "kind": "form",
+     "title": "Thêm sự kiện",
+     "icon": "grid",
+     "fields": [
+      {
+       "label": "Tiêu đề",
+       "type": "text",
+       "wide": true
+      },
+      {
+       "label": "Ngày",
+       "type": "date"
+      },
+      {
+       "label": "Giờ",
+       "type": "text",
+       "placeholder": "VD: 14:00 – 15:30"
+      },
+      {
+       "label": "Loại",
+       "type": "select",
+       "options": [
+        "Giảng dạy",
+        "Nghiên cứu",
+        "Hành chính",
+        "Cá nhân"
+       ]
+      },
+      {
+       "label": "Nhắc trước",
+       "type": "select",
+       "options": [
+        "10 phút",
+        "30 phút",
+        "1 giờ",
+        "1 ngày"
+       ]
+      },
+      {
+       "label": "Ghi chú",
+       "type": "textarea",
+       "wide": true
+      }
+     ],
+     "submit": "Lưu sự kiện"
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Đồng bộ Google Calendar",
+       "icon": "calendar"
+      },
+      {
+       "label": "Xuất iCal (.ics)",
+       "icon": "download"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "ei.ghi-chu",
+   "path": "tien-ich-elearning/ghi-chu",
+   "title": "Ghi chú",
+   "sub": "Sổ ghi chú nhanh gắn với học phần và công việc",
+   "back": {
+    "label": "Tiện ích & E-learning",
+    "to": "/euni/giang-vien/tien-ich-elearning"
+   },
+   "blocks": [
+    {
+     "kind": "form",
+     "title": "Ghi chú mới",
+     "icon": "file",
+     "fields": [
+      {
+       "label": "Tiêu đề",
+       "type": "text",
+       "wide": true
+      },
+      {
+       "label": "Gắn nhãn",
+       "type": "select",
+       "options": [
+        "Chung",
+        "IT3210",
+        "IT3105",
+        "Nghiên cứu",
+        "Việc cần làm"
+       ]
+      },
+      {
+       "label": "Nội dung",
+       "type": "textarea",
+       "wide": true
+      }
+     ],
+     "submit": "Lưu ghi chú"
+    },
+    {
+     "kind": "notice",
+     "title": "Ghi chú gần đây",
+     "icon": "layers",
+     "items": [
+      {
+       "date": "16/09/2025 · IT3210",
+       "title": "Nhắc SV nhóm 3 nộp lại ERD trước buổi 10; chuẩn bị dữ liệu mẫu cho lab phân tán."
+      },
+      {
+       "date": "12/09/2025 · Nghiên cứu",
+       "title": "Ý tưởng: dùng dữ liệu điểm danh + LMS log làm đặc trưng cho mô hình cảnh báo sớm."
+      },
+      {
+       "date": "05/09/2025 · Việc cần làm",
+       "title": "Gửi minh chứng bài báo 2024 cho P.KH&CN trước 30/09."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "ei.cong-viec",
+   "path": "tien-ich-elearning/cong-viec",
+   "title": "Công việc",
+   "sub": "Danh sách việc cần làm, theo dõi hạn và mức ưu tiên",
+   "back": {
+    "label": "Tiện ích & E-learning",
+    "to": "/euni/giang-vien/tien-ich-elearning"
+   },
+   "blocks": [
+    {
+     "kind": "stats",
+     "items": [
+      {
+       "value": "9",
+       "label": "Đang mở"
+      },
+      {
+       "value": "3",
+       "label": "Quá hạn"
+      },
+      {
+       "value": "4",
+       "label": "Đến hạn tuần này"
+      },
+      {
+       "value": "21",
+       "label": "Đã hoàn thành (tháng)"
+      }
+     ]
+    },
+    {
+     "kind": "table",
+     "title": "Việc cần làm",
+     "icon": "check",
+     "columns": [
+      "Công việc",
+      "Nhãn",
+      "Hạn",
+      "Ưu tiên",
+      "Trạng thái"
+     ],
+     "rows": [
+      [
+       "Chấm bài tập lớn DVM063B",
+       "Giảng dạy",
+       "19/05/2025",
+       "Cao",
+       "Đang làm"
+      ],
+      [
+       "Nộp đề cương chi tiết DTC061A",
+       "Học phần",
+       "25/05/2025",
+       "Cao",
+       "Chưa bắt đầu"
+      ],
+      [
+       "Hoàn thiện báo cáo đề tài cấp trường",
+       "Nghiên cứu",
+       "30/05/2025",
+       "Trung bình",
+       "Chưa bắt đầu"
+      ],
+      [
+       "Phản hồi email doanh nghiệp thực tập",
+       "Hành chính",
+       "15/05/2025",
+       "Cao",
+       "Quá hạn"
+      ]
+     ]
+    },
+    {
+     "kind": "form",
+     "title": "Thêm công việc",
+     "icon": "grid",
+     "fields": [
+      {
+       "label": "Tên công việc",
+       "type": "text",
+       "wide": true
+      },
+      {
+       "label": "Nhãn",
+       "type": "select",
+       "options": [
+        "Giảng dạy",
+        "Học phần",
+        "Nghiên cứu",
+        "Hành chính",
+        "Cá nhân"
+       ]
+      },
+      {
+       "label": "Hạn hoàn thành",
+       "type": "date"
+      },
+      {
+       "label": "Ưu tiên",
+       "type": "select",
+       "options": [
+        "Thấp",
+        "Trung bình",
+        "Cao"
+       ]
+      }
+     ],
+     "submit": "Thêm"
+    }
+   ]
+  },
+  {
+   "key": "ei.cloud",
+   "path": "tien-ich-elearning/cloud",
+   "title": "Cloud lưu trữ",
+   "sub": "Không gian lưu trữ tài liệu giảng dạy trên hạ tầng HUMG",
+   "back": {
+    "label": "Tiện ích & E-learning",
+    "to": "/euni/giang-vien/tien-ich-elearning"
+   },
+   "blocks": [
+    {
+     "kind": "stats",
+     "items": [
+      {
+       "value": "15 / 50 GB",
+       "label": "Dung lượng đã dùng"
+      },
+      {
+       "value": "248",
+       "label": "Tệp"
+      },
+      {
+       "value": "12",
+       "label": "Thư mục"
+      },
+      {
+       "value": "6",
+       "label": "Đang chia sẻ"
+      }
+     ]
+    },
+    {
+     "kind": "table",
+     "title": "Tệp gần đây",
+     "icon": "layers",
+     "columns": [
+      "Tên",
+      "Loại",
+      "Kích thước",
+      "Sửa đổi",
+      "Chia sẻ"
+     ],
+     "rows": [
+      [
+       "/IT3210/lab/",
+       "Thư mục",
+       "2.1 GB",
+       "18/09/2025",
+       "Lớp IT3210"
+      ],
+      [
+       "de-thi-cuoi-ky-2025.docx",
+       "DOCX",
+       "480 KB",
+       "16/09/2025",
+       "Chỉ mình tôi"
+      ],
+      [
+       "bang-diem-DTC061A.xlsx",
+       "XLSX",
+       "96 KB",
+       "15/09/2025",
+       "Bộ môn"
+      ],
+      [
+       "video-lab02.mp4",
+       "MP4",
+       "186 MB",
+       "18/09/2025",
+       "Liên kết"
+      ]
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Tải tệp lên",
+       "icon": "download"
+      },
+      {
+       "label": "Tạo thư mục",
+       "icon": "grid"
+      },
+      {
+       "label": "Mở trên ứng dụng web",
+       "icon": "external"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "ei.ket-noi-cntt",
+   "path": "tien-ich-elearning/ket-noi-cntt",
+   "title": "Kết nối CNTT",
+   "sub": "Hỗ trợ kỹ thuật, cấp tài khoản và phần mềm cho giảng viên",
+   "back": {
+    "label": "Tiện ích & E-learning",
+    "to": "/euni/giang-vien/tien-ich-elearning"
+   },
+   "blocks": [
+    {
+     "kind": "kv",
+     "title": "Đầu mối hỗ trợ",
+     "icon": "phone",
+     "rows": [
+      [
+       "Hotline CNTT",
+       "024.3838.3636 (máy lẻ 115)"
+      ],
+      [
+       "Email",
+       "hotro.cntt@humg.edu.vn"
+      ],
+      [
+       "Phòng trực",
+       "Tầng 1 – Nhà C, Phòng C-105"
+      ],
+      [
+       "Giờ trực",
+       "T2 – T6 · 08:00 – 17:00"
+      ],
+      [
+       "Cổng ticket",
+       "Cổng Giảng viên · Ticket hỗ trợ"
+      ]
+     ]
+    },
+    {
+     "kind": "tiles",
+     "title": "Dịch vụ thường dùng",
+     "icon": "grid",
+     "items": [
+      {
+       "icon": "mail",
+       "title": "Cấp / khôi phục email",
+       "meta": "@humg.edu.vn"
+      },
+      {
+       "icon": "grid",
+       "title": "Tài khoản Microsoft 365",
+       "meta": "Office, Teams, OneDrive"
+      },
+      {
+       "icon": "globe",
+       "title": "VPN truy cập nội bộ",
+       "meta": "Thư viện số, CSDL"
+      },
+      {
+       "icon": "check",
+       "title": "Tài khoản Turnitin",
+       "meta": "Kiểm tra trùng lặp"
+      },
+      {
+       "icon": "play",
+       "title": "Phòng Zoom bản quyền",
+       "meta": "Không giới hạn 40 phút"
+      },
+      {
+       "icon": "layers",
+       "title": "Cài đặt phần mềm chuyên dụng",
+       "meta": "GIS, xử lý ảnh…"
+      }
+     ]
+    },
+    {
+     "kind": "form",
+     "title": "Gửi yêu cầu hỗ trợ",
+     "icon": "headphones",
+     "fields": [
+      {
+       "label": "Loại yêu cầu",
+       "type": "select",
+       "options": [
+        "Sự cố tài khoản",
+        "Cấp phần mềm / bản quyền",
+        "Hạ tầng lớp học",
+        "Truy cập hệ thống",
+        "Khác"
+       ]
+      },
+      {
+       "label": "Mức độ",
+       "type": "select",
+       "options": [
+        "Thấp",
+        "Trung bình",
+        "Cao – ảnh hưởng giảng dạy"
+       ]
+      },
+      {
+       "label": "Tiêu đề",
+       "type": "text",
+       "wide": true
+      },
+      {
+       "label": "Mô tả chi tiết",
+       "type": "textarea",
+       "wide": true
+      },
+      {
+       "label": "Ảnh chụp màn hình",
+       "type": "file",
+       "wide": true
+      }
+     ],
+     "submit": "Gửi yêu cầu"
+    }
+   ]
+  }
+ ],
+ "staffToolMap": {
+  "lop.danh-sach": {
+   "key": "lop.danh-sach",
+   "path": "quan-ly-lop-hoc/danh-sach-sinh-vien",
+   "title": "Danh sách sinh viên lớp",
+   "sub": "DTC061A – Trắc địa đại cương (01) · HK2 2024 – 2025",
+   "back": {
+    "label": "Quản lý lớp học",
+    "to": "/euni/giang-vien/quan-ly-lop-hoc"
+   },
+   "blocks": [
+    {
+     "kind": "stats",
+     "items": [
+      {
+       "value": "45",
+       "label": "Sĩ số lớp"
+      },
+      {
+       "value": "43",
+       "label": "Đang học"
+      },
+      {
+       "value": "2",
+       "label": "Bảo lưu / tạm dừng"
+      },
+      {
+       "value": "41",
+       "label": "Đủ điều kiện dự thi"
+      }
+     ]
+    },
+    {
+     "kind": "form",
+     "title": "Lọc danh sách",
+     "icon": "grid",
+     "fields": [
+      {
+       "label": "Lớp học phần",
+       "type": "select",
+       "options": [
+        "DTC061A – Trắc địa đại cương (01)",
+        "DVM063B – Đo vẽ bản đồ số (02)",
+        "LGN048A – Hệ thống thông tin địa lý (01)"
+       ]
+      },
+      {
+       "label": "Trạng thái",
+       "type": "select",
+       "options": [
+        "Tất cả",
+        "Đang học",
+        "Bảo lưu",
+        "Đủ điều kiện thi"
+       ]
+      },
+      {
+       "label": "Từ khóa",
+       "type": "text",
+       "placeholder": "MSSV hoặc họ tên…"
+      }
+     ],
+     "submit": "Áp dụng"
+    },
+    {
+     "kind": "table",
+     "title": "Sinh viên trong lớp",
+     "icon": "users",
+     "columns": [
+      "STT",
+      "MSSV",
+      "Họ và tên",
+      "Lớp",
+      "Email",
+      "Chuyên cần",
+      "Trạng thái"
+     ],
+     "rows": [
+      [
+       "1",
+       "22DTC001",
+       "Nguyễn Minh Anh",
+       "DTC-K67A",
+       "anhnm.22@st.humg.edu.vn",
+       "100%",
+       "Đang học"
+      ],
+      [
+       "2",
+       "22DTC002",
+       "Trần Thị Bích Ngọc",
+       "DTC-K67A",
+       "ngocttb.22@st.humg.edu.vn",
+       "96%",
+       "Đang học"
+      ],
+      [
+       "3",
+       "22DTC003",
+       "Phạm Văn Cường",
+       "DTC-K67A",
+       "cuongpv.22@st.humg.edu.vn",
+       "88%",
+       "Đang học"
+      ],
+      [
+       "4",
+       "22DTC004",
+       "Lê Hoàng Dũng",
+       "DTC-K67B",
+       "dunglh.22@st.humg.edu.vn",
+       "92%",
+       "Đang học"
+      ],
+      [
+       "5",
+       "22DTC005",
+       "Vũ Thị Hải Yến",
+       "DTC-K67B",
+       "yenvth.22@st.humg.edu.vn",
+       "70%",
+       "Cảnh báo chuyên cần"
+      ],
+      [
+       "6",
+       "22DTC006",
+       "Đỗ Quang Huy",
+       "DTC-K67B",
+       "huydq.22@st.humg.edu.vn",
+       "—",
+       "Bảo lưu"
+      ]
+     ],
+     "foot": "Hiển thị 6 / 45 sinh viên"
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Xuất Excel",
+       "icon": "download"
+      },
+      {
+       "label": "Gửi email cả lớp",
+       "icon": "mail"
+      },
+      {
+       "label": "In danh sách ký",
+       "icon": "file"
+      }
+     ]
+    }
+   ]
+  },
+  "lop.diem-danh": {
+   "key": "lop.diem-danh",
+   "path": "quan-ly-lop-hoc/diem-danh",
+   "title": "Điểm danh lớp học",
+   "sub": "Ghi nhận chuyên cần theo từng buổi học",
+   "back": {
+    "label": "Quản lý lớp học",
+    "to": "/euni/giang-vien/quan-ly-lop-hoc"
+   },
+   "blocks": [
+    {
+     "kind": "form",
+     "title": "Chọn buổi điểm danh",
+     "icon": "calendar",
+     "fields": [
+      {
+       "label": "Lớp học phần",
+       "type": "select",
+       "options": [
+        "DTC061A – Trắc địa đại cương (01)",
+        "DVM063B – Đo vẽ bản đồ số (02)"
+       ]
+      },
+      {
+       "label": "Buổi học",
+       "type": "select",
+       "options": [
+        "Buổi 8 – 16/05/2025",
+        "Buổi 7 – 09/05/2025",
+        "Buổi 6 – 02/05/2025"
+       ]
+      },
+      {
+       "label": "Hình thức",
+       "type": "select",
+       "options": [
+        "Trực tiếp",
+        "Trực tuyến"
+       ]
+      }
+     ],
+     "submit": "Mở buổi điểm danh"
+    },
+    {
+     "kind": "table",
+     "title": "Bảng điểm danh – Buổi 8 (16/05/2025)",
+     "icon": "check",
+     "columns": [
+      "MSSV",
+      "Họ và tên",
+      "Có mặt",
+      "Muộn",
+      "Vắng có phép",
+      "Vắng",
+      "Ghi chú"
+     ],
+     "rows": [
+      [
+       "22DTC001",
+       "Nguyễn Minh Anh",
+       "✓",
+       "",
+       "",
+       "",
+       ""
+      ],
+      [
+       "22DTC002",
+       "Trần Thị Bích Ngọc",
+       "✓",
+       "",
+       "",
+       "",
+       ""
+      ],
+      [
+       "22DTC003",
+       "Phạm Văn Cường",
+       "",
+       "✓",
+       "",
+       "",
+       "Vào lúc 07:45"
+      ],
+      [
+       "22DTC004",
+       "Lê Hoàng Dũng",
+       "✓",
+       "",
+       "",
+       "",
+       ""
+      ],
+      [
+       "22DTC005",
+       "Vũ Thị Hải Yến",
+       "",
+       "",
+       "✓",
+       "",
+       "Đơn xin nghỉ 15/05"
+      ],
+      [
+       "22DTC006",
+       "Đỗ Quang Huy",
+       "",
+       "",
+       "",
+       "✓",
+       ""
+      ]
+     ]
+    },
+    {
+     "kind": "stats",
+     "items": [
+      {
+       "value": "38",
+       "label": "Có mặt"
+      },
+      {
+       "value": "3",
+       "label": "Đi muộn"
+      },
+      {
+       "value": "2",
+       "label": "Vắng có phép"
+      },
+      {
+       "value": "2",
+       "label": "Vắng không phép"
+      }
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Lưu điểm danh",
+       "icon": "check"
+      },
+      {
+       "label": "Điểm danh bằng QR",
+       "icon": "grid"
+      },
+      {
+       "label": "Xuất báo cáo chuyên cần",
+       "icon": "download"
+      }
+     ]
+    }
+   ]
+  },
+  "lop.nhap-diem": {
+   "key": "lop.nhap-diem",
+   "path": "quan-ly-lop-hoc/nhap-diem",
+   "title": "Nhập điểm lớp học phần",
+   "sub": "Nhập, kiểm tra và gửi duyệt bảng điểm thành phần",
+   "back": {
+    "label": "Quản lý lớp học",
+    "to": "/euni/giang-vien/quan-ly-lop-hoc"
+   },
+   "blocks": [
+    {
+     "kind": "form",
+     "title": "Thiết lập",
+     "icon": "award",
+     "fields": [
+      {
+       "label": "Lớp học phần",
+       "type": "select",
+       "options": [
+        "DTC061A – Trắc địa đại cương (01)",
+        "DVM063B – Đo vẽ bản đồ số (02)"
+       ]
+      },
+      {
+       "label": "Đợt nhập",
+       "type": "select",
+       "options": [
+        "Điểm quá trình",
+        "Điểm giữa kỳ",
+        "Điểm cuối kỳ",
+        "Tổng kết"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "table",
+     "title": "Bảng điểm",
+     "icon": "file",
+     "columns": [
+      "MSSV",
+      "Họ và tên",
+      "Chuyên cần (10%)",
+      "Kiểm tra (20%)",
+      "Giữa kỳ (30%)",
+      "Cuối kỳ (40%)",
+      "Tổng kết",
+      "Xếp loại"
+     ],
+     "rows": [
+      [
+       "22DTC001",
+       "Nguyễn Minh Anh",
+       "9.0",
+       "7.5",
+       "8.0",
+       "8.5",
+       "8.20",
+       "Giỏi"
+      ],
+      [
+       "22DTC002",
+       "Trần Thị Bích Ngọc",
+       "8.5",
+       "8.0",
+       "7.5",
+       "8.0",
+       "7.95",
+       "Khá"
+      ],
+      [
+       "22DTC003",
+       "Phạm Văn Cường",
+       "7.5",
+       "6.5",
+       "7.0",
+       "7.5",
+       "7.15",
+       "Khá"
+      ],
+      [
+       "22DTC004",
+       "Lê Hoàng Dũng",
+       "8.0",
+       "7.5",
+       "7.0",
+       "8.0",
+       "7.65",
+       "Khá"
+      ],
+      [
+       "22DTC005",
+       "Vũ Thị Hải Yến",
+       "6.5",
+       "6.0",
+       "6.5",
+       "7.0",
+       "6.60",
+       "Trung bình"
+      ]
+     ]
+    },
+    {
+     "kind": "stats",
+     "items": [
+      {
+       "value": "45",
+       "label": "Sĩ số"
+      },
+      {
+       "value": "43",
+       "label": "Đã nhập"
+      },
+      {
+       "value": "7.26",
+       "label": "Điểm TB lớp"
+      },
+      {
+       "value": "95.6%",
+       "label": "Tỷ lệ đạt"
+      }
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Nhập từ Excel",
+       "icon": "download"
+      },
+      {
+       "label": "Lưu nháp",
+       "icon": "file"
+      },
+      {
+       "label": "Gửi duyệt Bộ môn",
+       "icon": "check"
+      }
+     ]
+    }
+   ]
+  },
+  "lop.bai-tap": {
+   "key": "lop.bai-tap",
+   "path": "quan-ly-lop-hoc/bai-tap-de-thi",
+   "title": "Bài tập – Đề thi",
+   "sub": "Giao bài tập, quản lý ngân hàng đề và bài nộp của sinh viên",
+   "back": {
+    "label": "Quản lý lớp học",
+    "to": "/euni/giang-vien/quan-ly-lop-hoc"
+   },
+   "blocks": [
+    {
+     "kind": "table",
+     "title": "Bài tập đã giao",
+     "icon": "file",
+     "columns": [
+      "Tiêu đề",
+      "Loại",
+      "Ngày giao",
+      "Hạn nộp",
+      "Đã nộp",
+      "Trạng thái"
+     ],
+     "rows": [
+      [
+       "Bài tập tuần 8 – Bình sai lưới",
+       "Cá nhân",
+       "12/05/2025",
+       "19/05/2025",
+       "30/45",
+       "Đang mở"
+      ],
+      [
+       "Bài tập lớn – Đo vẽ khu vực A1",
+       "Nhóm",
+       "02/05/2025",
+       "23/05/2025",
+       "8/12 nhóm",
+       "Đang mở"
+      ],
+      [
+       "Kiểm tra giữa kỳ",
+       "Trắc nghiệm",
+       "18/04/2025",
+       "18/04/2025",
+       "45/45",
+       "Đã chấm"
+      ]
+     ]
+    },
+    {
+     "kind": "form",
+     "title": "Tạo bài tập / đề thi mới",
+     "icon": "grid",
+     "fields": [
+      {
+       "label": "Tiêu đề",
+       "type": "text",
+       "wide": true,
+       "placeholder": "Ví dụ: Bài tập tuần 9 – Chuyền độ cao"
+      },
+      {
+       "label": "Loại",
+       "type": "select",
+       "options": [
+        "Bài tập cá nhân",
+        "Bài tập nhóm",
+        "Trắc nghiệm",
+        "Đề thi cuối kỳ"
+       ]
+      },
+      {
+       "label": "Hạn nộp",
+       "type": "date"
+      },
+      {
+       "label": "Thang điểm",
+       "type": "select",
+       "options": [
+        "10",
+        "100",
+        "Đạt / Không đạt"
+       ]
+      },
+      {
+       "label": "Cho phép nộp muộn",
+       "type": "select",
+       "options": [
+        "Không",
+        "Có – trừ 10%/ngày"
+       ]
+      },
+      {
+       "label": "Mô tả / Yêu cầu",
+       "type": "textarea",
+       "wide": true
+      },
+      {
+       "label": "Tệp đính kèm",
+       "type": "file",
+       "wide": true
+      }
+     ],
+     "submit": "Giao cho lớp"
+    }
+   ]
+  },
+  "lop.tai-lieu": {
+   "key": "lop.tai-lieu",
+   "path": "quan-ly-lop-hoc/tai-lieu-hoc-tap",
+   "title": "Tài liệu học tập của lớp",
+   "sub": "Chia sẻ bài giảng, tài liệu tham khảo tới sinh viên trong lớp",
+   "back": {
+    "label": "Quản lý lớp học",
+    "to": "/euni/giang-vien/quan-ly-lop-hoc"
+   },
+   "blocks": [
+    {
+     "kind": "table",
+     "title": "Tài liệu đã chia sẻ",
+     "icon": "layers",
+     "columns": [
+      "Tên tài liệu",
+      "Loại",
+      "Dung lượng",
+      "Ngày đăng",
+      "Lượt tải"
+     ],
+     "rows": [
+      [
+       "Bài giảng chương 5 – Lưới khống chế",
+       "PDF",
+       "3.2 MB",
+       "14/05/2025",
+       "41"
+      ],
+      [
+       "Video hướng dẫn sử dụng máy toàn đạc",
+       "MP4",
+       "186 MB",
+       "10/05/2025",
+       "38"
+      ],
+      [
+       "Bảng tra sai số cho phép",
+       "XLSX",
+       "240 KB",
+       "02/05/2025",
+       "44"
+      ],
+      [
+       "Đề cương ôn tập cuối kỳ",
+       "DOCX",
+       "520 KB",
+       "28/04/2025",
+       "45"
+      ]
+     ]
+    },
+    {
+     "kind": "form",
+     "title": "Tải lên tài liệu",
+     "icon": "download",
+     "fields": [
+      {
+       "label": "Tên hiển thị",
+       "type": "text",
+       "wide": true
+      },
+      {
+       "label": "Nhóm tài liệu",
+       "type": "select",
+       "options": [
+        "Bài giảng",
+        "Tài liệu tham khảo",
+        "Video",
+        "Đề cương / Hướng dẫn"
+       ]
+      },
+      {
+       "label": "Hiển thị cho",
+       "type": "select",
+       "options": [
+        "Cả lớp",
+        "Theo nhóm",
+        "Chỉ mình tôi (nháp)"
+       ]
+      },
+      {
+       "label": "Tệp",
+       "type": "file",
+       "wide": true
+      }
+     ],
+     "submit": "Đăng tài liệu"
+    }
+   ]
+  },
+  "lop.thong-ke": {
+   "key": "lop.thong-ke",
+   "path": "quan-ly-lop-hoc/thong-ke-lop",
+   "title": "Thống kê lớp học",
+   "sub": "Tổng hợp kết quả học tập và chuyên cần của lớp",
+   "back": {
+    "label": "Quản lý lớp học",
+    "to": "/euni/giang-vien/quan-ly-lop-hoc"
+   },
+   "blocks": [
+    {
+     "kind": "stats",
+     "items": [
+      {
+       "value": "7.26",
+       "label": "Điểm TB lớp"
+      },
+      {
+       "value": "95.6%",
+       "label": "Tỷ lệ đạt"
+      },
+      {
+       "value": "92%",
+       "label": "Chuyên cần trung bình"
+      },
+      {
+       "value": "12",
+       "label": "Sinh viên khá – giỏi"
+      }
+     ]
+    },
+    {
+     "kind": "table",
+     "title": "Phân bố xếp loại",
+     "icon": "grid",
+     "columns": [
+      "Xếp loại",
+      "Số lượng",
+      "Tỷ lệ"
+     ],
+     "rows": [
+      [
+       "Giỏi",
+       "8",
+       "17.8%"
+      ],
+      [
+       "Khá",
+       "22",
+       "48.9%"
+      ],
+      [
+       "Trung bình",
+       "13",
+       "28.9%"
+      ],
+      [
+       "Yếu / Không đạt",
+       "2",
+       "4.4%"
+      ]
+     ]
+    },
+    {
+     "kind": "table",
+     "title": "Chuyên cần theo tuần",
+     "icon": "calendar",
+     "columns": [
+      "Tuần",
+      "Có mặt",
+      "Muộn",
+      "Vắng",
+      "Tỷ lệ chuyên cần"
+     ],
+     "rows": [
+      [
+       "Tuần 5",
+       "44",
+       "1",
+       "0",
+       "99%"
+      ],
+      [
+       "Tuần 6",
+       "41",
+       "2",
+       "2",
+       "93%"
+      ],
+      [
+       "Tuần 7",
+       "40",
+       "3",
+       "2",
+       "91%"
+      ],
+      [
+       "Tuần 8",
+       "38",
+       "3",
+       "4",
+       "87%"
+      ]
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Xuất báo cáo (PDF)",
+       "icon": "download"
+      },
+      {
+       "label": "Gửi cố vấn học tập",
+       "icon": "mail"
+      }
+     ]
+    }
+   ]
+  },
+  "hp.de-cuong": {
+   "key": "hp.de-cuong",
+   "path": "quan-ly-hoc-phan/de-cuong",
+   "title": "Đề cương học phần",
+   "sub": "IT3210 – Cơ sở dữ liệu nâng cao · 3 tín chỉ",
+   "back": {
+    "label": "Quản lý học phần",
+    "to": "/euni/giang-vien/quan-ly-hoc-phan"
+   },
+   "blocks": [
+    {
+     "kind": "kv",
+     "title": "Thông tin chung",
+     "icon": "file",
+     "rows": [
+      [
+       "Tên học phần",
+       "Cơ sở dữ liệu nâng cao"
+      ],
+      [
+       "Mã học phần",
+       "IT3210"
+      ],
+      [
+       "Số tín chỉ",
+       "3 (2 LT + 1 TH)"
+      ],
+      [
+       "Học kỳ áp dụng",
+       "HK1 · 2025 – 2026"
+      ],
+      [
+       "Bộ môn phụ trách",
+       "Bộ môn Hệ thống thông tin – Khoa CNTT"
+      ],
+      [
+       "Điều kiện tiên quyết",
+       "IT2011 – Cấu trúc dữ liệu và giải thuật"
+      ],
+      [
+       "Phiên bản đề cương",
+       "v2.1 · cập nhật 20/08/2025"
+      ]
+     ]
+    },
+    {
+     "kind": "table",
+     "title": "Chuẩn đầu ra học phần (CLO)",
+     "icon": "award",
+     "columns": [
+      "Mã",
+      "Nội dung",
+      "Trình độ",
+      "CĐR CTĐT"
+     ],
+     "rows": [
+      [
+       "CLO1",
+       "Phân tích và chuẩn hóa mô hình dữ liệu quan hệ",
+       "Vận dụng",
+       "PLO2"
+      ],
+      [
+       "CLO2",
+       "Thiết kế chỉ mục và tối ưu truy vấn SQL",
+       "Vận dụng",
+       "PLO3"
+      ],
+      [
+       "CLO3",
+       "Vận dụng cơ chế giao dịch, đồng thời, phục hồi",
+       "Phân tích",
+       "PLO3"
+      ],
+      [
+       "CLO4",
+       "Triển khai CSDL phân tán / NoSQL cho bài toán thực tế",
+       "Đánh giá",
+       "PLO4, PLO6"
+      ]
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Tải đề cương (PDF)",
+       "icon": "download"
+      },
+      {
+       "label": "Chỉnh sửa đề cương",
+       "icon": "file"
+      },
+      {
+       "label": "Gửi duyệt Bộ môn",
+       "icon": "check"
+      },
+      {
+       "label": "So sánh phiên bản",
+       "icon": "layers"
+      }
+     ]
+    }
+   ]
+  },
+  "hp.ke-hoach": {
+   "key": "hp.ke-hoach",
+   "path": "quan-ly-hoc-phan/ke-hoach-giang-day",
+   "title": "Kế hoạch giảng dạy",
+   "sub": "IT3210 – Cơ sở dữ liệu nâng cao · 15 tuần",
+   "back": {
+    "label": "Quản lý học phần",
+    "to": "/euni/giang-vien/quan-ly-hoc-phan"
+   },
+   "blocks": [
+    {
+     "kind": "table",
+     "title": "Kế hoạch chi tiết theo tuần",
+     "icon": "calendar",
+     "columns": [
+      "Tuần",
+      "Nội dung",
+      "Số tiết",
+      "Hình thức",
+      "CĐR",
+      "Tài liệu"
+     ],
+     "rows": [
+      [
+       "1 – 3",
+       "Mô hình quan hệ, đại số quan hệ, chuẩn hóa",
+       "9",
+       "LT + bài tập",
+       "CLO1",
+       "Giáo trình ch.1–3"
+      ],
+      [
+       "4 – 6",
+       "Chỉ mục B-Tree/Hash, kế hoạch thực thi, tối ưu truy vấn",
+       "9",
+       "LT + TH",
+       "CLO2",
+       "Giáo trình ch.4–5"
+      ],
+      [
+       "7",
+       "Kiểm tra giữa kỳ + chữa bài",
+       "3",
+       "Kiểm tra",
+       "CLO1, CLO2",
+       "—"
+      ],
+      [
+       "8 – 10",
+       "Giao dịch, khóa, mức cô lập, phục hồi sau sự cố",
+       "9",
+       "LT + TH",
+       "CLO3",
+       "Giáo trình ch.6–7"
+      ],
+      [
+       "11 – 14",
+       "CSDL phân tán, nhân bản, NoSQL, đồ án nhóm",
+       "12",
+       "TH + báo cáo",
+       "CLO4",
+       "Tài liệu tham khảo [2][3]"
+      ],
+      [
+       "15",
+       "Bảo vệ đồ án nhóm, ôn tập",
+       "3",
+       "Seminar",
+       "CLO4",
+       "—"
+      ]
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Xuất kế hoạch (DOCX)",
+       "icon": "download"
+      },
+      {
+       "label": "Sao chép từ kỳ trước",
+       "icon": "layers"
+      },
+      {
+       "label": "Đồng bộ lên LMS",
+       "icon": "grid"
+      }
+     ]
+    }
+   ]
+  },
+  "hp.hoc-lieu": {
+   "key": "hp.hoc-lieu",
+   "path": "quan-ly-hoc-phan/hoc-lieu-can-thiet",
+   "title": "Học liệu cần thiết",
+   "sub": "Giáo trình, tài liệu tham khảo và phần mềm cho học phần",
+   "back": {
+    "label": "Quản lý học phần",
+    "to": "/euni/giang-vien/quan-ly-hoc-phan"
+   },
+   "blocks": [
+    {
+     "kind": "table",
+     "title": "Danh mục học liệu",
+     "icon": "layers",
+     "columns": [
+      "Loại",
+      "Tên tài liệu / Giáo trình",
+      "Tác giả – NXB",
+      "Năm",
+      "Yêu cầu"
+     ],
+     "rows": [
+      [
+       "Giáo trình",
+       "Cơ sở dữ liệu nâng cao",
+       "Bộ môn HTTT – NXB Bách khoa",
+       "2021",
+       "Bắt buộc"
+      ],
+      [
+       "Tham khảo",
+       "Database System Concepts",
+       "Silberschatz, Korth, Sudarshan",
+       "2020",
+       "Bắt buộc"
+      ],
+      [
+       "Tham khảo",
+       "Designing Data-Intensive Applications",
+       "Martin Kleppmann – O’Reilly",
+       "2017",
+       "Khuyến khích"
+      ],
+      [
+       "Phần mềm",
+       "PostgreSQL 16, DBeaver, Docker",
+       "—",
+       "2024",
+       "Bắt buộc (thực hành)"
+      ]
+     ]
+    },
+    {
+     "kind": "form",
+     "title": "Thêm học liệu",
+     "icon": "grid",
+     "fields": [
+      {
+       "label": "Loại",
+       "type": "select",
+       "options": [
+        "Giáo trình",
+        "Tài liệu tham khảo",
+        "Phần mềm / Công cụ",
+        "Học liệu số nội bộ"
+       ]
+      },
+      {
+       "label": "Tên tài liệu",
+       "type": "text",
+       "wide": true
+      },
+      {
+       "label": "Tác giả / Nguồn",
+       "type": "text"
+      },
+      {
+       "label": "Mức yêu cầu",
+       "type": "select",
+       "options": [
+        "Bắt buộc",
+        "Khuyến khích"
+       ]
+      },
+      {
+       "label": "Liên kết / Tệp",
+       "type": "file",
+       "wide": true
+      }
+     ],
+     "submit": "Thêm vào danh mục"
+    }
+   ]
+  },
+  "hp.danh-gia": {
+   "key": "hp.danh-gia",
+   "path": "quan-ly-hoc-phan/danh-gia",
+   "title": "Phương án đánh giá học phần",
+   "sub": "Rubric và tỷ trọng các thành phần điểm",
+   "back": {
+    "label": "Quản lý học phần",
+    "to": "/euni/giang-vien/quan-ly-hoc-phan"
+   },
+   "blocks": [
+    {
+     "kind": "table",
+     "title": "Thành phần đánh giá",
+     "icon": "award",
+     "columns": [
+      "Thành phần",
+      "Trọng số",
+      "Hình thức",
+      "CĐR đánh giá",
+      "Thời điểm"
+     ],
+     "rows": [
+      [
+       "Chuyên cần – thái độ",
+       "10%",
+       "Điểm danh, phát biểu",
+       "CLO1–CLO4",
+       "Cả kỳ"
+      ],
+      [
+       "Bài tập / thực hành",
+       "20%",
+       "Chấm bài trên LMS",
+       "CLO1, CLO2",
+       "Tuần 3, 6, 10"
+      ],
+      [
+       "Kiểm tra giữa kỳ",
+       "20%",
+       "Tự luận trên giấy",
+       "CLO1, CLO2",
+       "Tuần 7"
+      ],
+      [
+       "Đồ án nhóm",
+       "20%",
+       "Báo cáo + bảo vệ",
+       "CLO4",
+       "Tuần 15"
+      ],
+      [
+       "Thi cuối kỳ",
+       "30%",
+       "Tự luận + thực hành máy",
+       "CLO2, CLO3",
+       "Lịch chung"
+      ]
+     ]
+    },
+    {
+     "kind": "kv",
+     "title": "Quy định",
+     "icon": "file",
+     "rows": [
+      [
+       "Tổng trọng số",
+       "100%"
+      ],
+      [
+       "Điều kiện dự thi",
+       "Chuyên cần ≥ 80% và nộp đủ bài tập bắt buộc"
+      ],
+      [
+       "Điểm đạt học phần",
+       "Điểm tổng kết ≥ 4.0 và điểm thi cuối kỳ ≥ 3.0"
+      ],
+      [
+       "Phúc khảo",
+       "Trong 7 ngày kể từ khi công bố điểm"
+      ]
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Tải rubric chi tiết",
+       "icon": "download"
+      },
+      {
+       "label": "Chỉnh sửa phương án",
+       "icon": "file"
+      }
+     ]
+    }
+   ]
+  },
+  "hp.bao-cao": {
+   "key": "hp.bao-cao",
+   "path": "quan-ly-hoc-phan/bao-cao",
+   "title": "Báo cáo học phần",
+   "sub": "Tổng kết kết quả giảng dạy và cải tiến chất lượng",
+   "back": {
+    "label": "Quản lý học phần",
+    "to": "/euni/giang-vien/quan-ly-hoc-phan"
+   },
+   "blocks": [
+    {
+     "kind": "table",
+     "title": "Báo cáo theo học kỳ",
+     "icon": "grid",
+     "columns": [
+      "Học kỳ",
+      "Số lớp",
+      "Tổng SV",
+      "Điểm TB",
+      "Tỷ lệ đạt",
+      "Mức đạt CĐR",
+      "Trạng thái"
+     ],
+     "rows": [
+      [
+       "HK1 2024 – 2025",
+       "2",
+       "96",
+       "7.31",
+       "94.8%",
+       "3.9 / 5",
+       "Đã duyệt"
+      ],
+      [
+       "HK2 2024 – 2025",
+       "1",
+       "48",
+       "7.05",
+       "91.7%",
+       "3.8 / 5",
+       "Đang soạn"
+      ]
+     ]
+    },
+    {
+     "kind": "text",
+     "title": "Ghi nhận cải tiến",
+     "icon": "file",
+     "body": [
+      "Bổ sung 2 buổi thực hành Docker/PostgreSQL sau phản hồi khảo sát giữa kỳ về khoảng cách giữa lý thuyết và triển khai thực tế.",
+      "Điều chỉnh trọng số đồ án nhóm từ 15% lên 20% nhằm tăng đánh giá năng lực vận dụng (CLO4)."
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Tạo báo cáo tổng kết",
+       "icon": "file"
+      },
+      {
+       "label": "Xuất PDF nộp Khoa",
+       "icon": "download"
+      },
+      {
+       "label": "Xem khảo sát sinh viên",
+       "icon": "eye"
+      }
+     ]
+    }
+   ]
+  },
+  "hls.bai-giang": {
+   "key": "hls.bai-giang",
+   "path": "hoc-lieu-so/bai-giang",
+   "title": "Bài giảng",
+   "sub": "120 tài liệu · bài giảng điện tử theo học phần",
+   "back": {
+    "label": "Học liệu số",
+    "to": "/euni/giang-vien/hoc-lieu-so"
+   },
+   "blocks": [
+    {
+     "kind": "form",
+     "title": "Tìm bài giảng",
+     "icon": "grid",
+     "fields": [
+      {
+       "label": "Học phần",
+       "type": "select",
+       "options": [
+        "Tất cả",
+        "IT3210 – CSDL nâng cao",
+        "IT3105 – Lập trình Web",
+        "IT2011 – CTDL & GT"
+       ]
+      },
+      {
+       "label": "Định dạng",
+       "type": "select",
+       "options": [
+        "Tất cả",
+        "PDF",
+        "PPTX",
+        "DOCX"
+       ]
+      },
+      {
+       "label": "Từ khóa",
+       "type": "text",
+       "placeholder": "Tên chương, chủ đề…"
+      }
+     ],
+     "submit": "Tìm"
+    },
+    {
+     "kind": "table",
+     "title": "Danh sách bài giảng",
+     "icon": "book",
+     "columns": [
+      "Tên bài giảng",
+      "Học phần",
+      "Định dạng",
+      "Dung lượng",
+      "Cập nhật",
+      "Lượt xem"
+     ],
+     "rows": [
+      [
+       "Chương 5 – Cơ sở dữ liệu phân tán",
+       "IT3210",
+       "PPTX",
+       "8.4 MB",
+       "18/09/2025",
+       "312"
+      ],
+      [
+       "Chương 4 – Tối ưu truy vấn",
+       "IT3210",
+       "PPTX",
+       "6.1 MB",
+       "11/09/2025",
+       "287"
+      ],
+      [
+       "Bài 3 – React Hooks nâng cao",
+       "IT3105",
+       "PDF",
+       "2.7 MB",
+       "16/09/2025",
+       "198"
+      ],
+      [
+       "Chương 2 – Cây và cây nhị phân tìm kiếm",
+       "IT2011",
+       "PDF",
+       "3.9 MB",
+       "05/09/2025",
+       "451"
+      ]
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Tải lên bài giảng",
+       "icon": "download"
+      },
+      {
+       "label": "Tạo thư mục học phần",
+       "icon": "layers"
+      }
+     ]
+    }
+   ]
+  },
+  "hls.video": {
+   "key": "hls.video",
+   "path": "hoc-lieu-so/video-hoc-phan",
+   "title": "Video học phần",
+   "sub": "36 video · bài giảng quay sẵn và hướng dẫn thực hành",
+   "back": {
+    "label": "Học liệu số",
+    "to": "/euni/giang-vien/hoc-lieu-so"
+   },
+   "blocks": [
+    {
+     "kind": "table",
+     "title": "Thư viện video",
+     "icon": "play",
+     "columns": [
+      "Tiêu đề",
+      "Học phần",
+      "Thời lượng",
+      "Ngày đăng",
+      "Lượt xem"
+     ],
+     "rows": [
+      [
+       "Hướng dẫn cài đặt Lab PostgreSQL + Docker",
+       "IT3210",
+       "18:24",
+       "18/09/2025",
+       "265"
+      ],
+      [
+       "Demo: Explain Analyze và đọc kế hoạch thực thi",
+       "IT3210",
+       "25:10",
+       "11/09/2025",
+       "241"
+      ],
+      [
+       "Live coding: REST API với Express",
+       "IT3105",
+       "42:37",
+       "16/09/2025",
+       "176"
+      ],
+      [
+       "Trực quan hóa thao tác trên cây AVL",
+       "IT2011",
+       "12:05",
+       "05/09/2025",
+       "389"
+      ]
+     ]
+    },
+    {
+     "kind": "form",
+     "title": "Thêm video",
+     "icon": "grid",
+     "fields": [
+      {
+       "label": "Tiêu đề",
+       "type": "text",
+       "wide": true
+      },
+      {
+       "label": "Học phần",
+       "type": "select",
+       "options": [
+        "IT3210 – CSDL nâng cao",
+        "IT3105 – Lập trình Web",
+        "IT2011 – CTDL & GT"
+       ]
+      },
+      {
+       "label": "Nguồn",
+       "type": "select",
+       "options": [
+        "Tải tệp MP4",
+        "Liên kết YouTube (ẩn danh sách)",
+        "Liên kết Panopto"
+       ]
+      },
+      {
+       "label": "Tệp / Liên kết",
+       "type": "file",
+       "wide": true
+      }
+     ],
+     "submit": "Đăng video"
+    }
+   ]
+  },
+  "hls.slide": {
+   "key": "hls.slide",
+   "path": "hoc-lieu-so/slide",
+   "title": "Slide bài giảng",
+   "sub": "85 tệp · slide trình chiếu dùng trên lớp",
+   "back": {
+    "label": "Học liệu số",
+    "to": "/euni/giang-vien/hoc-lieu-so"
+   },
+   "blocks": [
+    {
+     "kind": "table",
+     "title": "Danh sách slide",
+     "icon": "file",
+     "columns": [
+      "Tên slide",
+      "Học phần",
+      "Số trang",
+      "Cập nhật",
+      "Chia sẻ SV"
+     ],
+     "rows": [
+      [
+       "Buổi 9 – Giao dịch & khóa",
+       "IT3210",
+       "38",
+       "16/09/2025",
+       "Có"
+      ],
+      [
+       "Buổi 8 – Chỉ mục",
+       "IT3210",
+       "31",
+       "09/09/2025",
+       "Có"
+      ],
+      [
+       "Buổi 5 – Routing & Middleware",
+       "IT3105",
+       "27",
+       "14/09/2025",
+       "Có"
+      ],
+      [
+       "Buổi 3 – Danh sách liên kết",
+       "IT2011",
+       "22",
+       "03/09/2025",
+       "Nháp"
+      ]
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Tải lên slide",
+       "icon": "download"
+      },
+      {
+       "label": "Xuất gói cả học phần (ZIP)",
+       "icon": "layers"
+      }
+     ]
+    }
+   ]
+  },
+  "hls.tham-khao": {
+   "key": "hls.tham-khao",
+   "path": "hoc-lieu-so/tai-lieu-tham-khao",
+   "title": "Tài liệu tham khảo",
+   "sub": "64 tài liệu · sách, bài báo, chuẩn kỹ thuật",
+   "back": {
+    "label": "Học liệu số",
+    "to": "/euni/giang-vien/hoc-lieu-so"
+   },
+   "blocks": [
+    {
+     "kind": "table",
+     "title": "Kho tài liệu tham khảo",
+     "icon": "layers",
+     "columns": [
+      "Tên tài liệu",
+      "Loại",
+      "Nguồn",
+      "Năm",
+      "Định dạng"
+     ],
+     "rows": [
+      [
+       "Database System Concepts (7th ed.)",
+       "Sách",
+       "McGraw-Hill",
+       "2020",
+       "PDF"
+      ],
+      [
+       "Designing Data-Intensive Applications",
+       "Sách",
+       "O’Reilly",
+       "2017",
+       "PDF"
+      ],
+      [
+       "The Log: What every software engineer should know…",
+       "Bài viết",
+       "LinkedIn Engineering",
+       "2013",
+       "HTML"
+      ],
+      [
+       "PostgreSQL 16 Documentation",
+       "Tài liệu kỹ thuật",
+       "PostgreSQL Global Dev Group",
+       "2024",
+       "PDF"
+      ]
+     ]
+    },
+    {
+     "kind": "form",
+     "title": "Thêm tài liệu tham khảo",
+     "icon": "grid",
+     "fields": [
+      {
+       "label": "Tên tài liệu",
+       "type": "text",
+       "wide": true
+      },
+      {
+       "label": "Loại",
+       "type": "select",
+       "options": [
+        "Sách",
+        "Bài báo khoa học",
+        "Bài viết kỹ thuật",
+        "Tiêu chuẩn / Tài liệu kỹ thuật"
+       ]
+      },
+      {
+       "label": "Nguồn / DOI",
+       "type": "text"
+      },
+      {
+       "label": "Năm",
+       "type": "text"
+      },
+      {
+       "label": "Tệp / Liên kết",
+       "type": "file",
+       "wide": true
+      }
+     ],
+     "submit": "Lưu tài liệu"
+    }
+   ]
+  },
+  "da.giao-de-tai": {
+   "key": "da.giao-de-tai",
+   "path": "huong-dan-do-an/giao-de-tai",
+   "title": "Giao đề tài mới",
+   "sub": "Tạo và phân công đề tài đồ án / khóa luận / luận văn",
+   "back": {
+    "label": "Hướng dẫn đồ án / luận văn",
+    "to": "/euni/giang-vien/huong-dan-do-an"
+   },
+   "blocks": [
+    {
+     "kind": "form",
+     "title": "Thông tin đề tài",
+     "icon": "file",
+     "fields": [
+      {
+       "label": "Sinh viên / Học viên (MSSV)",
+       "type": "text",
+       "placeholder": "2151000xxx"
+      },
+      {
+       "label": "Loại",
+       "type": "select",
+       "options": [
+        "Đồ án tốt nghiệp",
+        "Khóa luận tốt nghiệp",
+        "Luận văn thạc sĩ",
+        "Luận án tiến sĩ"
+       ]
+      },
+      {
+       "label": "Tên đề tài",
+       "type": "text",
+       "wide": true
+      },
+      {
+       "label": "Mục tiêu & phạm vi",
+       "type": "textarea",
+       "wide": true
+      },
+      {
+       "label": "Ngày bắt đầu",
+       "type": "date"
+      },
+      {
+       "label": "Hạn hoàn thành",
+       "type": "date"
+      },
+      {
+       "label": "Đồng hướng dẫn",
+       "type": "text"
+      },
+      {
+       "label": "Kết quả kỳ vọng",
+       "type": "text"
+      }
+     ],
+     "submit": "Giao đề tài"
+    },
+    {
+     "kind": "table",
+     "title": "Đề tài sinh viên đề xuất – chờ xử lý",
+     "icon": "grid",
+     "columns": [
+      "MSSV",
+      "Sinh viên",
+      "Tên đề xuất",
+      "Loại",
+      "Ngày gửi",
+      "Trạng thái"
+     ],
+     "rows": [
+      [
+       "2151000512",
+       "Bùi Anh Tú",
+       "Trợ lý ảo hỏi đáp quy chế đào tạo",
+       "Đồ án tốt nghiệp",
+       "02/09/2025",
+       "Chờ duyệt"
+      ],
+      [
+       "2151000488",
+       "Ngô Thảo Vy",
+       "Phân tích log học tập phát hiện SV nguy cơ",
+       "Khóa luận tốt nghiệp",
+       "30/08/2025",
+       "Chờ duyệt"
+      ]
+     ]
+    }
+   ]
+  },
+  "da.duyet-nhat-ky": {
+   "key": "da.duyet-nhat-ky",
+   "path": "huong-dan-do-an/duyet-nhat-ky",
+   "title": "Duyệt nhật ký tiến độ",
+   "sub": "Xác nhận nhật ký làm việc hằng tuần của sinh viên",
+   "back": {
+    "label": "Hướng dẫn đồ án / luận văn",
+    "to": "/euni/giang-vien/huong-dan-do-an"
+   },
+   "blocks": [
+    {
+     "kind": "stats",
+     "items": [
+      {
+       "value": "5",
+       "label": "Nhật ký chờ duyệt"
+      },
+      {
+       "value": "9",
+       "label": "SV đang hướng dẫn"
+      },
+      {
+       "value": "2",
+       "label": "Quá hạn nộp"
+      },
+      {
+       "value": "86%",
+       "label": "Tỷ lệ nộp đúng hạn"
+      }
+     ]
+    },
+    {
+     "kind": "table",
+     "title": "Nhật ký tuần chờ duyệt",
+     "icon": "check",
+     "columns": [
+      "Sinh viên",
+      "Đề tài",
+      "Tuần",
+      "Nội dung thực hiện",
+      "Ngày nộp",
+      "Trạng thái"
+     ],
+     "rows": [
+      [
+       "Trần Văn A",
+       "Hệ khuyến nghị học liệu",
+       "Tuần 4",
+       "Hoàn thiện thu thập dữ liệu, tiền xử lý",
+       "15/09/2025",
+       "Chờ duyệt"
+      ],
+      [
+       "Lê Thị B",
+       "Phát hiện gian lận thi trực tuyến",
+       "Tuần 4",
+       "Cài đặt baseline CNN, đo độ chính xác",
+       "15/09/2025",
+       "Chờ duyệt"
+      ],
+      [
+       "Nguyễn Quang C",
+       "Nền tảng quản lý đồ án",
+       "Tuần 4",
+       "Thiết kế CSDL, dựng API khung",
+       "14/09/2025",
+       "Chờ duyệt"
+      ],
+      [
+       "Hoàng Văn E",
+       "Mô hình dự báo kết quả học tập",
+       "Tuần 3",
+       "(chưa nộp)",
+       "—",
+       "Quá hạn"
+      ]
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Duyệt các mục đã chọn",
+       "icon": "check"
+      },
+      {
+       "label": "Gửi nhắc nộp",
+       "icon": "bell"
+      },
+      {
+       "label": "Xuất nhật ký (PDF)",
+       "icon": "download"
+      }
+     ]
+    }
+   ]
+  },
+  "da.lich-bao-ve": {
+   "key": "da.lich-bao-ve",
+   "path": "huong-dan-do-an/lich-bao-ve",
+   "title": "Lịch bảo vệ",
+   "sub": "Lịch bảo vệ đồ án / luận văn của sinh viên hướng dẫn",
+   "back": {
+    "label": "Hướng dẫn đồ án / luận văn",
+    "to": "/euni/giang-vien/huong-dan-do-an"
+   },
+   "blocks": [
+    {
+     "kind": "table",
+     "title": "Đợt bảo vệ tháng 10/2025",
+     "icon": "calendar",
+     "columns": [
+      "Thời gian",
+      "Sinh viên",
+      "Đề tài",
+      "Hội đồng",
+      "Phòng",
+      "Vai trò của tôi"
+     ],
+     "rows": [
+      [
+       "20/10 · 08:00",
+       "Nguyễn Quang C",
+       "Nền tảng quản lý đồ án tốt nghiệp",
+       "HĐ CNTT-03",
+       "A2-401",
+       "GV hướng dẫn"
+      ],
+      [
+       "20/10 · 09:30",
+       "Phạm Thu D",
+       "Tối ưu truy vấn trên CSDL phân tán",
+       "HĐ CNTT-03",
+       "A2-401",
+       "GV hướng dẫn"
+      ],
+      [
+       "21/10 · 14:00",
+       "Đặng Minh K (SV khác)",
+       "Ứng dụng RAG trong hỗ trợ học tập",
+       "HĐ CNTT-05",
+       "A2-403",
+       "Phản biện"
+      ]
+     ]
+    },
+    {
+     "kind": "kv",
+     "title": "Chuẩn bị",
+     "icon": "file",
+     "rows": [
+      [
+       "Hạn nộp quyển",
+       "13/10/2025 (trước bảo vệ 7 ngày)"
+      ],
+      [
+       "Hạn nộp bản mềm + mã nguồn",
+       "15/10/2025"
+      ],
+      [
+       "Thời lượng trình bày",
+       "15 phút + 10 phút hỏi đáp"
+      ],
+      [
+       "Biểu mẫu nhận xét",
+       "BM-HD-05, BM-PB-06"
+      ]
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Thêm vào lịch cá nhân",
+       "icon": "calendar"
+      },
+      {
+       "label": "Tải phiếu nhận xét",
+       "icon": "download"
+      }
+     ]
+    }
+   ]
+  },
+  "da.nhap-diem": {
+   "key": "da.nhap-diem",
+   "path": "huong-dan-do-an/nhap-diem",
+   "title": "Nhập điểm hướng dẫn",
+   "sub": "Điểm của giảng viên hướng dẫn cho đồ án / luận văn",
+   "back": {
+    "label": "Hướng dẫn đồ án / luận văn",
+    "to": "/euni/giang-vien/huong-dan-do-an"
+   },
+   "blocks": [
+    {
+     "kind": "table",
+     "title": "Bảng điểm hướng dẫn",
+     "icon": "award",
+     "columns": [
+      "MSSV",
+      "Sinh viên",
+      "Đề tài",
+      "Thái độ (20%)",
+      "Tiến độ (30%)",
+      "Kết quả (50%)",
+      "Điểm HD"
+     ],
+     "rows": [
+      [
+       "2151000205",
+       "Nguyễn Quang C",
+       "Nền tảng quản lý đồ án tốt nghiệp",
+       "9.0",
+       "8.5",
+       "8.5",
+       "8.6"
+      ],
+      [
+       "CH2300145",
+       "Phạm Thu D",
+       "Tối ưu truy vấn trên CSDL phân tán",
+       "9.5",
+       "9.0",
+       "9.0",
+       "9.1"
+      ]
+     ]
+    },
+    {
+     "kind": "kv",
+     "title": "Lưu ý",
+     "icon": "file",
+     "rows": [
+      [
+       "Thang điểm",
+       "10, làm tròn 1 chữ số thập phân"
+      ],
+      [
+       "Hạn nhập điểm",
+       "Trước 18/10/2025"
+      ],
+      [
+       "Sau khi gửi",
+       "Điểm khóa, muốn sửa phải có đề nghị gửi Bộ môn"
+      ]
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Lưu nháp",
+       "icon": "file"
+      },
+      {
+       "label": "Gửi Bộ môn",
+       "icon": "check"
+      },
+      {
+       "label": "Xuất Excel",
+       "icon": "download"
+      }
+     ]
+    }
+   ]
+  },
+  "tt.tao-dot": {
+   "key": "tt.tao-dot",
+   "path": "thuc-tap-doanh-nghiep/tao-dot",
+   "title": "Tạo đợt thực tập",
+   "sub": "Khởi tạo đợt thực tập doanh nghiệp mới cho lớp / khóa",
+   "back": {
+    "label": "Thực tập doanh nghiệp",
+    "to": "/euni/giang-vien/thuc-tap-doanh-nghiep"
+   },
+   "blocks": [
+    {
+     "kind": "form",
+     "title": "Thông tin đợt thực tập",
+     "icon": "briefcase",
+     "fields": [
+      {
+       "label": "Tên đợt",
+       "type": "text",
+       "wide": true,
+       "placeholder": "Ví dụ: Thực tập tốt nghiệp – Đợt 1 · 2025 – 2026"
+      },
+      {
+       "label": "Năm học",
+       "type": "select",
+       "options": [
+        "2025 – 2026",
+        "2026 – 2027"
+       ]
+      },
+      {
+       "label": "Đối tượng",
+       "type": "select",
+       "options": [
+        "D21CNTT (K66)",
+        "D21HTTT (K66)",
+        "Toàn khóa"
+       ]
+      },
+      {
+       "label": "Ngày bắt đầu",
+       "type": "date"
+      },
+      {
+       "label": "Ngày kết thúc",
+       "type": "date"
+      },
+      {
+       "label": "Số tín chỉ",
+       "type": "text"
+      },
+      {
+       "label": "Hạn đăng ký nguyện vọng",
+       "type": "date"
+      },
+      {
+       "label": "Yêu cầu & hướng dẫn",
+       "type": "textarea",
+       "wide": true
+      }
+     ],
+     "submit": "Tạo đợt thực tập"
+    },
+    {
+     "kind": "table",
+     "title": "Các đợt gần đây",
+     "icon": "grid",
+     "columns": [
+      "Tên đợt",
+      "Thời gian",
+      "Số SV",
+      "Số DN",
+      "Trạng thái"
+     ],
+     "rows": [
+      [
+       "Thực tập tốt nghiệp – Đợt 2 · 2024 – 2025",
+       "01/2025 – 04/2025",
+       "54",
+       "15",
+       "Đã kết thúc"
+      ],
+      [
+       "Thực tập cơ sở – Hè 2025",
+       "06/2025 – 08/2025",
+       "61",
+       "18",
+       "Đang tổng kết"
+      ]
+     ]
+    }
+   ]
+  },
+  "tt.xac-nhan-dn": {
+   "key": "tt.xac-nhan-dn",
+   "path": "thuc-tap-doanh-nghiep/xac-nhan-dn",
+   "title": "Xác nhận tiếp nhận của doanh nghiệp",
+   "sub": "Duyệt phản hồi tiếp nhận sinh viên từ phía doanh nghiệp",
+   "back": {
+    "label": "Thực tập doanh nghiệp",
+    "to": "/euni/giang-vien/thuc-tap-doanh-nghiep"
+   },
+   "blocks": [
+    {
+     "kind": "stats",
+     "items": [
+      {
+       "value": "4",
+       "label": "Chờ xác nhận"
+      },
+      {
+       "value": "18",
+       "label": "Đã tiếp nhận"
+      },
+      {
+       "value": "1",
+       "label": "Bị từ chối"
+      },
+      {
+       "value": "12",
+       "label": "DN đối tác"
+      }
+     ]
+    },
+    {
+     "kind": "table",
+     "title": "Phản hồi từ doanh nghiệp",
+     "icon": "check",
+     "columns": [
+      "MSSV",
+      "Sinh viên",
+      "Doanh nghiệp",
+      "Vị trí",
+      "Người tiếp nhận",
+      "Ngày gửi",
+      "Trạng thái"
+     ],
+     "rows": [
+      [
+       "2151000205",
+       "Nguyễn Quang C",
+       "Viettel Solutions",
+       "Thực tập sinh Data",
+       "Ông Lê Sơn",
+       "10/09/2025",
+       "Chờ xác nhận"
+      ],
+      [
+       "2151000311",
+       "Đinh Thị Hoa",
+       "Công ty CP Công nghệ ABC",
+       "Fresher Backend",
+       "Bà Vũ Lan",
+       "11/09/2025",
+       "Chờ xác nhận"
+      ],
+      [
+       "2151000277",
+       "Lý Văn Nam",
+       "MISA",
+       "Thực tập sinh QA",
+       "Ông Trịnh Bách",
+       "09/09/2025",
+       "Từ chối – hết chỉ tiêu"
+      ]
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Xác nhận mục đã chọn",
+       "icon": "check"
+      },
+      {
+       "label": "Yêu cầu bổ sung",
+       "icon": "file"
+      },
+      {
+       "label": "Gửi lại email cho DN",
+       "icon": "mail"
+      }
+     ]
+    }
+   ]
+  },
+  "tt.bieu-mau": {
+   "key": "tt.bieu-mau",
+   "path": "thuc-tap-doanh-nghiep/bieu-mau",
+   "title": "Biểu mẫu thực tập",
+   "sub": "Bộ biểu mẫu dùng cho quá trình thực tập doanh nghiệp",
+   "back": {
+    "label": "Thực tập doanh nghiệp",
+    "to": "/euni/giang-vien/thuc-tap-doanh-nghiep"
+   },
+   "blocks": [
+    {
+     "kind": "table",
+     "title": "Danh mục biểu mẫu",
+     "icon": "file",
+     "columns": [
+      "Tên biểu mẫu",
+      "Mã",
+      "Đối tượng nộp",
+      "Định dạng",
+      "Cập nhật"
+     ],
+     "rows": [
+      [
+       "Giấy giới thiệu thực tập",
+       "BM-TT-01",
+       "Sinh viên",
+       "DOCX",
+       "08/2025"
+      ],
+      [
+       "Phiếu tiếp nhận của doanh nghiệp",
+       "BM-TT-02",
+       "Doanh nghiệp",
+       "PDF",
+       "08/2025"
+      ],
+      [
+       "Nhật ký thực tập (mẫu tuần)",
+       "BM-TT-03",
+       "Sinh viên",
+       "DOCX",
+       "08/2025"
+      ],
+      [
+       "Phiếu đánh giá của doanh nghiệp",
+       "BM-TT-04",
+       "Doanh nghiệp",
+       "PDF",
+       "08/2025"
+      ],
+      [
+       "Mẫu báo cáo thực tập",
+       "BM-TT-05",
+       "Sinh viên",
+       "DOCX",
+       "08/2025"
+      ]
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Tải toàn bộ (ZIP)",
+       "icon": "download"
+      },
+      {
+       "label": "Gửi bộ biểu mẫu cho lớp",
+       "icon": "mail"
+      }
+     ]
+    }
+   ]
+  },
+  "tt.nhap-diem": {
+   "key": "tt.nhap-diem",
+   "path": "thuc-tap-doanh-nghiep/nhap-diem",
+   "title": "Nhập điểm thực tập",
+   "sub": "Tổng hợp điểm doanh nghiệp, báo cáo và điểm giảng viên",
+   "back": {
+    "label": "Thực tập doanh nghiệp",
+    "to": "/euni/giang-vien/thuc-tap-doanh-nghiep"
+   },
+   "blocks": [
+    {
+     "kind": "table",
+     "title": "Bảng điểm thực tập",
+     "icon": "award",
+     "columns": [
+      "MSSV",
+      "Sinh viên",
+      "Doanh nghiệp",
+      "Điểm DN (40%)",
+      "Báo cáo (30%)",
+      "Điểm GV (30%)",
+      "Tổng kết"
+     ],
+     "rows": [
+      [
+       "2151000123",
+       "Trần Văn A",
+       "Công ty CP Công nghệ ABC",
+       "8.5",
+       "8.0",
+       "8.0",
+       "8.2"
+      ],
+      [
+       "2151000188",
+       "Lê Thị B",
+       "FPT Software",
+       "9.0",
+       "8.5",
+       "8.5",
+       "8.7"
+      ],
+      [
+       "2151000241",
+       "Phạm Thu D",
+       "Công ty TNHH Bản đồ số",
+       "8.0",
+       "7.5",
+       "8.0",
+       "7.8"
+      ]
+     ]
+    },
+    {
+     "kind": "kv",
+     "title": "Quy định",
+     "icon": "file",
+     "rows": [
+      [
+       "Điều kiện đạt",
+       "Không có thành phần điểm < 4.0 và tổng kết ≥ 5.0"
+      ],
+      [
+       "Minh chứng bắt buộc",
+       "Phiếu đánh giá DN (BM-TT-04) + Báo cáo thực tập"
+      ],
+      [
+       "Hạn nhập điểm",
+       "Trước 25/04/2026"
+      ]
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Nhập từ Excel",
+       "icon": "download"
+      },
+      {
+       "label": "Lưu & gửi Bộ môn",
+       "icon": "check"
+      }
+     ]
+    }
+   ]
+  },
+  "ei.lich-ca-nhan": {
+   "key": "ei.lich-ca-nhan",
+   "path": "tien-ich-elearning/lich-ca-nhan",
+   "title": "Lịch cá nhân",
+   "sub": "Lịch làm việc riêng, đồng bộ với lịch giảng dạy và công tác",
+   "back": {
+    "label": "Tiện ích & E-learning",
+    "to": "/euni/giang-vien/tien-ich-elearning"
+   },
+   "blocks": [
+    {
+     "kind": "table",
+     "title": "Tuần này · 12/05 – 18/05/2025",
+     "icon": "calendar",
+     "columns": [
+      "Thời gian",
+      "Nội dung",
+      "Loại",
+      "Địa điểm"
+     ],
+     "rows": [
+      [
+       "T2 · 07:30",
+       "Giảng Trắc địa đại cương – DTC061A",
+       "Giảng dạy",
+       "A1-201"
+      ],
+      [
+       "T3 · 14:00",
+       "Họp nhóm nghiên cứu UAV",
+       "Nghiên cứu",
+       "VP Bộ môn"
+      ],
+      [
+       "T5 · 09:00",
+       "Dự giờ đồng nghiệp – LGN048A",
+       "Chuyên môn",
+       "A1-102"
+      ],
+      [
+       "T6 · 08:00",
+       "Họp Khoa tháng 5",
+       "Hành chính",
+       "A1-201"
+      ]
+     ]
+    },
+    {
+     "kind": "form",
+     "title": "Thêm sự kiện",
+     "icon": "grid",
+     "fields": [
+      {
+       "label": "Tiêu đề",
+       "type": "text",
+       "wide": true
+      },
+      {
+       "label": "Ngày",
+       "type": "date"
+      },
+      {
+       "label": "Giờ",
+       "type": "text",
+       "placeholder": "VD: 14:00 – 15:30"
+      },
+      {
+       "label": "Loại",
+       "type": "select",
+       "options": [
+        "Giảng dạy",
+        "Nghiên cứu",
+        "Hành chính",
+        "Cá nhân"
+       ]
+      },
+      {
+       "label": "Nhắc trước",
+       "type": "select",
+       "options": [
+        "10 phút",
+        "30 phút",
+        "1 giờ",
+        "1 ngày"
+       ]
+      },
+      {
+       "label": "Ghi chú",
+       "type": "textarea",
+       "wide": true
+      }
+     ],
+     "submit": "Lưu sự kiện"
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Đồng bộ Google Calendar",
+       "icon": "calendar"
+      },
+      {
+       "label": "Xuất iCal (.ics)",
+       "icon": "download"
+      }
+     ]
+    }
+   ]
+  },
+  "ei.ghi-chu": {
+   "key": "ei.ghi-chu",
+   "path": "tien-ich-elearning/ghi-chu",
+   "title": "Ghi chú",
+   "sub": "Sổ ghi chú nhanh gắn với học phần và công việc",
+   "back": {
+    "label": "Tiện ích & E-learning",
+    "to": "/euni/giang-vien/tien-ich-elearning"
+   },
+   "blocks": [
+    {
+     "kind": "form",
+     "title": "Ghi chú mới",
+     "icon": "file",
+     "fields": [
+      {
+       "label": "Tiêu đề",
+       "type": "text",
+       "wide": true
+      },
+      {
+       "label": "Gắn nhãn",
+       "type": "select",
+       "options": [
+        "Chung",
+        "IT3210",
+        "IT3105",
+        "Nghiên cứu",
+        "Việc cần làm"
+       ]
+      },
+      {
+       "label": "Nội dung",
+       "type": "textarea",
+       "wide": true
+      }
+     ],
+     "submit": "Lưu ghi chú"
+    },
+    {
+     "kind": "notice",
+     "title": "Ghi chú gần đây",
+     "icon": "layers",
+     "items": [
+      {
+       "date": "16/09/2025 · IT3210",
+       "title": "Nhắc SV nhóm 3 nộp lại ERD trước buổi 10; chuẩn bị dữ liệu mẫu cho lab phân tán."
+      },
+      {
+       "date": "12/09/2025 · Nghiên cứu",
+       "title": "Ý tưởng: dùng dữ liệu điểm danh + LMS log làm đặc trưng cho mô hình cảnh báo sớm."
+      },
+      {
+       "date": "05/09/2025 · Việc cần làm",
+       "title": "Gửi minh chứng bài báo 2024 cho P.KH&CN trước 30/09."
+      }
+     ]
+    }
+   ]
+  },
+  "ei.cong-viec": {
+   "key": "ei.cong-viec",
+   "path": "tien-ich-elearning/cong-viec",
+   "title": "Công việc",
+   "sub": "Danh sách việc cần làm, theo dõi hạn và mức ưu tiên",
+   "back": {
+    "label": "Tiện ích & E-learning",
+    "to": "/euni/giang-vien/tien-ich-elearning"
+   },
+   "blocks": [
+    {
+     "kind": "stats",
+     "items": [
+      {
+       "value": "9",
+       "label": "Đang mở"
+      },
+      {
+       "value": "3",
+       "label": "Quá hạn"
+      },
+      {
+       "value": "4",
+       "label": "Đến hạn tuần này"
+      },
+      {
+       "value": "21",
+       "label": "Đã hoàn thành (tháng)"
+      }
+     ]
+    },
+    {
+     "kind": "table",
+     "title": "Việc cần làm",
+     "icon": "check",
+     "columns": [
+      "Công việc",
+      "Nhãn",
+      "Hạn",
+      "Ưu tiên",
+      "Trạng thái"
+     ],
+     "rows": [
+      [
+       "Chấm bài tập lớn DVM063B",
+       "Giảng dạy",
+       "19/05/2025",
+       "Cao",
+       "Đang làm"
+      ],
+      [
+       "Nộp đề cương chi tiết DTC061A",
+       "Học phần",
+       "25/05/2025",
+       "Cao",
+       "Chưa bắt đầu"
+      ],
+      [
+       "Hoàn thiện báo cáo đề tài cấp trường",
+       "Nghiên cứu",
+       "30/05/2025",
+       "Trung bình",
+       "Chưa bắt đầu"
+      ],
+      [
+       "Phản hồi email doanh nghiệp thực tập",
+       "Hành chính",
+       "15/05/2025",
+       "Cao",
+       "Quá hạn"
+      ]
+     ]
+    },
+    {
+     "kind": "form",
+     "title": "Thêm công việc",
+     "icon": "grid",
+     "fields": [
+      {
+       "label": "Tên công việc",
+       "type": "text",
+       "wide": true
+      },
+      {
+       "label": "Nhãn",
+       "type": "select",
+       "options": [
+        "Giảng dạy",
+        "Học phần",
+        "Nghiên cứu",
+        "Hành chính",
+        "Cá nhân"
+       ]
+      },
+      {
+       "label": "Hạn hoàn thành",
+       "type": "date"
+      },
+      {
+       "label": "Ưu tiên",
+       "type": "select",
+       "options": [
+        "Thấp",
+        "Trung bình",
+        "Cao"
+       ]
+      }
+     ],
+     "submit": "Thêm"
+    }
+   ]
+  },
+  "ei.cloud": {
+   "key": "ei.cloud",
+   "path": "tien-ich-elearning/cloud",
+   "title": "Cloud lưu trữ",
+   "sub": "Không gian lưu trữ tài liệu giảng dạy trên hạ tầng HUMG",
+   "back": {
+    "label": "Tiện ích & E-learning",
+    "to": "/euni/giang-vien/tien-ich-elearning"
+   },
+   "blocks": [
+    {
+     "kind": "stats",
+     "items": [
+      {
+       "value": "15 / 50 GB",
+       "label": "Dung lượng đã dùng"
+      },
+      {
+       "value": "248",
+       "label": "Tệp"
+      },
+      {
+       "value": "12",
+       "label": "Thư mục"
+      },
+      {
+       "value": "6",
+       "label": "Đang chia sẻ"
+      }
+     ]
+    },
+    {
+     "kind": "table",
+     "title": "Tệp gần đây",
+     "icon": "layers",
+     "columns": [
+      "Tên",
+      "Loại",
+      "Kích thước",
+      "Sửa đổi",
+      "Chia sẻ"
+     ],
+     "rows": [
+      [
+       "/IT3210/lab/",
+       "Thư mục",
+       "2.1 GB",
+       "18/09/2025",
+       "Lớp IT3210"
+      ],
+      [
+       "de-thi-cuoi-ky-2025.docx",
+       "DOCX",
+       "480 KB",
+       "16/09/2025",
+       "Chỉ mình tôi"
+      ],
+      [
+       "bang-diem-DTC061A.xlsx",
+       "XLSX",
+       "96 KB",
+       "15/09/2025",
+       "Bộ môn"
+      ],
+      [
+       "video-lab02.mp4",
+       "MP4",
+       "186 MB",
+       "18/09/2025",
+       "Liên kết"
+      ]
+     ]
+    },
+    {
+     "kind": "actions",
+     "items": [
+      {
+       "label": "Tải tệp lên",
+       "icon": "download"
+      },
+      {
+       "label": "Tạo thư mục",
+       "icon": "grid"
+      },
+      {
+       "label": "Mở trên ứng dụng web",
+       "icon": "external"
+      }
+     ]
+    }
+   ]
+  },
+  "ei.ket-noi-cntt": {
+   "key": "ei.ket-noi-cntt",
+   "path": "tien-ich-elearning/ket-noi-cntt",
+   "title": "Kết nối CNTT",
+   "sub": "Hỗ trợ kỹ thuật, cấp tài khoản và phần mềm cho giảng viên",
+   "back": {
+    "label": "Tiện ích & E-learning",
+    "to": "/euni/giang-vien/tien-ich-elearning"
+   },
+   "blocks": [
+    {
+     "kind": "kv",
+     "title": "Đầu mối hỗ trợ",
+     "icon": "phone",
+     "rows": [
+      [
+       "Hotline CNTT",
+       "024.3838.3636 (máy lẻ 115)"
+      ],
+      [
+       "Email",
+       "hotro.cntt@humg.edu.vn"
+      ],
+      [
+       "Phòng trực",
+       "Tầng 1 – Nhà C, Phòng C-105"
+      ],
+      [
+       "Giờ trực",
+       "T2 – T6 · 08:00 – 17:00"
+      ],
+      [
+       "Cổng ticket",
+       "Cổng Giảng viên · Ticket hỗ trợ"
+      ]
+     ]
+    },
+    {
+     "kind": "tiles",
+     "title": "Dịch vụ thường dùng",
+     "icon": "grid",
+     "items": [
+      {
+       "icon": "mail",
+       "title": "Cấp / khôi phục email",
+       "meta": "@humg.edu.vn"
+      },
+      {
+       "icon": "grid",
+       "title": "Tài khoản Microsoft 365",
+       "meta": "Office, Teams, OneDrive"
+      },
+      {
+       "icon": "globe",
+       "title": "VPN truy cập nội bộ",
+       "meta": "Thư viện số, CSDL"
+      },
+      {
+       "icon": "check",
+       "title": "Tài khoản Turnitin",
+       "meta": "Kiểm tra trùng lặp"
+      },
+      {
+       "icon": "play",
+       "title": "Phòng Zoom bản quyền",
+       "meta": "Không giới hạn 40 phút"
+      },
+      {
+       "icon": "layers",
+       "title": "Cài đặt phần mềm chuyên dụng",
+       "meta": "GIS, xử lý ảnh…"
+      }
+     ]
+    },
+    {
+     "kind": "form",
+     "title": "Gửi yêu cầu hỗ trợ",
+     "icon": "headphones",
+     "fields": [
+      {
+       "label": "Loại yêu cầu",
+       "type": "select",
+       "options": [
+        "Sự cố tài khoản",
+        "Cấp phần mềm / bản quyền",
+        "Hạ tầng lớp học",
+        "Truy cập hệ thống",
+        "Khác"
+       ]
+      },
+      {
+       "label": "Mức độ",
+       "type": "select",
+       "options": [
+        "Thấp",
+        "Trung bình",
+        "Cao – ảnh hưởng giảng dạy"
+       ]
+      },
+      {
+       "label": "Tiêu đề",
+       "type": "text",
+       "wide": true
+      },
+      {
+       "label": "Mô tả chi tiết",
+       "type": "textarea",
+       "wide": true
+      },
+      {
+       "label": "Ảnh chụp màn hình",
+       "type": "file",
+       "wide": true
+      }
+     ],
+     "submit": "Gửi yêu cầu"
+    }
+   ]
+  }
+ }
+}

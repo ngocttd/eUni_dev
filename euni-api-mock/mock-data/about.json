@@ -1,0 +1,2401 @@
+{
+ "aboutNav": [
+  {
+   "label": "Tổng quan",
+   "to": "/gioi-thieu",
+   "icon": "home"
+  },
+  {
+   "label": "Thông điệp Hiệu trưởng",
+   "to": "/gioi-thieu/thong-diep-hieu-truong",
+   "icon": "mail"
+  },
+  {
+   "label": "Lịch sử phát triển",
+   "to": "/gioi-thieu/lich-su",
+   "icon": "clock"
+  },
+  {
+   "label": "Sứ mạng – Tầm nhìn – Giá trị",
+   "to": "/gioi-thieu/tam-nhin-su-mang",
+   "icon": "compass"
+  },
+  {
+   "label": "Thành tựu & con số nổi bật",
+   "to": "/gioi-thieu/thanh-tuu",
+   "icon": "award"
+  },
+  {
+   "label": "Cơ cấu tổ chức",
+   "to": "/gioi-thieu/co-cau-to-chuc",
+   "icon": "layers"
+  },
+  {
+   "label": "Đội ngũ cán bộ, giảng viên",
+   "to": "/gioi-thieu/giang-vien",
+   "icon": "users"
+  }
+ ],
+ "achievements": [
+  {
+   "key": "daotao",
+   "label": "Đào tạo",
+   "items": [
+    {
+     "title": "Top 10 trường đại học kỹ thuật hàng đầu Việt Nam",
+     "meta": "Bảng xếp hạng VNUR",
+     "year": "2024"
+    },
+    {
+     "title": "Kiểm định chất lượng cơ sở giáo dục chu kỳ 2 – đạt chuẩn",
+     "meta": "Bộ GD&ĐT",
+     "year": "2023"
+    },
+    {
+     "title": "15 chương trình đào tạo đạt chuẩn kiểm định",
+     "meta": "AUN-QA & trong nước",
+     "year": "2022 – 2025"
+    }
+   ]
+  },
+  {
+   "key": "nghiencuu",
+   "label": "Nghiên cứu",
+   "items": [
+    {
+     "title": "650+ công bố khoa học quốc tế (ISI/Scopus)",
+     "meta": "Toàn trường",
+     "year": "2020 – 2025"
+    },
+    {
+     "title": "Trung tâm nghiên cứu trọng điểm quốc gia lĩnh vực Mỏ - Địa chất",
+     "meta": "Được công nhận",
+     "year": "2021"
+    },
+    {
+     "title": "Hàng chục đề tài cấp Nhà nước, cấp Bộ nghiệm thu xuất sắc",
+     "meta": "Nhiều lĩnh vực",
+     "year": "2016 – 2025"
+    }
+   ]
+  },
+  {
+   "key": "hoptac",
+   "label": "Hợp tác",
+   "items": [
+    {
+     "title": "Mạng lưới hơn 500 đối tác trong và ngoài nước",
+     "meta": "40+ quốc gia",
+     "year": "2025"
+    },
+    {
+     "title": "Chương trình liên kết đào tạo quốc tế",
+     "meta": "Đức, Hàn Quốc, Nhật Bản, Ba Lan",
+     "year": "2018 – nay"
+    }
+   ]
+  },
+  {
+   "key": "giaithuong",
+   "label": "Giải thưởng",
+   "items": [
+    {
+     "title": "Huân chương Độc lập hạng Nhì",
+     "meta": "Nhà nước trao tặng",
+     "year": "2016"
+    },
+    {
+     "title": "Nhiều Bằng khen của Thủ tướng Chính phủ, Bộ GD&ĐT",
+     "meta": "Tập thể & cá nhân",
+     "year": "2016 – 2025"
+    },
+    {
+     "title": "Giải thưởng Sáng tạo Khoa học Công nghệ Việt Nam",
+     "meta": "Nhiều công trình",
+     "year": "2019 – 2024"
+    }
+   ]
+  }
+ ],
+ "board": {
+  "rector": {
+   "name": "PGS.TS. Trần Xuân Trường",
+   "role": "Hiệu trưởng",
+   "email": "hieutruong@humg.edu.vn",
+   "phone": "024.3838.3006",
+   "bio": "Phụ trách chung, chiến lược phát triển, công tác tổ chức cán bộ, tài chính và đối ngoại của Nhà trường."
+  },
+  "vices": [
+   {
+    "name": "PGS.TS. Nguyễn Văn X",
+    "role": "Phó Hiệu trưởng",
+    "email": "pht.daotao@humg.edu.vn",
+    "phone": "024.3838.3010",
+    "bio": "Phụ trách đào tạo đại học, sau đại học, khảo thí và đảm bảo chất lượng giáo dục."
+   },
+   {
+    "name": "PGS.TS. Trần Thị B",
+    "role": "Phó Hiệu trưởng",
+    "email": "pht.khcn@humg.edu.vn",
+    "phone": "024.3838.3012",
+    "bio": "Phụ trách khoa học công nghệ, hợp tác quốc tế và tạp chí khoa học."
+   },
+   {
+    "name": "TS. Lê Văn C",
+    "role": "Phó Hiệu trưởng",
+    "email": "pht.csvc@humg.edu.vn",
+    "phone": "024.3838.3014",
+    "bio": "Phụ trách cơ sở vật chất, công tác sinh viên và chuyển đổi số."
+   }
+  ]
+ },
+ "facultyDepartments": {
+  "mo": [
+   {
+    "id": "khai-thac-ham-lo",
+    "name": "Bộ môn Khai thác hầm lò",
+    "head": "PGS.TS. Trần Văn Anh",
+    "desc": "Đào tạo và nghiên cứu công nghệ khai thác khoáng sản bằng phương pháp hầm lò, cơ giới hóa và an toàn mỏ.",
+    "research": [
+     "Cơ giới hóa khấu than",
+     "Ổn định công trình ngầm",
+     "Thông gió và an toàn mỏ"
+    ],
+    "size": 15,
+    "lecturers": [
+     {
+      "id": "tran-van-anh",
+      "name": "PGS.TS. Trần Văn Anh",
+      "position": "Trưởng bộ môn",
+      "fields": [
+       "Cơ giới hóa khấu than",
+       "Ổn định công trình ngầm"
+      ],
+      "pubs": 52,
+      "email": "tran-van-anh@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "nguyen-quang-huy-hl",
+      "name": "TS. Nguyễn Quang Huy",
+      "position": "Phó Trưởng bộ môn",
+      "fields": [
+       "Thông gió mỏ",
+       "An toàn mỏ hầm lò"
+      ],
+      "pubs": 24,
+      "email": "nguyen-quang-huy-hl@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "le-thi-mai-hl",
+      "name": "TS. Lê Thị Mai",
+      "position": "Giảng viên chính",
+      "fields": [
+       "Cơ học đá",
+       "Chống giữ lò"
+      ],
+      "pubs": 18,
+      "email": "le-thi-mai-hl@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "pham-cong-son-hl",
+      "name": "ThS. Phạm Công Sơn",
+      "position": "Giảng viên",
+      "fields": [
+       "Vận tải hầm lò",
+       "Thiết bị mỏ"
+      ],
+      "pubs": 7,
+      "email": "pham-cong-son-hl@humg.edu.vn",
+      "phone": "024.3838.3800"
+     }
+    ]
+   },
+   {
+    "id": "khai-thac-lo-thien",
+    "name": "Bộ môn Khai thác lộ thiên",
+    "head": "TS. Phạm Văn Dũng",
+    "desc": "Nghiên cứu công nghệ và tối ưu hóa khai thác mỏ lộ thiên, vận tải mỏ và hoàn thổ.",
+    "research": [
+     "Tối ưu biên giới mỏ",
+     "Nổ mìn và khoan",
+     "Vận tải mỏ lộ thiên"
+    ],
+    "size": 12,
+    "lecturers": [
+     {
+      "id": "pham-van-dung-lt",
+      "name": "TS. Phạm Văn Dũng",
+      "position": "Trưởng bộ môn",
+      "fields": [
+       "Tối ưu biên giới mỏ",
+       "Kế hoạch hóa khai thác"
+      ],
+      "pubs": 33,
+      "email": "pham-van-dung-lt@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "hoang-minh-tuan-lt",
+      "name": "PGS.TS. Hoàng Minh Tuấn",
+      "position": "Giảng viên cao cấp",
+      "fields": [
+       "Nổ mìn và khoan",
+       "Rung chấn nổ mìn"
+      ],
+      "pubs": 41,
+      "email": "hoang-minh-tuan-lt@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "do-thi-hoa-lt",
+      "name": "ThS. Đỗ Thị Hoa",
+      "position": "Giảng viên",
+      "fields": [
+       "Vận tải mỏ lộ thiên",
+       "Hoàn thổ – phục hồi"
+      ],
+      "pubs": 6,
+      "email": "do-thi-hoa-lt@humg.edu.vn",
+      "phone": "024.3838.3800"
+     }
+    ]
+   },
+   {
+    "id": "tuyen-khoang",
+    "name": "Bộ môn Tuyển khoáng",
+    "head": "PGS.TS. Ngô Văn Giang",
+    "desc": "Đào tạo, nghiên cứu công nghệ tuyển và chế biến khoáng sản, thu hồi kim loại và xử lý quặng đuôi.",
+    "research": [
+     "Tuyển nổi",
+     "Tuyển trọng lực",
+     "Chế biến sâu khoáng sản"
+    ],
+    "size": 10,
+    "lecturers": [
+     {
+      "id": "ngo-van-giang-tk",
+      "name": "PGS.TS. Ngô Văn Giang",
+      "position": "Trưởng bộ môn",
+      "fields": [
+       "Tuyển nổi",
+       "Chế biến sâu khoáng sản"
+      ],
+      "pubs": 47,
+      "email": "ngo-van-giang-tk@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "vu-thi-lan-tk",
+      "name": "TS. Vũ Thị Lan",
+      "position": "Giảng viên chính",
+      "fields": [
+       "Tuyển trọng lực",
+       "Thu hồi kim loại quý"
+      ],
+      "pubs": 20,
+      "email": "vu-thi-lan-tk@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "bui-duc-thang-tk",
+      "name": "ThS. Bùi Đức Thắng",
+      "position": "Giảng viên",
+      "fields": [
+       "Xử lý quặng đuôi",
+       "Hóa tuyển"
+      ],
+      "pubs": 8,
+      "email": "bui-duc-thang-tk@humg.edu.vn",
+      "phone": "024.3838.3800"
+     }
+    ]
+   }
+  ],
+  "dia-chat": [
+   {
+    "id": "dia-chat-cong-trinh",
+    "name": "Bộ môn Địa chất công trình – Địa kỹ thuật",
+    "head": "TS. Nguyễn Thị Bình",
+    "desc": "Nghiên cứu tính chất cơ lý của đất đá, ổn định nền móng, hố đào và các bài toán địa kỹ thuật.",
+    "research": [
+     "Ổn định mái dốc",
+     "Nền móng công trình",
+     "Địa kỹ thuật môi trường"
+    ],
+    "size": 14,
+    "lecturers": [
+     {
+      "id": "nguyen-thi-binh-dcct",
+      "name": "TS. Nguyễn Thị Bình",
+      "position": "Trưởng bộ môn",
+      "fields": [
+       "Ổn định mái dốc",
+       "Nền móng công trình"
+      ],
+      "pubs": 29,
+      "email": "nguyen-thi-binh-dcct@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "tran-quoc-viet-dcct",
+      "name": "PGS.TS. Trần Quốc Việt",
+      "position": "Giảng viên cao cấp",
+      "fields": [
+       "Địa kỹ thuật môi trường",
+       "Cơ học đất không bão hòa"
+      ],
+      "pubs": 44,
+      "email": "tran-quoc-viet-dcct@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "le-hoang-nam-dcct",
+      "name": "TS. Lê Hoàng Nam",
+      "position": "Giảng viên chính",
+      "fields": [
+       "Hố đào sâu",
+       "Gia cố nền đất yếu"
+      ],
+      "pubs": 17,
+      "email": "le-hoang-nam-dcct@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "pham-thu-ha-dcct",
+      "name": "ThS. Phạm Thu Hà",
+      "position": "Giảng viên",
+      "fields": [
+       "Khảo sát địa chất công trình"
+      ],
+      "pubs": 6,
+      "email": "pham-thu-ha-dcct@humg.edu.vn",
+      "phone": "024.3838.3800"
+     }
+    ]
+   },
+   {
+    "id": "khoang-san-dia-hoa",
+    "name": "Bộ môn Khoáng sản – Địa hóa",
+    "head": "PGS.TS. Hoàng Văn Long",
+    "desc": "Đào tạo và nghiên cứu về tìm kiếm, thăm dò khoáng sản, địa hóa và đánh giá tài nguyên.",
+    "research": [
+     "Địa hóa thăm dò",
+     "Khoáng sản kim loại hiếm",
+     "Mô hình hóa mỏ khoáng"
+    ],
+    "size": 12,
+    "lecturers": [
+     {
+      "id": "hoang-van-long-ksdh",
+      "name": "PGS.TS. Hoàng Văn Long",
+      "position": "Trưởng bộ môn",
+      "fields": [
+       "Địa hóa thăm dò",
+       "Khoáng sản kim loại hiếm"
+      ],
+      "pubs": 45,
+      "email": "hoang-van-long-ksdh@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "nguyen-thi-nga-ksdh",
+      "name": "TS. Nguyễn Thị Nga",
+      "position": "Phó Trưởng bộ môn",
+      "fields": [
+       "Thạch luận",
+       "Mô hình hóa mỏ khoáng"
+      ],
+      "pubs": 21,
+      "email": "nguyen-thi-nga-ksdh@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "do-van-khoa-ksdh",
+      "name": "ThS. Đỗ Văn Khoa",
+      "position": "Giảng viên",
+      "fields": [
+       "Đánh giá tài nguyên",
+       "Địa chất kinh tế"
+      ],
+      "pubs": 7,
+      "email": "do-van-khoa-ksdh@humg.edu.vn",
+      "phone": "024.3838.3800"
+     }
+    ]
+   }
+  ],
+  "dau-khi": [
+   {
+    "id": "khoan-khai-thac",
+    "name": "Bộ môn Khoan – Khai thác dầu khí",
+    "head": "TS. Phạm Văn Cường",
+    "desc": "Nghiên cứu công nghệ khoan, hoàn thiện giếng và nâng cao hệ số thu hồi dầu.",
+    "research": [
+     "Thủy lực khoan",
+     "Nâng cao thu hồi dầu (EOR)",
+     "Mô phỏng mỏ"
+    ],
+    "size": 13,
+    "lecturers": [
+     {
+      "id": "pham-van-cuong-kkt",
+      "name": "TS. Phạm Văn Cường",
+      "position": "Trưởng bộ môn",
+      "fields": [
+       "Thủy lực khoan",
+       "Hoàn thiện giếng"
+      ],
+      "pubs": 31,
+      "email": "pham-van-cuong-kkt@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "le-anh-tuan-kkt",
+      "name": "PGS.TS. Lê Anh Tuấn",
+      "position": "Giảng viên cao cấp",
+      "fields": [
+       "Nâng cao thu hồi dầu (EOR)",
+       "Mô phỏng mỏ"
+      ],
+      "pubs": 49,
+      "email": "le-anh-tuan-kkt@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "tran-thi-thu-kkt",
+      "name": "ThS. Trần Thị Thu",
+      "position": "Giảng viên",
+      "fields": [
+       "Dung dịch khoan",
+       "An toàn giàn khoan"
+      ],
+      "pubs": 8,
+      "email": "tran-thi-thu-kkt@humg.edu.vn",
+      "phone": "024.3838.3800"
+     }
+    ]
+   },
+   {
+    "id": "dia-vat-ly",
+    "name": "Bộ môn Địa vật lý",
+    "head": "PGS.TS. Lê Văn Phú",
+    "desc": "Đào tạo và nghiên cứu các phương pháp địa vật lý thăm dò và địa vật lý giếng khoan.",
+    "research": [
+     "Địa chấn thăm dò",
+     "Địa vật lý giếng khoan",
+     "Xử lý – minh giải tài liệu"
+    ],
+    "size": 11,
+    "lecturers": [
+     {
+      "id": "le-van-phu-dvl",
+      "name": "PGS.TS. Lê Văn Phú",
+      "position": "Trưởng bộ môn",
+      "fields": [
+       "Địa chấn thăm dò",
+       "Xử lý – minh giải tài liệu"
+      ],
+      "pubs": 46,
+      "email": "le-van-phu-dvl@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "nguyen-hai-son-dvl",
+      "name": "TS. Nguyễn Hải Sơn",
+      "position": "Giảng viên chính",
+      "fields": [
+       "Địa vật lý giếng khoan",
+       "Nghịch đảo địa chấn"
+      ],
+      "pubs": 19,
+      "email": "nguyen-hai-son-dvl@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "vu-thi-oanh-dvl",
+      "name": "ThS. Vũ Thị Oanh",
+      "position": "Giảng viên",
+      "fields": [
+       "Địa vật lý môi trường",
+       "Từ – trọng lực"
+      ],
+      "pubs": 6,
+      "email": "vu-thi-oanh-dvl@humg.edu.vn",
+      "phone": "024.3838.3800"
+     }
+    ]
+   }
+  ],
+  "trac-dia": [
+   {
+    "id": "trac-dia-cao-cap",
+    "name": "Bộ môn Trắc địa cao cấp – Địa không gian",
+    "head": "PGS.TS. Phạm Văn Định",
+    "desc": "Nghiên cứu trắc địa cao cấp, GNSS, trọng lực và hệ quy chiếu, quan trắc chuyển dịch biến dạng.",
+    "research": [
+     "GNSS – định vị chính xác",
+     "Quan trắc lún – biến dạng",
+     "Hệ quy chiếu quốc gia"
+    ],
+    "size": 16,
+    "lecturers": [
+     {
+      "id": "pham-van-dinh-tdcc",
+      "name": "PGS.TS. Phạm Văn Định",
+      "position": "Trưởng bộ môn",
+      "fields": [
+       "GNSS – định vị chính xác",
+       "Hệ quy chiếu quốc gia"
+      ],
+      "pubs": 58,
+      "email": "pham-van-dinh-tdcc@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "nguyen-thi-uyen-tdcc",
+      "name": "TS. Nguyễn Thị Uyên",
+      "position": "Phó Trưởng bộ môn",
+      "fields": [
+       "Quan trắc lún – biến dạng",
+       "Trắc địa công trình"
+      ],
+      "pubs": 26,
+      "email": "nguyen-thi-uyen-tdcc@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "hoang-trung-kien-tdcc",
+      "name": "TS. Hoàng Trung Kiên",
+      "position": "Giảng viên chính",
+      "fields": [
+       "Trọng lực – geoid",
+       "Xử lý số liệu trắc địa"
+      ],
+      "pubs": 15,
+      "email": "hoang-trung-kien-tdcc@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "le-thi-thanh-tdcc",
+      "name": "ThS. Lê Thị Thanh",
+      "position": "Giảng viên",
+      "fields": [
+       "Trắc địa địa hình",
+       "Đo đạc UAV"
+      ],
+      "pubs": 7,
+      "email": "le-thi-thanh-tdcc@humg.edu.vn",
+      "phone": "024.3838.3800"
+     }
+    ]
+   },
+   {
+    "id": "ban-do-vien-tham-gis",
+    "name": "Bộ môn Bản đồ – Viễn thám – GIS",
+    "head": "PGS.TS. Hoàng Văn Em",
+    "desc": "Đào tạo và nghiên cứu thành lập bản đồ, xử lý ảnh viễn thám và phân tích không gian GIS.",
+    "research": [
+     "Viễn thám và học sâu",
+     "WebGIS",
+     "Giám sát biến động lớp phủ"
+    ],
+    "size": 14,
+    "lecturers": [
+     {
+      "id": "hoang-van-em-btvg",
+      "name": "PGS.TS. Hoàng Văn Em",
+      "position": "Trưởng bộ môn",
+      "fields": [
+       "Viễn thám và học sâu",
+       "Giám sát biến động lớp phủ"
+      ],
+      "pubs": 71,
+      "email": "hoang-van-em-btvg@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "tran-minh-quan-btvg",
+      "name": "TS. Trần Minh Quân",
+      "position": "Phó Trưởng bộ môn",
+      "fields": [
+       "WebGIS",
+       "Phân tích không gian"
+      ],
+      "pubs": 28,
+      "email": "tran-minh-quan-btvg@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "nguyen-thi-ly-btvg",
+      "name": "TS. Nguyễn Thị Lý",
+      "position": "Giảng viên chính",
+      "fields": [
+       "Bản đồ số",
+       "Cơ sở dữ liệu địa lý"
+      ],
+      "pubs": 16,
+      "email": "nguyen-thi-ly-btvg@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "do-manh-hung-btvg",
+      "name": "ThS. Đỗ Mạnh Hùng",
+      "position": "Giảng viên",
+      "fields": [
+       "Xử lý ảnh vệ tinh",
+       "Học máy không gian"
+      ],
+      "pubs": 9,
+      "email": "do-manh-hung-btvg@humg.edu.vn",
+      "phone": "024.3838.3800"
+     }
+    ]
+   },
+   {
+    "id": "quan-ly-dat-dai",
+    "name": "Bộ môn Quản lý đất đai",
+    "head": "TS. Nguyễn Thị Út",
+    "desc": "Nghiên cứu chính sách, quy hoạch sử dụng đất, định giá đất và hệ thống hồ sơ địa chính.",
+    "research": [
+     "Quy hoạch sử dụng đất",
+     "Định giá bất động sản",
+     "Địa chính số"
+    ],
+    "size": 12,
+    "lecturers": [
+     {
+      "id": "nguyen-thi-ut-qldd",
+      "name": "TS. Nguyễn Thị Út",
+      "position": "Trưởng bộ môn",
+      "fields": [
+       "Quy hoạch sử dụng đất",
+       "Chính sách đất đai"
+      ],
+      "pubs": 27,
+      "email": "nguyen-thi-ut-qldd@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "le-van-truong-qldd",
+      "name": "PGS.TS. Lê Văn Trường",
+      "position": "Giảng viên cao cấp",
+      "fields": [
+       "Định giá bất động sản",
+       "Kinh tế đất"
+      ],
+      "pubs": 40,
+      "email": "le-van-truong-qldd@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "pham-thi-hang-qldd",
+      "name": "ThS. Phạm Thị Hằng",
+      "position": "Giảng viên",
+      "fields": [
+       "Địa chính số",
+       "Đăng ký đất đai"
+      ],
+      "pubs": 8,
+      "email": "pham-thi-hang-qldd@humg.edu.vn",
+      "phone": "024.3838.3800"
+     }
+    ]
+   }
+  ],
+  "cntt": [
+   {
+    "id": "khoa-hoc-may-tinh",
+    "name": "Bộ môn Khoa học máy tính",
+    "head": "TS. Lê Văn Chính",
+    "desc": "Đào tạo nền tảng khoa học máy tính, trí tuệ nhân tạo và học máy ứng dụng.",
+    "research": [
+     "Học máy – học sâu",
+     "Thị giác máy tính",
+     "Tối ưu hóa"
+    ],
+    "size": 18,
+    "lecturers": [
+     {
+      "id": "le-van-chinh-khmt",
+      "name": "TS. Lê Văn Chính",
+      "position": "Trưởng bộ môn",
+      "fields": [
+       "Học máy – học sâu",
+       "Tối ưu hóa"
+      ],
+      "pubs": 38,
+      "email": "le-van-chinh-khmt@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "nguyen-hoang-anh-khmt",
+      "name": "PGS.TS. Nguyễn Hoàng Anh",
+      "position": "Giảng viên cao cấp",
+      "fields": [
+       "Thị giác máy tính",
+       "Xử lý ngôn ngữ tự nhiên"
+      ],
+      "pubs": 55,
+      "email": "nguyen-hoang-anh-khmt@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "tran-thi-bich-ngoc-khmt",
+      "name": "TS. Trần Thị Bích Ngọc",
+      "position": "Giảng viên chính",
+      "fields": [
+       "Học tăng cường",
+       "Đồ họa máy tính"
+      ],
+      "pubs": 22,
+      "email": "tran-thi-bich-ngoc-khmt@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "vu-quang-hai-khmt",
+      "name": "ThS. Vũ Quang Hải",
+      "position": "Giảng viên",
+      "fields": [
+       "Thuật toán",
+       "Lập trình thi đấu"
+      ],
+      "pubs": 9,
+      "email": "vu-quang-hai-khmt@humg.edu.vn",
+      "phone": "024.3838.3800"
+     }
+    ]
+   },
+   {
+    "id": "he-thong-thong-tin",
+    "name": "Bộ môn Hệ thống thông tin",
+    "head": "TS. Vũ Văn Zũng",
+    "desc": "Nghiên cứu phân tích – thiết kế hệ thống, cơ sở dữ liệu và hệ thống thông tin doanh nghiệp.",
+    "research": [
+     "Dữ liệu lớn",
+     "Hệ khuyến nghị",
+     "Kho dữ liệu – BI"
+    ],
+    "size": 14,
+    "lecturers": [
+     {
+      "id": "vu-van-zung-httt",
+      "name": "TS. Vũ Văn Zũng",
+      "position": "Trưởng bộ môn",
+      "fields": [
+       "Dữ liệu lớn",
+       "Kho dữ liệu – BI"
+      ],
+      "pubs": 34,
+      "email": "vu-van-zung-httt@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "nguyen-thanh-tung-httt",
+      "name": "TS. Nguyễn Thanh Tùng",
+      "position": "Phó Trưởng bộ môn",
+      "fields": [
+       "Hệ khuyến nghị",
+       "Khai phá dữ liệu"
+      ],
+      "pubs": 20,
+      "email": "nguyen-thanh-tung-httt@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "le-thi-huong-httt",
+      "name": "ThS. Lê Thị Hương",
+      "position": "Giảng viên",
+      "fields": [
+       "Phân tích thiết kế hệ thống",
+       "CSDL quan hệ"
+      ],
+      "pubs": 7,
+      "email": "le-thi-huong-httt@humg.edu.vn",
+      "phone": "024.3838.3800"
+     }
+    ]
+   },
+   {
+    "id": "mang-may-tinh",
+    "name": "Bộ môn Mạng máy tính & An toàn thông tin",
+    "head": "PGS.TS. Hoàng Văn Bằng",
+    "desc": "Đào tạo về mạng máy tính, hệ thống phân tán và an toàn – bảo mật thông tin.",
+    "research": [
+     "An toàn hệ thống",
+     "IoT",
+     "Điện toán đám mây"
+    ],
+    "size": 12,
+    "lecturers": [
+     {
+      "id": "hoang-van-bang-mmt",
+      "name": "PGS.TS. Hoàng Văn Bằng",
+      "position": "Trưởng bộ môn",
+      "fields": [
+       "An toàn hệ thống",
+       "Mật mã ứng dụng"
+      ],
+      "pubs": 43,
+      "email": "hoang-van-bang-mmt@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "tran-cong-minh-mmt",
+      "name": "TS. Trần Công Minh",
+      "position": "Giảng viên chính",
+      "fields": [
+       "IoT",
+       "Điện toán biên"
+      ],
+      "pubs": 18,
+      "email": "tran-cong-minh-mmt@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "nguyen-thi-thao-mmt",
+      "name": "ThS. Nguyễn Thị Thảo",
+      "position": "Giảng viên",
+      "fields": [
+       "Điện toán đám mây",
+       "Quản trị mạng"
+      ],
+      "pubs": 8,
+      "email": "nguyen-thi-thao-mmt@humg.edu.vn",
+      "phone": "024.3838.3800"
+     }
+    ]
+   }
+  ],
+  "co-dien": [
+   {
+    "id": "tu-dong-hoa",
+    "name": "Bộ môn Tự động hóa",
+    "head": "PGS.TS. Vũ Văn Phong",
+    "desc": "Nghiên cứu điều khiển tự động, hệ thống nhúng, IoT và tự động hóa dây chuyền công nghiệp mỏ.",
+    "research": [
+     "Điều khiển hiện đại",
+     "IoT công nghiệp",
+     "SCADA – DCS"
+    ],
+    "size": 15,
+    "lecturers": [
+     {
+      "id": "vu-van-phong-tdh",
+      "name": "PGS.TS. Vũ Văn Phong",
+      "position": "Trưởng bộ môn",
+      "fields": [
+       "Điều khiển hiện đại",
+       "SCADA – DCS"
+      ],
+      "pubs": 41,
+      "email": "vu-van-phong-tdh@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "nguyen-duc-thinh-tdh",
+      "name": "TS. Nguyễn Đức Thịnh",
+      "position": "Phó Trưởng bộ môn",
+      "fields": [
+       "IoT công nghiệp",
+       "Hệ thống nhúng"
+      ],
+      "pubs": 23,
+      "email": "nguyen-duc-thinh-tdh@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "le-thi-yen-tdh",
+      "name": "ThS. Lê Thị Yến",
+      "position": "Giảng viên",
+      "fields": [
+       "Điều khiển logic khả trình (PLC)",
+       "Robot công nghiệp"
+      ],
+      "pubs": 8,
+      "email": "le-thi-yen-tdh@humg.edu.vn",
+      "phone": "024.3838.3800"
+     }
+    ]
+   },
+   {
+    "id": "ky-thuat-dien",
+    "name": "Bộ môn Kỹ thuật điện",
+    "head": "TS. Lê Văn Phúc",
+    "desc": "Đào tạo và nghiên cứu hệ thống điện, truyền động điện và cung cấp điện cho mỏ và công nghiệp.",
+    "research": [
+     "Cung cấp điện mỏ",
+     "Truyền động điện",
+     "Năng lượng tái tạo"
+    ],
+    "size": 12,
+    "lecturers": [
+     {
+      "id": "le-van-phuc-ktd",
+      "name": "TS. Lê Văn Phúc",
+      "position": "Trưởng bộ môn",
+      "fields": [
+       "Cung cấp điện mỏ",
+       "Chất lượng điện năng"
+      ],
+      "pubs": 30,
+      "email": "le-van-phuc-ktd@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "pham-quang-dat-ktd",
+      "name": "PGS.TS. Phạm Quang Đạt",
+      "position": "Giảng viên cao cấp",
+      "fields": [
+       "Truyền động điện",
+       "Điện tử công suất"
+      ],
+      "pubs": 47,
+      "email": "pham-quang-dat-ktd@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "tran-thi-nhung-ktd",
+      "name": "ThS. Trần Thị Nhung",
+      "position": "Giảng viên",
+      "fields": [
+       "Năng lượng tái tạo",
+       "Lưới điện thông minh"
+      ],
+      "pubs": 9,
+      "email": "tran-thi-nhung-ktd@humg.edu.vn",
+      "phone": "024.3838.3800"
+     }
+    ]
+   },
+   {
+    "id": "co-khi",
+    "name": "Bộ môn Kỹ thuật cơ khí",
+    "head": "PGS.TS. Đỗ Văn Hải",
+    "desc": "Nghiên cứu thiết kế, chế tạo và bảo trì máy – thiết bị mỏ và công nghiệp.",
+    "research": [
+     "Thiết kế máy",
+     "CAD/CAM/CNC",
+     "Bảo trì thiết bị mỏ"
+    ],
+    "size": 13,
+    "lecturers": [
+     {
+      "id": "do-van-hai-ck",
+      "name": "PGS.TS. Đỗ Văn Hải",
+      "position": "Trưởng bộ môn",
+      "fields": [
+       "Thiết kế máy",
+       "Bảo trì thiết bị mỏ"
+      ],
+      "pubs": 39,
+      "email": "do-van-hai-ck@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "nguyen-van-toan-ck",
+      "name": "TS. Nguyễn Văn Toàn",
+      "position": "Giảng viên chính",
+      "fields": [
+       "CAD/CAM/CNC",
+       "Công nghệ chế tạo máy"
+      ],
+      "pubs": 17,
+      "email": "nguyen-van-toan-ck@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "le-cong-danh-ck",
+      "name": "ThS. Lê Công Danh",
+      "position": "Giảng viên",
+      "fields": [
+       "Cơ điện tử",
+       "Mô phỏng động lực học"
+      ],
+      "pubs": 7,
+      "email": "le-cong-danh-ck@humg.edu.vn",
+      "phone": "024.3838.3800"
+     }
+    ]
+   }
+  ],
+  "kt-qtkd": [
+   {
+    "id": "quan-tri-kinh-doanh",
+    "name": "Bộ môn Quản trị kinh doanh",
+    "head": "TS. Đỗ Văn Giàu",
+    "desc": "Đào tạo và nghiên cứu quản trị doanh nghiệp, quản trị dự án và khởi nghiệp trong lĩnh vực tài nguyên.",
+    "research": [
+     "Quản trị chiến lược",
+     "Quản trị dự án khai khoáng",
+     "Khởi nghiệp đổi mới sáng tạo"
+    ],
+    "size": 16,
+    "lecturers": [
+     {
+      "id": "do-van-giau-qtkd",
+      "name": "TS. Đỗ Văn Giàu",
+      "position": "Trưởng bộ môn",
+      "fields": [
+       "Quản trị chiến lược",
+       "Khởi nghiệp đổi mới sáng tạo"
+      ],
+      "pubs": 26,
+      "email": "do-van-giau-qtkd@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "nguyen-thi-thu-hien-qtkd",
+      "name": "PGS.TS. Nguyễn Thị Thu Hiền",
+      "position": "Giảng viên cao cấp",
+      "fields": [
+       "Quản trị dự án khai khoáng",
+       "Quản trị vận hành"
+      ],
+      "pubs": 38,
+      "email": "nguyen-thi-thu-hien-qtkd@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "tran-van-loc-qtkd",
+      "name": "ThS. Trần Văn Lộc",
+      "position": "Giảng viên",
+      "fields": [
+       "Marketing",
+       "Hành vi tổ chức"
+      ],
+      "pubs": 6,
+      "email": "tran-van-loc-qtkd@humg.edu.vn",
+      "phone": "024.3838.3800"
+     }
+    ]
+   },
+   {
+    "id": "ke-toan",
+    "name": "Bộ môn Kế toán",
+    "head": "TS. Lê Thị Lam",
+    "desc": "Đào tạo và nghiên cứu kế toán tài chính, kế toán quản trị và kiểm toán.",
+    "research": [
+     "Kế toán quản trị chi phí",
+     "Phân tích tài chính",
+     "Kiểm toán nội bộ"
+    ],
+    "size": 12,
+    "lecturers": [
+     {
+      "id": "le-thi-lam-kt",
+      "name": "TS. Lê Thị Lam",
+      "position": "Trưởng bộ môn",
+      "fields": [
+       "Kế toán quản trị chi phí",
+       "Phân tích tài chính"
+      ],
+      "pubs": 24,
+      "email": "le-thi-lam-kt@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "pham-van-quyet-kt",
+      "name": "TS. Phạm Văn Quyết",
+      "position": "Phó Trưởng bộ môn",
+      "fields": [
+       "Kiểm toán nội bộ",
+       "Kế toán tài chính"
+      ],
+      "pubs": 19,
+      "email": "pham-van-quyet-kt@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "nguyen-thi-diu-kt",
+      "name": "ThS. Nguyễn Thị Dịu",
+      "position": "Giảng viên",
+      "fields": [
+       "Thuế",
+       "Kế toán chi phí mỏ"
+      ],
+      "pubs": 7,
+      "email": "nguyen-thi-diu-kt@humg.edu.vn",
+      "phone": "024.3838.3800"
+     }
+    ]
+   }
+  ],
+  "moi-truong": [
+   {
+    "id": "ky-thuat-moi-truong",
+    "name": "Bộ môn Kỹ thuật môi trường",
+    "head": "PGS.TS. Ngô Thị Hồng",
+    "desc": "Nghiên cứu công nghệ xử lý nước, khí, chất thải rắn và phục hồi môi trường sau khai thác.",
+    "research": [
+     "Xử lý nước thải mỏ",
+     "Hoàn nguyên môi trường mỏ",
+     "Kinh tế tuần hoàn"
+    ],
+    "size": 12,
+    "lecturers": [
+     {
+      "id": "ngo-thi-hong-ktmt",
+      "name": "PGS.TS. Ngô Thị Hồng",
+      "position": "Trưởng bộ môn",
+      "fields": [
+       "Xử lý nước thải mỏ",
+       "Hoàn nguyên môi trường mỏ"
+      ],
+      "pubs": 36,
+      "email": "ngo-thi-hong-ktmt@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "tran-van-phuong-ktmt",
+      "name": "TS. Trần Văn Phương",
+      "position": "Giảng viên chính",
+      "fields": [
+       "Xử lý khí thải",
+       "Kinh tế tuần hoàn"
+      ],
+      "pubs": 18,
+      "email": "tran-van-phuong-ktmt@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "le-thi-kim-ktmt",
+      "name": "ThS. Lê Thị Kim",
+      "position": "Giảng viên",
+      "fields": [
+       "Quản lý chất thải rắn",
+       "Quan trắc môi trường"
+      ],
+      "pubs": 8,
+      "email": "le-thi-kim-ktmt@humg.edu.vn",
+      "phone": "024.3838.3800"
+     }
+    ]
+   },
+   {
+    "id": "quan-ly-tai-nguyen",
+    "name": "Bộ môn Quản lý tài nguyên & Môi trường",
+    "head": "TS. Trần Văn Phát",
+    "desc": "Đào tạo và nghiên cứu quản lý tổng hợp tài nguyên, chính sách và phát triển bền vững.",
+    "research": [
+     "Quản lý tổng hợp lưu vực",
+     "Chính sách tài nguyên",
+     "Biến đổi khí hậu"
+    ],
+    "size": 10,
+    "lecturers": [
+     {
+      "id": "tran-van-phat-qltn",
+      "name": "TS. Trần Văn Phát",
+      "position": "Trưởng bộ môn",
+      "fields": [
+       "Quản lý tổng hợp lưu vực",
+       "Chính sách tài nguyên"
+      ],
+      "pubs": 22,
+      "email": "tran-van-phat-qltn@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "nguyen-thi-hoa-qltn",
+      "name": "PGS.TS. Nguyễn Thị Hoa",
+      "position": "Giảng viên cao cấp",
+      "fields": [
+       "Biến đổi khí hậu",
+       "Đánh giá tác động môi trường"
+      ],
+      "pubs": 33,
+      "email": "nguyen-thi-hoa-qltn@humg.edu.vn",
+      "phone": "024.3838.3800"
+     },
+     {
+      "id": "do-van-son-qltn",
+      "name": "ThS. Đỗ Văn Sơn",
+      "position": "Giảng viên",
+      "fields": [
+       "GIS trong quản lý tài nguyên",
+       "Phát triển bền vững"
+      ],
+      "pubs": 7,
+      "email": "do-van-son-qltn@humg.edu.vn",
+      "phone": "024.3838.3800"
+     }
+    ]
+   }
+  ]
+ },
+ "history": [
+  {
+   "year": "1966",
+   "title": "Thành lập Trường",
+   "text": "Trường Đại học Mỏ - Địa chất được thành lập theo Quyết định của Hội đồng Chính phủ, trên cơ sở Khoa Mỏ - Địa chất của Trường Đại học Bách khoa Hà Nội."
+  },
+  {
+   "year": "1975 – 1990",
+   "title": "Xây dựng và trưởng thành",
+   "text": "Mở rộng quy mô đào tạo, xây dựng cơ sở vật chất và đội ngũ giảng viên, khẳng định vị thế trong đào tạo ngành mỏ - địa chất."
+  },
+  {
+   "year": "1991 – 2005",
+   "title": "Đổi mới và hội nhập",
+   "text": "Đa dạng hóa ngành nghề, tăng cường hợp tác quốc tế, đẩy mạnh nghiên cứu khoa học và ứng dụng."
+  },
+  {
+   "year": "2006 – 2015",
+   "title": "Phát triển bền vững",
+   "text": "Nâng cao chất lượng đào tạo, mở rộng ngành nghề, đầu tư các phòng thí nghiệm trọng điểm và cơ sở vật chất hiện đại."
+  },
+  {
+   "year": "2016 – nay",
+   "title": "Vươn tầm quốc tế",
+   "text": "Hướng tới đại học nghiên cứu, hội nhập quốc tế sâu rộng, đồng hành cùng chuyển đổi số và phát triển bền vững."
+  }
+ ],
+ "numbers": {
+  "big": [
+   {
+    "value": "60+",
+    "label": "Năm phát triển"
+   },
+   {
+    "value": "20.000+",
+    "label": "Sinh viên, học viên"
+   },
+   {
+    "value": "600+",
+    "label": "Giảng viên, cán bộ"
+   },
+   {
+    "value": "52",
+    "label": "Chương trình đào tạo"
+   },
+   {
+    "value": "500+",
+    "label": "Đối tác toàn cầu"
+   }
+  ],
+  "enrollment": [
+   {
+    "year": "2019",
+    "value": 12800
+   },
+   {
+    "year": "2020",
+    "value": 13500
+   },
+   {
+    "year": "2021",
+    "value": 14200
+   },
+   {
+    "year": "2022",
+    "value": 16400
+   },
+   {
+    "year": "2023",
+    "value": 18600
+   },
+   {
+    "year": "2024",
+    "value": 20000
+   }
+  ],
+  "publications": [
+   {
+    "year": "2019",
+    "value": 420
+   },
+   {
+    "year": "2020",
+    "value": 460
+   },
+   {
+    "year": "2021",
+    "value": 520
+   },
+   {
+    "year": "2022",
+    "value": 615
+   },
+   {
+    "year": "2023",
+    "value": 850
+   },
+   {
+    "year": "2024",
+    "value": 950
+   }
+  ],
+  "faculty": [
+   {
+    "label": "Giáo sư, Phó Giáo sư",
+    "value": 10
+   },
+   {
+    "label": "Tiến sĩ",
+    "value": 40
+   },
+   {
+    "label": "Thạc sĩ",
+    "value": 40
+   },
+   {
+    "label": "Trình độ khác",
+    "value": 10
+   }
+  ]
+ },
+ "orgChart": {
+  "board": "Ban Giám hiệu",
+  "support": "Đảng ủy lãnh đạo toàn diện; Công đoàn, Đoàn Thanh niên và Hội Sinh viên phối hợp thực hiện nhiệm vụ.",
+  "branches": [
+   "Khối Khoa / Viện đào tạo",
+   "Khối Phòng / Ban chức năng",
+   "Khối Trung tâm / Viện nghiên cứu",
+   "Khối Đơn vị trực thuộc"
+  ],
+  "motto": "Minh bạch · Hiệu quả · Hợp tác · Phát triển"
+ },
+ "overview": {
+  "intro": [
+   "Trường Đại học Mỏ - Địa chất là trường đại học công lập trực thuộc Bộ Giáo dục và Đào tạo, có bề dày truyền thống trong đào tạo và nghiên cứu các lĩnh vực mỏ – địa chất – dầu khí – trắc địa bản đồ và các ngành kỹ thuật liên quan.",
+   "Trải qua 60 năm xây dựng và phát triển, Nhà trường đã đào tạo hàng chục nghìn kỹ sư, cử nhân, thạc sĩ và tiến sĩ, đóng góp quan trọng cho sự nghiệp công nghiệp hóa, hiện đại hóa đất nước."
+  ],
+  "stats": [
+   {
+    "value": "1966",
+    "label": "Năm thành lập"
+   },
+   {
+    "value": "60+",
+    "label": "Năm phát triển"
+   },
+   {
+    "value": "20.000+",
+    "label": "Sinh viên, học viên"
+   },
+   {
+    "value": "600+",
+    "label": "Giảng viên, cán bộ"
+   },
+   {
+    "value": "5",
+    "label": "Cơ sở đào tạo"
+   }
+  ],
+  "more": [
+   {
+    "value": "12",
+    "label": "Khoa chuyên môn"
+   },
+   {
+    "value": "4",
+    "label": "Viện nghiên cứu"
+   },
+   {
+    "value": "52",
+    "label": "Chương trình đào tạo"
+   },
+   {
+    "value": "500+",
+    "label": "Đối tác trong & ngoài nước"
+   }
+  ],
+  "values": [
+   "Đổi mới sáng tạo",
+   "Chất lượng hàng đầu",
+   "Hội nhập quốc tế",
+   "Phát triển bền vững",
+   "Trách nhiệm cộng đồng"
+  ]
+ },
+ "rectorMessage": {
+  "name": "PGS.TS. Trần Xuân Trường",
+  "role": "Hiệu trưởng Trường Đại học Mỏ - Địa chất",
+  "paragraphs": [
+   "Với truyền thống 60 năm xây dựng và phát triển, Trường Đại học Mỏ - Địa chất không ngừng đổi mới, sáng tạo trong đào tạo, nghiên cứu khoa học và chuyển giao công nghệ, góp phần đào tạo nguồn nhân lực chất lượng cao cho đất nước.",
+   "Chúng tôi cam kết xây dựng môi trường học thuật năng động, sáng tạo, hiện đại và nhân văn, nơi mỗi sinh viên được khuyến khích phát huy tối đa năng lực, bản lĩnh và tinh thần khởi nghiệp, hội nhập.",
+   "Nhà trường luôn trân trọng và mong muốn tiếp tục nhận được sự đồng hành của các thế hệ thầy trò, cựu sinh viên, đối tác và toàn xã hội trên chặng đường phát triển tiếp theo."
+  ],
+  "sign": "Trân trọng,",
+  "values": [
+   "Đổi mới – Sáng tạo",
+   "Chất lượng hàng đầu",
+   "Hội nhập quốc tế",
+   "Phát triển bền vững",
+   "Trách nhiệm cộng đồng"
+  ]
+ },
+ "units": {
+  "khoa": {
+   "label": "Khoa / Viện đào tạo",
+   "singular": "Khoa",
+   "intro": "Các khoa và viện đào tạo trực thuộc Trường Đại học Mỏ - Địa chất, đảm nhiệm công tác giảng dạy và nghiên cứu theo lĩnh vực chuyên môn.",
+   "list": [
+    {
+     "id": "mo",
+     "name": "Khoa Mỏ",
+     "head": "PGS.TS. Nguyễn Văn A",
+     "founded": 1966,
+     "staff": 62,
+     "students": 2300,
+     "majors": [
+      "Kỹ thuật Mỏ",
+      "Kỹ thuật Tuyển khoáng",
+      "Kỹ thuật Trắc địa mỏ"
+     ],
+     "desc": "Đào tạo và nghiên cứu về khai thác mỏ, tuyển khoáng, an toàn và cơ điện mỏ.",
+     "phone": "024.3838.3860",
+     "email": "khoamo@humg.edu.vn",
+     "board": [
+      {
+       "name": "PGS.TS. Nguyễn Văn A",
+       "role": "Trưởng khoa",
+       "email": "nguyenvana@humg.edu.vn"
+      },
+      {
+       "name": "PGS.TS. Đặng Vũ Chí",
+       "role": "Phó Trưởng khoa phụ trách đào tạo",
+       "email": "dangvuchi@humg.edu.vn"
+      },
+      {
+       "name": "TS. Nguyễn Phi Hùng",
+       "role": "Phó Trưởng khoa phụ trách khoa học",
+       "email": "nguyenphihung@humg.edu.vn"
+      },
+      {
+       "name": "ThS. Trần Thị Thu Hà",
+       "role": "Trợ lý giáo vụ khoa",
+       "email": "tranthithuha@humg.edu.vn"
+      }
+     ]
+    },
+    {
+     "id": "dia-chat",
+     "name": "Khoa Khoa học & Kỹ thuật Địa chất",
+     "head": "PGS.TS. Trần Thị B",
+     "founded": 1966,
+     "staff": 55,
+     "students": 1800,
+     "majors": [
+      "Kỹ thuật Địa chất",
+      "Địa chất học",
+      "Địa kỹ thuật xây dựng"
+     ],
+     "desc": "Đào tạo về địa chất, địa chất công trình, địa kỹ thuật và tài nguyên khoáng sản.",
+     "phone": "024.3838.3861",
+     "email": "khoadiachat@humg.edu.vn",
+     "board": [
+      {
+       "name": "PGS.TS. Trần Thị B",
+       "role": "Trưởng khoa",
+       "email": "tranthib@humg.edu.vn"
+      },
+      {
+       "name": "PGS.TS. Ngô Xuân Thành",
+       "role": "Phó Trưởng khoa",
+       "email": "ngoxuanthanh@humg.edu.vn"
+      },
+      {
+       "name": "TS. Bùi Thị Thu Hiền",
+       "role": "Phó Trưởng khoa",
+       "email": "buithithuhien@humg.edu.vn"
+      },
+      {
+       "name": "ThS. Phạm Văn Long",
+       "role": "Trợ lý giáo vụ khoa",
+       "email": "phamvanlong@humg.edu.vn"
+      }
+     ]
+    },
+    {
+     "id": "dau-khi",
+     "name": "Khoa Dầu khí",
+     "head": "TS. Lê Văn C",
+     "founded": 1975,
+     "staff": 40,
+     "students": 1200,
+     "majors": [
+      "Kỹ thuật Dầu khí",
+      "Kỹ thuật Địa vật lý"
+     ],
+     "desc": "Đào tạo về khoan – khai thác dầu khí, địa vật lý và lọc hóa dầu.",
+     "phone": "024.3838.3862",
+     "email": "khoadaukhi@humg.edu.vn",
+     "board": [
+      {
+       "name": "TS. Lê Văn C",
+       "role": "Trưởng khoa",
+       "email": "levanc@humg.edu.vn"
+      },
+      {
+       "name": "PGS.TS. Nguyễn Thế Vinh",
+       "role": "Phó Trưởng khoa",
+       "email": "nguyenthevinh@humg.edu.vn"
+      },
+      {
+       "name": "TS. Doãn Ngọc San",
+       "role": "Phó Trưởng khoa",
+       "email": "doanngocsan@humg.edu.vn"
+      },
+      {
+       "name": "ThS. Vũ Thị Minh Nguyệt",
+       "role": "Trợ lý giáo vụ khoa",
+       "email": "vuthiminhnguyet@humg.edu.vn"
+      }
+     ]
+    },
+    {
+     "id": "trac-dia",
+     "name": "Khoa Trắc địa – Bản đồ và Quản lý đất đai",
+     "head": "PGS.TS. Phạm Văn D",
+     "founded": 1966,
+     "staff": 58,
+     "students": 2000,
+     "majors": [
+      "Kỹ thuật Trắc địa – Bản đồ",
+      "Quản lý đất đai",
+      "Kỹ thuật Địa không gian"
+     ],
+     "desc": "Đào tạo về trắc địa, bản đồ, GIS, viễn thám và quản lý đất đai.",
+     "phone": "024.3838.3863",
+     "email": "khoatracdia@humg.edu.vn",
+     "board": [
+      {
+       "name": "PGS.TS. Phạm Văn D",
+       "role": "Trưởng khoa",
+       "email": "phamvand@humg.edu.vn"
+      },
+      {
+       "name": "PGS.TS. Nguyễn Quang Minh",
+       "role": "Phó Trưởng khoa",
+       "email": "nguyenquangminh@humg.edu.vn"
+      },
+      {
+       "name": "TS. Trần Thùy Dương",
+       "role": "Phó Trưởng khoa",
+       "email": "tranthuyduong@humg.edu.vn"
+      },
+      {
+       "name": "ThS. Lê Thị Hồng Vân",
+       "role": "Trợ lý giáo vụ khoa",
+       "email": "lethihongvan@humg.edu.vn"
+      }
+     ]
+    },
+    {
+     "id": "cntt",
+     "name": "Khoa Công nghệ thông tin",
+     "head": "TS. Hoàng Văn E",
+     "founded": 2001,
+     "staff": 45,
+     "students": 1900,
+     "majors": [
+      "Công nghệ thông tin",
+      "Khoa học dữ liệu",
+      "Hệ thống thông tin"
+     ],
+     "desc": "Đào tạo CNTT, khoa học dữ liệu, trí tuệ nhân tạo và hệ thống thông tin địa lý.",
+     "phone": "024.3838.3864",
+     "email": "khoacntt@humg.edu.vn",
+     "board": [
+      {
+       "name": "TS. Hoàng Văn E",
+       "role": "Trưởng khoa",
+       "email": "hoangvane@humg.edu.vn"
+      },
+      {
+       "name": "PGS.TS. Đào Anh Tuấn",
+       "role": "Phó Trưởng khoa",
+       "email": "daoanhtuan@humg.edu.vn"
+      },
+      {
+       "name": "TS. Nguyễn Thị Hải Bình",
+       "role": "Phó Trưởng khoa",
+       "email": "nguyenthihaibinh@humg.edu.vn"
+      },
+      {
+       "name": "ThS. Bùi Quang Hưng",
+       "role": "Trợ lý giáo vụ khoa",
+       "email": "buiquanghung@humg.edu.vn"
+      }
+     ]
+    },
+    {
+     "id": "co-dien",
+     "name": "Khoa Cơ – Điện",
+     "head": "PGS.TS. Vũ Văn F",
+     "founded": 1976,
+     "staff": 50,
+     "students": 1700,
+     "majors": [
+      "Kỹ thuật Điều khiển & Tự động hóa",
+      "Kỹ thuật Điện",
+      "Kỹ thuật Cơ khí"
+     ],
+     "desc": "Đào tạo về tự động hóa, điện – điện tử và cơ khí phục vụ công nghiệp.",
+     "phone": "024.3838.3865",
+     "email": "khoacodien@humg.edu.vn",
+     "board": [
+      {
+       "name": "PGS.TS. Vũ Văn F",
+       "role": "Trưởng khoa",
+       "email": "vuvanf@humg.edu.vn"
+      },
+      {
+       "name": "TS. Đinh Văn Chiến",
+       "role": "Phó Trưởng khoa",
+       "email": "dinhvanchien@humg.edu.vn"
+      },
+      {
+       "name": "TS. Khổng Cao Phong",
+       "role": "Phó Trưởng khoa",
+       "email": "khongcaophong@humg.edu.vn"
+      },
+      {
+       "name": "ThS. Nguyễn Thị Vân Anh",
+       "role": "Trợ lý giáo vụ khoa",
+       "email": "nguyenthivananh@humg.edu.vn"
+      }
+     ]
+    },
+    {
+     "id": "kt-qtkd",
+     "name": "Khoa Kinh tế & Quản trị kinh doanh",
+     "head": "TS. Đỗ Văn G",
+     "founded": 1997,
+     "staff": 42,
+     "students": 2100,
+     "majors": [
+      "Quản trị kinh doanh",
+      "Kế toán",
+      "Quản lý công nghiệp"
+     ],
+     "desc": "Đào tạo về quản trị, kế toán, tài chính và quản lý công nghiệp – khoáng sản.",
+     "phone": "024.3838.3866",
+     "email": "khoaktqtkd@humg.edu.vn",
+     "board": [
+      {
+       "name": "TS. Đỗ Văn G",
+       "role": "Trưởng khoa",
+       "email": "dovang@humg.edu.vn"
+      },
+      {
+       "name": "PGS.TS. Nguyễn Thị Bích Ngọc",
+       "role": "Phó Trưởng khoa",
+       "email": "nguyenthibichngoc@humg.edu.vn"
+      },
+      {
+       "name": "TS. Phí Thị Diễm Hồng",
+       "role": "Phó Trưởng khoa",
+       "email": "phithidiemhong@humg.edu.vn"
+      },
+      {
+       "name": "ThS. Trần Văn Tuấn",
+       "role": "Trợ lý giáo vụ khoa",
+       "email": "tranvantuan@humg.edu.vn"
+      }
+     ]
+    },
+    {
+     "id": "moi-truong",
+     "name": "Khoa Môi trường",
+     "head": "PGS.TS. Ngô Thị H",
+     "founded": 2007,
+     "staff": 30,
+     "students": 900,
+     "majors": [
+      "Kỹ thuật Môi trường",
+      "Quản lý tài nguyên & Môi trường"
+     ],
+     "desc": "Đào tạo và nghiên cứu về kỹ thuật, quản lý môi trường và tài nguyên.",
+     "phone": "024.3838.3867",
+     "email": "khoamoitruong@humg.edu.vn",
+     "board": [
+      {
+       "name": "PGS.TS. Ngô Thị H",
+       "role": "Trưởng khoa",
+       "email": "ngothih@humg.edu.vn"
+      },
+      {
+       "name": "TS. Nguyễn Mai Hoa",
+       "role": "Phó Trưởng khoa",
+       "email": "nguyenmaihoa@humg.edu.vn"
+      },
+      {
+       "name": "TS. Trần Thị Thanh Thủy",
+       "role": "Phó Trưởng khoa",
+       "email": "tranthithanhthuy@humg.edu.vn"
+      },
+      {
+       "name": "ThS. Đỗ Mạnh Hùng",
+       "role": "Trợ lý giáo vụ khoa",
+       "email": "domanhhung@humg.edu.vn"
+      }
+     ]
+    }
+   ]
+  },
+  "phong-ban": {
+   "label": "Phòng / Ban chức năng",
+   "singular": "Phòng / Ban",
+   "intro": "Các phòng, ban chức năng tham mưu, giúp việc cho Ban Giám hiệu trong quản lý và điều hành Nhà trường.",
+   "list": [
+    {
+     "id": "dao-tao",
+     "name": "Phòng Đào tạo",
+     "head": "TS. Nguyễn Văn B",
+     "phone": "024.3838.3827",
+     "email": "daotao@humg.edu.vn",
+     "functions": [
+      "Quản lý đào tạo đại học",
+      "Xây dựng kế hoạch giảng dạy",
+      "Xét tốt nghiệp và cấp bằng"
+     ],
+     "desc": "Tham mưu và tổ chức thực hiện công tác đào tạo bậc đại học.",
+     "staff": [
+      {
+       "name": "TS. Nguyễn Văn B",
+       "role": "Trưởng phòng",
+       "email": "nguyenvanb@humg.edu.vn"
+      },
+      {
+       "name": "ThS. Lê Thị Hồng Nhung",
+       "role": "Phó Trưởng phòng",
+       "email": "lethihongnhung@humg.edu.vn"
+      },
+      {
+       "name": "ThS. Trần Quốc Toản",
+       "role": "Phó Trưởng phòng",
+       "email": "tranquoctoan@humg.edu.vn"
+      },
+      {
+       "name": "CN. Phạm Thị Thu Trang",
+       "role": "Chuyên viên quản lý kế hoạch",
+       "email": "phamthithutrang-dt@humg.edu.vn"
+      },
+      {
+       "name": "CN. Hoàng Minh Đức",
+       "role": "Chuyên viên xét tốt nghiệp",
+       "email": "hoangminhduc-dt@humg.edu.vn"
+      }
+     ]
+    },
+    {
+     "id": "sau-dai-hoc",
+     "name": "Phòng Đào tạo Sau đại học",
+     "head": "PGS.TS. Trần C",
+     "phone": "024.3838.3828",
+     "email": "saudaihoc@humg.edu.vn",
+     "functions": [
+      "Tuyển sinh và quản lý học viên cao học, NCS",
+      "Tổ chức bảo vệ luận văn, luận án"
+     ],
+     "desc": "Quản lý đào tạo trình độ thạc sĩ và tiến sĩ.",
+     "staff": [
+      {
+       "name": "PGS.TS. Trần C",
+       "role": "Trưởng phòng",
+       "email": "tranc@humg.edu.vn"
+      },
+      {
+       "name": "TS. Nguyễn Thị Thanh Huyền",
+       "role": "Phó Trưởng phòng",
+       "email": "nguyenthithanhhuyen-sdh@humg.edu.vn"
+      },
+      {
+       "name": "ThS. Đỗ Văn Khánh",
+       "role": "Chuyên viên quản lý NCS",
+       "email": "dovankhanh-sdh@humg.edu.vn"
+      },
+      {
+       "name": "CN. Vũ Thị Lan Anh",
+       "role": "Chuyên viên quản lý cao học",
+       "email": "vuthilananh-sdh@humg.edu.vn"
+      }
+     ]
+    },
+    {
+     "id": "khcn",
+     "name": "Phòng Khoa học – Công nghệ",
+     "head": "TS. Lê D",
+     "phone": "024.3838.3829",
+     "email": "khcn@humg.edu.vn",
+     "functions": [
+      "Quản lý đề tài, dự án",
+      "Sở hữu trí tuệ",
+      "Tạp chí khoa học"
+     ],
+     "desc": "Quản lý hoạt động nghiên cứu khoa học và chuyển giao công nghệ.",
+     "staff": [
+      {
+       "name": "TS. Lê D",
+       "role": "Trưởng phòng",
+       "email": "led@humg.edu.vn"
+      },
+      {
+       "name": "TS. Phạm Thị Nhàn",
+       "role": "Phó Trưởng phòng",
+       "email": "phamthinhan-khcn@humg.edu.vn"
+      },
+      {
+       "name": "ThS. Nguyễn Bá Dũng",
+       "role": "Chuyên viên quản lý đề tài",
+       "email": "nguyenbadung-khcn@humg.edu.vn"
+      },
+      {
+       "name": "CN. Trần Thị Kiều Oanh",
+       "role": "Chuyên viên sở hữu trí tuệ",
+       "email": "tranthikieuoanh-khcn@humg.edu.vn"
+      }
+     ]
+    },
+    {
+     "id": "ctsv",
+     "name": "Phòng Công tác chính trị & Sinh viên",
+     "head": "ThS. Phạm E",
+     "phone": "024.3838.3830",
+     "email": "ctsv@humg.edu.vn",
+     "functions": [
+      "Quản lý sinh viên",
+      "Học bổng, chính sách",
+      "Hỗ trợ việc làm"
+     ],
+     "desc": "Tổ chức công tác chính trị, tư tưởng và hỗ trợ sinh viên.",
+     "staff": [
+      {
+       "name": "ThS. Phạm E",
+       "role": "Trưởng phòng",
+       "email": "phame@humg.edu.vn"
+      },
+      {
+       "name": "ThS. Nguyễn Đức Thắng",
+       "role": "Phó Trưởng phòng",
+       "email": "nguyenducthang-ctsv@humg.edu.vn"
+      },
+      {
+       "name": "CN. Lê Thị Phương Thảo",
+       "role": "Chuyên viên học bổng, chính sách",
+       "email": "lethiphuongthao-ctsv@humg.edu.vn"
+      },
+      {
+       "name": "CN. Đặng Quang Hải",
+       "role": "Chuyên viên hỗ trợ việc làm",
+       "email": "dangquanghai-ctsv@humg.edu.vn"
+      }
+     ]
+    },
+    {
+     "id": "htqt",
+     "name": "Phòng Hợp tác quốc tế",
+     "head": "TS. Hoàng F",
+     "phone": "024.3838.3831",
+     "email": "htqt@humg.edu.vn",
+     "functions": [
+      "Quan hệ đối tác quốc tế",
+      "Chương trình trao đổi",
+      "Quản lý người nước ngoài"
+     ],
+     "desc": "Đầu mối hợp tác quốc tế của Nhà trường.",
+     "staff": [
+      {
+       "name": "TS. Hoàng F",
+       "role": "Trưởng phòng",
+       "email": "hoangf@humg.edu.vn"
+      },
+      {
+       "name": "ThS. Nguyễn Thị Quỳnh Trang",
+       "role": "Phó Trưởng phòng",
+       "email": "nguyenthiquynhtrang-htqt@humg.edu.vn"
+      },
+      {
+       "name": "CN. Phan Anh Tú",
+       "role": "Chuyên viên chương trình trao đổi",
+       "email": "phananhtu-htqt@humg.edu.vn"
+      },
+      {
+       "name": "CN. Bùi Thị Hải Yến",
+       "role": "Chuyên viên quản lý lưu học sinh",
+       "email": "buithihaiyen-htqt@humg.edu.vn"
+      }
+     ]
+    },
+    {
+     "id": "tccb",
+     "name": "Phòng Tổ chức – Cán bộ",
+     "head": "ThS. Vũ G",
+     "phone": "024.3838.3832",
+     "email": "tccb@humg.edu.vn",
+     "functions": [
+      "Tổ chức bộ máy",
+      "Quản lý nhân sự",
+      "Chế độ, chính sách"
+     ],
+     "desc": "Tham mưu công tác tổ chức và cán bộ.",
+     "staff": [
+      {
+       "name": "ThS. Vũ G",
+       "role": "Trưởng phòng",
+       "email": "vug@humg.edu.vn"
+      },
+      {
+       "name": "ThS. Trần Thị Minh Tâm",
+       "role": "Phó Trưởng phòng",
+       "email": "tranthiminhtam-tccb@humg.edu.vn"
+      },
+      {
+       "name": "CN. Nguyễn Văn Hiếu",
+       "role": "Chuyên viên quản lý hồ sơ nhân sự",
+       "email": "nguyenvanhieu-tccb@humg.edu.vn"
+      },
+      {
+       "name": "CN. Lê Thị Ngọc Ánh",
+       "role": "Chuyên viên chế độ, chính sách",
+       "email": "lethingocanh-tccb@humg.edu.vn"
+      }
+     ]
+    },
+    {
+     "id": "ke-hoach-tai-chinh",
+     "name": "Phòng Kế hoạch – Tài chính",
+     "head": "ThS. Đỗ H",
+     "phone": "024.3838.3833",
+     "email": "tckt@humg.edu.vn",
+     "functions": [
+      "Kế hoạch tài chính",
+      "Quản lý thu – chi",
+      "Học phí"
+     ],
+     "desc": "Quản lý tài chính, kế toán và học phí.",
+     "staff": [
+      {
+       "name": "ThS. Đỗ H",
+       "role": "Trưởng phòng – Kế toán trưởng",
+       "email": "doh@humg.edu.vn"
+      },
+      {
+       "name": "ThS. Nguyễn Thị Thu Hương",
+       "role": "Phó Trưởng phòng",
+       "email": "nguyenthithuhuong-tckt@humg.edu.vn"
+      },
+      {
+       "name": "CN. Phạm Văn Quyết",
+       "role": "Chuyên viên kế toán thanh toán",
+       "email": "phamvanquyet-tckt@humg.edu.vn"
+      },
+      {
+       "name": "CN. Trần Thị Thanh Loan",
+       "role": "Chuyên viên quản lý học phí",
+       "email": "tranthithanhloan-tckt@humg.edu.vn"
+      }
+     ]
+    },
+    {
+     "id": "quan-tri",
+     "name": "Phòng Quản trị – Đời sống",
+     "head": "ThS. Ngô K",
+     "phone": "024.3838.3834",
+     "email": "quantri@humg.edu.vn",
+     "functions": [
+      "Quản lý cơ sở vật chất",
+      "Điện nước, vệ sinh",
+      "Phục vụ đời sống"
+     ],
+     "desc": "Quản lý cơ sở vật chất và phục vụ đời sống trong Trường.",
+     "staff": [
+      {
+       "name": "ThS. Ngô K",
+       "role": "Trưởng phòng",
+       "email": "ngok@humg.edu.vn"
+      },
+      {
+       "name": "KS. Trần Văn Bình",
+       "role": "Phó Trưởng phòng",
+       "email": "tranvanbinh-qt@humg.edu.vn"
+      },
+      {
+       "name": "KS. Nguyễn Hữu Phước",
+       "role": "Chuyên viên quản lý công trình",
+       "email": "nguyenhuuphuoc-qt@humg.edu.vn"
+      },
+      {
+       "name": "CN. Lê Thị Hồng Gấm",
+       "role": "Chuyên viên quản trị thiết bị",
+       "email": "lethihonggam-qt@humg.edu.vn"
+      }
+     ]
+    }
+   ]
+  },
+  "trung-tam-vien": {
+   "label": "Trung tâm / Viện nghiên cứu",
+   "singular": "Trung tâm / Viện",
+   "intro": "Các trung tâm, viện nghiên cứu và đơn vị dịch vụ khoa học công nghệ của Trường.",
+   "list": [
+    {
+     "id": "vien-khcn-mo",
+     "name": "Viện Khoa học Công nghệ Mỏ - Địa chất",
+     "head": "PGS.TS. Nguyễn A",
+     "phone": "024.3838.3840",
+     "email": "vienkhcn@humg.edu.vn",
+     "functions": [
+      "Nghiên cứu ứng dụng",
+      "Chuyển giao công nghệ",
+      "Dịch vụ KHCN"
+     ],
+     "desc": "Nghiên cứu và chuyển giao công nghệ trong lĩnh vực mỏ - địa chất.",
+     "staff": [
+      {
+       "name": "PGS.TS. Nguyễn A",
+       "role": "Viện trưởng",
+       "email": "nguyena-vien@humg.edu.vn"
+      },
+      {
+       "name": "TS. Trần Mạnh Cường",
+       "role": "Phó Viện trưởng",
+       "email": "tranmanhcuong-vien@humg.edu.vn"
+      },
+      {
+       "name": "TS. Lê Thị Bích Hạnh",
+       "role": "Phó Viện trưởng",
+       "email": "lethibichhanh-vien@humg.edu.vn"
+      },
+      {
+       "name": "ThS. Phạm Đình Long",
+       "role": "Trưởng phòng Nghiên cứu ứng dụng",
+       "email": "phamdinhlong-vien@humg.edu.vn"
+      },
+      {
+       "name": "ThS. Nguyễn Thị Vân",
+       "role": "Chuyên viên quản lý dự án",
+       "email": "nguyenthivan-vien@humg.edu.vn"
+      }
+     ]
+    },
+    {
+     "id": "tt-ngoai-ngu-tin-hoc",
+     "name": "Trung tâm Ngoại ngữ – Tin học",
+     "head": "ThS. Trần B",
+     "phone": "024.3838.3841",
+     "email": "nnth@humg.edu.vn",
+     "functions": [
+      "Đào tạo và thi chứng chỉ ngoại ngữ, tin học",
+      "Bồi dưỡng kỹ năng số"
+     ],
+     "desc": "Đào tạo và tổ chức thi chứng chỉ ngoại ngữ, tin học.",
+     "staff": [
+      {
+       "name": "ThS. Trần B",
+       "role": "Giám đốc",
+       "email": "tranb-nnth@humg.edu.vn"
+      },
+      {
+       "name": "ThS. Nguyễn Thị Thu Hà",
+       "role": "Phó Giám đốc",
+       "email": "nguyenthithuha-nnth@humg.edu.vn"
+      },
+      {
+       "name": "CN. Đỗ Trọng Nghĩa",
+       "role": "Cán bộ khảo thí",
+       "email": "dotrongnghia-nnth@humg.edu.vn"
+      },
+      {
+       "name": "CN. Lê Thị Ánh Tuyết",
+       "role": "Chuyên viên đào tạo",
+       "email": "lethianhtuyet-nnth@humg.edu.vn"
+      }
+     ]
+    },
+    {
+     "id": "tt-thu-vien",
+     "name": "Trung tâm Thông tin – Thư viện",
+     "head": "ThS. Lê C",
+     "phone": "024.3838.3842",
+     "email": "thuvien@humg.edu.vn",
+     "functions": [
+      "Quản lý thư viện và học liệu",
+      "CSDL khoa học",
+      "Thư viện số"
+     ],
+     "desc": "Quản lý tài nguyên thông tin, thư viện và học liệu số.",
+     "staff": [
+      {
+       "name": "ThS. Lê C",
+       "role": "Giám đốc",
+       "email": "lec-tv@humg.edu.vn"
+      },
+      {
+       "name": "ThS. Phạm Thị Hồng Minh",
+       "role": "Phó Giám đốc",
+       "email": "phamthihongminh-tv@humg.edu.vn"
+      },
+      {
+       "name": "CN. Nguyễn Văn Trường",
+       "role": "Cán bộ thư viện số",
+       "email": "nguyenvantruong-tv@humg.edu.vn"
+      },
+      {
+       "name": "CN. Trần Thị Bích Ngọc",
+       "role": "Cán bộ phục vụ bạn đọc",
+       "email": "tranthibichngoc-tv@humg.edu.vn"
+      }
+     ]
+    },
+    {
+     "id": "tt-tuyen-sinh",
+     "name": "Trung tâm Tuyển sinh & Hướng nghiệp",
+     "head": "ThS. Phạm D",
+     "phone": "024.3838.3843",
+     "email": "tuyensinh@humg.edu.vn",
+     "functions": [
+      "Tư vấn tuyển sinh",
+      "Hướng nghiệp",
+      "Truyền thông tuyển sinh"
+     ],
+     "desc": "Tổ chức tư vấn, truyền thông tuyển sinh và hướng nghiệp.",
+     "staff": [
+      {
+       "name": "ThS. Phạm D",
+       "role": "Giám đốc",
+       "email": "phamd-ts@humg.edu.vn"
+      },
+      {
+       "name": "ThS. Nguyễn Hoàng Nam",
+       "role": "Phó Giám đốc",
+       "email": "nguyenhoangnam-ts@humg.edu.vn"
+      },
+      {
+       "name": "CN. Vũ Thị Thùy Dương",
+       "role": "Chuyên viên truyền thông",
+       "email": "vuthithuyduong-ts@humg.edu.vn"
+      },
+      {
+       "name": "CN. Đặng Văn Hòa",
+       "role": "Chuyên viên tư vấn tuyển sinh",
+       "email": "dangvanhoa-ts@humg.edu.vn"
+      }
+     ]
+    },
+    {
+     "id": "tt-phan-tich-thi-nghiem",
+     "name": "Trung tâm Phân tích, Thí nghiệm",
+     "head": "TS. Hoàng E",
+     "phone": "024.3838.3844",
+     "email": "thinghiem@humg.edu.vn",
+     "functions": [
+      "Phân tích mẫu",
+      "Kiểm định",
+      "Dịch vụ thí nghiệm"
+     ],
+     "desc": "Cung cấp dịch vụ phân tích, thí nghiệm và kiểm định.",
+     "staff": [
+      {
+       "name": "TS. Hoàng E",
+       "role": "Giám đốc",
+       "email": "hoange-ptn@humg.edu.vn"
+      },
+      {
+       "name": "TS. Nguyễn Thị Thu Thủy",
+       "role": "Phó Giám đốc",
+       "email": "nguyenthithuthuy-ptn@humg.edu.vn"
+      },
+      {
+       "name": "ThS. Trần Đăng Khoa",
+       "role": "Phụ trách phòng thí nghiệm hóa",
+       "email": "trandangkhoa-ptn@humg.edu.vn"
+      },
+      {
+       "name": "KS. Lê Văn Sơn",
+       "role": "Kỹ thuật viên phân tích",
+       "email": "levanson-ptn@humg.edu.vn"
+      }
+     ]
+    }
+   ]
+  },
+  "don-vi-truc-thuoc": {
+   "label": "Đơn vị trực thuộc",
+   "singular": "Đơn vị",
+   "intro": "Các đơn vị sự nghiệp, dịch vụ trực thuộc Trường Đại học Mỏ - Địa chất.",
+   "list": [
+    {
+     "id": "ky-tuc-xa",
+     "name": "Ban Quản lý Ký túc xá",
+     "head": "ThS. Nguyễn F",
+     "phone": "024.3838.3850",
+     "email": "ktx@humg.edu.vn",
+     "functions": [
+      "Quản lý chỗ ở sinh viên",
+      "An ninh, trật tự",
+      "Đời sống nội trú"
+     ],
+     "desc": "Quản lý và phục vụ chỗ ở cho sinh viên nội trú.",
+     "staff": [
+      {
+       "name": "ThS. Nguyễn F",
+       "role": "Trưởng ban",
+       "email": "nguyenf-ktx@humg.edu.vn"
+      },
+      {
+       "name": "CN. Trần Văn Hùng",
+       "role": "Phó Trưởng ban",
+       "email": "tranvanhung-ktx@humg.edu.vn"
+      },
+      {
+       "name": "CN. Lê Thị Thu Hằng",
+       "role": "Cán bộ quản lý sinh viên nội trú",
+       "email": "lethithuhang-ktx@humg.edu.vn"
+      },
+      {
+       "name": "NV. Phạm Văn Đô",
+       "role": "Tổ trưởng bảo vệ ký túc xá",
+       "email": "phamvando-ktx@humg.edu.vn"
+      }
+     ]
+    },
+    {
+     "id": "tram-y-te",
+     "name": "Trạm Y tế",
+     "head": "BS. Trần G",
+     "phone": "024.3838.3851",
+     "email": "yte@humg.edu.vn",
+     "functions": [
+      "Chăm sóc sức khỏe ban đầu",
+      "Khám sức khỏe định kỳ",
+      "Bảo hiểm y tế"
+     ],
+     "desc": "Chăm sóc sức khỏe cho cán bộ và sinh viên.",
+     "staff": [
+      {
+       "name": "BS. Trần G",
+       "role": "Trưởng trạm",
+       "email": "trang-yte@humg.edu.vn"
+      },
+      {
+       "name": "BS. Nguyễn Thị Hoài Thu",
+       "role": "Bác sĩ điều trị",
+       "email": "nguyenthihoaithu-yte@humg.edu.vn"
+      },
+      {
+       "name": "YS. Đỗ Thị Kim Dung",
+       "role": "Y sĩ",
+       "email": "dothikimdung-yte@humg.edu.vn"
+      },
+      {
+       "name": "CN. Hoàng Văn Lâm",
+       "role": "Cán bộ bảo hiểm y tế",
+       "email": "hoangvanlam-yte@humg.edu.vn"
+      }
+     ]
+    },
+    {
+     "id": "xuong-in",
+     "name": "Nhà xuất bản / Xưởng in",
+     "head": "ThS. Lê H",
+     "phone": "024.3838.3852",
+     "email": "nxb@humg.edu.vn",
+     "functions": [
+      "Xuất bản giáo trình, tài liệu",
+      "In ấn nội bộ"
+     ],
+     "desc": "Xuất bản và in ấn giáo trình, tài liệu học tập.",
+     "staff": [
+      {
+       "name": "ThS. Lê H",
+       "role": "Giám đốc – Tổng biên tập",
+       "email": "leh-nxb@humg.edu.vn"
+      },
+      {
+       "name": "CN. Nguyễn Đức Anh",
+       "role": "Phó Giám đốc",
+       "email": "nguyenducanh-nxb@humg.edu.vn"
+      },
+      {
+       "name": "CN. Trần Thị Lệ Quyên",
+       "role": "Biên tập viên",
+       "email": "tranthilequyen-nxb@humg.edu.vn"
+      },
+      {
+       "name": "KTV. Vũ Mạnh Toàn",
+       "role": "Kỹ thuật viên chế bản",
+       "email": "vumanhtoan-nxb@humg.edu.vn"
+      }
+     ]
+    },
+    {
+     "id": "tap-chi-khoa-hoc",
+     "name": "Tòa soạn Tạp chí Khoa học Kỹ thuật Mỏ - Địa chất",
+     "head": "PGS.TS. Vũ K",
+     "phone": "024.3838.3853",
+     "email": "tapchi@humg.edu.vn",
+     "functions": [
+      "Biên tập, xuất bản tạp chí",
+      "Tổ chức phản biện khoa học"
+     ],
+     "desc": "Xuất bản tạp chí khoa học của Nhà trường.",
+     "staff": [
+      {
+       "name": "PGS.TS. Vũ K",
+       "role": "Tổng biên tập",
+       "email": "vuk-tapchi@humg.edu.vn"
+      },
+      {
+       "name": "PGS.TS. Nguyễn Văn Sáng",
+       "role": "Phó Tổng biên tập",
+       "email": "nguyenvansang-tapchi@humg.edu.vn"
+      },
+      {
+       "name": "ThS. Đỗ Thị Thanh Nga",
+       "role": "Thư ký tòa soạn",
+       "email": "dothithanhnga-tapchi@humg.edu.vn"
+      },
+      {
+       "name": "CN. Lê Quang Vinh",
+       "role": "Biên tập – trị sự",
+       "email": "lequangvinh-tapchi@humg.edu.vn"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "vision": {
+  "mission": "Đào tạo nguồn nhân lực chất lượng cao, nghiên cứu khoa học và chuyển giao công nghệ trong lĩnh vực mỏ, địa chất, dầu khí, trắc địa - bản đồ và các lĩnh vực liên quan, phục vụ sự phát triển bền vững của đất nước.",
+  "visionText": "Đến năm 2035 trở thành đại học nghiên cứu đa ngành, có uy tín trong khu vực và quốc tế, dẫn đầu Việt Nam về đào tạo và nghiên cứu trong lĩnh vực khoa học Trái đất và mỏ.",
+  "core": "Tri thức – Bản lĩnh – Sáng tạo – Hội nhập",
+  "principles": [
+   {
+    "icon": "award",
+    "title": "Chất lượng hàng đầu",
+    "desc": "Lấy chất lượng đào tạo và nghiên cứu làm nền tảng phát triển."
+   },
+   {
+    "icon": "rocket",
+    "title": "Đổi mới sáng tạo",
+    "desc": "Khuyến khích tư duy mới, giải pháp mới và tinh thần khởi nghiệp."
+   },
+   {
+    "icon": "globe",
+    "title": "Hội nhập quốc tế",
+    "desc": "Mở rộng hợp tác, liên kết đào tạo và nghiên cứu với đối tác quốc tế."
+   },
+   {
+    "icon": "heart",
+    "title": "Trách nhiệm cộng đồng",
+    "desc": "Gắn hoạt động của Nhà trường với lợi ích cộng đồng và xã hội."
+   },
+   {
+    "icon": "layers",
+    "title": "Phát triển bền vững",
+    "desc": "Cân bằng giữa tăng trưởng, con người và môi trường."
+   },
+   {
+    "icon": "users",
+    "title": "Con người là trung tâm",
+    "desc": "Tôn trọng, phát huy năng lực của mỗi cán bộ, giảng viên và sinh viên."
+   }
+  ]
+ }
+}

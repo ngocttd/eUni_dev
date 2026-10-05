@@ -1,0 +1,158 @@
+/* ============================================================
+   Khối "Sinh viên" — cổng dành riêng cho sinh viên.
+   Nhận diện riêng: BANNER NAVY ĐẶC (khác các khối nội dung dùng
+   banner xanh nhạt), thẻ danh mục đánh số, dải "thông tin nhanh".
+   ============================================================ */
+
+/* ---------- Banner navy đặc (chỉ áp cho variant student) ---------- */
+.pg-shell--student .pg-hero {
+  background: linear-gradient(120deg, #0a3d91 0%, #0c2f6b 55%, #0a2a5f 100%);
+  border-bottom: 3px solid var(--humg-accent);
+  min-height: 150px;
+  color: #fff;
+}
+.pg-shell--student .pg-hero::before {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.16) 1.3px, transparent 1.3px);
+  background-size: 22px 22px;
+  -webkit-mask-image: linear-gradient(100deg, #000, transparent 55%);
+  mask-image: linear-gradient(100deg, #000, transparent 55%);
+}
+.pg-shell--student .pg-hero::after {
+  background: radial-gradient(circle, rgba(120, 170, 255, 0.35), transparent 70%);
+}
+.pg-shell--student .pg-hero .humg-eyebrow {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+.pg-shell--student .pg-hero h1 { color: #fff; }
+.pg-shell--student .pg-hero__lead { color: rgba(255, 255, 255, 0.82); }
+
+/* ---------- Thẻ danh mục dành cho sinh viên ---------- */
+.stu-cats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.stu-cat {
+  position: relative; display: grid; gap: 6px;
+  padding: 18px 16px 16px; border: 1px solid var(--humg-border); border-radius: 14px; background: #fff;
+  border-top: 3px solid var(--humg-secondary);
+  transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+}
+.stu-cat:hover { transform: translateY(-3px); box-shadow: 0 16px 30px -18px rgba(10, 61, 145, 0.3); border-color: color-mix(in srgb, var(--humg-secondary) 45%, var(--humg-border)); }
+.stu-cat__no {
+  position: absolute; top: 12px; right: 14px;
+  font-size: 11px; font-weight: 800; color: var(--humg-secondary);
+  background: #eef3fb; padding: 2px 8px; border-radius: 999px;
+}
+.stu-cat__ic {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 46px; height: 46px; border-radius: 13px; margin-bottom: 2px;
+  background: #eef3fb; color: var(--humg-primary);
+}
+.stu-cat strong { font-size: 15px; color: var(--humg-primary); }
+.stu-cat__desc { font-size: 12.5px; color: var(--humg-text-secondary); line-height: 1.55; }
+.stu-cat__go { display: inline-flex; align-items: center; gap: 5px; margin-top: 4px; font-size: 12.5px; font-weight: 700; color: var(--humg-accent-dark); }
+.stu-cat:hover .stu-cat__go { gap: 8px; }
+
+/* ---------- Dải thông tin nhanh ---------- */
+.stu-quickinfo { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.stu-qi {
+  display: grid; justify-items: center; gap: 2px; text-align: center;
+  padding: 16px 10px; border: 1px solid var(--humg-border); border-radius: 12px;
+  background: linear-gradient(170deg, #eff4fc, #fff 72%);
+}
+.stu-qi__ic {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 10px; margin-bottom: 4px;
+  background: #fff; color: var(--humg-primary); border: 1px solid var(--humg-border);
+}
+.stu-qi strong { font-size: 22px; font-weight: 800; color: var(--humg-primary); }
+.stu-qi span { font-size: 11.5px; color: var(--humg-text-secondary); line-height: 1.4; }
+
+/* ---------- Thông báo / sự kiện (sidebar) ---------- */
+.stu-notice { display: grid; gap: 10px; }
+.stu-notice li { display: grid; gap: 2px; }
+.stu-notice li + li { border-top: 1px solid var(--humg-border); padding-top: 10px; }
+.stu-notice__date { font-size: 10.5px; color: var(--humg-text-secondary); }
+.stu-notice__date em { font-style: normal; font-size: 9.5px; font-weight: 700; text-transform: uppercase; color: var(--humg-accent-dark); background: #fff4e5; padding: 1px 6px; border-radius: 999px; margin-left: 4px; }
+.stu-notice li a { font-size: 12.5px; font-weight: 500; line-height: 1.4; color: var(--humg-text); }
+.stu-notice li a:hover { color: var(--humg-primary); }
+
+.stu-events { display: grid; gap: 12px; }
+.stu-events li { display: grid; grid-template-columns: 46px 1fr; gap: 12px; align-items: center; }
+.stu-events__day { display: grid; justify-items: center; padding: 6px 0; border-radius: 10px; background: #eef3fb; }
+.stu-events__day strong { font-size: 16px; font-weight: 800; color: var(--humg-primary); line-height: 1; }
+.stu-events__day em { font-style: normal; font-size: 9px; font-weight: 700; text-transform: uppercase; color: var(--humg-text-secondary); }
+.stu-events__body { display: grid; gap: 2px; }
+.stu-events__body strong { font-size: 12.5px; font-weight: 600; line-height: 1.4; color: var(--humg-text); }
+.stu-events__body em { font-style: normal; font-size: 11px; color: var(--humg-text-secondary); }
+
+/* ---------- Dashboard hub ---------- */
+.stu-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.stu-quickinfo--2 { grid-template-columns: repeat(2, 1fr); }
+.stu-todo { display: grid; gap: 2px; }
+.stu-todo li { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px; border-radius: 8px; }
+.stu-todo li:hover { background: var(--humg-hover); }
+.stu-todo li + li { border-top: 1px solid var(--humg-border); }
+.stu-todo li a { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--humg-text); line-height: 1.4; }
+.stu-todo li a:hover { color: var(--humg-primary); }
+.stu-todo li a svg { color: var(--humg-secondary); flex-shrink: 0; }
+.stu-todo__due { font-size: 11px; font-weight: 700; color: var(--humg-accent-dark); white-space: nowrap; }
+@media (max-width: 900px) { .stu-2col { grid-template-columns: 1fr; } }
+
+/* ---------- Tiện ích chung ---------- */
+.stu-check { display: grid; gap: 8px; }
+.stu-check li { display: flex; align-items: flex-start; gap: 8px; font-size: 13.5px; line-height: 1.55; }
+.stu-check li svg { color: var(--humg-secondary); flex-shrink: 0; margin-top: 3px; }
+.stu-check a { color: var(--humg-primary); font-weight: 600; }
+
+.stu-note { display: flex; align-items: flex-start; gap: 8px; margin: 0; font-size: 13px; line-height: 1.65; color: var(--humg-text-secondary); }
+.stu-note svg { color: var(--humg-secondary); flex-shrink: 0; margin-top: 2px; }
+.stu-note a { color: var(--humg-primary); font-weight: 600; }
+
+.stu-muted { color: var(--humg-text-secondary); font-size: 12.5px; line-height: 1.55; }
+.stu-prose { margin: 0 0 14px; font-size: 14px; line-height: 1.75; color: #2b2b2b; }
+.stu-subhead { margin: 18px 0 10px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--humg-text-secondary); }
+.stu-subhead:first-child { margin-top: 0; }
+
+.stu-select { display: inline-grid; gap: 4px; margin-bottom: 14px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--humg-text-secondary); }
+.stu-select select { font: inherit; font-size: 13px; font-weight: 500; text-transform: none; letter-spacing: 0; color: var(--humg-text); padding: 8px 12px; border: 1px solid var(--humg-border); border-radius: 8px; background: #fff; min-width: 220px; }
+
+.stu-dl { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--humg-primary); white-space: nowrap; }
+.stu-dl:hover { color: var(--humg-secondary); }
+
+.stu-deflist { display: grid; gap: 10px; }
+.stu-deflist li { padding: 12px 14px; border: 1px solid var(--humg-border); border-radius: 10px; }
+.stu-deflist strong { display: block; font-size: 13.5px; color: var(--humg-primary); margin-bottom: 3px; }
+.stu-deflist span { font-size: 12.5px; color: var(--humg-text-secondary); line-height: 1.55; }
+
+/* ---------- Việc làm ---------- */
+.stu-jobs { display: grid; gap: 8px; }
+.stu-job { display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; padding: 13px 15px; border: 1px solid var(--humg-border); border-radius: 12px; border-left: 3px solid transparent; transition: border-color 0.16s ease, box-shadow 0.16s ease; }
+.stu-job:hover { border-color: color-mix(in srgb, var(--humg-secondary) 45%, var(--humg-border)); border-left-color: var(--humg-secondary); box-shadow: var(--humg-shadow-sm); }
+.stu-job__ic { display: inline-flex; width: 34px; height: 34px; border-radius: 9px; align-items: center; justify-content: center; background: #eef3fb; color: var(--humg-primary); }
+.stu-job__body strong { display: block; font-size: 13.5px; color: var(--humg-primary); }
+.stu-job__body em { font-style: normal; font-size: 12px; color: var(--humg-text-secondary); }
+.stu-job__deadline { font-size: 11.5px; font-weight: 700; color: var(--humg-accent-dark); white-space: nowrap; }
+
+/* ---------- Tài liệu nổi bật ---------- */
+.stu-featlist { display: grid; gap: 8px; }
+.stu-featlist li { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; padding: 10px 12px; border: 1px solid var(--humg-border); border-radius: 10px; }
+.stu-feat__ic { display: inline-flex; width: 30px; height: 30px; border-radius: 8px; align-items: center; justify-content: center; background: #eef3fb; color: var(--humg-primary); }
+.stu-featlist li a { font-size: 13px; font-weight: 500; color: var(--humg-text); }
+.stu-featlist li a:hover { color: var(--humg-primary); }
+.stu-featlist li em { font-style: normal; font-size: 11px; color: var(--humg-text-secondary); }
+
+/* ---------- My eUni prompt ---------- */
+.stu-portal { display: grid; grid-template-columns: 200px 1fr; gap: 24px; align-items: center; padding: 24px; border: 1px solid var(--humg-border); border-radius: var(--humg-radius-card); background: linear-gradient(150deg, #eef4fc, #fff 70%); }
+.stu-portal__art { display: inline-flex; align-items: center; justify-content: center; width: 100%; aspect-ratio: 4 / 3; border-radius: 14px; background: #fff; border: 1px solid var(--humg-border); color: var(--humg-primary); }
+.stu-portal__body h2 { margin: 0 0 12px; font-size: 18px; color: var(--humg-primary); }
+.stu-portal__actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+
+@media (max-width: 1080px) {
+  .stu-quickinfo { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 720px) {
+  .stu-cats { grid-template-columns: 1fr; }
+  .stu-quickinfo { grid-template-columns: repeat(2, 1fr); }
+  .stu-portal { grid-template-columns: 1fr; }
+  .stu-portal__art { max-width: 160px; }
+}

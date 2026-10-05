@@ -1,0 +1,18 @@
+{
+  "name": "euni-public",
+  "private": true,
+  "version": "0.2.0",
+  "description": "HUMG Digital Portal — website công khai + My eUni Portal (Next.js, dữ liệu từ API gateway)",
+  "scripts": {
+    "dev": "next dev -p 3002",
+    "build": "next build",
+    "start": "next start -p 3002",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "^15.5.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "sanitize-html": "^2.18.0"
+  }
+}

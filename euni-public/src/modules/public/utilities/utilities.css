@@ -1,0 +1,115 @@
+.util-muted { color: var(--humg-text-secondary); font-size: 12.5px; line-height: 1.5; }
+.util-subhead { margin: 18px 0 10px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--humg-text-secondary); }
+.util-subhead:first-child { margin-top: 0; }
+.util-check { display: grid; gap: 8px; }
+.util-check li { display: flex; align-items: flex-start; gap: 8px; font-size: 13.5px; line-height: 1.55; }
+.util-check li svg { color: var(--humg-success); flex-shrink: 0; margin-top: 3px; }
+
+/* Lưới nút nhảy mục trong trang (PG-EDU-01 Tuyển sinh) */
+.util-jumpgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.util-jump {
+  display: grid; gap: 4px; padding: 16px 14px; border: 1px solid var(--humg-border); border-radius: 12px; background: #fff;
+  transition: border-color 0.16s ease, box-shadow 0.16s ease, transform 0.16s ease;
+}
+.util-jump:hover { border-color: var(--humg-secondary); box-shadow: var(--humg-shadow-sm); transform: translateY(-2px); }
+.util-jump__ic { display: inline-flex; width: 42px; height: 42px; border-radius: 12px; align-items: center; justify-content: center; background: #eef3fb; color: var(--humg-primary); margin-bottom: 4px; }
+.util-jump strong { font-size: 13.5px; color: var(--humg-primary); }
+.util-jump span { font-size: 11.5px; color: var(--humg-text-secondary); line-height: 1.5; }
+.ui-panel[id] { scroll-margin-top: 90px; }
+@media (max-width: 900px) { .util-jumpgrid { grid-template-columns: 1fr; } }
+.util-dl { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--humg-primary); white-space: nowrap; }
+.util-dl:hover { color: var(--humg-secondary); }
+
+/* ---------- Tuyển sinh: danh sách ngành ---------- */
+.util-majorlist { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px; }
+.util-majorlist li a {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding: 11px 12px; border: 1px solid var(--humg-border); border-radius: 9px; font-size: 13.5px;
+}
+.util-majorlist li a:hover { border-color: var(--humg-secondary); background: var(--humg-hover); color: var(--humg-primary); }
+.util-majorlist li a svg { color: var(--humg-secondary); }
+
+/* ---------- E-learning: hệ thống truy cập nhanh ---------- */
+.util-systems { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.util-system { display: grid; gap: 3px; padding: 14px 16px; border: 1px solid var(--humg-border); border-radius: 12px; }
+.util-system:hover { border-color: var(--humg-secondary); background: var(--humg-hover); }
+.util-system__ic { display: inline-flex; width: 34px; height: 34px; border-radius: 9px; align-items: center; justify-content: center; background: var(--humg-hover); color: var(--humg-primary); margin-bottom: 4px; }
+.util-system strong { font-size: 14px; }
+.util-system span { font-size: 12px; color: var(--humg-text-secondary); }
+
+/* ---------- Danh sách khóa học / tài liệu ---------- */
+.util-courselist { display: grid; gap: 4px; }
+.util-courselist li { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; padding: 11px 8px; border-radius: 8px; }
+.util-courselist li:hover { background: var(--humg-surface-alt); }
+.util-courselist__ic { display: inline-flex; width: 30px; height: 30px; border-radius: 8px; align-items: center; justify-content: center; background: var(--humg-hover); color: var(--humg-primary); }
+.util-courselist li strong { display: block; font-size: 13.5px; }
+.util-courselist li em { font-style: normal; font-size: 12px; color: var(--humg-text-secondary); }
+.util-courselist .humg-btn { padding: 7px 14px; font-size: 12.5px; }
+
+/* ---------- Thư viện số: tài nguyên ---------- */
+.util-resgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.util-res { border: 1px solid var(--humg-border); border-radius: 12px; padding: 14px; display: grid; gap: 4px; }
+.util-res:hover { border-color: var(--humg-secondary); }
+.util-res__badge { justify-self: start; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; background: var(--humg-hover); color: var(--humg-primary); padding: 2px 8px; border-radius: 999px; }
+.util-res strong { font-size: 14px; margin-top: 4px; }
+.util-res span { font-size: 11.5px; color: var(--humg-text-secondary); }
+
+/* ---------- Lịch công tác ---------- */
+.util-weekbar { display: inline-flex; align-items: center; gap: 14px; background: #fff; border: 1px solid var(--humg-border); border-radius: 999px; padding: 6px 10px; }
+.util-weekbar strong { font-size: 14px; color: var(--humg-primary); }
+.util-weekbar button { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--humg-border); background: #fff; color: var(--humg-primary); display: inline-flex; align-items: center; justify-content: center; }
+.util-weekbar button:hover { background: var(--humg-hover); }
+
+.util-week { display: grid; gap: 12px; }
+.util-day { display: grid; grid-template-columns: 130px 1fr; gap: 16px; background: #fff; border: 1px solid var(--humg-border); border-radius: 12px; padding: 16px; }
+.util-day.is-empty { opacity: 0.7; }
+.util-day__head strong { display: block; font-size: 14px; color: var(--humg-primary); }
+.util-day__head span { font-size: 12px; color: var(--humg-text-secondary); }
+.util-day ul { display: grid; gap: 10px; }
+.util-day li { display: grid; grid-template-columns: 56px 1fr; gap: 12px; }
+.util-day__time { font-size: 13px; font-weight: 700; color: var(--humg-accent); }
+.util-day__info strong { display: block; font-size: 13.5px; }
+.util-day__info em { display: flex; align-items: center; gap: 5px; font-style: normal; font-size: 12px; color: var(--humg-text-secondary); margin-top: 2px; }
+.util-day__none { margin: 0; font-size: 13px; color: var(--humg-text-secondary); }
+
+/* ---------- Webmail ---------- */
+.util-webmail { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.util-webmail__ic { display: inline-flex; width: 52px; height: 52px; border-radius: 14px; align-items: center; justify-content: center; background: var(--humg-hover); color: var(--humg-primary); flex-shrink: 0; }
+.util-webmail strong { display: block; font-size: 15px; }
+.util-webmail p { margin: 4px 0 0; font-size: 13px; color: var(--humg-text-secondary); }
+.util-webmail code { background: var(--humg-surface-alt); padding: 1px 6px; border-radius: 5px; font-size: 12px; }
+.util-webmail .humg-btn { margin-left: auto; }
+
+/* ---------- Liên hệ ---------- */
+.util-contactcards { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; }
+.util-contactcard { border: 1px solid var(--humg-border); border-radius: 12px; padding: 16px; background: #fff; box-shadow: var(--humg-shadow-sm); display: grid; gap: 4px; }
+.util-contactcard__ic { display: inline-flex; width: 38px; height: 38px; border-radius: 10px; align-items: center; justify-content: center; background: var(--humg-hover); color: var(--humg-primary); margin-bottom: 4px; }
+.util-contactcard strong { font-size: 13.5px; }
+.util-contactcard span { font-size: 11.5px; color: var(--humg-text-secondary); }
+
+.util-contactgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: start; }
+
+.util-form { display: grid; gap: 14px; }
+.util-form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.util-form label { display: grid; gap: 6px; font-size: 12.5px; font-weight: 600; color: var(--humg-text); }
+.util-form label span { color: var(--humg-danger); }
+.util-form input, .util-form select, .util-form textarea {
+  font: inherit; font-weight: 400; padding: 10px 12px; border: 1px solid var(--humg-border); border-radius: 8px; background: #fff;
+}
+.util-form input:focus, .util-form select:focus, .util-form textarea:focus { outline: none; border-color: var(--humg-secondary); }
+.util-form textarea { resize: vertical; }
+
+.util-map { border-radius: 0; }
+.util-transport { display: grid; gap: 12px; padding: 16px 18px; }
+.util-transport > div { display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; }
+.util-transport__ic { grid-row: span 2; display: inline-flex; width: 30px; height: 30px; border-radius: 8px; align-items: center; justify-content: center; background: var(--humg-hover); color: var(--humg-primary); }
+.util-transport strong { font-size: 13px; }
+.util-transport em { font-style: normal; font-size: 12px; color: var(--humg-text-secondary); }
+
+@media (max-width: 900px) {
+  .util-contactgrid { grid-template-columns: 1fr; }
+  .util-form__row { grid-template-columns: 1fr; }
+  .util-majorlist { grid-template-columns: 1fr; }
+  .util-systems { grid-template-columns: 1fr; }
+  .util-day { grid-template-columns: 1fr; gap: 10px; }
+}

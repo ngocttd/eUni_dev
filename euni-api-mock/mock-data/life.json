@@ -1,0 +1,963 @@
+{
+ "activities": [
+  {
+   "organizer": "Trung tâm Hỗ trợ sinh viên",
+   "gallery": 8,
+   "content": [
+    "Hoạt động thu hút đông đảo sinh viên các khoa tham gia, tạo sân chơi bổ ích và lan tỏa tinh thần tích cực trong cộng đồng sinh viên HUMG.",
+    "Chương trình được chuẩn bị kỹ lưỡng từ khâu truyền thông, hậu cần đến tổ chức, với sự phối hợp của nhiều câu lạc bộ, đội, nhóm."
+   ],
+   "agenda": [
+    {
+     "time": "07:30",
+     "item": "Đón tiếp và ổn định"
+    },
+    {
+     "time": "08:00",
+     "item": "Khai mạc chương trình"
+    },
+    {
+     "time": "09:00",
+     "item": "Nội dung chính"
+    },
+    {
+     "time": "11:30",
+     "item": "Tổng kết và trao thưởng"
+    }
+   ],
+   "slug": "ngay-hoi-viec-lam-2026",
+   "tag": "Sự kiện",
+   "date": "20/05/2026",
+   "title": "Ngày hội việc làm & Kết nối doanh nghiệp 2026",
+   "place": "Sân vận động HUMG",
+   "people": "2.100+",
+   "excerpt": "Hơn 50 doanh nghiệp tham gia tuyển dụng và giao lưu cùng sinh viên năm cuối."
+  },
+  {
+   "organizer": "Đoàn Thanh niên – Hội Sinh viên HUMG",
+   "gallery": 8,
+   "content": [
+    "Hoạt động thu hút đông đảo sinh viên các khoa tham gia, tạo sân chơi bổ ích và lan tỏa tinh thần tích cực trong cộng đồng sinh viên HUMG.",
+    "Chương trình được chuẩn bị kỹ lưỡng từ khâu truyền thông, hậu cần đến tổ chức, với sự phối hợp của nhiều câu lạc bộ, đội, nhóm."
+   ],
+   "agenda": [
+    {
+     "time": "07:30",
+     "item": "Đón tiếp và ổn định"
+    },
+    {
+     "time": "08:00",
+     "item": "Khai mạc chương trình"
+    },
+    {
+     "time": "09:00",
+     "item": "Nội dung chính"
+    },
+    {
+     "time": "11:30",
+     "item": "Tổng kết và trao thưởng"
+    }
+   ],
+   "slug": "mua-he-xanh-2026",
+   "tag": "Phong trào",
+   "date": "10/05/2026",
+   "title": "Chiến dịch Mùa hè xanh HUMG 2026",
+   "place": "Hà Giang",
+   "people": "350",
+   "excerpt": "Sinh viên tình nguyện xây dựng nông thôn mới, dạy học và hỗ trợ cộng đồng vùng cao."
+  },
+  {
+   "organizer": "Đoàn Thanh niên – Hội Sinh viên HUMG",
+   "gallery": 8,
+   "content": [
+    "Hoạt động thu hút đông đảo sinh viên các khoa tham gia, tạo sân chơi bổ ích và lan tỏa tinh thần tích cực trong cộng đồng sinh viên HUMG.",
+    "Chương trình được chuẩn bị kỹ lưỡng từ khâu truyền thông, hậu cần đến tổ chức, với sự phối hợp của nhiều câu lạc bộ, đội, nhóm."
+   ],
+   "agenda": [
+    {
+     "time": "07:30",
+     "item": "Đón tiếp và ổn định"
+    },
+    {
+     "time": "08:00",
+     "item": "Khai mạc chương trình"
+    },
+    {
+     "time": "09:00",
+     "item": "Nội dung chính"
+    },
+    {
+     "time": "11:30",
+     "item": "Tổng kết và trao thưởng"
+    }
+   ],
+   "slug": "chung-ket-startup-2026",
+   "tag": "Cuộc thi",
+   "date": "05/05/2026",
+   "title": "Chung kết Startup HUMG 2026",
+   "place": "Hội trường B",
+   "people": "400",
+   "excerpt": "Các đội thi trình bày dự án khởi nghiệp trong lĩnh vực công nghệ và tài nguyên – môi trường."
+  },
+  {
+   "organizer": "Đoàn Thanh niên – Hội Sinh viên HUMG",
+   "gallery": 8,
+   "content": [
+    "Hoạt động thu hút đông đảo sinh viên các khoa tham gia, tạo sân chơi bổ ích và lan tỏa tinh thần tích cực trong cộng đồng sinh viên HUMG.",
+    "Chương trình được chuẩn bị kỹ lưỡng từ khâu truyền thông, hậu cần đến tổ chức, với sự phối hợp của nhiều câu lạc bộ, đội, nhóm."
+   ],
+   "agenda": [
+    {
+     "time": "07:30",
+     "item": "Đón tiếp và ổn định"
+    },
+    {
+     "time": "08:00",
+     "item": "Khai mạc chương trình"
+    },
+    {
+     "time": "09:00",
+     "item": "Nội dung chính"
+    },
+    {
+     "time": "11:30",
+     "item": "Tổng kết và trao thưởng"
+    }
+   ],
+   "slug": "dem-nhac-26-3",
+   "tag": "Văn hóa",
+   "date": "26/03/2026",
+   "title": "Đêm nhạc chào mừng ngày thành lập Đoàn 26/3",
+   "place": "Sảnh Nhà C",
+   "people": "1.500",
+   "excerpt": "Chương trình nghệ thuật do sinh viên các khoa dàn dựng và biểu diễn."
+  },
+  {
+   "organizer": "Đoàn Thanh niên – Hội Sinh viên HUMG",
+   "gallery": 8,
+   "content": [
+    "Hoạt động thu hút đông đảo sinh viên các khoa tham gia, tạo sân chơi bổ ích và lan tỏa tinh thần tích cực trong cộng đồng sinh viên HUMG.",
+    "Chương trình được chuẩn bị kỹ lưỡng từ khâu truyền thông, hậu cần đến tổ chức, với sự phối hợp của nhiều câu lạc bộ, đội, nhóm."
+   ],
+   "agenda": [
+    {
+     "time": "07:30",
+     "item": "Đón tiếp và ổn định"
+    },
+    {
+     "time": "08:00",
+     "item": "Khai mạc chương trình"
+    },
+    {
+     "time": "09:00",
+     "item": "Nội dung chính"
+    },
+    {
+     "time": "11:30",
+     "item": "Tổng kết và trao thưởng"
+    }
+   ],
+   "slug": "hoi-nghi-khoa-hoc-tre-xxv",
+   "tag": "Học thuật",
+   "date": "12/05/2025",
+   "title": "Hội nghị Khoa học trẻ HUMG lần thứ XXV",
+   "place": "Nhà C, HUMG",
+   "people": "300",
+   "excerpt": "Diễn đàn công bố kết quả nghiên cứu khoa học của sinh viên và học viên trẻ."
+  },
+  {
+   "organizer": "Đoàn Thanh niên – Hội Sinh viên HUMG",
+   "gallery": 8,
+   "content": [
+    "Hoạt động thu hút đông đảo sinh viên các khoa tham gia, tạo sân chơi bổ ích và lan tỏa tinh thần tích cực trong cộng đồng sinh viên HUMG.",
+    "Chương trình được chuẩn bị kỹ lưỡng từ khâu truyền thông, hậu cần đến tổ chức, với sự phối hợp của nhiều câu lạc bộ, đội, nhóm."
+   ],
+   "agenda": [
+    {
+     "time": "07:30",
+     "item": "Đón tiếp và ổn định"
+    },
+    {
+     "time": "08:00",
+     "item": "Khai mạc chương trình"
+    },
+    {
+     "time": "09:00",
+     "item": "Nội dung chính"
+    },
+    {
+     "time": "11:30",
+     "item": "Tổng kết và trao thưởng"
+    }
+   ],
+   "slug": "hien-mau-giot-hong",
+   "tag": "Tình nguyện",
+   "date": "05/05/2025",
+   "title": "Ngày hội hiến máu tình nguyện “Giọt hồng HUMG”",
+   "place": "Sảnh Nhà C",
+   "people": "600",
+   "excerpt": "Thu về hơn 500 đơn vị máu, lan tỏa tinh thần sẻ chia trong sinh viên."
+  }
+ ],
+ "campus": {
+  "intro": "Khuôn viên HUMG rộng, xanh và hiện đại tại phường Đức Thắng, quận Bắc Từ Liêm, Hà Nội, cùng các cơ sở đào tạo, thực hành và ký túc xá.",
+  "facilities": [
+   {
+    "name": "Hệ thống giảng đường & phòng học",
+    "desc": "Hơn 200 phòng học được trang bị máy chiếu, âm thanh và điều hòa."
+   },
+   {
+    "name": "Trung tâm Thông tin – Thư viện",
+    "desc": "Phòng đọc mở, khu tự học 24/7, thư viện số và kho tài liệu chuyên ngành."
+   },
+   {
+    "name": "Hệ thống phòng thí nghiệm",
+    "desc": "Phòng thí nghiệm cơ học đá, địa hóa, địa vật lý, môi trường, tự động hóa – IoT."
+   },
+   {
+    "name": "Khu thể thao đa năng",
+    "desc": "Sân vận động, nhà thi đấu, sân bóng rổ, cầu lông, bàn bóng bàn."
+   },
+   {
+    "name": "Không gian sáng tạo & khởi nghiệp",
+    "desc": "Khu co-working, phòng lab khởi nghiệp và không gian trưng bày sản phẩm."
+   },
+   {
+    "name": "Căng tin & dịch vụ sinh viên",
+    "desc": "Căng tin, quán cà phê, hiệu sách, photocopy, ngân hàng và điểm dừng xe buýt."
+   }
+  ],
+  "address": "18 Phố Viên, Đức Thắng, Bắc Từ Liêm, Hà Nội",
+  "hours": [
+   [
+    "Giảng đường",
+    "06:30 – 21:00 (Thứ 2 – Thứ 7)"
+   ],
+   [
+    "Thư viện",
+    "07:30 – 21:00; khu tự học 24/7"
+   ],
+   [
+    "Khu thể thao",
+    "05:30 – 21:00 hằng ngày"
+   ]
+  ]
+ },
+ "campusServices": [
+  {
+   "icon": "grid",
+   "title": "Căng tin & ẩm thực",
+   "desc": "Căng tin sinh viên, quán cà phê và các điểm ăn uống trong khuôn viên."
+  },
+  {
+   "icon": "globe",
+   "title": "Wifi & hạ tầng số",
+   "desc": "Phủ sóng wifi toàn trường, tài khoản truy cập cho sinh viên."
+  },
+  {
+   "icon": "file",
+   "title": "Photocopy & in ấn",
+   "desc": "Dịch vụ in, photo, đóng quyển tài liệu học tập."
+  },
+  {
+   "icon": "briefcase",
+   "title": "Ngân hàng & ATM",
+   "desc": "Quầy giao dịch và máy ATM của ngân hàng liên kết."
+  },
+  {
+   "icon": "map-pin",
+   "title": "Xe buýt & gửi xe",
+   "desc": "Điểm dừng các tuyến 18, 57, 60A, 75; bãi gửi xe hai bánh."
+  },
+  {
+   "icon": "library",
+   "title": "Hiệu sách & văn phòng phẩm",
+   "desc": "Giáo trình, tài liệu tham khảo và đồ dùng học tập."
+  }
+ ],
+ "clubCategories": [
+  "Tất cả",
+  "Học thuật",
+  "Kỹ năng",
+  "Thể thao",
+  "Văn hóa - Nghệ thuật",
+  "Tình nguyện"
+ ],
+ "clubs": [
+  {
+   "activities": [
+    "Sinh hoạt định kỳ hằng tuần, đào tạo kỹ năng cho thành viên",
+    "Tổ chức sự kiện, workshop và cuộc thi cấp trường",
+    "Giao lưu với CLB các trường bạn và doanh nghiệp"
+   ],
+   "schedule": "Sinh hoạt vào 18:00 tối Thứ Tư hằng tuần tại phòng 302 – Nhà C.",
+   "achievements": [
+    "Giải thưởng CLB xuất sắc cấp Trường nhiều năm liền",
+    "Tổ chức thành công chuỗi sự kiện thu hút hàng nghìn lượt sinh viên"
+   ],
+   "fanpage": "facebook.com/CLB.HUMG",
+   "gallery": 6,
+   "id": "cntt-humg",
+   "name": "CLB Công nghệ thông tin HUMG",
+   "category": "Học thuật",
+   "members": 180,
+   "founded": 2015,
+   "lead": "Nguyễn Văn A",
+   "desc": "Sân chơi công nghệ cho sinh viên đam mê lập trình, AI, IoT và an toàn thông tin."
+  },
+  {
+   "activities": [
+    "Sinh hoạt định kỳ hằng tuần, đào tạo kỹ năng cho thành viên",
+    "Tổ chức sự kiện, workshop và cuộc thi cấp trường",
+    "Giao lưu với CLB các trường bạn và doanh nghiệp"
+   ],
+   "schedule": "Sinh hoạt vào 18:00 tối Thứ Tư hằng tuần tại phòng 302 – Nhà C.",
+   "achievements": [
+    "Giải thưởng CLB xuất sắc cấp Trường nhiều năm liền",
+    "Tổ chức thành công chuỗi sự kiện thu hút hàng nghìn lượt sinh viên"
+   ],
+   "fanpage": "facebook.com/CLB.HUMG",
+   "gallery": 6,
+   "id": "tieng-anh",
+   "name": "CLB Tiếng Anh HUMG (HUMG English)",
+   "category": "Kỹ năng",
+   "members": 320,
+   "founded": 2012,
+   "lead": "Trần Thị Linh",
+   "desc": "Rèn luyện kỹ năng tiếng Anh qua các buổi Public Speaking, Debate và English Corner."
+  },
+  {
+   "activities": [
+    "Sinh hoạt định kỳ hằng tuần, đào tạo kỹ năng cho thành viên",
+    "Tổ chức sự kiện, workshop và cuộc thi cấp trường",
+    "Giao lưu với CLB các trường bạn và doanh nghiệp"
+   ],
+   "schedule": "Sinh hoạt vào 18:00 tối Thứ Tư hằng tuần tại phòng 302 – Nhà C.",
+   "achievements": [
+    "Giải thưởng CLB xuất sắc cấp Trường nhiều năm liền",
+    "Tổ chức thành công chuỗi sự kiện thu hút hàng nghìn lượt sinh viên"
+   ],
+   "fanpage": "facebook.com/CLB.HUMG",
+   "gallery": 6,
+   "id": "bong-da",
+   "name": "CLB Bóng đá HUMG",
+   "category": "Thể thao",
+   "members": 256,
+   "founded": 2010,
+   "lead": "Lê Văn Cường",
+   "desc": "Đội bóng truyền thống của Trường, thi đấu tại các giải sinh viên toàn quốc."
+  },
+  {
+   "activities": [
+    "Sinh hoạt định kỳ hằng tuần, đào tạo kỹ năng cho thành viên",
+    "Tổ chức sự kiện, workshop và cuộc thi cấp trường",
+    "Giao lưu với CLB các trường bạn và doanh nghiệp"
+   ],
+   "schedule": "Sinh hoạt vào 18:00 tối Thứ Tư hằng tuần tại phòng 302 – Nhà C.",
+   "achievements": [
+    "Giải thưởng CLB xuất sắc cấp Trường nhiều năm liền",
+    "Tổ chức thành công chuỗi sự kiện thu hút hàng nghìn lượt sinh viên"
+   ],
+   "fanpage": "facebook.com/CLB.HUMG",
+   "gallery": 6,
+   "id": "guitar",
+   "name": "CLB Guitar & Âm nhạc",
+   "category": "Văn hóa - Nghệ thuật",
+   "members": 140,
+   "founded": 2013,
+   "lead": "Phạm Thu Hà",
+   "desc": "Nơi hội tụ những người yêu âm nhạc, biểu diễn trong các sự kiện lớn của Trường."
+  },
+  {
+   "activities": [
+    "Sinh hoạt định kỳ hằng tuần, đào tạo kỹ năng cho thành viên",
+    "Tổ chức sự kiện, workshop và cuộc thi cấp trường",
+    "Giao lưu với CLB các trường bạn và doanh nghiệp"
+   ],
+   "schedule": "Sinh hoạt vào 18:00 tối Thứ Tư hằng tuần tại phòng 302 – Nhà C.",
+   "achievements": [
+    "Giải thưởng CLB xuất sắc cấp Trường nhiều năm liền",
+    "Tổ chức thành công chuỗi sự kiện thu hút hàng nghìn lượt sinh viên"
+   ],
+   "fanpage": "facebook.com/CLB.HUMG",
+   "gallery": 6,
+   "id": "tinh-nguyen",
+   "name": "CLB Tình nguyện HUMG",
+   "category": "Tình nguyện",
+   "members": 410,
+   "founded": 2011,
+   "lead": "Vũ Minh Đức",
+   "desc": "Tổ chức các chương trình thiện nguyện, hiến máu và hỗ trợ cộng đồng vùng khó khăn."
+  },
+  {
+   "activities": [
+    "Sinh hoạt định kỳ hằng tuần, đào tạo kỹ năng cho thành viên",
+    "Tổ chức sự kiện, workshop và cuộc thi cấp trường",
+    "Giao lưu với CLB các trường bạn và doanh nghiệp"
+   ],
+   "schedule": "Sinh hoạt vào 18:00 tối Thứ Tư hằng tuần tại phòng 302 – Nhà C.",
+   "achievements": [
+    "Giải thưởng CLB xuất sắc cấp Trường nhiều năm liền",
+    "Tổ chức thành công chuỗi sự kiện thu hút hàng nghìn lượt sinh viên"
+   ],
+   "fanpage": "facebook.com/CLB.HUMG",
+   "gallery": 6,
+   "id": "robocon",
+   "name": "CLB Robocon HUMG",
+   "category": "Học thuật",
+   "members": 90,
+   "founded": 2016,
+   "lead": "Đỗ Quang Huy",
+   "desc": "Chế tạo robot, thi đấu Robocon Việt Nam và các cuộc thi kỹ thuật."
+  },
+  {
+   "activities": [
+    "Sinh hoạt định kỳ hằng tuần, đào tạo kỹ năng cho thành viên",
+    "Tổ chức sự kiện, workshop và cuộc thi cấp trường",
+    "Giao lưu với CLB các trường bạn và doanh nghiệp"
+   ],
+   "schedule": "Sinh hoạt vào 18:00 tối Thứ Tư hằng tuần tại phòng 302 – Nhà C.",
+   "achievements": [
+    "Giải thưởng CLB xuất sắc cấp Trường nhiều năm liền",
+    "Tổ chức thành công chuỗi sự kiện thu hút hàng nghìn lượt sinh viên"
+   ],
+   "fanpage": "facebook.com/CLB.HUMG",
+   "gallery": 6,
+   "id": "ky-nang-mem",
+   "name": "CLB Kỹ năng mềm HUMG",
+   "category": "Kỹ năng",
+   "members": 260,
+   "founded": 2014,
+   "lead": "Ngô Thị Mai",
+   "desc": "Đào tạo kỹ năng thuyết trình, làm việc nhóm, quản lý thời gian và tư duy phản biện."
+  },
+  {
+   "activities": [
+    "Sinh hoạt định kỳ hằng tuần, đào tạo kỹ năng cho thành viên",
+    "Tổ chức sự kiện, workshop và cuộc thi cấp trường",
+    "Giao lưu với CLB các trường bạn và doanh nghiệp"
+   ],
+   "schedule": "Sinh hoạt vào 18:00 tối Thứ Tư hằng tuần tại phòng 302 – Nhà C.",
+   "achievements": [
+    "Giải thưởng CLB xuất sắc cấp Trường nhiều năm liền",
+    "Tổ chức thành công chuỗi sự kiện thu hút hàng nghìn lượt sinh viên"
+   ],
+   "fanpage": "facebook.com/CLB.HUMG",
+   "gallery": 6,
+   "id": "nhiep-anh",
+   "name": "CLB Nhiếp ảnh HUMG",
+   "category": "Văn hóa - Nghệ thuật",
+   "members": 110,
+   "founded": 2017,
+   "lead": "Bùi Anh Tuấn",
+   "desc": "Ghi lại khoảnh khắc đời sống sinh viên, tổ chức triển lãm ảnh thường niên."
+  }
+ ],
+ "dorm": {
+  "intro": "Ký túc xá HUMG cung cấp chỗ ở an toàn, tiện nghi cho gần 4.000 sinh viên, với an ninh 24/7 và các dịch vụ sinh hoạt đầy đủ.",
+  "zones": [
+   {
+    "name": "Khu A",
+    "type": "Phòng 8 người",
+    "note": "Ưu tiên sinh viên năm nhất"
+   },
+   {
+    "name": "Khu B",
+    "type": "Phòng 6 người",
+    "note": "Có bình nóng lạnh, ban công"
+   },
+   {
+    "name": "Khu C",
+    "type": "Phòng 4 người (dịch vụ)",
+    "note": "Điều hòa, khu vệ sinh khép kín"
+   }
+  ],
+  "amenities": [
+   "An ninh, bảo vệ 24/7",
+   "Wifi tốc độ cao",
+   "Khu bếp và giặt là chung",
+   "Phòng sinh hoạt cộng đồng",
+   "Căng tin và điểm mua sắm",
+   "Sân chơi thể thao nội khu"
+  ],
+  "fee": "Từ 180.000 đ đến 650.000 đ/tháng tùy loại phòng (chưa gồm điện, nước).",
+  "steps": [
+   {
+    "title": "Đăng ký trực tuyến",
+    "text": "Điền đơn đăng ký ở ký túc xá trên Cổng sinh viên My eUni theo thời hạn thông báo."
+   },
+   {
+    "title": "Xét duyệt",
+    "text": "Ban Quản lý KTX xét theo thứ tự ưu tiên và chỉ tiêu từng khu."
+   },
+   {
+    "title": "Nhận phòng & ký nội quy",
+    "text": "Nộp lệ phí, nhận phòng, ký cam kết thực hiện nội quy ký túc xá."
+   }
+  ],
+  "rules": [
+   "Giữ gìn an ninh trật tự, vệ sinh chung; không gây ồn sau 22:30",
+   "Không tàng trữ, sử dụng chất cấm, vật liệu dễ cháy nổ",
+   "Khách đến thăm đăng ký tại phòng bảo vệ, không lưu trú qua đêm"
+  ],
+  "contact": {
+   "phone": "024.3838.3850",
+   "email": "ktx@humg.edu.vn"
+  }
+ },
+ "health": {
+  "intro": "Trạm Y tế HUMG chăm sóc sức khỏe ban đầu cho sinh viên và cán bộ, tổ chức khám sức khỏe định kỳ và triển khai bảo hiểm y tế sinh viên.",
+  "services": [
+   "Khám và xử trí ban đầu các bệnh thông thường",
+   "Sơ cấp cứu và chuyển tuyến khi cần thiết",
+   "Khám sức khỏe đầu khóa và định kỳ hằng năm",
+   "Tư vấn sức khỏe, dinh dưỡng và phòng chống dịch bệnh",
+   "Quản lý và cấp phát thuốc trong danh mục"
+  ],
+  "insurance": [
+   "BHYT là bắt buộc với sinh viên; Nhà trường tổ chức thu và cấp thẻ đầu năm học",
+   "Ngân sách nhà nước hỗ trợ 30% mức đóng cho sinh viên",
+   "Khám chữa bệnh đúng tuyến tại cơ sở đăng ký ban đầu ghi trên thẻ"
+  ],
+  "schedule": [
+   [
+    "Thứ 2 – Thứ 6",
+    "07:30 – 17:00"
+   ],
+   [
+    "Thứ 7",
+    "07:30 – 11:30"
+   ],
+   [
+    "Trực cấp cứu",
+    "24/7 (liên hệ bảo vệ trường)"
+   ]
+  ],
+  "contact": {
+   "phone": "024.3838.3851",
+   "email": "yte@humg.edu.vn",
+   "emergency": "024.3838.3851 (máy lẻ 115)"
+  }
+ },
+ "jobs": {
+  "intro": "Trung tâm Hỗ trợ sinh viên kết nối người học với doanh nghiệp qua ngày hội việc làm, cơ sở dữ liệu việc làm, chương trình thực tập và hệ sinh thái khởi nghiệp.",
+  "stats": [
+   {
+    "value": "200+",
+    "label": "Doanh nghiệp đối tác"
+   },
+   {
+    "value": "5.000+",
+    "label": "Vị trí việc làm / năm"
+   },
+   {
+    "value": "92%",
+    "label": "SV có việc làm sau 1 năm"
+   },
+   {
+    "value": "30+",
+    "label": "Dự án khởi nghiệp được ươm tạo"
+   }
+  ],
+  "listings": [
+   {
+    "type": "Toàn thời gian",
+    "quantity": "05 – 10",
+    "description": "Doanh nghiệp tuyển dụng sinh viên năm cuối và cựu sinh viên HUMG cho vị trí phù hợp với ngành đào tạo, có lộ trình đào tạo và phát triển rõ ràng.",
+    "requirements": [
+     "Sinh viên năm cuối hoặc đã tốt nghiệp ngành phù hợp",
+     "Có kiến thức nền tảng chuyên ngành, kỹ năng tin học văn phòng",
+     "Chủ động, ham học hỏi, có tinh thần trách nhiệm và làm việc nhóm tốt"
+    ],
+    "benefits": [
+     "Thu nhập cạnh tranh, xét tăng lương định kỳ",
+     "Được đào tạo, hướng dẫn bởi kỹ sư/chuyên gia giàu kinh nghiệm",
+     "Đầy đủ chế độ BHXH, BHYT, phụ cấp theo quy định"
+    ],
+    "applyNote": "Nộp CV qua email tuyendung@congty.vn hoặc đăng ký qua Trung tâm Hỗ trợ sinh viên HUMG (nhà A, tầng 1).",
+    "id": "ky-su-mo-tkv",
+    "title": "Kỹ sư Mỏ (thực tập & chính thức)",
+    "company": "Tập đoàn TKV",
+    "place": "Quảng Ninh",
+    "deadline": "30/06/2026",
+    "salary": "12 – 20 triệu đ"
+   },
+   {
+    "type": "Toàn thời gian",
+    "quantity": "05 – 10",
+    "description": "Doanh nghiệp tuyển dụng sinh viên năm cuối và cựu sinh viên HUMG cho vị trí phù hợp với ngành đào tạo, có lộ trình đào tạo và phát triển rõ ràng.",
+    "requirements": [
+     "Sinh viên năm cuối hoặc đã tốt nghiệp ngành phù hợp",
+     "Có kiến thức nền tảng chuyên ngành, kỹ năng tin học văn phòng",
+     "Chủ động, ham học hỏi, có tinh thần trách nhiệm và làm việc nhóm tốt"
+    ],
+    "benefits": [
+     "Thu nhập cạnh tranh, xét tăng lương định kỳ",
+     "Được đào tạo, hướng dẫn bởi kỹ sư/chuyên gia giàu kinh nghiệm",
+     "Đầy đủ chế độ BHXH, BHYT, phụ cấp theo quy định"
+    ],
+    "applyNote": "Nộp CV qua email tuyendung@congty.vn hoặc đăng ký qua Trung tâm Hỗ trợ sinh viên HUMG (nhà A, tầng 1).",
+    "id": "ky-su-dau-khi-pvep",
+    "title": "Kỹ sư Dầu khí",
+    "company": "PVEP",
+    "place": "Hà Nội / Vũng Tàu",
+    "deadline": "15/06/2026",
+    "salary": "Thỏa thuận"
+   },
+   {
+    "type": "Toàn thời gian / Thực tập",
+    "quantity": "05 – 10",
+    "description": "Doanh nghiệp tuyển dụng sinh viên năm cuối và cựu sinh viên HUMG cho vị trí phù hợp với ngành đào tạo, có lộ trình đào tạo và phát triển rõ ràng.",
+    "requirements": [
+     "Sinh viên năm cuối hoặc đã tốt nghiệp ngành phù hợp",
+     "Có kiến thức nền tảng chuyên ngành, kỹ năng tin học văn phòng",
+     "Chủ động, ham học hỏi, có tinh thần trách nhiệm và làm việc nhóm tốt"
+    ],
+    "benefits": [
+     "Thu nhập cạnh tranh, xét tăng lương định kỳ",
+     "Được đào tạo, hướng dẫn bởi kỹ sư/chuyên gia giàu kinh nghiệm",
+     "Đầy đủ chế độ BHXH, BHYT, phụ cấp theo quy định"
+    ],
+    "applyNote": "Nộp CV qua email tuyendung@congty.vn hoặc đăng ký qua Trung tâm Hỗ trợ sinh viên HUMG (nhà A, tầng 1).",
+    "id": "lap-trinh-vien-abc",
+    "title": "Lập trình viên (Fresher)",
+    "company": "Công ty CP Công nghệ ABC",
+    "place": "Hà Nội",
+    "deadline": "20/06/2026",
+    "salary": "10 – 15 triệu đ"
+   },
+   {
+    "type": "Toàn thời gian",
+    "quantity": "05 – 10",
+    "description": "Doanh nghiệp tuyển dụng sinh viên năm cuối và cựu sinh viên HUMG cho vị trí phù hợp với ngành đào tạo, có lộ trình đào tạo và phát triển rõ ràng.",
+    "requirements": [
+     "Sinh viên năm cuối hoặc đã tốt nghiệp ngành phù hợp",
+     "Có kiến thức nền tảng chuyên ngành, kỹ năng tin học văn phòng",
+     "Chủ động, ham học hỏi, có tinh thần trách nhiệm và làm việc nhóm tốt"
+    ],
+    "benefits": [
+     "Thu nhập cạnh tranh, xét tăng lương định kỳ",
+     "Được đào tạo, hướng dẫn bởi kỹ sư/chuyên gia giàu kinh nghiệm",
+     "Đầy đủ chế độ BHXH, BHYT, phụ cấp theo quy định"
+    ],
+    "applyNote": "Nộp CV qua email tuyendung@congty.vn hoặc đăng ký qua Trung tâm Hỗ trợ sinh viên HUMG (nhà A, tầng 1).",
+    "id": "chuyen-vien-gis",
+    "title": "Chuyên viên GIS – Viễn thám",
+    "company": "Công ty TNHH Bản đồ số",
+    "place": "Hà Nội",
+    "deadline": "25/06/2026",
+    "salary": "12 – 18 triệu đ"
+   },
+   {
+    "type": "Toàn thời gian",
+    "quantity": "05 – 10",
+    "description": "Doanh nghiệp tuyển dụng sinh viên năm cuối và cựu sinh viên HUMG cho vị trí phù hợp với ngành đào tạo, có lộ trình đào tạo và phát triển rõ ràng.",
+    "requirements": [
+     "Sinh viên năm cuối hoặc đã tốt nghiệp ngành phù hợp",
+     "Có kiến thức nền tảng chuyên ngành, kỹ năng tin học văn phòng",
+     "Chủ động, ham học hỏi, có tinh thần trách nhiệm và làm việc nhóm tốt"
+    ],
+    "benefits": [
+     "Thu nhập cạnh tranh, xét tăng lương định kỳ",
+     "Được đào tạo, hướng dẫn bởi kỹ sư/chuyên gia giàu kinh nghiệm",
+     "Đầy đủ chế độ BHXH, BHYT, phụ cấp theo quy định"
+    ],
+    "applyNote": "Nộp CV qua email tuyendung@congty.vn hoặc đăng ký qua Trung tâm Hỗ trợ sinh viên HUMG (nhà A, tầng 1).",
+    "id": "phan-tich-moi-truong",
+    "title": "Nhân viên phân tích môi trường",
+    "company": "Trung tâm Quan trắc MT",
+    "place": "Hà Nội",
+    "deadline": "10/07/2026",
+    "salary": "9 – 13 triệu đ"
+   }
+  ],
+  "services": [
+   {
+    "icon": "file",
+    "title": "Tư vấn CV & phỏng vấn",
+    "desc": "Chỉnh sửa CV, mô phỏng phỏng vấn, định hướng nghề nghiệp."
+   },
+   {
+    "icon": "briefcase",
+    "title": "Kết nối thực tập",
+    "desc": "Giới thiệu vị trí thực tập tại doanh nghiệp đối tác."
+   },
+   {
+    "icon": "rocket",
+    "title": "Vườn ươm khởi nghiệp",
+    "desc": "Không gian làm việc, cố vấn và kết nối vốn cho dự án sinh viên."
+   },
+   {
+    "icon": "users",
+    "title": "Mạng lưới cựu sinh viên",
+    "desc": "Kết nối, mentoring và cơ hội việc làm từ cựu sinh viên HUMG."
+   }
+  ]
+ },
+ "lifeHub": {
+  "intro": "HUMG – nơi kiến tạo trải nghiệm và gắn kết. Bên cạnh học tập, sinh viên có một môi trường sôi động với hơn 200 câu lạc bộ, đội nhóm, hoạt động thể thao – văn hóa và mạng lưới hỗ trợ toàn diện.",
+  "features": [
+   {
+    "icon": "building",
+    "tag": "Campus",
+    "title": "Campus & Cơ sở vật chất",
+    "desc": "Giảng đường, thư viện, phòng thí nghiệm, khu thể thao và không gian sáng tạo.",
+    "to": "/doi-song/campus-co-so-vat-chat"
+   },
+   {
+    "icon": "users",
+    "tag": "Hoạt động",
+    "title": "Hoạt động sinh viên",
+    "desc": "Sự kiện, phong trào, cuộc thi và chương trình trải nghiệm quanh năm.",
+    "to": "/doi-song/hoat-dong-sinh-vien"
+   },
+   {
+    "icon": "target",
+    "tag": "CLB",
+    "title": "Câu lạc bộ sinh viên",
+    "desc": "200+ CLB học thuật, thể thao, văn hóa – nghệ thuật, tình nguyện.",
+    "to": "/doi-song/cau-lac-bo"
+   },
+   {
+    "icon": "heart",
+    "tag": "Ký túc xá",
+    "title": "Ký túc xá HUMG",
+    "desc": "Chỗ ở an toàn, tiện nghi cho gần 4.000 sinh viên nội trú.",
+    "to": "/doi-song/ky-tuc-xa"
+   },
+   {
+    "icon": "shield",
+    "tag": "Y tế",
+    "title": "Y tế & Chăm sóc sức khỏe",
+    "desc": "Trạm y tế, khám sức khỏe định kỳ, bảo hiểm y tế sinh viên.",
+    "to": "/doi-song/y-te"
+   },
+   {
+    "icon": "briefcase",
+    "tag": "Nghề nghiệp",
+    "title": "Việc làm & Khởi nghiệp",
+    "desc": "Ngày hội việc làm, vườn ươm khởi nghiệp, kết nối doanh nghiệp.",
+    "to": "/doi-song/viec-lam-khoi-nghiep"
+   }
+  ],
+  "stats": [
+   {
+    "value": "200+",
+    "label": "Câu lạc bộ & đội nhóm"
+   },
+   {
+    "value": "15.000+",
+    "label": "Lượt sinh viên tham gia / năm"
+   },
+   {
+    "value": "4.000",
+    "label": "Chỗ ở ký túc xá"
+   },
+   {
+    "value": "120+",
+    "label": "Sự kiện, hoạt động / năm"
+   }
+  ],
+  "feed": [
+   {
+    "tag": "Sự kiện",
+    "date": "20/05/2026",
+    "title": "Ngày hội việc làm & Kết nối doanh nghiệp 2026",
+    "place": "Sân vận động HUMG"
+   },
+   {
+    "tag": "Phong trào",
+    "date": "10/05/2026",
+    "title": "Chiến dịch Mùa hè xanh HUMG 2026 xuất quân",
+    "place": "Hà Giang"
+   },
+   {
+    "tag": "Cuộc thi",
+    "date": "05/05/2026",
+    "title": "Chung kết cuộc thi Startup HUMG 2026",
+    "place": "Hội trường B"
+   },
+   {
+    "tag": "Thể thao",
+    "date": "28/04/2026",
+    "title": "Giải bóng đá sinh viên HUMG mở màn sôi động",
+    "place": "Sân vận động HUMG"
+   }
+  ]
+ },
+ "lifeNav": [
+  {
+   "label": "Đời sống HUMG",
+   "to": "/doi-song",
+   "icon": "heart"
+  },
+  {
+   "label": "Campus & Cơ sở vật chất",
+   "to": "/doi-song/campus-co-so-vat-chat",
+   "icon": "building"
+  },
+  {
+   "label": "Hoạt động sinh viên",
+   "to": "/doi-song/hoat-dong-sinh-vien",
+   "icon": "users"
+  },
+  {
+   "label": "Câu lạc bộ sinh viên",
+   "to": "/doi-song/cau-lac-bo",
+   "icon": "grid"
+  },
+  {
+   "label": "Đoàn – Hội",
+   "to": "/doi-song/doan-hoi",
+   "icon": "award"
+  },
+  {
+   "label": "Thể thao – Văn hóa",
+   "to": "/doi-song/the-thao-van-hoa",
+   "icon": "play"
+  },
+  {
+   "label": "Ký túc xá",
+   "to": "/doi-song/ky-tuc-xa",
+   "icon": "home"
+  },
+  {
+   "label": "Y tế – Chăm sóc sức khỏe",
+   "to": "/doi-song/y-te",
+   "icon": "shield"
+  },
+  {
+   "label": "Dịch vụ Campus",
+   "to": "/doi-song/dich-vu-campus",
+   "icon": "briefcase"
+  },
+  {
+   "label": "Hỗ trợ sinh viên",
+   "to": "/doi-song/ho-tro-sinh-vien",
+   "icon": "headphones"
+  },
+  {
+   "label": "Việc làm – Khởi nghiệp",
+   "to": "/doi-song/viec-lam-khoi-nghiep",
+   "icon": "rocket"
+  }
+ ],
+ "sportsCulture": {
+  "intro": "HUMG chú trọng phát triển thể chất và đời sống tinh thần cho sinh viên với hệ thống sân bãi, đội tuyển và các câu lạc bộ văn hóa – nghệ thuật.",
+  "facilities": [
+   "Sân vận động cỏ nhân tạo",
+   "Nhà thi đấu đa năng",
+   "Sân bóng rổ, bóng chuyền",
+   "Sân cầu lông, bàn bóng bàn",
+   "Phòng tập gym sinh viên"
+  ],
+  "events": [
+   {
+    "name": "Giải bóng đá sinh viên HUMG",
+    "time": "Tháng 6 hằng năm"
+   },
+   {
+    "name": "Hội thao truyền thống HUMG",
+    "time": "Tháng 11 hằng năm"
+   },
+   {
+    "name": "Liên hoan văn nghệ “Giai điệu tuổi trẻ”",
+    "time": "Tháng 3 hằng năm"
+   },
+   {
+    "name": "Cuộc thi “HUMG Got Talent”",
+    "time": "Tháng 12 hằng năm"
+   }
+  ],
+  "teams": [
+   "Bóng đá nam / nữ",
+   "Bóng chuyền",
+   "Bóng rổ",
+   "Điền kinh",
+   "Cầu lông",
+   "Cờ vua"
+  ]
+ },
+ "studentSupport": {
+  "intro": "HUMG xây dựng mạng lưới hỗ trợ toàn diện, giúp sinh viên vượt qua khó khăn trong học tập và đời sống.",
+  "channels": [
+   {
+    "icon": "book",
+    "title": "Hỗ trợ học vụ",
+    "desc": "Tư vấn đăng ký học phần, xử lý học vụ, cố vấn học tập.",
+    "to": "/hoc-tap/huong-dan"
+   },
+   {
+    "icon": "heart",
+    "title": "Hỗ trợ tâm lý",
+    "desc": "Tư vấn tâm lý học đường, kỹ năng thích ứng và cân bằng cuộc sống.",
+    "to": "/doi-song/ho-tro-sinh-vien"
+   },
+   {
+    "icon": "file",
+    "title": "Hỗ trợ tài chính",
+    "desc": "Học bổng, miễn giảm học phí, vay vốn ngân hàng chính sách.",
+    "to": "/hoc-tap/hoc-phi-hoc-bong"
+   },
+   {
+    "icon": "shield",
+    "title": "Hỗ trợ pháp lý & an toàn",
+    "desc": "Tư vấn quy chế, an toàn thông tin, phòng chống bạo lực học đường.",
+    "to": "/doi-song/ho-tro-sinh-vien"
+   }
+  ],
+  "steps": [
+   {
+    "title": "Gửi yêu cầu hỗ trợ",
+    "text": "Qua My eUni, hộp thư htsv@humg.edu.vn hoặc trực tiếp tại bộ phận một cửa."
+   },
+   {
+    "title": "Phân loại & kết nối",
+    "text": "Cán bộ tiếp nhận kết nối bạn tới đúng bộ phận chuyên môn."
+   },
+   {
+    "title": "Xử lý & phản hồi",
+    "text": "Bạn được hỗ trợ và nhận phản hồi trong 3 – 5 ngày làm việc."
+   }
+  ],
+  "faqs": [
+   {
+    "q": "Sinh viên gặp khó khăn tài chính giữa kỳ có thể xin hỗ trợ không?",
+    "a": "Có. Bạn làm đơn xin gia hạn học phí hoặc đề nghị hỗ trợ đột xuất gửi Phòng Công tác chính trị & Sinh viên để được xem xét."
+   },
+   {
+    "q": "Tư vấn tâm lý có mất phí và bảo mật không?",
+    "a": "Dịch vụ tư vấn tâm lý học đường miễn phí và được bảo mật thông tin theo quy định."
+   }
+  ],
+  "hotline": "1900 xxxx (trong giờ hành chính) · htsv@humg.edu.vn"
+ },
+ "youthUnion": {
+  "intro": "Đoàn Thanh niên Cộng sản Hồ Chí Minh và Hội Sinh viên Việt Nam Trường Đại học Mỏ - Địa chất là tổ chức chính trị – xã hội của tuổi trẻ Nhà trường, dẫn dắt các phong trào và hoạt động sinh viên.",
+  "bodies": [
+   {
+    "name": "Đoàn Thanh niên",
+    "desc": "Ban Chấp hành Đoàn trường, các Liên chi đoàn khoa và chi đoàn lớp."
+   },
+   {
+    "name": "Hội Sinh viên",
+    "desc": "Ban Chấp hành Hội Sinh viên trường và các Liên chi hội, chi hội."
+   }
+  ],
+  "movements": [
+   "Phong trào “Sinh viên 5 tốt” và “Thanh niên tình nguyện”",
+   "Chiến dịch Mùa hè xanh, Tiếp sức mùa thi, Xuân tình nguyện",
+   "Phong trào học tập, nghiên cứu khoa học và khởi nghiệp trong sinh viên",
+   "Các hoạt động văn hóa – văn nghệ – thể dục thể thao"
+  ],
+  "achievements": [
+   "Bằng khen của Trung ương Đoàn, Trung ương Hội Sinh viên Việt Nam",
+   "Nhiều tập thể, cá nhân đạt danh hiệu “Sinh viên 5 tốt” cấp Trung ương",
+   "Đơn vị dẫn đầu cụm thi đua các trường đại học khối kỹ thuật"
+  ],
+  "contact": {
+   "phone": "024.3838.3830",
+   "email": "doantn@humg.edu.vn"
+  }
+ }
+}

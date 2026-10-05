@@ -1,0 +1,6 @@
+.breadcrumb { background: var(--humg-surface); border-bottom: 1px solid var(--humg-border); }
+.breadcrumb__inner { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; height: 48px; font-size: 13px; color: var(--humg-text-secondary); }
+.breadcrumb__inner a { display: inline-flex; align-items: center; gap: 5px; color: var(--humg-text-secondary); }
+.breadcrumb__inner a:hover { color: var(--humg-primary); }
+.breadcrumb__seg { display: inline-flex; align-items: center; gap: 4px; }
+.breadcrumb__seg strong { color: var(--humg-primary); font-weight: 600; }

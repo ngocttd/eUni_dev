@@ -1,0 +1,1372 @@
+{
+ "conferences": [
+  {
+   "slug": "dia-chat-khoang-san-2026",
+   "name": "Hội thảo khoa học quốc tế về Địa chất và Khoáng sản 2026",
+   "date": "20/05/2026",
+   "time": "08:00 – 17:00",
+   "place": "Hội trường A, HUMG",
+   "scope": "Quốc tế",
+   "organizer": "Khoa Địa chất & Phòng Hợp tác quốc tế",
+   "status": "Sắp diễn ra"
+  },
+  {
+   "slug": "ky-thuat-mo-toan-quoc-xxvi",
+   "name": "Hội nghị Khoa học Kỹ thuật Mỏ toàn quốc lần thứ XXVI",
+   "date": "15/08/2026",
+   "time": "08:00 – 17:30",
+   "place": "TP. Hạ Long, Quảng Ninh",
+   "scope": "Trong nước",
+   "organizer": "Hội KHKT Mỏ Việt Nam & HUMG",
+   "status": "Sắp diễn ra"
+  },
+  {
+   "slug": "trac-dia-gis-2025",
+   "name": "Hội thảo quốc tế về Trắc địa và GIS 2025",
+   "date": "14/05/2025",
+   "time": "08:00 – 17:00",
+   "place": "Hội trường A, HUMG",
+   "scope": "Quốc tế",
+   "organizer": "Khoa Trắc địa – Bản đồ",
+   "status": "Đã tổ chức"
+  },
+  {
+   "slug": "khoa-hoc-tre-humg-xxv",
+   "name": "Hội nghị Khoa học trẻ HUMG lần thứ XXV",
+   "date": "12/05/2025",
+   "time": "13:30 – 17:00",
+   "place": "Nhà C, HUMG",
+   "scope": "Trong nước",
+   "organizer": "Đoàn Thanh niên & Phòng KHCN",
+   "status": "Đã tổ chức"
+  },
+  {
+   "slug": "gioi-thieu-nafosted",
+   "name": "Hội thảo giới thiệu chương trình tài trợ NAFOSTED",
+   "date": "05/05/2026",
+   "time": "14:00 – 16:30",
+   "place": "Phòng họp B, HUMG",
+   "scope": "Trong nước",
+   "organizer": "Phòng KHCN",
+   "status": "Sắp diễn ra"
+  },
+  {
+   "slug": "dien-dan-viet-duc",
+   "name": "Diễn đàn hợp tác nghiên cứu Việt – Đức về khai thác bền vững",
+   "date": "28/04/2025",
+   "time": "15:00 – 17:00",
+   "place": "Trực tuyến (Zoom)",
+   "scope": "Quốc tế",
+   "organizer": "Phòng Hợp tác quốc tế",
+   "status": "Đã tổ chức"
+  }
+ ],
+ "expertStats": [
+  {
+   "value": "236",
+   "label": "Tổng số chuyên gia"
+  },
+  {
+   "value": "12",
+   "label": "Giáo sư"
+  },
+  {
+   "value": "48",
+   "label": "Phó Giáo sư"
+  },
+  {
+   "value": "128",
+   "label": "Tiến sĩ"
+  }
+ ],
+ "experts": [
+  {
+   "id": "e1",
+   "name": "PGS.TS. Trần Văn A",
+   "position": "Trưởng nhóm nghiên cứu mạnh",
+   "faculty": "Khoa Mỏ",
+   "fields": [
+    "Khai thác mỏ",
+    "An toàn mỏ",
+    "Cơ học đá"
+   ],
+   "email": "tranva@humg.edu.vn",
+   "phone": "024.3838.1301",
+   "pubs": 62,
+   "projects": 9,
+   "hIndex": 14
+  },
+  {
+   "id": "e2",
+   "name": "TS. Nguyễn Thị B",
+   "position": "Trưởng bộ môn",
+   "faculty": "Khoa KH&KT Địa chất",
+   "fields": [
+    "Địa hóa",
+    "Khoáng sản kim loại hiếm",
+    "Thạch luận"
+   ],
+   "email": "nguyenthib@humg.edu.vn",
+   "phone": "024.3838.1402",
+   "pubs": 45,
+   "projects": 7,
+   "hIndex": 11
+  },
+  {
+   "id": "e3",
+   "name": "TS. Phạm Văn C",
+   "position": "Giảng viên chính",
+   "faculty": "Khoa Dầu khí",
+   "fields": [
+    "Khoan dầu khí",
+    "Nâng cao thu hồi dầu",
+    "Địa vật lý giếng khoan"
+   ],
+   "email": "phamvanc@humg.edu.vn",
+   "phone": "024.3838.1503",
+   "pubs": 38,
+   "projects": 6,
+   "hIndex": 9
+  },
+  {
+   "id": "e4",
+   "name": "PGS.TS. Hoàng Văn E",
+   "position": "Trưởng nhóm AI – Viễn thám",
+   "faculty": "Khoa Trắc địa – Bản đồ và QLĐĐ",
+   "fields": [
+    "Viễn thám",
+    "GIS",
+    "Học sâu",
+    "Giám sát biến động"
+   ],
+   "email": "hoangvane@humg.edu.vn",
+   "phone": "024.3838.1604",
+   "pubs": 71,
+   "projects": 10,
+   "hIndex": 17
+  },
+  {
+   "id": "e5",
+   "name": "TS. Lê Văn C",
+   "position": "Phó Trưởng khoa",
+   "faculty": "Khoa Công nghệ thông tin",
+   "fields": [
+    "Khoa học dữ liệu",
+    "Dữ liệu lớn",
+    "Hệ khuyến nghị"
+   ],
+   "email": "levanc@humg.edu.vn",
+   "phone": "024.3838.1705",
+   "pubs": 40,
+   "projects": 5,
+   "hIndex": 10
+  },
+  {
+   "id": "e6",
+   "name": "PGS.TS. Vũ Văn F",
+   "position": "Trưởng bộ môn Tự động hóa",
+   "faculty": "Khoa Cơ – Điện",
+   "fields": [
+    "IoT",
+    "Tự động hóa mỏ",
+    "Điều khiển"
+   ],
+   "email": "vuvanf@humg.edu.vn",
+   "phone": "024.3838.1806",
+   "pubs": 33,
+   "projects": 6,
+   "hIndex": 8
+  },
+  {
+   "id": "e7",
+   "name": "PGS.TS. Ngô Thị H",
+   "position": "Trưởng nhóm Môi trường",
+   "faculty": "Khoa Môi trường",
+   "fields": [
+    "Hoàn nguyên mỏ",
+    "Đánh giá tác động môi trường",
+    "Kinh tế tuần hoàn"
+   ],
+   "email": "ngothih@humg.edu.vn",
+   "phone": "024.3838.1907",
+   "pubs": 29,
+   "projects": 5,
+   "hIndex": 9
+  },
+  {
+   "id": "e8",
+   "name": "TS. Đỗ Văn G",
+   "position": "Giảng viên chính",
+   "faculty": "Khoa Kinh tế & QTKD",
+   "fields": [
+    "Kinh tế tài nguyên",
+    "Định giá khoáng sản",
+    "Phát triển bền vững"
+   ],
+   "email": "dovang@humg.edu.vn",
+   "phone": "024.3838.2008",
+   "pubs": 24,
+   "projects": 4,
+   "hIndex": 6
+  },
+  {
+   "id": "e9",
+   "name": "TS. Trần Mạnh H",
+   "position": "Nghiên cứu viên",
+   "faculty": "Viện KHCN Mỏ - Địa chất",
+   "fields": [
+    "Thăm dò khoáng sản",
+    "Địa chất cấu tạo"
+   ],
+   "email": "tranmanhh@humg.edu.vn",
+   "phone": "024.3838.2109",
+   "pubs": 20,
+   "projects": 3,
+   "hIndex": 5
+  }
+ ],
+ "labs": [
+  {
+   "id": "l1",
+   "name": "Phòng thí nghiệm Cơ học đá",
+   "faculty": "Khoa Mỏ",
+   "head": "PGS.TS. Trần Văn A",
+   "desc": "Nghiên cứu tính chất cơ – lý của đá và ổn định công trình ngầm.",
+   "equipment": [
+    "Máy nén đa trục",
+    "Thiết bị đo biến dạng",
+    "Hệ thống mô phỏng địa cơ"
+   ],
+   "services": [
+    "Thí nghiệm mẫu đá",
+    "Tư vấn ổn định hầm lò"
+   ]
+  },
+  {
+   "id": "l2",
+   "name": "Phòng thí nghiệm Địa hóa – Khoáng vật",
+   "faculty": "Khoa KH&KT Địa chất",
+   "head": "TS. Nguyễn Thị B",
+   "desc": "Phân tích thành phần địa hóa, khoáng vật và tuổi đồng vị.",
+   "equipment": [
+    "ICP-MS",
+    "XRD",
+    "Kính hiển vi phân cực"
+   ],
+   "services": [
+    "Phân tích mẫu địa hóa",
+    "Định danh khoáng vật"
+   ]
+  },
+  {
+   "id": "l3",
+   "name": "Phòng thí nghiệm Địa vật lý",
+   "faculty": "Khoa Dầu khí",
+   "head": "TS. Phạm Văn C",
+   "desc": "Đo và xử lý số liệu địa vật lý thăm dò, giếng khoan.",
+   "equipment": [
+    "Máy đo địa chấn",
+    "Thiết bị đo điện – từ",
+    "Phần mềm xử lý địa vật lý"
+   ],
+   "services": [
+    "Khảo sát địa vật lý hiện trường",
+    "Xử lý – minh giải số liệu"
+   ]
+  },
+  {
+   "id": "l4",
+   "name": "Phòng thí nghiệm GIS – Viễn thám",
+   "faculty": "Khoa Trắc địa – Bản đồ và QLĐĐ",
+   "head": "PGS.TS. Hoàng Văn E",
+   "desc": "Xử lý ảnh viễn thám, xây dựng CSDL không gian và mô hình học sâu.",
+   "equipment": [
+    "Máy chủ GPU",
+    "Máy bay không người lái (UAV)",
+    "Phần mềm GIS/RS bản quyền"
+   ],
+   "services": [
+    "Thành lập bản đồ chuyên đề",
+    "Giám sát biến động bằng ảnh vệ tinh"
+   ]
+  },
+  {
+   "id": "l5",
+   "name": "Phòng thí nghiệm Tự động hóa & IoT",
+   "faculty": "Khoa Cơ – Điện",
+   "head": "PGS.TS. Vũ Văn F",
+   "desc": "Phát triển hệ thống cảm biến, thu thập và phân tích dữ liệu công nghiệp.",
+   "equipment": [
+    "Bộ kit cảm biến công nghiệp",
+    "PLC & SCADA",
+    "Nền tảng IoT"
+   ],
+   "services": [
+    "Thiết kế hệ thống giám sát",
+    "Kiểm thử thiết bị IoT"
+   ]
+  },
+  {
+   "id": "l6",
+   "name": "Phòng thí nghiệm Kỹ thuật Môi trường",
+   "faculty": "Khoa Môi trường",
+   "head": "PGS.TS. Ngô Thị H",
+   "desc": "Phân tích chất lượng nước, đất, không khí và thử nghiệm công nghệ xử lý.",
+   "equipment": [
+    "Máy quang phổ",
+    "Thiết bị phân tích COD/BOD",
+    "Mô hình xử lý nước thải"
+   ],
+   "services": [
+    "Quan trắc môi trường",
+    "Đánh giá tác động môi trường"
+   ]
+  }
+ ],
+ "phdTraining": {
+  "intro": "HUMG là một trong những cơ sở hàng đầu cả nước về đào tạo trình độ tiến sĩ trong lĩnh vực khoa học Trái đất, mỏ và các ngành kỹ thuật liên quan.",
+  "stats": [
+   {
+    "value": "18",
+    "label": "Ngành đào tạo tiến sĩ"
+   },
+   {
+    "value": "240+",
+    "label": "NCS đang đào tạo"
+   },
+   {
+    "value": "1.200+",
+    "label": "Tiến sĩ đã đào tạo"
+   },
+   {
+    "value": "3 – 4 năm",
+    "label": "Thời gian đào tạo"
+   }
+  ],
+  "fields": [
+   "Kỹ thuật Mỏ",
+   "Khai thác mỏ",
+   "Kỹ thuật Địa chất",
+   "Địa chất học",
+   "Kỹ thuật Dầu khí",
+   "Kỹ thuật Trắc địa – Bản đồ",
+   "Quản lý đất đai",
+   "Kỹ thuật Điều khiển & Tự động hóa",
+   "Kỹ thuật Môi trường",
+   "Kỹ thuật Xây dựng công trình ngầm"
+  ],
+  "steps": [
+   {
+    "title": "Đăng ký & xét tuyển",
+    "text": "Nộp hồ sơ theo thông báo tuyển sinh, bảo vệ đề cương trước Tiểu ban chuyên môn."
+   },
+   {
+    "title": "Xây dựng kế hoạch học tập",
+    "text": "Hoàn thành các học phần bổ sung, học phần tiến sĩ và chuyên đề."
+   },
+   {
+    "title": "Nghiên cứu & công bố",
+    "text": "Thực hiện luận án, công bố tối thiểu theo quy định trên tạp chí uy tín."
+   },
+   {
+    "title": "Bảo vệ luận án",
+    "text": "Bảo vệ cấp cơ sở và cấp Trường trước Hội đồng đánh giá luận án tiến sĩ."
+   }
+  ],
+  "docs": [
+   {
+    "name": "Quy chế đào tạo trình độ tiến sĩ (hiện hành)",
+    "meta": "PDF · 1.5 MB"
+   },
+   {
+    "name": "Danh mục ngành đào tạo tiến sĩ",
+    "meta": "PDF · 620 KB"
+   },
+   {
+    "name": "Biểu mẫu hồ sơ dự tuyển NCS",
+    "meta": "DOCX · 45 KB"
+   }
+  ],
+  "notices": [
+   {
+    "date": "15/05/2026",
+    "title": "Thông báo tuyển sinh đào tạo trình độ tiến sĩ đợt 2 năm 2026"
+   },
+   {
+    "date": "30/05/2026",
+    "title": "Lịch bảo vệ luận án tiến sĩ cấp Trường tháng 6/2026"
+   },
+   {
+    "date": "08/05/2026",
+    "title": "Hướng dẫn công bố khoa học đối với nghiên cứu sinh"
+   }
+  ]
+ },
+ "projectLevels": [
+  "Tất cả",
+  "Cấp Nhà nước",
+  "Cấp Bộ",
+  "Cấp Trường",
+  "Cấp Tỉnh",
+  "Hợp tác quốc tế"
+ ],
+ "projects": [
+  {
+   "budget": "2.500.000.000 đ",
+   "org": "Trường Đại học Mỏ - Địa chất",
+   "objectives": [
+    "Nghiên cứu cơ sở khoa học và thực tiễn của vấn đề đặt ra",
+    "Xây dựng giải pháp / mô hình / công nghệ phù hợp điều kiện Việt Nam",
+    "Thử nghiệm, đánh giá và hoàn thiện kết quả nghiên cứu"
+   ],
+   "results": [
+    "Báo cáo tổng kết đề tài và các báo cáo chuyên đề",
+    "Bài báo khoa học công bố trên tạp chí trong nước và quốc tế",
+    "Mô hình / quy trình / phần mềm có khả năng ứng dụng"
+   ],
+   "products": [
+    "02 bài báo quốc tế (Scopus)",
+    "01 bài báo trong nước",
+    "01 quy trình công nghệ",
+    "01 báo cáo kiến nghị chính sách"
+   ],
+   "members": [
+    {
+     "name": "PGS.TS. Trần Văn A",
+     "role": "Chủ nhiệm đề tài"
+    },
+    {
+     "name": "TS. Nguyễn Thị B",
+     "role": "Thư ký khoa học"
+    },
+    {
+     "name": "ThS. Lê Văn C",
+     "role": "Thành viên"
+    },
+    {
+     "name": "KS. Phạm Thị D",
+     "role": "Thành viên"
+    }
+   ],
+   "docs": [
+    {
+     "name": "Thuyết minh đề tài (đã phê duyệt)",
+     "meta": "PDF · 1.25 MB"
+    },
+    {
+     "name": "Báo cáo tổng kết đề tài",
+     "meta": "PDF · 2.10 MB"
+    },
+    {
+     "name": "Biên bản nghiệm thu",
+     "meta": "PDF · 820 KB"
+    }
+   ],
+   "id": "humg-2024-01",
+   "code": "HUMG.2024.01",
+   "level": "Cấp Bộ",
+   "field": "Kỹ thuật Mỏ & An toàn",
+   "title": "Nghiên cứu công nghệ khai thác than hầm lò thân thiện môi trường vùng Quảng Ninh",
+   "leader": "PGS.TS. Trần Văn A",
+   "startYear": 2024,
+   "endYear": 2026,
+   "status": "Đang thực hiện",
+   "summary": "Đề tài nghiên cứu các giải pháp công nghệ nhằm giảm tổn thất tài nguyên, giảm phát thải và nâng cao an toàn trong khai thác than hầm lò."
+  },
+  {
+   "budget": "4.200.000.000 đ",
+   "org": "Trường Đại học Mỏ - Địa chất",
+   "objectives": [
+    "Nghiên cứu cơ sở khoa học và thực tiễn của vấn đề đặt ra",
+    "Xây dựng giải pháp / mô hình / công nghệ phù hợp điều kiện Việt Nam",
+    "Thử nghiệm, đánh giá và hoàn thiện kết quả nghiên cứu"
+   ],
+   "results": [
+    "Báo cáo tổng kết đề tài và các báo cáo chuyên đề",
+    "Bài báo khoa học công bố trên tạp chí trong nước và quốc tế",
+    "Mô hình / quy trình / phần mềm có khả năng ứng dụng"
+   ],
+   "products": [
+    "02 bài báo quốc tế (Scopus)",
+    "01 bài báo trong nước",
+    "01 quy trình công nghệ",
+    "01 báo cáo kiến nghị chính sách"
+   ],
+   "members": [
+    {
+     "name": "PGS.TS. Trần Văn A",
+     "role": "Chủ nhiệm đề tài"
+    },
+    {
+     "name": "TS. Nguyễn Thị B",
+     "role": "Thư ký khoa học"
+    },
+    {
+     "name": "ThS. Lê Văn C",
+     "role": "Thành viên"
+    },
+    {
+     "name": "KS. Phạm Thị D",
+     "role": "Thành viên"
+    }
+   ],
+   "docs": [
+    {
+     "name": "Thuyết minh đề tài (đã phê duyệt)",
+     "meta": "PDF · 1.25 MB"
+    },
+    {
+     "name": "Báo cáo tổng kết đề tài",
+     "meta": "PDF · 2.10 MB"
+    },
+    {
+     "name": "Biên bản nghiệm thu",
+     "meta": "PDF · 820 KB"
+    }
+   ],
+   "id": "humg-2023-12",
+   "code": "HUMG.2023.12",
+   "level": "Cấp Nhà nước",
+   "field": "Trắc địa – Bản đồ, GIS & Viễn thám",
+   "title": "Ứng dụng trí tuệ nhân tạo và dữ liệu viễn thám trong giám sát biến động sử dụng đất",
+   "leader": "TS. Hoàng Văn E",
+   "startYear": 2023,
+   "endYear": 2026,
+   "status": "Đang thực hiện",
+   "summary": "Xây dựng mô hình học sâu kết hợp ảnh vệ tinh đa thời gian để phát hiện, phân loại và dự báo biến động sử dụng đất quy mô vùng."
+  },
+  {
+   "budget": "850.000.000 đ",
+   "org": "Trường Đại học Mỏ - Địa chất",
+   "objectives": [
+    "Nghiên cứu cơ sở khoa học và thực tiễn của vấn đề đặt ra",
+    "Xây dựng giải pháp / mô hình / công nghệ phù hợp điều kiện Việt Nam",
+    "Thử nghiệm, đánh giá và hoàn thiện kết quả nghiên cứu"
+   ],
+   "results": [
+    "Báo cáo tổng kết đề tài và các báo cáo chuyên đề",
+    "Bài báo khoa học công bố trên tạp chí trong nước và quốc tế",
+    "Mô hình / quy trình / phần mềm có khả năng ứng dụng"
+   ],
+   "products": [
+    "02 bài báo quốc tế (Scopus)",
+    "01 bài báo trong nước",
+    "01 quy trình công nghệ",
+    "01 báo cáo kiến nghị chính sách"
+   ],
+   "members": [
+    {
+     "name": "PGS.TS. Trần Văn A",
+     "role": "Chủ nhiệm đề tài"
+    },
+    {
+     "name": "TS. Nguyễn Thị B",
+     "role": "Thư ký khoa học"
+    },
+    {
+     "name": "ThS. Lê Văn C",
+     "role": "Thành viên"
+    },
+    {
+     "name": "KS. Phạm Thị D",
+     "role": "Thành viên"
+    }
+   ],
+   "docs": [
+    {
+     "name": "Thuyết minh đề tài (đã phê duyệt)",
+     "meta": "PDF · 1.25 MB"
+    },
+    {
+     "name": "Báo cáo tổng kết đề tài",
+     "meta": "PDF · 2.10 MB"
+    },
+    {
+     "name": "Biên bản nghiệm thu",
+     "meta": "PDF · 820 KB"
+    }
+   ],
+   "id": "humg-2023-06",
+   "code": "HUMG.2023.06",
+   "level": "Cấp Bộ",
+   "field": "Địa chất & Tài nguyên khoáng sản",
+   "title": "Nghiên cứu đặc điểm địa hóa và tiềm năng khoáng sản kim loại hiếm khu vực Tây Bắc",
+   "leader": "PGS.TS. Nguyễn Thị B",
+   "startYear": 2023,
+   "endYear": 2025,
+   "status": "Đã nghiệm thu",
+   "summary": "Đánh giá đặc điểm phân bố, quy luật thành tạo và tiềm năng khoáng sản kim loại hiếm phục vụ định hướng thăm dò."
+  },
+  {
+   "budget": "350.000.000 đ",
+   "org": "Trường Đại học Mỏ - Địa chất",
+   "objectives": [
+    "Nghiên cứu cơ sở khoa học và thực tiễn của vấn đề đặt ra",
+    "Xây dựng giải pháp / mô hình / công nghệ phù hợp điều kiện Việt Nam",
+    "Thử nghiệm, đánh giá và hoàn thiện kết quả nghiên cứu"
+   ],
+   "results": [
+    "Báo cáo tổng kết đề tài và các báo cáo chuyên đề",
+    "Bài báo khoa học công bố trên tạp chí trong nước và quốc tế",
+    "Mô hình / quy trình / phần mềm có khả năng ứng dụng"
+   ],
+   "products": [
+    "02 bài báo quốc tế (Scopus)",
+    "01 bài báo trong nước",
+    "01 quy trình công nghệ",
+    "01 báo cáo kiến nghị chính sách"
+   ],
+   "members": [
+    {
+     "name": "PGS.TS. Trần Văn A",
+     "role": "Chủ nhiệm đề tài"
+    },
+    {
+     "name": "TS. Nguyễn Thị B",
+     "role": "Thư ký khoa học"
+    },
+    {
+     "name": "ThS. Lê Văn C",
+     "role": "Thành viên"
+    },
+    {
+     "name": "KS. Phạm Thị D",
+     "role": "Thành viên"
+    }
+   ],
+   "docs": [
+    {
+     "name": "Thuyết minh đề tài (đã phê duyệt)",
+     "meta": "PDF · 1.25 MB"
+    },
+    {
+     "name": "Báo cáo tổng kết đề tài",
+     "meta": "PDF · 2.10 MB"
+    },
+    {
+     "name": "Biên bản nghiệm thu",
+     "meta": "PDF · 820 KB"
+    }
+   ],
+   "id": "humg-2022-19",
+   "code": "HUMG.2022.19",
+   "level": "Cấp Trường",
+   "field": "Công nghệ thông tin & Trí tuệ nhân tạo",
+   "title": "Xây dựng nền tảng dữ liệu lớn phục vụ quản trị đại học thông minh",
+   "leader": "TS. Lê Văn C",
+   "startYear": 2022,
+   "endYear": 2024,
+   "status": "Đã nghiệm thu",
+   "summary": "Thiết kế kiến trúc dữ liệu và các dashboard phân tích phục vụ ra quyết định trong quản trị đào tạo, tài chính và nhân sự."
+  },
+  {
+   "budget": "1.800.000.000 đ",
+   "org": "Trường Đại học Mỏ - Địa chất",
+   "objectives": [
+    "Nghiên cứu cơ sở khoa học và thực tiễn của vấn đề đặt ra",
+    "Xây dựng giải pháp / mô hình / công nghệ phù hợp điều kiện Việt Nam",
+    "Thử nghiệm, đánh giá và hoàn thiện kết quả nghiên cứu"
+   ],
+   "results": [
+    "Báo cáo tổng kết đề tài và các báo cáo chuyên đề",
+    "Bài báo khoa học công bố trên tạp chí trong nước và quốc tế",
+    "Mô hình / quy trình / phần mềm có khả năng ứng dụng"
+   ],
+   "products": [
+    "02 bài báo quốc tế (Scopus)",
+    "01 bài báo trong nước",
+    "01 quy trình công nghệ",
+    "01 báo cáo kiến nghị chính sách"
+   ],
+   "members": [
+    {
+     "name": "PGS.TS. Trần Văn A",
+     "role": "Chủ nhiệm đề tài"
+    },
+    {
+     "name": "TS. Nguyễn Thị B",
+     "role": "Thư ký khoa học"
+    },
+    {
+     "name": "ThS. Lê Văn C",
+     "role": "Thành viên"
+    },
+    {
+     "name": "KS. Phạm Thị D",
+     "role": "Thành viên"
+    }
+   ],
+   "docs": [
+    {
+     "name": "Thuyết minh đề tài (đã phê duyệt)",
+     "meta": "PDF · 1.25 MB"
+    },
+    {
+     "name": "Báo cáo tổng kết đề tài",
+     "meta": "PDF · 2.10 MB"
+    },
+    {
+     "name": "Biên bản nghiệm thu",
+     "meta": "PDF · 820 KB"
+    }
+   ],
+   "id": "humg-2023-02",
+   "code": "HUMG.2023.02",
+   "level": "Hợp tác quốc tế",
+   "field": "Môi trường & Phát triển bền vững",
+   "title": "Đánh giá tác động môi trường và giải pháp hoàn nguyên sau khai thác mỏ lộ thiên",
+   "leader": "PGS.TS. Ngô Thị H",
+   "startYear": 2023,
+   "endYear": 2026,
+   "status": "Đang thực hiện",
+   "summary": "Hợp tác với đối tác CHLB Đức nghiên cứu quy trình hoàn nguyên đất, phục hồi hệ sinh thái và kinh tế tuần hoàn tại các mỏ lộ thiên."
+  },
+  {
+   "budget": "850.000.000 đ",
+   "org": "Trường Đại học Mỏ - Địa chất",
+   "objectives": [
+    "Nghiên cứu cơ sở khoa học và thực tiễn của vấn đề đặt ra",
+    "Xây dựng giải pháp / mô hình / công nghệ phù hợp điều kiện Việt Nam",
+    "Thử nghiệm, đánh giá và hoàn thiện kết quả nghiên cứu"
+   ],
+   "results": [
+    "Báo cáo tổng kết đề tài và các báo cáo chuyên đề",
+    "Bài báo khoa học công bố trên tạp chí trong nước và quốc tế",
+    "Mô hình / quy trình / phần mềm có khả năng ứng dụng"
+   ],
+   "products": [
+    "02 bài báo quốc tế (Scopus)",
+    "01 bài báo trong nước",
+    "01 quy trình công nghệ",
+    "01 báo cáo kiến nghị chính sách"
+   ],
+   "members": [
+    {
+     "name": "PGS.TS. Trần Văn A",
+     "role": "Chủ nhiệm đề tài"
+    },
+    {
+     "name": "TS. Nguyễn Thị B",
+     "role": "Thư ký khoa học"
+    },
+    {
+     "name": "ThS. Lê Văn C",
+     "role": "Thành viên"
+    },
+    {
+     "name": "KS. Phạm Thị D",
+     "role": "Thành viên"
+    }
+   ],
+   "docs": [
+    {
+     "name": "Thuyết minh đề tài (đã phê duyệt)",
+     "meta": "PDF · 1.25 MB"
+    },
+    {
+     "name": "Báo cáo tổng kết đề tài",
+     "meta": "PDF · 2.10 MB"
+    },
+    {
+     "name": "Biên bản nghiệm thu",
+     "meta": "PDF · 820 KB"
+    }
+   ],
+   "id": "humg-2021-11",
+   "code": "HUMG.2021.11",
+   "level": "Cấp Tỉnh",
+   "field": "Dầu khí & Địa vật lý",
+   "title": "Nghiên cứu giải pháp nâng cao hệ số thu hồi dầu cho mỏ nhỏ, cận biên",
+   "leader": "TS. Phạm Văn D",
+   "startYear": 2021,
+   "endYear": 2023,
+   "status": "Tạm dừng",
+   "summary": "Phân tích các phương pháp bơm ép và xử lý vùng cận đáy giếng nhằm gia tăng sản lượng cho các mỏ nhỏ."
+  },
+  {
+   "budget": "2.000.000.000 đ",
+   "org": "Trường Đại học Mỏ - Địa chất",
+   "objectives": [
+    "Nghiên cứu cơ sở khoa học và thực tiễn của vấn đề đặt ra",
+    "Xây dựng giải pháp / mô hình / công nghệ phù hợp điều kiện Việt Nam",
+    "Thử nghiệm, đánh giá và hoàn thiện kết quả nghiên cứu"
+   ],
+   "results": [
+    "Báo cáo tổng kết đề tài và các báo cáo chuyên đề",
+    "Bài báo khoa học công bố trên tạp chí trong nước và quốc tế",
+    "Mô hình / quy trình / phần mềm có khả năng ứng dụng"
+   ],
+   "products": [
+    "02 bài báo quốc tế (Scopus)",
+    "01 bài báo trong nước",
+    "01 quy trình công nghệ",
+    "01 báo cáo kiến nghị chính sách"
+   ],
+   "members": [
+    {
+     "name": "PGS.TS. Trần Văn A",
+     "role": "Chủ nhiệm đề tài"
+    },
+    {
+     "name": "TS. Nguyễn Thị B",
+     "role": "Thư ký khoa học"
+    },
+    {
+     "name": "ThS. Lê Văn C",
+     "role": "Thành viên"
+    },
+    {
+     "name": "KS. Phạm Thị D",
+     "role": "Thành viên"
+    }
+   ],
+   "docs": [
+    {
+     "name": "Thuyết minh đề tài (đã phê duyệt)",
+     "meta": "PDF · 1.25 MB"
+    },
+    {
+     "name": "Báo cáo tổng kết đề tài",
+     "meta": "PDF · 2.10 MB"
+    },
+    {
+     "name": "Biên bản nghiệm thu",
+     "meta": "PDF · 820 KB"
+    }
+   ],
+   "id": "humg-2024-05",
+   "code": "HUMG.2024.05",
+   "level": "Cấp Bộ",
+   "field": "Cơ – Điện & Tự động hóa",
+   "title": "Phát triển hệ thống giám sát và cảnh báo an toàn thời gian thực cho mỏ hầm lò bằng IoT",
+   "leader": "PGS.TS. Vũ Văn F",
+   "startYear": 2024,
+   "endYear": 2026,
+   "status": "Đang thực hiện",
+   "summary": "Thiết kế mạng cảm biến, nền tảng thu thập – phân tích dữ liệu và thuật toán cảnh báo sớm nguy cơ mất an toàn trong hầm lò."
+  },
+  {
+   "budget": "320.000.000 đ",
+   "org": "Trường Đại học Mỏ - Địa chất",
+   "objectives": [
+    "Nghiên cứu cơ sở khoa học và thực tiễn của vấn đề đặt ra",
+    "Xây dựng giải pháp / mô hình / công nghệ phù hợp điều kiện Việt Nam",
+    "Thử nghiệm, đánh giá và hoàn thiện kết quả nghiên cứu"
+   ],
+   "results": [
+    "Báo cáo tổng kết đề tài và các báo cáo chuyên đề",
+    "Bài báo khoa học công bố trên tạp chí trong nước và quốc tế",
+    "Mô hình / quy trình / phần mềm có khả năng ứng dụng"
+   ],
+   "products": [
+    "02 bài báo quốc tế (Scopus)",
+    "01 bài báo trong nước",
+    "01 quy trình công nghệ",
+    "01 báo cáo kiến nghị chính sách"
+   ],
+   "members": [
+    {
+     "name": "PGS.TS. Trần Văn A",
+     "role": "Chủ nhiệm đề tài"
+    },
+    {
+     "name": "TS. Nguyễn Thị B",
+     "role": "Thư ký khoa học"
+    },
+    {
+     "name": "ThS. Lê Văn C",
+     "role": "Thành viên"
+    },
+    {
+     "name": "KS. Phạm Thị D",
+     "role": "Thành viên"
+    }
+   ],
+   "docs": [
+    {
+     "name": "Thuyết minh đề tài (đã phê duyệt)",
+     "meta": "PDF · 1.25 MB"
+    },
+    {
+     "name": "Báo cáo tổng kết đề tài",
+     "meta": "PDF · 2.10 MB"
+    },
+    {
+     "name": "Biên bản nghiệm thu",
+     "meta": "PDF · 820 KB"
+    }
+   ],
+   "id": "humg-2022-03",
+   "code": "HUMG.2022.03",
+   "level": "Cấp Trường",
+   "field": "Kinh tế – Quản lý tài nguyên",
+   "title": "Mô hình định giá tài nguyên khoáng sản trong điều kiện chuyển đổi xanh",
+   "leader": "TS. Đỗ Văn G",
+   "startYear": 2022,
+   "endYear": 2024,
+   "status": "Đã nghiệm thu",
+   "summary": "Xây dựng khung phương pháp định giá tài nguyên có tính đến chi phí môi trường, xã hội và yếu tố phát triển bền vững."
+  }
+ ],
+ "publicationTypes": [
+  "Tất cả",
+  "Tạp chí quốc tế",
+  "Tạp chí trong nước",
+  "Hội nghị",
+  "Sách / Chương sách"
+ ],
+ "publications": [
+  {
+   "id": "pub-01",
+   "type": "Tạp chí quốc tế",
+   "quartile": "Q1",
+   "year": 2024,
+   "citations": 18,
+   "downloads": 420,
+   "impactFactor": "4.5",
+   "title": "Application of Machine Learning for Rockburst Prediction in Underground Coal Mines",
+   "titleVi": "Ứng dụng học máy dự báo hiện tượng nứt vỡ đá trong mỏ than hầm lò",
+   "authors": "Tran V. A., Nguyen V. B., Pham T. C.",
+   "journal": "Engineering Geology (Elsevier)",
+   "doi": "10.1016/j.enggeo.2024.107647",
+   "abstract": "This study proposes a machine learning framework integrating microseismic monitoring data and geological features to predict rockburst hazards in deep underground coal mines. The model achieves high accuracy and provides an early-warning capability for mine safety management.",
+   "keywords": [
+    "rockburst",
+    "machine learning",
+    "coal mine",
+    "microseismic",
+    "mine safety"
+   ],
+   "apa": "Tran, V. A., Nguyen, V. B., & Pham, T. C. (2024). Application of machine learning for rockburst prediction in underground coal mines. Engineering Geology, 322, 107647. https://doi.org/10.1016/j.enggeo.2024.107647"
+  },
+  {
+   "id": "pub-02",
+   "type": "Tạp chí quốc tế",
+   "quartile": "Q1",
+   "year": 2023,
+   "citations": 34,
+   "downloads": 610,
+   "impactFactor": "5.1",
+   "title": "Multi-temporal Satellite Data and Deep Learning for Land-Use Change Detection",
+   "titleVi": "Dữ liệu vệ tinh đa thời gian và học sâu trong phát hiện biến động sử dụng đất",
+   "authors": "Hoang V. E., Le V. C., Vu T. F.",
+   "journal": "Remote Sensing (MDPI)",
+   "doi": "10.3390/rs15112841",
+   "abstract": "A deep learning approach based on transformer architectures is developed for accurate land-use change detection using multi-temporal Sentinel-2 imagery, with applications in urban planning and land management.",
+   "keywords": [
+    "remote sensing",
+    "deep learning",
+    "land-use change",
+    "Sentinel-2",
+    "transformer"
+   ],
+   "apa": "Hoang, V. E., Le, V. C., & Vu, T. F. (2023). Multi-temporal satellite data and deep learning for land-use change detection. Remote Sensing, 15(11), 2841. https://doi.org/10.3390/rs15112841"
+  },
+  {
+   "id": "pub-03",
+   "type": "Tạp chí quốc tế",
+   "quartile": "Q2",
+   "year": 2024,
+   "citations": 7,
+   "downloads": 190,
+   "impactFactor": "2.8",
+   "title": "Optimization of Ventilation Systems in Deep Underground Coal Mines",
+   "titleVi": "Tối ưu hệ thống thông gió trong mỏ than hầm lò sâu",
+   "authors": "Vu V. F., Tran V. A.",
+   "journal": "Journal of Mining Science",
+   "doi": "10.1134/S1062739124020123",
+   "abstract": "The paper presents a numerical optimization model for mine ventilation networks aiming to minimize energy consumption while maintaining safe air quality conditions in deep mining operations.",
+   "keywords": [
+    "mine ventilation",
+    "optimization",
+    "energy efficiency",
+    "deep mining"
+   ],
+   "apa": "Vu, V. F., & Tran, V. A. (2024). Optimization of ventilation systems in deep underground coal mines. Journal of Mining Science, 60(2), 245–258."
+  },
+  {
+   "id": "pub-04",
+   "type": "Tạp chí trong nước",
+   "quartile": "—",
+   "year": 2024,
+   "citations": 3,
+   "downloads": 95,
+   "impactFactor": "—",
+   "title": "Đánh giá tiềm năng khoáng sản kim loại hiếm khu vực Tây Bắc Việt Nam",
+   "titleVi": "Đánh giá tiềm năng khoáng sản kim loại hiếm khu vực Tây Bắc Việt Nam",
+   "authors": "Nguyễn Thị B, Trần Mạnh H",
+   "journal": "Tạp chí Khoa học Kỹ thuật Mỏ - Địa chất",
+   "doi": "10.46326/JMES.2024.65(2).01",
+   "abstract": "Bài báo trình bày kết quả điều tra địa hóa và đánh giá tiềm năng khoáng sản kim loại hiếm tại một số khu vực triển vọng thuộc Tây Bắc Việt Nam, làm cơ sở định hướng công tác thăm dò.",
+   "keywords": [
+    "kim loại hiếm",
+    "địa hóa",
+    "Tây Bắc",
+    "tài nguyên khoáng sản"
+   ],
+   "apa": "Nguyễn Thị B, Trần Mạnh H (2024). Đánh giá tiềm năng khoáng sản kim loại hiếm khu vực Tây Bắc Việt Nam. Tạp chí Khoa học Kỹ thuật Mỏ - Địa chất, 65(2), 1–12."
+  },
+  {
+   "id": "pub-05",
+   "type": "Hội nghị",
+   "quartile": "—",
+   "year": 2023,
+   "citations": 5,
+   "downloads": 140,
+   "impactFactor": "—",
+   "title": "IoT-based Real-time Safety Monitoring for Underground Mines",
+   "titleVi": "Hệ thống giám sát an toàn thời gian thực dựa trên IoT cho mỏ hầm lò",
+   "authors": "Pham T. C., Vu V. F., Do V. G.",
+   "journal": "Proc. of Intl. Conf. on Mining & Geo-Engineering (ICMG 2023)",
+   "doi": "—",
+   "abstract": "A prototype IoT platform is presented for continuous monitoring of gas, dust and temperature in mining tunnels, providing early alerts to reduce safety incidents.",
+   "keywords": [
+    "IoT",
+    "mine safety",
+    "real-time monitoring",
+    "sensor network"
+   ],
+   "apa": "Pham, T. C., Vu, V. F., & Do, V. G. (2023). IoT-based real-time safety monitoring for underground mines. In Proceedings of ICMG 2023 (pp. 145–152)."
+  },
+  {
+   "id": "pub-06",
+   "type": "Sách / Chương sách",
+   "quartile": "—",
+   "year": 2022,
+   "citations": 12,
+   "downloads": 260,
+   "impactFactor": "—",
+   "title": "Sustainable Mine Reclamation: Methods and Case Studies in Vietnam",
+   "titleVi": "Hoàn nguyên mỏ bền vững: Phương pháp và nghiên cứu điển hình tại Việt Nam",
+   "authors": "Ngo T. H., Tran V. A. (Eds.)",
+   "journal": "Springer Nature — Book chapter",
+   "doi": "10.1007/978-3-031-xxxx",
+   "abstract": "This chapter reviews soil rehabilitation techniques, ecological restoration and circular-economy approaches for post-mining landscapes, illustrated by open-pit mine case studies in Vietnam.",
+   "keywords": [
+    "mine reclamation",
+    "ecological restoration",
+    "circular economy",
+    "Vietnam"
+   ],
+   "apa": "Ngo, T. H., & Tran, V. A. (Eds.). (2022). Sustainable mine reclamation: Methods and case studies in Vietnam. Springer Nature."
+  }
+ ],
+ "resHub": {
+  "modules": [
+   {
+    "icon": "flask",
+    "title": "Đề tài / Dự án",
+    "desc": "Đề tài các cấp: Nhà nước, Bộ, Tỉnh, Trường.",
+    "to": "/nghien-cuu/de-tai"
+   },
+   {
+    "icon": "newspaper",
+    "title": "Công bố khoa học",
+    "desc": "Bài báo ISI/Scopus, tạp chí trong nước.",
+    "to": "/nghien-cuu/cong-bo"
+   },
+   {
+    "icon": "users",
+    "title": "Danh sách chuyên gia",
+    "desc": "Chuyên gia theo lĩnh vực nghiên cứu.",
+    "to": "/nghien-cuu/chuyen-gia"
+   },
+   {
+    "icon": "target",
+    "title": "Nhóm nghiên cứu",
+    "desc": "Các nhóm nghiên cứu mạnh của Trường.",
+    "to": "/nghien-cuu/nhom-nghien-cuu"
+   },
+   {
+    "icon": "calendar",
+    "title": "Hội nghị / Hội thảo",
+    "desc": "Sự kiện khoa học trong nước & quốc tế.",
+    "to": "/nghien-cuu/hoi-nghi-hoi-thao"
+   },
+   {
+    "icon": "grid",
+    "title": "Phòng thí nghiệm",
+    "desc": "Hệ thống phòng thí nghiệm, thiết bị.",
+    "to": "/nghien-cuu/phong-thi-nghiem"
+   },
+   {
+    "icon": "handshake",
+    "title": "Chuyển giao công nghệ",
+    "desc": "Sản phẩm, hợp đồng chuyển giao.",
+    "to": "/nghien-cuu/chuyen-giao-cong-nghe"
+   },
+   {
+    "icon": "graduation",
+    "title": "Nghiên cứu sinh",
+    "desc": "Đào tạo tiến sĩ và nghiên cứu sinh.",
+    "to": "/nghien-cuu/nghien-cuu-sinh"
+   },
+   {
+    "icon": "award",
+    "title": "Giải thưởng & Thành tựu",
+    "desc": "Giải thưởng KH&CN, sáng chế, thành tựu nổi bật.",
+    "to": "/gioi-thieu/thanh-tuu"
+   }
+  ],
+  "stats": [
+   {
+    "value": "142",
+    "label": "Đề tài / dự án"
+   },
+   {
+    "value": "650+",
+    "label": "Công bố quốc tế"
+   },
+   {
+    "value": "67",
+    "label": "Sản phẩm KH&CN"
+   },
+   {
+    "value": "23",
+    "label": "Sáng chế / giải pháp"
+   },
+   {
+    "value": "38",
+    "label": "Nhóm nghiên cứu"
+   }
+  ],
+  "quickLinks": [
+   {
+    "label": "CSDL khoa học",
+    "to": "/thu-vien/csdl-khoa-hoc"
+   },
+   {
+    "label": "Danh sách chuyên gia",
+    "to": "/nghien-cuu/chuyen-gia"
+   },
+   {
+    "label": "Nhóm nghiên cứu",
+    "to": "/nghien-cuu/nhom-nghien-cuu"
+   },
+   {
+    "label": "Mẫu thuyết minh đề tài",
+    "to": "/giang-vien/bieu-mau"
+   },
+   {
+    "label": "Tạp chí KHKT Mỏ - Địa chất",
+    "to": "/gioi-thieu/don-vi-truc-thuoc/tap-chi-khoa-hoc"
+   }
+  ],
+  "notices": [
+   {
+    "date": "18/05/2026",
+    "title": "Thông báo xét duyệt đề tài NCKH cấp Trường năm 2026"
+   },
+   {
+    "date": "12/05/2026",
+    "title": "Danh mục tạp chí được tính điểm công trình năm 2026"
+   },
+   {
+    "date": "05/05/2026",
+    "title": "Hội thảo giới thiệu chương trình tài trợ NAFOSTED"
+   }
+  ]
+ },
+ "resNav": [
+  {
+   "label": "Khoa học & Công nghệ",
+   "to": "/nghien-cuu",
+   "icon": "flask"
+  },
+  {
+   "label": "Đề tài / Dự án",
+   "to": "/nghien-cuu/de-tai",
+   "icon": "file"
+  },
+  {
+   "label": "Công bố khoa học",
+   "to": "/nghien-cuu/cong-bo",
+   "icon": "book"
+  },
+  {
+   "label": "Danh sách chuyên gia",
+   "to": "/nghien-cuu/chuyen-gia",
+   "icon": "users"
+  },
+  {
+   "label": "Nhóm nghiên cứu",
+   "to": "/nghien-cuu/nhom-nghien-cuu",
+   "icon": "layers"
+  },
+  {
+   "label": "Hội nghị / Hội thảo",
+   "to": "/nghien-cuu/hoi-nghi-hoi-thao",
+   "icon": "calendar"
+  },
+  {
+   "label": "Phòng thí nghiệm",
+   "to": "/nghien-cuu/phong-thi-nghiem",
+   "icon": "building"
+  },
+  {
+   "label": "Chuyển giao công nghệ",
+   "to": "/nghien-cuu/chuyen-giao-cong-nghe",
+   "icon": "rocket"
+  },
+  {
+   "label": "Nghiên cứu sinh",
+   "to": "/nghien-cuu/nghien-cuu-sinh",
+   "icon": "graduation"
+  }
+ ],
+ "researchFields": [
+  "Địa chất & Tài nguyên khoáng sản",
+  "Kỹ thuật Mỏ & An toàn",
+  "Dầu khí & Địa vật lý",
+  "Trắc địa – Bản đồ, GIS & Viễn thám",
+  "Công nghệ thông tin & Trí tuệ nhân tạo",
+  "Cơ – Điện & Tự động hóa",
+  "Môi trường & Phát triển bền vững",
+  "Kinh tế – Quản lý tài nguyên"
+ ],
+ "researchGroups": [
+  {
+   "id": "g1",
+   "name": "Nhóm nghiên cứu mạnh Cơ học đá & Khai thác hầm lò",
+   "leader": "PGS.TS. Trần Văn A",
+   "members": 12,
+   "field": "Kỹ thuật Mỏ & An toàn",
+   "established": 2018,
+   "focus": "Cơ học đá, ổn định công trình ngầm, an toàn mỏ và cơ giới hóa khai thác."
+  },
+  {
+   "id": "g2",
+   "name": "Nhóm AI & Viễn thám cho Khoa học Trái đất",
+   "leader": "PGS.TS. Hoàng Văn E",
+   "members": 10,
+   "field": "Trắc địa – Bản đồ, GIS & Viễn thám",
+   "established": 2020,
+   "focus": "Học sâu, xử lý ảnh vệ tinh, giám sát tài nguyên – môi trường và tai biến địa chất."
+  },
+  {
+   "id": "g3",
+   "name": "Nhóm Địa hóa & Khoáng sản chiến lược",
+   "leader": "TS. Nguyễn Thị B",
+   "members": 8,
+   "field": "Địa chất & Tài nguyên khoáng sản",
+   "established": 2019,
+   "focus": "Địa hóa, thạch luận, đánh giá tiềm năng khoáng sản kim loại hiếm và đất hiếm."
+  },
+  {
+   "id": "g4",
+   "name": "Nhóm Công nghệ Dầu khí nâng cao",
+   "leader": "TS. Phạm Văn C",
+   "members": 9,
+   "field": "Dầu khí & Địa vật lý",
+   "established": 2017,
+   "focus": "Nâng cao hệ số thu hồi dầu, mô phỏng mỏ và địa vật lý giếng khoan."
+  },
+  {
+   "id": "g5",
+   "name": "Nhóm Tự động hóa & IoT trong công nghiệp mỏ",
+   "leader": "PGS.TS. Vũ Văn F",
+   "members": 7,
+   "field": "Cơ – Điện & Tự động hóa",
+   "established": 2021,
+   "focus": "Mạng cảm biến, giám sát an toàn thời gian thực và điều khiển thiết bị mỏ."
+  },
+  {
+   "id": "g6",
+   "name": "Nhóm Môi trường mỏ & Kinh tế tuần hoàn",
+   "leader": "PGS.TS. Ngô Thị H",
+   "members": 8,
+   "field": "Môi trường & Phát triển bền vững",
+   "established": 2019,
+   "focus": "Hoàn nguyên mỏ, phục hồi hệ sinh thái, xử lý ô nhiễm và kinh tế tuần hoàn."
+  }
+ ],
+ "strongFields": [
+  {
+   "label": "Kỹ thuật Mỏ & An toàn",
+   "value": 56
+  },
+  {
+   "label": "Địa chất & Khoáng sản",
+   "value": 42
+  },
+  {
+   "label": "Trắc địa – Bản đồ, GIS & Viễn thám",
+   "value": 38
+  },
+  {
+   "label": "Công nghệ thông tin & AI",
+   "value": 30
+  },
+  {
+   "label": "Môi trường & Phát triển bền vững",
+   "value": 24
+  }
+ ],
+ "techTransfer": {
+  "intro": "Trường Đại học Mỏ - Địa chất đẩy mạnh chuyển giao kết quả nghiên cứu vào thực tiễn sản xuất thông qua các hợp đồng dịch vụ khoa học công nghệ, tư vấn kỹ thuật và chuyển giao quy trình – công nghệ.",
+  "steps": [
+   {
+    "title": "Tiếp nhận nhu cầu",
+    "text": "Doanh nghiệp / đơn vị gửi yêu cầu qua Phòng KHCN hoặc trực tiếp tới nhóm nghiên cứu."
+   },
+   {
+    "title": "Khảo sát & đề xuất giải pháp",
+    "text": "Nhóm chuyên gia khảo sát hiện trạng, xây dựng phương án và dự toán."
+   },
+   {
+    "title": "Ký hợp đồng & triển khai",
+    "text": "Hai bên ký hợp đồng, triển khai theo tiến độ, có nghiệm thu từng giai đoạn."
+   },
+   {
+    "title": "Chuyển giao & hỗ trợ vận hành",
+    "text": "Bàn giao sản phẩm/quy trình, đào tạo vận hành và bảo hành kỹ thuật."
+   }
+  ],
+  "products": [
+   {
+    "name": "Quy trình khai thác than hầm lò giảm tổn thất tài nguyên",
+    "field": "Kỹ thuật Mỏ",
+    "partner": "Tập đoàn TKV",
+    "year": 2024,
+    "value": "3,2 tỷ đồng"
+   },
+   {
+    "name": "Hệ thống giám sát an toàn hầm lò bằng IoT",
+    "field": "Tự động hóa",
+    "partner": "Công ty than Vàng Danh",
+    "year": 2025,
+    "value": "1,8 tỷ đồng"
+   },
+   {
+    "name": "Phần mềm quản lý và định giá tài nguyên khoáng sản",
+    "field": "Kinh tế – CNTT",
+    "partner": "Sở TN&MT tỉnh Lào Cai",
+    "year": 2023,
+    "value": "900 triệu đồng"
+   },
+   {
+    "name": "Bản đồ nguy cơ trượt lở bằng ảnh viễn thám",
+    "field": "GIS – Viễn thám",
+    "partner": "Ban Chỉ huy PCTT tỉnh Lai Châu",
+    "year": 2024,
+    "value": "1,1 tỷ đồng"
+   }
+  ],
+  "capabilities": [
+   "Tư vấn, thiết kế và giám sát công trình mỏ, công trình ngầm",
+   "Khảo sát địa chất, địa vật lý, địa kỹ thuật và trắc địa công trình",
+   "Phân tích mẫu (địa hóa, cơ lý đá, môi trường) tại phòng thí nghiệm đạt chuẩn",
+   "Xây dựng phần mềm, CSDL và hệ thống hỗ trợ ra quyết định"
+  ],
+  "faqs": [
+   {
+    "q": "Doanh nghiệp muốn hợp tác chuyển giao thì liên hệ ở đâu?",
+    "a": "Liên hệ Phòng Khoa học – Công nghệ (khcn@humg.edu.vn) để được kết nối với nhóm nghiên cứu phù hợp."
+   },
+   {
+    "q": "HUMG có hỗ trợ đăng ký sở hữu trí tuệ không?",
+    "a": "Có. Nhà trường hỗ trợ thủ tục đăng ký sáng chế, giải pháp hữu ích và bảo hộ kết quả nghiên cứu."
+   }
+  ]
+ }
+}

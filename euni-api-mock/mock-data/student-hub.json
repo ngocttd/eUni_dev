@@ -1,0 +1,769 @@
+{
+ "stuFaq": [
+  {
+   "q": "Tôi quên mật khẩu tài khoản My eUni thì làm thế nào?",
+   "a": "Dùng chức năng “Quên mật khẩu” trên trang đăng nhập để nhận liên kết đặt lại qua email HUMG, hoặc liên hệ Phòng Đào tạo / Trung tâm CNTT để được hỗ trợ."
+  },
+  {
+   "q": "Đăng ký học phần bị trùng lịch hoặc hết chỗ, tôi phải làm gì?",
+   "a": "Chọn nhóm lớp khác còn chỗ trong đợt đăng ký, hoặc liên hệ cố vấn học tập và Phòng Đào tạo để được điều chỉnh trong thời gian cho phép."
+  },
+  {
+   "q": "Khi nào có kết quả học tập và điểm rèn luyện?",
+   "a": "Điểm học phần công bố sau khi kết thúc chấm thi từng học phần; điểm rèn luyện được tổng hợp và công bố vào cuối mỗi học kỳ trên My eUni."
+  },
+  {
+   "q": "Tôi thuộc diện được miễn giảm học phí, cần nộp hồ sơ ở đâu?",
+   "a": "Nộp đơn theo mẫu kèm giấy tờ minh chứng về Phòng Công tác chính trị – Sinh viên trong thời hạn thông báo mỗi học kỳ."
+  },
+  {
+   "q": "Làm sao xin giấy xác nhận sinh viên để vay vốn hoặc làm vé tháng?",
+   "a": "Tải “Đơn xin xác nhận sinh viên” trong mục Biểu mẫu, điền thông tin và nộp tại bộ phận một cửa; giấy được trả sau 1 – 2 ngày làm việc."
+  },
+  {
+   "q": "Tôi muốn ở ký túc xá thì đăng ký thế nào?",
+   "a": "Đăng ký trực tuyến trên My eUni theo đợt; Ban Quản lý KTX xét theo thứ tự ưu tiên và chỉ tiêu từng khu."
+  }
+ ],
+ "stuForms": {
+  "intro": "Kho biểu mẫu, đơn từ và tài liệu cần thiết trong quá trình học tập và rèn luyện của sinh viên.",
+  "categories": [
+   "Tất cả",
+   "Học vụ",
+   "Công tác sinh viên",
+   "Học phí – Học bổng",
+   "Tốt nghiệp"
+  ],
+  "list": [
+   {
+    "name": "Đơn xin xác nhận sinh viên",
+    "category": "Công tác sinh viên",
+    "desc": "Dùng để xác nhận đang là sinh viên chính quy của Trường.",
+    "meta": "DOCX · 32 KB"
+   },
+   {
+    "name": "Đơn xin bảo lưu kết quả học tập",
+    "category": "Học vụ",
+    "desc": "Dành cho sinh viên tạm ngừng học tập có thời hạn.",
+    "meta": "DOCX · 36 KB"
+   },
+   {
+    "name": "Đơn xin học lại / học cải thiện",
+    "category": "Học vụ",
+    "desc": "Đăng ký học lại học phần chưa đạt hoặc cải thiện điểm.",
+    "meta": "DOCX · 30 KB"
+   },
+   {
+    "name": "Đơn xin phúc khảo điểm thi",
+    "category": "Học vụ",
+    "desc": "Đề nghị chấm phúc khảo bài thi kết thúc học phần.",
+    "meta": "DOCX · 28 KB"
+   },
+   {
+    "name": "Đơn xin chuyển ngành / chuyển chương trình",
+    "category": "Học vụ",
+    "desc": "Áp dụng theo quy chế và điều kiện chuyển ngành.",
+    "meta": "DOCX · 34 KB"
+   },
+   {
+    "name": "Đơn xin cấp bản sao bảng điểm",
+    "category": "Tốt nghiệp",
+    "desc": "Yêu cầu cấp bảng điểm toàn khóa có xác nhận của Trường.",
+    "meta": "DOCX · 26 KB"
+   },
+   {
+    "name": "Đơn đề nghị xét miễn, giảm học phí",
+    "category": "Học phí – Học bổng",
+    "desc": "Nộp kèm hồ sơ minh chứng đối tượng chính sách.",
+    "meta": "DOCX · 40 KB"
+   },
+   {
+    "name": "Đơn đăng ký xét học bổng khuyến khích học tập",
+    "category": "Học phí – Học bổng",
+    "desc": "Đăng ký xét học bổng theo học kỳ.",
+    "meta": "DOCX · 30 KB"
+   },
+   {
+    "name": "Đơn xin xét tốt nghiệp",
+    "category": "Tốt nghiệp",
+    "desc": "Đăng ký xét công nhận tốt nghiệp theo đợt.",
+    "meta": "DOCX · 33 KB"
+   },
+   {
+    "name": "Giấy đề nghị hoãn thi",
+    "category": "Học vụ",
+    "desc": "Đề nghị hoãn thi kết thúc học phần có lý do chính đáng.",
+    "meta": "DOCX · 27 KB"
+   }
+  ]
+ },
+ "stuJobs": {
+  "intro": "Cơ hội việc làm, thực tập, chương trình tuyển dụng và hỗ trợ khởi nghiệp dành cho sinh viên HUMG.",
+  "tabs": [
+   "Việc làm",
+   "Thực tập",
+   "Khởi nghiệp",
+   "Sự kiện"
+  ],
+  "listings": [
+   {
+    "id": "ky-su-mo-tkv",
+    "title": "Kỹ sư Mỏ (thực tập & chính thức)",
+    "company": "Tập đoàn TKV",
+    "place": "Quảng Ninh",
+    "deadline": "30/09/2026",
+    "kind": "Việc làm"
+   },
+   {
+    "id": "ky-su-dau-khi-pvep",
+    "title": "Kỹ sư Dầu khí",
+    "company": "PVEP",
+    "place": "Hà Nội / Vũng Tàu",
+    "deadline": "15/09/2026",
+    "kind": "Việc làm"
+   },
+   {
+    "id": "lap-trinh-vien-abc",
+    "title": "Lập trình viên (Fresher / Thực tập)",
+    "company": "Công ty CP Công nghệ ABC",
+    "place": "Hà Nội",
+    "deadline": "20/09/2026",
+    "kind": "Thực tập"
+   },
+   {
+    "id": "chuyen-vien-gis",
+    "title": "Chuyên viên GIS – Viễn thám",
+    "company": "Công ty TNHH Bản đồ số",
+    "place": "Hà Nội",
+    "deadline": "25/09/2026",
+    "kind": "Việc làm"
+   },
+   {
+    "id": "phan-tich-moi-truong",
+    "title": "Thực tập sinh phân tích môi trường",
+    "company": "Trung tâm Quan trắc MT",
+    "place": "Hà Nội",
+    "deadline": "10/10/2026",
+    "kind": "Thực tập"
+   }
+  ],
+  "startup": [
+   "Vườn ươm khởi nghiệp HUMG: không gian làm việc chung, cố vấn và kết nối vốn cho dự án sinh viên.",
+   "Cuộc thi Startup HUMG thường niên và các chương trình tăng tốc khởi nghiệp.",
+   "Khóa học tinh thần doanh nhân, thiết kế mô hình kinh doanh và gọi vốn."
+  ],
+  "events": [
+   {
+    "date": "25/09/2026",
+    "title": "Ngày hội việc làm & Kết nối doanh nghiệp HUMG 2026"
+   },
+   {
+    "date": "Hằng quý",
+    "title": "Talkshow định hướng nghề nghiệp theo nhóm ngành"
+   },
+   {
+    "date": "20/10/2026",
+    "title": "Chung kết cuộc thi Startup HUMG 2026"
+   }
+  ]
+ },
+ "stuLearning": {
+  "intro": "Tổng hợp các thông tin và công cụ về chương trình đào tạo, lịch học, kết quả học tập và các quy định liên quan.",
+  "tiles": [
+   {
+    "icon": "book",
+    "title": "Chương trình đào tạo",
+    "desc": "Khung chương trình, đề cương học phần theo ngành và khóa.",
+    "to": "/hoc-tap/chuong-trinh-dao-tao"
+   },
+   {
+    "icon": "target",
+    "title": "Kế hoạch & tiến độ học tập",
+    "desc": "Kế hoạch năm học và lộ trình theo chương trình đào tạo.",
+    "to": "/hoc-tap/lich-hoc"
+   },
+   {
+    "icon": "calendar",
+    "title": "Lịch học – Lịch thi",
+    "desc": "Thời khóa biểu, lịch thi và phòng thi theo học kỳ.",
+    "to": "/hoc-tap/lich-hoc"
+   },
+   {
+    "icon": "award",
+    "title": "Kết quả học tập",
+    "desc": "Tra cứu điểm, bảng điểm và điểm rèn luyện.",
+    "to": "/hoc-tap/tra-cuu-ket-qua"
+   },
+   {
+    "icon": "compass",
+    "title": "Hướng dẫn học tập",
+    "desc": "Cẩm nang đăng ký học phần, tính điểm, xử lý học vụ.",
+    "to": "/hoc-tap/huong-dan"
+   },
+   {
+    "icon": "shield",
+    "title": "Quy định đào tạo",
+    "desc": "Quy chế đào tạo tín chỉ và các quy định học vụ.",
+    "to": "/sinh-vien/quy-che"
+   }
+  ],
+  "quickLinks": [
+   {
+    "label": "Đăng ký học phần",
+    "to": "/hoc-tap/huong-dan"
+   },
+   {
+    "label": "Tra cứu điểm",
+    "to": "/hoc-tap/tra-cuu-ket-qua"
+   },
+   {
+    "label": "Thời khóa biểu (lịch học)",
+    "to": "/hoc-tap/lich-hoc"
+   },
+   {
+    "label": "Lịch thi và phòng thi",
+    "to": "/hoc-tap/lich-hoc?tab=thi"
+   }
+  ]
+ },
+ "stuLibrary": {
+  "intro": "Cổng truy cập nhanh tới tài nguyên thư viện, học liệu số và các khóa học trực tuyến của Nhà trường.",
+  "tabs": [
+   "Thư viện",
+   "E-learning",
+   "CSDL trực tuyến"
+  ],
+  "featured": [
+   {
+    "icon": "book",
+    "name": "Giáo trình khai thác hầm lò",
+    "meta": "Sách · 2022"
+   },
+   {
+    "icon": "file",
+    "name": "Tài liệu ôn thi Cơ học đá",
+    "meta": "Tài liệu số · 2023"
+   },
+   {
+    "icon": "graduation",
+    "name": "Luận văn tham khảo ngành Quản lý mỏ",
+    "meta": "Luận văn · 2021"
+   }
+  ],
+  "quickAccess": [
+   {
+    "icon": "search",
+    "title": "Tra cứu sách",
+    "desc": "Tìm tài liệu trong mục lục trực tuyến (OPAC).",
+    "to": "/thu-vien/tim-kiem"
+   },
+   {
+    "icon": "layers",
+    "title": "Đặt mượn",
+    "desc": "Đặt giữ tài liệu và theo dõi lịch sử mượn.",
+    "to": "/thu-vien/tai-lieu-cua-toi"
+   },
+   {
+    "icon": "compass",
+    "title": "Hướng dẫn sử dụng",
+    "desc": "Cách đăng ký thẻ, mượn – trả và trích dẫn.",
+    "to": "/thu-vien/huong-dan"
+   },
+   {
+    "icon": "phone",
+    "title": "Liên hệ thư viện",
+    "desc": "Hỗ trợ tra cứu và khai thác tài nguyên số.",
+    "to": "/lien-he"
+   }
+  ],
+  "elearning": "Hệ thống E-learning & LMS cung cấp lớp học trực tuyến, nộp bài, kiểm tra và học liệu số theo từng học phần. Đăng nhập bằng tài khoản HUMG để truy cập.",
+  "elearningTo": "/hoc-tap/e-learning",
+  "databasesTo": "/thu-vien/csdl-khoa-hoc"
+ },
+ "stuLife": {
+  "intro": "Các dịch vụ và chương trình hỗ trợ sinh viên về đời sống, y tế, tư vấn, pháp lý và tài chính.",
+  "tiles": [
+   {
+    "icon": "shield",
+    "title": "Y tế & Chăm sóc sức khỏe",
+    "desc": "Trạm y tế, khám sức khỏe định kỳ, bảo hiểm y tế sinh viên.",
+    "to": "/doi-song/y-te"
+   },
+   {
+    "icon": "headphones",
+    "title": "Tư vấn tâm lý",
+    "desc": "Tư vấn tâm lý học đường, kỹ năng thích ứng và cân bằng cuộc sống.",
+    "to": "/doi-song/ho-tro-sinh-vien"
+   },
+   {
+    "icon": "book",
+    "title": "Hỗ trợ học tập",
+    "desc": "Cố vấn học tập, hỗ trợ xử lý học vụ và kỹ năng học đại học.",
+    "to": "/hoc-tap/huong-dan"
+   },
+   {
+    "icon": "file",
+    "title": "Hỗ trợ tài chính",
+    "desc": "Học bổng, miễn giảm học phí, vay vốn ngân hàng chính sách.",
+    "to": "/sinh-vien/hoc-phi-hoc-bong"
+   },
+   {
+    "icon": "heart",
+    "title": "Ký túc xá",
+    "desc": "Đăng ký chỗ ở, đời sống nội trú và các dịch vụ trong khu KTX.",
+    "to": "/doi-song/ky-tuc-xa"
+   },
+   {
+    "icon": "users",
+    "title": "Công tác sinh viên",
+    "desc": "Hoạt động Đoàn – Hội, câu lạc bộ và phong trào sinh viên.",
+    "to": "/doi-song"
+   }
+  ],
+  "note": "Bạn cần hỗ trợ? Liên hệ Trung tâm Hỗ trợ sinh viên hoặc gửi yêu cầu trực tuyến qua My eUni để được tiếp nhận và phản hồi trong 3 – 5 ngày làm việc."
+ },
+ "stuOnboarding": {
+  "intro": "Những việc cần làm trong những tuần đầu tiên để bắt đầu quãng đời sinh viên tại HUMG một cách thuận lợi.",
+  "steps": [
+   {
+    "title": "Hoàn tất thủ tục nhập học",
+    "text": "Nộp hồ sơ, đóng lệ phí nhập học và nhận lớp, khoa quản lý theo thông báo trúng tuyển."
+   },
+   {
+    "title": "Kích hoạt tài khoản HUMG & My eUni",
+    "text": "Nhận tài khoản email và mật khẩu ban đầu, đổi mật khẩu và đăng nhập cổng My eUni."
+   },
+   {
+    "title": "Làm thẻ sinh viên",
+    "text": "Chụp ảnh và đăng ký làm thẻ sinh viên tích hợp (thư viện, ra vào, thanh toán)."
+   },
+   {
+    "title": "Dự tuần sinh hoạt công dân",
+    "text": "Tham gia đầy đủ tuần sinh hoạt đầu khóa để nắm quy chế, quyền lợi và nghĩa vụ."
+   },
+   {
+    "title": "Đăng ký học phần học kỳ đầu",
+    "text": "Theo hướng dẫn của cố vấn học tập, đăng ký học phần đúng thời hạn trên hệ thống."
+   },
+   {
+    "title": "Khám sức khỏe & tham gia BHYT",
+    "text": "Khám sức khỏe đầu khóa tại Trạm Y tế và hoàn thành đăng ký bảo hiểm y tế."
+   }
+  ],
+  "checklist": [
+   "Giấy báo trúng tuyển và hồ sơ nhập học bản gốc",
+   "Căn cước công dân và ảnh thẻ 3x4",
+   "Tài khoản email HUMG đã kích hoạt",
+   "Biết cố vấn học tập và ban cán sự lớp",
+   "Nắm lịch học, sơ đồ giảng đường và khu vực chức năng"
+  ],
+  "downloads": [
+   {
+    "name": "Sổ tay sinh viên HUMG",
+    "meta": "PDF · 3.2 MB"
+   },
+   {
+    "name": "Hướng dẫn sử dụng My eUni cho sinh viên",
+    "meta": "PDF · 1.4 MB"
+   },
+   {
+    "name": "Sơ đồ khuôn viên và giảng đường",
+    "meta": "PDF · 0.8 MB"
+   }
+  ]
+ },
+ "stuPortal": {
+  "intro": "Đăng nhập để sử dụng các dịch vụ và quản lý thông tin cá nhân trên cổng thông tin eUni.",
+  "benefits": [
+   "Quản lý hồ sơ và thông tin học tập cá nhân",
+   "Tra cứu kết quả học tập, lịch học và tiến độ",
+   "Thanh toán học phí trực tuyến, xem biên lai",
+   "Đăng ký học phần và nộp biểu mẫu điện tử",
+   "Gửi yêu cầu hỗ trợ và nhận thông báo cá nhân",
+   "Truy cập thư viện số và hệ thống E-learning"
+  ],
+  "loginTo": "/dang-nhap",
+  "guideTo": "/sinh-vien/tan-sinh-vien"
+ },
+ "stuRegulations": {
+  "intro": "Các văn bản quy chế, quy định liên quan đến quyền lợi và nghĩa vụ của sinh viên HUMG.",
+  "categories": [
+   "Tất cả",
+   "Đào tạo",
+   "Công tác sinh viên",
+   "Học phí – Học bổng",
+   "Khen thưởng – Kỷ luật"
+  ],
+  "docs": [
+   {
+    "name": "Quy chế đào tạo đại học chính quy theo hệ thống tín chỉ",
+    "category": "Đào tạo",
+    "meta": "QĐ số 1234/QĐ-MĐC · 2023 · PDF"
+   },
+   {
+    "name": "Quy chế công tác sinh viên đối với chương trình đào tạo đại học hệ chính quy",
+    "category": "Công tác sinh viên",
+    "meta": "QĐ số 0876/QĐ-MĐC · 2022 · PDF"
+   },
+   {
+    "name": "Quy định về học vụ và đánh giá điểm rèn luyện sinh viên",
+    "category": "Công tác sinh viên",
+    "meta": "QĐ số 0912/QĐ-MĐC · 2023 · PDF"
+   },
+   {
+    "name": "Quy định về học phí và chính sách miễn, giảm học phí",
+    "category": "Học phí – Học bổng",
+    "meta": "QĐ số 0455/QĐ-MĐC · 2024 · PDF"
+   },
+   {
+    "name": "Quy định xét, cấp học bổng khuyến khích học tập",
+    "category": "Học phí – Học bổng",
+    "meta": "QĐ số 0456/QĐ-MĐC · 2024 · PDF"
+   },
+   {
+    "name": "Quy định khen thưởng và kỷ luật sinh viên",
+    "category": "Khen thưởng – Kỷ luật",
+    "meta": "QĐ số 0788/QĐ-MĐC · 2022 · PDF"
+   },
+   {
+    "name": "Quy định về cố vấn học tập",
+    "category": "Đào tạo",
+    "meta": "QĐ số 0633/QĐ-MĐC · 2021 · PDF"
+   },
+   {
+    "name": "Quy định công tác nội trú, ngoại trú của sinh viên",
+    "category": "Công tác sinh viên",
+    "meta": "QĐ số 0521/QĐ-MĐC · 2021 · PDF"
+   }
+  ],
+  "note": "Sinh viên có trách nhiệm tìm hiểu và thực hiện đúng các quy chế, quy định để bảo đảm quyền lợi và tránh vi phạm trong quá trình học tập, rèn luyện tại Trường."
+ },
+ "stuTuition": {
+  "intro": "Thông tin học phí theo năm học, các loại học bổng, chính sách miễn giảm và hướng dẫn thanh toán dành cho sinh viên.",
+  "tabs": [
+   "Học phí",
+   "Học bổng",
+   "Chính sách miễn giảm"
+  ],
+  "years": [
+   "Năm học 2026 – 2027",
+   "Năm học 2025 – 2026",
+   "Năm học 2024 – 2025"
+  ],
+  "tuitionRows": [
+   [
+    "K71",
+    "Kỹ thuật Địa chất",
+    "16.500.000"
+   ],
+   [
+    "K71",
+    "Kỹ thuật Mỏ",
+    "16.500.000"
+   ],
+   [
+    "K71",
+    "Kỹ thuật Dầu khí",
+    "17.800.000"
+   ],
+   [
+    "K71",
+    "Công nghệ thông tin",
+    "18.500.000"
+   ],
+   [
+    "K71",
+    "Kế toán",
+    "15.000.000"
+   ],
+   [
+    "K71",
+    "Quản trị kinh doanh",
+    "15.000.000"
+   ]
+  ],
+  "payTiles": [
+   {
+    "icon": "file",
+    "title": "Phương thức thanh toán",
+    "desc": "Chuyển khoản, thu hộ qua ngân hàng liên kết hoặc trên My eUni.",
+    "to": "/sinh-vien/my-euni"
+   },
+   {
+    "icon": "compass",
+    "title": "Hướng dẫn nộp học phí",
+    "desc": "Các bước nộp học phí trực tuyến và đối chiếu biên lai.",
+    "to": "/sinh-vien/tan-sinh-vien"
+   },
+   {
+    "icon": "calendar",
+    "title": "Lịch thu học phí",
+    "desc": "Mốc thời gian thu học phí từng học kỳ trong năm học.",
+    "to": "/hoc-tap/lich-hoc"
+   }
+  ],
+  "scholarships": [
+   {
+    "name": "Học bổng khuyến khích học tập",
+    "desc": "Xét theo kết quả học tập và rèn luyện từng học kỳ; mức từ 100% đến 150% học phí."
+   },
+   {
+    "name": "Học bổng doanh nghiệp – đối tác",
+    "desc": "Do các tập đoàn, công ty tài trợ cho sinh viên ngành gần với lĩnh vực hoạt động."
+   },
+   {
+    "name": "Học bổng vượt khó",
+    "desc": "Dành cho sinh viên có hoàn cảnh khó khăn, nỗ lực vươn lên trong học tập."
+   },
+   {
+    "name": "Học bổng tài năng",
+    "desc": "Cho sinh viên đạt giải thưởng khoa học – công nghệ, Olympic, cuộc thi cấp quốc gia, quốc tế."
+   }
+  ],
+  "waivers": [
+   "Miễn, giảm học phí theo đối tượng chính sách (con thương binh, liệt sĩ, hộ nghèo, dân tộc thiểu số rất ít người…).",
+   "Hỗ trợ chi phí học tập theo quy định của Nhà nước.",
+   "Trợ cấp xã hội cho sinh viên thuộc diện quy định."
+  ],
+  "waiverSteps": [
+   {
+    "title": "Chuẩn bị hồ sơ",
+    "text": "Đơn đề nghị theo mẫu kèm giấy tờ chứng minh đối tượng được miễn, giảm."
+   },
+   {
+    "title": "Nộp hồ sơ",
+    "text": "Nộp về Phòng Công tác chính trị – Sinh viên trong thời hạn thông báo mỗi học kỳ."
+   },
+   {
+    "title": "Xét duyệt & chi trả",
+    "text": "Nhà trường xét duyệt và thực hiện miễn, giảm hoặc chi trả theo quy định."
+   }
+  ]
+ },
+ "studentHub": {
+  "intro": "Trang thông tin chung dành cho sinh viên HUMG: thông báo, mốc thời gian học kỳ và lối vào nhanh các dịch vụ. Đăng nhập My eUni để xem thời khóa biểu, điểm và học phí của cá nhân.",
+  "stats": [
+   {
+    "value": "20.000+",
+    "label": "Sinh viên, học viên"
+   },
+   {
+    "value": "12",
+    "label": "Khoa đào tạo"
+   },
+   {
+    "value": "52",
+    "label": "Chương trình đào tạo"
+   },
+   {
+    "value": "200+",
+    "label": "Câu lạc bộ, đội, nhóm"
+   },
+   {
+    "value": "92%",
+    "label": "Có việc làm sau 1 năm"
+   }
+  ],
+  "keyDates": {
+   "year": "Năm học 2026 – 2027",
+   "rows": [
+    [
+     "Đăng ký học phần học kỳ I",
+     "05/08 – 18/08/2026",
+     "Trực tuyến trên My eUni"
+    ],
+    [
+     "Khai giảng & bắt đầu học kỳ I",
+     "25/08/2026",
+     "15 tuần thực học"
+    ],
+    [
+     "Nộp học phí học kỳ I",
+     "Trước 30/09/2026",
+     "Chuyển khoản / thu hộ ngân hàng"
+    ],
+    [
+     "Thi kết thúc học kỳ I",
+     "30/12/2026 – 18/01/2027",
+     "Theo lịch từng học phần"
+    ],
+    [
+     "Đăng ký xét học bổng KKHT",
+     "01/10 – 15/10/2026",
+     "Nộp Phòng CTCT–SV"
+    ]
+   ]
+  },
+  "publicTools": [
+   {
+    "icon": "calendar",
+    "title": "Lịch học – Lịch thi",
+    "desc": "Tra cứu TKB và lịch thi các lớp",
+    "to": "/hoc-tap/lich-hoc"
+   },
+   {
+    "icon": "award",
+    "title": "Tra cứu kết quả học tập",
+    "desc": "Hướng dẫn xem điểm, GPA, rèn luyện",
+    "to": "/hoc-tap/tra-cuu-ket-qua"
+   },
+   {
+    "icon": "file",
+    "title": "Học phí & Học bổng",
+    "desc": "Mức thu, chính sách, hướng dẫn nộp",
+    "to": "/sinh-vien/hoc-phi-hoc-bong"
+   },
+   {
+    "icon": "layers",
+    "title": "Biểu mẫu sinh viên",
+    "desc": "Đơn từ, xác nhận, phúc khảo…",
+    "to": "/sinh-vien/bieu-mau"
+   },
+   {
+    "icon": "library",
+    "title": "Thư viện",
+    "desc": "Tra cứu, mượn tài liệu, CSDL",
+    "to": "/thu-vien/tim-kiem"
+   },
+   {
+    "icon": "compass",
+    "title": "Hướng dẫn & Sổ tay",
+    "desc": "Đăng ký học phần, tân sinh viên",
+    "to": "/hoc-tap/huong-dan"
+   }
+  ],
+  "notices": [
+   {
+    "date": "20/08/2026",
+    "title": "Thông báo lịch thi học kỳ I năm học 2026 – 2027",
+    "tag": "Mới"
+   },
+   {
+    "date": "18/08/2026",
+    "title": "Hướng dẫn đăng ký học phần học kỳ I năm học 2026 – 2027",
+    "tag": "Mới"
+   },
+   {
+    "date": "15/08/2026",
+    "title": "Chương trình học bổng khuyến khích học tập học kỳ II năm học 2025 – 2026"
+   },
+   {
+    "date": "05/08/2026",
+    "title": "Kế hoạch khám sức khỏe đầu khóa cho sinh viên K70"
+   }
+  ],
+  "events": [
+   {
+    "day": "25",
+    "month": "TH.09",
+    "title": "Ngày hội việc làm HUMG 2026",
+    "time": "08:00 · Hội trường A"
+   },
+   {
+    "day": "08",
+    "month": "TH.10",
+    "title": "Chạy bộ vì cộng đồng HUMG",
+    "time": "06:00 · Sân vận động HUMG"
+   },
+   {
+    "day": "20",
+    "month": "TH.10",
+    "title": "Chung kết Startup HUMG 2026",
+    "time": "14:00 · Hội trường B"
+   }
+  ]
+ },
+ "studentNavGroups": [
+  {
+   "title": "Cổng sinh viên",
+   "items": [
+    {
+     "label": "Tổng quan",
+     "to": "/sinh-vien",
+     "icon": "home"
+    },
+    {
+     "label": "Học tập & Đào tạo",
+     "to": "/sinh-vien/hoc-tap",
+     "icon": "book"
+    },
+    {
+     "label": "Quy chế sinh viên",
+     "to": "/sinh-vien/quy-che",
+     "icon": "shield"
+    },
+    {
+     "label": "Học phí & Học bổng",
+     "to": "/sinh-vien/hoc-phi-hoc-bong",
+     "icon": "award"
+    },
+    {
+     "label": "Biểu mẫu sinh viên",
+     "to": "/sinh-vien/bieu-mau",
+     "icon": "file"
+    },
+    {
+     "label": "Đời sống & Hỗ trợ sinh viên",
+     "to": "/sinh-vien/doi-song-ho-tro",
+     "icon": "heart"
+    },
+    {
+     "label": "Việc làm & Khởi nghiệp",
+     "to": "/sinh-vien/viec-lam-khoi-nghiep",
+     "icon": "rocket"
+    },
+    {
+     "label": "Thư viện & E-learning",
+     "to": "/sinh-vien/thu-vien-elearning",
+     "icon": "library"
+    },
+    {
+     "label": "My eUni Sinh viên",
+     "to": "/sinh-vien/my-euni",
+     "icon": "external"
+    }
+   ]
+  },
+  {
+   "title": "Hỗ trợ nhanh",
+   "items": [
+    {
+     "label": "Sổ tay tân sinh viên",
+     "to": "/sinh-vien/tan-sinh-vien",
+     "icon": "book"
+    },
+    {
+     "label": "Hỏi – Đáp (FAQ)",
+     "to": "/sinh-vien/faq",
+     "icon": "mail"
+    }
+   ]
+  }
+ ],
+ "studentQuickLinks": [
+  {
+   "label": "Lịch học – Lịch thi",
+   "to": "/hoc-tap/lich-hoc"
+  },
+  {
+   "label": "Tra cứu điểm",
+   "to": "/hoc-tap/tra-cuu-ket-qua"
+  },
+  {
+   "label": "Thanh toán học phí",
+   "to": "/sinh-vien/hoc-phi-hoc-bong"
+  },
+  {
+   "label": "Yêu cầu hỗ trợ",
+   "to": "/sinh-vien/doi-song-ho-tro"
+  },
+  {
+   "label": "Sổ tay tân sinh viên",
+   "to": "/sinh-vien/tan-sinh-vien"
+  },
+  {
+   "label": "Hỏi – Đáp (FAQ)",
+   "to": "/sinh-vien/faq"
+  }
+ ]
+}

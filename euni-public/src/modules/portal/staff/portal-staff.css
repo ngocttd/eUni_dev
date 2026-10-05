@@ -1,0 +1,74 @@
+/* MY eUni Portal · Giảng viên (POR-11 → POR-19) — bổ sung trên .ps-* */
+.ps-head__right { flex-shrink: 0; }
+.ps-service__meta { display: block; font-size: 10.5px; font-weight: 500; color: var(--humg-text-secondary); }
+
+.ps-rowact { display: inline-flex; gap: 10px; }
+.ps-rowact a, .ps-rowact button { display: inline-flex; color: var(--humg-primary); border: 0; background: none; padding: 2px; cursor: pointer; }
+.ps-rowact a:hover, .ps-rowact button:hover { color: var(--humg-secondary); }
+
+.ps-publist { display: grid; gap: 10px; }
+.ps-publist li { position: relative; display: grid; gap: 3px; padding: 12px 14px; padding-right: 64px; border: 1px solid var(--humg-border); border-radius: 10px; }
+.ps-publist strong { font-size: 13px; color: var(--humg-primary); line-height: 1.4; }
+.ps-publist em { font-style: normal; font-size: 11.5px; color: var(--humg-text-secondary); }
+.ps-publist .ps-rowact { position: absolute; top: 12px; right: 14px; }
+
+.ps-tag--warn { background: #fff4e5; color: var(--humg-accent-dark); }
+
+.ps-progbar { display: inline-flex; align-items: center; gap: 8px; min-width: 128px; }
+.ps-progbar__track { flex: 1; height: 7px; border-radius: 999px; background: var(--humg-surface-alt); overflow: hidden; }
+.ps-progbar__fill { display: block; height: 100%; border-radius: 999px; background: var(--humg-secondary); }
+.ps-progbar.is-done .ps-progbar__fill { background: var(--humg-success); }
+.ps-progbar em { font-style: normal; font-size: 11px; font-weight: 600; color: var(--humg-text-secondary); min-width: 30px; text-align: right; }
+
+.ps-empty { margin: 14px; padding: 18px; text-align: center; font-size: 12.5px; color: var(--humg-text-secondary); background: var(--humg-surface-alt); border-radius: 10px; }
+
+/* ============================================================
+   PG-PORT-STAFF — bổ sung bố cục theo wireframe
+   ============================================================ */
+
+/* 11.1 — trạng thái buổi dạy trên card */
+.ps-clspill { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 999px; vertical-align: 1px; }
+.ps-clspill.is-live { background: #e6f4ea; color: var(--humg-success); }
+.ps-clspill.is-soon { background: #fff4e5; color: var(--humg-accent-dark); }
+
+/* mini thống kê trong panel dashboard */
+.ps-ministat { display: flex; gap: 10px; flex-wrap: wrap; }
+.ps-ministat > div { flex: 1; min-width: 96px; text-align: center; padding: 12px 8px; border: 1px solid var(--humg-border); border-radius: 10px; background: #fff; }
+.ps-ministat strong { display: block; font-size: 20px; font-weight: 800; color: var(--humg-primary); }
+.ps-ministat span { font-size: 10.5px; color: var(--humg-text-secondary); }
+
+/* 11.2 — màu block lịch giảng dạy */
+.ps-cal__event.is-giang-lt { background: #e3f0ff; border-color: var(--humg-secondary); color: #0d47a1; }
+.ps-cal__event.is-giang-th { background: #e6f4ea; border-color: var(--humg-success); color: #1b5e20; }
+.ps-cal__event.is-huong-dan { background: #f3e8ff; border-color: #7b3fe4; color: #5b21b6; }
+.ps-cal__event.is-khac { background: var(--humg-surface-alt); border-color: var(--humg-text-secondary); color: var(--humg-text); }
+.ps-callegend i.is-giang-lt { background: var(--humg-secondary); }
+.ps-callegend i.is-giang-th { background: var(--humg-success); }
+.ps-callegend i.is-huong-dan { background: #7b3fe4; }
+.ps-callegend i.is-khac { background: var(--humg-text-secondary); }
+
+/* 11.2 — xem theo tháng */
+.ps-monthview { display: grid; grid-template-columns: 280px 1fr; gap: 22px; align-items: start; }
+
+/* Lịch tháng thu nhỏ (11.2, 11.6) */
+.ps-minical { border: 1px solid var(--humg-border); border-radius: 12px; overflow: hidden; }
+.ps-minical__head { padding: 9px 12px; background: var(--humg-surface-alt); border-bottom: 1px solid var(--humg-border); font-size: 12px; font-weight: 700; color: var(--humg-primary); text-align: center; }
+.ps-minical__grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; padding: 8px; }
+.ps-minical__dow { text-align: center; font-size: 10px; font-weight: 700; color: var(--humg-text-secondary); padding: 4px 0; }
+.ps-minical__day { display: flex; align-items: center; justify-content: center; aspect-ratio: 1; font-size: 11.5px; border-radius: 7px; color: var(--humg-text); }
+.ps-minical__day:not(.is-empty):hover { background: var(--humg-hover); }
+.ps-minical__day.is-today { background: var(--humg-primary); color: #fff; font-weight: 700; }
+.ps-minical__day.is-empty { visibility: hidden; }
+
+/* 11.6 — bố cục 2 cột + lịch hôm nay */
+.ps-admingrid { display: grid; grid-template-columns: 1fr 320px; gap: 20px; align-items: start; }
+.ps-col { display: grid; gap: 20px; align-content: start; }
+.ps-agenda { display: grid; gap: 10px; }
+.ps-agenda li { display: flex; gap: 12px; padding: 10px 12px; border: 1px solid var(--humg-border); border-radius: 10px; }
+.ps-agenda li span { font-size: 12px; font-weight: 800; color: var(--humg-primary); white-space: nowrap; }
+.ps-agenda li strong { display: block; font-size: 12.5px; color: var(--humg-primary); }
+.ps-agenda li em { font-style: normal; font-size: 11px; color: var(--humg-text-secondary); }
+
+@media (max-width: 1080px) {
+  .ps-monthview, .ps-admingrid { grid-template-columns: 1fr; }
+}

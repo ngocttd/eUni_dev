@@ -1,0 +1,24 @@
+{
+  "name": "euni-api-mock",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "HUMG eUni — mock API gateway (CMS API + các service ngoài) để FE chạy khi chưa có backend",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "reset": "node scripts/reset.mjs",
+    "contract": "node scripts/gen-contract.mjs",
+    "export:mock": "node scripts/export-mock-data.mjs",
+    "db:migrate": "node database/migrate.mjs",
+    "db:fresh": "node database/migrate.mjs --fresh --seed"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "pg": "^8.13.0"
+  }
+}

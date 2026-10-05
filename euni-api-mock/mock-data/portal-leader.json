@@ -1,0 +1,1018 @@
+{
+ "plApprovals": {
+  "counts": {
+   "Tất cả": 12,
+   "Chờ duyệt": 7,
+   "Đã duyệt": 5,
+   "Từ chối": 0
+  },
+  "list": [
+   {
+    "icon": "file",
+    "title": "Kế hoạch học tập học kỳ 3 (2024 – 2025)",
+    "unit": "Khoa Trắc địa – Bản đồ",
+    "time": "2 giờ trước",
+    "status": "Chờ duyệt"
+   },
+   {
+    "icon": "book",
+    "title": "Đề cương học phần: GIS cơ bản",
+    "unit": "Khoa CNTT – Truyền thông",
+    "time": "5 giờ trước",
+    "status": "Chờ duyệt"
+   },
+   {
+    "icon": "grid",
+    "title": "Đề nghị mua sắm thiết bị phòng thí nghiệm",
+    "unit": "Khoa Địa chất",
+    "time": "Hôm qua, 14:20",
+    "status": "Chờ duyệt"
+   },
+   {
+    "icon": "user",
+    "title": "Đơn xin nghỉ học có thời hạn",
+    "unit": "Sinh viên: Nguyễn Văn A – K70",
+    "time": "16/05/2025",
+    "status": "Chờ duyệt"
+   },
+   {
+    "icon": "flask",
+    "title": "Đề xuất đề tài NCKH cấp trường",
+    "unit": "GV: TS. Trần Thị Bích Ngọc",
+    "time": "15/05/2025",
+    "status": "Chờ duyệt"
+   },
+   {
+    "icon": "file",
+    "title": "Kế hoạch mời giảng viên thỉnh giảng HK2",
+    "unit": "Khoa Dầu khí",
+    "time": "14/05/2025",
+    "status": "Đã duyệt"
+   },
+   {
+    "icon": "grid",
+    "title": "Đề nghị sửa chữa giảng đường B2",
+    "unit": "Phòng Quản trị – Thiết bị",
+    "time": "12/05/2025",
+    "status": "Đã duyệt"
+   }
+  ],
+  "alerts": [
+   [
+    "Cao",
+    "Tỷ lệ tốt nghiệp đúng hạn dưới mục tiêu",
+    "Khoa Kinh tế – QTKD",
+    "20/05/2025"
+   ],
+   [
+    "Trung bình",
+    "Tiến độ giải ngân đề tài chậm",
+    "Phòng QLĐA",
+    "18/05/2025"
+   ],
+   [
+    "Trung bình",
+    "Số phòng thực hành quá tải giờ cao điểm",
+    "Khoa CNTT – TT",
+    "16/05/2025"
+   ],
+   [
+    "Thấp",
+    "Số lượng giảng viên cơ hữu còn thiếu",
+    "Khoa Địa chất",
+    "15/05/2025"
+   ]
+  ]
+ },
+ "plBI": {
+  "training": [
+   {
+    "value": "85.6%",
+    "delta": "+3.4%",
+    "label": "Tỷ lệ SV tốt nghiệp đúng hạn"
+   },
+   {
+    "value": "90.2%",
+    "delta": "+2.7%",
+    "label": "Tỷ lệ SV có việc làm"
+   },
+   {
+    "value": "45.3",
+    "delta": "-1.2%",
+    "down": true,
+    "label": "Sĩ số lớp trung bình"
+   }
+  ],
+  "research": [
+   {
+    "value": "86",
+    "delta": "+15.7%",
+    "label": "Bài báo ISI / Scopus"
+   },
+   {
+    "value": "24",
+    "delta": "+9.1%",
+    "label": "Đề tài cấp Bộ / Nhà nước"
+   },
+   {
+    "value": "08",
+    "delta": "+14.3%",
+    "label": "Sáng chế / Giải pháp hữu ích"
+   }
+  ],
+  "finance": [
+   {
+    "value": "235",
+    "delta": "+12.5%",
+    "label": "Tổng thu (tỷ VND)"
+   },
+   {
+    "value": "198",
+    "delta": "+9.8%",
+    "label": "Tổng chi (tỷ VND)"
+   },
+   {
+    "value": "52.3%",
+    "delta": "+3.6%",
+    "label": "Tỷ lệ tự chủ tài chính"
+   }
+  ],
+  "trend": {
+   "labels": [
+    "HK1 23-24",
+    "HK2 23-24",
+    "HK1 24-25",
+    "HK2 24-25"
+   ],
+   "series": [
+    {
+     "name": "Tỷ lệ SV có việc làm (%)",
+     "points": [
+      86,
+      88,
+      89,
+      90.2
+     ]
+    },
+    {
+     "name": "Tỷ lệ tốt nghiệp đúng hạn (%)",
+     "points": [
+      80,
+      82,
+      84,
+      85.6
+     ]
+    }
+   ]
+  }
+ },
+ "plDashboard": {
+  "updatedAt": "16/05/2025 09:30",
+  "stats": [
+   {
+    "value": "16.542",
+    "delta": "+4.2%",
+    "label": "Sinh viên",
+    "icon": "users"
+   },
+   {
+    "value": "812",
+    "delta": "+2.1%",
+    "label": "Giảng viên",
+    "icon": "user"
+   },
+   {
+    "value": "45",
+    "label": "Ngành đào tạo",
+    "icon": "book"
+   },
+   {
+    "value": "128",
+    "delta": "+6.3%",
+    "label": "Đề tài nghiên cứu",
+    "icon": "flask"
+   }
+  ],
+  "admissionDonut": {
+   "total": "2.850",
+   "parts": [
+    {
+     "label": "Kỹ thuật Mỏ",
+     "pct": 28
+    },
+    {
+     "label": "Địa chất",
+     "pct": 22
+    },
+    {
+     "label": "Trắc địa – Bản đồ",
+     "pct": 16
+    },
+    {
+     "label": "CNTT",
+     "pct": 12
+    },
+    {
+     "label": "KT Điện – Tự động",
+     "pct": 10
+    },
+    {
+     "label": "Khác",
+     "pct": 12
+    }
+   ]
+  },
+  "revenue": {
+   "total": "235 tỷ",
+   "delta": "+12.9%",
+   "quarters": [
+    {
+     "label": "Q1",
+     "value": 40
+    },
+    {
+     "label": "Q2",
+     "value": 65
+    },
+    {
+     "label": "Q3",
+     "value": 58
+    },
+    {
+     "label": "Q4",
+     "value": 72
+    }
+   ]
+  },
+  "alerts": [
+   {
+    "text": "Hạn cuối nộp báo cáo NCKH cấp trường: 25/05/2025",
+    "urgent": true
+   },
+   {
+    "text": "Hạn phê duyệt kế hoạch học tập HK3: 20/05/2025",
+    "urgent": false
+   },
+   {
+    "text": "Còn 12 yêu cầu trong mục Phê duyệt",
+    "urgent": true
+   }
+  ],
+  "activity": [
+   {
+    "text": "Khoa Địa chất vừa cập nhật đề cương học phần",
+    "time": "10 phút trước"
+   },
+   {
+    "text": "Đề tài \"Nghiên cứu ứng dụng GIS trong quản lý đất đai…\" đã nghiệm thu",
+    "time": "35 phút trước"
+   },
+   {
+    "text": "Sinh viên Nguyễn Văn A nộp đơn xin bảo lưu",
+    "time": "1 giờ trước"
+   }
+  ]
+ },
+ "plDomains": {
+  "dao-tao": {
+   "title": "Đào tạo",
+   "icon": "book",
+   "stats": [
+    {
+     "value": "45",
+     "label": "Ngành đào tạo"
+    },
+    {
+     "value": "1.240",
+     "label": "Lớp học phần / kỳ"
+    },
+    {
+     "value": "85.6%",
+     "label": "Tốt nghiệp đúng hạn"
+    },
+    {
+     "value": "3.18",
+     "label": "GPA trung bình toàn trường"
+    }
+   ],
+   "columns": [
+    "Khoa",
+    "Quy mô SV",
+    "Số ngành",
+    "GPA TB",
+    "TN đúng hạn"
+   ],
+   "rows": [
+    [
+     "Khoa Mỏ",
+     "2.980",
+     "7",
+     "3.05",
+     "82.1%"
+    ],
+    [
+     "Khoa CNTT – Truyền thông",
+     "2.640",
+     "6",
+     "3.34",
+     "90.5%"
+    ],
+    [
+     "Khoa Dầu khí",
+     "2.110",
+     "5",
+     "3.12",
+     "84.7%"
+    ],
+    [
+     "Khoa Trắc địa – Bản đồ",
+     "2.260",
+     "6",
+     "3.20",
+     "86.0%"
+    ],
+    [
+     "Khoa Địa chất",
+     "1.980",
+     "6",
+     "3.02",
+     "80.3%"
+    ],
+    [
+     "Khoa Kinh tế – QTKD",
+     "2.520",
+     "5",
+     "3.28",
+     "88.4%"
+    ]
+   ]
+  },
+  "nghien-cuu-khoa-hoc": {
+   "title": "Nghiên cứu khoa học",
+   "icon": "flask",
+   "stats": [
+    {
+     "value": "128",
+     "label": "Đề tài đang thực hiện"
+    },
+    {
+     "value": "86",
+     "label": "Bài báo ISI / Scopus (2024)"
+    },
+    {
+     "value": "24",
+     "label": "Đề tài cấp Bộ / Nhà nước"
+    },
+    {
+     "value": "312 tỷ",
+     "label": "Kinh phí NCKH lũy kế"
+    }
+   ],
+   "columns": [
+    "Khoa",
+    "Đề tài",
+    "Bài báo quốc tế",
+    "Sáng chế",
+    "Kinh phí (tỷ)"
+   ],
+   "rows": [
+    [
+     "Khoa Mỏ",
+     "32",
+     "18",
+     "3",
+     "78"
+    ],
+    [
+     "Khoa CNTT – Truyền thông",
+     "26",
+     "24",
+     "2",
+     "52"
+    ],
+    [
+     "Khoa Dầu khí",
+     "21",
+     "14",
+     "1",
+     "61"
+    ],
+    [
+     "Khoa Trắc địa – Bản đồ",
+     "19",
+     "12",
+     "1",
+     "43"
+    ],
+    [
+     "Khoa Địa chất",
+     "20",
+     "13",
+     "1",
+     "55"
+    ],
+    [
+     "Khoa Kinh tế – QTKD",
+     "10",
+     "5",
+     "0",
+     "23"
+    ]
+   ]
+  },
+  "sinh-vien": {
+   "title": "Sinh viên",
+   "icon": "user",
+   "stats": [
+    {
+     "value": "16.542",
+     "label": "Tổng sinh viên"
+    },
+    {
+     "value": "1.284",
+     "label": "Nhận học bổng KKHT"
+    },
+    {
+     "value": "92",
+     "label": "Khen thưởng cấp trường"
+    },
+    {
+     "value": "18",
+     "label": "Kỷ luật (từ cảnh cáo)"
+    }
+   ],
+   "columns": [
+    "Khoa",
+    "Quy mô SV",
+    "Học bổng",
+    "Khen thưởng",
+    "Thôi học"
+   ],
+   "rows": [
+    [
+     "Khoa Mỏ",
+     "2.980",
+     "210",
+     "15",
+     "32"
+    ],
+    [
+     "Khoa CNTT – Truyền thông",
+     "2.640",
+     "265",
+     "22",
+     "18"
+    ],
+    [
+     "Khoa Dầu khí",
+     "2.110",
+     "170",
+     "12",
+     "21"
+    ],
+    [
+     "Khoa Trắc địa – Bản đồ",
+     "2.260",
+     "188",
+     "14",
+     "17"
+    ],
+    [
+     "Khoa Địa chất",
+     "1.980",
+     "151",
+     "11",
+     "24"
+    ],
+    [
+     "Khoa Kinh tế – QTKD",
+     "2.520",
+     "300",
+     "18",
+     "12"
+    ]
+   ]
+  },
+  "tai-chinh": {
+   "title": "Tài chính",
+   "icon": "file",
+   "stats": [
+    {
+     "value": "235 tỷ",
+     "label": "Tổng thu năm 2024"
+    },
+    {
+     "value": "198 tỷ",
+     "label": "Tổng chi năm 2024"
+    },
+    {
+     "value": "52.3%",
+     "label": "Tỷ lệ tự chủ tài chính"
+    },
+    {
+     "value": "37 tỷ",
+     "label": "Chênh lệch thu – chi"
+    }
+   ],
+   "columns": [
+    "Khoản mục",
+    "Dự toán (tỷ)",
+    "Thực hiện (tỷ)",
+    "Tỷ lệ"
+   ],
+   "rows": [
+    [
+     "Thu học phí",
+     "150",
+     "156",
+     "104%"
+    ],
+    [
+     "Thu NSNN & dự án",
+     "42",
+     "40",
+     "95%"
+    ],
+    [
+     "Thu NCKH & dịch vụ",
+     "35",
+     "31",
+     "89%"
+    ],
+    [
+     "Chi lương & phụ cấp",
+     "110",
+     "108",
+     "98%"
+    ],
+    [
+     "Chi đầu tư CSVC",
+     "48",
+     "45",
+     "94%"
+    ],
+    [
+     "Chi hoạt động thường xuyên",
+     "46",
+     "45",
+     "98%"
+    ]
+   ]
+  },
+  "nhan-su": {
+   "title": "Nhân sự",
+   "icon": "users",
+   "stats": [
+    {
+     "value": "812",
+     "label": "Giảng viên"
+    },
+    {
+     "value": "286",
+     "label": "Cán bộ, nhân viên"
+    },
+    {
+     "value": "41.8%",
+     "label": "Giảng viên trình độ Tiến sĩ"
+    },
+    {
+     "value": "58",
+     "label": "Hợp đồng hết hạn trong năm"
+    }
+   ],
+   "columns": [
+    "Đơn vị",
+    "Giảng viên",
+    "Tiến sĩ",
+    "PGS / GS",
+    "Tuổi TB"
+   ],
+   "rows": [
+    [
+     "Khoa Mỏ",
+     "148",
+     "62",
+     "9",
+     "43"
+    ],
+    [
+     "Khoa CNTT – Truyền thông",
+     "132",
+     "58",
+     "6",
+     "39"
+    ],
+    [
+     "Khoa Dầu khí",
+     "118",
+     "49",
+     "7",
+     "42"
+    ],
+    [
+     "Khoa Trắc địa – Bản đồ",
+     "124",
+     "52",
+     "5",
+     "41"
+    ],
+    [
+     "Khoa Địa chất",
+     "126",
+     "55",
+     "8",
+     "44"
+    ],
+    [
+     "Khoa Kinh tế – QTKD",
+     "96",
+     "32",
+     "3",
+     "38"
+    ]
+   ]
+  },
+  "co-so-vat-chat": {
+   "title": "Cơ sở vật chất",
+   "icon": "building",
+   "stats": [
+    {
+     "value": "312",
+     "label": "Phòng học"
+    },
+    {
+     "value": "86",
+     "label": "Phòng thí nghiệm / thực hành"
+    },
+    {
+     "value": "78.4%",
+     "label": "Hiệu suất sử dụng phòng học"
+    },
+    {
+     "value": "12,6 ha",
+     "label": "Tổng diện tích đất"
+    }
+   ],
+   "columns": [
+    "Khu / Toà nhà",
+    "Phòng học",
+    "Phòng TN",
+    "Hiệu suất",
+    "Tình trạng"
+   ],
+   "rows": [
+    [
+     "Nhà A (Giảng đường)",
+     "96",
+     "4",
+     "82%",
+     "Tốt"
+    ],
+    [
+     "Nhà B (Giảng đường)",
+     "84",
+     "8",
+     "80%",
+     "Tốt"
+    ],
+    [
+     "Nhà C (Thí nghiệm)",
+     "18",
+     "32",
+     "71%",
+     "Cần bảo trì"
+    ],
+    [
+     "Nhà D (Thí nghiệm)",
+     "12",
+     "28",
+     "69%",
+     "Tốt"
+    ],
+    [
+     "Khu thực hành ngoài trời",
+     "–",
+     "14",
+     "64%",
+     "Tốt"
+    ]
+   ]
+  }
+ },
+ "plNotifications": {
+  "tabs": [
+   "Tất cả",
+   "Thông báo",
+   "Thông báo hệ thống",
+   "Thông báo cá nhân"
+  ],
+  "list": [
+   {
+    "icon": "bell",
+    "title": "Thông báo nghỉ lễ 30/4 và 1/5",
+    "unit": "Phòng Hành chính – Tổng hợp",
+    "time": "16/05/2025 08:00",
+    "kind": "Thông báo"
+   },
+   {
+    "icon": "flask",
+    "title": "Hạn nộp báo cáo NCKH cấp trường năm 2025",
+    "unit": "Phòng Khoa học Công nghệ",
+    "time": "15/05/2025 14:30",
+    "kind": "Thông báo"
+   },
+   {
+    "icon": "globe",
+    "title": "Tổ chức hội thảo khoa học quốc tế HUMG 2025",
+    "unit": "Phòng Khoa học Công nghệ",
+    "time": "15/05/2025 10:20",
+    "kind": "Thông báo"
+   },
+   {
+    "icon": "calendar",
+    "title": "Cập nhật lịch thi học kỳ 2 (2024 – 2025)",
+    "unit": "Phòng Đào tạo",
+    "time": "14/05/2025 16:45",
+    "kind": "Thông báo"
+   },
+   {
+    "icon": "grid",
+    "title": "Thông báo bảo trì hệ thống eUni Portal",
+    "unit": "Phòng CNTT – TT",
+    "time": "14/05/2025 09:00",
+    "kind": "Thông báo hệ thống"
+   }
+  ]
+ },
+ "plPortalSettings": {
+  "tabs": [
+   "Giao diện",
+   "Nội dung",
+   "Menu",
+   "Footer",
+   "SEO"
+  ],
+  "themes": [
+   "Mặc định",
+   "Xanh dương",
+   "Xanh ngọc",
+   "Tối giản"
+  ],
+  "colors": [
+   "#0a3d91",
+   "#1976d2",
+   "#d32f2f",
+   "#2e7d32",
+   "#7b3fe4",
+   "#f59e0b",
+   "#e2c290"
+  ],
+  "display": [
+   {
+    "key": "slider",
+    "label": "Hiển thị slider trang chủ",
+    "on": true
+   },
+   {
+    "key": "news",
+    "label": "Hiển thị tin tức nổi bật",
+    "on": false
+   },
+   {
+    "key": "events",
+    "label": "Hiển thị sự kiện",
+    "on": true
+   },
+   {
+    "key": "partners",
+    "label": "Hiển thị đối tác",
+    "on": false
+   }
+  ]
+ },
+ "plReports": {
+  "catalog": [
+   {
+    "icon": "book",
+    "title": "Báo cáo đào tạo",
+    "desc": "Thống kê tuyển sinh, kết quả học tập, tốt nghiệp…"
+   },
+   {
+    "icon": "users",
+    "title": "Báo cáo nhân sự",
+    "desc": "Giảng viên, nhân viên, hợp đồng, ngạch bậc…"
+   },
+   {
+    "icon": "flask",
+    "title": "Báo cáo nghiên cứu",
+    "desc": "Thống kê đề tài, bài báo, hội thảo, công bố…"
+   },
+   {
+    "icon": "building",
+    "title": "Báo cáo cơ sở vật chất",
+    "desc": "Phòng học, thiết bị, đất, tình hình sử dụng…"
+   },
+   {
+    "icon": "user",
+    "title": "Báo cáo sinh viên",
+    "desc": "Quy mô, học bổng, khen thưởng, kỷ luật…"
+   },
+   {
+    "icon": "check",
+    "title": "Báo cáo kiểm định",
+    "desc": "Tự đánh giá, minh chứng, tiêu chí kiểm định…"
+   },
+   {
+    "icon": "file",
+    "title": "Báo cáo tài chính",
+    "desc": "Thu – chi, ngân sách, công nợ, tài sản…"
+   },
+   {
+    "icon": "grid",
+    "title": "Báo cáo khác",
+    "desc": "Tổng hợp theo yêu cầu"
+   }
+  ],
+  "favorites": [
+   [
+    "Báo cáo kết quả học tập toàn trường",
+    "PDF",
+    "16/05/2025"
+   ],
+   [
+    "Báo cáo tuyển sinh theo ngành",
+    "Excel",
+    "16/05/2025"
+   ],
+   [
+    "Báo cáo đề tài nghiên cứu năm 2024",
+    "PDF",
+    "14/05/2025"
+   ],
+   [
+    "Báo cáo tài chính quý 1/2025",
+    "Excel",
+    "13/05/2025"
+   ]
+  ]
+ },
+ "plSysLog": {
+  "eventTypes": [
+   "Tất cả",
+   "Đăng nhập",
+   "Phê duyệt",
+   "Từ chối",
+   "Xuất báo cáo",
+   "Cập nhật dữ liệu",
+   "Sao lưu"
+  ],
+  "total": 128,
+  "rows": [
+   [
+    "16/05/2025 09:28",
+    "tranxuantruong",
+    "Đăng nhập hệ thống",
+    "203.113.45.12 / Chrome"
+   ],
+   [
+    "16/05/2025 09:15",
+    "nguyenvana",
+    "Phê duyệt kế hoạch học tập",
+    "203.113.45.12 / Chrome"
+   ],
+   [
+    "16/05/2025 08:45",
+    "lethihong",
+    "Tải báo cáo tài chính",
+    "125.212.10.8 / Edge"
+   ],
+   [
+    "15/05/2025 17:20",
+    "phamdung",
+    "Cập nhật thông tin giảng viên",
+    "203.113.45.12 / Chrome"
+   ],
+   [
+    "15/05/2025 16:05",
+    "tranxuantruong",
+    "Xuất báo cáo tổng hợp",
+    "203.113.45.12 / Chrome"
+   ],
+   [
+    "15/05/2025 15:32",
+    "nguyenvana",
+    "Từ chối đề nghị mua sắm",
+    "203.113.45.12 / Chrome"
+   ],
+   [
+    "15/05/2025 14:50",
+    "system",
+    "Sao lưu cơ sở dữ liệu",
+    "192.168.1.10 / System"
+   ]
+  ]
+ },
+ "plSystem": {
+  "groups": [
+   {
+    "title": "Quản trị người dùng",
+    "items": [
+     {
+      "icon": "users",
+      "title": "Quản lý tài khoản",
+      "desc": "Tạo, sửa, khóa tài khoản"
+     },
+     {
+      "icon": "shield",
+      "title": "Phân quyền",
+      "desc": "Vai trò, nhóm quyền hạn"
+     },
+     {
+      "icon": "clock",
+      "title": "Nhật ký truy cập",
+      "desc": "Lịch sử đăng nhập",
+      "to": "/euni/lanh-dao/nhat-ky"
+     }
+    ]
+   },
+   {
+    "title": "Quản lý hệ thống",
+    "items": [
+     {
+      "icon": "lock",
+      "title": "Cấu hình chung",
+      "desc": "Thông tin, tham số hệ thống",
+      "to": "/euni/lanh-dao/cai-dat"
+     },
+     {
+      "icon": "layers",
+      "title": "Quản lý danh mục",
+      "desc": "Danh mục dùng chung"
+     },
+     {
+      "icon": "download",
+      "title": "Sao lưu dữ liệu",
+      "desc": "Backup & Restore"
+     }
+    ]
+   },
+   {
+    "title": "Tích hợp & Kết nối",
+    "items": [
+     {
+      "icon": "grid",
+      "title": "Tích hợp SSO",
+      "desc": "Microsoft 365, Google"
+     },
+     {
+      "icon": "globe",
+      "title": "API & Webhook",
+      "desc": "Kết nối hệ thống ngoài"
+     },
+     {
+      "icon": "mail",
+      "title": "Email & SMS",
+      "desc": "Cấu hình thông báo"
+     }
+    ]
+   }
+  ],
+  "info": [
+   [
+    "Phiên bản",
+    "eUni Portal v2.3.1"
+   ],
+   [
+    "Cơ sở dữ liệu",
+    "PostgreSQL 15"
+   ],
+   [
+    "Dung lượng lưu trữ",
+    "256 GB / 1 TB"
+   ]
+  ]
+ },
+ "plTerms": [
+  "Học kỳ 1",
+  "Học kỳ 2",
+  "Cả năm"
+ ],
+ "plUnits": [
+  "Tất cả",
+  "Khoa Mỏ",
+  "Khoa CNTT – Truyền thông",
+  "Khoa Dầu khí",
+  "Khoa Trắc địa – Bản đồ",
+  "Khoa Địa chất",
+  "Khoa Kinh tế – QTKD"
+ ],
+ "plUser": {
+  "name": "PGS.TS. Trần Xuân Trường",
+  "title": "Hiệu trưởng"
+ },
+ "plYears": [
+  "2024 – 2025",
+  "2023 – 2024",
+  "2022 – 2023"
+ ]
+}

@@ -1,0 +1,236 @@
+/* ============================================================
+   HUMG Digital Portal — Design tokens & base styles
+   Nguồn: thông số trong bộ wireframe (wireframe_humg/*)
+   ============================================================ */
+:root {
+  /* Màu chủ đạo */
+  --humg-primary: #0a3d91;
+  --humg-primary-dark: #082f6f;
+  --humg-primary-700: #0d47a1;
+  --humg-secondary: #1976d2;
+  --humg-accent: #ff9800;
+  --humg-accent-dark: #f57c00;
+  --humg-success: #2e7d32;
+  --humg-warning: #f59e0b;
+  --humg-danger: #e53935;
+
+  /* Nền & chữ */
+  --humg-bg: #f8fafc;
+  --humg-surface: #ffffff;
+  --humg-surface-alt: #f1f5f9;
+  --humg-text: #1a1a1a;
+  --humg-text-secondary: #64748b;
+  --humg-border: #e2e8f0;
+  --humg-hover: #e3f2fd;
+
+  /* Hình khối */
+  --humg-radius-card: 12px;
+  --humg-radius-btn: 8px;
+  --humg-shadow-sm: 0 1px 2px rgba(13, 71, 161, 0.05), 0 10px 24px -14px rgba(13, 71, 161, 0.18);
+  --humg-shadow-md: 0 4px 12px rgba(13, 71, 161, 0.08), 0 24px 48px -20px rgba(13, 71, 161, 0.28);
+  --humg-container: 1200px;
+  --humg-container-wide: 1560px;
+  --humg-gutter: 24px;
+
+  /* Header */
+  --humg-utilitybar-h: 36px;
+  --humg-header-h: 72px;
+
+  --humg-transition: 0.2s ease;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+/* Chặn tràn ngang trên mobile (header, ô tìm kiếm, bảng dài…).
+   Dùng `clip` thay `hidden` để không tạo scroll-container, giữ position:sticky. */
+html, body { overflow-x: clip; max-width: 100%; }
+
+body {
+  font-family: 'Inter', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  color: var(--humg-text);
+  background: var(--humg-bg);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg, video, canvas { max-width: 100%; }
+
+h1, h2, h3, h4, h5 { margin: 0 0 0.5em; line-height: 1.25; font-weight: 700; }
+
+p { margin: 0 0 1em; }
+
+a { color: inherit; text-decoration: none; transition: color var(--humg-transition); }
+
+img { max-width: 100%; display: block; }
+
+button { font-family: inherit; cursor: pointer; }
+
+ul { margin: 0; padding: 0; list-style: none; }
+
+:focus-visible { outline: 2px solid var(--humg-secondary); outline-offset: 2px; }
+
+/* ---------- Tiện ích dùng chung ---------- */
+.humg-container {
+  width: 100%;
+  max-width: var(--humg-container);
+  margin: 0 auto;
+  padding-inline: var(--humg-gutter);
+}
+.humg-container-wide {
+  width: 100%;
+  max-width: var(--humg-container-wide);
+  margin: 0 auto;
+  padding-inline: var(--humg-gutter);
+}
+
+.humg-section { padding-block: 56px; }
+.humg-section--tight { padding-block: 40px; }
+.humg-section--alt { background: var(--humg-surface); }
+.humg-section--tint {
+  background:
+    radial-gradient(600px 300px at 100% 0%, rgba(25, 118, 210, 0.06), transparent),
+    #f3f7fd;
+}
+
+.humg-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--humg-secondary);
+}
+
+.humg-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.humg-section-head h2 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 20px;
+  margin: 0;
+  color: var(--humg-primary);
+}
+.humg-section-head__ic {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--humg-primary);
+  color: #fff;
+  flex-shrink: 0;
+}
+.humg-section-head .humg-link-more { flex-shrink: 0; }
+
+.humg-link-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--humg-secondary);
+}
+.humg-link-more:hover { color: var(--humg-primary); }
+
+.humg-card {
+  background: var(--humg-surface);
+  border: 1px solid var(--humg-border);
+  border-radius: var(--humg-radius-card);
+  box-shadow: var(--humg-shadow-sm);
+}
+
+.humg-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 22px;
+  border-radius: var(--humg-radius-btn);
+  border: 1px solid transparent;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all var(--humg-transition);
+  white-space: nowrap;
+}
+.humg-btn--primary { background: var(--humg-primary); color: #fff; }
+.humg-btn--primary:hover { background: var(--humg-primary-dark); }
+.humg-btn--accent { background: var(--humg-accent); color: #fff; }
+.humg-btn--accent:hover { background: var(--humg-accent-dark); }
+.humg-btn--ghost { background: transparent; color: var(--humg-primary); border-color: var(--humg-border); }
+.humg-btn--ghost:hover { background: var(--humg-hover); border-color: var(--humg-secondary); }
+.humg-btn--light { background: #fff; color: var(--humg-primary); }
+.humg-btn--light:hover { background: var(--humg-surface-alt); }
+.humg-btn--block { width: 100%; }
+.humg-btn:disabled { opacity: 0.5; cursor: not-allowed; filter: grayscale(0.3); }
+.humg-btn--sm { padding: 7px 13px; font-size: 12.5px; gap: 5px; }
+.humg-btn--sm svg { width: 13px; height: 13px; }
+
+/* Placeholder ảnh (dùng thay ảnh thật trong prototype) */
+.humg-ph {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(10, 61, 145, 0.10), rgba(25, 118, 210, 0.16)),
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.5) 0 10px, rgba(255, 255, 255, 0) 10px 20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--humg-primary);
+  font-size: 13px;
+  font-weight: 600;
+}
+.humg-ph[data-ratio='16-9']::before { content: ''; display: block; padding-top: 56.25%; }
+.humg-ph[data-ratio='4-3']::before { content: ''; display: block; padding-top: 75%; }
+.humg-ph[data-ratio='1-1']::before { content: ''; display: block; padding-top: 100%; }
+.humg-ph[data-ratio='3-2']::before { content: ''; display: block; padding-top: 66.66%; }
+.humg-ph > span {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8px;
+}
+
+.humg-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: var(--humg-hover);
+  color: var(--humg-primary);
+}
+.humg-tag--accent { background: #fff3e0; color: var(--humg-accent-dark); }
+.humg-tag--success { background: #e8f5e9; color: var(--humg-success); }
+
+.humg-visually-hidden {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+@media (max-width: 768px) {
+  .humg-section { padding-block: 40px; }
+  .humg-section-head h2 { font-size: 22px; }
+}
+@media (max-width: 600px) {
+  :root { --humg-gutter: 16px; }
+}
+@media (max-width: 380px) {
+  :root { --humg-gutter: 12px; }
+}

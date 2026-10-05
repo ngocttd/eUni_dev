@@ -1,0 +1,705 @@
+{
+ "staffDirectory": {
+  "units": [
+   {
+    "unit": "Phòng Đào tạo",
+    "head": "TS. Nguyễn Văn A",
+    "phone": "024.3838.2222 (101)",
+    "email": "daotao@humg.edu.vn"
+   },
+   {
+    "unit": "Phòng Công tác chính trị – Sinh viên",
+    "head": "ThS. Trần Thị B",
+    "phone": "024.3838.3830 (110)",
+    "email": "ctsv@humg.edu.vn"
+   },
+   {
+    "unit": "Phòng Khoa học – Công nghệ",
+    "head": "PGS.TS. Lê Văn C",
+    "phone": "024.3838.4444 (120)",
+    "email": "khcn@humg.edu.vn"
+   },
+   {
+    "unit": "Phòng Tổ chức – Hành chính",
+    "head": "ThS. Phạm Thị D",
+    "phone": "024.3838.3801 (100)",
+    "email": "tccb@humg.edu.vn"
+   },
+   {
+    "unit": "Phòng Kế hoạch – Tài chính",
+    "head": "ThS. Hoàng Văn E",
+    "phone": "024.3838.3805 (130)",
+    "email": "khtc@humg.edu.vn"
+   },
+   {
+    "unit": "Phòng Hợp tác quốc tế",
+    "head": "TS. Vũ Thị F",
+    "phone": "024.3838.3831 (140)",
+    "email": "htqt@humg.edu.vn"
+   },
+   {
+    "unit": "Trung tâm Thông tin – Thư viện",
+    "head": "ThS. Đỗ Văn G",
+    "phone": "024.3838.3840 (150)",
+    "email": "thuvien@humg.edu.vn"
+   },
+   {
+    "unit": "Trung tâm Công nghệ thông tin",
+    "head": "ThS. Ngô Văn H",
+    "phone": "024.3838.2020 (160)",
+    "email": "cntt@humg.edu.vn"
+   },
+   {
+    "unit": "Trạm Y tế",
+    "head": "BS. Bùi Thị K",
+    "phone": "024.3838.3851 (115)",
+    "email": "yte@humg.edu.vn"
+   },
+   {
+    "unit": "Ban Quản lý Ký túc xá",
+    "head": "ThS. Đặng Văn L",
+    "phone": "024.3838.3850 (170)",
+    "email": "ktx@humg.edu.vn"
+   }
+  ],
+  "rooms": [
+   {
+    "name": "Phòng họp A1",
+    "location": "Tầng 1, Nhà A",
+    "capacity": 20,
+    "equipment": "Máy chiếu, âm thanh, họp trực tuyến",
+    "status": "Còn trống",
+    "free": true
+   },
+   {
+    "name": "Phòng họp A2",
+    "location": "Tầng 2, Nhà A",
+    "capacity": 12,
+    "equipment": "Màn hình LED, họp trực tuyến",
+    "status": "Đang sử dụng",
+    "free": false
+   },
+   {
+    "name": "Hội trường B",
+    "location": "Tầng 1, Nhà B",
+    "capacity": 250,
+    "equipment": "Sân khấu, âm thanh, chiếu sáng",
+    "status": "Còn trống",
+    "free": true
+   },
+   {
+    "name": "Phòng hội thảo C3",
+    "location": "Tầng 3, Nhà C",
+    "capacity": 40,
+    "equipment": "Máy chiếu kép, bàn tròn, họp trực tuyến",
+    "status": "Đặt trước 14:00",
+    "free": false
+   },
+   {
+    "name": "Phòng họp Thư viện",
+    "location": "Tầng 2, Trung tâm TT–TV",
+    "capacity": 16,
+    "equipment": "Màn hình cảm ứng, họp trực tuyến",
+    "status": "Còn trống",
+    "free": true
+   }
+  ]
+ },
+ "staffHub": {
+  "intro": "Trang thông tin chung dành cho giảng viên và cán bộ HUMG: thông báo điều hành, văn bản mới, mốc thời gian năm học và lối vào nhanh các hệ thống. Đăng nhập My eUni để xem lịch giảng dạy, hồ sơ và nhiệm vụ của cá nhân.",
+  "stats": [
+   {
+    "value": "600+",
+    "label": "Giảng viên, cán bộ"
+   },
+   {
+    "value": "12",
+    "label": "Khoa đào tạo"
+   },
+   {
+    "value": "142",
+    "label": "Đề tài / dự án"
+   },
+   {
+    "value": "650+",
+    "label": "Công bố quốc tế"
+   },
+   {
+    "value": "38",
+    "label": "Nhóm nghiên cứu"
+   }
+  ],
+  "quickTools": [
+   {
+    "icon": "mail",
+    "title": "Webmail",
+    "desc": "Thư nội bộ @humg.edu.vn",
+    "to": "/webmail"
+   },
+   {
+    "icon": "calendar",
+    "title": "Lịch công tác",
+    "desc": "Lịch tuần của Trường",
+    "to": "/lich-cong-tac"
+   },
+   {
+    "icon": "flask",
+    "title": "Đăng ký đề tài NCKH",
+    "desc": "Thông báo & mẫu thuyết minh",
+    "to": "/nghien-cuu/de-tai"
+   },
+   {
+    "icon": "play",
+    "title": "E-learning & LMS",
+    "desc": "Lớp học trực tuyến",
+    "to": "/hoc-tap/e-learning"
+   },
+   {
+    "icon": "library",
+    "title": "CSDL khoa học",
+    "desc": "Scopus, ScienceDirect, IEEE…",
+    "to": "/thu-vien/csdl-khoa-hoc"
+   },
+   {
+    "icon": "users",
+    "title": "Danh bạ & Phòng họp",
+    "desc": "Số máy, hộp thư, đặt phòng",
+    "to": "/giang-vien/danh-ba"
+   }
+  ],
+  "keyDates": {
+   "year": "Năm học 2026 – 2027",
+   "rows": [
+    [
+     "SV đăng ký học phần học kỳ I",
+     "05/08 – 18/08/2026",
+     "GV cố vấn học tập hỗ trợ SV"
+    ],
+    [
+     "Khai giảng & bắt đầu học kỳ I",
+     "25/08/2026",
+     "Rà soát đề cương, phân công giảng dạy"
+    ],
+    [
+     "Đánh giá, phân loại viên chức 2025 – 2026",
+     "Trước 30/09/2026",
+     "Theo Hướng dẫn 512/HD-MĐC"
+    ],
+    [
+     "Đăng ký đề tài NCKH cấp Trường 2027",
+     "Trước 15/10/2026",
+     "Nộp thuyết minh về Phòng KHCN"
+    ],
+    [
+     "Hội nghị viên chức, người lao động 2026",
+     "Tháng 11/2026",
+     "Các đơn vị chuẩn bị báo cáo"
+    ]
+   ]
+  },
+  "docsNew": [
+   {
+    "date": "18/08/2026",
+    "title": "Hướng dẫn số 512/HD-MĐC về đánh giá, phân loại viên chức 2025–2026",
+    "to": "/giang-vien/quy-dinh"
+   },
+   {
+    "date": "05/08/2026",
+    "title": "Quyết định ban hành Quy chế chi tiêu nội bộ (sửa đổi)",
+    "to": "/giang-vien/quy-dinh"
+   },
+   {
+    "date": "28/07/2026",
+    "title": "Kế hoạch tổ chức Hội nghị viên chức, người lao động 2026",
+    "to": "/tin-tuc"
+   }
+  ],
+  "notices": [
+   {
+    "date": "20/08/2026",
+    "title": "Thông báo lịch nghỉ Lễ Quốc khánh 02/9 và bố trí trực cơ quan"
+   },
+   {
+    "date": "15/08/2026",
+    "title": "Hướng dẫn thực hiện đánh giá, phân loại viên chức năm học 2025 – 2026"
+   },
+   {
+    "date": "08/08/2026",
+    "title": "Kế hoạch đăng ký đề tài NCKH cấp Trường năm 2027"
+   },
+   {
+    "date": "01/08/2026",
+    "title": "Triển khai phần mềm quản lý giảng dạy trên hệ thống My eUni"
+   }
+  ]
+ },
+ "staffNav": [
+  {
+   "label": "Tổng quan",
+   "to": "/giang-vien",
+   "icon": "home"
+  },
+  {
+   "label": "Giảng dạy & Đào tạo",
+   "to": "/giang-vien/giang-day",
+   "icon": "book"
+  },
+  {
+   "label": "Nghiên cứu khoa học",
+   "to": "/giang-vien/nghien-cuu",
+   "icon": "flask"
+  },
+  {
+   "label": "Quy định – Quy chế",
+   "to": "/giang-vien/quy-dinh",
+   "icon": "shield"
+  },
+  {
+   "label": "Biểu mẫu chung",
+   "to": "/giang-vien/bieu-mau",
+   "icon": "file"
+  },
+  {
+   "label": "Tiện ích cán bộ",
+   "to": "/giang-vien/tien-ich",
+   "icon": "grid"
+  },
+  {
+   "label": "Danh bạ đơn vị & Phòng họp",
+   "to": "/giang-vien/danh-ba",
+   "icon": "users"
+  },
+  {
+   "label": "My eUni Giảng viên",
+   "to": "/giang-vien/my-euni",
+   "icon": "external"
+  }
+ ],
+ "staffQuickLinks": [
+  {
+   "label": "Webmail HUMG",
+   "to": "/webmail"
+  },
+  {
+   "label": "Lịch công tác tuần",
+   "to": "/lich-cong-tac"
+  },
+  {
+   "label": "Đăng ký đề tài NCKH",
+   "to": "/nghien-cuu/de-tai"
+  },
+  {
+   "label": "Biểu mẫu chung",
+   "to": "/giang-vien/bieu-mau"
+  },
+  {
+   "label": "Quy định – Quy chế",
+   "to": "/giang-vien/quy-dinh"
+  },
+  {
+   "label": "E-learning & LMS",
+   "to": "/hoc-tap/e-learning"
+  }
+ ],
+ "stfForms": {
+  "intro": "Kho biểu mẫu chung phục vụ công tác giảng dạy, nghiên cứu, hành chính và tài chính.",
+  "categories": [
+   "Tất cả",
+   "Giảng dạy",
+   "Nghiên cứu khoa học",
+   "Hành chính – Nhân sự",
+   "Tài chính – Kế toán"
+  ],
+  "list": [
+   {
+    "name": "Đề cương chi tiết học phần",
+    "category": "Giảng dạy",
+    "desc": "Mẫu đề cương chi tiết theo học phần.",
+    "meta": "DOCX · 48 KB"
+   },
+   {
+    "name": "Kế hoạch giảng dạy học phần",
+    "category": "Giảng dạy",
+    "desc": "Mẫu kế hoạch giảng dạy theo lớp.",
+    "meta": "DOCX · 40 KB"
+   },
+   {
+    "name": "Đăng ký đề tài NCKH cấp Trường",
+    "category": "Nghiên cứu khoa học",
+    "desc": "Mẫu thuyết minh đăng ký đề tài.",
+    "meta": "DOCX · 60 KB"
+   },
+   {
+    "name": "Báo cáo tổng kết đề tài NCKH",
+    "category": "Nghiên cứu khoa học",
+    "desc": "Mẫu báo cáo tổng kết và tóm tắt.",
+    "meta": "DOCX · 55 KB"
+   },
+   {
+    "name": "Đề nghị thanh toán kinh phí",
+    "category": "Tài chính – Kế toán",
+    "desc": "Mẫu đề nghị thanh toán và tạm ứng.",
+    "meta": "DOCX · 30 KB"
+   },
+   {
+    "name": "Giấy đề nghị tạm ứng",
+    "category": "Tài chính – Kế toán",
+    "desc": "Mẫu tạm ứng công tác, mua sắm.",
+    "meta": "DOCX · 26 KB"
+   },
+   {
+    "name": "Đơn xin nghỉ phép",
+    "category": "Hành chính – Nhân sự",
+    "desc": "Mẫu đơn xin nghỉ phép, nghỉ việc riêng.",
+    "meta": "DOCX · 24 KB"
+   },
+   {
+    "name": "Đề nghị đi công tác",
+    "category": "Hành chính – Nhân sự",
+    "desc": "Mẫu đề nghị và quyết định cử đi công tác.",
+    "meta": "DOCX · 28 KB"
+   },
+   {
+    "name": "Phiếu đăng ký lịch coi thi",
+    "category": "Giảng dạy",
+    "desc": "Mẫu đăng ký và phân công coi thi.",
+    "meta": "DOCX · 22 KB"
+   },
+   {
+    "name": "Bản kê khối lượng giờ giảng",
+    "category": "Giảng dạy",
+    "desc": "Mẫu kê khai giờ chuẩn cuối học kỳ.",
+    "meta": "XLSX · 45 KB"
+   }
+  ]
+ },
+ "stfPortal": {
+  "intro": "Đăng nhập để sử dụng các dịch vụ và quản lý thông tin cá nhân trên cổng thông tin eUni.",
+  "benefits": [
+   "Quản lý giảng dạy: phân công, lịch dạy, điểm và học liệu",
+   "Quản lý nghiên cứu khoa học: đề tài, công bố, sản phẩm",
+   "Hồ sơ nhân sự: lý lịch khoa học, hợp đồng, chức danh",
+   "Thông báo điều hành và lịch làm việc cá nhân",
+   "Dịch vụ nội bộ: thanh toán, tạm ứng, đề nghị công tác"
+  ],
+  "loginTo": "/dang-nhap",
+  "guideTo": "/hoc-tap/huong-dan"
+ },
+ "stfRegulations": {
+  "intro": "Các quy định, quy chế, văn bản pháp lý áp dụng cho giảng viên và cán bộ HUMG.",
+  "categories": [
+   "Tất cả",
+   "Quy chế",
+   "Quy định",
+   "Hướng dẫn",
+   "Chính sách"
+  ],
+  "docs": [
+   {
+    "title": "Quy chế tổ chức và hoạt động của Trường",
+    "type": "Quy chế",
+    "date": "15/03/2023"
+   },
+   {
+    "title": "Quy định về công tác giảng dạy của giảng viên",
+    "type": "Quy định",
+    "date": "10/02/2023"
+   },
+   {
+    "title": "Quy chế nghiên cứu khoa học của Trường",
+    "type": "Quy chế",
+    "date": "05/01/2023"
+   },
+   {
+    "title": "Quy định về thi đua, khen thưởng",
+    "type": "Quy định",
+    "date": "20/12/2022"
+   },
+   {
+    "title": "Hướng dẫn thanh toán đề tài NCKH",
+    "type": "Hướng dẫn",
+    "date": "18/11/2022"
+   },
+   {
+    "title": "Quy định về chế độ làm việc của giảng viên",
+    "type": "Quy định",
+    "date": "02/10/2022"
+   },
+   {
+    "title": "Chính sách hỗ trợ công bố quốc tế",
+    "type": "Chính sách",
+    "date": "15/09/2022"
+   },
+   {
+    "title": "Hướng dẫn đánh giá, phân loại viên chức",
+    "type": "Hướng dẫn",
+    "date": "01/08/2022"
+   },
+   {
+    "title": "Quy chế chi tiêu nội bộ",
+    "type": "Quy chế",
+    "date": "12/07/2022"
+   },
+   {
+    "title": "Chính sách đào tạo, bồi dưỡng cán bộ",
+    "type": "Chính sách",
+    "date": "05/06/2022"
+   }
+  ]
+ },
+ "stfResearch": {
+  "intro": "Thông tin về hoạt động nghiên cứu, công bố khoa học, đề tài và hỗ trợ nghiên cứu dành cho giảng viên, cán bộ.",
+  "tiles": [
+   {
+    "icon": "file",
+    "title": "Công bố khoa học",
+    "desc": "Khai báo, thống kê bài báo, sách và sản phẩm khoa học.",
+    "to": "/nghien-cuu/cong-bo"
+   },
+   {
+    "icon": "flask",
+    "title": "Đề tài NCKH",
+    "desc": "Đăng ký, triển khai và nghiệm thu đề tài các cấp.",
+    "to": "/nghien-cuu/de-tai"
+   },
+   {
+    "icon": "calendar",
+    "title": "Hội thảo – Hội nghị",
+    "desc": "Lịch hội nghị, hội thảo khoa học và kêu gọi báo cáo.",
+    "to": "/nghien-cuu/hoi-nghi-hoi-thao"
+   },
+   {
+    "icon": "newspaper",
+    "title": "Tạp chí khoa học",
+    "desc": "Tạp chí Khoa học Kỹ thuật Mỏ – Địa chất và hướng dẫn gửi bài.",
+    "to": "/gioi-thieu/don-vi-truc-thuoc/tap-chi-khoa-hoc"
+   },
+   {
+    "icon": "headphones",
+    "title": "Hỗ trợ nghiên cứu",
+    "desc": "Hỗ trợ kinh phí công bố, sở hữu trí tuệ và nhóm nghiên cứu.",
+    "to": "/nghien-cuu/nhom-nghien-cuu"
+   },
+   {
+    "icon": "award",
+    "title": "Thống kê NCKH",
+    "desc": "Số liệu công bố, đề tài và chuyển giao theo đơn vị.",
+    "to": "/nghien-cuu"
+   }
+  ],
+  "news": [
+   {
+    "date": "20/08/2026",
+    "title": "Thông báo xét duyệt đề tài NCKH cấp Trường năm 2027"
+   },
+   {
+    "date": "12/08/2026",
+    "title": "Danh mục tạp chí khoa học được tính điểm công trình năm 2026"
+   },
+   {
+    "date": "30/07/2026",
+    "title": "Hội thảo quốc tế về khai thác mỏ và địa chất môi trường 2026"
+   }
+  ]
+ },
+ "stfTeaching": {
+  "intro": "Lịch giảng dạy, phân công, tài liệu và các quy định liên quan tới công tác giảng dạy của giảng viên.",
+  "terms": [
+   "HK1 2026 – 2027",
+   "HK2 2025 – 2026",
+   "HK1 2025 – 2026"
+  ],
+  "groups": [
+   "Tất cả",
+   "DCCTĐKT K68",
+   "KTM K67",
+   "XDCTN K68",
+   "KTM K66"
+  ],
+  "schedule": [
+   {
+    "term": "HK1 2026 – 2027",
+    "day": "Thứ 2",
+    "period": "Tiết 1–3",
+    "course": "Cơ học đá",
+    "credits": 3,
+    "group": "DCCTĐKT K68",
+    "room": "P.301 – A",
+    "weeks": "1–15"
+   },
+   {
+    "term": "HK1 2026 – 2027",
+    "day": "Thứ 3",
+    "period": "Tiết 4–6",
+    "course": "An toàn và bảo hộ lao động",
+    "credits": 2,
+    "group": "KTM K67",
+    "room": "P.205 – C",
+    "weeks": "1–10"
+   },
+   {
+    "term": "HK1 2026 – 2027",
+    "day": "Thứ 5",
+    "period": "Tiết 1–3",
+    "course": "Cơ học đá",
+    "credits": 3,
+    "group": "XDCTN K68",
+    "room": "P.301 – A",
+    "weeks": "1–15"
+   },
+   {
+    "term": "HK1 2026 – 2027",
+    "day": "Thứ 6",
+    "period": "Tiết 7–9",
+    "course": "Đồ án môn học",
+    "credits": 1,
+    "group": "KTM K66",
+    "room": "Xưởng thực hành",
+    "weeks": "6–12"
+   },
+   {
+    "term": "HK2 2025 – 2026",
+    "day": "Thứ 2",
+    "period": "Tiết 4–6",
+    "course": "Khai thác hầm lò 1",
+    "credits": 3,
+    "group": "KTM K67",
+    "room": "P.402 – C",
+    "weeks": "1–15"
+   },
+   {
+    "term": "HK2 2025 – 2026",
+    "day": "Thứ 4",
+    "period": "Tiết 1–3",
+    "course": "Cơ học đá",
+    "credits": 3,
+    "group": "DCCTĐKT K67",
+    "room": "P.301 – A",
+    "weeks": "1–15"
+   }
+  ],
+  "resources": [
+   {
+    "icon": "book",
+    "title": "Chương trình đào tạo",
+    "desc": "Khung chương trình, đề cương học phần theo ngành.",
+    "to": "/hoc-tap/chuong-trinh-dao-tao"
+   },
+   {
+    "icon": "shield",
+    "title": "Quy định đào tạo",
+    "desc": "Quy chế đào tạo tín chỉ, quy trình tổ chức lớp học phần.",
+    "to": "/giang-vien/quy-dinh"
+   },
+   {
+    "icon": "play",
+    "title": "Hướng dẫn sử dụng LMS",
+    "desc": "Tạo lớp, giao bài, tổ chức kiểm tra trên E-learning.",
+    "to": "/hoc-tap/e-learning"
+   },
+   {
+    "icon": "award",
+    "title": "Kiểm định & ĐBCL",
+    "desc": "Quy trình bảo đảm chất lượng, tự đánh giá chương trình.",
+    "to": "/hoc-tap/chuan-dau-ra"
+   },
+   {
+    "icon": "users",
+    "title": "Đánh giá giảng viên",
+    "desc": "Khảo sát người học và đánh giá hoạt động giảng dạy.",
+    "to": "/hoc-tap/khao-sat"
+   },
+   {
+    "icon": "layers",
+    "title": "Biểu mẫu đào tạo",
+    "desc": "Đề cương, kế hoạch giảng dạy, đăng ký coi thi.",
+    "to": "/giang-vien/bieu-mau"
+   }
+  ],
+  "quickLinks": [
+   {
+    "label": "Kế hoạch năm học",
+    "to": "/hoc-tap/lich-hoc"
+   },
+   {
+    "label": "Quy chế đào tạo tín chỉ",
+    "to": "/giang-vien/quy-dinh"
+   },
+   {
+    "label": "Hướng dẫn sử dụng LMS",
+    "to": "/hoc-tap/e-learning"
+   },
+   {
+    "label": "Biểu mẫu đào tạo",
+    "to": "/giang-vien/bieu-mau"
+   }
+  ]
+ },
+ "stfUtilities": {
+  "intro": "Các tiện ích hỗ trợ công việc hằng ngày của giảng viên và cán bộ.",
+  "tiles": [
+   {
+    "icon": "mail",
+    "title": "Webmail",
+    "desc": "Truy cập email nội bộ @humg.edu.vn.",
+    "to": "/webmail"
+   },
+   {
+    "icon": "calendar",
+    "title": "Lịch công tác",
+    "desc": "Xem lịch công tác tuần và lịch cá nhân.",
+    "to": "/lich-cong-tac"
+   },
+   {
+    "icon": "users",
+    "title": "Danh bạ đơn vị",
+    "desc": "Số máy, hộp thư của các phòng, khoa, trung tâm.",
+    "to": "/giang-vien/danh-ba"
+   },
+   {
+    "icon": "building",
+    "title": "Phòng họp",
+    "desc": "Xem và đăng ký sử dụng phòng họp.",
+    "to": "/giang-vien/danh-ba"
+   },
+   {
+    "icon": "library",
+    "title": "Thư viện số",
+    "desc": "Tra cứu giáo trình, tài liệu số dùng chung.",
+    "to": "/thu-vien-so"
+   },
+   {
+    "icon": "grid",
+    "title": "Phần mềm hỗ trợ",
+    "desc": "Các công cụ chuyên môn được cấp phép.",
+    "to": "/tien-ich"
+   }
+  ],
+  "external": [
+   {
+    "label": "Cổng thông tin Bộ GD&ĐT",
+    "href": "https://moet.gov.vn"
+   },
+   {
+    "label": "Thư viện số Quốc gia",
+    "href": "#"
+   },
+   {
+    "label": "CSDL khoa học quốc gia",
+    "href": "#"
+   },
+   {
+    "label": "Scopus",
+    "href": "https://scopus.com"
+   },
+   {
+    "label": "Web of Science",
+    "href": "#"
+   },
+   {
+    "label": "Google Scholar",
+    "href": "https://scholar.google.com"
+   }
+  ]
+ }
+}

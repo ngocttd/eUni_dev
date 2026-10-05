@@ -1,0 +1,6 @@
+'use client'
+import './shared.jsx'
+export { LoginPage } from './pages/LoginPage.jsx'
+export { ParentLoginPage } from './pages/ParentLoginPage.jsx'
+export { ChangePasswordPage } from './pages/ChangePasswordPage.jsx'
+export { ForgotPasswordPage } from './pages/ForgotPasswordPage.jsx'

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" fill="none">
+  <defs>
+    <linearGradient id="gvG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e4f1e5"/><stop offset="1" stop-color="#f6fcf6"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="240" fill="url(#gvG)"/>
+  <circle cx="342" cy="50" r="66" fill="#2e7d32" opacity="0.12"/>
+  <circle cx="56" cy="206" r="42" fill="#2e7d32" opacity="0.12"/>
+  <!-- board -->
+  <rect x="150" y="44" width="210" height="120" rx="8" fill="#ffffff" stroke="#2e7d32" stroke-width="6"/>
+  <path d="M172 74h150M172 96h120M172 118h140" stroke="#a5d6a7" stroke-width="6" stroke-linecap="round"/>
+  <path d="M255 164v28" stroke="#2e7d32" stroke-width="6"/>
+  <!-- teacher figure -->
+  <circle cx="86" cy="120" r="22" fill="#2e7d32"/>
+  <path d="M50 210v-26a36 36 0 0 1 72 0v26z" fill="#2e7d32"/>
+  <path d="M118 150l40 -20" stroke="#2e7d32" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="162" cy="128" r="6" fill="#ff9800"/>
+  <path d="M40 210h300" stroke="#bcdcbd" stroke-width="6" stroke-linecap="round"/>
+</svg>

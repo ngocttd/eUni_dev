@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" fill="none">
+  <defs>
+    <linearGradient id="tsG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e6f1fb"/><stop offset="1" stop-color="#f7fbff"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="240" fill="url(#tsG)"/>
+  <circle cx="342" cy="46" r="72" fill="#1976d2" opacity="0.12"/>
+  <circle cx="52" cy="206" r="44" fill="#ff9800" opacity="0.14"/>
+  <path d="M64 74l4 10 10 1-7 7 2 11-9-6-9 6 2-11-7-7 10-1z" fill="#ff9800" opacity="0.7"/>
+  <!-- graduation cap -->
+  <path d="M200 62l64 24-64 24-64-24z" fill="#1976d2"/>
+  <path d="M172 100v22c0 8 12 14 28 14s28-6 28-14v-22" stroke="#1976d2" stroke-width="7" stroke-linecap="round"/>
+  <path d="M264 86v34" stroke="#1976d2" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="264" cy="126" r="7" fill="#ff9800"/>
+  <!-- open book -->
+  <path d="M120 176c26-12 54-12 80 0v34c-26-12-54-12-80 0z" fill="#ffffff" stroke="#1976d2" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M280 176c-26-12-54-12-80 0v34c26-12 54-12 80 0z" fill="#ffffff" stroke="#1976d2" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M200 176v34" stroke="#1976d2" stroke-width="6"/>
+  <path d="M136 182h44M136 194h40M220 182h44M224 194h40" stroke="#90caf9" stroke-width="5" stroke-linecap="round"/>
+</svg>

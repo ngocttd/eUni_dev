@@ -1,0 +1,31 @@
+.ph-page { display: grid; grid-template-columns: 1fr 320px; gap: 32px; align-items: start; }
+.ph-page__main h1 { font-size: 30px; margin: 10px 0 12px; color: var(--humg-primary); }
+.ph-page__params { font-size: 13px; color: var(--humg-text-secondary); }
+.ph-page__lead { max-width: 60ch; color: var(--humg-text-secondary); }
+.ph-page__lead code { background: var(--humg-surface-alt); padding: 2px 6px; border-radius: 5px; font-size: 12.5px; color: var(--humg-primary); }
+
+.ph-page__skeleton { margin: 24px 0 28px; }
+.ph-page__sk-row { display: flex; gap: 16px; margin-bottom: 16px; }
+.ph-page__sk-row span { flex: 1; height: 72px; border-radius: 10px; background: var(--humg-surface-alt); }
+.ph-page__sk-block { height: 200px; border-radius: 12px; background: var(--humg-surface-alt); margin-bottom: 16px; }
+.ph-page__sk-lines { display: grid; gap: 10px; }
+.ph-page__sk-lines span { height: 12px; border-radius: 6px; background: var(--humg-surface-alt); }
+.ph-page__sk-lines span:nth-child(2) { width: 92%; }
+.ph-page__sk-lines span:nth-child(3) { width: 80%; }
+.ph-page__sk-lines span:nth-child(4) { width: 60%; }
+
+.ph-page__aside { padding: 18px; position: sticky; top: 92px; }
+.ph-page__aside h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--humg-primary); margin-bottom: 12px; }
+.ph-page__aside ul { display: grid; gap: 2px; }
+.ph-page__aside li a { display: flex; align-items: center; gap: 6px; padding: 8px 10px; border-radius: 7px; font-size: 13px; color: var(--humg-text); }
+.ph-page__aside li a em { margin-left: auto; font-style: normal; font-size: 10px; color: var(--humg-text-secondary); }
+.ph-page__aside li a:hover { background: var(--humg-hover); color: var(--humg-primary); }
+.ph-page__aside li.is-current a { background: var(--humg-primary); color: #fff; }
+.ph-page__aside li.is-current a em { color: rgba(255, 255, 255, 0.75); }
+.ph-page__aside li a svg { flex-shrink: 0; color: var(--humg-secondary); }
+.ph-page__aside li.is-current a svg { color: #fff; }
+
+@media (max-width: 900px) {
+  .ph-page { grid-template-columns: 1fr; }
+  .ph-page__aside { position: static; }
+}

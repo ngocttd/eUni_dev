@@ -1,0 +1,684 @@
+{
+ "ppAttendance": {
+  "terms": [
+   "Học kỳ 2 (2024 – 2025)",
+   "Học kỳ 1 (2024 – 2025)"
+  ],
+  "subjects": [
+   "Trắc địa đại cương (DTC061A)",
+   "Đo vẽ bản đồ số (DVM063B)",
+   "Viễn thám cơ bản (VTN001)"
+  ],
+  "stats": [
+   {
+    "value": "45",
+    "label": "Tổng số buổi"
+   },
+   {
+    "value": "41",
+    "note": "91.1%",
+    "label": "Có mặt",
+    "tone": "ok"
+   },
+   {
+    "value": "4",
+    "note": "8.9%",
+    "label": "Vắng",
+    "tone": "bad"
+   },
+   {
+    "value": "0",
+    "note": "0%",
+    "label": "Có phép"
+   }
+  ],
+  "history": [
+   [
+    "16/05/2025",
+    "Sáng",
+    "Bài 15: Lưới khống chế đo vẽ",
+    "Có mặt",
+    ""
+   ],
+   [
+    "14/05/2025",
+    "Chiều",
+    "Bài 14: Đo vẽ chi tiết",
+    "Có mặt",
+    ""
+   ],
+   [
+    "09/05/2025",
+    "Sáng",
+    "Bài 13: Đo vẽ chi tiết",
+    "Có mặt",
+    ""
+   ],
+   [
+    "07/05/2025",
+    "Chiều",
+    "Bài 12: Trắc địa công trình",
+    "Vắng",
+    "Không phép"
+   ],
+   [
+    "05/05/2025",
+    "Sáng",
+    "Bài 11: Trắc địa công trình",
+    "Có mặt",
+    ""
+   ]
+  ]
+ },
+ "ppChild": {
+  "name": "Trần Minh Anh",
+  "mssv": "21CQC01234",
+  "dob": "20/09/2003",
+  "gender": "Nam",
+  "ethnic": "Kinh",
+  "cccd": "036203012345",
+  "issued": "10/06/2021",
+  "issuedBy": "Cục CSQLHC về TTXH",
+  "address": "12 Nguyễn Du, TP. Nam Định, tỉnh Nam Định",
+  "email": "tranminhanh@humg.edu.vn",
+  "faculty": "Khoa Trắc địa – Bản đồ và Quản lý đất đai",
+  "major": "Trắc địa công trình",
+  "program": "Đại học chính quy",
+  "mode": "Chính quy",
+  "class": "DTC061A – K61",
+  "cohort": "K61 (2021 – 2026)",
+  "year": "2024 – 2025",
+  "family": [
+   [
+    "Họ tên bố",
+    "Trần Văn Bình"
+   ],
+   [
+    "Nghề nghiệp",
+    "Kỹ sư xây dựng"
+   ],
+   [
+    "Điện thoại",
+    "0987 654 321"
+   ],
+   [
+    "Họ tên mẹ",
+    "Trần Thị Lan"
+   ],
+   [
+    "Nghề nghiệp",
+    "Giáo viên"
+   ],
+   [
+    "Điện thoại",
+    "0912 345 678"
+   ],
+   [
+    "Hộ khẩu thường trú",
+    "12 Nguyễn Du, TP. Nam Định, Nam Định"
+   ]
+  ]
+ },
+ "ppContactInfo": [
+  {
+   "unit": "Phòng Công tác sinh viên",
+   "phone": "024.38383806 (Máy lẻ 123)",
+   "email": "ctsv@humg.edu.vn"
+  },
+  {
+   "unit": "Phòng Đào tạo",
+   "phone": "024.38383806 (Máy lẻ 105)",
+   "email": "daotao@humg.edu.vn"
+  }
+ ],
+ "ppDashboard": {
+  "years": [
+   "2024 – 2025",
+   "2023 – 2024"
+  ],
+  "stats": [
+   {
+    "value": "3.21",
+    "unit": "/ 4.00",
+    "label": "GPA học kỳ"
+   },
+   {
+    "value": "Khá",
+    "label": "Xếp loại học lực"
+   },
+   {
+    "value": "72",
+    "unit": "/ 140",
+    "label": "Số tín chỉ tích lũy"
+   },
+   {
+    "value": "18",
+    "label": "Số môn đã học"
+   },
+   {
+    "value": "85",
+    "unit": "/ 100",
+    "label": "Điểm rèn luyện"
+   },
+   {
+    "value": "0 VNĐ",
+    "note": "Đã thanh toán",
+    "label": "Nợ học phí"
+   }
+  ],
+  "gradeDonut": {
+   "total": 25,
+   "parts": [
+    {
+     "label": "Xuất sắc",
+     "pct": 12
+    },
+    {
+     "label": "Giỏi",
+     "pct": 28
+    },
+    {
+     "label": "Khá",
+     "pct": 40
+    },
+    {
+     "label": "Trung bình",
+     "pct": 16
+    },
+    {
+     "label": "Yếu",
+     "pct": 4
+    }
+   ]
+  },
+  "gpaTrend": {
+   "labels": [
+    "HK1 22-23",
+    "HK2 22-23",
+    "HK1 23-24",
+    "HK2 23-24",
+    "HK1 24-25",
+    "HK2 24-25"
+   ],
+   "points": [
+    2.85,
+    2.96,
+    3.02,
+    3.15,
+    3.1,
+    3.21
+   ]
+  },
+  "notices": [
+   {
+    "date": "16/05/2025",
+    "title": "Thông báo học phí học kỳ 3 (2024 – 2025)"
+   },
+   {
+    "date": "14/05/2025",
+    "title": "Lịch thi học kỳ 2 (2024 – 2025)"
+   },
+   {
+    "date": "10/05/2025",
+    "title": "Kết quả học tập học kỳ 1 (2024 – 2025)"
+   }
+  ]
+ },
+ "ppLinks": [
+  [
+   "1",
+   "Trần Minh Anh",
+   "21CQC01234",
+   "DTC061A – K61",
+   "Con"
+  ]
+ ],
+ "ppNotices": {
+  "tabs": [
+   "Tất cả",
+   "Học tập",
+   "Học phí",
+   "Lịch thi",
+   "Khác"
+  ],
+  "total": 15,
+  "list": [
+   {
+    "icon": "file",
+    "title": "Thông báo học phí học kỳ 3 (2024 – 2025)",
+    "cat": "Học phí",
+    "unread": true,
+    "desc": "Nhà trường thông báo học phí học kỳ 3 năm học 2024 – 2025. Phụ huynh và sinh viên xem chi tiết trên cổng.",
+    "date": "16/05/2025 09:30"
+   },
+   {
+    "icon": "calendar",
+    "title": "Lịch thi học kỳ 2 (2024 – 2025)",
+    "cat": "Lịch thi",
+    "unread": true,
+    "desc": "Công bố lịch thi học kỳ 2 năm học 2024 – 2025. Sinh viên chủ động theo dõi phòng thi và ca thi.",
+    "date": "14/05/2025 14:20"
+   },
+   {
+    "icon": "award",
+    "title": "Kết quả học tập học kỳ 1 (2024 – 2025)",
+    "cat": "Học tập",
+    "unread": false,
+    "desc": "Đã có kết quả học tập học kỳ 1 năm học 2024 – 2025. Phụ huynh có thể xem trong mục Kết quả học tập.",
+    "date": "10/05/2025 10:15"
+   },
+   {
+    "icon": "grid",
+    "title": "Thông báo bảo trì hệ thống eUni Portal",
+    "cat": "Khác",
+    "unread": false,
+    "desc": "Hệ thống sẽ bảo trì từ 22:00 ngày 12/05/2025 đến 02:00 ngày 13/05/2025. Mong quý phụ huynh thông cảm.",
+    "date": "08/05/2025 16:00"
+   },
+   {
+    "icon": "award",
+    "title": "Thông báo học bổng khuyến khích học tập",
+    "cat": "Học tập",
+    "unread": false,
+    "desc": "Nhà trường thông báo xét học bổng khuyến khích học tập học kỳ 2 (2024 – 2025). Hạn nộp hồ sơ: 25/05/2025.",
+    "date": "05/05/2025 09:00"
+   },
+   {
+    "icon": "bell",
+    "title": "Con bạn vắng buổi học Trắc địa công trình ngày 07/05 (không phép)",
+    "cat": "Học tập",
+    "unread": false,
+    "desc": "Nhà trường thông tin tình hình chuyên cần của sinh viên tới phụ huynh để cùng phối hợp nhắc nhở.",
+    "date": "08/05/2025 07:50"
+   }
+  ]
+ },
+ "ppParent": {
+  "name": "Trần Thị Lan",
+  "relation": "Mẹ",
+  "child": "Trần Minh Anh",
+  "email": "tranthilan.nd@gmail.com",
+  "phone": "0912 345 678",
+  "address": "12 Nguyễn Du, TP. Nam Định, tỉnh Nam Định"
+ },
+ "ppRequestHistory": [
+  [
+   "YC2025-058",
+   "Hỏi về học phí học kỳ 3",
+   "Phòng Đào tạo",
+   "12/05/2025",
+   "Đã phản hồi"
+  ],
+  [
+   "YC2025-041",
+   "Xin xác nhận sinh viên đang học",
+   "Phòng CTSV",
+   "28/04/2025",
+   "Đã phản hồi"
+  ],
+  [
+   "YC2025-030",
+   "Phản ánh về lịch học trùng",
+   "Phòng Đào tạo",
+   "15/04/2025",
+   "Đang xử lý"
+  ]
+ ],
+ "ppRequestTypes": [
+  "Chọn loại yêu cầu",
+  "Hỏi về kết quả học tập",
+  "Hỏi về học phí",
+  "Hỏi về chuyên cần",
+  "Xin xác nhận sinh viên",
+  "Phản ánh / Góp ý",
+  "Khác"
+ ],
+ "ppResults": {
+  "terms": [
+   "Học kỳ 2 (2024 – 2025)",
+   "Học kỳ 1 (2024 – 2025)",
+   "Học kỳ 2 (2023 – 2024)"
+  ],
+  "summary": [
+   {
+    "value": "3.21",
+    "label": "GPA học kỳ"
+   },
+   {
+    "value": "72",
+    "label": "Số tín chỉ tích lũy"
+   },
+   {
+    "value": "23 / 25",
+    "label": "Số môn đạt"
+   },
+   {
+    "value": "Khá",
+    "label": "Xếp loại học lực"
+   }
+  ],
+  "courses": [
+   [
+    "1",
+    "DTC061A",
+    "Trắc địa đại cương",
+    "3",
+    "B+",
+    "3.5"
+   ],
+   [
+    "2",
+    "DVM063B",
+    "Đo vẽ bản đồ số",
+    "3",
+    "A-",
+    "3.7"
+   ],
+   [
+    "3",
+    "VTN001",
+    "Viễn thám cơ bản",
+    "3",
+    "B",
+    "3.0"
+   ],
+   [
+    "4",
+    "BDS101",
+    "Bản đồ địa hình",
+    "3",
+    "A",
+    "4.0"
+   ],
+   [
+    "5",
+    "KNG3101",
+    "Kỹ thuật GNSS",
+    "3",
+    "B+",
+    "3.5"
+   ],
+   [
+    "6",
+    "PL101",
+    "Pháp luật đại cương",
+    "2",
+    "B",
+    "3.0"
+   ],
+   [
+    "7",
+    "TUDV001",
+    "Tư duy và kỹ năng số",
+    "2",
+    "A",
+    "4.0"
+   ],
+   [
+    "8",
+    "NN201",
+    "Ngoại ngữ 2",
+    "2",
+    "B+",
+    "3.5"
+   ]
+  ],
+  "bySubject": {
+   "columns": [
+    "Môn học",
+    "Số lần học",
+    "Điểm cao nhất",
+    "Điểm gần nhất",
+    "Xu hướng"
+   ],
+   "rows": [
+    [
+     "Trắc địa đại cương",
+     "1",
+     "3.5",
+     "3.5",
+     "Ổn định"
+    ],
+    [
+     "Đo vẽ bản đồ số",
+     "1",
+     "3.7",
+     "3.7",
+     "Ổn định"
+    ],
+    [
+     "Viễn thám cơ bản",
+     "2",
+     "3.0",
+     "3.0",
+     "Cải thiện"
+    ],
+    [
+     "Kỹ thuật GNSS",
+     "1",
+     "3.5",
+     "3.5",
+     "Ổn định"
+    ]
+   ]
+  }
+ },
+ "ppSchedule": {
+  "weeks": [
+   "Tuần 20 (12/05 – 18/05/2025)",
+   "Tuần 21 (19/05 – 25/05/2025)"
+  ],
+  "slots": [
+   "Tiết 1–3",
+   "Tiết 4–6",
+   "Tiết 7–9",
+   "Tiết 10–12"
+  ],
+  "timetable": [
+   {
+    "day": "Thứ 2",
+    "slot": "Tiết 1–3",
+    "course": "Trắc địa đại cương",
+    "room": "A5-201"
+   },
+   {
+    "day": "Thứ 3",
+    "slot": "Tiết 7–9",
+    "course": "Hệ thống thông tin địa lý",
+    "room": "A5-102"
+   },
+   {
+    "day": "Thứ 4",
+    "slot": "Tiết 1–3",
+    "course": "Đo vẽ bản đồ số",
+    "room": "TH Trắc địa 2"
+   },
+   {
+    "day": "Thứ 4",
+    "slot": "Tiết 7–9",
+    "course": "Viễn thám ứng dụng",
+    "room": "A5-204"
+   },
+   {
+    "day": "Thứ 5",
+    "slot": "Tiết 4–6",
+    "course": "Viễn thám cơ bản",
+    "room": "A5-108"
+   },
+   {
+    "day": "Thứ 6",
+    "slot": "Tiết 7–9",
+    "course": "Pháp luật đại cương",
+    "room": "B2-401"
+   }
+  ],
+  "exams": [
+   [
+    "Trắc địa đại cương",
+    "DTC061A",
+    "02/06/2025",
+    "Ca 1 (07:30)",
+    "P.A5-201"
+   ],
+   [
+    "Đo vẽ bản đồ số",
+    "DVM063B",
+    "05/06/2025",
+    "Ca 2 (09:30)",
+    "P.A5-105"
+   ],
+   [
+    "Viễn thám cơ bản",
+    "VTN001",
+    "09/06/2025",
+    "Ca 1 (07:30)",
+    "P.A5-108"
+   ]
+  ]
+ },
+ "ppServices": {
+  "catalog": [
+   {
+    "icon": "file",
+    "title": "Giấy xác nhận sinh viên",
+    "fee": "Miễn phí",
+    "time": "2 ngày làm việc"
+   },
+   {
+    "icon": "award",
+    "title": "Bảng điểm có xác nhận",
+    "fee": "20.000 đ / bản",
+    "time": "3 ngày làm việc"
+   },
+   {
+    "icon": "grid",
+    "title": "Xác nhận vay vốn ngân hàng CSXH",
+    "fee": "Miễn phí",
+    "time": "2 ngày làm việc"
+   },
+   {
+    "icon": "heart",
+    "title": "Xác nhận hưởng chế độ chính sách",
+    "fee": "Miễn phí",
+    "time": "3 ngày làm việc"
+   },
+   {
+    "icon": "book",
+    "title": "Đăng ký ở ký túc xá",
+    "fee": "Theo quy định",
+    "time": "Theo đợt"
+   },
+   {
+    "icon": "bell",
+    "title": "Đăng ký nhận thông báo qua SMS",
+    "fee": "10.000 đ / tháng",
+    "time": "Kích hoạt ngay"
+   }
+  ],
+  "history": [
+   [
+    "DV2025-112",
+    "Giấy xác nhận sinh viên",
+    "10/05/2025",
+    "Hoàn thành"
+   ],
+   [
+    "DV2025-098",
+    "Bảng điểm có xác nhận",
+    "22/04/2025",
+    "Hoàn thành"
+   ],
+   [
+    "DV2025-081",
+    "Xác nhận vay vốn ngân hàng CSXH",
+    "05/04/2025",
+    "Đang xử lý"
+   ]
+  ]
+ },
+ "ppTerm": "Học kỳ 2 · Năm học 2024 – 2025",
+ "ppTuition": {
+  "overview": {
+   "total": "12.870.000 VNĐ",
+   "paid": "12.870.000 VNĐ",
+   "due": "0 VNĐ",
+   "status": "Đã thanh toán"
+  },
+  "detailTitle": "Chi tiết học phí học kỳ 3 (2024 – 2025)",
+  "fees": [
+   [
+    "Học phí tín chỉ (15 tín chỉ)",
+    "11.250.000",
+    "Đã thanh toán"
+   ],
+   [
+    "Lệ phí thực hành",
+    "800.000",
+    "Đã thanh toán"
+   ],
+   [
+    "Bảo hiểm y tế",
+    "870.000",
+    "Đã thanh toán"
+   ],
+   [
+    "Lệ phí thư viện",
+    "100.000",
+    "Đã thanh toán"
+   ],
+   [
+    "Khác",
+    "–",
+    "–"
+   ]
+  ],
+  "totalRow": [
+   "Tổng cộng",
+   "12.870.000",
+   "Đã thanh toán"
+  ],
+  "history": [
+   [
+    "12/03/2025",
+    "Nộp học phí học kỳ 2 (2024 – 2025) — đợt 1",
+    "8.000.000 VNĐ",
+    "Chuyển khoản",
+    "Thành công"
+   ],
+   [
+    "02/04/2025",
+    "Nộp học phí học kỳ 2 (2024 – 2025) — đợt 2",
+    "4.870.000 VNĐ",
+    "VNPay",
+    "Thành công"
+   ],
+   [
+    "20/09/2024",
+    "Nộp học phí học kỳ 1 (2024 – 2025)",
+    "12.400.000 VNĐ",
+    "Chuyển khoản",
+    "Thành công"
+   ]
+  ],
+  "invoices": [
+   [
+    "HD2025-00841",
+    "Học phí học kỳ 2 (2024 – 2025)",
+    "12.870.000 VNĐ",
+    "05/04/2025",
+    "Đã xuất"
+   ],
+   [
+    "HD2024-01720",
+    "Học phí học kỳ 1 (2024 – 2025)",
+    "12.400.000 VNĐ",
+    "25/09/2024",
+    "Đã xuất"
+   ]
+  ]
+ },
+ "ppWorkingHours": [
+  "Thứ 2 – Thứ 6: 7:30 – 16:30",
+  "Thứ 7: 7:30 – 11:30"
+ ]
+}

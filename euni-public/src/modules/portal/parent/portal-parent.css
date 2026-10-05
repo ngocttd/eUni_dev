@@ -1,0 +1,66 @@
+/* ============================================================
+   PG-PORT-PARENT · Phụ huynh — bổ sung trên .ps-* / .ui-*
+   (.ps-formgrid, .ps-noti*, .ps-listfoot… lấy từ portal-student.css)
+   ============================================================ */
+
+/* 13.1 — thẻ thông tin sinh viên */
+.pp-studentcard { display: flex; gap: 20px; align-items: center; padding: 18px; border: 1px solid var(--humg-border); border-radius: 14px; background: #fff; flex-wrap: wrap; }
+.pp-studentcard .humg-ph { width: 96px; flex-shrink: 0; border-radius: 12px; }
+.pp-studentcard > div { flex: 1; min-width: 220px; }
+.pp-studentcard strong { display: block; font-size: 16px; color: var(--humg-primary); margin-bottom: 8px; }
+.pp-studentcard ul { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 18px; }
+.pp-studentcard ul li { display: grid; gap: 1px; font-size: 12.5px; color: var(--humg-text); }
+.pp-studentcard ul li span { font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--humg-text-secondary); }
+
+/* Stat grids */
+.pp-stats6 { grid-template-columns: repeat(6, 1fr); }
+.pp-stats4 { grid-template-columns: repeat(4, 1fr); margin-top: 16px; }
+.pp-stat__note { display: block; font-style: normal; font-size: 10.5px; color: var(--humg-success); margin-top: 4px; }
+.ps-stat strong.pp-ok { color: var(--humg-success); }
+.ps-stat strong.pp-bad { color: var(--humg-danger); }
+
+.pp-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+
+/* Donut nhiều phần + chú giải */
+.pp-donut { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+.pp-donut__ring { position: relative; width: 132px; height: 132px; border-radius: 50%; flex-shrink: 0; display: grid; place-items: center; }
+.pp-donut__hole { position: relative; width: 86px; height: 86px; border-radius: 50%; background: #fff; display: grid; place-items: center; text-align: center; }
+.pp-donut__hole strong { font-size: 20px; font-weight: 800; color: var(--humg-primary); }
+.pp-donut__hole em { font-style: normal; font-size: 10.5px; color: var(--humg-text-secondary); }
+.pp-legend { display: grid; gap: 8px; font-size: 12.5px; color: var(--humg-text); }
+.pp-legend li { display: flex; align-items: center; gap: 8px; }
+.pp-legend li span { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+
+/* Line chart GPA theo học kỳ */
+.pp-linechart { display: grid; gap: 6px; }
+.pp-linechart svg { width: 100%; height: auto; overflow: visible; }
+.pp-linechart__labels { display: flex; justify-content: space-between; gap: 4px; font-size: 9.5px; color: var(--humg-text-secondary); }
+.pp-linechart__labels span { flex: 1; text-align: center; }
+
+/* 13.6 — liên hệ */
+.pp-contactgrid { display: grid; grid-template-columns: 1fr 300px; gap: 20px; align-items: start; }
+.pp-contactlist { display: grid; gap: 14px; }
+.pp-contactlist li { display: grid; gap: 4px; padding-bottom: 14px; border-bottom: 1px solid var(--humg-border); }
+.pp-contactlist li:last-child { border-bottom: 0; padding-bottom: 0; }
+.pp-contactlist strong { font-size: 12.5px; color: var(--humg-primary); }
+.pp-contactlist span { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; color: var(--humg-text-secondary); }
+.pp-hint { font-style: normal; font-size: 11px; font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--humg-text-secondary); }
+.pp-formact { grid-column: 1 / -1; display: flex; gap: 10px; }
+
+/* Đăng ký dịch vụ */
+.pp-svcgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.pp-svc { display: grid; gap: 6px; padding: 16px; border: 1px solid var(--humg-border); border-radius: 12px; background: #fff; }
+.pp-svc__ic { width: 42px; height: 42px; border-radius: 11px; display: inline-flex; align-items: center; justify-content: center; background: #eef3fb; color: var(--humg-primary); }
+.pp-svc strong { font-size: 13px; color: var(--humg-primary); margin-top: 4px; }
+.pp-svc span { font-size: 11px; color: var(--humg-text-secondary); }
+.pp-svc .humg-btn { margin-top: 8px; }
+
+@media (max-width: 1080px) {
+  .pp-stats6 { grid-template-columns: repeat(3, 1fr); }
+  .pp-contactgrid { grid-template-columns: 1fr; }
+  .pp-svcgrid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 680px) {
+  .pp-stats6, .pp-stats4, .pp-svcgrid { grid-template-columns: 1fr 1fr; }
+  .pp-studentcard ul { grid-template-columns: 1fr 1fr; }
+}

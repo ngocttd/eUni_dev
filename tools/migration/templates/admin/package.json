@@ -1,0 +1,16 @@
+{
+  "name": "euni-admin",
+  "private": true,
+  "version": "0.2.0",
+  "description": "HUMG eUni — CMS quản trị nội dung (Next.js, dữ liệu từ cms-api)",
+  "scripts": {
+    "dev": "next dev -p 3001",
+    "build": "next build",
+    "start": "next start -p 3001"
+  },
+  "dependencies": {
+    "next": "^15.5.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}

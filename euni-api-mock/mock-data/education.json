@@ -1,0 +1,2079 @@
+{
+ "academicCalendar": {
+  "year": "Năm học 2025 – 2026",
+  "plan": {
+   "columns": [
+    "Nội dung",
+    "Thời gian",
+    "Ghi chú"
+   ],
+   "rows": [
+    [
+     "Đăng ký học phần học kỳ I",
+     "05/08 – 18/08/2025",
+     "Trực tuyến trên My eUni"
+    ],
+    [
+     "Học kỳ I",
+     "25/08 – 27/12/2025",
+     "15 tuần thực học"
+    ],
+    [
+     "Thi kết thúc học kỳ I",
+     "30/12/2025 – 18/01/2026",
+     "Theo lịch từng học phần"
+    ],
+    [
+     "Nghỉ Tết Nguyên đán",
+     "09/02 – 22/02/2026",
+     ""
+    ],
+    [
+     "Học kỳ II",
+     "23/02 – 06/06/2026",
+     "15 tuần thực học"
+    ],
+    [
+     "Thi kết thúc học kỳ II",
+     "08/06 – 27/06/2026",
+     ""
+    ],
+    [
+     "Học kỳ hè (tự chọn)",
+     "06/07 – 15/08/2026",
+     "Học lại, học cải thiện, học vượt"
+    ]
+   ]
+  },
+  "exam": [
+   "Lịch thi chi tiết được công bố trước kỳ thi ít nhất 2 tuần trên My eUni và website khoa.",
+   "Sinh viên có mặt trước giờ thi 15 phút, mang theo thẻ sinh viên hoặc CCCD.",
+   "Đơn phúc khảo nộp trong 7 ngày kể từ ngày công bố điểm."
+  ],
+  "docs": [
+   {
+    "name": "Kế hoạch năm học 2025 – 2026 (toàn văn)",
+    "meta": "PDF · 1.4 MB"
+   },
+   {
+    "name": "Hướng dẫn đăng ký học phần trực tuyến",
+    "meta": "PDF · 1.0 MB"
+   }
+  ],
+  "terms": [
+   "HK1 2026 – 2027",
+   "HK2 2025 – 2026",
+   "HK1 2025 – 2026"
+  ],
+  "faculties": [
+   "Tất cả",
+   "Khoa Mỏ",
+   "Khoa Khoa học & Kỹ thuật Địa chất",
+   "Khoa Dầu khí",
+   "Khoa Trắc địa – Bản đồ và QLĐĐ",
+   "Khoa Công nghệ thông tin",
+   "Khoa Cơ – Điện",
+   "Khoa Kinh tế & QTKD",
+   "Khoa Môi trường"
+  ],
+  "classes": [
+   "Tất cả",
+   "KTM K68",
+   "KTM K67",
+   "DCCTĐKT K68",
+   "CNTT K69",
+   "CNTT K68",
+   "QLĐĐ K67",
+   "KTMT K68"
+  ],
+  "timetable": [
+   {
+    "term": "HK1 2026 – 2027",
+    "faculty": "Khoa Mỏ",
+    "class": "KTM K68",
+    "day": "Thứ 2",
+    "period": "Tiết 1–3",
+    "time": "07:00–09:25",
+    "course": "Cơ học đá",
+    "code": "MO4012",
+    "lecturer": "PGS.TS. Trần Văn A",
+    "room": "P.301 – A",
+    "weeks": "1–15"
+   },
+   {
+    "term": "HK1 2026 – 2027",
+    "faculty": "Khoa Mỏ",
+    "class": "KTM K68",
+    "day": "Thứ 4",
+    "period": "Tiết 4–6",
+    "time": "09:35–12:00",
+    "course": "Khai thác lộ thiên 1",
+    "code": "MO4021",
+    "lecturer": "TS. Phạm Văn D",
+    "room": "P.205 – C",
+    "weeks": "1–15"
+   },
+   {
+    "term": "HK1 2026 – 2027",
+    "faculty": "Khoa Mỏ",
+    "class": "KTM K67",
+    "day": "Thứ 3",
+    "period": "Tiết 1–3",
+    "time": "07:00–09:25",
+    "course": "Thông gió mỏ",
+    "code": "MO4105",
+    "lecturer": "ThS. Lê Thị C",
+    "room": "P.402 – C",
+    "weeks": "1–15"
+   },
+   {
+    "term": "HK1 2026 – 2027",
+    "faculty": "Khoa Công nghệ thông tin",
+    "class": "CNTT K69",
+    "day": "Thứ 2",
+    "period": "Tiết 4–6",
+    "time": "09:35–12:00",
+    "course": "Cấu trúc dữ liệu và giải thuật",
+    "code": "CT2011",
+    "lecturer": "ThS. Nguyễn Văn X",
+    "room": "P.107 – B",
+    "weeks": "1–15"
+   },
+   {
+    "term": "HK1 2026 – 2027",
+    "faculty": "Khoa Công nghệ thông tin",
+    "class": "CNTT K69",
+    "day": "Thứ 5",
+    "period": "Tiết 1–3",
+    "time": "07:00–09:25",
+    "course": "Lập trình hướng đối tượng",
+    "code": "CT2015",
+    "lecturer": "ThS. Trần Thị Y",
+    "room": "Lab CNTT 3",
+    "weeks": "1–15"
+   },
+   {
+    "term": "HK1 2026 – 2027",
+    "faculty": "Khoa Công nghệ thông tin",
+    "class": "CNTT K68",
+    "day": "Thứ 6",
+    "period": "Tiết 7–9",
+    "time": "13:00–15:25",
+    "course": "Trí tuệ nhân tạo",
+    "code": "CT3021",
+    "lecturer": "TS. Lê Văn C",
+    "room": "P.109 – B",
+    "weeks": "1–15"
+   },
+   {
+    "term": "HK2 2025 – 2026",
+    "faculty": "Khoa Mỏ",
+    "class": "KTM K67",
+    "day": "Thứ 2",
+    "period": "Tiết 4–6",
+    "time": "09:35–12:00",
+    "course": "Khai thác hầm lò 1",
+    "code": "MO4031",
+    "lecturer": "PGS.TS. Trần Văn A",
+    "room": "P.402 – C",
+    "weeks": "1–15"
+   },
+   {
+    "term": "HK2 2025 – 2026",
+    "faculty": "Khoa Môi trường",
+    "class": "KTMT K68",
+    "day": "Thứ 3",
+    "period": "Tiết 1–3",
+    "time": "07:00–09:25",
+    "course": "Kỹ thuật xử lý nước thải",
+    "code": "MT4011",
+    "lecturer": "PGS.TS. Ngô Thị H",
+    "room": "P.303 – A",
+    "weeks": "1–15"
+   }
+  ],
+  "exams": [
+   {
+    "term": "HK1 2026 – 2027",
+    "faculty": "Khoa Mỏ",
+    "class": "KTM K68",
+    "course": "Cơ học đá",
+    "code": "MO4012",
+    "date": "05/01/2027",
+    "session": "Ca 1 (07:30)",
+    "room": "P.301, P.302 – A",
+    "form": "Tự luận",
+    "students": 78
+   },
+   {
+    "term": "HK1 2026 – 2027",
+    "faculty": "Khoa Mỏ",
+    "class": "KTM K68",
+    "course": "Khai thác lộ thiên 1",
+    "code": "MO4021",
+    "date": "08/01/2027",
+    "session": "Ca 2 (09:30)",
+    "room": "P.205 – C",
+    "form": "Tự luận",
+    "students": 76
+   },
+   {
+    "term": "HK1 2026 – 2027",
+    "faculty": "Khoa Công nghệ thông tin",
+    "class": "CNTT K69",
+    "course": "Cấu trúc dữ liệu và giải thuật",
+    "code": "CT2011",
+    "date": "06/01/2027",
+    "session": "Ca 3 (13:30)",
+    "room": "Lab CNTT 1, 2",
+    "form": "Vấn đáp trên máy",
+    "students": 120
+   },
+   {
+    "term": "HK1 2026 – 2027",
+    "faculty": "Khoa Công nghệ thông tin",
+    "class": "CNTT K68",
+    "course": "Trí tuệ nhân tạo",
+    "code": "CT3021",
+    "date": "10/01/2027",
+    "session": "Ca 1 (07:30)",
+    "room": "P.109 – B",
+    "form": "Tiểu luận + bảo vệ",
+    "students": 64
+   },
+   {
+    "term": "HK2 2025 – 2026",
+    "faculty": "Khoa Mỏ",
+    "class": "KTM K67",
+    "course": "Khai thác hầm lò 1",
+    "code": "MO4031",
+    "date": "12/06/2026",
+    "session": "Ca 2 (09:30)",
+    "room": "P.402 – C",
+    "form": "Tự luận",
+    "students": 70
+   },
+   {
+    "term": "HK2 2025 – 2026",
+    "faculty": "Khoa Môi trường",
+    "class": "KTMT K68",
+    "course": "Kỹ thuật xử lý nước thải",
+    "code": "MT4011",
+    "date": "15/06/2026",
+    "session": "Ca 1 (07:30)",
+    "room": "P.303 – A",
+    "form": "Tự luận",
+    "students": 45
+   }
+  ]
+ },
+ "eduHub": {
+  "modules": [
+   {
+    "icon": "search",
+    "title": "Tuyển sinh",
+    "desc": "Chỉ tiêu, phương thức xét tuyển, ngành đào tạo.",
+    "to": "/hoc-tap/tuyen-sinh"
+   },
+   {
+    "icon": "book",
+    "title": "Chương trình đào tạo",
+    "desc": "52 chương trình đại học & sau đại học.",
+    "to": "/hoc-tap/chuong-trinh-dao-tao"
+   },
+   {
+    "icon": "target",
+    "title": "Chuẩn đầu ra",
+    "desc": "Chuẩn kiến thức, kỹ năng, năng lực người học.",
+    "to": "/hoc-tap/chuan-dau-ra"
+   },
+   {
+    "icon": "file",
+    "title": "Học phí & Học bổng",
+    "desc": "Mức học phí, chính sách miễn giảm, học bổng.",
+    "to": "/hoc-tap/hoc-phi-hoc-bong"
+   },
+   {
+    "icon": "calendar",
+    "title": "Lịch học – Lịch thi",
+    "desc": "Kế hoạch năm học, lịch thi, lịch nghỉ.",
+    "to": "/hoc-tap/lich-hoc"
+   },
+   {
+    "icon": "award",
+    "title": "Tra cứu kết quả",
+    "desc": "Điểm học phần, GPA, tiến độ tích lũy.",
+    "to": "/hoc-tap/tra-cuu-ket-qua"
+   },
+   {
+    "icon": "headphones",
+    "title": "Hướng dẫn học tập",
+    "desc": "Quy chế, đăng ký học phần, cố vấn học tập.",
+    "to": "/hoc-tap/huong-dan"
+   },
+   {
+    "icon": "play",
+    "title": "E-learning & LMS",
+    "desc": "Lớp học trực tuyến, học liệu số.",
+    "to": "/hoc-tap/e-learning"
+   },
+   {
+    "icon": "check",
+    "title": "Khảo sát & Đánh giá",
+    "desc": "Khảo sát chất lượng đào tạo, phản hồi.",
+    "to": "/hoc-tap/khao-sat"
+   }
+  ],
+  "stats": [
+   {
+    "value": "52",
+    "label": "Chương trình đào tạo"
+   },
+   {
+    "value": "12",
+    "label": "Ngành trình độ đại học"
+   },
+   {
+    "value": "15",
+    "label": "CTĐT đạt chuẩn kiểm định"
+   },
+   {
+    "value": "06",
+    "label": "CTĐT quốc tế & liên kết"
+   }
+  ],
+  "quickLinks": [
+   {
+    "icon": "calendar",
+    "title": "Lịch học – Lịch thi",
+    "to": "/hoc-tap/lich-hoc"
+   },
+   {
+    "icon": "file",
+    "title": "Hướng dẫn đăng ký học phần",
+    "to": "/hoc-tap/huong-dan"
+   },
+   {
+    "icon": "award",
+    "title": "Tra cứu kết quả học tập",
+    "to": "/hoc-tap/tra-cuu-ket-qua"
+   },
+   {
+    "icon": "layers",
+    "title": "Biểu mẫu – Tra cứu",
+    "to": "/hoc-tap/bieu-mau"
+   },
+   {
+    "icon": "library",
+    "title": "Thư viện số",
+    "to": "/thu-vien-so"
+   },
+   {
+    "icon": "play",
+    "title": "E-learning & LMS",
+    "to": "/hoc-tap/e-learning"
+   }
+  ],
+  "notices": [
+   {
+    "date": "20/05/2026",
+    "title": "Kế hoạch đăng ký học phần học kỳ I năm học 2026 – 2027"
+   },
+   {
+    "date": "15/05/2026",
+    "title": "Thông báo lịch thi kết thúc học kỳ II năm học 2025 – 2026"
+   },
+   {
+    "date": "08/05/2026",
+    "title": "Hướng dẫn xét và công nhận tốt nghiệp đợt tháng 6/2026"
+   }
+  ]
+ },
+ "eduNav": [
+  {
+   "label": "Tổng quan Học tập",
+   "to": "/hoc-tap",
+   "icon": "home"
+  },
+  {
+   "label": "Tuyển sinh",
+   "to": "/hoc-tap/tuyen-sinh",
+   "icon": "search"
+  },
+  {
+   "label": "Chương trình đào tạo",
+   "to": "/hoc-tap/chuong-trinh-dao-tao",
+   "icon": "book"
+  },
+  {
+   "label": "Chuẩn đầu ra",
+   "to": "/hoc-tap/chuan-dau-ra",
+   "icon": "target"
+  },
+  {
+   "label": "Thông tin chung",
+   "to": "/hoc-tap/thong-tin-chung",
+   "icon": "file"
+  },
+  {
+   "label": "Học phí & Học bổng",
+   "to": "/hoc-tap/hoc-phi-hoc-bong",
+   "icon": "award"
+  },
+  {
+   "label": "Biểu mẫu",
+   "to": "/hoc-tap/bieu-mau",
+   "icon": "download"
+  },
+  {
+   "label": "Lịch học – Lịch thi",
+   "to": "/hoc-tap/lich-hoc",
+   "icon": "calendar"
+  },
+  {
+   "label": "Tra cứu kết quả học tập",
+   "to": "/hoc-tap/tra-cuu-ket-qua",
+   "icon": "check"
+  },
+  {
+   "label": "Hướng dẫn học tập",
+   "to": "/hoc-tap/huong-dan",
+   "icon": "headphones"
+  },
+  {
+   "label": "E-learning & LMS",
+   "to": "/hoc-tap/e-learning",
+   "icon": "play"
+  },
+  {
+   "label": "Khảo sát & Đánh giá",
+   "to": "/hoc-tap/khao-sat",
+   "icon": "eye"
+  }
+ ],
+ "generalInfo": {
+  "systems": [
+   {
+    "name": "Đại học chính quy",
+    "desc": "Đào tạo tập trung theo hệ thống tín chỉ, 4 – 4,5 năm."
+   },
+   {
+    "name": "Đại học chính quy (Chất lượng cao)",
+    "desc": "Tăng cường ngoại ngữ, thực hành và kết nối doanh nghiệp."
+   },
+   {
+    "name": "Liên thông đại học",
+    "desc": "Dành cho người đã có bằng cao đẳng ngành phù hợp."
+   },
+   {
+    "name": "Vừa làm vừa học",
+    "desc": "Học ngoài giờ hành chính, phù hợp người đi làm."
+   },
+   {
+    "name": "Đào tạo từ xa / trực tuyến",
+    "desc": "Kết hợp học liệu số và lớp học trực tuyến qua LMS."
+   }
+  ],
+  "grading": {
+   "columns": [
+    "Điểm hệ 10",
+    "Điểm chữ",
+    "Điểm hệ 4",
+    "Xếp loại"
+   ],
+   "rows": [
+    [
+     "8,5 – 10",
+     "A",
+     "4,0",
+     "Giỏi / Xuất sắc"
+    ],
+    [
+     "7,0 – 8,4",
+     "B",
+     "3,0",
+     "Khá"
+    ],
+    [
+     "5,5 – 6,9",
+     "C",
+     "2,0",
+     "Trung bình"
+    ],
+    [
+     "4,0 – 5,4",
+     "D",
+     "1,0",
+     "Trung bình yếu"
+    ],
+    [
+     "Dưới 4,0",
+     "F",
+     "0",
+     "Kém (không đạt)"
+    ]
+   ]
+  },
+  "graduation": [
+   "Tích lũy đủ số tín chỉ theo chương trình đào tạo, không còn học phần bị điểm F.",
+   "Điểm trung bình chung tích lũy đạt từ 2,0 trở lên (thang điểm 4).",
+   "Đạt chuẩn đầu ra ngoại ngữ, tin học và các điều kiện khác theo quy định.",
+   "Hoàn thành các học phần Giáo dục quốc phòng – an ninh và Giáo dục thể chất.",
+   "Không bị truy cứu trách nhiệm hình sự hoặc kỷ luật ở mức đình chỉ học tập."
+  ],
+  "docs": [
+   {
+    "name": "Quy chế đào tạo trình độ đại học (hiện hành)",
+    "meta": "PDF · 1.6 MB"
+   },
+   {
+    "name": "Quy định về học vụ và xử lý học vụ",
+    "meta": "PDF · 1.1 MB"
+   },
+   {
+    "name": "Quy định chuẩn đầu ra ngoại ngữ, tin học",
+    "meta": "PDF · 640 KB"
+   }
+  ]
+ },
+ "outcomesGeneral": {
+  "intro": "Chuẩn đầu ra thể hiện những gì người học đạt được sau khi hoàn thành chương trình, gồm 3 nhóm: kiến thức, kỹ năng và mức tự chủ – trách nhiệm, được xây dựng theo Khung trình độ quốc gia Việt Nam (bậc 6 – 7).",
+  "years": [
+   "Áp dụng từ khóa 2024",
+   "Áp dụng từ khóa 2021",
+   "Áp dụng từ khóa 2018"
+  ],
+  "courseOutcomes": [
+   {
+    "code": "MO4012",
+    "name": "Cơ học đá",
+    "credits": 3,
+    "plo": [
+     "PLO2",
+     "PLO4",
+     "PLO7"
+    ]
+   },
+   {
+    "code": "MO4021",
+    "name": "Khai thác lộ thiên 1",
+    "credits": 3,
+    "plo": [
+     "PLO2",
+     "PLO3",
+     "PLO5"
+    ]
+   },
+   {
+    "code": "MO4105",
+    "name": "Thông gió mỏ",
+    "credits": 2,
+    "plo": [
+     "PLO2",
+     "PLO4",
+     "PLO8"
+    ]
+   },
+   {
+    "code": "CB1002",
+    "name": "Xác suất thống kê",
+    "credits": 3,
+    "plo": [
+     "PLO1",
+     "PLO5"
+    ]
+   },
+   {
+    "code": "CT1005",
+    "name": "Nhập môn lập trình",
+    "credits": 3,
+    "plo": [
+     "PLO1",
+     "PLO5",
+     "PLO6"
+    ]
+   },
+   {
+    "code": "MT2001",
+    "name": "Kỹ thuật môi trường đại cương",
+    "credits": 2,
+    "plo": [
+     "PLO3",
+     "PLO7"
+    ]
+   }
+  ],
+  "groups": [
+   {
+    "title": "Về kiến thức",
+    "icon": "book",
+    "items": [
+     "Vận dụng kiến thức toán, khoa học tự nhiên và khoa học xã hội phù hợp với ngành đào tạo.",
+     "Vận dụng kiến thức cơ sở ngành và chuyên ngành để giải quyết vấn đề thực tiễn.",
+     "Hiểu và vận dụng kiến thức về pháp luật, đạo đức nghề nghiệp, an toàn và bảo vệ môi trường."
+    ]
+   },
+   {
+    "title": "Về kỹ năng",
+    "icon": "target",
+    "items": [
+     "Phân tích, thiết kế, triển khai và đánh giá giải pháp kỹ thuật/quản lý.",
+     "Sử dụng thành thạo công cụ, phần mềm và công nghệ hiện đại của ngành.",
+     "Kỹ năng làm việc nhóm, lãnh đạo, giao tiếp và thuyết trình.",
+     "Sử dụng ngoại ngữ đạt tối thiểu bậc 3/6 Khung năng lực ngoại ngữ Việt Nam."
+    ]
+   },
+   {
+    "title": "Về mức tự chủ và trách nhiệm",
+    "icon": "shield",
+    "items": [
+     "Làm việc độc lập hoặc theo nhóm trong điều kiện thay đổi, chịu trách nhiệm cá nhân và với tập thể.",
+     "Hướng dẫn, giám sát người khác thực hiện nhiệm vụ; tự định hướng và học tập suốt đời.",
+     "Tuân thủ đạo đức nghề nghiệp, có trách nhiệm với cộng đồng và xã hội."
+    ]
+   }
+  ]
+ },
+ "programTypes": [
+  "Tất cả",
+  "Chương trình chuẩn",
+  "Chất lượng cao",
+  "Liên kết quốc tế"
+ ],
+ "programs": [
+  {
+   "level": "Đại học",
+   "type": "Chương trình chuẩn",
+   "duration": "4,5 năm",
+   "credits": 150,
+   "quota": 180,
+   "degree": "Kỹ sư",
+   "combos": [
+    "A00 (Toán, Lý, Hóa)",
+    "A01 (Toán, Lý, Anh)",
+    "D01 (Toán, Văn, Anh)",
+    "C01 (Toán, Văn, Lý)"
+   ],
+   "orientations": [
+    "Khai thác lộ thiên",
+    "Khai thác hầm lò",
+    "Cơ giới hóa & tự động hóa mỏ",
+    "An toàn và môi trường mỏ"
+   ],
+   "objectives": [
+    "Có kiến thức nền tảng vững chắc về khoa học cơ bản và kỹ thuật cơ sở",
+    "Có kiến thức chuyên sâu và năng lực thực hành nghề nghiệp trong lĩnh vực đào tạo",
+    "Ứng dụng công nghệ số, tư duy đổi mới sáng tạo trong công việc",
+    "Có năng lực tự học, nghiên cứu và học tập suốt đời"
+   ],
+   "outcomes": {
+    "knowledge": [
+     "Kiến thức toán, khoa học tự nhiên và kỹ thuật cơ sở",
+     "Kiến thức chuyên sâu của ngành và định hướng chuyên ngành",
+     "Kiến thức về pháp luật, an toàn, môi trường và quản lý dự án"
+    ],
+    "skills": [
+     "Phân tích, thiết kế và triển khai giải pháp kỹ thuật",
+     "Sử dụng thành thạo công cụ, phần mềm chuyên ngành",
+     "Làm việc nhóm, giao tiếp kỹ thuật và ngoại ngữ (bậc 3/6)"
+    ],
+    "autonomy": [
+     "Làm việc độc lập, chịu trách nhiệm cá nhân và với nhóm",
+     "Tuân thủ đạo đức nghề nghiệp và quy định an toàn lao động"
+    ]
+   },
+   "curriculum": [
+    {
+     "block": "Giáo dục đại cương",
+     "credits": 40
+    },
+    {
+     "block": "Cơ sở ngành",
+     "credits": 45
+    },
+    {
+     "block": "Chuyên ngành",
+     "credits": 45
+    },
+    {
+     "block": "Thực tập & Đồ án tốt nghiệp",
+     "credits": 15
+    }
+   ],
+   "careers": [
+    "Kỹ sư thiết kế, điều hành sản xuất tại các mỏ",
+    "Cán bộ kỹ thuật, an toàn tại doanh nghiệp khai khoáng",
+    "Chuyên viên tư vấn, thẩm định dự án mỏ",
+    "Giảng dạy, nghiên cứu tại viện, trường"
+   ],
+   "tuition": {
+    "perCredit": "420.000 đ/tín chỉ",
+    "perYear": "≈ 14 triệu đ/năm",
+    "note": "Chương trình chuẩn, thu theo số tín chỉ đăng ký thực tế mỗi học kỳ."
+   },
+   "docs": [
+    {
+     "name": "Đề cương chi tiết chương trình đào tạo",
+     "meta": "PDF · 1.25 MB"
+    },
+    {
+     "name": "Khung chương trình & kế hoạch học tập",
+     "meta": "PDF · 0.98 MB"
+    },
+    {
+     "name": "Bản mô tả chuẩn đầu ra chương trình",
+     "meta": "PDF · 0.76 MB"
+    }
+   ],
+   "id": "ky-thuat-mo",
+   "code": "7520601",
+   "name": "Kỹ thuật Mỏ",
+   "faculty": "Khoa Mỏ",
+   "desc": "Đào tạo kỹ sư có năng lực thiết kế, tổ chức và quản lý sản xuất mỏ an toàn, hiệu quả, hiện đại."
+  },
+  {
+   "level": "Đại học",
+   "type": "Chương trình chuẩn",
+   "duration": "4 năm",
+   "credits": 145,
+   "quota": 240,
+   "degree": "Kỹ sư / Cử nhân",
+   "combos": [
+    "A00 (Toán, Lý, Hóa)",
+    "A01 (Toán, Lý, Anh)",
+    "D01 (Toán, Văn, Anh)",
+    "D07 (Toán, Hóa, Anh)"
+   ],
+   "orientations": [
+    "Công nghệ phần mềm",
+    "Khoa học dữ liệu & Trí tuệ nhân tạo",
+    "Hệ thống thông tin",
+    "Mạng & An toàn thông tin"
+   ],
+   "objectives": [
+    "Có kiến thức nền tảng vững chắc về khoa học cơ bản và kỹ thuật cơ sở",
+    "Có kiến thức chuyên sâu và năng lực thực hành nghề nghiệp trong lĩnh vực đào tạo",
+    "Ứng dụng công nghệ số, tư duy đổi mới sáng tạo trong công việc",
+    "Có năng lực tự học, nghiên cứu và học tập suốt đời"
+   ],
+   "outcomes": {
+    "knowledge": [
+     "Kiến thức toán, khoa học tự nhiên và kỹ thuật cơ sở",
+     "Kiến thức chuyên sâu của ngành và định hướng chuyên ngành",
+     "Kiến thức về pháp luật, an toàn, môi trường và quản lý dự án"
+    ],
+    "skills": [
+     "Phân tích, thiết kế và triển khai giải pháp kỹ thuật",
+     "Sử dụng thành thạo công cụ, phần mềm chuyên ngành",
+     "Làm việc nhóm, giao tiếp kỹ thuật và ngoại ngữ (bậc 3/6)"
+    ],
+    "autonomy": [
+     "Làm việc độc lập, chịu trách nhiệm cá nhân và với nhóm",
+     "Tuân thủ đạo đức nghề nghiệp và quy định an toàn lao động"
+    ]
+   },
+   "curriculum": [
+    {
+     "block": "Giáo dục đại cương",
+     "credits": 40
+    },
+    {
+     "block": "Cơ sở ngành",
+     "credits": 45
+    },
+    {
+     "block": "Chuyên ngành",
+     "credits": 45
+    },
+    {
+     "block": "Thực tập & Đồ án tốt nghiệp",
+     "credits": 15
+    }
+   ],
+   "careers": [
+    "Lập trình viên, kỹ sư phần mềm",
+    "Kỹ sư dữ liệu, kỹ sư AI",
+    "Quản trị hệ thống, an toàn thông tin",
+    "Chuyên viên phân tích nghiệp vụ"
+   ],
+   "tuition": {
+    "perCredit": "420.000 đ/tín chỉ",
+    "perYear": "≈ 14 triệu đ/năm",
+    "note": "Chương trình chuẩn, thu theo số tín chỉ đăng ký thực tế mỗi học kỳ."
+   },
+   "docs": [
+    {
+     "name": "Đề cương chi tiết chương trình đào tạo",
+     "meta": "PDF · 1.25 MB"
+    },
+    {
+     "name": "Khung chương trình & kế hoạch học tập",
+     "meta": "PDF · 0.98 MB"
+    },
+    {
+     "name": "Bản mô tả chuẩn đầu ra chương trình",
+     "meta": "PDF · 0.76 MB"
+    }
+   ],
+   "id": "cong-nghe-thong-tin",
+   "code": "7480201",
+   "name": "Công nghệ thông tin",
+   "faculty": "Khoa CNTT",
+   "desc": "Đào tạo cử nhân/kỹ sư CNTT có năng lực phát triển phần mềm, phân tích dữ liệu và xây dựng hệ thống thông tin."
+  },
+  {
+   "level": "Đại học",
+   "type": "Chương trình chuẩn",
+   "duration": "4,5 năm",
+   "credits": 150,
+   "quota": 120,
+   "degree": "Kỹ sư",
+   "combos": [
+    "A00 (Toán, Lý, Hóa)",
+    "A01 (Toán, Lý, Anh)",
+    "D01 (Toán, Văn, Anh)"
+   ],
+   "orientations": [
+    "Khoan dầu khí",
+    "Khai thác dầu khí",
+    "Thiết bị dầu khí",
+    "An toàn & môi trường dầu khí"
+   ],
+   "objectives": [
+    "Có kiến thức nền tảng vững chắc về khoa học cơ bản và kỹ thuật cơ sở",
+    "Có kiến thức chuyên sâu và năng lực thực hành nghề nghiệp trong lĩnh vực đào tạo",
+    "Ứng dụng công nghệ số, tư duy đổi mới sáng tạo trong công việc",
+    "Có năng lực tự học, nghiên cứu và học tập suốt đời"
+   ],
+   "outcomes": {
+    "knowledge": [
+     "Kiến thức toán, khoa học tự nhiên và kỹ thuật cơ sở",
+     "Kiến thức chuyên sâu của ngành và định hướng chuyên ngành",
+     "Kiến thức về pháp luật, an toàn, môi trường và quản lý dự án"
+    ],
+    "skills": [
+     "Phân tích, thiết kế và triển khai giải pháp kỹ thuật",
+     "Sử dụng thành thạo công cụ, phần mềm chuyên ngành",
+     "Làm việc nhóm, giao tiếp kỹ thuật và ngoại ngữ (bậc 3/6)"
+    ],
+    "autonomy": [
+     "Làm việc độc lập, chịu trách nhiệm cá nhân và với nhóm",
+     "Tuân thủ đạo đức nghề nghiệp và quy định an toàn lao động"
+    ]
+   },
+   "curriculum": [
+    {
+     "block": "Giáo dục đại cương",
+     "credits": 40
+    },
+    {
+     "block": "Cơ sở ngành",
+     "credits": 45
+    },
+    {
+     "block": "Chuyên ngành",
+     "credits": 45
+    },
+    {
+     "block": "Thực tập & Đồ án tốt nghiệp",
+     "credits": 15
+    }
+   ],
+   "careers": [
+    "Kỹ sư khoan, khai thác tại giàn/nhà máy",
+    "Chuyên viên kỹ thuật dịch vụ dầu khí",
+    "Cán bộ an toàn – môi trường",
+    "Nghiên cứu, giảng dạy"
+   ],
+   "tuition": {
+    "perCredit": "420.000 đ/tín chỉ",
+    "perYear": "≈ 14 triệu đ/năm",
+    "note": "Chương trình chuẩn, thu theo số tín chỉ đăng ký thực tế mỗi học kỳ."
+   },
+   "docs": [
+    {
+     "name": "Đề cương chi tiết chương trình đào tạo",
+     "meta": "PDF · 1.25 MB"
+    },
+    {
+     "name": "Khung chương trình & kế hoạch học tập",
+     "meta": "PDF · 0.98 MB"
+    },
+    {
+     "name": "Bản mô tả chuẩn đầu ra chương trình",
+     "meta": "PDF · 0.76 MB"
+    }
+   ],
+   "id": "ky-thuat-dau-khi",
+   "code": "7520604",
+   "name": "Kỹ thuật Dầu khí",
+   "faculty": "Khoa Dầu khí",
+   "desc": "Đào tạo kỹ sư về khoan – khai thác dầu khí, công nghệ mỏ dầu khí và quản lý an toàn."
+  },
+  {
+   "level": "Đại học",
+   "type": "Chương trình chuẩn",
+   "duration": "4 năm",
+   "credits": 140,
+   "quota": 200,
+   "degree": "Cử nhân",
+   "combos": [
+    "A00 (Toán, Lý, Hóa)",
+    "A01 (Toán, Lý, Anh)",
+    "D01 (Toán, Văn, Anh)",
+    "C00 (Văn, Sử, Địa)"
+   ],
+   "orientations": [
+    "Quản trị doanh nghiệp",
+    "Quản trị marketing",
+    "Khởi nghiệp & đổi mới sáng tạo",
+    "Quản lý công nghiệp – khoáng sản"
+   ],
+   "objectives": [
+    "Có kiến thức nền tảng vững chắc về khoa học cơ bản và kỹ thuật cơ sở",
+    "Có kiến thức chuyên sâu và năng lực thực hành nghề nghiệp trong lĩnh vực đào tạo",
+    "Ứng dụng công nghệ số, tư duy đổi mới sáng tạo trong công việc",
+    "Có năng lực tự học, nghiên cứu và học tập suốt đời"
+   ],
+   "outcomes": {
+    "knowledge": [
+     "Kiến thức toán, khoa học tự nhiên và kỹ thuật cơ sở",
+     "Kiến thức chuyên sâu của ngành và định hướng chuyên ngành",
+     "Kiến thức về pháp luật, an toàn, môi trường và quản lý dự án"
+    ],
+    "skills": [
+     "Phân tích, thiết kế và triển khai giải pháp kỹ thuật",
+     "Sử dụng thành thạo công cụ, phần mềm chuyên ngành",
+     "Làm việc nhóm, giao tiếp kỹ thuật và ngoại ngữ (bậc 3/6)"
+    ],
+    "autonomy": [
+     "Làm việc độc lập, chịu trách nhiệm cá nhân và với nhóm",
+     "Tuân thủ đạo đức nghề nghiệp và quy định an toàn lao động"
+    ]
+   },
+   "curriculum": [
+    {
+     "block": "Giáo dục đại cương",
+     "credits": 40
+    },
+    {
+     "block": "Cơ sở ngành",
+     "credits": 45
+    },
+    {
+     "block": "Chuyên ngành",
+     "credits": 45
+    },
+    {
+     "block": "Thực tập & Đồ án tốt nghiệp",
+     "credits": 15
+    }
+   ],
+   "careers": [
+    "Chuyên viên kinh doanh, marketing",
+    "Quản lý dự án, quản lý sản xuất",
+    "Khởi nghiệp, tự doanh",
+    "Chuyên viên phân tích, tư vấn"
+   ],
+   "tuition": {
+    "perCredit": "410.000 đ/tín chỉ",
+    "perYear": "≈ 13,5 triệu đ/năm",
+    "note": "Chương trình chuẩn khối ngành kinh tế."
+   },
+   "docs": [
+    {
+     "name": "Đề cương chi tiết chương trình đào tạo",
+     "meta": "PDF · 1.25 MB"
+    },
+    {
+     "name": "Khung chương trình & kế hoạch học tập",
+     "meta": "PDF · 0.98 MB"
+    },
+    {
+     "name": "Bản mô tả chuẩn đầu ra chương trình",
+     "meta": "PDF · 0.76 MB"
+    }
+   ],
+   "id": "quan-tri-kinh-doanh",
+   "code": "7340101",
+   "name": "Quản trị kinh doanh",
+   "faculty": "Khoa Kinh tế & QTKD",
+   "desc": "Đào tạo cử nhân quản trị kinh doanh có tư duy quản lý hiện đại, kỹ năng khởi nghiệp và hội nhập."
+  },
+  {
+   "level": "Đại học",
+   "type": "Chương trình chuẩn",
+   "duration": "4 – 4,5 năm",
+   "credits": 145,
+   "quota": 100,
+   "degree": "Kỹ sư / Cử nhân",
+   "combos": [
+    "A00 (Toán, Lý, Hóa)",
+    "A01 (Toán, Lý, Anh)",
+    "D01 (Toán, Văn, Anh)"
+   ],
+   "orientations": [
+    "Địa chất khoáng sản",
+    "Địa chất thủy văn – công trình",
+    "Địa kỹ thuật"
+   ],
+   "objectives": [
+    "Có kiến thức nền tảng vững chắc về khoa học cơ bản và kỹ thuật cơ sở",
+    "Có kiến thức chuyên sâu và năng lực thực hành nghề nghiệp trong lĩnh vực đào tạo",
+    "Ứng dụng công nghệ số, tư duy đổi mới sáng tạo trong công việc",
+    "Có năng lực tự học, nghiên cứu và học tập suốt đời"
+   ],
+   "outcomes": {
+    "knowledge": [
+     "Kiến thức toán, khoa học tự nhiên và kỹ thuật cơ sở",
+     "Kiến thức chuyên sâu của ngành và định hướng chuyên ngành",
+     "Kiến thức về pháp luật, an toàn, môi trường và quản lý dự án"
+    ],
+    "skills": [
+     "Phân tích, thiết kế và triển khai giải pháp kỹ thuật",
+     "Sử dụng thành thạo công cụ, phần mềm chuyên ngành",
+     "Làm việc nhóm, giao tiếp kỹ thuật và ngoại ngữ (bậc 3/6)"
+    ],
+    "autonomy": [
+     "Làm việc độc lập, chịu trách nhiệm cá nhân và với nhóm",
+     "Tuân thủ đạo đức nghề nghiệp và quy định an toàn lao động"
+    ]
+   },
+   "curriculum": [
+    {
+     "block": "Giáo dục đại cương",
+     "credits": 40
+    },
+    {
+     "block": "Cơ sở ngành",
+     "credits": 45
+    },
+    {
+     "block": "Chuyên ngành",
+     "credits": 45
+    },
+    {
+     "block": "Thực tập & Đồ án tốt nghiệp",
+     "credits": 15
+    }
+   ],
+   "careers": [
+    "Kỹ sư, chuyên viên kỹ thuật tại doanh nghiệp trong ngành",
+    "Cán bộ quản lý, tư vấn và thẩm định dự án",
+    "Nghiên cứu viên tại viện, trung tâm nghiên cứu",
+    "Giảng dạy tại các cơ sở đào tạo"
+   ],
+   "tuition": {
+    "perCredit": "420.000 đ/tín chỉ",
+    "perYear": "≈ 14 triệu đ/năm",
+    "note": "Chương trình chuẩn, thu theo số tín chỉ đăng ký thực tế mỗi học kỳ."
+   },
+   "docs": [
+    {
+     "name": "Đề cương chi tiết chương trình đào tạo",
+     "meta": "PDF · 1.25 MB"
+    },
+    {
+     "name": "Khung chương trình & kế hoạch học tập",
+     "meta": "PDF · 0.98 MB"
+    },
+    {
+     "name": "Bản mô tả chuẩn đầu ra chương trình",
+     "meta": "PDF · 0.76 MB"
+    }
+   ],
+   "id": "ky-thuat-dia-chat",
+   "code": "7520501",
+   "name": "Kỹ thuật Địa chất",
+   "faculty": "Khoa KH&KT Địa chất",
+   "desc": "Đào tạo kỹ sư địa chất phục vụ điều tra tài nguyên, địa chất công trình và địa kỹ thuật."
+  },
+  {
+   "level": "Đại học",
+   "type": "Chương trình chuẩn",
+   "duration": "4 – 4,5 năm",
+   "credits": 145,
+   "quota": 100,
+   "degree": "Kỹ sư / Cử nhân",
+   "combos": [
+    "A00 (Toán, Lý, Hóa)",
+    "A01 (Toán, Lý, Anh)",
+    "D01 (Toán, Văn, Anh)"
+   ],
+   "orientations": [
+    "Trắc địa công trình",
+    "Bản đồ – GIS",
+    "Viễn thám",
+    "Đo đạc địa chính"
+   ],
+   "objectives": [
+    "Có kiến thức nền tảng vững chắc về khoa học cơ bản và kỹ thuật cơ sở",
+    "Có kiến thức chuyên sâu và năng lực thực hành nghề nghiệp trong lĩnh vực đào tạo",
+    "Ứng dụng công nghệ số, tư duy đổi mới sáng tạo trong công việc",
+    "Có năng lực tự học, nghiên cứu và học tập suốt đời"
+   ],
+   "outcomes": {
+    "knowledge": [
+     "Kiến thức toán, khoa học tự nhiên và kỹ thuật cơ sở",
+     "Kiến thức chuyên sâu của ngành và định hướng chuyên ngành",
+     "Kiến thức về pháp luật, an toàn, môi trường và quản lý dự án"
+    ],
+    "skills": [
+     "Phân tích, thiết kế và triển khai giải pháp kỹ thuật",
+     "Sử dụng thành thạo công cụ, phần mềm chuyên ngành",
+     "Làm việc nhóm, giao tiếp kỹ thuật và ngoại ngữ (bậc 3/6)"
+    ],
+    "autonomy": [
+     "Làm việc độc lập, chịu trách nhiệm cá nhân và với nhóm",
+     "Tuân thủ đạo đức nghề nghiệp và quy định an toàn lao động"
+    ]
+   },
+   "curriculum": [
+    {
+     "block": "Giáo dục đại cương",
+     "credits": 40
+    },
+    {
+     "block": "Cơ sở ngành",
+     "credits": 45
+    },
+    {
+     "block": "Chuyên ngành",
+     "credits": 45
+    },
+    {
+     "block": "Thực tập & Đồ án tốt nghiệp",
+     "credits": 15
+    }
+   ],
+   "careers": [
+    "Kỹ sư, chuyên viên kỹ thuật tại doanh nghiệp trong ngành",
+    "Cán bộ quản lý, tư vấn và thẩm định dự án",
+    "Nghiên cứu viên tại viện, trung tâm nghiên cứu",
+    "Giảng dạy tại các cơ sở đào tạo"
+   ],
+   "tuition": {
+    "perCredit": "420.000 đ/tín chỉ",
+    "perYear": "≈ 14 triệu đ/năm",
+    "note": "Chương trình chuẩn, thu theo số tín chỉ đăng ký thực tế mỗi học kỳ."
+   },
+   "docs": [
+    {
+     "name": "Đề cương chi tiết chương trình đào tạo",
+     "meta": "PDF · 1.25 MB"
+    },
+    {
+     "name": "Khung chương trình & kế hoạch học tập",
+     "meta": "PDF · 0.98 MB"
+    },
+    {
+     "name": "Bản mô tả chuẩn đầu ra chương trình",
+     "meta": "PDF · 0.76 MB"
+    }
+   ],
+   "id": "ky-thuat-trac-dia-ban-do",
+   "code": "7520503",
+   "name": "Kỹ thuật Trắc địa – Bản đồ",
+   "faculty": "Khoa Trắc địa – Bản đồ và QLĐĐ",
+   "desc": "Đào tạo kỹ sư trắc địa, bản đồ, GIS và viễn thám."
+  },
+  {
+   "level": "Đại học",
+   "type": "Chương trình chuẩn",
+   "duration": "4 – 4,5 năm",
+   "credits": 145,
+   "quota": 100,
+   "degree": "Cử nhân",
+   "combos": [
+    "A00 (Toán, Lý, Hóa)",
+    "A01 (Toán, Lý, Anh)",
+    "D01 (Toán, Văn, Anh)"
+   ],
+   "orientations": [
+    "Quản lý nhà nước về đất đai",
+    "Quy hoạch sử dụng đất",
+    "Định giá & thị trường bất động sản"
+   ],
+   "objectives": [
+    "Có kiến thức nền tảng vững chắc về khoa học cơ bản và kỹ thuật cơ sở",
+    "Có kiến thức chuyên sâu và năng lực thực hành nghề nghiệp trong lĩnh vực đào tạo",
+    "Ứng dụng công nghệ số, tư duy đổi mới sáng tạo trong công việc",
+    "Có năng lực tự học, nghiên cứu và học tập suốt đời"
+   ],
+   "outcomes": {
+    "knowledge": [
+     "Kiến thức toán, khoa học tự nhiên và kỹ thuật cơ sở",
+     "Kiến thức chuyên sâu của ngành và định hướng chuyên ngành",
+     "Kiến thức về pháp luật, an toàn, môi trường và quản lý dự án"
+    ],
+    "skills": [
+     "Phân tích, thiết kế và triển khai giải pháp kỹ thuật",
+     "Sử dụng thành thạo công cụ, phần mềm chuyên ngành",
+     "Làm việc nhóm, giao tiếp kỹ thuật và ngoại ngữ (bậc 3/6)"
+    ],
+    "autonomy": [
+     "Làm việc độc lập, chịu trách nhiệm cá nhân và với nhóm",
+     "Tuân thủ đạo đức nghề nghiệp và quy định an toàn lao động"
+    ]
+   },
+   "curriculum": [
+    {
+     "block": "Giáo dục đại cương",
+     "credits": 40
+    },
+    {
+     "block": "Cơ sở ngành",
+     "credits": 45
+    },
+    {
+     "block": "Chuyên ngành",
+     "credits": 45
+    },
+    {
+     "block": "Thực tập & Đồ án tốt nghiệp",
+     "credits": 15
+    }
+   ],
+   "careers": [
+    "Kỹ sư, chuyên viên kỹ thuật tại doanh nghiệp trong ngành",
+    "Cán bộ quản lý, tư vấn và thẩm định dự án",
+    "Nghiên cứu viên tại viện, trung tâm nghiên cứu",
+    "Giảng dạy tại các cơ sở đào tạo"
+   ],
+   "tuition": {
+    "perCredit": "420.000 đ/tín chỉ",
+    "perYear": "≈ 14 triệu đ/năm",
+    "note": "Chương trình chuẩn, thu theo số tín chỉ đăng ký thực tế mỗi học kỳ."
+   },
+   "docs": [
+    {
+     "name": "Đề cương chi tiết chương trình đào tạo",
+     "meta": "PDF · 1.25 MB"
+    },
+    {
+     "name": "Khung chương trình & kế hoạch học tập",
+     "meta": "PDF · 0.98 MB"
+    },
+    {
+     "name": "Bản mô tả chuẩn đầu ra chương trình",
+     "meta": "PDF · 0.76 MB"
+    }
+   ],
+   "id": "quan-ly-dat-dai",
+   "code": "7850103",
+   "name": "Quản lý đất đai",
+   "faculty": "Khoa Trắc địa – Bản đồ và QLĐĐ",
+   "desc": "Đào tạo cử nhân quản lý đất đai, quy hoạch sử dụng đất và định giá bất động sản."
+  },
+  {
+   "level": "Đại học",
+   "type": "Chương trình chuẩn",
+   "duration": "4 – 4,5 năm",
+   "credits": 145,
+   "quota": 100,
+   "degree": "Cử nhân",
+   "combos": [
+    "A00",
+    "A01",
+    "D01",
+    "C00"
+   ],
+   "orientations": [
+    "Kế toán doanh nghiệp",
+    "Kiểm toán",
+    "Kế toán công"
+   ],
+   "objectives": [
+    "Có kiến thức nền tảng vững chắc về khoa học cơ bản và kỹ thuật cơ sở",
+    "Có kiến thức chuyên sâu và năng lực thực hành nghề nghiệp trong lĩnh vực đào tạo",
+    "Ứng dụng công nghệ số, tư duy đổi mới sáng tạo trong công việc",
+    "Có năng lực tự học, nghiên cứu và học tập suốt đời"
+   ],
+   "outcomes": {
+    "knowledge": [
+     "Kiến thức toán, khoa học tự nhiên và kỹ thuật cơ sở",
+     "Kiến thức chuyên sâu của ngành và định hướng chuyên ngành",
+     "Kiến thức về pháp luật, an toàn, môi trường và quản lý dự án"
+    ],
+    "skills": [
+     "Phân tích, thiết kế và triển khai giải pháp kỹ thuật",
+     "Sử dụng thành thạo công cụ, phần mềm chuyên ngành",
+     "Làm việc nhóm, giao tiếp kỹ thuật và ngoại ngữ (bậc 3/6)"
+    ],
+    "autonomy": [
+     "Làm việc độc lập, chịu trách nhiệm cá nhân và với nhóm",
+     "Tuân thủ đạo đức nghề nghiệp và quy định an toàn lao động"
+    ]
+   },
+   "curriculum": [
+    {
+     "block": "Giáo dục đại cương",
+     "credits": 40
+    },
+    {
+     "block": "Cơ sở ngành",
+     "credits": 45
+    },
+    {
+     "block": "Chuyên ngành",
+     "credits": 45
+    },
+    {
+     "block": "Thực tập & Đồ án tốt nghiệp",
+     "credits": 15
+    }
+   ],
+   "careers": [
+    "Kỹ sư, chuyên viên kỹ thuật tại doanh nghiệp trong ngành",
+    "Cán bộ quản lý, tư vấn và thẩm định dự án",
+    "Nghiên cứu viên tại viện, trung tâm nghiên cứu",
+    "Giảng dạy tại các cơ sở đào tạo"
+   ],
+   "tuition": {
+    "perCredit": "420.000 đ/tín chỉ",
+    "perYear": "≈ 14 triệu đ/năm",
+    "note": "Chương trình chuẩn, thu theo số tín chỉ đăng ký thực tế mỗi học kỳ."
+   },
+   "docs": [
+    {
+     "name": "Đề cương chi tiết chương trình đào tạo",
+     "meta": "PDF · 1.25 MB"
+    },
+    {
+     "name": "Khung chương trình & kế hoạch học tập",
+     "meta": "PDF · 0.98 MB"
+    },
+    {
+     "name": "Bản mô tả chuẩn đầu ra chương trình",
+     "meta": "PDF · 0.76 MB"
+    }
+   ],
+   "id": "ke-toan",
+   "code": "7340301",
+   "name": "Kế toán",
+   "faculty": "Khoa Kinh tế & QTKD",
+   "desc": "Đào tạo cử nhân kế toán – kiểm toán cho doanh nghiệp và tổ chức."
+  },
+  {
+   "level": "Đại học",
+   "type": "Chương trình chuẩn",
+   "duration": "4 – 4,5 năm",
+   "credits": 145,
+   "quota": 100,
+   "degree": "Kỹ sư",
+   "combos": [
+    "A00 (Toán, Lý, Hóa)",
+    "A01 (Toán, Lý, Anh)",
+    "D01 (Toán, Văn, Anh)"
+   ],
+   "orientations": [
+    "Tự động hóa công nghiệp",
+    "Điều khiển & robot",
+    "Hệ thống điện"
+   ],
+   "objectives": [
+    "Có kiến thức nền tảng vững chắc về khoa học cơ bản và kỹ thuật cơ sở",
+    "Có kiến thức chuyên sâu và năng lực thực hành nghề nghiệp trong lĩnh vực đào tạo",
+    "Ứng dụng công nghệ số, tư duy đổi mới sáng tạo trong công việc",
+    "Có năng lực tự học, nghiên cứu và học tập suốt đời"
+   ],
+   "outcomes": {
+    "knowledge": [
+     "Kiến thức toán, khoa học tự nhiên và kỹ thuật cơ sở",
+     "Kiến thức chuyên sâu của ngành và định hướng chuyên ngành",
+     "Kiến thức về pháp luật, an toàn, môi trường và quản lý dự án"
+    ],
+    "skills": [
+     "Phân tích, thiết kế và triển khai giải pháp kỹ thuật",
+     "Sử dụng thành thạo công cụ, phần mềm chuyên ngành",
+     "Làm việc nhóm, giao tiếp kỹ thuật và ngoại ngữ (bậc 3/6)"
+    ],
+    "autonomy": [
+     "Làm việc độc lập, chịu trách nhiệm cá nhân và với nhóm",
+     "Tuân thủ đạo đức nghề nghiệp và quy định an toàn lao động"
+    ]
+   },
+   "curriculum": [
+    {
+     "block": "Giáo dục đại cương",
+     "credits": 40
+    },
+    {
+     "block": "Cơ sở ngành",
+     "credits": 45
+    },
+    {
+     "block": "Chuyên ngành",
+     "credits": 45
+    },
+    {
+     "block": "Thực tập & Đồ án tốt nghiệp",
+     "credits": 15
+    }
+   ],
+   "careers": [
+    "Kỹ sư, chuyên viên kỹ thuật tại doanh nghiệp trong ngành",
+    "Cán bộ quản lý, tư vấn và thẩm định dự án",
+    "Nghiên cứu viên tại viện, trung tâm nghiên cứu",
+    "Giảng dạy tại các cơ sở đào tạo"
+   ],
+   "tuition": {
+    "perCredit": "420.000 đ/tín chỉ",
+    "perYear": "≈ 14 triệu đ/năm",
+    "note": "Chương trình chuẩn, thu theo số tín chỉ đăng ký thực tế mỗi học kỳ."
+   },
+   "docs": [
+    {
+     "name": "Đề cương chi tiết chương trình đào tạo",
+     "meta": "PDF · 1.25 MB"
+    },
+    {
+     "name": "Khung chương trình & kế hoạch học tập",
+     "meta": "PDF · 0.98 MB"
+    },
+    {
+     "name": "Bản mô tả chuẩn đầu ra chương trình",
+     "meta": "PDF · 0.76 MB"
+    }
+   ],
+   "id": "ky-thuat-dieu-khien-tu-dong-hoa",
+   "code": "7520216",
+   "name": "Kỹ thuật Điều khiển & Tự động hóa",
+   "faculty": "Khoa Cơ – Điện",
+   "desc": "Đào tạo kỹ sư tự động hóa, điều khiển và hệ thống điện – điện tử công nghiệp."
+  },
+  {
+   "level": "Đại học",
+   "type": "Chương trình chuẩn",
+   "duration": "4 – 4,5 năm",
+   "credits": 145,
+   "quota": 100,
+   "degree": "Kỹ sư / Cử nhân",
+   "combos": [
+    "A00 (Toán, Lý, Hóa)",
+    "A01 (Toán, Lý, Anh)",
+    "D01 (Toán, Văn, Anh)"
+   ],
+   "orientations": [
+    "Kỹ thuật xử lý môi trường",
+    "Quản lý tài nguyên & môi trường",
+    "Đánh giá tác động môi trường"
+   ],
+   "objectives": [
+    "Có kiến thức nền tảng vững chắc về khoa học cơ bản và kỹ thuật cơ sở",
+    "Có kiến thức chuyên sâu và năng lực thực hành nghề nghiệp trong lĩnh vực đào tạo",
+    "Ứng dụng công nghệ số, tư duy đổi mới sáng tạo trong công việc",
+    "Có năng lực tự học, nghiên cứu và học tập suốt đời"
+   ],
+   "outcomes": {
+    "knowledge": [
+     "Kiến thức toán, khoa học tự nhiên và kỹ thuật cơ sở",
+     "Kiến thức chuyên sâu của ngành và định hướng chuyên ngành",
+     "Kiến thức về pháp luật, an toàn, môi trường và quản lý dự án"
+    ],
+    "skills": [
+     "Phân tích, thiết kế và triển khai giải pháp kỹ thuật",
+     "Sử dụng thành thạo công cụ, phần mềm chuyên ngành",
+     "Làm việc nhóm, giao tiếp kỹ thuật và ngoại ngữ (bậc 3/6)"
+    ],
+    "autonomy": [
+     "Làm việc độc lập, chịu trách nhiệm cá nhân và với nhóm",
+     "Tuân thủ đạo đức nghề nghiệp và quy định an toàn lao động"
+    ]
+   },
+   "curriculum": [
+    {
+     "block": "Giáo dục đại cương",
+     "credits": 40
+    },
+    {
+     "block": "Cơ sở ngành",
+     "credits": 45
+    },
+    {
+     "block": "Chuyên ngành",
+     "credits": 45
+    },
+    {
+     "block": "Thực tập & Đồ án tốt nghiệp",
+     "credits": 15
+    }
+   ],
+   "careers": [
+    "Kỹ sư, chuyên viên kỹ thuật tại doanh nghiệp trong ngành",
+    "Cán bộ quản lý, tư vấn và thẩm định dự án",
+    "Nghiên cứu viên tại viện, trung tâm nghiên cứu",
+    "Giảng dạy tại các cơ sở đào tạo"
+   ],
+   "tuition": {
+    "perCredit": "420.000 đ/tín chỉ",
+    "perYear": "≈ 14 triệu đ/năm",
+    "note": "Chương trình chuẩn, thu theo số tín chỉ đăng ký thực tế mỗi học kỳ."
+   },
+   "docs": [
+    {
+     "name": "Đề cương chi tiết chương trình đào tạo",
+     "meta": "PDF · 1.25 MB"
+    },
+    {
+     "name": "Khung chương trình & kế hoạch học tập",
+     "meta": "PDF · 0.98 MB"
+    },
+    {
+     "name": "Bản mô tả chuẩn đầu ra chương trình",
+     "meta": "PDF · 0.76 MB"
+    }
+   ],
+   "id": "ky-thuat-moi-truong",
+   "code": "7520320",
+   "name": "Kỹ thuật Môi trường",
+   "faculty": "Khoa Môi trường",
+   "desc": "Đào tạo kỹ sư về xử lý ô nhiễm, quản lý môi trường và phát triển bền vững."
+  },
+  {
+   "level": "Đại học",
+   "type": "Chất lượng cao",
+   "duration": "4 năm",
+   "credits": 150,
+   "quota": 90,
+   "degree": "Kỹ sư",
+   "combos": [
+    "A00 (Toán, Lý, Hóa)",
+    "A01 (Toán, Lý, Anh)",
+    "D01 (Toán, Văn, Anh)"
+   ],
+   "orientations": [
+    "Kỹ thuật phần mềm",
+    "Khoa học dữ liệu & AI",
+    "An toàn thông tin"
+   ],
+   "objectives": [
+    "Có kiến thức nền tảng vững chắc về khoa học cơ bản và kỹ thuật cơ sở",
+    "Có kiến thức chuyên sâu và năng lực thực hành nghề nghiệp trong lĩnh vực đào tạo",
+    "Ứng dụng công nghệ số, tư duy đổi mới sáng tạo trong công việc",
+    "Có năng lực tự học, nghiên cứu và học tập suốt đời"
+   ],
+   "outcomes": {
+    "knowledge": [
+     "Kiến thức toán, khoa học tự nhiên và kỹ thuật cơ sở",
+     "Kiến thức chuyên sâu của ngành và định hướng chuyên ngành",
+     "Kiến thức về pháp luật, an toàn, môi trường và quản lý dự án"
+    ],
+    "skills": [
+     "Phân tích, thiết kế và triển khai giải pháp kỹ thuật",
+     "Sử dụng thành thạo công cụ, phần mềm chuyên ngành",
+     "Làm việc nhóm, giao tiếp kỹ thuật và ngoại ngữ (bậc 3/6)"
+    ],
+    "autonomy": [
+     "Làm việc độc lập, chịu trách nhiệm cá nhân và với nhóm",
+     "Tuân thủ đạo đức nghề nghiệp và quy định an toàn lao động"
+    ]
+   },
+   "curriculum": [
+    {
+     "block": "Giáo dục đại cương",
+     "credits": 40
+    },
+    {
+     "block": "Cơ sở ngành",
+     "credits": 45
+    },
+    {
+     "block": "Chuyên ngành",
+     "credits": 45
+    },
+    {
+     "block": "Thực tập & Đồ án tốt nghiệp",
+     "credits": 15
+    }
+   ],
+   "careers": [
+    "Kỹ sư, chuyên viên kỹ thuật tại doanh nghiệp trong ngành",
+    "Cán bộ quản lý, tư vấn và thẩm định dự án",
+    "Nghiên cứu viên tại viện, trung tâm nghiên cứu",
+    "Giảng dạy tại các cơ sở đào tạo"
+   ],
+   "tuition": {
+    "perCredit": "780.000 đ/tín chỉ",
+    "perYear": "≈ 30 triệu đ/năm",
+    "note": "Chương trình chất lượng cao, học phí theo đề án."
+   },
+   "docs": [
+    {
+     "name": "Đề cương chi tiết chương trình đào tạo",
+     "meta": "PDF · 1.25 MB"
+    },
+    {
+     "name": "Khung chương trình & kế hoạch học tập",
+     "meta": "PDF · 0.98 MB"
+    },
+    {
+     "name": "Bản mô tả chuẩn đầu ra chương trình",
+     "meta": "PDF · 0.76 MB"
+    }
+   ],
+   "id": "cntt-chat-luong-cao",
+   "code": "7480201C",
+   "name": "Công nghệ thông tin (Chất lượng cao)",
+   "faculty": "Khoa CNTT",
+   "desc": "Chương trình chất lượng cao ngành CNTT, tăng cường tiếng Anh, dự án thực tế và kết nối doanh nghiệp."
+  },
+  {
+   "level": "Đại học",
+   "type": "Chương trình chuẩn",
+   "duration": "4 – 4,5 năm",
+   "credits": 145,
+   "quota": 60,
+   "degree": "Kỹ sư",
+   "combos": [
+    "A00 (Toán, Lý, Hóa)",
+    "A01 (Toán, Lý, Anh)",
+    "D01 (Toán, Văn, Anh)"
+   ],
+   "orientations": [
+    "Địa vật lý thăm dò",
+    "Địa vật lý giếng khoan",
+    "Địa vật lý môi trường – công trình"
+   ],
+   "objectives": [
+    "Có kiến thức nền tảng vững chắc về khoa học cơ bản và kỹ thuật cơ sở",
+    "Có kiến thức chuyên sâu và năng lực thực hành nghề nghiệp trong lĩnh vực đào tạo",
+    "Ứng dụng công nghệ số, tư duy đổi mới sáng tạo trong công việc",
+    "Có năng lực tự học, nghiên cứu và học tập suốt đời"
+   ],
+   "outcomes": {
+    "knowledge": [
+     "Kiến thức toán, khoa học tự nhiên và kỹ thuật cơ sở",
+     "Kiến thức chuyên sâu của ngành và định hướng chuyên ngành",
+     "Kiến thức về pháp luật, an toàn, môi trường và quản lý dự án"
+    ],
+    "skills": [
+     "Phân tích, thiết kế và triển khai giải pháp kỹ thuật",
+     "Sử dụng thành thạo công cụ, phần mềm chuyên ngành",
+     "Làm việc nhóm, giao tiếp kỹ thuật và ngoại ngữ (bậc 3/6)"
+    ],
+    "autonomy": [
+     "Làm việc độc lập, chịu trách nhiệm cá nhân và với nhóm",
+     "Tuân thủ đạo đức nghề nghiệp và quy định an toàn lao động"
+    ]
+   },
+   "curriculum": [
+    {
+     "block": "Giáo dục đại cương",
+     "credits": 40
+    },
+    {
+     "block": "Cơ sở ngành",
+     "credits": 45
+    },
+    {
+     "block": "Chuyên ngành",
+     "credits": 45
+    },
+    {
+     "block": "Thực tập & Đồ án tốt nghiệp",
+     "credits": 15
+    }
+   ],
+   "careers": [
+    "Kỹ sư, chuyên viên kỹ thuật tại doanh nghiệp trong ngành",
+    "Cán bộ quản lý, tư vấn và thẩm định dự án",
+    "Nghiên cứu viên tại viện, trung tâm nghiên cứu",
+    "Giảng dạy tại các cơ sở đào tạo"
+   ],
+   "tuition": {
+    "perCredit": "420.000 đ/tín chỉ",
+    "perYear": "≈ 14 triệu đ/năm",
+    "note": "Chương trình chuẩn, thu theo số tín chỉ đăng ký thực tế mỗi học kỳ."
+   },
+   "docs": [
+    {
+     "name": "Đề cương chi tiết chương trình đào tạo",
+     "meta": "PDF · 1.25 MB"
+    },
+    {
+     "name": "Khung chương trình & kế hoạch học tập",
+     "meta": "PDF · 0.98 MB"
+    },
+    {
+     "name": "Bản mô tả chuẩn đầu ra chương trình",
+     "meta": "PDF · 0.76 MB"
+    }
+   ],
+   "id": "ky-thuat-dia-vat-ly",
+   "code": "7520502",
+   "name": "Kỹ thuật Địa vật lý",
+   "faculty": "Khoa Dầu khí",
+   "desc": "Đào tạo kỹ sư địa vật lý phục vụ thăm dò khoáng sản, dầu khí và địa vật lý công trình."
+  }
+ ],
+ "resultLookup": {
+  "terms": [
+   "HK1 2025 – 2026",
+   "HK2 2024 – 2025",
+   "HK1 2024 – 2025"
+  ],
+  "programs": [
+   "Kỹ thuật Mỏ",
+   "Công nghệ thông tin",
+   "Kỹ thuật Địa chất",
+   "Quản trị kinh doanh"
+  ],
+  "sample": {
+   "rows": [
+    [
+     "1",
+     "MO4012",
+     "Cơ học đá",
+     "3",
+     "8.0",
+     "B+"
+    ],
+    [
+     "2",
+     "MO4021",
+     "Khai thác lộ thiên 1",
+     "3",
+     "7.5",
+     "B"
+    ],
+    [
+     "3",
+     "MT2001",
+     "Kỹ thuật môi trường đại cương",
+     "2",
+     "7.0",
+     "B"
+    ],
+    [
+     "4",
+     "CT1005",
+     "Nhập môn lập trình",
+     "3",
+     "8.5",
+     "A"
+    ],
+    [
+     "5",
+     "CB1002",
+     "Xác suất thống kê",
+     "3",
+     "6.5",
+     "C+"
+    ]
+   ],
+   "summary": {
+    "credits": 14,
+    "gpa10": "7.62",
+    "gpa4": "3.13",
+    "rank": "Khá"
+   }
+  },
+  "steps": [
+   {
+    "title": "Đăng nhập Cổng sinh viên My eUni",
+    "text": "Sử dụng tài khoản và mật khẩu được cấp khi nhập học."
+   },
+   {
+    "title": "Vào mục Kết quả học tập",
+    "text": "Chọn học kỳ hoặc xem tổng hợp toàn khóa."
+   },
+   {
+    "title": "Xem điểm và GPA",
+    "text": "Điểm thành phần, điểm học phần, GPA học kỳ và tích lũy."
+   },
+   {
+    "title": "Tải bảng điểm",
+    "text": "Xuất bảng điểm tạm thời (PDF) phục vụ nhu cầu cá nhân."
+   }
+  ],
+  "grading": {
+   "columns": [
+    "Điểm hệ 10",
+    "Điểm chữ",
+    "Điểm hệ 4"
+   ],
+   "rows": [
+    [
+     "8,5 – 10",
+     "A",
+     "4,0"
+    ],
+    [
+     "8,0 – 8,4",
+     "B+",
+     "3,5"
+    ],
+    [
+     "7,0 – 7,9",
+     "B",
+     "3,0"
+    ],
+    [
+     "6,5 – 6,9",
+     "C+",
+     "2,5"
+    ],
+    [
+     "5,5 – 6,4",
+     "C",
+     "2,0"
+    ],
+    [
+     "5,0 – 5,4",
+     "D+",
+     "1,5"
+    ],
+    [
+     "4,0 – 4,9",
+     "D",
+     "1,0"
+    ],
+    [
+     "Dưới 4,0",
+     "F",
+     "0"
+    ]
+   ]
+  },
+  "faqs": [
+   {
+    "q": "Tôi quên mật khẩu My eUni thì làm sao?",
+    "a": "Dùng chức năng “Quên mật khẩu” trên trang đăng nhập hoặc liên hệ Trung tâm CNTT để được cấp lại."
+   },
+   {
+    "q": "Bảng điểm chính thức xin ở đâu?",
+    "a": "Bảng điểm có dấu do Phòng Đào tạo cấp; sinh viên nộp đơn tại bộ phận một cửa hoặc đăng ký trực tuyến."
+   },
+   {
+    "q": "Điểm chưa cập nhật sau khi thi?",
+    "a": "Điểm được cập nhật trong 2 – 3 tuần sau khi thi. Nếu quá thời gian, liên hệ giảng viên/khoa phụ trách học phần."
+   }
+  ]
+ },
+ "studyGuides": {
+  "tiles": [
+   {
+    "icon": "file",
+    "title": "Quy chế đào tạo",
+    "desc": "Toàn văn quy chế đào tạo trình độ đại học."
+   },
+   {
+    "icon": "check",
+    "title": "Đăng ký học phần",
+    "desc": "Các bước đăng ký, rút, đổi học phần trên My eUni."
+   },
+   {
+    "icon": "layers",
+    "title": "Học vượt – Học lại – Cải thiện",
+    "desc": "Điều kiện và quy trình đăng ký."
+   },
+   {
+    "icon": "award",
+    "title": "Xét & công nhận tốt nghiệp",
+    "desc": "Điều kiện, hồ sơ và mốc thời gian."
+   },
+   {
+    "icon": "user",
+    "title": "Cố vấn học tập",
+    "desc": "Vai trò cố vấn học tập và cách liên hệ."
+   },
+   {
+    "icon": "headphones",
+    "title": "Hỗ trợ học tập",
+    "desc": "Kênh hỗ trợ học vụ, tâm lý và kỹ năng."
+   }
+  ],
+  "videos": [
+   {
+    "title": "Hướng dẫn đăng ký học phần trên My eUni",
+    "to": "/media/video/huong-dan-dang-ky-xet-tuyen"
+   },
+   {
+    "title": "Cách xây dựng kế hoạch học tập cá nhân",
+    "to": "/media"
+   },
+   {
+    "title": "Sử dụng hệ thống LMS cho sinh viên",
+    "to": "/media"
+   }
+  ],
+  "docs": [
+   {
+    "name": "Sổ tay sinh viên (bản mới nhất)",
+    "meta": "PDF · 2.3 MB"
+   },
+   {
+    "name": "Hướng dẫn đăng ký học phần trực tuyến",
+    "meta": "PDF · 1.0 MB"
+   },
+   {
+    "name": "Quy trình xét và công nhận tốt nghiệp",
+    "meta": "PDF · 860 KB"
+   }
+  ],
+  "faqs": [
+   {
+    "q": "Mỗi học kỳ được đăng ký tối đa bao nhiêu tín chỉ?",
+    "a": "Sinh viên thường đăng ký 14 – 24 tín chỉ/học kỳ; sinh viên có học lực tốt có thể đăng ký nhiều hơn theo quy định."
+   },
+   {
+    "q": "Cố vấn học tập là ai?",
+    "a": "Là giảng viên được khoa phân công đồng hành, tư vấn cho sinh viên trong suốt khóa học về kế hoạch học tập và định hướng nghề nghiệp."
+   }
+  ]
+ },
+ "surveys": {
+  "open": [
+   {
+    "name": "Khảo sát ý kiến người học về hoạt động giảng dạy",
+    "audience": "Sinh viên đang học",
+    "deadline": "30/06/2026"
+   },
+   {
+    "name": "Khảo sát mức độ hài lòng về dịch vụ hỗ trợ sinh viên",
+    "audience": "Sinh viên toàn trường",
+    "deadline": "15/06/2026"
+   },
+   {
+    "name": "Khảo sát tình hình việc làm sinh viên tốt nghiệp 2025",
+    "audience": "Cựu sinh viên khóa 2021",
+    "deadline": "31/07/2026"
+   }
+  ],
+  "about": "Hoạt động khảo sát nhằm thu thập phản hồi của người học, cựu người học và nhà tuyển dụng, làm cơ sở cải tiến chương trình đào tạo, phương pháp giảng dạy và chất lượng dịch vụ hỗ trợ.",
+  "results": [
+   {
+    "label": "Hài lòng về hoạt động giảng dạy",
+    "value": 91
+   },
+   {
+    "label": "Hài lòng về cố vấn học tập",
+    "value": 85
+   },
+   {
+    "label": "Hài lòng về dịch vụ hỗ trợ sinh viên",
+    "value": 88
+   },
+   {
+    "label": "Hài lòng về cơ sở vật chất",
+    "value": 82
+   }
+  ],
+  "closed": [
+   {
+    "name": "Báo cáo khảo sát người học 2024 – 2025",
+    "meta": "PDF · 1.8 MB"
+   },
+   {
+    "name": "Báo cáo khảo sát nhà tuyển dụng 2024",
+    "meta": "PDF · 1.3 MB"
+   },
+   {
+    "name": "Báo cáo khảo sát việc làm sinh viên tốt nghiệp 2024",
+    "meta": "PDF · 1.1 MB"
+   }
+  ]
+ },
+ "tuition": {
+  "table": {
+   "columns": [
+    "Chương trình",
+    "Đơn giá tín chỉ",
+    "Học phí ước tính / năm"
+   ],
+   "rows": [
+    [
+     "Đại học chính quy – chương trình chuẩn",
+     "420.000 đ",
+     "≈ 14 triệu đ"
+    ],
+    [
+     "Đại học chính quy – khối ngành kinh tế",
+     "410.000 đ",
+     "≈ 13,5 triệu đ"
+    ],
+    [
+     "Chương trình chất lượng cao",
+     "780.000 đ",
+     "≈ 30 triệu đ"
+    ],
+    [
+     "Liên thông / Vừa làm vừa học",
+     "460.000 đ",
+     "Theo số tín chỉ đăng ký"
+    ]
+   ]
+  },
+  "payment": [
+   {
+    "title": "Thời hạn nộp",
+    "text": "Nộp học phí trong 4 tuần đầu mỗi học kỳ theo thông báo của Phòng Kế hoạch – Tài chính."
+   },
+   {
+    "title": "Hình thức",
+    "text": "Chuyển khoản qua cổng thanh toán trực tuyến trên My eUni hoặc nộp tại ngân hàng liên kết."
+   },
+   {
+    "title": "Gia hạn",
+    "text": "Sinh viên khó khăn có thể làm đơn xin gia hạn, xét theo từng trường hợp."
+   }
+  ],
+  "scholarships": [
+   {
+    "name": "Học bổng khuyến khích học tập",
+    "cond": "ĐTB học kỳ ≥ 3,2 và điểm rèn luyện ≥ 80, không bị kỷ luật.",
+    "value": "50% – 150% học phí"
+   },
+   {
+    "name": "Học bổng tài trợ doanh nghiệp",
+    "cond": "Sinh viên các ngành mũi nhọn, có thành tích học tập & hoạt động tốt.",
+    "value": "5 – 15 triệu đ/suất"
+   },
+   {
+    "name": "Học bổng vượt khó",
+    "cond": "Sinh viên có hoàn cảnh khó khăn, nỗ lực vươn lên trong học tập.",
+    "value": "3 – 10 triệu đ/suất"
+   },
+   {
+    "name": "Học bổng thủ khoa đầu vào",
+    "cond": "Thủ khoa, á khoa theo ngành trong kỳ tuyển sinh.",
+    "value": "100% học phí năm nhất"
+   }
+  ],
+  "waiver": [
+   "Người có công với cách mạng và thân nhân theo quy định.",
+   "Sinh viên là người dân tộc thiểu số thuộc hộ nghèo, cận nghèo.",
+   "Sinh viên mồ côi cả cha lẫn mẹ, không nơi nương tựa.",
+   "Sinh viên khuyết tật thuộc hộ nghèo, cận nghèo."
+  ],
+  "docs": [
+   {
+    "name": "Quy định về học phí năm học 2025 – 2026",
+    "meta": "PDF · 720 KB"
+   },
+   {
+    "name": "Quy chế học bổng khuyến khích học tập",
+    "meta": "PDF · 890 KB"
+   },
+   {
+    "name": "Mẫu đơn xin miễn / giảm học phí",
+    "meta": "DOCX · 28 KB"
+   }
+  ],
+  "faqs": [
+   {
+    "q": "Học phí được tính như thế nào?",
+    "a": "Học phí thu theo số tín chỉ sinh viên đăng ký thực tế trong học kỳ, nhân với đơn giá tín chỉ của chương trình."
+   },
+   {
+    "q": "Khi nào biết kết quả xét học bổng?",
+    "a": "Kết quả xét học bổng khuyến khích học tập được công bố sau khi có điểm tổng kết học kỳ, thường trong 4 – 6 tuần."
+   },
+   {
+    "q": "Có thể nộp học phí thành nhiều đợt không?",
+    "a": "Trường hợp khó khăn, sinh viên làm đơn xin gia hạn/chia đợt nộp gửi Phòng Kế hoạch – Tài chính để được xem xét."
+   }
+  ]
+ }
+}

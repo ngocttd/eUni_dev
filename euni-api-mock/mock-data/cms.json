@@ -1,0 +1,1017 @@
+{
+ "cmsActivity": [
+  {
+   "time": "16/05/2025 10:15",
+   "user": "Trần Văn Minh",
+   "action": "Cập nhật bài viết",
+   "target": "Hội thảo quốc tế về Trắc địa và GIS 2025",
+   "ip": "203.113.45.12"
+  },
+  {
+   "time": "16/05/2025 09:50",
+   "user": "Nguyễn Thị Hoa",
+   "action": "Đăng nhập",
+   "target": "Hệ thống",
+   "ip": "203.113.45.20"
+  },
+  {
+   "time": "16/05/2025 09:30",
+   "user": "Lê Thị Mai",
+   "action": "Tải lên file",
+   "target": "banner-tuyensinh.jpg",
+   "ip": "27.68.35.19"
+  },
+  {
+   "time": "15/05/2025 16:45",
+   "user": "Phạm Văn Lộc",
+   "action": "Đăng bài viết",
+   "target": "Thông báo tuyển dụng giảng viên năm 2025",
+   "ip": "203.113.45.12"
+  },
+  {
+   "time": "15/05/2025 09:10",
+   "user": "Hoàng Đức Nam",
+   "action": "Xóa bài viết",
+   "target": "Bài viết nháp cũ (ID #204)",
+   "ip": "27.68.35.19"
+  },
+  {
+   "time": "14/05/2025 15:20",
+   "user": "Đỗ Văn Tùng",
+   "action": "Đăng nhập",
+   "target": "Hệ thống",
+   "ip": "203.113.45.11"
+  },
+  {
+   "time": "13/05/2025 10:55",
+   "user": "Vũ Thị Hương",
+   "action": "Đăng nhập",
+   "target": "Hệ thống",
+   "ip": "203.113.45.14"
+  },
+  {
+   "time": "08/05/2025 15:30",
+   "user": "Bùi Minh Đức",
+   "action": "Đăng nhập",
+   "target": "Hệ thống",
+   "ip": "27.68.35.19"
+  }
+ ],
+ "cmsBackupInfo": [
+  "Sao lưu tự động hằng ngày lúc 03:00 AM.",
+  "Hệ thống lưu trữ 7 bản sao lưu gần nhất.",
+  "Vị trí lưu trữ: /backup/cms_humg"
+ ],
+ "cmsBackups": [
+  {
+   "time": "16/05/2025 03:00",
+   "size": "425.6 MB",
+   "by": "Hệ thống (Cron)",
+   "status": "Thành công"
+  },
+  {
+   "time": "15/05/2025 03:00",
+   "size": "418.2 MB",
+   "by": "Hệ thống (Cron)",
+   "status": "Thành công"
+  },
+  {
+   "time": "14/05/2025 03:00",
+   "size": "410.7 MB",
+   "by": "Hệ thống (Cron)",
+   "status": "Thành công"
+  },
+  {
+   "time": "13/05/2025 15:12",
+   "size": "399.1 MB",
+   "by": "Trần Văn Minh",
+   "status": "Thành công"
+  }
+ ],
+ "cmsBannerPositions": [
+  "Tất cả vị trí",
+  "Trang chủ – Slider",
+  "Trang chủ – Popup",
+  "Cột phải",
+  "Chân trang"
+ ],
+ "cmsBanners": [
+  {
+   "name": "Banner tuyển sinh đại học 2025",
+   "position": "Trang chủ – Slider",
+   "status": "Hiển thị",
+   "order": 1,
+   "period": "01/05 – 30/06/2025"
+  },
+  {
+   "name": "Hội thảo quốc tế Trắc địa – GIS 2025",
+   "position": "Trang chủ – Slider",
+   "status": "Hiển thị",
+   "order": 2,
+   "period": "10/05 – 30/05/2025"
+  },
+  {
+   "name": "Chào mừng 60 năm thành lập Trường",
+   "position": "Trang chủ – Popup",
+   "status": "Ẩn",
+   "order": 3,
+   "period": "01/11 – 20/11/2025"
+  },
+  {
+   "name": "Ngày hội việc làm HUMG 2025",
+   "position": "Cột phải",
+   "status": "Hiển thị",
+   "order": 4,
+   "period": "01/09 – 28/09/2025"
+  },
+  {
+   "name": "Thông báo học bổng khuyến khích học tập",
+   "position": "Chân trang",
+   "status": "Hiển thị",
+   "order": 5,
+   "period": "15/05 – 15/06/2025"
+  }
+ ],
+ "cmsCategories": [
+  {
+   "name": "Tin tức",
+   "posts": 68,
+   "status": "Hiển thị",
+   "children": [
+    {
+     "name": "Thông báo",
+     "posts": 23,
+     "status": "Hiển thị"
+    }
+   ]
+  },
+  {
+   "name": "Sự kiện",
+   "posts": 18,
+   "status": "Hiển thị"
+  },
+  {
+   "name": "Nghiên cứu",
+   "posts": 35,
+   "status": "Hiển thị",
+   "children": [
+    {
+     "name": "Đề tài – Dự án",
+     "posts": 15,
+     "status": "Hiển thị"
+    },
+    {
+     "name": "Tạp chí khoa học",
+     "posts": 12,
+     "status": "Hiển thị"
+    }
+   ]
+  },
+  {
+   "name": "Học tập",
+   "posts": 24,
+   "status": "Hiển thị"
+  },
+  {
+   "name": "Tuyển sinh",
+   "posts": 19,
+   "status": "Hiển thị"
+  },
+  {
+   "name": "Văn bản – Biểu mẫu",
+   "posts": 8,
+   "status": "Ẩn"
+  }
+ ],
+ "cmsContentShortcuts": {
+  "su-kien": {
+   "title": "Sự kiện",
+   "category": "Sự kiện"
+  },
+  "tuyen-sinh": {
+   "title": "Tuyển sinh",
+   "category": "Tuyển sinh"
+  },
+  "nghien-cuu": {
+   "title": "Nghiên cứu",
+   "category": "Nghiên cứu"
+  },
+  "hoc-tap": {
+   "title": "Học tập",
+   "category": "Học tập"
+  }
+ },
+ "cmsDashboard": {
+  "stats": [
+   {
+    "value": "238",
+    "label": "Bài viết",
+    "delta": "+12% so với tuần trước"
+   },
+   {
+    "value": "56",
+    "label": "Trang",
+    "delta": "+6% so với tuần trước"
+   },
+   {
+    "value": "68",
+    "label": "Danh mục",
+    "delta": "+5% so với tuần trước"
+   },
+   {
+    "value": "32",
+    "label": "Người dùng",
+    "delta": "+3% so với tuần trước"
+   }
+  ],
+  "trend": [
+   {
+    "day": "17/04",
+    "published": 380,
+    "draft": 210
+   },
+   {
+    "day": "22/04",
+    "published": 300,
+    "draft": 250
+   },
+   {
+    "day": "27/04",
+    "published": 460,
+    "draft": 200
+   },
+   {
+    "day": "02/05",
+    "published": 420,
+    "draft": 280
+   },
+   {
+    "day": "07/05",
+    "published": 520,
+    "draft": 240
+   },
+   {
+    "day": "12/05",
+    "published": 470,
+    "draft": 300
+   },
+   {
+    "day": "17/05",
+    "published": 560,
+    "draft": 260
+   }
+  ],
+  "status": {
+   "total": 238,
+   "parts": [
+    {
+     "label": "Đã xuất bản",
+     "value": 152,
+     "pct": 63.9
+    },
+    {
+     "label": "Bản nháp",
+     "value": 56,
+     "pct": 23.5
+    },
+    {
+     "label": "Chờ duyệt",
+     "value": 18,
+     "pct": 7.6
+    },
+    {
+     "label": "Khác",
+     "value": 12,
+     "pct": 5
+    }
+   ]
+  },
+  "latestPosts": [
+   {
+    "title": "Hội thảo quốc tế về Trắc địa và GIS 2025",
+    "meta": "Tin tức · 16/05/2025"
+   },
+   {
+    "title": "Thông báo lịch thi học kỳ 2 (2024 – 2025)",
+    "meta": "Thông báo · 15/05/2025"
+   },
+   {
+    "title": "Chương trình học bổng HUMG 2025",
+    "meta": "Tuyển sinh · 14/05/2025"
+   }
+  ],
+  "upcomingEvents": [
+   {
+    "title": "Lễ kỷ niệm 60 năm thành lập Trường",
+    "meta": "15/11/2025"
+   },
+   {
+    "title": "Ngày hội việc làm HUMG 2025",
+    "meta": "28/09/2025"
+   },
+   {
+    "title": "Hội nghị khoa học sinh viên",
+    "meta": "20/06/2025"
+   }
+  ],
+  "latestMedia": [
+   {
+    "title": "banner-tuyensinh.png",
+    "meta": "Hình ảnh · 12/05/2025"
+   },
+   {
+    "title": "bao-cao-de-tai.pdf",
+    "meta": "Tài liệu · 11/05/2025"
+   },
+   {
+    "title": "khai-giang-2025.mp4",
+    "meta": "Video · 10/05/2025"
+   }
+  ],
+  "onlineUsers": 5
+ },
+ "cmsEditorDefaultContentVi": "Nhập nội dung bài viết ở đây… (trình soạn thảo WYSIWYG)\n\nHội thảo quốc tế về Trắc địa và GIS 2025 quy tụ các chuyên gia đầu ngành trong nước và quốc tế…",
+ "cmsEditorDefaults": {
+  "title": "Hội thảo quốc tế về Trắc địa và GIS 2025",
+  "category": "Sự kiện",
+  "slug": "hoi-thao-trac-dia-gis-2025",
+  "excerpt": "Hội thảo là diễn đàn học thuật uy tín nhằm chia sẻ các xu hướng, công nghệ mới nhất trong lĩnh vực Trắc địa, Bản đồ và Hệ thống thông tin địa lý (GIS).",
+  "status": "Đã xuất bản",
+  "showHome": true,
+  "featured": true,
+  "publishAt": "2025-05-30T09:30",
+  "expireAt": "2025-05-30T22:59",
+  "categories": [
+   "Tin tức",
+   "Thông báo",
+   "Sự kiện",
+   "Nghiên cứu",
+   "Học tập",
+   "Tuyển sinh"
+  ],
+  "seoTitle": "Hội thảo quốc tế về Trắc địa và GIS 2025 – HUMG",
+  "seoDesc": "Thông tin chương trình, diễn giả và đăng ký tham dự Hội thảo quốc tế Trắc địa – GIS 2025 tại Trường Đại học Mỏ – Địa chất.",
+  "seoKeywords": "trắc địa, GIS, hội thảo quốc tế, HUMG"
+ },
+ "cmsEditorDefaultsEn": {
+  "title": "International Conference on Geodesy and GIS 2025",
+  "slug": "international-conference-geodesy-gis-2025",
+  "excerpt": "The conference is a prestigious academic forum to share the latest trends and technologies in Geodesy, Cartography and Geographic Information Systems (GIS).",
+  "content": "Enter the post content here… (WYSIWYG editor)\n\nThe International Conference on Geodesy and GIS 2025 brings together leading experts from Vietnam and abroad…",
+  "seoTitle": "International Conference on Geodesy and GIS 2025 – HUMG",
+  "seoDesc": "Program, speakers and registration for the International Conference on Geodesy – GIS 2025 at Hanoi University of Mining and Geology.",
+  "seoKeywords": "geodesy, GIS, international conference, HUMG"
+ },
+ "cmsEditorTabs": [
+  "Thông tin chung",
+  "Nội dung",
+  "SEO",
+  "Hình ảnh & File",
+  "Khác"
+ ],
+ "cmsI18nCoverage": [
+  {
+   "type": "Bài viết",
+   "total": 238,
+   "translated": 96
+  },
+  {
+   "type": "Trang tĩnh",
+   "total": 56,
+   "translated": 21
+  },
+  {
+   "type": "Danh mục",
+   "total": 68,
+   "translated": 68
+  },
+  {
+   "type": "Mục menu",
+   "total": 8,
+   "translated": 8
+  },
+  {
+   "type": "Banner / Slider",
+   "total": 5,
+   "translated": 2
+  }
+ ],
+ "cmsI18nStatuses": [
+  "Đã dịch",
+  "Đang dịch",
+  "Chưa dịch"
+ ],
+ "cmsLanguageSettings": {
+  "defaultCode": "vi",
+  "enabledCodes": [
+   "vi",
+   "en"
+  ],
+  "fallback": "Hiển thị bản Tiếng Việt (khuyến nghị)",
+  "fallbackOptions": [
+   "Hiển thị bản Tiếng Việt (khuyến nghị)",
+   "Ẩn nội dung cho đến khi có bản dịch",
+   "Hiển thị nội dung Tiếng Việt kèm nhãn \"Chưa có bản dịch\""
+  ],
+  "urlNote": "Lựa chọn ngôn ngữ được ghi nhớ theo trình duyệt của người dùng (localStorage), áp dụng đồng thời cho cả website công khai và My eUni Portal."
+ },
+ "cmsLanguages": [
+  {
+   "code": "vi",
+   "label": "Tiếng Việt",
+   "flag": "🇻🇳",
+   "isSource": true
+  },
+  {
+   "code": "en",
+   "label": "English",
+   "flag": "🇬🇧",
+   "isSource": false
+  }
+ ],
+ "cmsLogActions": [
+  "Tất cả hành động",
+  "Đăng nhập",
+  "Đăng bài viết",
+  "Cập nhật bài viết",
+  "Xóa bài viết",
+  "Tải lên file",
+  "Xóa người dùng",
+  "Đổi cấu hình"
+ ],
+ "cmsLogTotal": 158,
+ "cmsLogUsers": [
+  "Tất cả người dùng",
+  "Trần Văn Minh",
+  "Nguyễn Thị Hoa",
+  "Phạm Văn Lộc",
+  "Lê Thị Mai",
+  "Hoàng Đức Nam"
+ ],
+ "cmsMedia": [
+  {
+   "name": "hoi-thao-gis-2025.png",
+   "kind": "Hình ảnh",
+   "ext": "png",
+   "date": "16/05/2025",
+   "size": "512 KB"
+  },
+  {
+   "name": "campus-humg.png",
+   "kind": "Hình ảnh",
+   "ext": "png",
+   "date": "15/05/2025",
+   "size": "645 KB"
+  },
+  {
+   "name": "khoa-mo-truong.jpg",
+   "kind": "Hình ảnh",
+   "ext": "jpg",
+   "date": "15/05/2025",
+   "size": "88 KB"
+  },
+  {
+   "name": "logo-humg.png",
+   "kind": "Hình ảnh",
+   "ext": "png",
+   "date": "13/05/2025",
+   "size": "42 KB"
+  },
+  {
+   "name": "banner-tuyensinh.png",
+   "kind": "Hình ảnh",
+   "ext": "png",
+   "date": "12/05/2025",
+   "size": "420 KB"
+  },
+  {
+   "name": "co-so-vat-chat.jpg",
+   "kind": "Hình ảnh",
+   "ext": "jpg",
+   "date": "11/05/2025",
+   "size": "1.2 MB"
+  },
+  {
+   "name": "sinh-vien-hoc-tap.jpg",
+   "kind": "Hình ảnh",
+   "ext": "jpg",
+   "date": "11/05/2025",
+   "size": "780 KB"
+  },
+  {
+   "name": "thuc-hanh-mine.jpg",
+   "kind": "Hình ảnh",
+   "ext": "jpg",
+   "date": "10/05/2025",
+   "size": "674 KB"
+  },
+  {
+   "name": "bao-cao-de-tai.pdf",
+   "kind": "Tài liệu",
+   "ext": "pdf",
+   "date": "09/05/2025",
+   "size": "2.4 MB"
+  },
+  {
+   "name": "quy-dinh-dao-tao.pdf",
+   "kind": "Tài liệu",
+   "ext": "pdf",
+   "date": "07/05/2025",
+   "size": "1.1 MB"
+  }
+ ],
+ "cmsMediaCategories": [
+  "Tất cả danh mục",
+  "Tin tức",
+  "Sự kiện",
+  "Tuyển sinh",
+  "Cơ sở vật chất",
+  "Đào tạo"
+ ],
+ "cmsMediaTabs": [
+  "Tất cả",
+  "Hình ảnh",
+  "Tài liệu",
+  "Video",
+  "Âm thanh",
+  "Khác"
+ ],
+ "cmsMediaTotal": 245,
+ "cmsMenuGroups": [
+  "Menu chính (Header)",
+  "Menu chân trang (Footer)",
+  "Menu tiện ích"
+ ],
+ "cmsMenus": [
+  {
+   "label": "Trang chủ",
+   "url": "/",
+   "type": "Trang",
+   "order": 1
+  },
+  {
+   "label": "Giới thiệu HUMG",
+   "url": "/gioi-thieu",
+   "type": "Trang",
+   "order": 2
+  },
+  {
+   "label": "Học tập",
+   "url": "/hoc-tap",
+   "type": "Trang",
+   "order": 3
+  },
+  {
+   "label": "Nghiên cứu",
+   "url": "/nghien-cuu",
+   "type": "Trang",
+   "order": 4
+  },
+  {
+   "label": "Hợp tác",
+   "url": "/hop-tac",
+   "type": "Trang",
+   "order": 5
+  },
+  {
+   "label": "Đời sống",
+   "url": "/doi-song",
+   "type": "Trang",
+   "order": 6
+  },
+  {
+   "label": "Thư viện",
+   "url": "/thu-vien",
+   "type": "Liên kết",
+   "order": 7
+  },
+  {
+   "label": "Tin tức",
+   "url": "/tin-tuc",
+   "type": "Chuyên mục",
+   "order": 8
+  }
+ ],
+ "cmsPageDefaults": {
+  "title": "Đơn vị",
+  "slug": "don-vi",
+  "parent": "-- Trang cha --",
+  "parents": [
+   "-- Trang cha --",
+   "Trang chủ",
+   "Giới thiệu",
+   "Đào tạo",
+   "Nghiên cứu"
+  ],
+  "templates": [
+   "Mặc định",
+   "Trang danh sách",
+   "Trang chi tiết",
+   "Trang liên hệ"
+  ],
+  "order": 3
+ },
+ "cmsPageTree": [
+  {
+   "name": "Trang chủ",
+   "slug": ""
+  },
+  {
+   "name": "Giới thiệu",
+   "slug": "gioi-thieu"
+  },
+  {
+   "name": "Media thư viện",
+   "slug": "media"
+  },
+  {
+   "name": "Đơn vị",
+   "slug": "don-vi",
+   "children": [
+    {
+     "name": "Ban giám hiệu",
+     "slug": "ban-giam-hieu"
+    },
+    {
+     "name": "Phòng ban chức năng",
+     "slug": "phong-ban"
+    },
+    {
+     "name": "Khoa chuyên môn",
+     "slug": "khoa"
+    }
+   ]
+  },
+  {
+   "name": "Đào tạo",
+   "slug": "dao-tao"
+  },
+  {
+   "name": "Nghiên cứu",
+   "slug": "nghien-cuu"
+  },
+  {
+   "name": "Sinh viên",
+   "slug": "sinh-vien"
+  },
+  {
+   "name": "Tin tức – Sự kiện",
+   "slug": "tin-tuc"
+  },
+  {
+   "name": "Thư viện số",
+   "slug": "thu-vien-so"
+  },
+  {
+   "name": "Liên hệ",
+   "slug": "lien-he"
+  }
+ ],
+ "cmsPermissionMatrix": {
+  "roles": [
+   "Super Admin",
+   "Editor",
+   "Author",
+   "Viewer"
+  ],
+  "rows": [
+   {
+    "module": "Bài viết",
+    "perms": [
+     true,
+     true,
+     true,
+     false
+    ]
+   },
+   {
+    "module": "Xuất bản bài viết",
+    "perms": [
+     true,
+     true,
+     false,
+     false
+    ]
+   },
+   {
+    "module": "Danh mục",
+    "perms": [
+     true,
+     true,
+     false,
+     false
+    ]
+   },
+   {
+    "module": "Media thư viện",
+    "perms": [
+     true,
+     true,
+     true,
+     false
+    ]
+   },
+   {
+    "module": "Trang & Menu",
+    "perms": [
+     true,
+     true,
+     false,
+     false
+    ]
+   },
+   {
+    "module": "Người dùng",
+    "perms": [
+     true,
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "module": "Cấu hình hệ thống",
+    "perms": [
+     true,
+     false,
+     false,
+     false
+    ]
+   },
+   {
+    "module": "Nhật ký & Sao lưu",
+    "perms": [
+     true,
+     false,
+     false,
+     false
+    ]
+   }
+  ]
+ },
+ "cmsPostCategories": [
+  "Tất cả danh mục",
+  "Tin tức",
+  "Thông báo",
+  "Sự kiện",
+  "Nghiên cứu",
+  "Học tập",
+  "Tuyển sinh"
+ ],
+ "cmsPostI18n": {
+  "1": "Đã dịch",
+  "2": "Đang dịch",
+  "3": "Chưa dịch",
+  "4": "Đang dịch",
+  "5": "Đã dịch",
+  "6": "Chưa dịch",
+  "7": "Chưa dịch",
+  "8": "Chưa dịch",
+  "9": "Đang dịch",
+  "10": "Chưa dịch",
+  "11": "Đã dịch",
+  "12": "Chưa dịch"
+ },
+ "cmsPostStatuses": [
+  "Tất cả trạng thái",
+  "Đã xuất bản",
+  "Bản nháp",
+  "Chờ duyệt"
+ ],
+ "cmsPostTotal": 238,
+ "cmsPosts": [
+  {
+   "id": 1,
+   "title": "Hội thảo quốc tế về Trắc địa và GIS 2025",
+   "category": "Tin tức",
+   "author": "Trần Văn Minh",
+   "status": "Đã xuất bản",
+   "date": "16/05/2025"
+  },
+  {
+   "id": 2,
+   "title": "Thông báo lịch thi học kỳ 2 (2024 – 2025)",
+   "category": "Thông báo",
+   "author": "Nguyễn Thị Hoa",
+   "status": "Đã xuất bản",
+   "date": "15/05/2025"
+  },
+  {
+   "id": 3,
+   "title": "Nghiên cứu ứng dụng AI trong quản lý đào tạo",
+   "category": "Nghiên cứu",
+   "author": "Lê Quốc Hùng",
+   "status": "Bản nháp",
+   "date": "15/05/2025"
+  },
+  {
+   "id": 4,
+   "title": "Chương trình học bổng HUMG 2025",
+   "category": "Tuyển sinh",
+   "author": "Phạm Thị Lan",
+   "status": "Chờ duyệt",
+   "date": "14/05/2025"
+  },
+  {
+   "id": 5,
+   "title": "Kết quả xét tuyển đợt 1 năm học 2024 – 2025",
+   "category": "Tin tức",
+   "author": "Nguyễn Văn An",
+   "status": "Đã xuất bản",
+   "date": "12/05/2025"
+  },
+  {
+   "id": 6,
+   "title": "Lễ khai giảng năm học mới 2025 – 2026",
+   "category": "Sự kiện",
+   "author": "Lê Thị Mai",
+   "status": "Đã xuất bản",
+   "date": "11/05/2025"
+  },
+  {
+   "id": 7,
+   "title": "Hướng dẫn đăng ký học phần học kỳ mới",
+   "category": "Học tập",
+   "author": "Hoàng Đức Nam",
+   "status": "Đã xuất bản",
+   "date": "10/05/2025"
+  },
+  {
+   "id": 8,
+   "title": "Hội thảo khoa học trẻ HUMG lần thứ XV",
+   "category": "Sự kiện",
+   "author": "Lê Thị Mai",
+   "status": "Bản nháp",
+   "date": "09/05/2025"
+  },
+  {
+   "id": 9,
+   "title": "Thông báo tuyển dụng giảng viên năm 2025",
+   "category": "Thông báo",
+   "author": "Nguyễn Thị Hoa",
+   "status": "Đã xuất bản",
+   "date": "08/05/2025"
+  },
+  {
+   "id": 10,
+   "title": "Danh mục đề tài NCKH cấp Trường năm 2027",
+   "category": "Nghiên cứu",
+   "author": "Lê Quốc Hùng",
+   "status": "Chờ duyệt",
+   "date": "07/05/2025"
+  },
+  {
+   "id": 11,
+   "title": "Chỉ tiêu tuyển sinh đại học chính quy 2025",
+   "category": "Tuyển sinh",
+   "author": "Phạm Thị Lan",
+   "status": "Đã xuất bản",
+   "date": "06/05/2025"
+  },
+  {
+   "id": 12,
+   "title": "Kế hoạch học tập – rèn luyện năm học mới",
+   "category": "Học tập",
+   "author": "Hoàng Đức Nam",
+   "status": "Bản nháp",
+   "date": "05/05/2025"
+  }
+ ],
+ "cmsRoles": [
+  {
+   "role": "Super Admin",
+   "users": 1,
+   "desc": "Toàn quyền trên toàn bộ hệ thống"
+  },
+  {
+   "role": "Editor",
+   "users": 2,
+   "desc": "Quản lý, biên tập và xuất bản nội dung"
+  },
+  {
+   "role": "Author",
+   "users": 8,
+   "desc": "Tạo và chỉnh sửa bài viết của chính mình"
+  },
+  {
+   "role": "Viewer",
+   "users": 21,
+   "desc": "Chỉ xem nội dung, không chỉnh sửa"
+  }
+ ],
+ "cmsSettings": {
+  "general": {
+   "siteName": "Trường Đại học Mỏ – Địa chất",
+   "email": "cskh@humg.edu.vn",
+   "phone": "024.3838.0355",
+   "address": "18 Phố Viên, Đức Thắng, Bắc Từ Liêm, Hà Nội"
+  },
+  "seo": {
+   "metaTitle": "Trường Đại học Mỏ – Địa chất | HUMG",
+   "metaDesc": "Cổng thông tin điện tử Trường Đại học Mỏ – Địa chất – đào tạo, nghiên cứu khoa học lĩnh vực Trái đất, Mỏ, Năng lượng.",
+   "facebook": "https://facebook.com/humg.edu.vn",
+   "youtube": "https://youtube.com/@humg",
+   "analytics": "G-XXXXXXXXXX"
+  },
+  "email": {
+   "smtpHost": "smtp.humg.edu.vn",
+   "smtpPort": "587",
+   "fromName": "HUMG Digital Portal",
+   "fromEmail": "no-reply@humg.edu.vn"
+  }
+ },
+ "cmsSettingsSections": [
+  "Thông tin chung",
+  "Ngôn ngữ",
+  "SEO & Mạng xã hội",
+  "Email hệ thống",
+  "Bảo mật",
+  "Sao lưu dữ liệu",
+  "Tích hợp dịch vụ",
+  "Lịch trình (Cron)",
+  "Nhật ký hệ thống"
+ ],
+ "cmsUser": {
+  "name": "Trần Văn Minh",
+  "role": "Super Admin"
+ },
+ "cmsUserRoles": [
+  "Tất cả vai trò",
+  "Super Admin",
+  "Editor",
+  "Author",
+  "Viewer"
+ ],
+ "cmsUserStatuses": [
+  "Tất cả trạng thái",
+  "Hoạt động",
+  "Không hoạt động"
+ ],
+ "cmsUserTotal": 32,
+ "cmsUsers": [
+  {
+   "id": 1,
+   "name": "Trần Văn Minh",
+   "email": "tvanminh@humg.edu.vn",
+   "role": "Super Admin",
+   "status": "Hoạt động",
+   "last": "16/05/2025 09:15"
+  },
+  {
+   "id": 2,
+   "name": "Nguyễn Thị Hoa",
+   "email": "nthoa@humg.edu.vn",
+   "role": "Editor",
+   "status": "Hoạt động",
+   "last": "16/05/2025 08:30"
+  },
+  {
+   "id": 3,
+   "name": "Phạm Văn Lộc",
+   "email": "pvloc@humg.edu.vn",
+   "role": "Editor",
+   "status": "Hoạt động",
+   "last": "15/05/2025 16:45"
+  },
+  {
+   "id": 4,
+   "name": "Lê Thị Mai",
+   "email": "ltmai@humg.edu.vn",
+   "role": "Author",
+   "status": "Hoạt động",
+   "last": "15/05/2025 14:20"
+  },
+  {
+   "id": 5,
+   "name": "Hoàng Đức Nam",
+   "email": "hdnam@humg.edu.vn",
+   "role": "Author",
+   "status": "Không hoạt động",
+   "last": "10/05/2025 11:00"
+  },
+  {
+   "id": 6,
+   "name": "Đỗ Văn Tùng",
+   "email": "dvtung@humg.edu.vn",
+   "role": "Author",
+   "status": "Hoạt động",
+   "last": "14/05/2025 10:05"
+  },
+  {
+   "id": 7,
+   "name": "Vũ Thị Hương",
+   "email": "vthuong@humg.edu.vn",
+   "role": "Viewer",
+   "status": "Hoạt động",
+   "last": "13/05/2025 10:55"
+  },
+  {
+   "id": 8,
+   "name": "Bùi Minh Đức",
+   "email": "bmduc@humg.edu.vn",
+   "role": "Viewer",
+   "status": "Không hoạt động",
+   "last": "08/05/2025 15:30"
+  }
+ ]
+}

@@ -1,0 +1,63 @@
+/* ============================================================
+   Trang lỗi hệ thống (404 / trang không tồn tại) — PG-SYS-01
+   ============================================================ */
+.sys-error {
+  min-height: calc(100vh - var(--humg-header-h) - 220px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 20px 72px;
+}
+.sys-error__inner { width: 100%; max-width: 560px; text-align: center; }
+
+.sys-error__code {
+  font-size: 96px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--humg-primary);
+  margin: 0;
+}
+.sys-error__title {
+  font-size: 24px;
+  color: var(--humg-text);
+  margin: 10px 0 8px;
+}
+.sys-error__desc {
+  font-size: 14px;
+  color: var(--humg-text-secondary);
+  margin: 0 auto 4px;
+  max-width: 42ch;
+}
+
+.sys-error__art {
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  margin: 22px auto 26px;
+  display: block;
+}
+
+.sys-error__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+.sys-error__actions .humg-btn { padding: 11px 20px; }
+
+.sys-error__sitemap {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 20px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--humg-secondary);
+}
+.sys-error__sitemap:hover { color: var(--humg-primary); }
+
+@media (max-width: 480px) {
+  .sys-error__code { font-size: 72px; }
+  .sys-error__title { font-size: 20px; }
+}

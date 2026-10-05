@@ -1,0 +1,107 @@
+.coop-lead { font-size: 14.5px; line-height: 1.7; margin: 0 0 12px; }
+.coop-note { font-size: 12.5px; color: var(--humg-text-secondary); margin: 8px 0 0; }
+.coop-chiprow { display: flex; flex-wrap: wrap; gap: 8px; }
+.coop-chiprow span { font-size: 12px; font-weight: 600; color: var(--humg-primary); background: var(--humg-hover); padding: 6px 12px; border-radius: 999px; }
+.coop-check { display: grid; gap: 8px; }
+.coop-check li { display: flex; align-items: flex-start; gap: 8px; font-size: 13.5px; line-height: 1.55; }
+.coop-check li svg { color: var(--humg-success); flex-shrink: 0; margin-top: 3px; }
+
+.coop-status { font-size: 10.5px; font-weight: 700; padding: 3px 10px; border-radius: 999px; white-space: nowrap; background: var(--humg-hover); color: var(--humg-primary); }
+.coop-status.is-run { background: #e3f0ff; color: var(--humg-secondary); }
+.coop-status.is-done { background: #e8f5e9; color: var(--humg-success); }
+.coop-tag { font-size: 10.5px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: var(--humg-surface-alt); color: var(--humg-text-secondary); white-space: nowrap; }
+
+/* ---------- Danh sách đối tác ---------- */
+.coop-partners { display: grid; gap: 8px; }
+.coop-partner {
+  display: grid; grid-template-columns: 52px 1fr auto; gap: 14px; align-items: center;
+  padding: 14px 16px; border: 1px solid var(--humg-border); border-radius: 12px; background: #fff;
+  border-left: 3px solid transparent;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+.coop-partner:hover { border-color: var(--humg-secondary); border-left-color: var(--humg-accent); box-shadow: var(--humg-shadow-sm); transform: translateX(2px); }
+.coop-partner__mono {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 52px; height: 52px; border-radius: 12px; flex-shrink: 0; align-self: start;
+  background: linear-gradient(150deg, var(--humg-primary), var(--humg-secondary)); color: #fff;
+  font-weight: 800; font-size: 15px; letter-spacing: 0.02em;
+}
+.coop-partner__body strong { display: block; font-size: 14px; color: var(--humg-primary); line-height: 1.4; margin-bottom: 4px; }
+.coop-partner__meta { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; color: var(--humg-text-secondary); }
+.coop-partner__fields { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+.coop-partner__fields span { font-size: 10.5px; background: var(--humg-hover); color: var(--humg-primary); padding: 2px 8px; border-radius: 999px; }
+.coop-partner > svg { color: var(--humg-secondary); }
+
+/* ---------- Hub: lưới logo đối tác + hoạt động năm ---------- */
+.coop-logogrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.coop-logo {
+  display: flex; flex-direction: column; gap: 6px;
+  padding: 18px 16px; border: 1px solid var(--humg-border); border-radius: 14px; background: #fff;
+  box-shadow: var(--humg-shadow-sm);
+  transition: border-color 0.16s ease, box-shadow 0.16s ease, transform 0.16s ease;
+}
+.coop-logo:hover { border-color: var(--humg-secondary); box-shadow: 0 16px 30px -18px rgba(13, 71, 161, 0.28); transform: translateY(-3px); }
+.coop-logo__mono {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 52px; height: 52px; border-radius: 14px; margin-bottom: 6px;
+  background: linear-gradient(150deg, var(--humg-primary), var(--humg-secondary)); color: #fff;
+  font-weight: 800; font-size: 16px; letter-spacing: 0.02em;
+  box-shadow: 0 8px 16px -8px rgba(13, 71, 161, 0.4);
+}
+.coop-logo__name { font-size: 13.5px; font-weight: 700; color: var(--humg-primary); line-height: 1.4; flex: 1; }
+.coop-logo__country { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; color: var(--humg-text-secondary); }
+.coop-logo__go {
+  display: inline-flex; align-items: center; gap: 5px; margin-top: 4px;
+  font-size: 11.5px; font-weight: 700; color: var(--humg-accent-dark);
+  opacity: 0; transform: translateX(-4px); transition: opacity 0.16s ease, transform 0.16s ease;
+}
+.coop-logo:hover .coop-logo__go { opacity: 1; transform: translateX(0); }
+
+.coop-yearstat { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.coop-ys { text-align: center; padding: 14px 8px; border: 1px solid var(--humg-border); border-radius: 12px; background: linear-gradient(170deg, #eef4fc, #fff 72%); }
+.coop-ys strong { display: block; font-size: 22px; font-weight: 800; color: var(--humg-primary); }
+.coop-ys span { font-size: 11px; color: var(--humg-text-secondary); line-height: 1.4; }
+
+@media (max-width: 1080px) { .coop-logogrid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 900px) {
+  .coop-logogrid { grid-template-columns: repeat(2, 1fr); }
+  .coop-yearstat { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ---------- Danh sách chương trình ---------- */
+.coop-list { display: grid; gap: 8px; }
+.coop-item {
+  display: grid; grid-template-columns: 1fr auto auto; gap: 14px; align-items: center;
+  padding: 14px 16px; border: 1px solid var(--humg-border); border-radius: 12px; background: #fff;
+  border-left: 3px solid transparent;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+.coop-item:hover { border-color: var(--humg-secondary); border-left-color: var(--humg-accent); box-shadow: var(--humg-shadow-sm); transform: translateX(2px); }
+.coop-item__body strong { display: block; font-size: 14px; color: var(--humg-primary); line-height: 1.4; margin-bottom: 3px; }
+.coop-item__body em { font-style: normal; font-size: 12px; color: var(--humg-text-secondary); }
+
+/* ---------- Tabs ---------- */
+.coop-tabs { display: flex; flex-wrap: wrap; gap: 2px; padding: 6px 8px 0; border-bottom: 1px solid var(--humg-border); }
+.coop-tabs button { background: none; border: 0; padding: 10px 14px; font: inherit; font-size: 13px; font-weight: 600; color: var(--humg-text-secondary); border-bottom: 2px solid transparent; margin-bottom: -1px; border-radius: 6px 6px 0 0; }
+.coop-tabs button:hover { color: var(--humg-primary); background: var(--humg-surface-alt); }
+.coop-tabs button.is-active { color: var(--humg-primary); border-color: var(--humg-accent); }
+.coop-tabbody { padding: 20px; display: grid; gap: 12px; }
+
+/* ---------- Link rows / def list ---------- */
+.coop-linkrows { display: grid; gap: 4px; }
+.coop-linkrows li a { display: flex; align-items: center; gap: 10px; padding: 11px 12px; border: 1px solid var(--humg-border); border-radius: 9px; font-size: 13.5px; }
+.coop-linkrows li a:hover { border-color: var(--humg-secondary); background: var(--humg-hover); color: var(--humg-primary); }
+.coop-linkrows li a > svg:last-child { margin-left: auto; color: var(--humg-secondary); }
+.coop-linkrows__ic { display: inline-flex; width: 28px; height: 28px; border-radius: 8px; align-items: center; justify-content: center; background: var(--humg-hover); color: var(--humg-primary); }
+
+.coop-deflist { display: grid; gap: 10px; }
+.coop-deflist li { padding: 12px 14px; border: 1px solid var(--humg-border); border-radius: 10px; }
+.coop-deflist strong { display: block; font-size: 13.5px; color: var(--humg-primary); margin-bottom: 3px; }
+.coop-deflist span { font-size: 12.5px; color: var(--humg-text-secondary); line-height: 1.55; }
+
+@media (max-width: 900px) {
+  .coop-partner { grid-template-columns: 44px 1fr; }
+  .coop-partner > svg { display: none; }
+  .coop-partner__mono { width: 44px; height: 44px; }
+  .coop-item { grid-template-columns: 1fr auto; }
+}
