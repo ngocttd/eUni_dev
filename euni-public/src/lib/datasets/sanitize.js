@@ -1,7 +1,7 @@
 /**
  * Làm sạch HTML bài viết do CMS soạn (WYSIWYG) trước khi hiển thị công khai.
  * Chỉ giữ thẻ/thuộc tính an toàn; loại script, style nội tuyến, sự kiện on*, javascript: URL…
- * Chỉ import động từ loaders (phía server) để không đưa thư viện này vào bundle trình duyệt.
+ * Chỉ import động (loaders phía server; hộp thư thông báo của portal) để không đưa thư viện này vào bundle chung.
  */
 import sanitizeHtml from 'sanitize-html'
 

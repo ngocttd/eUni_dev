@@ -1,5 +1,5 @@
 'use client'
-import { cmsUserRoles, cmsUserStatuses, cmsBannerPositions, cmsI18nStatuses } from '../../config/static/cms.js'
+import { cmsBannerPositions, cmsI18nStatuses } from '../../config/static/cms.js'
 import { useModuleData } from '@/lib/datasets/useModuleData'
 import { useMemo, useState } from 'react';
 import { Link, useParams } from '../../lib/router.jsx';
@@ -36,7 +36,7 @@ export function Tag({
   v
 }) {
   const s = norm(v);
-  const cls = /da xuat ban|hien thi|hoat dong|thanh cong/.test(s) ? 'is-done' : /ban nhap/.test(s) ? 'is-draft' : /cho duyet/.test(s) ? 'is-wait' : 'is-off';
+  const cls = /da xuat ban|hien thi|hoat dong|thanh cong/.test(s) ? 'is-done' : /ban nhap/.test(s) ? 'is-draft' : /cho duyet|hen gio/.test(s) ? 'is-wait' : 'is-off';
   return <span className={`cms-tag ${cls}`}>{v}</span>;
 }
 export function RowActions({
@@ -170,8 +170,5 @@ export const PAGE_TITLE_EN_SEED = {
 export const MENU_LABEL_EN_SEED = {
   'Trang chủ': 'Home'
 };
-export /* ============================ CMS-07 · Quản lý người dùng ============================ */
-const USER_ROLES = cmsUserRoles.filter(r => r !== 'Tất cả vai trò');
-export const USER_STATES = cmsUserStatuses.filter(s => s !== 'Tất cả trạng thái');
 export /* ============================ Banner / Slider ============================ */
 const BANNER_POS = cmsBannerPositions.filter(p => p !== 'Tất cả vị trí');

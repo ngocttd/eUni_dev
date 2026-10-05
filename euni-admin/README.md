@@ -13,7 +13,11 @@ npm run dev                     # http://localhost:3001  → /cms
 ```
 
 Cần API gateway: chạy **euni-api-mock** (`http://127.0.0.1:3000`) hoặc gateway thật.
-Tài khoản mock: `tvanminh` / `Humg@2025` (Super Admin), `nthoa` (Editor), `ltmai` (Author) — cùng mật khẩu. Viewer không vào được CMS.
+Tài khoản mock (mật khẩu `Humg@2025`): `tvanminh` quản trị (2 trang: Trường + Khoa CNTT) · `nthoa` biên tập trang Trường · `pvloc` biên tập Khoa CNTT ·
+`vthuong` người duyệt thông báo P.Đào tạo · `ltmai` tác giả P.Truyền thông · `dvtung` cộng tác viên chuyên mục Nghiên cứu.
+
+Thiết kế: [`docs/design/CMS_DESIGN.md`](../docs/design/CMS_DESIGN.md) — multi-tenant, workflow Draft → PendingReview → Published → Archived (+ hẹn giờ),
+phân quyền mức bản ghi, revision / soft delete / audit, thông báo theo đối tượng.
 
 ## Cấu trúc
 
@@ -21,15 +25,17 @@ Tài khoản mock: `tvanminh` / `Humg@2025` (Super Admin), `nthoa` (Editor), `lt
 src/
 ├─ app/
 │  ├─ (auth)/dang-nhap      Đăng nhập CMS (modules/authentication/AdminLoginPage)
-│  ├─ (cms)/cms/*           21 màn hình CMS, layout bọc CmsShell (bắt buộc đăng nhập + quyền cms.access)
+│  ├─ (cms)/cms/*           Màn hình CMS, layout bọc CmsShell (đăng nhập + quyền cms.access + chọn trang/tenant quản trị)
+│  │                        bai-viet (+ thùng rác, workflow, lịch sử) · thong-bao (soạn, đối tượng nhận, thống kê đọc) · phan-quyen (grants) · …
 │  └─ page.jsx              / → redirect /cms
 ├─ modules/
-│  ├─ cms/                  ResourceManager.jsx (CRUD dùng chung) · pages/ (CmsDashboard, CmsPosts, CmsPostEditor, CmsCategories, CmsMedia, CmsPagesMenu,
-│  │                        CmsBanners, CmsHome, CmsAlbums, CmsVideos, CmsPodcasts, CmsUsers, CmsRoles, CmsSettings, CmsActivity, CmsBackup…), shared.jsx, css
+│  ├─ cms/                  ResourceManager.jsx (CRUD dùng chung) · workflow.jsx (WorkflowBar, HistoryPanel, TrashPanel) · pickers.jsx (danh bạ, đơn vị)
+│  │                        pages/ (CmsDashboard, CmsPosts, CmsPostEditor, CmsAnnouncements, CmsAnnouncementEditor, CmsGrants, CmsCategories, CmsMedia,
+│  │                        CmsPagesMenu, CmsBanners, CmsHome, CmsAlbums, CmsVideos, CmsPodcasts, CmsSettings, CmsActivity, CmsBackup…), shared.jsx, css
 │  └─ authentication/       AdminLoginPage
 ├─ lib/
 │  ├─ api/client.js         Client gọi gateway (Bearer token)
-│  ├─ api/cmsApi.js         ★ Thao tác GHI sẵn sàng gắn vào màn hình: cmsApi.contents.update(id, {...})…
+│  ├─ api/cmsApi.js         ★ Thao tác GHI: cmsApi.contents.update(id, {..., version}) · .workflow(id, 'submit') · .revisions(id) · announcements · grants…
 │  ├─ datasets/loaders.js   ★ loadCms(): gọi các endpoint quản trị và đổi về dạng dữ liệu màn hình đang dùng
 │  ├─ datasets/useModuleData.jsx   useModuleData('cms') · useReloadDatasets() (làm mới sau khi ghi)
 │  └─ router.jsx            Lớp tương thích react-router-dom → next/navigation
@@ -41,7 +47,12 @@ src/
 ## Trạng thái
 
 - **Đọc dữ liệu**: tất cả màn hình lấy dữ liệu thật từ `cms-api` (không còn mock trong code).
-- **Ghi dữ liệu qua giao diện**: **tất cả màn hình lưu/xóa được qua API** — Bài viết, Danh mục, Media (tải lên/xóa), Trang & Menu (kể cả tiêu đề EN), Banner, Album, Video, Podcast, Trang chủ, Người dùng, Vai trò & Ma trận phân quyền, Cấu hình hệ thống, Sao lưu. Website public đổi theo ngay.
+- **Ghi dữ liệu qua giao diện**: **tất cả màn hình lưu/xóa được qua API** — Bài viết, Thông báo, Danh mục, Media (tải lên/xóa), Trang & Menu (kể cả tiêu đề EN), Banner, Album, Video, Podcast, Trang chủ, Phân quyền nội dung, Cấu hình hệ thống, Sao lưu.
+- **Workflow** (bài viết, thông báo): Bản nháp → Chờ duyệt → Đã xuất bản (hoặc **Hẹn giờ**) → Lưu trữ. Nút trên thanh workflow theo `allowedActions` do server tính từ quyền;
+  trả lại cần lý do; sửa bài đang xuất bản khi không có quyền xuất bản → **bản sửa đổi chờ duyệt** (website giữ nội dung cũ đến khi được duyệt).
+  Lưu kèm `version` → báo xung đột nếu người khác vừa sửa. Tab **Lịch sử**: các phiên bản (xem khác biệt, khôi phục), lịch sử xử lý, audit. **Thùng rác**: xóa mềm + khôi phục.
+- **Thông báo theo đối tượng**: chọn sinh viên / cán bộ / phụ huynh × đơn vị hoặc lớp (gồm đơn vị con) × cá nhân (tra danh bạ theo tên, email, mã CB/SV), có dòng loại trừ;
+  ưu tiên, ghim, hết hạn, yêu cầu xác nhận đã đọc, thống kê đã đọc. Người nhận xem trong My eUni (euni-public).
   Màn hình CRUD đơn giản dùng chung `modules/cms/ResourceManager.jsx`; các màn hình khác dùng hook `useAction()` (`modules/cms/actions.jsx`) để chạy thao tác, báo lỗi/thành công và nạp lại dữ liệu CMS.
 - **Soạn bài viết bằng trình soạn WYSIWYG** (`modules/cms/RichTextEditor.jsx`, **TipTap — giấy phép MIT, miễn phí kể cả thương mại**): đậm/nghiêng/gạch chân, H2–H3, danh sách, trích dẫn, căn lề, liên kết, bảng, chèn ảnh (tải thẳng lên Media thư viện hoặc theo URL), hoàn tác/làm lại.
   Nội dung lưu dạng **HTML** trong `contentBody`; bài cũ (dữ liệu khối JSON) vẫn mở và hiển thị được. Website **làm sạch HTML** (`sanitize-html`) trước khi hiển thị nên script/onerror/javascript: bị loại.
@@ -51,21 +62,10 @@ src/
 
 ## Đăng nhập
 
-- **SSO Microsoft 365** (mặc định: đăng nhập **trực tiếp Microsoft Entra ID** của HUMG bằng OIDC + PKCE): nút "Đăng nhập với Microsoft 365 (SSO)".
-  Application (client) ID `5a7cce06-4b5c-4612-b1fa-0ef7f0702a27`, tenant `c852d62b-3032-4cdc-96ab-30e4368fabd7`. Trên Azure, app cần có nền tảng **Single-page application** với Redirect URI `{origin}/dang-nhap/sso/callback`
-  (vd. `http://localhost:3001/dang-nhap/sso/callback`, và địa chỉ production của admin) và Post-logout redirect `{origin}/`.
-  Vai trò CMS lấy từ app role/nhóm trong token (`cms-admin`, `cms-editor`) — xem `src/lib/sso/oidc.js` (`ROLE_RULES`); tài khoản không có vai trò CMS sẽ bị từ chối.
-  Có thể chuyển sang Keycloak HUMG bằng `NEXT_PUBLIC_SSO_PROVIDER=keycloak`.
-- **Tài khoản nội bộ/mock** qua `auth-api` (dev: `tvanminh` / `Humg@2025`).
-- Cần quản trị SSO đăng ký client OIDC (public, PKCE S256) cho app này: Valid redirect URI `{origin}/dang-nhap/sso/callback`, Post logout redirect URI `{origin}/`.
+Mọi đăng nhập đi qua **Identity Server** (OIDC + PKCE) — `NEXT_PUBLIC_AUTH_MODE=oidc`, `NEXT_PUBLIC_SSO_PROVIDER=ids`, `NEXT_PUBLIC_SSO_ISSUER`:
+hai nút **Tài khoản trường** và **Microsoft 365** (cùng một người dùng trên IdS). Quyền CMS lấy từ role trong token
+(`cms.admin`, `cms.editor`, `cms.reviewer`, `cms.author`) + phân quyền mức bản ghi ở màn hình **Phân quyền nội dung**.
+**CMS không quản lý người dùng / vai trò** (màn hình Người dùng, Vai trò cũ đã bỏ). Trang (tenant) được quản trị lấy từ claim `tenant`.
 
-## Phân quyền
-
-Token mang `permissions`; cms-api kiểm tra từng endpoint (`post.create`, `post.publish`, `user.manage`, `settings.manage`…).
-Giao diện chỉ ẩn/hiện, quyền thật do backend quyết định. Xem bảng quyền trong `euni-api-mock/contract/API_CONTRACT.md`.
-
-## Biến môi trường
-
-`NEXT_PUBLIC_API_GATEWAY_URL` (gateway), `NEXT_PUBLIC_API_TIMEOUT`, `NEXT_PUBLIC_API_LOG`,
-`NEXT_PUBLIC_PUBLIC_URL` / `NEXT_PUBLIC_ADMIN_URL` (link chéo tới website công khai),
-`NEXT_PUBLIC_SSO_ENABLED` / `_PROVIDER` / `_TENANT_ID` / `_CLIENT_ID` / `_API_SCOPE` (đăng nhập SSO; `_ISSUER`, `_IDP_HINT` chỉ cho chế độ Keycloak).
+Chế độ `entra` (đăng nhập thẳng Entra ID, client `5a7cce06-…`) vẫn dùng được; chế độ `mock` dùng form gọi `auth-api` của euni-api-mock.
+Cấu hình đầy đủ: `.env.example`.

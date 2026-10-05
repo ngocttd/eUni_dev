@@ -1,37 +1,48 @@
+// auth-api mock — đóng vai Identity Server (IdS) khi phát triển.
+// Hệ thống thật: user, role, tenant, đơn vị do IdS quản lý; CMS chỉ đọc claim trong token (xem docs/design/CMS_DESIGN.md §3, §5).
+// Token mock mang các claim giống IdS: sub, name, email, roles[], tenants[], units[], staff_code, student_code.
 import jwt from 'jsonwebtoken'
 import { Router } from 'express'
-import { getStore } from './store.js'
+import { getStore, rows } from './store.js'
 
 const SECRET = process.env.JWT_SECRET || 'dev-only-change-me'
 const EXPIRES = process.env.JWT_EXPIRES_IN || '8h'
 export const DEV_PASSWORD = 'Humg@2025'
 
-/* Tài khoản mock cho các cổng người dùng (mật khẩu: bất kỳ khi dùng "demo login", hoặc Humg@2025) */
-export const PORTAL_USERS = {
-  student: { id: 'SV001', username: '2151000123', name: 'Nguyễn Văn Sinh', role: 'student', permissions: ['portal.student.view'], portal: '/euni/sinh-vien' },
-  staff: { id: 'GV001', username: 'giangvien', name: 'Giảng viên HUMG', role: 'staff', permissions: ['portal.staff.view'], portal: '/euni/giang-vien' },
-  parent: { id: 'PH001', username: 'phuhuynh', name: 'Phụ huynh', role: 'parent', permissions: ['portal.parent.view'], portal: '/euni/phu-huynh' },
-  leader: { id: 'LD001', username: 'lanhdao', name: 'Lãnh đạo HUMG', role: 'leader', permissions: ['portal.leader.view'], portal: '/euni/lanh-dao' },
+/** Ánh xạ role (IdS) → quyền chức năng của CMS. Cấu hình tĩnh, không có màn hình quản lý role. */
+export const ROLE_PERMISSIONS = {
+  'cms.admin': ['cms.*'],
+  'cms.editor': ['cms.access', 'news.view', 'news.edit', 'news.review', 'news.publish', 'announcement.view', 'announcement.edit', 'announcement.review', 'announcement.publish',
+    'media.manage', 'category.manage', 'page.manage', 'menu.manage', 'site.manage', 'log.view'],
+  'cms.reviewer': ['cms.access', 'news.view', 'news.review', 'announcement.view', 'announcement.review'],
+  'cms.author': ['cms.access', 'news.view', 'news.edit', 'announcement.view', 'announcement.edit', 'media.manage'],
+  student: ['portal.student.view'], staff: ['portal.staff.view'], parent: ['portal.parent.view'], leader: ['portal.leader.view'],
 }
+const PORTAL_OF = { student: '/euni/sinh-vien', staff: '/euni/giang-vien', parent: '/euni/phu-huynh', leader: '/euni/lanh-dao' }
+const DEMO_SUB = { student: 'SV001', staff: 'GV001', parent: 'PH001', leader: 'LD001' }
+const ROLE_LABEL = { 'cms.admin': 'Quản trị CMS', 'cms.editor': 'Biên tập viên', 'cms.reviewer': 'Người duyệt', 'cms.author': 'Tác giả' }
 
-const resolvePortalRole = (username = '') => {
-  const v = String(username).trim().toLowerCase()
-  if (v.includes('lanh') || v.includes('leader')) return 'leader'
-  if (v.includes('phu') || v.includes('parent')) return 'parent'
-  if (v.includes('giang') || v.includes('staff') || v.includes('gv')) return 'staff'
-  return 'student'
-}
+export const permissionsOf = (roles = []) => [...new Set(roles.flatMap((r) => ROLE_PERMISSIONS[r] || []))]
+export const isSuper = (perms = []) => perms.includes('cms.*')
+export const hasPerm = (perms = [], need) => isSuper(perms) || perms.includes(need) || perms.some((g) => g.endsWith('.*') && need.startsWith(g.slice(0, -1)))
 
-function cmsUserView(u) {
-  const perms = getStore().rolePermissions[u.roleCode] || []
+/** Người dùng (dạng FE dùng) từ một dòng danh bạ IdS. `role` = vai trò chính để điều hướng FE. */
+export function userView(u) {
+  const roles = u.roles || []
+  const cmsRole = roles.find((r) => r.startsWith('cms.'))
+  const portalRole = ['leader', 'staff', 'student', 'parent'].find((r) => roles.includes(r))
+  const role = cmsRole ? (cmsRole === 'cms.admin' ? 'cms-admin' : 'cms-editor') : portalRole || 'student'
   return {
-    id: `CMS${u.id}`, userId: u.id, username: u.username, name: u.fullName, email: u.email,
-    role: u.roleCode === 'super_admin' ? 'cms-admin' : u.roleCode === 'viewer' ? 'cms-viewer' : 'cms-editor',
-    roleCode: u.roleCode, permissions: u.roleCode === 'super_admin' ? ['cms.*', ...perms] : perms, portal: '/',
+    id: u.sub, sub: u.sub, username: u.username, name: u.fullName, email: u.email, role, roles,
+    roleLabel: ROLE_LABEL[cmsRole] || null,
+    permissions: permissionsOf(roles), tenants: u.tenants || ['humg'], units: u.units || [],
+    staffCode: u.staffCode || null, studentCode: u.studentCode || null,
+    portal: cmsRole ? '/cms' : PORTAL_OF[role] || '/',
   }
 }
 
-const sign = (user) => jwt.sign({ sub: user.id, role: user.role, name: user.name, perms: user.permissions, uid: user.userId }, SECRET, { expiresIn: EXPIRES })
+const sign = (u) => jwt.sign({ sub: u.sub, name: u.name, email: u.email, role: u.role, roles: u.roles, perms: u.permissions, tenants: u.tenants, units: u.units,
+  staff_code: u.staffCode, student_code: u.studentCode }, SECRET, { expiresIn: EXPIRES })
 
 export function readToken(req) {
   const h = req.headers.authorization || ''
@@ -39,54 +50,69 @@ export function readToken(req) {
   try { return jwt.verify(h.slice(7), SECRET) } catch { return null }
 }
 
-const matches = (granted = [], need) => granted.includes(need) || granted.some((g) => g.endsWith('.*') && need.startsWith(g.slice(0, -1)))
+/** Middleware: bắt buộc đăng nhập (mọi vai trò). */
+export function requireUser(req, res, next) {
+  const t = readToken(req)
+  if (!t) return res.status(401).json({ message: 'Chưa đăng nhập hoặc phiên đã hết hạn.' })
+  req.user = t
+  next()
+}
 
-/** Middleware: bắt buộc đăng nhập CMS (+ quyền tuỳ chọn). */
+/**
+ * Middleware: bắt buộc đăng nhập CMS + quyền chức năng (tùy chọn) + được quản trị tenant đang chọn (X-Tenant).
+ * Quyền mức bản ghi kiểm tra tiếp trong acl.js.
+ */
 export function requireCms(perm) {
   return (req, res, next) => {
     const t = readToken(req)
     if (!t) return res.status(401).json({ message: 'Chưa đăng nhập hoặc phiên đã hết hạn.' })
-    if (!String(t.role).startsWith('cms-') || !matches(t.perms, 'cms.access')) return res.status(403).json({ message: 'Tài khoản không có quyền truy cập CMS.' })
-    if (perm && !matches(t.perms, perm)) return res.status(403).json({ message: `Thiếu quyền ${perm}.` })
+    if (!hasPerm(t.perms, 'cms.access')) return res.status(403).json({ message: 'Tài khoản không có quyền truy cập CMS.' })
+    if (!isSuper(t.perms) && !(t.tenants || []).includes(req.tenant)) return res.status(403).json({ message: `Tài khoản không được quản trị trang "${req.tenant}".` })
+    if (perm && !hasPerm(t.perms, perm)) return res.status(403).json({ message: `Thiếu quyền ${perm}.` })
     req.user = t
     next()
   }
 }
 
+const findUser = (key) => rows('users').find((u) => [u.username, u.email, u.staffCode, u.studentCode].some((v) => v && String(v).toLowerCase() === key))
+const resolvePortalRole = (v = '') => (v.includes('lanh') || v.includes('leader') ? 'leader' : v.includes('phu') || v.includes('parent') ? 'parent' : v.includes('giang') || v.includes('staff') || v.includes('gv') ? 'staff' : 'student')
+
 export const authRouter = Router()
 
+/**
+ * Đăng nhập mock (thay cho trang đăng nhập của IdS khi dev):
+ *   { role: 'student' }                       → vào thẳng cổng demo
+ *   { username, password }                    → tài khoản trong danh bạ (username / email / mã CB / mã SV)
+ * Tài khoản có vai trò CMS cần mật khẩu Humg@2025; tài khoản portal mock nhận mật khẩu bất kỳ.
+ */
 authRouter.post('/auth/login', (req, res) => {
   const { username, password, role } = req.body || {}
-  if (role && PORTAL_USERS[role]) { const u = PORTAL_USERS[role]; return res.json({ accessToken: sign(u), user: u }) } // demo login theo vai trò
+  getStore()
+  if (role && DEMO_SUB[role]) { const u = userView(rows('users').find((x) => x.sub === DEMO_SUB[role])); return res.json({ accessToken: sign(u), user: u }) }
   const key = String(username || '').trim().toLowerCase()
   if (!key) return res.status(422).json({ message: 'Thiếu tên đăng nhập.' })
-  const cmsUser = getStore().collections.users.find((u) => u.username.toLowerCase() === key || u.email.toLowerCase() === key)
-  if (cmsUser) {
-    if (cmsUser.status !== 1) return res.status(403).json({ message: 'Tài khoản đã bị khóa.' })
-    if (password !== DEV_PASSWORD) return res.status(401).json({ message: 'Sai tên đăng nhập hoặc mật khẩu.' })
-    const user = cmsUserView(cmsUser)
-    return res.json({ accessToken: sign(user), user })
+  const found = findUser(key)
+  if (found) {
+    if (found.status !== 1) return res.status(403).json({ message: 'Tài khoản đã bị khóa.' })
+    const u = userView(found)
+    if (u.roles.some((r) => r.startsWith('cms.')) && password !== DEV_PASSWORD) return res.status(401).json({ message: 'Sai tên đăng nhập hoặc mật khẩu.' })
+    found.lastLoginAt = new Date().toISOString()
+    return res.json({ accessToken: sign(u), user: u })
   }
-  const u = PORTAL_USERS[resolvePortalRole(key)]
+  const u = userView(rows('users').find((x) => x.sub === DEMO_SUB[resolvePortalRole(key)]))
   return res.json({ accessToken: sign(u), user: { ...u, username: key } })
 })
 
+const current = (t) => { const u = t && rows('users').find((x) => x.sub === t.sub); return u && u.status === 1 ? userView(u) : null }
+
 authRouter.get('/auth/me', (req, res) => {
-  const t = readToken(req)
-  if (!t) return res.status(401).json({ message: 'Chưa đăng nhập.' })
-  const cms = t.uid && getStore().collections.users.find((u) => u.id === t.uid)
-  const user = cms ? cmsUserView(cms) : Object.values(PORTAL_USERS).find((u) => u.id === t.sub)
-  if (!user) return res.status(401).json({ message: 'Tài khoản không tồn tại.' })
-  res.json({ user })
+  const user = current(readToken(req))
+  return user ? res.json({ user }) : res.status(401).json({ message: 'Chưa đăng nhập.' })
 })
 
 authRouter.post('/auth/refresh', (req, res) => {
-  const t = readToken(req)
-  if (!t) return res.status(401).json({ message: 'Phiên đã hết hạn.' })
-  const cms = t.uid && getStore().collections.users.find((u) => u.id === t.uid)
-  const user = cms ? cmsUserView(cms) : Object.values(PORTAL_USERS).find((u) => u.id === t.sub)
-  if (!user) return res.status(401).json({ message: 'Tài khoản không tồn tại.' })
-  res.json({ accessToken: sign(user), user })
+  const user = current(readToken(req))
+  return user ? res.json({ accessToken: sign(user), user }) : res.status(401).json({ message: 'Phiên đã hết hạn.' })
 })
 
 authRouter.post('/auth/logout', (_req, res) => res.status(204).end())

@@ -1,15 +1,20 @@
-// Kiểm thử luồng OIDC (Authorization Code + PKCE) với Keycloak GIẢ LẬP — không cần tài khoản M365.
-//   node sso-test.mjs
+// Kiểm thử luồng OIDC (Authorization Code + PKCE) với nhà cung cấp GIẢ LẬP — không cần tài khoản M365.
+//   node sso-test.mjs                                                   (Entra trực tiếp)
+//   NEXT_PUBLIC_SSO_PROVIDER=keycloak node sso-test.mjs                 (Keycloak)
+//   NEXT_PUBLIC_SSO_PROVIDER=ids NEXT_PUBLIC_SSO_ISSUER=https://id.humg.test node sso-test.mjs   (Identity Server, discovery)
 import assert from 'node:assert/strict'
 import { createHash } from 'node:crypto'
 import { pathToFileURL } from 'node:url'
 import { resolve } from 'node:path'
 
 const origin = 'http://localhost:3002'
-const PROVIDER = process.env.NEXT_PUBLIC_SSO_PROVIDER === 'keycloak' ? 'keycloak' : 'entra'
+const PROVIDER = ['keycloak', 'ids'].includes(process.env.NEXT_PUBLIC_SSO_PROVIDER) ? process.env.NEXT_PUBLIC_SSO_PROVIDER : 'entra'
+const ISSUER = process.env.NEXT_PUBLIC_SSO_ISSUER || 'https://id.humg.test'
 const EXPECT = PROVIDER === 'keycloak'
-  ? { auth: 'https://sso-demo.humg.edu.vn/realms/humg-euni/protocol/openid-connect/auth', clientId: 'humg-euni-web', logout: /openid-connect\/logout$/ }
-  : { auth: 'https://login.microsoftonline.com/c852d62b-3032-4cdc-96ab-30e4368fabd7/oauth2/v2.0/authorize', clientId: '5a7cce06-4b5c-4612-b1fa-0ef7f0702a27', logout: /oauth2\/v2\.0\/logout$/ }
+  ? { auth: 'https://sso-demo.humg.edu.vn/realms/humg-euni/protocol/openid-connect/auth', clientId: 'humg-euni-web', logout: /openid-connect\/logout$/, hint: ['kc_idp_hint', 'entra-public'] }
+  : PROVIDER === 'ids'
+    ? { auth: `${ISSUER}/connect/authorize-from-discovery`, clientId: 'humg-euni-web', logout: /connect\/endsession$/, hint: ['acr_values', 'idp:Microsoft'] }
+    : { auth: 'https://login.microsoftonline.com/c852d62b-3032-4cdc-96ab-30e4368fabd7/oauth2/v2.0/authorize', clientId: '5a7cce06-4b5c-4612-b1fa-0ef7f0702a27', logout: /oauth2\/v2\.0\/logout$/, hint: null }
 console.log('Provider:', PROVIDER)
 const store = new Map()
 let navigated = null
@@ -21,6 +26,10 @@ globalThis.window = {
 const jwt = (claims) => `h.${Buffer.from(JSON.stringify(claims)).toString('base64url')}.s`
 let tokenCalls = []
 globalThis.fetch = async (url, init) => {
+  // discovery của Identity Server (chế độ ids)
+  if (String(url).endsWith('/.well-known/openid-configuration')) {
+    return new Response(JSON.stringify({ issuer: ISSUER, authorization_endpoint: EXPECT.auth, token_endpoint: `${ISSUER}/connect/token`, end_session_endpoint: `${ISSUER}/connect/endsession` }), { status: 200 })
+  }
   const body = Object.fromEntries(new URLSearchParams(init.body))
   tokenCalls.push({ url: String(url), body })
   if (body.grant_type === 'authorization_code') {
@@ -39,14 +48,23 @@ let failed = 0
 const step = async (name, fn) => { try { await fn(); console.log('✔', name) } catch (e) { failed++; console.log('✘', name, '\n   ', e.message) } }
 
 let state
-await step('startLogin: chuyển tới Keycloak với PKCE S256, state, nonce, kc_idp_hint=entra-public', async () => {
-  await startLogin({ returnTo: '/euni/sinh-vien/lich-hoc' })
+await step('startLogin "tài khoản trường": không gợi ý IdP (IdS hiện form của nó)', async () => {
+  await startLogin({ returnTo: '/', method: 'school' })
+  const u = new URL(navigated)
+  assert.equal(u.origin + u.pathname, EXPECT.auth)
+  assert.equal(u.searchParams.get('kc_idp_hint'), null)
+  assert.equal(u.searchParams.get('acr_values'), null)
+})
+
+await step('startLogin "Microsoft 365": PKCE S256, state, nonce, gợi ý IdP (kc_idp_hint=entra-public với Keycloak)', async () => {
+  await startLogin({ returnTo: '/euni/sinh-vien/lich-hoc', method: 'm365' })
   const u = new URL(navigated)
   assert.equal(u.origin + u.pathname, EXPECT.auth)
   assert.equal(u.searchParams.get('client_id'), EXPECT.clientId)
   assert.equal(u.searchParams.get('response_type'), 'code')
   assert.equal(u.searchParams.get('code_challenge_method'), 'S256')
-  assert.equal(u.searchParams.get('kc_idp_hint'), PROVIDER === 'keycloak' ? 'entra-public' : null)
+  if (EXPECT.hint) assert.equal(u.searchParams.get(EXPECT.hint[0]), EXPECT.hint[1])
+  else assert.equal(u.searchParams.get('kc_idp_hint') ?? u.searchParams.get('acr_values'), null)
   assert.equal(u.searchParams.get('redirect_uri'), `${origin}/dang-nhap/sso/callback`)
   assert.match(u.searchParams.get('scope'), /openid/)
   state = u.searchParams.get('state')
@@ -68,12 +86,13 @@ await step('completeLogin: đổi code → phiên SSO, vai trò staff, returnTo 
   globalThis.__session = session
 })
 
-await step('refreshSession: dùng refresh_token, giữ idToken cũ', async () => {
+await step('refreshSession: dùng refresh_token, giữ idToken cũ; vai trò theo claim mới (Keycloak) hoặc giữ người dùng cũ khi token mới không có claim (Entra)', async () => {
   const next = await refreshSession(globalThis.__session)
   assert.equal(tokenCalls.at(-1).body.grant_type, 'refresh_token')
   assert.equal(next.refreshToken, 'r2')
   assert.equal(next.idToken, globalThis.__session.idToken)
-  assert.equal(next.user.role, 'student')
+  // access token làm mới mang realm_access=student: IdS/Keycloak đọc claim của access token; Entra chỉ tin id_token → giữ nguyên người dùng
+  assert.equal(next.user.role, PROVIDER === 'entra' ? 'staff' : 'student')
 })
 
 await step('completeLogin: sai state bị từ chối', async () => {
@@ -97,7 +116,7 @@ await step('completeLogin: PKCE sai (verifier không khớp) bị Keycloak từ 
 await step('logoutUrl: end_session kèm id_token_hint và post_logout_redirect_uri', async () => {
   const u = new URL(logoutUrl({ idToken: 'abc' }))
   assert.match(u.pathname, EXPECT.logout)
-  if (PROVIDER === 'keycloak') assert.equal(u.searchParams.get('id_token_hint'), 'abc')
+  if (PROVIDER !== 'entra') assert.equal(u.searchParams.get('id_token_hint'), 'abc')
   assert.equal(u.searchParams.get('post_logout_redirect_uri'), `${origin}/`)
 })
 
@@ -110,7 +129,12 @@ await step('mapSsoUser: ánh xạ vai trò CMS / leader / parent / mặc định
   assert.equal(mapSsoUser({ sub: 's', roles: ['CMS-Admin'] }).role, 'cms-admin') // app role của Entra
   assert.equal(role([]), 'student')
   assert.deepEqual(mapSsoUser({ sub: 's', realm_access: { roles: ['cms-admin'] } }).permissions, ['cms.access', 'cms.*'])
+  // claim chuẩn của Identity Server: role (chuỗi hoặc mảng), tenant, unit, staff_code
+  const ids = mapSsoUser({ sub: 's', role: ['cms.editor', 'staff'], tenant: ['humg', 'cntt'], unit: 'BM-KHMT', staff_code: 'GV0123' })
+  assert.equal(ids.role, 'cms-editor'); assert.deepEqual(ids.tenants, ['humg', 'cntt']); assert.deepEqual(ids.units, ['BM-KHMT']); assert.equal(ids.staffCode, 'GV0123')
+  assert.equal(mapSsoUser({ sub: 's', role: 'cms.admin' }).role, 'cms-admin')
+  assert.equal(mapSsoUser({ sub: 's', role: 'cms.reviewer' }).role, 'cms-editor')
 })
 
-console.log(failed ? `\nCÓ ${failed} LỖI` : '\nSSO (OIDC + PKCE, Keycloak giả lập): tất cả đạt')
+console.log(failed ? `\nCÓ ${failed} LỖI` : `\nSSO (OIDC + PKCE, ${PROVIDER} giả lập): tất cả đạt`)
 process.exitCode = failed ? 1 : 0

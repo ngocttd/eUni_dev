@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link, useNavigate, useLocation } from '../../lib/router.jsx';
 import { useAuth } from '../../shared/auth/AuthContext.jsx';
 import { sso, ssoEndpoints } from '../../lib/sso/config.js';
+export { authMode } from '../../lib/sso/config.js';
 import Icon from '../../shared/lib/Icon.jsx';
 import './auth.css';
 
@@ -38,32 +39,41 @@ export function PwInput({
       </button>
     </div>;
 }
-export function MsButton({
-  label = 'Đăng nhập với Microsoft 365',
-  returnTo
+/**
+ * Nút đăng nhập qua Identity Server (docs/design/CMS_DESIGN.md §3):
+ *   method="school" — tài khoản trường (form của IdS) · method="m365" — Microsoft 365 (IdS chuyển thẳng sang Entra ID).
+ * Hai cách cho cùng một tài khoản (`sub`) trên IdS. App không nhận mật khẩu.
+ */
+export function SsoButton({
+  method = 'm365',
+  label,
+  returnTo,
+  showAccountLink = false
 }) {
   const { loginWithSso } = useAuth();
   const { search } = useLocation();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
-  if (!sso.enabled) return null;
+  if (!sso.enabled || (method === 'school' && !sso.schoolAccount)) return null;
   const go = async () => {
     setBusy(true);
     setError('');
     try {
-      await loginWithSso({ returnTo: returnTo || new URLSearchParams(search).get('next') || undefined });
+      await loginWithSso({ method, returnTo: returnTo || new URLSearchParams(search).get('next') || undefined });
     } catch (e) {
-      setError(e?.message || 'Không mở được trang đăng nhập SSO.');
+      setError(e?.message || 'Không mở được trang đăng nhập.');
       setBusy(false);
     }
   };
+  const text = label || (method === 'm365' ? 'Đăng nhập với Microsoft 365' : 'Đăng nhập bằng tài khoản trường (HUMG ID)');
   return <>
-      <button type="button" className="auth-sso" onClick={go} disabled={busy}>
-        <Icon name="microsoft" size={16} /> {busy ? 'Đang chuyển tới SSO…' : label}
+      <button type="button" className={method === 'm365' ? 'auth-sso' : 'humg-btn humg-btn--primary humg-btn--block'} onClick={go} disabled={busy}>
+        <Icon name={method === 'm365' ? 'microsoft' : 'user'} size={16} /> {busy ? 'Đang chuyển tới trang đăng nhập…' : text}
       </button>
       {error && <p className="auth-note" role="alert">{error}</p>}
-      <p className="auth-note"><a href={ssoEndpoints.account} target="_blank" rel="noreferrer">Quản lý tài khoản SSO</a></p>
+      {showAccountLink && <p className="auth-note"><a href={ssoEndpoints.account} target="_blank" rel="noreferrer">Quản lý tài khoản</a></p>}
     </>;
 }
+export const MsButton = props => <SsoButton method="m365" showAccountLink {...props} />;
 
 /* ======================= AUTH-01 · Đăng nhập chung (SSO) ======================= */

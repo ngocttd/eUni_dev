@@ -20,19 +20,19 @@ export function MediaPage() {
     label: 'Media HUMG'
   }]} hero={<HeroSearch placeholder="Tìm album, video, podcast…" />} sidebar={<>
           <Panel title="Xem nhiều nhất" icon="award">
-            <NewsMini items={[{
+            <NewsMini items={[videos[0] && {
         date: `${videos[0].views.toLocaleString('vi-VN')} lượt xem`,
         title: videos[0].title,
         to: `/media/video/${videos[0].slug}`
-      }, {
-        date: `${podcasts[2].plays.toLocaleString('vi-VN')} lượt nghe`,
-        title: podcasts[2].title,
-        to: `/media/podcast/${podcasts[2].slug}`
-      }, {
+      }, (podcasts[2] || podcasts[0]) && {
+        date: `${(podcasts[2] || podcasts[0]).plays.toLocaleString('vi-VN')} lượt nghe`,
+        title: (podcasts[2] || podcasts[0]).title,
+        to: `/media/podcast/${(podcasts[2] || podcasts[0]).slug}`
+      }, albums[0] && {
         date: `${albums[0].count} ảnh`,
         title: albums[0].title,
         to: `/media/anh/${albums[0].slug}`
-      }]} />
+      }].filter(Boolean)} />
           </Panel>
           <LinkList title="Kênh HUMG" items={[{
       label: 'YouTube HUMG',

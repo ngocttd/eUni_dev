@@ -1,4 +1,5 @@
 'use client'
+import NotFound from '../../../../views/NotFound.jsx';
 import { useModuleData } from '@/lib/datasets/useModuleData'
 import { useParams, Link } from '../../../../lib/router.jsx';
 
@@ -10,6 +11,7 @@ export function NewsDetailPage() {
     slug
   } = useParams();
   const a = getArticle(slug) || articles[0];
+  if (!a) return <NotFound />; // trang (tenant) chưa có nội dung loại này
   return <PageShell eyebrow={a.category} title={a.title} crumbs={[{
     label: 'Tin tức & Sự kiện',
     to: '/tin-tuc'

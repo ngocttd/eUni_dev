@@ -5,7 +5,7 @@
 | Repo | Vai trò | Công nghệ | Cổng dev |
 |---|---|---|---|
 | `euni-public` | Website công khai · My eUni Portal (4 cổng theo vai trò) · đăng nhập | Next.js 15 App Router, React 19 | 3002 |
-| `euni-admin` | CMS quản trị nội dung | Next.js 15 App Router, React 19 | 3001 |
+| `euni-admin` | CMS quản trị nội dung (theo tenant, workflow, thông báo, phân quyền mức bản ghi) | Next.js 15 App Router, React 19 | 3001 |
 | `euni-api-mock` | Gateway giả lập + hợp đồng API + DB tham khảo (không phải backend thật) | Node.js, Express | 3000 |
 
 Hai app FE độc lập (build/deploy riêng). Chúng chỉ giao tiếp với nhau qua **API gateway** và qua **link chéo**
@@ -59,10 +59,10 @@ src/
 src/
 ├─ app/
 │  ├─ (auth)/dang-nhap       Đăng nhập CMS
-│  ├─ (cms)/cms/             Tổng quan · bai-viet(+moi/[id]) · danh-muc · media · trang-menu · su-kien · tuyen-sinh ·
-│  │                         nghien-cuu · hoc-tap · banner · trang-chu · album · video · podcast · nguoi-dung · phan-quyen · cau-hinh · nhat-ky · sao-luu
+│  ├─ (cms)/cms/             Tổng quan · bai-viet(+moi/[id]) · thong-bao(+moi/[id]) · danh-muc · media · trang-menu · su-kien · tuyen-sinh ·
+│  │                         nghien-cuu · hoc-tap · banner · trang-chu · album · video · podcast · phan-quyen (grants) · cau-hinh · nhat-ky · sao-luu
 │  └─ page.jsx               / → /cms
-├─ modules/cms/              21 màn hình (pages/), ResourceManager.jsx (CRUD dùng chung), shared.jsx, css          · modules/authentication/AdminLoginPage
+├─ modules/cms/              màn hình (pages/), ResourceManager.jsx (CRUD dùng chung), workflow.jsx, pickers.jsx, shared.jsx, css  · modules/authentication/AdminLoginPage
 ├─ lib/api/cmsApi.js         ★ thao tác ghi (contents/categories/media/users/…) sẵn sàng gắn vào màn hình
 ├─ lib/datasets/loaders.js   ★ loadCms(): gọi endpoint quản trị → dạng dữ liệu màn hình đang dùng
 ├─ shared/ · config/ (cmsUi.js = hằng số giao diện) · routes/cmsConfig.js · i18n/
@@ -81,12 +81,13 @@ database/schema.sql · seed.sql · migrate.mjs                  PostgreSQL (sche
 
 | Khu vực giao diện | Service | Ghi chú |
 |---|---|---|
-| Tin tức, sự kiện, media, trang chủ, banner, menu | `cms-api` | Do CMS quản trị; ghi ở admin → public đổi ngay |
+| Tin tức, sự kiện, media, trang chủ, banner, menu | `cms-api` | Do CMS quản trị theo tenant; ghi ở admin → public đổi ngay (theo workflow & giờ đăng) |
+| Thông báo trong My eUni (SV, GV, phụ huynh) | `cms-api` `/api/Me/announcements` | Soạn ở CMS theo đối tượng nhận; hộp thư so khớp vai trò + đơn vị/lớp + cá nhân |
 | Giới thiệu (cơ cấu, giảng viên), cổng Giảng viên, Lãnh đạo | `qlns-api` | Hệ thống nhân sự |
 | Nghiên cứu (đề tài, công bố, chuyên gia…) | `qlkhcn-api` | Hệ thống KHCN |
 | Học tập, tuyển sinh, cổng Sinh viên/Phụ huynh | `qldt-api` | Hệ thống đào tạo |
 | Hợp tác, thư viện, đời sống, tiện ích | `portal-api` | Dịch vụ chung |
-| Đăng nhập | `auth-api` | JWT |
+| Đăng nhập | Identity Server (OIDC) | Tài khoản trường + Microsoft 365, cùng một `sub`; dev: `auth-api` của mock |
 
 Map này nằm ở `MODULE_SERVICE` (`src/lib/datasets/loaders.js`) và `euni-api-mock/src/datasets.js`; đổi ở đó nếu backend chia service khác.
 
@@ -96,3 +97,5 @@ Map này nằm ở `MODULE_SERVICE` (`src/lib/datasets/loaders.js`) và `euni-ap
 - Thêm trang công khai: tạo `app/(site)/<đường-dẫn>/page.jsx` + component trong `modules/public/<module>/pages/`.
 - Cần field/endpoint mới: sửa mock + sinh lại `contract/`, báo backend; rồi cập nhật `loaders.js`.
 - Link nội bộ cứ viết dạng `/đường-dẫn`; link sang app khác (`/cms`) tự được đổi sang URL tuyệt đối.
+- Mọi lời gọi API gửi `X-Tenant`: trang công khai (server) dùng `lib/datasets/server.js` (tenant theo host), trình duyệt dùng `shared/services/tenantService.js`.
+- Thiết kế backend & nghiệp vụ CMS: `docs/design/CMS_DESIGN.md`.

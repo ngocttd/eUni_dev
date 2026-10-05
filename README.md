@@ -38,15 +38,30 @@ Kiểm thử tự động: `node tools/migration/sync-test.mjs` (10 kịch bản
 
 | File | Nội dung |
 |---|---|
+| [docs/design/CMS_DESIGN.md](docs/design/CMS_DESIGN.md) | **Thiết kế CMS giai đoạn 1** (.NET · PostgreSQL · Redis · MinIO): multi-tenant, đăng nhập qua Identity Server (tài khoản trường + M365), song ngữ, workflow + hẹn giờ, phân quyền mức bản ghi, revision / soft delete / audit, tin tức vs thông báo, tìm kiếm tiếng Việt |
+| [euni-api-mock/database/v2/schema.sql](euni-api-mock/database/v2/schema.sql) | DDL PostgreSQL đích cho backend (RLS theo tenant, unaccent + pg_trgm) + `test.sql` |
 | [docs/SITE_STRUCTURE.md](docs/SITE_STRUCTURE.md) | Cấu trúc website sau khi tách: repo, thư mục, sơ đồ route, luồng dữ liệu |
 | [euni-api-mock/contract/API_CONTRACT.md](euni-api-mock/contract/API_CONTRACT.md) | **Hợp đồng API cho backend** (+ `openapi.json`) |
 | [docs/GIT_WORKFLOW.md](docs/GIT_WORKFLOW.md) | Quy trình branch / PR cho các repo |
 | [docs/MIGRATION.md](docs/MIGRATION.md) | Đã chuyển đổi gì, kiểm thử ra sao, cách khôi phục bản Vite cũ |
 
-## Đăng nhập SSO (Microsoft 365)
+## Đăng nhập: tài khoản trường + Microsoft 365
 
-Cả hai app có nút "Đăng nhập với Microsoft 365": đăng nhập trực tiếp **Microsoft Entra ID** của HUMG (OIDC + PKCE; client ID `5a7cce06-4b5c-4612-b1fa-0ef7f0702a27`, tenant `c852d62b-3032-4cdc-96ab-30e4368fabd7`).
-App Azure cần Redirect URI loại SPA `{origin}/dang-nhap/sso/callback` cho từng địa chỉ chạy (website :3002, admin :3001 khi dev). Có thể chuyển sang Keycloak HUMG bằng `NEXT_PUBLIC_SSO_PROVIDER=keycloak`. Kiểm thử: `node tools/migration/sso-test.mjs`.
+Mọi đăng nhập đi qua **Identity Server** của trường (OIDC + PKCE): trang đăng nhập có 2 lựa chọn **Tài khoản trường (HUMG ID)** và **Microsoft 365**;
+IdS đã liên kết hai loại tài khoản nên là cùng một người dùng (`sub`). App không nhận mật khẩu; user / role / tenant / đơn vị lấy từ claim của IdS
+(CMS không quản lý người dùng, chỉ phân quyền mức bản ghi). Cấu hình: `NEXT_PUBLIC_AUTH_MODE=oidc`, `NEXT_PUBLIC_SSO_PROVIDER=ids`, `NEXT_PUBLIC_SSO_ISSUER=…`
+(xem `.env.example` của từng app). Khi dev (`AUTH_MODE=mock`, mặc định) `euni-api-mock` đóng vai IdS. Chế độ cũ đăng nhập thẳng Entra ID
+(client `5a7cce06-…`) vẫn còn (`NEXT_PUBLIC_SSO_PROVIDER=entra`). Kiểm thử: `node tools/migration/sso-test.mjs` (3 chế độ).
+
+## Kiểm thử
+
+```bash
+npm --prefix euni-api-mock test                     # 67 kiểm tra hành vi API (tự chạy server tạm)
+psql … -f euni-api-mock/database/v2/schema.sql -f euni-api-mock/database/v2/test.sql   # schema v2 + RLS
+# với 3 app đang chạy (mock dữ liệu gốc, public build với NEXT_PUBLIC_TENANT_HOSTS="cntt.localhost:3002=cntt"):
+node tools/migration/e2e-v2.mjs                     # 24 bước trình duyệt: workflow, tenant, thông báo, phân quyền
+node tools/migration/sync-test.mjs                  # đồng bộ CMS → website
+```
 
 ## Nối backend thật
 

@@ -341,6 +341,9 @@
              },
              "isVisible": {
               "type": "boolean"
+             },
+             "tenantId": {
+              "type": "string"
              }
             }
            }
@@ -370,6 +373,9 @@
               "items": {
                "type": "object"
               }
+             },
+             "tenantId": {
+              "type": "string"
              }
             }
            }
@@ -408,6 +414,9 @@
              },
              "isVisible": {
               "type": "boolean"
+             },
+             "tenantId": {
+              "type": "string"
              }
             }
            }
@@ -455,6 +464,9 @@
              },
              "isVisible": {
               "type": "boolean"
+             },
+             "tenantId": {
+              "type": "string"
              }
             }
            }
@@ -558,6 +570,9 @@
              },
              "sortOrder": {
               "type": "integer"
+             },
+             "tenantId": {
+              "type": "string"
              }
             }
            }
@@ -584,6 +599,9 @@
              },
              "sortOrder": {
               "type": "integer"
+             },
+             "tenantId": {
+              "type": "string"
              }
             }
            }
@@ -619,6 +637,9 @@
              },
              "sortOrder": {
               "type": "integer"
+             },
+             "tenantId": {
+              "type": "string"
              }
             }
            }
@@ -645,6 +666,9 @@
              },
              "sortOrder": {
               "type": "integer"
+             },
+             "tenantId": {
+              "type": "string"
              }
             }
            }
@@ -674,6 +698,9 @@
              },
              "sortOrder": {
               "type": "integer"
+             },
+             "tenantId": {
+              "type": "string"
              }
             }
            }
@@ -703,6 +730,9 @@
              },
              "sortOrder": {
               "type": "integer"
+             },
+             "tenantId": {
+              "type": "string"
              }
             }
            }
@@ -732,6 +762,9 @@
              },
              "sortOrder": {
               "type": "integer"
+             },
+             "tenantId": {
+              "type": "string"
              }
             }
            }
@@ -938,6 +971,9 @@
              },
              "isVisible": {
               "type": "boolean"
+             },
+             "tenantId": {
+              "type": "string"
              }
             }
            }
@@ -968,6 +1004,9 @@
                "photos": {
                 "type": "array",
                 "items": {}
+               },
+               "tenantId": {
+                "type": "string"
                }
               }
              }
@@ -1006,6 +1045,9 @@
                },
                "isVisible": {
                 "type": "boolean"
+               },
+               "tenantId": {
+                "type": "string"
                }
               }
              }
@@ -1051,6 +1093,9 @@
                },
                "isVisible": {
                 "type": "boolean"
+               },
+               "tenantId": {
+                "type": "string"
                }
               }
              }
@@ -1115,6 +1160,9 @@
            },
            "openInNewTab": {
             "type": "boolean"
+           },
+           "tenantId": {
+            "type": "string"
            }
           }
          }
@@ -1185,6 +1233,9 @@
         "schema": {
          "type": "object",
          "properties": {
+          "tenant": {
+           "type": "string"
+          },
           "general": {
            "type": "object",
            "properties": {
@@ -1719,6 +1770,9 @@
              "translations": {
               "type": "object",
               "properties": {}
+             },
+             "tenantId": {
+              "type": "string"
              }
             }
            }
@@ -1752,7 +1806,7 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "CRUD danh mục.",
+    "summary": "CRUD danh mục (theo tenant, xóa mềm, POST /{id}/restore).",
     "description": "Cần Bearer token + quyền: category.manage",
     "security": [
      {
@@ -1792,6 +1846,9 @@
           "translations": {
            "type": "object",
            "properties": {}
+          },
+          "tenantId": {
+           "type": "string"
           }
          }
         }
@@ -1863,13 +1920,181 @@
     }
    }
   },
+  "/cms-api/api/Public/tenant": {
+   "get": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Tenant đang phục vụ (theo X-Tenant / host).",
+    "description": "Không cần đăng nhập.",
+    "parameters": [],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   }
+  },
+  "/cms-api/api/Me/context": {
+   "get": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Ngữ cảnh người dùng: tenants được quản trị, permissions (từ role trong token), đơn vị (kèm đơn vị cha), can.{news|announcement}.{view|edit|review|publish}.",
+    "description": "Cần Bearer token + quyền: đăng nhập",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "user": {
+           "type": "object",
+           "properties": {
+            "sub": {
+             "type": "string"
+            },
+            "name": {
+             "type": "string"
+            },
+            "email": {
+             "type": "string"
+            },
+            "roles": {
+             "type": "array",
+             "items": {
+              "type": "string"
+             }
+            },
+            "units": {
+             "type": "array",
+             "items": {
+              "type": "string"
+             }
+            }
+           }
+          },
+          "permissions": {
+           "type": "array",
+           "items": {
+            "type": "string"
+           }
+          },
+          "tenants": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "properties": {
+             "id": {
+              "type": "string"
+             },
+             "name": {
+              "type": "string"
+             },
+             "rootUnit": {
+              "type": "string"
+             }
+            }
+           }
+          },
+          "currentTenant": {
+           "type": "string"
+          },
+          "units": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "properties": {
+             "code": {
+              "type": "string"
+             },
+             "name": {
+              "type": "string"
+             }
+            }
+           }
+          },
+          "can": {
+           "type": "object",
+           "properties": {
+            "news": {
+             "type": "object",
+             "properties": {
+              "view": {
+               "type": "boolean"
+              },
+              "edit": {
+               "type": "boolean"
+              },
+              "review": {
+               "type": "boolean"
+              },
+              "publish": {
+               "type": "boolean"
+              }
+             }
+            },
+            "announcement": {
+             "type": "object",
+             "properties": {
+              "view": {
+               "type": "boolean"
+              },
+              "edit": {
+               "type": "boolean"
+              },
+              "review": {
+               "type": "boolean"
+              },
+              "publish": {
+               "type": "boolean"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   }
+  },
   "/cms-api/api/Contents": {
    "get": {
     "tags": [
      "cms-api"
     ],
-    "summary": "Quản trị: danh sách bài viết mọi trạng thái.",
-    "description": "Cần Bearer token + quyền: post.view",
+    "summary": "Quản trị: danh sách bài viết user được xem (lọc theo grant). Mỗi dòng có allowedActions[], isScheduled, pendingRevision, version.",
+    "description": "Cần Bearer token + quyền: news.view + ACL",
     "security": [
      {
       "bearer": []
@@ -1879,9 +2104,25 @@
      {
       "name": "status",
       "in": "query",
-      "description": "0 nháp · 1 chờ duyệt · 2 xuất bản · 3 lưu trữ",
+      "description": "draft | pending_review | published | archived",
       "schema": {
-       "type": "integer"
+       "type": "string"
+      }
+     },
+     {
+      "name": "scheduled",
+      "in": "query",
+      "description": "chỉ bài hẹn giờ",
+      "schema": {
+       "type": "boolean"
+      }
+     },
+     {
+      "name": "mine",
+      "in": "query",
+      "description": "chỉ bài tôi tạo",
+      "schema": {
+       "type": "boolean"
       }
      },
      {
@@ -1890,6 +2131,14 @@
       "description": "",
       "schema": {
        "type": "integer"
+      }
+     },
+     {
+      "name": "ownerUnitCode",
+      "in": "query",
+      "description": "",
+      "schema": {
+       "type": "string"
       }
      },
      {
@@ -1939,6 +2188,9 @@
           "categoryId": {
            "type": "integer"
           },
+          "ownerUnitCode": {
+           "type": "string"
+          },
           "title": {
            "type": "string"
           },
@@ -1949,7 +2201,7 @@
            "type": "string"
           },
           "status": {
-           "type": "integer"
+           "type": "string"
           },
           "isFeatured": {
            "type": "boolean"
@@ -1975,8 +2227,8 @@
           "attachmentId": {
            "nullable": true
           },
-          "authorId": {
-           "type": "integer"
+          "authorSub": {
+           "type": "string"
           },
           "authorName": {
            "type": "string"
@@ -2017,23 +2269,80 @@
            "type": "object",
            "properties": {}
           },
-          "publishedAt": {
+          "publishAt": {
            "type": "string"
           },
-          "expiredAt": {
+          "expireAt": {
            "nullable": true
           },
+          "firstPublishedAt": {
+           "type": "string"
+          },
+          "submittedAt": {
+           "nullable": true
+          },
+          "submittedBy": {
+           "nullable": true
+          },
+          "reviewedAt": {
+           "nullable": true
+          },
+          "reviewedBy": {
+           "nullable": true
+          },
+          "reviewNote": {
+           "nullable": true
+          },
+          "pendingRevisionId": {
+           "nullable": true
+          },
+          "version": {
+           "type": "integer"
+          },
           "createdAt": {
+           "type": "string"
+          },
+          "createdBy": {
            "type": "string"
           },
           "updatedAt": {
            "type": "string"
           },
-          "deleteAt": {
+          "updatedBy": {
+           "type": "string"
+          },
+          "deletedAt": {
            "nullable": true
+          },
+          "deletedBy": {
+           "nullable": true
+          },
+          "tenantId": {
+           "type": "string"
           },
           "categoryName": {
            "type": "string"
+          },
+          "ownerUnitName": {
+           "type": "string"
+          },
+          "isScheduled": {
+           "type": "boolean"
+          },
+          "isExpired": {
+           "type": "boolean"
+          },
+          "updatedByName": {
+           "type": "string"
+          },
+          "pendingRevision": {
+           "nullable": true
+          },
+          "allowedActions": {
+           "type": "array",
+           "items": {
+            "type": "string"
+           }
           }
          }
         }
@@ -2052,8 +2361,8 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Tạo bài viết. Bắt buộc title; slug tự sinh nếu thiếu.",
-    "description": "Cần Bearer token + quyền: post.create (+post.publish nếu status=2)",
+    "summary": "Tạo bản nháp. ownerUnitCode mặc định = đơn vị đầu tiên của user. Có thể gửi status=pending_review|published để chuyển trạng thái ngay (cần quyền tương ứng).",
+    "description": "Cần Bearer token + quyền: news.edit + ACL (phạm vi chuyên mục/đơn vị)",
     "security": [
      {
       "bearer": []
@@ -2074,6 +2383,9 @@
           "categoryId": {
            "type": "integer"
           },
+          "ownerUnitCode": {
+           "type": "string"
+          },
           "title": {
            "type": "string"
           },
@@ -2084,7 +2396,7 @@
            "type": "string"
           },
           "status": {
-           "type": "integer"
+           "type": "string"
           },
           "isFeatured": {
            "type": "boolean"
@@ -2110,8 +2422,8 @@
           "attachmentId": {
            "nullable": true
           },
-          "authorId": {
-           "type": "integer"
+          "authorSub": {
+           "type": "string"
           },
           "authorName": {
            "type": "string"
@@ -2152,25 +2464,140 @@
            "type": "object",
            "properties": {}
           },
-          "publishedAt": {
+          "publishAt": {
            "type": "string"
           },
-          "expiredAt": {
+          "expireAt": {
            "nullable": true
           },
+          "firstPublishedAt": {
+           "type": "string"
+          },
+          "submittedAt": {
+           "nullable": true
+          },
+          "submittedBy": {
+           "nullable": true
+          },
+          "reviewedAt": {
+           "nullable": true
+          },
+          "reviewedBy": {
+           "nullable": true
+          },
+          "reviewNote": {
+           "nullable": true
+          },
+          "pendingRevisionId": {
+           "nullable": true
+          },
+          "version": {
+           "type": "integer"
+          },
           "createdAt": {
+           "type": "string"
+          },
+          "createdBy": {
            "type": "string"
           },
           "updatedAt": {
            "type": "string"
           },
-          "deleteAt": {
+          "updatedBy": {
+           "type": "string"
+          },
+          "deletedAt": {
            "nullable": true
+          },
+          "deletedBy": {
+           "nullable": true
+          },
+          "tenantId": {
+           "type": "string"
           },
           "categoryName": {
            "type": "string"
+          },
+          "ownerUnitName": {
+           "type": "string"
+          },
+          "isScheduled": {
+           "type": "boolean"
+          },
+          "isExpired": {
+           "type": "boolean"
+          },
+          "updatedByName": {
+           "type": "string"
+          },
+          "pendingRevision": {
+           "nullable": true
+          },
+          "allowedActions": {
+           "type": "array",
+           "items": {
+            "type": "string"
+           }
           }
          }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   }
+  },
+  "/cms-api/api/Contents/trash": {
+   "get": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Thùng rác (bài đã xóa mềm).",
+    "description": "Cần Bearer token + quyền: news.edit|publish + ACL",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "pageIndex",
+      "in": "query",
+      "description": "Trang (mặc định 1)",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "pageSize",
+      "in": "query",
+      "description": "Số dòng/trang (mặc định 20, tối đa 500)",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "keyword",
+      "in": "query",
+      "description": "Từ khóa tìm kiếm",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object"
         }
        }
       }
@@ -2189,8 +2616,8 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Chi tiết bài viết (kèm bản dịch).",
-    "description": "Cần Bearer token + quyền: post.view",
+    "summary": "Chi tiết bài viết (kèm bản dịch). Header ETag = version.",
+    "description": "Cần Bearer token + quyền: news.view + ACL",
     "security": [
      {
       "bearer": []
@@ -2211,6 +2638,9 @@
           "categoryId": {
            "type": "integer"
           },
+          "ownerUnitCode": {
+           "type": "string"
+          },
           "title": {
            "type": "string"
           },
@@ -2221,7 +2651,7 @@
            "type": "string"
           },
           "status": {
-           "type": "integer"
+           "type": "string"
           },
           "isFeatured": {
            "type": "boolean"
@@ -2247,8 +2677,8 @@
           "attachmentId": {
            "nullable": true
           },
-          "authorId": {
-           "type": "integer"
+          "authorSub": {
+           "type": "string"
           },
           "authorName": {
            "type": "string"
@@ -2289,23 +2719,80 @@
            "type": "object",
            "properties": {}
           },
-          "publishedAt": {
+          "publishAt": {
            "type": "string"
           },
-          "expiredAt": {
+          "expireAt": {
            "nullable": true
           },
+          "firstPublishedAt": {
+           "type": "string"
+          },
+          "submittedAt": {
+           "nullable": true
+          },
+          "submittedBy": {
+           "nullable": true
+          },
+          "reviewedAt": {
+           "nullable": true
+          },
+          "reviewedBy": {
+           "nullable": true
+          },
+          "reviewNote": {
+           "nullable": true
+          },
+          "pendingRevisionId": {
+           "nullable": true
+          },
+          "version": {
+           "type": "integer"
+          },
           "createdAt": {
+           "type": "string"
+          },
+          "createdBy": {
            "type": "string"
           },
           "updatedAt": {
            "type": "string"
           },
-          "deleteAt": {
+          "updatedBy": {
+           "type": "string"
+          },
+          "deletedAt": {
            "nullable": true
+          },
+          "deletedBy": {
+           "nullable": true
+          },
+          "tenantId": {
+           "type": "string"
           },
           "categoryName": {
            "type": "string"
+          },
+          "ownerUnitName": {
+           "type": "string"
+          },
+          "isScheduled": {
+           "type": "boolean"
+          },
+          "isExpired": {
+           "type": "boolean"
+          },
+          "updatedByName": {
+           "type": "string"
+          },
+          "pendingRevision": {
+           "nullable": true
+          },
+          "allowedActions": {
+           "type": "array",
+           "items": {
+            "type": "string"
+           }
           }
          }
         }
@@ -2324,8 +2811,8 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Cập nhật (merge các trường gửi lên). Đổi status sang 2 cần post.publish.",
-    "description": "Cần Bearer token + quyền: post.update",
+    "summary": "Sửa nội dung (status KHÔNG đổi qua PUT). Gửi version (hoặc If-Match) → 409 nếu đã có người sửa. Bài đang published mà user không có publish → 202, lưu thành bản sửa đổi chờ duyệt (pendingRevision).",
+    "description": "Cần Bearer token + quyền: news.edit + ACL",
     "security": [
      {
       "bearer": []
@@ -2346,6 +2833,9 @@
           "categoryId": {
            "type": "integer"
           },
+          "ownerUnitCode": {
+           "type": "string"
+          },
           "title": {
            "type": "string"
           },
@@ -2356,7 +2846,7 @@
            "type": "string"
           },
           "status": {
-           "type": "integer"
+           "type": "string"
           },
           "isFeatured": {
            "type": "boolean"
@@ -2382,8 +2872,8 @@
           "attachmentId": {
            "nullable": true
           },
-          "authorId": {
-           "type": "integer"
+          "authorSub": {
+           "type": "string"
           },
           "authorName": {
            "type": "string"
@@ -2424,23 +2914,80 @@
            "type": "object",
            "properties": {}
           },
-          "publishedAt": {
+          "publishAt": {
            "type": "string"
           },
-          "expiredAt": {
+          "expireAt": {
            "nullable": true
           },
+          "firstPublishedAt": {
+           "type": "string"
+          },
+          "submittedAt": {
+           "nullable": true
+          },
+          "submittedBy": {
+           "nullable": true
+          },
+          "reviewedAt": {
+           "nullable": true
+          },
+          "reviewedBy": {
+           "nullable": true
+          },
+          "reviewNote": {
+           "nullable": true
+          },
+          "pendingRevisionId": {
+           "nullable": true
+          },
+          "version": {
+           "type": "integer"
+          },
           "createdAt": {
+           "type": "string"
+          },
+          "createdBy": {
            "type": "string"
           },
           "updatedAt": {
            "type": "string"
           },
-          "deleteAt": {
+          "updatedBy": {
+           "type": "string"
+          },
+          "deletedAt": {
            "nullable": true
+          },
+          "deletedBy": {
+           "nullable": true
+          },
+          "tenantId": {
+           "type": "string"
           },
           "categoryName": {
            "type": "string"
+          },
+          "ownerUnitName": {
+           "type": "string"
+          },
+          "isScheduled": {
+           "type": "boolean"
+          },
+          "isExpired": {
+           "type": "boolean"
+          },
+          "updatedByName": {
+           "type": "string"
+          },
+          "pendingRevision": {
+           "nullable": true
+          },
+          "allowedActions": {
+           "type": "array",
+           "items": {
+            "type": "string"
+           }
           }
          }
         }
@@ -2459,8 +3006,8 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Xóa mềm (deleteAt).",
-    "description": "Cần Bearer token + quyền: post.update",
+    "summary": "Xóa mềm (deletedAt, deletedBy).",
+    "description": "Cần Bearer token + quyền: allowedActions có delete",
     "security": [
      {
       "bearer": []
@@ -2487,12 +3034,2504 @@
     }
    }
   },
+  "/cms-api/api/Contents/{id}/restore": {
+   "post": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Khôi phục từ thùng rác.",
+    "description": "Cần Bearer token + quyền: allowedActions có restore",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   }
+  },
+  "/cms-api/api/Contents/{id}/purge": {
+   "delete": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Xóa vĩnh viễn bài trong thùng rác.",
+    "description": "Cần Bearer token + quyền: cms.*",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   }
+  },
+  "/cms-api/api/Contents/{id}/workflow/{action}": {
+   "post": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "action: submit (edit) · reject (review, body.note bắt buộc) · approve (review) · publish (publish) · unpublish · archive (publish) · approve-revision / reject-revision (review). Body: { note?, publishAt?, version? }. publishAt tương lai = hẹn giờ.",
+    "description": "Cần Bearer token + quyền: theo action",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "id": {
+           "type": "integer"
+          },
+          "categoryId": {
+           "type": "integer"
+          },
+          "ownerUnitCode": {
+           "type": "string"
+          },
+          "title": {
+           "type": "string"
+          },
+          "slug": {
+           "type": "string"
+          },
+          "excerpt": {
+           "type": "string"
+          },
+          "status": {
+           "type": "string"
+          },
+          "isFeatured": {
+           "type": "boolean"
+          },
+          "showOnHome": {
+           "type": "boolean"
+          },
+          "contentBody": {
+           "type": "string"
+          },
+          "metaTitle": {
+           "nullable": true
+          },
+          "metaDescription": {
+           "nullable": true
+          },
+          "metaKeywords": {
+           "nullable": true
+          },
+          "featuredImageId": {
+           "nullable": true
+          },
+          "attachmentId": {
+           "nullable": true
+          },
+          "authorSub": {
+           "type": "string"
+          },
+          "authorName": {
+           "type": "string"
+          },
+          "source": {
+           "nullable": true
+          },
+          "unit": {
+           "type": "string"
+          },
+          "viewCount": {
+           "type": "integer"
+          },
+          "tags": {
+           "type": "array",
+           "items": {
+            "type": "string"
+           }
+          },
+          "attachments": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "properties": {
+             "title": {
+              "type": "string"
+             },
+             "meta": {
+              "type": "string"
+             },
+             "url": {
+              "nullable": true
+             }
+            }
+           }
+          },
+          "translations": {
+           "type": "object",
+           "properties": {}
+          },
+          "publishAt": {
+           "type": "string"
+          },
+          "expireAt": {
+           "nullable": true
+          },
+          "firstPublishedAt": {
+           "type": "string"
+          },
+          "submittedAt": {
+           "nullable": true
+          },
+          "submittedBy": {
+           "nullable": true
+          },
+          "reviewedAt": {
+           "nullable": true
+          },
+          "reviewedBy": {
+           "nullable": true
+          },
+          "reviewNote": {
+           "nullable": true
+          },
+          "pendingRevisionId": {
+           "nullable": true
+          },
+          "version": {
+           "type": "integer"
+          },
+          "createdAt": {
+           "type": "string"
+          },
+          "createdBy": {
+           "type": "string"
+          },
+          "updatedAt": {
+           "type": "string"
+          },
+          "updatedBy": {
+           "type": "string"
+          },
+          "deletedAt": {
+           "nullable": true
+          },
+          "deletedBy": {
+           "nullable": true
+          },
+          "tenantId": {
+           "type": "string"
+          },
+          "categoryName": {
+           "type": "string"
+          },
+          "ownerUnitName": {
+           "type": "string"
+          },
+          "isScheduled": {
+           "type": "boolean"
+          },
+          "isExpired": {
+           "type": "boolean"
+          },
+          "updatedByName": {
+           "type": "string"
+          },
+          "pendingRevision": {
+           "nullable": true
+          },
+          "allowedActions": {
+           "type": "array",
+           "items": {
+            "type": "string"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   }
+  },
+  "/cms-api/api/Contents/{id}/revisions": {
+   "get": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Danh sách phiên bản (state current | superseded | proposed | rejected).",
+    "description": "Cần Bearer token + quyền: news.view + ACL",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "type": "object",
+          "properties": {
+           "id": {
+            "type": "integer"
+           },
+           "tenantId": {
+            "type": "string"
+           },
+           "entityType": {
+            "type": "string"
+           },
+           "entityId": {
+            "type": "integer"
+           },
+           "version": {
+            "type": "integer"
+           },
+           "state": {
+            "type": "string"
+           },
+           "reason": {
+            "type": "string"
+           },
+           "createdBy": {
+            "type": "string"
+           },
+           "createdAt": {
+            "type": "string"
+           },
+           "createdByName": {
+            "type": "string"
+           },
+           "title": {
+            "type": "string"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   }
+  },
+  "/cms-api/api/Contents/{id}/revisions/{version}": {
+   "get": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Một phiên bản: snapshot + changesFromCurrent.",
+    "description": "Cần Bearer token + quyền: news.view + ACL",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   }
+  },
+  "/cms-api/api/Contents/{id}/revisions/{version}/restore": {
+   "post": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Khôi phục nội dung phiên bản cũ → tạo phiên bản mới (không ghi đè lịch sử).",
+    "description": "Cần Bearer token + quyền: news.edit/publish + ACL",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   }
+  },
+  "/cms-api/api/Contents/{id}/history": {
+   "get": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Lịch sử workflow + audit của bản ghi.",
+    "description": "Cần Bearer token + quyền: news.view + ACL",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "workflow": {
+           "type": "array",
+           "items": {}
+          },
+          "audit": {
+           "type": "array",
+           "items": {}
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   }
+  },
+  "/cms-api/api/Announcements …": {
+   "get": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Thông báo: cùng bộ endpoint vòng đời như /api/Contents (trash, restore, workflow, revisions, history). Body có targets[] = [{ audience?, unitCode?, userSub? | userKey? (mã CB/mã SV/email), isExclude? }], priority 0|1|2, category, requireAck, channels[], pinnedUntil, expireAt. archive kèm note = thu hồi (recallReason).",
+    "description": "Cần Bearer token + quyền: announcement.* + ACL",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "status",
+      "in": "query",
+      "description": "",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "category",
+      "in": "query",
+      "description": "",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "ownerUnitCode",
+      "in": "query",
+      "description": "",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "pageIndex",
+      "in": "query",
+      "description": "Trang (mặc định 1)",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "pageSize",
+      "in": "query",
+      "description": "Số dòng/trang (mặc định 20, tối đa 500)",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "keyword",
+      "in": "query",
+      "description": "Từ khóa tìm kiếm",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "id": {
+           "type": "integer"
+          },
+          "tenantId": {
+           "type": "string"
+          },
+          "category": {
+           "type": "string"
+          },
+          "priority": {
+           "type": "integer"
+          },
+          "status": {
+           "type": "string"
+          },
+          "expireAt": {
+           "nullable": true
+          },
+          "pinnedUntil": {
+           "nullable": true
+          },
+          "requireAck": {
+           "type": "boolean"
+          },
+          "channels": {
+           "type": "array",
+           "items": {
+            "type": "string"
+           }
+          },
+          "recallReason": {
+           "nullable": true
+          },
+          "bodyHtml": {
+           "type": "string"
+          },
+          "translations": {
+           "type": "object",
+           "properties": {}
+          },
+          "attachments": {
+           "type": "array",
+           "items": {}
+          },
+          "authorSub": {
+           "type": "string"
+          },
+          "authorName": {
+           "type": "string"
+          },
+          "submittedAt": {
+           "nullable": true
+          },
+          "submittedBy": {
+           "nullable": true
+          },
+          "reviewedAt": {
+           "nullable": true
+          },
+          "reviewedBy": {
+           "nullable": true
+          },
+          "reviewNote": {
+           "nullable": true
+          },
+          "pendingRevisionId": {
+           "nullable": true
+          },
+          "version": {
+           "type": "integer"
+          },
+          "createdBy": {
+           "type": "string"
+          },
+          "updatedBy": {
+           "type": "string"
+          },
+          "deletedAt": {
+           "nullable": true
+          },
+          "deletedBy": {
+           "nullable": true
+          },
+          "title": {
+           "type": "string"
+          },
+          "ownerUnitCode": {
+           "type": "string"
+          },
+          "publishAt": {
+           "type": "string"
+          },
+          "targets": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "properties": {
+             "audience": {
+              "type": "string"
+             },
+             "unitCode": {
+              "nullable": true
+             },
+             "userSub": {
+              "nullable": true
+             },
+             "isExclude": {
+              "type": "boolean"
+             },
+             "label": {
+              "type": "string"
+             }
+            }
+           }
+          },
+          "createdAt": {
+           "type": "string"
+          },
+          "updatedAt": {
+           "type": "string"
+          },
+          "firstPublishedAt": {
+           "type": "string"
+          },
+          "ownerUnitName": {
+           "type": "string"
+          },
+          "categoryLabel": {
+           "type": "string"
+          },
+          "priorityLabel": {
+           "type": "string"
+          },
+          "targetSummary": {
+           "type": "string"
+          },
+          "stats": {
+           "type": "object",
+           "properties": {
+            "recipients": {
+             "type": "integer"
+            },
+            "read": {
+             "type": "integer"
+            },
+            "acked": {
+             "type": "integer"
+            }
+           }
+          },
+          "isScheduled": {
+           "type": "boolean"
+          },
+          "isExpired": {
+           "type": "boolean"
+          },
+          "updatedByName": {
+           "type": "string"
+          },
+          "pendingRevision": {
+           "nullable": true
+          },
+          "allowedActions": {
+           "type": "array",
+           "items": {
+            "type": "string"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   },
+   "post": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Thông báo: cùng bộ endpoint vòng đời như /api/Contents (trash, restore, workflow, revisions, history). Body có targets[] = [{ audience?, unitCode?, userSub? | userKey? (mã CB/mã SV/email), isExclude? }], priority 0|1|2, category, requireAck, channels[], pinnedUntil, expireAt. archive kèm note = thu hồi (recallReason).",
+    "description": "Cần Bearer token + quyền: announcement.* + ACL",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "status",
+      "in": "query",
+      "description": "",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "category",
+      "in": "query",
+      "description": "",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "ownerUnitCode",
+      "in": "query",
+      "description": "",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "pageIndex",
+      "in": "query",
+      "description": "Trang (mặc định 1)",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "pageSize",
+      "in": "query",
+      "description": "Số dòng/trang (mặc định 20, tối đa 500)",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "keyword",
+      "in": "query",
+      "description": "Từ khóa tìm kiếm",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "id": {
+           "type": "integer"
+          },
+          "tenantId": {
+           "type": "string"
+          },
+          "category": {
+           "type": "string"
+          },
+          "priority": {
+           "type": "integer"
+          },
+          "status": {
+           "type": "string"
+          },
+          "expireAt": {
+           "nullable": true
+          },
+          "pinnedUntil": {
+           "nullable": true
+          },
+          "requireAck": {
+           "type": "boolean"
+          },
+          "channels": {
+           "type": "array",
+           "items": {
+            "type": "string"
+           }
+          },
+          "recallReason": {
+           "nullable": true
+          },
+          "bodyHtml": {
+           "type": "string"
+          },
+          "translations": {
+           "type": "object",
+           "properties": {}
+          },
+          "attachments": {
+           "type": "array",
+           "items": {}
+          },
+          "authorSub": {
+           "type": "string"
+          },
+          "authorName": {
+           "type": "string"
+          },
+          "submittedAt": {
+           "nullable": true
+          },
+          "submittedBy": {
+           "nullable": true
+          },
+          "reviewedAt": {
+           "nullable": true
+          },
+          "reviewedBy": {
+           "nullable": true
+          },
+          "reviewNote": {
+           "nullable": true
+          },
+          "pendingRevisionId": {
+           "nullable": true
+          },
+          "version": {
+           "type": "integer"
+          },
+          "createdBy": {
+           "type": "string"
+          },
+          "updatedBy": {
+           "type": "string"
+          },
+          "deletedAt": {
+           "nullable": true
+          },
+          "deletedBy": {
+           "nullable": true
+          },
+          "title": {
+           "type": "string"
+          },
+          "ownerUnitCode": {
+           "type": "string"
+          },
+          "publishAt": {
+           "type": "string"
+          },
+          "targets": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "properties": {
+             "audience": {
+              "type": "string"
+             },
+             "unitCode": {
+              "nullable": true
+             },
+             "userSub": {
+              "nullable": true
+             },
+             "isExclude": {
+              "type": "boolean"
+             },
+             "label": {
+              "type": "string"
+             }
+            }
+           }
+          },
+          "createdAt": {
+           "type": "string"
+          },
+          "updatedAt": {
+           "type": "string"
+          },
+          "firstPublishedAt": {
+           "type": "string"
+          },
+          "ownerUnitName": {
+           "type": "string"
+          },
+          "categoryLabel": {
+           "type": "string"
+          },
+          "priorityLabel": {
+           "type": "string"
+          },
+          "targetSummary": {
+           "type": "string"
+          },
+          "stats": {
+           "type": "object",
+           "properties": {
+            "recipients": {
+             "type": "integer"
+            },
+            "read": {
+             "type": "integer"
+            },
+            "acked": {
+             "type": "integer"
+            }
+           }
+          },
+          "isScheduled": {
+           "type": "boolean"
+          },
+          "isExpired": {
+           "type": "boolean"
+          },
+          "updatedByName": {
+           "type": "string"
+          },
+          "pendingRevision": {
+           "nullable": true
+          },
+          "allowedActions": {
+           "type": "array",
+           "items": {
+            "type": "string"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   },
+   "put": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Thông báo: cùng bộ endpoint vòng đời như /api/Contents (trash, restore, workflow, revisions, history). Body có targets[] = [{ audience?, unitCode?, userSub? | userKey? (mã CB/mã SV/email), isExclude? }], priority 0|1|2, category, requireAck, channels[], pinnedUntil, expireAt. archive kèm note = thu hồi (recallReason).",
+    "description": "Cần Bearer token + quyền: announcement.* + ACL",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "status",
+      "in": "query",
+      "description": "",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "category",
+      "in": "query",
+      "description": "",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "ownerUnitCode",
+      "in": "query",
+      "description": "",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "pageIndex",
+      "in": "query",
+      "description": "Trang (mặc định 1)",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "pageSize",
+      "in": "query",
+      "description": "Số dòng/trang (mặc định 20, tối đa 500)",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "keyword",
+      "in": "query",
+      "description": "Từ khóa tìm kiếm",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "id": {
+           "type": "integer"
+          },
+          "tenantId": {
+           "type": "string"
+          },
+          "category": {
+           "type": "string"
+          },
+          "priority": {
+           "type": "integer"
+          },
+          "status": {
+           "type": "string"
+          },
+          "expireAt": {
+           "nullable": true
+          },
+          "pinnedUntil": {
+           "nullable": true
+          },
+          "requireAck": {
+           "type": "boolean"
+          },
+          "channels": {
+           "type": "array",
+           "items": {
+            "type": "string"
+           }
+          },
+          "recallReason": {
+           "nullable": true
+          },
+          "bodyHtml": {
+           "type": "string"
+          },
+          "translations": {
+           "type": "object",
+           "properties": {}
+          },
+          "attachments": {
+           "type": "array",
+           "items": {}
+          },
+          "authorSub": {
+           "type": "string"
+          },
+          "authorName": {
+           "type": "string"
+          },
+          "submittedAt": {
+           "nullable": true
+          },
+          "submittedBy": {
+           "nullable": true
+          },
+          "reviewedAt": {
+           "nullable": true
+          },
+          "reviewedBy": {
+           "nullable": true
+          },
+          "reviewNote": {
+           "nullable": true
+          },
+          "pendingRevisionId": {
+           "nullable": true
+          },
+          "version": {
+           "type": "integer"
+          },
+          "createdBy": {
+           "type": "string"
+          },
+          "updatedBy": {
+           "type": "string"
+          },
+          "deletedAt": {
+           "nullable": true
+          },
+          "deletedBy": {
+           "nullable": true
+          },
+          "title": {
+           "type": "string"
+          },
+          "ownerUnitCode": {
+           "type": "string"
+          },
+          "publishAt": {
+           "type": "string"
+          },
+          "targets": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "properties": {
+             "audience": {
+              "type": "string"
+             },
+             "unitCode": {
+              "nullable": true
+             },
+             "userSub": {
+              "nullable": true
+             },
+             "isExclude": {
+              "type": "boolean"
+             },
+             "label": {
+              "type": "string"
+             }
+            }
+           }
+          },
+          "createdAt": {
+           "type": "string"
+          },
+          "updatedAt": {
+           "type": "string"
+          },
+          "firstPublishedAt": {
+           "type": "string"
+          },
+          "ownerUnitName": {
+           "type": "string"
+          },
+          "categoryLabel": {
+           "type": "string"
+          },
+          "priorityLabel": {
+           "type": "string"
+          },
+          "targetSummary": {
+           "type": "string"
+          },
+          "stats": {
+           "type": "object",
+           "properties": {
+            "recipients": {
+             "type": "integer"
+            },
+            "read": {
+             "type": "integer"
+            },
+            "acked": {
+             "type": "integer"
+            }
+           }
+          },
+          "isScheduled": {
+           "type": "boolean"
+          },
+          "isExpired": {
+           "type": "boolean"
+          },
+          "updatedByName": {
+           "type": "string"
+          },
+          "pendingRevision": {
+           "nullable": true
+          },
+          "allowedActions": {
+           "type": "array",
+           "items": {
+            "type": "string"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   },
+   "delete": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Thông báo: cùng bộ endpoint vòng đời như /api/Contents (trash, restore, workflow, revisions, history). Body có targets[] = [{ audience?, unitCode?, userSub? | userKey? (mã CB/mã SV/email), isExclude? }], priority 0|1|2, category, requireAck, channels[], pinnedUntil, expireAt. archive kèm note = thu hồi (recallReason).",
+    "description": "Cần Bearer token + quyền: announcement.* + ACL",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "status",
+      "in": "query",
+      "description": "",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "category",
+      "in": "query",
+      "description": "",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "ownerUnitCode",
+      "in": "query",
+      "description": "",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "pageIndex",
+      "in": "query",
+      "description": "Trang (mặc định 1)",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "pageSize",
+      "in": "query",
+      "description": "Số dòng/trang (mặc định 20, tối đa 500)",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "keyword",
+      "in": "query",
+      "description": "Từ khóa tìm kiếm",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "id": {
+           "type": "integer"
+          },
+          "tenantId": {
+           "type": "string"
+          },
+          "category": {
+           "type": "string"
+          },
+          "priority": {
+           "type": "integer"
+          },
+          "status": {
+           "type": "string"
+          },
+          "expireAt": {
+           "nullable": true
+          },
+          "pinnedUntil": {
+           "nullable": true
+          },
+          "requireAck": {
+           "type": "boolean"
+          },
+          "channels": {
+           "type": "array",
+           "items": {
+            "type": "string"
+           }
+          },
+          "recallReason": {
+           "nullable": true
+          },
+          "bodyHtml": {
+           "type": "string"
+          },
+          "translations": {
+           "type": "object",
+           "properties": {}
+          },
+          "attachments": {
+           "type": "array",
+           "items": {}
+          },
+          "authorSub": {
+           "type": "string"
+          },
+          "authorName": {
+           "type": "string"
+          },
+          "submittedAt": {
+           "nullable": true
+          },
+          "submittedBy": {
+           "nullable": true
+          },
+          "reviewedAt": {
+           "nullable": true
+          },
+          "reviewedBy": {
+           "nullable": true
+          },
+          "reviewNote": {
+           "nullable": true
+          },
+          "pendingRevisionId": {
+           "nullable": true
+          },
+          "version": {
+           "type": "integer"
+          },
+          "createdBy": {
+           "type": "string"
+          },
+          "updatedBy": {
+           "type": "string"
+          },
+          "deletedAt": {
+           "nullable": true
+          },
+          "deletedBy": {
+           "nullable": true
+          },
+          "title": {
+           "type": "string"
+          },
+          "ownerUnitCode": {
+           "type": "string"
+          },
+          "publishAt": {
+           "type": "string"
+          },
+          "targets": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "properties": {
+             "audience": {
+              "type": "string"
+             },
+             "unitCode": {
+              "nullable": true
+             },
+             "userSub": {
+              "nullable": true
+             },
+             "isExclude": {
+              "type": "boolean"
+             },
+             "label": {
+              "type": "string"
+             }
+            }
+           }
+          },
+          "createdAt": {
+           "type": "string"
+          },
+          "updatedAt": {
+           "type": "string"
+          },
+          "firstPublishedAt": {
+           "type": "string"
+          },
+          "ownerUnitName": {
+           "type": "string"
+          },
+          "categoryLabel": {
+           "type": "string"
+          },
+          "priorityLabel": {
+           "type": "string"
+          },
+          "targetSummary": {
+           "type": "string"
+          },
+          "stats": {
+           "type": "object",
+           "properties": {
+            "recipients": {
+             "type": "integer"
+            },
+            "read": {
+             "type": "integer"
+            },
+            "acked": {
+             "type": "integer"
+            }
+           }
+          },
+          "isScheduled": {
+           "type": "boolean"
+          },
+          "isExpired": {
+           "type": "boolean"
+          },
+          "updatedByName": {
+           "type": "string"
+          },
+          "pendingRevision": {
+           "nullable": true
+          },
+          "allowedActions": {
+           "type": "array",
+           "items": {
+            "type": "string"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   }
+  },
+  "/cms-api/api/Announcements/{id}/stats": {
+   "get": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Người nhận (ước tính từ danh bạ/Membership API), đã đọc, đã xác nhận.",
+    "description": "Cần Bearer token + quyền: announcement.view + ACL",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   }
+  },
+  "/cms-api/api/Announcements/meta/options": {
+   "get": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Danh mục audiences, categories, priorities, channels.",
+    "description": "Cần Bearer token + quyền: announcement.view",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   }
+  },
+  "/cms-api/api/Me/announcements": {
+   "get": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Hộp thư thông báo của tôi: so khớp targets với role (audience) + đơn vị (kèm đơn vị cha) + sub. Ghim → ưu tiên → mới nhất. X-Tenant: * = mọi tenant của user.",
+    "description": "Cần Bearer token + quyền: đăng nhập (mọi vai trò)",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "unread",
+      "in": "query",
+      "description": "",
+      "schema": {
+       "type": "boolean"
+      }
+     },
+     {
+      "name": "category",
+      "in": "query",
+      "description": "",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "lang",
+      "in": "query",
+      "description": "vi | en",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "pageIndex",
+      "in": "query",
+      "description": "Trang (mặc định 1)",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "pageSize",
+      "in": "query",
+      "description": "Số dòng/trang (mặc định 20, tối đa 500)",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "keyword",
+      "in": "query",
+      "description": "Từ khóa tìm kiếm",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "items": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "properties": {
+             "id": {
+              "type": "integer"
+             },
+             "tenantId": {
+              "type": "string"
+             },
+             "title": {
+              "type": "string"
+             },
+             "bodyHtml": {
+              "type": "string"
+             },
+             "language": {
+              "type": "string"
+             },
+             "category": {
+              "type": "string"
+             },
+             "categoryLabel": {
+              "type": "string"
+             },
+             "priority": {
+              "type": "integer"
+             },
+             "priorityLabel": {
+              "type": "string"
+             },
+             "ownerUnitCode": {
+              "type": "string"
+             },
+             "ownerUnitName": {
+              "type": "string"
+             },
+             "publishAt": {
+              "type": "string"
+             },
+             "expireAt": {
+              "nullable": true
+             },
+             "pinned": {
+              "type": "boolean"
+             },
+             "requireAck": {
+              "type": "boolean"
+             },
+             "attachments": {
+              "type": "array",
+              "items": {
+               "type": "object"
+              }
+             },
+             "readAt": {
+              "nullable": true
+             },
+             "ackedAt": {
+              "nullable": true
+             }
+            }
+           }
+          },
+          "pageIndex": {
+           "type": "integer"
+          },
+          "pageSize": {
+           "type": "integer"
+          },
+          "totalItems": {
+           "type": "integer"
+          },
+          "totalPages": {
+           "type": "integer"
+          },
+          "unreadCount": {
+           "type": "integer"
+          },
+          "categories": {
+           "type": "object",
+           "properties": {
+            "general": {
+             "type": "string"
+            },
+            "academic": {
+             "type": "string"
+            },
+            "exam": {
+             "type": "string"
+            },
+            "tuition": {
+             "type": "string"
+            },
+            "event": {
+             "type": "string"
+            },
+            "admin": {
+             "type": "string"
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   }
+  },
+  "/cms-api/api/Me/announcements/unread-count": {
+   "get": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Số thông báo chưa đọc.",
+    "description": "Cần Bearer token + quyền: đăng nhập",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   }
+  },
+  "/cms-api/api/Me/announcements/{id}/read": {
+   "post": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Đánh dấu đã đọc / xác nhận đã đọc (requireAck) / đọc tất cả.",
+    "description": "Cần Bearer token + quyền: đăng nhập",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   }
+  },
+  "/cms-api/api/Me/announcements/{id}/ack": {
+   "post": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Đánh dấu đã đọc / xác nhận đã đọc (requireAck) / đọc tất cả.",
+    "description": "Cần Bearer token + quyền: đăng nhập",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   }
+  },
+  "/cms-api/api/Me/announcements/read-all": {
+   "post": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Đánh dấu đã đọc / xác nhận đã đọc (requireAck) / đọc tất cả.",
+    "description": "Cần Bearer token + quyền: đăng nhập",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   }
+  },
+  "/cms-api/api/Grants": {
+   "get": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Phân quyền mức bản ghi: { principalType user|unit|role, principalId, resourceType *|news|announcement|page|media, scopeType tenant|category|unit|record, scopeId, permissions[view|edit|review|publish|manage], expiresAt?, note? }. Grant theo đơn vị áp dụng cả đơn vị con.",
+    "description": "Cần Bearer token + quyền: grant.manage",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "pageIndex",
+      "in": "query",
+      "description": "Trang (mặc định 1)",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "pageSize",
+      "in": "query",
+      "description": "Số dòng/trang (mặc định 20, tối đa 500)",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "keyword",
+      "in": "query",
+      "description": "Từ khóa tìm kiếm",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "id": {
+           "type": "integer"
+          },
+          "tenantId": {
+           "type": "string"
+          },
+          "resourceType": {
+           "type": "string"
+          },
+          "scopeType": {
+           "type": "string"
+          },
+          "scopeId": {
+           "nullable": true
+          },
+          "note": {
+           "type": "string"
+          },
+          "expiresAt": {
+           "nullable": true
+          },
+          "createdBy": {
+           "type": "string"
+          },
+          "createdAt": {
+           "type": "string"
+          },
+          "deletedAt": {
+           "nullable": true
+          },
+          "principalType": {
+           "type": "string"
+          },
+          "principalId": {
+           "type": "string"
+          },
+          "permissions": {
+           "type": "array",
+           "items": {
+            "type": "string"
+           }
+          },
+          "principalLabel": {
+           "type": "string"
+          },
+          "scopeLabel": {
+           "type": "string"
+          },
+          "createdByName": {
+           "type": "string"
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   },
+   "post": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Phân quyền mức bản ghi: { principalType user|unit|role, principalId, resourceType *|news|announcement|page|media, scopeType tenant|category|unit|record, scopeId, permissions[view|edit|review|publish|manage], expiresAt?, note? }. Grant theo đơn vị áp dụng cả đơn vị con.",
+    "description": "Cần Bearer token + quyền: grant.manage",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "pageIndex",
+      "in": "query",
+      "description": "Trang (mặc định 1)",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "pageSize",
+      "in": "query",
+      "description": "Số dòng/trang (mặc định 20, tối đa 500)",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "keyword",
+      "in": "query",
+      "description": "Từ khóa tìm kiếm",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "id": {
+           "type": "integer"
+          },
+          "tenantId": {
+           "type": "string"
+          },
+          "resourceType": {
+           "type": "string"
+          },
+          "scopeType": {
+           "type": "string"
+          },
+          "scopeId": {
+           "nullable": true
+          },
+          "note": {
+           "type": "string"
+          },
+          "expiresAt": {
+           "nullable": true
+          },
+          "createdBy": {
+           "type": "string"
+          },
+          "createdAt": {
+           "type": "string"
+          },
+          "deletedAt": {
+           "nullable": true
+          },
+          "principalType": {
+           "type": "string"
+          },
+          "principalId": {
+           "type": "string"
+          },
+          "permissions": {
+           "type": "array",
+           "items": {
+            "type": "string"
+           }
+          },
+          "principalLabel": {
+           "type": "string"
+          },
+          "scopeLabel": {
+           "type": "string"
+          },
+          "createdByName": {
+           "type": "string"
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   },
+   "put": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Phân quyền mức bản ghi: { principalType user|unit|role, principalId, resourceType *|news|announcement|page|media, scopeType tenant|category|unit|record, scopeId, permissions[view|edit|review|publish|manage], expiresAt?, note? }. Grant theo đơn vị áp dụng cả đơn vị con.",
+    "description": "Cần Bearer token + quyền: grant.manage",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "pageIndex",
+      "in": "query",
+      "description": "Trang (mặc định 1)",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "pageSize",
+      "in": "query",
+      "description": "Số dòng/trang (mặc định 20, tối đa 500)",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "keyword",
+      "in": "query",
+      "description": "Từ khóa tìm kiếm",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "id": {
+           "type": "integer"
+          },
+          "tenantId": {
+           "type": "string"
+          },
+          "resourceType": {
+           "type": "string"
+          },
+          "scopeType": {
+           "type": "string"
+          },
+          "scopeId": {
+           "nullable": true
+          },
+          "note": {
+           "type": "string"
+          },
+          "expiresAt": {
+           "nullable": true
+          },
+          "createdBy": {
+           "type": "string"
+          },
+          "createdAt": {
+           "type": "string"
+          },
+          "deletedAt": {
+           "nullable": true
+          },
+          "principalType": {
+           "type": "string"
+          },
+          "principalId": {
+           "type": "string"
+          },
+          "permissions": {
+           "type": "array",
+           "items": {
+            "type": "string"
+           }
+          },
+          "principalLabel": {
+           "type": "string"
+          },
+          "scopeLabel": {
+           "type": "string"
+          },
+          "createdByName": {
+           "type": "string"
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   },
+   "delete": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Phân quyền mức bản ghi: { principalType user|unit|role, principalId, resourceType *|news|announcement|page|media, scopeType tenant|category|unit|record, scopeId, permissions[view|edit|review|publish|manage], expiresAt?, note? }. Grant theo đơn vị áp dụng cả đơn vị con.",
+    "description": "Cần Bearer token + quyền: grant.manage",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "pageIndex",
+      "in": "query",
+      "description": "Trang (mặc định 1)",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "pageSize",
+      "in": "query",
+      "description": "Số dòng/trang (mặc định 20, tối đa 500)",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "keyword",
+      "in": "query",
+      "description": "Từ khóa tìm kiếm",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "id": {
+           "type": "integer"
+          },
+          "tenantId": {
+           "type": "string"
+          },
+          "resourceType": {
+           "type": "string"
+          },
+          "scopeType": {
+           "type": "string"
+          },
+          "scopeId": {
+           "nullable": true
+          },
+          "note": {
+           "type": "string"
+          },
+          "expiresAt": {
+           "nullable": true
+          },
+          "createdBy": {
+           "type": "string"
+          },
+          "createdAt": {
+           "type": "string"
+          },
+          "deletedAt": {
+           "nullable": true
+          },
+          "principalType": {
+           "type": "string"
+          },
+          "principalId": {
+           "type": "string"
+          },
+          "permissions": {
+           "type": "array",
+           "items": {
+            "type": "string"
+           }
+          },
+          "principalLabel": {
+           "type": "string"
+          },
+          "scopeLabel": {
+           "type": "string"
+          },
+          "createdByName": {
+           "type": "string"
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   }
+  },
+  "/cms-api/api/Grants/effective/{sub}": {
+   "get": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Quyền chức năng + các grant đang áp dụng cho một người.",
+    "description": "Cần Bearer token + quyền: grant.manage",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   }
+  },
+  "/cms-api/api/Directory/users": {
+   "get": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Danh bạ (IdS) — tìm theo tên, email, mã CB, mã SV. Chỉ đọc; user/role quản lý ở Identity Server.",
+    "description": "Cần Bearer token + quyền: cms.access",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "keyword",
+      "in": "query",
+      "description": "",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "role",
+      "in": "query",
+      "description": "",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "items": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "properties": {
+             "sub": {
+              "type": "string"
+             },
+             "name": {
+              "type": "string"
+             },
+             "email": {
+              "type": "string"
+             },
+             "staffCode": {
+              "type": "string"
+             },
+             "studentCode": {
+              "nullable": true
+             },
+             "roles": {
+              "type": "array",
+              "items": {
+               "type": "string"
+              }
+             },
+             "units": {
+              "type": "array",
+              "items": {
+               "type": "string"
+              }
+             },
+             "active": {
+              "type": "boolean"
+             }
+            }
+           }
+          },
+          "pageIndex": {
+           "type": "integer"
+          },
+          "pageSize": {
+           "type": "integer"
+          },
+          "totalItems": {
+           "type": "integer"
+          },
+          "totalPages": {
+           "type": "integer"
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   }
+  },
+  "/cms-api/api/Directory/roles": {
+   "get": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Bảng role (IdS) → quyền chức năng CMS (cấu hình tĩnh).",
+    "description": "Cần Bearer token + quyền: cms.access",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   }
+  },
+  "/cms-api/api/OrgUnits": {
+   "get": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Cây đơn vị (bản sao QLNS/QLĐT): code, name, kind, parentCode, path, depth.",
+    "description": "Cần Bearer token + quyền: cms.access",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "type": "object",
+          "properties": {
+           "code": {
+            "type": "string"
+           },
+           "name": {
+            "type": "string"
+           },
+           "kind": {
+            "type": "string"
+           },
+           "parentCode": {
+            "nullable": true
+           },
+           "depth": {
+            "type": "integer"
+           },
+           "path": {
+            "type": "string"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   }
+  },
   "/cms-api/api/Categories/{id}": {
    "post": {
     "tags": [
      "cms-api"
     ],
-    "summary": "CRUD danh mục.",
+    "summary": "CRUD danh mục (theo tenant, xóa mềm, POST /{id}/restore).",
     "description": "Cần Bearer token + quyền: category.manage",
     "security": [
      {
@@ -2532,6 +5571,9 @@
           "translations": {
            "type": "object",
            "properties": {}
+          },
+          "tenantId": {
+           "type": "string"
           }
          }
         }
@@ -2552,7 +5594,7 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Thư viện media.",
+    "summary": "Thư viện media của tenant.",
     "description": "Cần Bearer token + quyền: media.manage",
     "security": [
      {
@@ -2640,9 +5682,12 @@
            "nullable": true
           },
           "uploadedBy": {
-           "type": "integer"
+           "type": "string"
           },
           "createdAt": {
+           "type": "string"
+          },
+          "tenantId": {
            "type": "string"
           }
          }
@@ -2664,7 +5709,7 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "multipart/form-data: file, uploadedBy, altText, caption, folder.",
+    "summary": "multipart/form-data: file, altText, caption, folder.",
     "description": "Cần Bearer token + quyền: media.manage",
     "security": [
      {
@@ -2711,9 +5756,12 @@
            "nullable": true
           },
           "uploadedBy": {
-           "type": "integer"
+           "type": "string"
           },
           "createdAt": {
+           "type": "string"
+          },
+          "tenantId": {
            "type": "string"
           }
          }
@@ -2735,496 +5783,8 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Xóa media.",
+    "summary": "Xóa mềm media.",
     "description": "Cần Bearer token + quyền: media.manage",
-    "security": [
-     {
-      "bearer": []
-     }
-    ],
-    "parameters": [],
-    "responses": {
-     "200": {
-      "description": "OK",
-      "content": {
-       "application/json": {
-        "schema": {
-         "type": "object"
-        }
-       }
-      }
-     },
-     "401": {
-      "description": "Chưa đăng nhập"
-     },
-     "403": {
-      "description": "Thiếu quyền"
-     }
-    }
-   }
-  },
-  "/cms-api/api/Users": {
-   "get": {
-    "tags": [
-     "cms-api"
-    ],
-    "summary": "Người dùng CMS.",
-    "description": "Cần Bearer token + quyền: user.manage",
-    "security": [
-     {
-      "bearer": []
-     }
-    ],
-    "parameters": [
-     {
-      "name": "roleCode",
-      "in": "query",
-      "description": "",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "status",
-      "in": "query",
-      "description": "1 hoạt động · 0 khóa",
-      "schema": {
-       "type": "integer"
-      }
-     },
-     {
-      "name": "pageIndex",
-      "in": "query",
-      "description": "Trang (mặc định 1)",
-      "schema": {
-       "type": "integer"
-      }
-     },
-     {
-      "name": "pageSize",
-      "in": "query",
-      "description": "Số dòng/trang (mặc định 20, tối đa 500)",
-      "schema": {
-       "type": "integer"
-      }
-     },
-     {
-      "name": "keyword",
-      "in": "query",
-      "description": "Từ khóa tìm kiếm",
-      "schema": {
-       "type": "string"
-      }
-     }
-    ],
-    "responses": {
-     "200": {
-      "description": "OK",
-      "content": {
-       "application/json": {
-        "schema": {
-         "type": "object",
-         "properties": {
-          "id": {
-           "type": "integer"
-          },
-          "username": {
-           "type": "string"
-          },
-          "email": {
-           "type": "string"
-          },
-          "fullName": {
-           "type": "string"
-          },
-          "roleCode": {
-           "type": "string"
-          },
-          "status": {
-           "type": "integer"
-          },
-          "lastLoginAt": {
-           "type": "string"
-          },
-          "createdAt": {
-           "type": "string"
-          }
-         }
-        }
-       }
-      }
-     },
-     "401": {
-      "description": "Chưa đăng nhập"
-     },
-     "403": {
-      "description": "Thiếu quyền"
-     }
-    }
-   },
-   "post": {
-    "tags": [
-     "cms-api"
-    ],
-    "summary": "CRUD người dùng (không trả passwordHash). DELETE: 409 nếu xóa chính tài khoản đang đăng nhập.",
-    "description": "Cần Bearer token + quyền: user.manage",
-    "security": [
-     {
-      "bearer": []
-     }
-    ],
-    "parameters": [],
-    "responses": {
-     "200": {
-      "description": "OK",
-      "content": {
-       "application/json": {
-        "schema": {
-         "type": "object",
-         "properties": {
-          "id": {
-           "type": "integer"
-          },
-          "username": {
-           "type": "string"
-          },
-          "email": {
-           "type": "string"
-          },
-          "fullName": {
-           "type": "string"
-          },
-          "roleCode": {
-           "type": "string"
-          },
-          "status": {
-           "type": "integer"
-          },
-          "lastLoginAt": {
-           "type": "string"
-          },
-          "createdAt": {
-           "type": "string"
-          }
-         }
-        }
-       }
-      }
-     },
-     "401": {
-      "description": "Chưa đăng nhập"
-     },
-     "403": {
-      "description": "Thiếu quyền"
-     }
-    }
-   }
-  },
-  "/cms-api/api/Users/{id}": {
-   "post": {
-    "tags": [
-     "cms-api"
-    ],
-    "summary": "CRUD người dùng (không trả passwordHash). DELETE: 409 nếu xóa chính tài khoản đang đăng nhập.",
-    "description": "Cần Bearer token + quyền: user.manage",
-    "security": [
-     {
-      "bearer": []
-     }
-    ],
-    "parameters": [],
-    "responses": {
-     "200": {
-      "description": "OK",
-      "content": {
-       "application/json": {
-        "schema": {
-         "type": "object",
-         "properties": {
-          "id": {
-           "type": "integer"
-          },
-          "username": {
-           "type": "string"
-          },
-          "email": {
-           "type": "string"
-          },
-          "fullName": {
-           "type": "string"
-          },
-          "roleCode": {
-           "type": "string"
-          },
-          "status": {
-           "type": "integer"
-          },
-          "lastLoginAt": {
-           "type": "string"
-          },
-          "createdAt": {
-           "type": "string"
-          }
-         }
-        }
-       }
-      }
-     },
-     "401": {
-      "description": "Chưa đăng nhập"
-     },
-     "403": {
-      "description": "Thiếu quyền"
-     }
-    }
-   }
-  },
-  "/cms-api/api/Roles": {
-   "get": {
-    "tags": [
-     "cms-api"
-    ],
-    "summary": "Vai trò + danh sách permission; POST nhận copyFrom (mã vai trò) để sao chép quyền.",
-    "description": "Cần Bearer token + quyền: user.manage",
-    "security": [
-     {
-      "bearer": []
-     }
-    ],
-    "parameters": [],
-    "responses": {
-     "200": {
-      "description": "OK",
-      "content": {
-       "application/json": {
-        "schema": {
-         "type": "object",
-         "properties": {
-          "id": {
-           "type": "integer"
-          },
-          "code": {
-           "type": "string"
-          },
-          "name": {
-           "type": "string"
-          },
-          "description": {
-           "type": "string"
-          },
-          "isSystem": {
-           "type": "boolean"
-          },
-          "userCount": {
-           "type": "integer"
-          },
-          "permissions": {
-           "type": "array",
-           "items": {
-            "type": "string"
-           }
-          }
-         }
-        }
-       }
-      }
-     },
-     "401": {
-      "description": "Chưa đăng nhập"
-     },
-     "403": {
-      "description": "Thiếu quyền"
-     }
-    }
-   }
-  },
-  "/cms-apiPOST": {
-   "get": {
-    "tags": [
-     "cms-api"
-    ],
-    "summary": "Vai trò + danh sách permission; POST nhận copyFrom (mã vai trò) để sao chép quyền.",
-    "description": "Cần Bearer token + quyền: user.manage",
-    "security": [
-     {
-      "bearer": []
-     }
-    ],
-    "parameters": [],
-    "responses": {
-     "200": {
-      "description": "OK",
-      "content": {
-       "application/json": {
-        "schema": {
-         "type": "object",
-         "properties": {
-          "id": {
-           "type": "integer"
-          },
-          "code": {
-           "type": "string"
-          },
-          "name": {
-           "type": "string"
-          },
-          "description": {
-           "type": "string"
-          },
-          "isSystem": {
-           "type": "boolean"
-          },
-          "userCount": {
-           "type": "integer"
-          },
-          "permissions": {
-           "type": "array",
-           "items": {
-            "type": "string"
-           }
-          }
-         }
-        }
-       }
-      }
-     },
-     "401": {
-      "description": "Chưa đăng nhập"
-     },
-     "403": {
-      "description": "Thiếu quyền"
-     }
-    }
-   }
-  },
-  "/cms-api/api/Roles/{id}": {
-   "get": {
-    "tags": [
-     "cms-api"
-    ],
-    "summary": "Vai trò + danh sách permission; POST nhận copyFrom (mã vai trò) để sao chép quyền.",
-    "description": "Cần Bearer token + quyền: user.manage",
-    "security": [
-     {
-      "bearer": []
-     }
-    ],
-    "parameters": [],
-    "responses": {
-     "200": {
-      "description": "OK",
-      "content": {
-       "application/json": {
-        "schema": {
-         "type": "object",
-         "properties": {
-          "id": {
-           "type": "integer"
-          },
-          "code": {
-           "type": "string"
-          },
-          "name": {
-           "type": "string"
-          },
-          "description": {
-           "type": "string"
-          },
-          "isSystem": {
-           "type": "boolean"
-          },
-          "userCount": {
-           "type": "integer"
-          },
-          "permissions": {
-           "type": "array",
-           "items": {
-            "type": "string"
-           }
-          }
-         }
-        }
-       }
-      }
-     },
-     "401": {
-      "description": "Chưa đăng nhập"
-     },
-     "403": {
-      "description": "Thiếu quyền"
-     }
-    }
-   },
-   "delete": {
-    "tags": [
-     "cms-api"
-    ],
-    "summary": "Xóa vai trò không phải hệ thống và chưa gán cho người dùng (409 nếu vi phạm).",
-    "description": "Cần Bearer token + quyền: user.manage",
-    "security": [
-     {
-      "bearer": []
-     }
-    ],
-    "parameters": [],
-    "responses": {
-     "200": {
-      "description": "OK",
-      "content": {
-       "application/json": {
-        "schema": {
-         "type": "object"
-        }
-       }
-      }
-     },
-     "401": {
-      "description": "Chưa đăng nhập"
-     },
-     "403": {
-      "description": "Thiếu quyền"
-     }
-    }
-   }
-  },
-  "/cms-api/api/Roles/permission-matrix": {
-   "get": {
-    "tags": [
-     "cms-api"
-    ],
-    "summary": "Ma trận quyền (module × vai trò) { roles:[mã], rows:[{module, perms:[bool]}] }. PUT phải đồng bộ quyền thật của từng vai trò (Super Admin luôn toàn quyền). Lưu ý: route này phải đặt trước /api/Roles/{id}.",
-    "description": "Cần Bearer token + quyền: user.manage",
-    "security": [
-     {
-      "bearer": []
-     }
-    ],
-    "parameters": [],
-    "responses": {
-     "200": {
-      "description": "OK",
-      "content": {
-       "application/json": {
-        "schema": {
-         "type": "object"
-        }
-       }
-      }
-     },
-     "401": {
-      "description": "Chưa đăng nhập"
-     },
-     "403": {
-      "description": "Thiếu quyền"
-     }
-    }
-   },
-   "put": {
-    "tags": [
-     "cms-api"
-    ],
-    "summary": "Ma trận quyền (module × vai trò) { roles:[mã], rows:[{module, perms:[bool]}] }. PUT phải đồng bộ quyền thật của từng vai trò (Super Admin luôn toàn quyền). Lưu ý: route này phải đặt trước /api/Roles/{id}.",
-    "description": "Cần Bearer token + quyền: user.manage",
     "security": [
      {
       "bearer": []
@@ -3256,8 +5816,8 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Sự kiện, album ảnh, video, podcast hiển thị ở website.",
-    "description": "Cần Bearer token + quyền: post.update",
+    "summary": "Sự kiện, album ảnh, video, podcast (theo tenant, xóa mềm + /{id}/restore, /trash).",
+    "description": "Cần Bearer token + quyền: site.manage",
     "security": [
      {
       "bearer": []
@@ -3352,6 +5912,9 @@
           },
           "isVisible": {
            "type": "boolean"
+          },
+          "tenantId": {
+           "type": "string"
           }
          }
         }
@@ -3370,8 +5933,8 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Sự kiện, album ảnh, video, podcast hiển thị ở website.",
-    "description": "Cần Bearer token + quyền: post.update",
+    "summary": "Sự kiện, album ảnh, video, podcast (theo tenant, xóa mềm + /{id}/restore, /trash).",
+    "description": "Cần Bearer token + quyền: site.manage",
     "security": [
      {
       "bearer": []
@@ -3466,6 +6029,9 @@
           },
           "isVisible": {
            "type": "boolean"
+          },
+          "tenantId": {
+           "type": "string"
           }
          }
         }
@@ -3486,8 +6052,8 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Sự kiện, album ảnh, video, podcast hiển thị ở website.",
-    "description": "Cần Bearer token + quyền: post.update",
+    "summary": "Sự kiện, album ảnh, video, podcast (theo tenant, xóa mềm + /{id}/restore, /trash).",
+    "description": "Cần Bearer token + quyền: site.manage",
     "security": [
      {
       "bearer": []
@@ -3582,6 +6148,9 @@
           },
           "isVisible": {
            "type": "boolean"
+          },
+          "tenantId": {
+           "type": "string"
           }
          }
         }
@@ -3600,8 +6169,8 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Sự kiện, album ảnh, video, podcast hiển thị ở website.",
-    "description": "Cần Bearer token + quyền: post.update",
+    "summary": "Sự kiện, album ảnh, video, podcast (theo tenant, xóa mềm + /{id}/restore, /trash).",
+    "description": "Cần Bearer token + quyền: site.manage",
     "security": [
      {
       "bearer": []
@@ -3696,6 +6265,9 @@
           },
           "isVisible": {
            "type": "boolean"
+          },
+          "tenantId": {
+           "type": "string"
           }
          }
         }
@@ -3716,8 +6288,8 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Sự kiện, album ảnh, video, podcast hiển thị ở website.",
-    "description": "Cần Bearer token + quyền: post.update",
+    "summary": "Sự kiện, album ảnh, video, podcast (theo tenant, xóa mềm + /{id}/restore, /trash).",
+    "description": "Cần Bearer token + quyền: site.manage",
     "security": [
      {
       "bearer": []
@@ -3812,6 +6384,9 @@
           },
           "isVisible": {
            "type": "boolean"
+          },
+          "tenantId": {
+           "type": "string"
           }
          }
         }
@@ -3830,8 +6405,8 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Sự kiện, album ảnh, video, podcast hiển thị ở website.",
-    "description": "Cần Bearer token + quyền: post.update",
+    "summary": "Sự kiện, album ảnh, video, podcast (theo tenant, xóa mềm + /{id}/restore, /trash).",
+    "description": "Cần Bearer token + quyền: site.manage",
     "security": [
      {
       "bearer": []
@@ -3926,6 +6501,9 @@
           },
           "isVisible": {
            "type": "boolean"
+          },
+          "tenantId": {
+           "type": "string"
           }
          }
         }
@@ -3946,8 +6524,8 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Sự kiện, album ảnh, video, podcast hiển thị ở website.",
-    "description": "Cần Bearer token + quyền: post.update",
+    "summary": "Sự kiện, album ảnh, video, podcast (theo tenant, xóa mềm + /{id}/restore, /trash).",
+    "description": "Cần Bearer token + quyền: site.manage",
     "security": [
      {
       "bearer": []
@@ -4042,6 +6620,9 @@
           },
           "isVisible": {
            "type": "boolean"
+          },
+          "tenantId": {
+           "type": "string"
           }
          }
         }
@@ -4060,8 +6641,8 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Sự kiện, album ảnh, video, podcast hiển thị ở website.",
-    "description": "Cần Bearer token + quyền: post.update",
+    "summary": "Sự kiện, album ảnh, video, podcast (theo tenant, xóa mềm + /{id}/restore, /trash).",
+    "description": "Cần Bearer token + quyền: site.manage",
     "security": [
      {
       "bearer": []
@@ -4156,6 +6737,9 @@
           },
           "isVisible": {
            "type": "boolean"
+          },
+          "tenantId": {
+           "type": "string"
           }
          }
         }
@@ -4405,7 +6989,7 @@
      "cms-api"
     ],
     "summary": "Banner/slider theo vị trí & khoảng ngày.",
-    "description": "Cần Bearer token + quyền: post.update",
+    "description": "Cần Bearer token + quyền: site.manage",
     "security": [
      {
       "bearer": []
@@ -4470,6 +7054,9 @@
            "type": "string"
           },
           "endsOn": {
+           "type": "string"
+          },
+          "tenantId": {
            "type": "string"
           }
          }
@@ -4490,7 +7077,7 @@
      "cms-api"
     ],
     "summary": "Banner/slider theo vị trí & khoảng ngày.",
-    "description": "Cần Bearer token + quyền: post.update",
+    "description": "Cần Bearer token + quyền: site.manage",
     "security": [
      {
       "bearer": []
@@ -4555,6 +7142,9 @@
            "type": "string"
           },
           "endsOn": {
+           "type": "string"
+          },
+          "tenantId": {
            "type": "string"
           }
          }
@@ -4577,7 +7167,7 @@
      "cms-api"
     ],
     "summary": "Các khối trang chủ.",
-    "description": "Cần Bearer token + quyền: post.update",
+    "description": "Cần Bearer token + quyền: site.manage",
     "security": [
      {
       "bearer": []
@@ -4633,7 +7223,7 @@
      "cms-api"
     ],
     "summary": "Các khối trang chủ.",
-    "description": "Cần Bearer token + quyền: post.update",
+    "description": "Cần Bearer token + quyền: site.manage",
     "security": [
      {
       "bearer": []
@@ -4691,7 +7281,7 @@
      "cms-api"
     ],
     "summary": "Các khối trang chủ.",
-    "description": "Cần Bearer token + quyền: post.update",
+    "description": "Cần Bearer token + quyền: site.manage",
     "security": [
      {
       "bearer": []
@@ -4747,7 +7337,7 @@
      "cms-api"
     ],
     "summary": "Các khối trang chủ.",
-    "description": "Cần Bearer token + quyền: post.update",
+    "description": "Cần Bearer token + quyền: site.manage",
     "security": [
      {
       "bearer": []
@@ -4805,7 +7395,7 @@
      "cms-api"
     ],
     "summary": "Các khối trang chủ.",
-    "description": "Cần Bearer token + quyền: post.update",
+    "description": "Cần Bearer token + quyền: site.manage",
     "security": [
      {
       "bearer": []
@@ -4861,7 +7451,7 @@
      "cms-api"
     ],
     "summary": "Các khối trang chủ.",
-    "description": "Cần Bearer token + quyền: post.update",
+    "description": "Cần Bearer token + quyền: site.manage",
     "security": [
      {
       "bearer": []
@@ -4919,7 +7509,7 @@
      "cms-api"
     ],
     "summary": "Các khối trang chủ.",
-    "description": "Cần Bearer token + quyền: post.update",
+    "description": "Cần Bearer token + quyền: site.manage",
     "security": [
      {
       "bearer": []
@@ -4975,7 +7565,7 @@
      "cms-api"
     ],
     "summary": "Các khối trang chủ.",
-    "description": "Cần Bearer token + quyền: post.update",
+    "description": "Cần Bearer token + quyền: site.manage",
     "security": [
      {
       "bearer": []
@@ -5033,7 +7623,7 @@
      "cms-api"
     ],
     "summary": "Các khối trang chủ.",
-    "description": "Cần Bearer token + quyền: post.update",
+    "description": "Cần Bearer token + quyền: site.manage",
     "security": [
      {
       "bearer": []
@@ -5089,7 +7679,7 @@
      "cms-api"
     ],
     "summary": "Các khối trang chủ.",
-    "description": "Cần Bearer token + quyền: post.update",
+    "description": "Cần Bearer token + quyền: site.manage",
     "security": [
      {
       "bearer": []
@@ -5147,7 +7737,7 @@
      "cms-api"
     ],
     "summary": "Các khối trang chủ.",
-    "description": "Cần Bearer token + quyền: post.update",
+    "description": "Cần Bearer token + quyền: site.manage",
     "security": [
      {
       "bearer": []
@@ -5203,7 +7793,7 @@
      "cms-api"
     ],
     "summary": "Các khối trang chủ.",
-    "description": "Cần Bearer token + quyền: post.update",
+    "description": "Cần Bearer token + quyền: site.manage",
     "security": [
      {
       "bearer": []
@@ -5260,7 +7850,7 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Cấu hình hệ thống theo nhóm: general, seo, email, language, backup, home.",
+    "summary": "Cấu hình theo tenant, theo nhóm: general, seo, email, language, backup, home.",
     "description": "Cần Bearer token + quyền: settings.manage",
     "security": [
      {
@@ -5291,7 +7881,7 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Cấu hình hệ thống theo nhóm: general, seo, email, language, backup, home.",
+    "summary": "Cấu hình theo tenant, theo nhóm: general, seo, email, language, backup, home.",
     "description": "Cần Bearer token + quyền: settings.manage",
     "security": [
      {
@@ -5324,7 +7914,7 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Cấu hình hệ thống theo nhóm: general, seo, email, language, backup, home.",
+    "summary": "Cấu hình theo tenant, theo nhóm: general, seo, email, language, backup, home.",
     "description": "Cần Bearer token + quyền: settings.manage",
     "security": [
      {
@@ -5355,7 +7945,7 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Cấu hình hệ thống theo nhóm: general, seo, email, language, backup, home.",
+    "summary": "Cấu hình theo tenant, theo nhóm: general, seo, email, language, backup, home.",
     "description": "Cần Bearer token + quyền: settings.manage",
     "security": [
      {
@@ -5383,12 +7973,12 @@
     }
    }
   },
-  "/cms-api/api/ActivityLogs": {
+  "/cms-api/api/AuditLogs": {
    "get": {
     "tags": [
      "cms-api"
     ],
-    "summary": "Nhật ký hoạt động.",
+    "summary": "Audit log chỉ ghi thêm: actorSub, action, entityType, entityId, changes {field:[cũ,mới]}, ip. (/api/ActivityLogs = tên cũ.)",
     "description": "Cần Bearer token + quyền: log.view",
     "security": [
      {
@@ -5405,11 +7995,43 @@
       }
      },
      {
-      "name": "userId",
+      "name": "actor",
+      "in": "query",
+      "description": "sub",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "entityType",
       "in": "query",
       "description": "",
       "schema": {
-       "type": "integer"
+       "type": "string"
+      }
+     },
+     {
+      "name": "entityId",
+      "in": "query",
+      "description": "",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "from",
+      "in": "query",
+      "description": "ISO",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "to",
+      "in": "query",
+      "description": "ISO",
+      "schema": {
+       "type": "string"
       }
      },
      {
@@ -5448,11 +8070,23 @@
           "id": {
            "type": "integer"
           },
-          "userId": {
-           "type": "integer"
+          "tenantId": {
+           "type": "string"
+          },
+          "actorSub": {
+           "type": "string"
           },
           "userName": {
            "type": "string"
+          },
+          "entityType": {
+           "nullable": true
+          },
+          "entityId": {
+           "nullable": true
+          },
+          "changes": {
+           "nullable": true
           },
           "action": {
            "type": "string"
@@ -5632,7 +8266,7 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Tải tệp sao lưu (JSON). 404 nếu bản sao lưu không còn dữ liệu. Danh sách Backups trả thêm hasData.",
+    "summary": "Tải tệp sao lưu (JSON).",
     "description": "Cần Bearer token + quyền: backup.manage",
     "security": [
      {
@@ -5665,7 +8299,7 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Phục hồi dữ liệu CMS từ một bản sao lưu (ghi đè dữ liệu hiện tại).",
+    "summary": "Phục hồi dữ liệu CMS từ một bản sao lưu.",
     "description": "Cần Bearer token + quyền: backup.manage",
     "security": [
      {
@@ -5698,7 +8332,7 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "multipart/form-data: file — phục hồi từ tệp sao lưu tải lên (422 nếu sai định dạng).",
+    "summary": "multipart/form-data: file — phục hồi từ tệp sao lưu tải lên.",
     "description": "Cần Bearer token + quyền: backup.manage",
     "security": [
      {
@@ -5731,7 +8365,7 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Gửi email thử bằng cấu hình SMTP hiện tại: { to } → { ok, message }.",
+    "summary": "Gửi email thử: { to } → { ok, message }.",
     "description": "Cần Bearer token + quyền: settings.manage",
     "security": [
      {
@@ -5764,7 +8398,7 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Số liệu trang tổng quan CMS.",
+    "summary": "Số liệu tổng quan theo quyền của user, kèm awaitingReview[].",
     "description": "Cần Bearer token + quyền: cms.access",
     "security": [
      {
@@ -5792,7 +8426,7 @@
             "categories": {
              "type": "integer"
             },
-            "users": {
+            "announcements": {
              "type": "integer"
             }
            }
@@ -5822,6 +8456,32 @@
             }
            }
           },
+          "awaitingReview": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "properties": {
+             "id": {
+              "type": "integer"
+             },
+             "type": {
+              "type": "string"
+             },
+             "title": {
+              "type": "string"
+             },
+             "status": {
+              "type": "string"
+             },
+             "hasPendingRevision": {
+              "type": "boolean"
+             },
+             "updatedAt": {
+              "type": "string"
+             }
+            }
+           }
+          },
           "latestPosts": {
            "type": "array",
            "items": {
@@ -5833,6 +8493,9 @@
              "categoryId": {
               "type": "integer"
              },
+             "ownerUnitCode": {
+              "type": "string"
+             },
              "title": {
               "type": "string"
              },
@@ -5843,7 +8506,7 @@
               "type": "string"
              },
              "status": {
-              "type": "integer"
+              "type": "string"
              },
              "isFeatured": {
               "type": "boolean"
@@ -5869,8 +8532,8 @@
              "attachmentId": {
               "nullable": true
              },
-             "authorId": {
-              "type": "integer"
+             "authorSub": {
+              "type": "string"
              },
              "authorName": {
               "type": "string"
@@ -5900,20 +8563,56 @@
               "type": "object",
               "properties": {}
              },
-             "publishedAt": {
+             "publishAt": {
               "type": "string"
              },
-             "expiredAt": {
+             "expireAt": {
               "nullable": true
              },
+             "firstPublishedAt": {
+              "type": "string"
+             },
+             "submittedAt": {
+              "nullable": true
+             },
+             "submittedBy": {
+              "nullable": true
+             },
+             "reviewedAt": {
+              "nullable": true
+             },
+             "reviewedBy": {
+              "nullable": true
+             },
+             "reviewNote": {
+              "nullable": true
+             },
+             "pendingRevisionId": {
+              "nullable": true
+             },
+             "version": {
+              "type": "integer"
+             },
              "createdAt": {
+              "type": "string"
+             },
+             "createdBy": {
               "type": "string"
              },
              "updatedAt": {
               "type": "string"
              },
-             "deleteAt": {
+             "updatedBy": {
+              "type": "string"
+             },
+             "deletedAt": {
               "nullable": true
+             },
+             "deletedBy": {
+              "nullable": true
+             },
+             "tenantId": {
+              "type": "string"
              },
              "categoryName": {
               "type": "string"
@@ -5973,6 +8672,9 @@
              },
              "isVisible": {
               "type": "boolean"
+             },
+             "tenantId": {
+              "type": "string"
              }
             }
            }
@@ -6013,9 +8715,12 @@
               "nullable": true
              },
              "uploadedBy": {
-              "type": "integer"
+              "type": "string"
              },
              "createdAt": {
+              "type": "string"
+             },
+             "tenantId": {
               "type": "string"
              }
             }

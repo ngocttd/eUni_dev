@@ -5,6 +5,9 @@
  *  - module khác    → service ngoài theo MODULE_SERVICE:  GET {gateway}/{service}/api/v1/datasets/{module}
  *
  * Khi backend thật sẵn sàng chỉ sửa file này (đổi endpoint / viết adapter) — giao diện không phải đổi.
+ *
+ * opts.tenant: tenant (X-Tenant) — trang công khai render phía server truyền tường minh (lib/datasets/server.js);
+ * ở trình duyệt bỏ trống thì client tự lấy theo host (shared/services/tenantService.js).
  */
 import api, { SERVICE } from '../api/client.js'
 import { fmtDate, fmtTime, dayMonth, fmtDuration, parseBody } from './format.js'
@@ -46,8 +49,8 @@ async function cleanBodies(articles) {
   return articles.map((a) => ({ ...a, body: clean(a.body), ...(a.en ? { en: { ...a.en, body: clean(a.en.body) } } : {}) }))
 }
 
-export async function loadContent() {
-  const d = await cms.get('/api/Public/content')
+export async function loadContent(opts = {}) {
+  const d = await cms.get('/api/Public/content', { tenant: opts.tenant })
   return {
     newsCategories: d.categories.map((c) => c.name),
     articles: await cleanBodies(d.articles.map(toArticle)),
@@ -61,8 +64,8 @@ export async function loadContent() {
 
 const homeEn = (n) => (n.translations?.en ? { en: { title: n.translations.en.title, excerpt: n.translations.en.excerpt } } : {})
 
-export async function loadHome() {
-  const d = await cms.get('/api/Public/home')
+export async function loadHome(opts = {}) {
+  const d = await cms.get('/api/Public/home', { tenant: opts.tenant })
   const media = (list, map) => list.map((x, i) => ({ label: map(x), size: i === 0 ? 'wide' : 'small' }))
   return {
     heroSlides: d.heroSlides.map((s) => ({ id: s.code, kicker: s.kicker, title: s.title, years: s.subtitle, motto: s.motto, primary: { label: s.primaryLabel, to: s.primaryUrl }, accent: { label: s.accentLabel, to: s.accentUrl } })),
@@ -84,12 +87,12 @@ export async function loadHome() {
   }
 }
 
-export async function loadDataset(module) {
-  if (module === 'content') return loadContent()
-  if (module === 'home') return loadHome()
+export async function loadDataset(module, opts = {}) {
+  if (module === 'content') return loadContent(opts)
+  if (module === 'home') return loadHome(opts)
   const service = MODULE_SERVICE[module]
   if (!service) throw new Error(`Module "${module}" chưa được khai báo trong MODULE_SERVICE.`)
-  return api(service).get(`/api/v1/datasets/${module}`)
+  return api(service).get(`/api/v1/datasets/${module}`, { tenant: opts.tenant })
 }
 
-export const loadDatasets = async (modules) => Object.fromEntries(await Promise.all(modules.map(async (m) => [m, await loadDataset(m)])))
+export const loadDatasets = async (modules, opts = {}) => Object.fromEntries(await Promise.all(modules.map(async (m) => [m, await loadDataset(m, opts)])))

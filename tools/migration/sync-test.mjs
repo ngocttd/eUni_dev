@@ -18,8 +18,8 @@ const { accessToken: t } = await j('POST', '/auth-api/api/auth/login', { usernam
 const stamp = Date.now().toString(36)
 let created
 
-await step('Phân quyền: Viewer không vào được CMS, không đăng nhập thì 401', async () => {
-  const res = await fetch(`${API}/cms-api/api/Users`)
+await step('Không đăng nhập thì API quản trị trả 401', async () => {
+  const res = await fetch(`${API}/cms-api/api/Contents`)
   assert.equal(res.status, 401)
 })
 
@@ -36,13 +36,14 @@ await step('Sửa tiêu đề bài viết → public đổi theo', async () => {
   assert.match(await page('/tin-tuc'), new RegExp(`Đã sửa tiêu đề ${stamp}`))
 })
 
-await step('Chuyển bài về Bản nháp → biến mất khỏi public', async () => {
-  await j('PUT', `/cms-api/api/Contents/${created.id}`, { status: 0 }, t)
+await step('Gỡ bài (workflow unpublish → Bản nháp) → biến mất khỏi public', async () => {
+  await j('POST', `/cms-api/api/Contents/${created.id}/workflow/unpublish`, {}, t)
   assert.doesNotMatch(await page('/tin-tuc'), new RegExp(`Đã sửa tiêu đề ${stamp}`))
 })
 
 await step('Bài nổi bật trang chủ: bật showOnHome + isFeatured → hiện ở trang chủ', async () => {
-  await j('PUT', `/cms-api/api/Contents/${created.id}`, { status: 2, showOnHome: true, isFeatured: true, publishedAt: new Date().toISOString() }, t)
+  await j('PUT', `/cms-api/api/Contents/${created.id}`, { showOnHome: true, isFeatured: true }, t)
+  await j('POST', `/cms-api/api/Contents/${created.id}/workflow/publish`, { publishAt: new Date(Date.now() - 1000).toISOString() }, t)
   const all = await j('GET', '/cms-api/api/Contents?pageSize=100', null, t)
   for (const c of all.items) if (c.id !== created.id && c.isFeatured) await j('PUT', `/cms-api/api/Contents/${c.id}`, { isFeatured: false }, t)
   assert.match(await page('/'), new RegExp(`Đã sửa tiêu đề ${stamp}`))

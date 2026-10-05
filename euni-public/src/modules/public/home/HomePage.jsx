@@ -267,7 +267,7 @@ function MediaHumg() {
           ))}
         </div>
         <div className="humg-ph media__hero" data-ratio="16-9">
-          <span>{active.items[0].label}</span>
+          <span>{active.items[0]?.label || t('Chưa có nội dung')}</span>
         </div>
         <ul className="media__recent">
           {active.items.map((it, k) => (

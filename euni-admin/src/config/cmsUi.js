@@ -154,9 +154,12 @@ export const cmsPageDefaults = {
 
 export const cmsPostStatuses = [
   "Tất cả trạng thái",
-  "Đã xuất bản",
   "Bản nháp",
-  "Chờ duyệt"
+  "Chờ duyệt",
+  "Đã xuất bản",
+  "Hẹn giờ",
+  "Hết hạn",
+  "Lưu trữ"
 ]
 
 export const cmsSettingsSections = [

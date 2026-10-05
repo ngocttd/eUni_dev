@@ -291,3 +291,8 @@
   .ps-tstats { grid-template-columns: repeat(2, 1fr); }
   .ps-resbar { flex-direction: column; align-items: stretch; }
 }
+/* Hộp thư thông báo (AnnouncementInbox) */
+.ps-noti__content { margin: 6px 0; font-size: 13px; line-height: 1.55; color: var(--humg-text); }
+.ps-noti__content p { margin: 0 0 6px; }
+.ps-noti__files { list-style: none; margin: 4px 0 6px; padding: 0; display: grid; gap: 4px; font-size: 12.5px; color: var(--humg-secondary); }
+.ps-noti__files li { display: inline-flex; align-items: center; gap: 6px; }

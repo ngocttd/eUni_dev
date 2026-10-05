@@ -1,4 +1,4 @@
-import { loadDatasets } from '@/lib/datasets/loaders'
+import { loadDatasets } from '@/lib/datasets/server'
 import { DatasetProvider } from '@/lib/datasets/useModuleData'
 import { LibrarySearchPage } from '@/modules/public/library/pages/LibrarySearchPage'
 

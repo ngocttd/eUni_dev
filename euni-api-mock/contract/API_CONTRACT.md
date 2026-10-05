@@ -11,12 +11,16 @@
 - **Envelope**: FE chấp nhận cả response thô (như mock) lẫn envelope của backend — cms-api `{ "success": true, "message": "...", "data": ... }`, qlns/qlkhcn `{ "code": 200, "message": "...", "data": ... }`. FE tự bóc `data`; `success:false` hoặc `code` ngoài 2xx được coi là lỗi. Danh sách có thể là **mảng thuần** hoặc đối tượng phân trang — FE chuẩn hóa (`asPage`). Các ví dụ dưới đây là dạng đã bóc `data`.
 - **Xác thực**: `Authorization: Bearer <accessToken>`. 401 chưa đăng nhập / hết hạn · 403 thiếu quyền · 404 · 409 trùng · 422 sai dữ liệu `{ message, errors? }`.
 - **Id** là số nguyên (int64). Bài viết **xóa mềm**. `contentBody` là **chuỗi HTML** do trình soạn thảo WYSIWYG của CMS tạo (p, h2–h4, ul/ol, blockquote, a, img, table…; **backend nên làm sạch HTML khi lưu**, website cũng làm sạch khi hiển thị), hoặc — với dữ liệu cũ — chuỗi JSON mảng khối (`"Đoạn văn"` | `{type:"h2"|"quote"|"img"|"list", ...}`).
-- Tên endpoint nhóm CMS theo mẫu Swagger gateway demo (`/api/Categories`, `/api/Contents`, `/api/Media`, `/api/Users`); phần mở rộng cùng phong cách.
+- **Tenant**: mọi request gửi header `X-Tenant: <tenant>` (vd. `humg`, `cntt`). Thiếu header → backend suy ra từ host, cuối cùng là tenant mặc định. API quản trị: tenant phải có trong claim `tenants` của token (trừ `cms.*`), sai → 403. Hộp thư `/api/Me/announcements` nhận `X-Tenant: *` = mọi tenant của user. Thiết kế: `docs/design/CMS_DESIGN.md` §2.
+- **Workflow**: `status` là chuỗi `draft | pending_review | published | archived` (mã số cũ 0..3 vẫn nhận khi ghi). Bài công khai = `published` và `publishAt <= now` và (`expireAt` trống hoặc > now). Đổi trạng thái chỉ qua `POST …/workflow/{action}`.
+- **Concurrency**: bản ghi có `version`; gửi `version` trong body hoặc header `If-Match: "<version>"` khi sửa → 409 `{ message, currentVersion }` nếu đã có người khác sửa.
+- **Quyền**: quyền chức năng lấy từ role trong token (bảng `GET /api/Directory/roles`), cộng phân quyền mức bản ghi `/api/Grants`. Mỗi bản ghi trả `allowedActions[]` để UI chỉ hiện nút hợp lệ; backend vẫn kiểm tra lại.
+- Tên endpoint nhóm CMS theo mẫu Swagger gateway demo (`/api/Categories`, `/api/Contents`, `/api/Media`); phần mở rộng cùng phong cách. `/api/Users`, `/api/Roles` **đã bỏ** — user/role quản lý ở Identity Server.
 - **Đồng bộ CMS → website**: website **không cache** dữ liệu CMS (fetch `no-store`). Khi admin ghi (POST/PUT/DELETE) thì lần đọc `/api/Public/*` kế tiếp phải thấy thay đổi.
 
 ## 2. auth-api
 
-> **SSO**: người dùng thật đăng nhập qua Keycloak (`https://sso-demo.humg.edu.vn/realms/humg-euni`, liên kết Microsoft 365). FE gửi `Authorization: Bearer <access_token của Keycloak>`; gateway/backend cần xác thực JWT bằng JWKS của realm và ánh xạ role → quyền. `auth-api` bên dưới là cho mock/dev và tài khoản nội bộ.
+> **Identity Server**: người dùng thật đăng nhập qua IdS (OIDC + PKCE) bằng **tài khoản trường** hoặc **Microsoft 365** (IdS federate, cùng một `sub`). FE gửi `Authorization: Bearer <access_token của IdS>` (aud = cms-api); backend xác thực JWT bằng JWKS của IdS. Claim cần có: `sub, name, email, role[], tenant[], unit[], staff_code, student_code` (xem docs/design/CMS_DESIGN.md §3). `auth-api` bên dưới **chỉ là mock của IdS** khi phát triển.
 
 | Method | Path | Mô tả |
 |---|---|---|
@@ -25,23 +29,34 @@
 | POST | `/api/auth/refresh` | → `{ accessToken, user }` |
 | POST | `/api/auth/logout` | 204 |
 
-`user`: `{ id, username, name, role, permissions[], portal }`. `role`: `student` `staff` `parent` `leader` `cms-admin` `cms-editor`. `permissions` hỗ trợ wildcard (`cms.*`). Người dùng CMS cần quyền `cms.access`.
+`user`: `{ sub, username, name, email, role, roles[], permissions[], tenants[], units[], staffCode, studentCode, portal }`. `roles` là role trên IdS (`cms.admin` `cms.editor` `cms.reviewer` `cms.author` `student` `staff` `parent` `leader`); `role` là vai trò chính để FE điều hướng. `permissions` = quyền chức năng suy ra từ roles (wildcard `cms.*`).
 
 ```json
 {
   "accessToken": "<jwt>",
   "user": {
-    "id": "CMS1",
-    "userId": 1,
+    "id": "u-tvanminh",
+    "sub": "u-tvanminh",
     "username": "tvanminh",
     "name": "Trần Văn Minh",
     "email": "tvanminh@humg.edu.vn",
     "role": "cms-admin",
-    "roleCode": "super_admin",
+    "roles": [
+      "cms.admin"
+    ],
+    "roleLabel": "Quản trị CMS",
     "permissions": [
       "cms.*"
     ],
-    "portal": "/"
+    "tenants": [
+      "humg"
+    ],
+    "units": [
+      "P-TT"
+    ],
+    "staffCode": "CB0001",
+    "studentCode": null,
+    "portal": "/cms"
   }
 }
 ```
@@ -64,33 +79,49 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
 | GET | `/api/Categories` | public | Danh mục (cây qua parentId). |
 | GET | `/api/Languages` | public | Ngôn ngữ hỗ trợ. |
 | GET | `/api/Media/{id}/url` | public | URL tải file media. |
-| GET | `/api/Contents` | post.view | Quản trị: danh sách bài viết mọi trạng thái. |
-| GET | `/api/Contents/{id}` | post.view | Chi tiết bài viết (kèm bản dịch). |
-| POST | `/api/Contents` | post.create (+post.publish nếu status=2) | Tạo bài viết. Bắt buộc title; slug tự sinh nếu thiếu. |
-| PUT | `/api/Contents/{id}` | post.update | Cập nhật (merge các trường gửi lên). Đổi status sang 2 cần post.publish. |
-| DELETE | `/api/Contents/{id}` | post.update | Xóa mềm (deleteAt). |
-| POST | `/api/Categories · PUT/DELETE /api/Categories/{id}` | category.manage | CRUD danh mục. |
-| GET | `/api/Media` | media.manage | Thư viện media. |
-| POST | `/api/Media/upload` | media.manage | multipart/form-data: file, uploadedBy, altText, caption, folder. |
-| DELETE | `/api/Media/{id}` | media.manage | Xóa media. |
-| GET | `/api/Users` | user.manage | Người dùng CMS. |
-| POST | `/api/Users · PUT/DELETE /api/Users/{id}` | user.manage | CRUD người dùng (không trả passwordHash). DELETE: 409 nếu xóa chính tài khoản đang đăng nhập. |
-| GET | `/api/Roles · POST · PUT /api/Roles/{id}` | user.manage | Vai trò + danh sách permission; POST nhận copyFrom (mã vai trò) để sao chép quyền. |
-| DELETE | `/api/Roles/{id}` | user.manage | Xóa vai trò không phải hệ thống và chưa gán cho người dùng (409 nếu vi phạm). |
-| GET/PUT | `/api/Roles/permission-matrix` | user.manage | Ma trận quyền (module × vai trò) { roles:[mã], rows:[{module, perms:[bool]}] }. PUT phải đồng bộ quyền thật của từng vai trò (Super Admin luôn toàn quyền). Lưu ý: route này phải đặt trước /api/Roles/{id}. |
-| CRUD | `/api/Events · /api/Albums · /api/Videos · /api/Podcasts` | post.update | Sự kiện, album ảnh, video, podcast hiển thị ở website. |
+| GET | `/api/Public/tenant` | public | Tenant đang phục vụ (theo X-Tenant / host). |
+| GET | `/api/Me/context` | đăng nhập | Ngữ cảnh người dùng: tenants được quản trị, permissions (từ role trong token), đơn vị (kèm đơn vị cha), can.{news|announcement}.{view|edit|review|publish}. |
+| GET | `/api/Contents` | news.view + ACL | Quản trị: danh sách bài viết user được xem (lọc theo grant). Mỗi dòng có allowedActions[], isScheduled, pendingRevision, version. |
+| GET | `/api/Contents/trash` | news.edit|publish + ACL | Thùng rác (bài đã xóa mềm). |
+| GET | `/api/Contents/{id}` | news.view + ACL | Chi tiết bài viết (kèm bản dịch). Header ETag = version. |
+| POST | `/api/Contents` | news.edit + ACL (phạm vi chuyên mục/đơn vị) | Tạo bản nháp. ownerUnitCode mặc định = đơn vị đầu tiên của user. Có thể gửi status=pending_review|published để chuyển trạng thái ngay (cần quyền tương ứng). |
+| PUT | `/api/Contents/{id}` | news.edit + ACL | Sửa nội dung (status KHÔNG đổi qua PUT). Gửi version (hoặc If-Match) → 409 nếu đã có người sửa. Bài đang published mà user không có publish → 202, lưu thành bản sửa đổi chờ duyệt (pendingRevision). |
+| DELETE | `/api/Contents/{id}` | allowedActions có delete | Xóa mềm (deletedAt, deletedBy). |
+| POST | `/api/Contents/{id}/restore` | allowedActions có restore | Khôi phục từ thùng rác. |
+| DELETE | `/api/Contents/{id}/purge` | cms.* | Xóa vĩnh viễn bài trong thùng rác. |
+| POST | `/api/Contents/{id}/workflow/{action}` | theo action | action: submit (edit) · reject (review, body.note bắt buộc) · approve (review) · publish (publish) · unpublish · archive (publish) · approve-revision / reject-revision (review). Body: { note?, publishAt?, version? }. publishAt tương lai = hẹn giờ. |
+| GET | `/api/Contents/{id}/revisions` | news.view + ACL | Danh sách phiên bản (state current | superseded | proposed | rejected). |
+| GET | `/api/Contents/{id}/revisions/{version}` | news.view + ACL | Một phiên bản: snapshot + changesFromCurrent. |
+| POST | `/api/Contents/{id}/revisions/{version}/restore` | news.edit/publish + ACL | Khôi phục nội dung phiên bản cũ → tạo phiên bản mới (không ghi đè lịch sử). |
+| GET | `/api/Contents/{id}/history` | news.view + ACL | Lịch sử workflow + audit của bản ghi. |
+| GET/POST/PUT/DELETE | `/api/Announcements …` | announcement.* + ACL | Thông báo: cùng bộ endpoint vòng đời như /api/Contents (trash, restore, workflow, revisions, history). Body có targets[] = [{ audience?, unitCode?, userSub? | userKey? (mã CB/mã SV/email), isExclude? }], priority 0|1|2, category, requireAck, channels[], pinnedUntil, expireAt. archive kèm note = thu hồi (recallReason). |
+| GET | `/api/Announcements/{id}/stats` | announcement.view + ACL | Người nhận (ước tính từ danh bạ/Membership API), đã đọc, đã xác nhận. |
+| GET | `/api/Announcements/meta/options` | announcement.view | Danh mục audiences, categories, priorities, channels. |
+| GET | `/api/Me/announcements` | đăng nhập (mọi vai trò) | Hộp thư thông báo của tôi: so khớp targets với role (audience) + đơn vị (kèm đơn vị cha) + sub. Ghim → ưu tiên → mới nhất. X-Tenant: * = mọi tenant của user. |
+| GET | `/api/Me/announcements/unread-count` | đăng nhập | Số thông báo chưa đọc. |
+| POST | `/api/Me/announcements/{id}/read · /api/Me/announcements/{id}/ack · /api/Me/announcements/read-all` | đăng nhập | Đánh dấu đã đọc / xác nhận đã đọc (requireAck) / đọc tất cả. |
+| GET/POST/PUT/DELETE | `/api/Grants` | grant.manage | Phân quyền mức bản ghi: { principalType user|unit|role, principalId, resourceType *|news|announcement|page|media, scopeType tenant|category|unit|record, scopeId, permissions[view|edit|review|publish|manage], expiresAt?, note? }. Grant theo đơn vị áp dụng cả đơn vị con. |
+| GET | `/api/Grants/effective/{sub}` | grant.manage | Quyền chức năng + các grant đang áp dụng cho một người. |
+| GET | `/api/Directory/users` | cms.access | Danh bạ (IdS) — tìm theo tên, email, mã CB, mã SV. Chỉ đọc; user/role quản lý ở Identity Server. |
+| GET | `/api/Directory/roles` | cms.access | Bảng role (IdS) → quyền chức năng CMS (cấu hình tĩnh). |
+| GET | `/api/OrgUnits` | cms.access | Cây đơn vị (bản sao QLNS/QLĐT): code, name, kind, parentCode, path, depth. |
+| POST | `/api/Categories · PUT/DELETE /api/Categories/{id}` | category.manage | CRUD danh mục (theo tenant, xóa mềm, POST /{id}/restore). |
+| GET | `/api/Media` | media.manage | Thư viện media của tenant. |
+| POST | `/api/Media/upload` | media.manage | multipart/form-data: file, altText, caption, folder. |
+| DELETE | `/api/Media/{id}` | media.manage | Xóa mềm media. |
+| CRUD | `/api/Events · /api/Albums · /api/Videos · /api/Podcasts` | site.manage | Sự kiện, album ảnh, video, podcast (theo tenant, xóa mềm + /{id}/restore, /trash). |
 | CRUD | `/api/Pages · /api/MenuItems` | page.manage / menu.manage | Trang tĩnh (cây) và mục menu. |
-| CRUD | `/api/Banners` | post.update | Banner/slider theo vị trí & khoảng ngày. |
-| CRUD | `/api/HeroSlides · /api/QuickLinks · /api/Audiences · /api/Strengths · /api/Partners · /api/SiteStats` | post.update | Các khối trang chủ. |
-| GET/PUT | `/api/Settings · /api/Settings/{group}` | settings.manage | Cấu hình hệ thống theo nhóm: general, seo, email, language, backup, home. |
-| GET | `/api/ActivityLogs` | log.view | Nhật ký hoạt động. |
+| CRUD | `/api/Banners` | site.manage | Banner/slider theo vị trí & khoảng ngày. |
+| CRUD | `/api/HeroSlides · /api/QuickLinks · /api/Audiences · /api/Strengths · /api/Partners · /api/SiteStats` | site.manage | Các khối trang chủ. |
+| GET/PUT | `/api/Settings · /api/Settings/{group}` | settings.manage | Cấu hình theo tenant, theo nhóm: general, seo, email, language, backup, home. |
+| GET | `/api/AuditLogs` | log.view | Audit log chỉ ghi thêm: actorSub, action, entityType, entityId, changes {field:[cũ,mới]}, ip. (/api/ActivityLogs = tên cũ.) |
 | GET/POST | `/api/Backups` | backup.manage | Lịch sử sao lưu / tạo sao lưu thủ công. |
 | DELETE | `/api/Backups/{id}` | backup.manage | Xóa bản sao lưu. |
-| GET | `/api/Backups/{id}/download` | backup.manage | Tải tệp sao lưu (JSON). 404 nếu bản sao lưu không còn dữ liệu. Danh sách Backups trả thêm hasData. |
-| POST | `/api/Backups/{id}/restore` | backup.manage | Phục hồi dữ liệu CMS từ một bản sao lưu (ghi đè dữ liệu hiện tại). |
-| POST | `/api/Backups/restore` | backup.manage | multipart/form-data: file — phục hồi từ tệp sao lưu tải lên (422 nếu sai định dạng). |
-| POST | `/api/Settings/email/test` | settings.manage | Gửi email thử bằng cấu hình SMTP hiện tại: { to } → { ok, message }. |
-| GET | `/api/Dashboard` | cms.access | Số liệu trang tổng quan CMS. |
+| GET | `/api/Backups/{id}/download` | backup.manage | Tải tệp sao lưu (JSON). |
+| POST | `/api/Backups/{id}/restore` | backup.manage | Phục hồi dữ liệu CMS từ một bản sao lưu. |
+| POST | `/api/Backups/restore` | backup.manage | multipart/form-data: file — phục hồi từ tệp sao lưu tải lên. |
+| POST | `/api/Settings/email/test` | settings.manage | Gửi email thử: { to } → { ok, message }. |
+| GET | `/api/Dashboard` | cms.access | Số liệu tổng quan theo quyền của user, kèm awaitingReview[]. |
 
 ### Ví dụ response
 
@@ -158,7 +189,8 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
           "item": "Đón tiếp đại biểu & khai mạc"
         }
       ],
-      "isVisible": true
+      "isVisible": true,
+      "tenantId": "humg"
     }
   ],
   "albums": [
@@ -175,7 +207,8 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
           "mediaId": null,
           "sortOrder": 0
         }
-      ]
+      ],
+      "tenantId": "humg"
     }
   ],
   "videos": [
@@ -189,7 +222,8 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
       "viewCount": 8420,
       "publishedAt": "2026-05-12",
       "description": "Phim tài liệu nhìn lại chặng đường 60 năm xây dựng và phát triển của Trường Đại học Mỏ - Địa chất.",
-      "isVisible": true
+      "isVisible": true,
+      "tenantId": "humg"
     }
   ],
   "podcasts": [
@@ -207,7 +241,8 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
       "notes": [
         "Khách mời: kỹ sư địa chất công trình"
       ],
-      "isVisible": true
+      "isVisible": true,
+      "tenantId": "humg"
     }
   ],
   "searchPages": [
@@ -237,7 +272,8 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
       "accentLabel": "Tuyển sinh 2026",
       "accentUrl": "/hoc-tap/tuyen-sinh",
       "isVisible": true,
-      "sortOrder": 0
+      "sortOrder": 0,
+      "tenantId": "humg"
     }
   ],
   "quickLinks": [
@@ -247,7 +283,8 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
       "icon": "calendar",
       "url": "/lich-cong-tac",
       "isVisible": true,
-      "sortOrder": 0
+      "sortOrder": 0,
+      "tenantId": "humg"
     }
   ],
   "audiences": [
@@ -260,7 +297,8 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
       "color": "#1976d2",
       "url": "/hoc-tap/tuyen-sinh",
       "isVisible": true,
-      "sortOrder": 0
+      "sortOrder": 0,
+      "tenantId": "humg"
     }
   ],
   "strengths": [
@@ -270,7 +308,8 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
       "title": "Đào tạo gắn thực tiễn",
       "text": "Chương trình cập nhật, hệ thống phòng thí nghiệm và thực hành hiện đại.",
       "isVisible": true,
-      "sortOrder": 0
+      "sortOrder": 0,
+      "tenantId": "humg"
     }
   ],
   "partners": [
@@ -281,7 +320,8 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
       "color": "#0057a8",
       "website": null,
       "isVisible": true,
-      "sortOrder": 0
+      "sortOrder": 0,
+      "tenantId": "humg"
     }
   ],
   "heroStats": [
@@ -292,7 +332,8 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
       "label": "Năm phát triển",
       "sub": null,
       "isVisible": true,
-      "sortOrder": 0
+      "sortOrder": 0,
+      "tenantId": "humg"
     }
   ],
   "universityStats": [
@@ -303,7 +344,8 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
       "label": "Năm phát triển",
       "sub": "1966 – 2026",
       "isVisible": true,
-      "sortOrder": 0
+      "sortOrder": 0,
+      "tenantId": "humg"
     }
   ],
   "heroChips": [
@@ -383,7 +425,8 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
           "item": "Đón tiếp đại biểu & khai mạc"
         }
       ],
-      "isVisible": true
+      "isVisible": true,
+      "tenantId": "humg"
     }
   ],
   "mediaTabs": {
@@ -401,7 +444,8 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
             "mediaId": null,
             "sortOrder": 0
           }
-        ]
+        ],
+        "tenantId": "humg"
       }
     ],
     "videos": [
@@ -415,7 +459,8 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
         "viewCount": 8420,
         "publishedAt": "2026-05-12",
         "description": "Phim tài liệu nhìn lại chặng đường 60 năm xây dựng và phát triển của Trường Đại học Mỏ - Địa chất.",
-        "isVisible": true
+        "isVisible": true,
+        "tenantId": "humg"
       }
     ],
     "podcasts": [
@@ -433,7 +478,8 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
         "notes": [
           "Khách mời: kỹ sư địa chất công trình"
         ],
-        "isVisible": true
+        "isVisible": true,
+        "tenantId": "humg"
       }
     ]
   }
@@ -473,15 +519,64 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
 }
 ```
 
+#### GET /api/Me/context
+```json
+{
+  "user": {
+    "sub": "u-tvanminh",
+    "name": "Trần Văn Minh",
+    "email": "tvanminh@humg.edu.vn",
+    "roles": [
+      "cms.admin"
+    ],
+    "units": [
+      "P-TT"
+    ]
+  },
+  "permissions": [
+    "cms.*"
+  ],
+  "tenants": [
+    {
+      "id": "humg",
+      "name": "Trường Đại học Mỏ - Địa chất",
+      "rootUnit": "HUMG"
+    }
+  ],
+  "currentTenant": "humg",
+  "units": [
+    {
+      "code": "P-TT",
+      "name": "Phòng Truyền thông"
+    }
+  ],
+  "can": {
+    "news": {
+      "view": true,
+      "edit": true,
+      "review": true,
+      "publish": true
+    },
+    "announcement": {
+      "view": true,
+      "edit": true,
+      "review": true,
+      "publish": true
+    }
+  }
+}
+```
+
 #### GET /api/Contents/{id} (quản trị)
 ```json
 {
   "id": 19,
   "categoryId": 8,
+  "ownerUnitCode": "P-DT",
   "title": "Thông báo tuyển sinh đại học chính quy năm 2026",
   "slug": "thong-bao-tuyen-sinh-dai-hoc-2026",
   "excerpt": "Trường Đại học Mỏ – Địa chất thông báo tuyển sinh đại học chính quy năm 2026 với 52 chương trình đào tạo và 5 phương thức xét tuyển.",
-  "status": 2,
+  "status": "published",
   "isFeatured": false,
   "showOnHome": false,
   "contentBody": "[\"Năm 2026, HUMG tuyển sinh 52 chương trình đào tạo trình độ đại học, trong đó có các chương trình chất lượng cao và chương trình liên kết quốc tế.\",{\"type\":\"h2\",\"text\":\"Phương thức xét tuyển\"},{\"type\":\"list\",\"items\":[\"Xét tuyển thẳng và ưu tiên xét tuyển\",\"Xét kết quả thi tốt nghiệp THPT\",\"Xét học bạ THPT\",\"Xét tuyển kết hợp\",\"Xét kết quả kỳ thi ĐGNL của ĐHQG Hà Nội\"]},\"Thí sinh theo dõi mốc thời gian và hướng dẫn đăng ký trực tuyến tại chuyên trang Tuyển sinh của Nhà trường.\"]",
@@ -490,7 +585,7 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
   "metaKeywords": null,
   "featuredImageId": null,
   "attachmentId": null,
-  "authorId": 2,
+  "authorSub": "u-nthoa",
   "authorName": "Nguyễn Thị Hoa",
   "source": null,
   "unit": "Phòng Đào tạo",
@@ -506,13 +601,235 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
     }
   ],
   "translations": {},
-  "publishedAt": "2026-05-20T08:00:00+07:00",
-  "expiredAt": null,
+  "publishAt": "2026-05-20T08:00:00+07:00",
+  "expireAt": null,
+  "firstPublishedAt": "2026-05-20T08:00:00+07:00",
+  "submittedAt": null,
+  "submittedBy": null,
+  "reviewedAt": null,
+  "reviewedBy": null,
+  "reviewNote": null,
+  "pendingRevisionId": null,
+  "version": 1,
   "createdAt": "2026-05-20T08:00:00+07:00",
+  "createdBy": "u-nthoa",
   "updatedAt": "2026-05-20T08:00:00+07:00",
-  "deleteAt": null,
-  "categoryName": "Tuyển sinh"
+  "updatedBy": "u-nthoa",
+  "deletedAt": null,
+  "deletedBy": null,
+  "tenantId": "humg",
+  "categoryName": "Tuyển sinh",
+  "ownerUnitName": "Phòng Đào tạo",
+  "isScheduled": false,
+  "isExpired": false,
+  "updatedByName": "Nguyễn Thị Hoa",
+  "pendingRevision": null,
+  "allowedActions": [
+    "edit"
+  ]
 }
+```
+
+#### GET /api/Contents/{id}/revisions
+```json
+[
+  {
+    "id": 1,
+    "tenantId": "humg",
+    "entityType": "news",
+    "entityId": 1,
+    "version": 1,
+    "state": "current",
+    "reason": "Khởi tạo",
+    "createdBy": "u-tvanminh",
+    "createdAt": "2025-05-16T08:00:00+07:00",
+    "createdByName": "Trần Văn Minh",
+    "title": "Hội thảo quốc tế về Trắc địa và GIS 2025"
+  }
+]
+```
+
+#### GET /api/Contents/{id}/history
+```json
+{
+  "workflow": [],
+  "audit": []
+}
+```
+
+#### GET /api/Announcements/{id}
+```json
+{
+  "id": 8,
+  "tenantId": "humg",
+  "category": "academic",
+  "priority": 0,
+  "status": "published",
+  "expireAt": null,
+  "pinnedUntil": null,
+  "requireAck": false,
+  "channels": [
+    "portal"
+  ],
+  "recallReason": null,
+  "bodyHtml": "<p>Cổng đăng ký học phần học kỳ hè mở từ ngày đăng thông báo này.</p>",
+  "translations": {},
+  "attachments": [],
+  "authorSub": "u-nthoa",
+  "authorName": "Nguyễn Thị Hoa",
+  "submittedAt": null,
+  "submittedBy": null,
+  "reviewedAt": null,
+  "reviewedBy": null,
+  "reviewNote": null,
+  "pendingRevisionId": null,
+  "version": 1,
+  "createdBy": "u-nthoa",
+  "updatedBy": "u-nthoa",
+  "deletedAt": null,
+  "deletedBy": null,
+  "title": "Đăng ký học phần học kỳ hè (hẹn giờ)",
+  "ownerUnitCode": "P-DT",
+  "publishAt": "2026-10-08T08:00:00.000Z",
+  "targets": [
+    {
+      "audience": "student",
+      "unitCode": null,
+      "userSub": null,
+      "isExclude": false,
+      "label": "Toàn bộ sinh viên"
+    }
+  ],
+  "createdAt": "2026-10-08T08:00:00.000Z",
+  "updatedAt": "2026-10-08T08:00:00.000Z",
+  "firstPublishedAt": "2026-10-08T08:00:00.000Z",
+  "ownerUnitName": "Phòng Đào tạo",
+  "categoryLabel": "Đào tạo",
+  "priorityLabel": "Bình thường",
+  "targetSummary": "Toàn bộ sinh viên",
+  "stats": {
+    "recipients": 5,
+    "read": 0,
+    "acked": 0
+  },
+  "isScheduled": true,
+  "isExpired": false,
+  "updatedByName": "Nguyễn Thị Hoa",
+  "pendingRevision": null,
+  "allowedActions": [
+    "edit"
+  ]
+}
+```
+
+#### GET /api/Me/announcements
+```json
+{
+  "items": [
+    {
+      "id": 1,
+      "tenantId": "humg",
+      "title": "Lịch thi học kỳ 2 năm học 2024–2025",
+      "bodyHtml": "<p>Phòng Đào tạo thông báo lịch thi học kỳ 2. Sinh viên kiểm tra phòng thi trên My eUni và <strong>xác nhận đã đọc</strong>.</p>",
+      "language": "vi",
+      "category": "exam",
+      "categoryLabel": "Thi cử",
+      "priority": 1,
+      "priorityLabel": "Quan trọng",
+      "ownerUnitCode": "P-DT",
+      "ownerUnitName": "Phòng Đào tạo",
+      "publishAt": "2026-10-02T08:00:00.000Z",
+      "expireAt": null,
+      "pinned": true,
+      "requireAck": true,
+      "attachments": [
+        {
+          "title": "Lich-thi-HK2.pdf",
+          "meta": "PDF · 420 KB"
+        }
+      ],
+      "readAt": null,
+      "ackedAt": null
+    }
+  ],
+  "pageIndex": 1,
+  "pageSize": 2,
+  "totalItems": 5,
+  "totalPages": 3,
+  "unreadCount": 5,
+  "categories": {
+    "general": "Chung",
+    "academic": "Đào tạo",
+    "exam": "Thi cử",
+    "tuition": "Học phí",
+    "event": "Sự kiện",
+    "admin": "Hành chính"
+  }
+}
+```
+
+#### Grant
+```json
+{
+  "id": 1,
+  "tenantId": "humg",
+  "resourceType": "*",
+  "scopeType": "tenant",
+  "scopeId": null,
+  "note": "Biên tập viên chính — toàn trang Trường",
+  "expiresAt": null,
+  "createdBy": "u-tvanminh",
+  "createdAt": "2025-01-10T08:00:00+07:00",
+  "deletedAt": null,
+  "principalType": "user",
+  "principalId": "u-nthoa",
+  "permissions": [
+    "view"
+  ],
+  "principalLabel": "Nguyễn Thị Hoa",
+  "scopeLabel": "Toàn trang",
+  "createdByName": "Trần Văn Minh"
+}
+```
+
+#### GET /api/Directory/users
+```json
+{
+  "items": [
+    {
+      "sub": "u-nthoa",
+      "name": "Nguyễn Thị Hoa",
+      "email": "nthoa@humg.edu.vn",
+      "staffCode": "CB0002",
+      "studentCode": null,
+      "roles": [
+        "cms.editor"
+      ],
+      "units": [
+        "P-TT"
+      ],
+      "active": true
+    }
+  ],
+  "pageIndex": 1,
+  "pageSize": 2,
+  "totalItems": 4,
+  "totalPages": 2
+}
+```
+
+#### GET /api/OrgUnits
+```json
+[
+  {
+    "code": "HUMG",
+    "name": "Trường Đại học Mỏ - Địa chất",
+    "kind": "school",
+    "parentCode": null,
+    "depth": 0,
+    "path": "HUMG"
+  }
+]
 ```
 
 #### Media
@@ -528,37 +845,9 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
   "altText": null,
   "caption": null,
   "folder": null,
-  "uploadedBy": 4,
-  "createdAt": "2025-05-16T08:00:00+07:00"
-}
-```
-
-#### User
-```json
-{
-  "id": 1,
-  "username": "tvanminh",
-  "email": "tvanminh@humg.edu.vn",
-  "fullName": "Trần Văn Minh",
-  "roleCode": "super_admin",
-  "status": 1,
-  "lastLoginAt": "2025-05-16T09:15:00+07:00",
-  "createdAt": "2025-01-10T08:00:00+07:00"
-}
-```
-
-#### Role
-```json
-{
-  "id": 1,
-  "code": "super_admin",
-  "name": "Super Admin",
-  "description": "Toàn quyền trên toàn bộ hệ thống",
-  "isSystem": true,
-  "userCount": 1,
-  "permissions": [
-    "post.view"
-  ]
+  "uploadedBy": "u-ltmai",
+  "createdAt": "2025-05-16T08:00:00+07:00",
+  "tenantId": "humg"
 }
 ```
 
@@ -573,7 +862,8 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
   "isVisible": true,
   "sortOrder": 1,
   "startsOn": "2025-05-01",
-  "endsOn": "2025-06-30"
+  "endsOn": "2025-06-30",
+  "tenantId": "humg"
 }
 ```
 
@@ -600,16 +890,21 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
       "item": "Đón tiếp đại biểu & khai mạc"
     }
   ],
-  "isVisible": true
+  "isVisible": true,
+  "tenantId": "humg"
 }
 ```
 
-#### ActivityLog
+#### AuditLog
 ```json
 {
   "id": 1,
-  "userId": 1,
+  "tenantId": "humg",
+  "actorSub": "u-tvanminh",
   "userName": "Trần Văn Minh",
+  "entityType": null,
+  "entityId": null,
+  "changes": null,
   "action": "post.update",
   "targetLabel": "Hội thảo quốc tế về Trắc địa và GIS 2025",
   "ipAddress": "203.113.45.12",
@@ -624,7 +919,7 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
     "posts": 22,
     "pages": 13,
     "categories": 10,
-    "users": 11
+    "announcements": 8
   },
   "status": {
     "total": 22,
@@ -636,14 +931,25 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
       }
     ]
   },
+  "awaitingReview": [
+    {
+      "id": 4,
+      "type": "news",
+      "title": "Chương trình học bổng HUMG 2025",
+      "status": "pending_review",
+      "hasPendingRevision": false,
+      "updatedAt": "2025-05-14T08:00:00+07:00"
+    }
+  ],
   "latestPosts": [
     {
       "id": 19,
       "categoryId": 8,
+      "ownerUnitCode": "P-DT",
       "title": "Thông báo tuyển sinh đại học chính quy năm 2026",
       "slug": "thong-bao-tuyen-sinh-dai-hoc-2026",
       "excerpt": "Trường Đại học Mỏ – Địa chất thông báo tuyển sinh đại học chính quy năm 2026 với 52 chương trình đào tạo và 5 phương thức xét tuyển.",
-      "status": 2,
+      "status": "published",
       "isFeatured": false,
       "showOnHome": false,
       "contentBody": "[\"Năm 2026, HUMG tuyển sinh 52 chương trình đào tạo trình độ đại học, trong đó có các chương trình chất lượng cao và chương trình liên kết quốc tế.\",{\"type\":\"h2\",\"text\":\"Phương thức xét tuyển\"},{\"type\":\"list\",\"items\":[\"Xét tuyển thẳng và ưu tiên xét tuyển\",\"Xét kết quả thi tốt nghiệp THPT\",\"Xét học bạ THPT\",\"Xét tuyển kết hợp\",\"Xét kết quả kỳ thi ĐGNL của ĐHQG Hà Nội\"]},\"Thí sinh theo dõi mốc thời gian và hướng dẫn đăng ký trực tuyến tại chuyên trang Tuyển sinh của Nhà trường.\"]",
@@ -652,7 +958,7 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
       "metaKeywords": null,
       "featuredImageId": null,
       "attachmentId": null,
-      "authorId": 2,
+      "authorSub": "u-nthoa",
       "authorName": "Nguyễn Thị Hoa",
       "source": null,
       "unit": "Phòng Đào tạo",
@@ -668,11 +974,23 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
         }
       ],
       "translations": {},
-      "publishedAt": "2026-05-20T08:00:00+07:00",
-      "expiredAt": null,
+      "publishAt": "2026-05-20T08:00:00+07:00",
+      "expireAt": null,
+      "firstPublishedAt": "2026-05-20T08:00:00+07:00",
+      "submittedAt": null,
+      "submittedBy": null,
+      "reviewedAt": null,
+      "reviewedBy": null,
+      "reviewNote": null,
+      "pendingRevisionId": null,
+      "version": 1,
       "createdAt": "2026-05-20T08:00:00+07:00",
+      "createdBy": "u-nthoa",
       "updatedAt": "2026-05-20T08:00:00+07:00",
-      "deleteAt": null,
+      "updatedBy": "u-nthoa",
+      "deletedAt": null,
+      "deletedBy": null,
+      "tenantId": "humg",
       "categoryName": "Tuyển sinh"
     }
   ],
@@ -698,7 +1016,8 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
           "item": "Đón tiếp đại biểu & khai mạc"
         }
       ],
-      "isVisible": true
+      "isVisible": true,
+      "tenantId": "humg"
     }
   ],
   "latestMedia": [
@@ -713,8 +1032,9 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
       "altText": null,
       "caption": null,
       "folder": null,
-      "uploadedBy": 4,
-      "createdAt": "2025-05-16T08:00:00+07:00"
+      "uploadedBy": "u-ltmai",
+      "createdAt": "2025-05-16T08:00:00+07:00",
+      "tenantId": "humg"
     }
   ],
   "trend": [
@@ -1003,4 +1323,4 @@ Hai endpoint đã có thật ở gateway demo: `GET /qlkhcn-api/api/v1/research-
 
 ## 5. Cơ sở dữ liệu CMS tham khảo
 
-Thư mục `database/` có `schema.sql` (PostgreSQL, schema `cms`, 44 bảng) và `seed.sql` — mô hình dữ liệu gợi ý cho cms-api (bài viết đa ngôn ngữ, danh mục cây, media, trang/menu, banner, khối trang chủ, nhật ký, sao lưu…).
+**`database/v2/schema.sql`** — schema đích cho backend .NET (PostgreSQL 16): multi-tenant + Row-Level Security, workflow, revisions, audit (partition), access_grants, announcements/targets/receipts, tìm kiếm `unaccent` + `pg_trgm`. Kiểm thử: `database/v2/test.sql`. Thư mục `database/` gốc (`schema.sql`, `seed.sql`) là bản v1 — chỉ để tham khảo lịch sử.

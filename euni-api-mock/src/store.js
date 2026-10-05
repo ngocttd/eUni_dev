@@ -5,7 +5,7 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
-const STORE_FILE = join(root, 'data', 'store.json')
+const STORE_FILE = process.env.STORE_FILE || join(root, 'data', 'store.json')
 const load = (name) => JSON.parse(readFileSync(join(root, 'mock-data', `${name}.json`), 'utf8'))
 
 export const slugify = (s) => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
@@ -15,21 +15,55 @@ const isoDate = (dmy) => { const [d, m, y] = dmy.split('/'); return `${y}-${m}-$
 const bytes = (s) => { const [n, u] = s.split(' '); return Math.round(parseFloat(n) * ({ KB: 1024, MB: 1048576 }[u] || 1)) }
 const secs = (s) => { const p = s.split(':').map(Number); return p.length === 3 ? p[0] * 3600 + p[1] * 60 + p[2] : p[0] * 60 + p[1] }
 
-export const POST_STATUS = { draft: 0, pending: 1, published: 2, archived: 3 }
-const STATUS_BY_LABEL = { 'Đã xuất bản': 2, 'Bản nháp': 0, 'Chờ duyệt': 1 }
+export const STATUSES = ['draft', 'pending_review', 'published', 'archived']
+/** Mã số cũ (0..3) vẫn được chấp nhận ở API để tương thích */
+export const LEGACY_STATUS = { 0: 'draft', 1: 'pending_review', 2: 'published', 3: 'archived', pending: 'pending_review' }
+const STATUS_BY_LABEL = { 'Đã xuất bản': 'published', 'Bản nháp': 'draft', 'Chờ duyệt': 'pending_review' }
+export const SCHEMA_VERSION = 2
+export const DEFAULT_TENANT = 'humg'
 const TR_BY_LABEL = { 'Đã dịch': 'done', 'Đang dịch': 'in_progress', 'Chưa dịch': 'missing' }
 const BANNER_POS = { 'Trang chủ – Slider': 'home_slider', 'Trang chủ – Popup': 'home_popup', 'Cột phải': 'sidebar_right', 'Chân trang': 'footer' }
-const ROLE_CODE = { 'Super Admin': 'super_admin', Editor: 'editor', Author: 'author', Viewer: 'viewer' }
+/** Vai trò trên Identity Server (mock) — CMS chỉ đọc từ token, không quản lý */
+const IDS_ROLE = { 'Super Admin': ['cms.admin'], Editor: ['cms.editor'], Author: ['cms.author'], Viewer: ['staff'] }
+const UNIT_BY_LABEL = { 'Khoa CNTT': 'CNTT', 'Khoa Mỏ': 'MO', 'Khoa Trắc địa – Bản đồ': 'TDBD', 'Phòng Đào tạo': 'P-DT', 'Phòng KHCN': 'P-KHCN', 'Phòng Hợp tác quốc tế': 'P-HTQT', 'Phòng CTSV': 'P-CTSV', 'Văn phòng': 'VP' }
 const ACTION = { 'Đăng nhập': 'login', 'Đăng bài viết': 'post.publish', 'Cập nhật bài viết': 'post.update', 'Xóa bài viết': 'post.delete', 'Tải lên file': 'media.upload', 'Xóa người dùng': 'user.delete', 'Đổi cấu hình': 'settings.update' }
 const MEDIA_KIND = { 'Hình ảnh': 'image', 'Tài liệu': 'document', 'Video': 'video', 'Âm thanh': 'audio' }
 const MENU_TYPE = { 'Trang': 'page', 'Liên kết': 'link', 'Chuyên mục': 'category' }
 
-/** Quyền chi tiết của từng hàng trong ma trận phân quyền */
-export const MODULE_PERMS = {
-  'Bài viết': ['post.view', 'post.create', 'post.update'], 'Xuất bản bài viết': ['post.publish'], 'Danh mục': ['category.manage'],
-  'Media thư viện': ['media.manage'], 'Trang & Menu': ['page.manage', 'menu.manage'], 'Người dùng': ['user.manage'],
-  'Cấu hình hệ thống': ['settings.manage'], 'Nhật ký & Sao lưu': ['log.view', 'backup.manage'],
-}
+
+/** Cây đơn vị (bản sao chỉ đọc của QLNS/QLĐT): [code, tên, loại, cha] */
+export const ORG_UNITS = [
+  ['HUMG', 'Trường Đại học Mỏ - Địa chất', 'school', null],
+  ['VP', 'Văn phòng Trường', 'office', 'HUMG'],
+  ['P-TT', 'Phòng Truyền thông', 'office', 'HUMG'],
+  ['P-DT', 'Phòng Đào tạo', 'office', 'HUMG'],
+  ['P-CTSV', 'Phòng Công tác sinh viên', 'office', 'HUMG'],
+  ['P-KHCN', 'Phòng Khoa học công nghệ', 'office', 'HUMG'],
+  ['P-HTQT', 'Phòng Hợp tác quốc tế', 'office', 'HUMG'],
+  ['CNTT', 'Khoa Công nghệ thông tin', 'faculty', 'HUMG'],
+  ['BM-KHMT', 'Bộ môn Khoa học máy tính', 'department', 'CNTT'],
+  ['BM-CNPM', 'Bộ môn Công nghệ phần mềm', 'department', 'CNTT'],
+  ['DCCTKT66A', 'Lớp DCCTKT66A', 'class', 'BM-KHMT'],
+  ['DCCTKT66B', 'Lớp DCCTKT66B', 'class', 'BM-CNPM'],
+  ['MO', 'Khoa Mỏ', 'faculty', 'HUMG'],
+  ['BM-KTM', 'Bộ môn Khai thác mỏ', 'department', 'MO'],
+  ['DCKTM66', 'Lớp DCKTM66', 'class', 'BM-KTM'],
+  ['TDBD', 'Khoa Trắc địa – Bản đồ', 'faculty', 'HUMG'],
+]
+
+/** Danh bạ người dùng portal (IdS mock). 4 tài khoản demo dùng sub cố định SV001/GV001/PH001/LD001. */
+const DIRECTORY = [
+  { sub: 'SV001', username: '2151000123', email: '2151000123@student.humg.edu.vn', fullName: 'Nguyễn Văn Sinh', roles: ['student'], tenants: ['humg', 'cntt'], units: ['DCCTKT66A'], studentCode: '2151000123' },
+  { sub: 'GV001', username: 'giangvien', email: 'giangvien@humg.edu.vn', fullName: 'Giảng viên HUMG', roles: ['staff'], tenants: ['humg', 'cntt'], units: ['BM-KHMT'], staffCode: 'GV0001' },
+  { sub: 'PH001', username: 'phuhuynh', email: 'phuhuynh@gmail.com', fullName: 'Phụ huynh', roles: ['parent'], tenants: ['humg'], units: ['DCCTKT66A'] },
+  { sub: 'LD001', username: 'lanhdao', email: 'lanhdao@humg.edu.vn', fullName: 'Lãnh đạo HUMG', roles: ['leader', 'staff'], tenants: ['humg', 'cntt'], units: ['HUMG'], staffCode: 'CB0100' },
+  { sub: 'SV002', username: '2151000124', email: '2151000124@student.humg.edu.vn', fullName: 'Trần Thị Lan', roles: ['student'], units: ['DCCTKT66A'], studentCode: '2151000124' },
+  { sub: 'SV003', username: '2151000125', email: '2151000125@student.humg.edu.vn', fullName: 'Lê Minh Quân', roles: ['student'], units: ['DCCTKT66A'], studentCode: '2151000125' },
+  { sub: 'SV004', username: '2151000201', email: '2151000201@student.humg.edu.vn', fullName: 'Phạm Thu Hà', roles: ['student'], units: ['DCCTKT66B'], studentCode: '2151000201' },
+  { sub: 'SV005', username: '2151000301', email: '2151000301@student.humg.edu.vn', fullName: 'Hoàng Văn Đức', roles: ['student'], units: ['DCKTM66'], studentCode: '2151000301' },
+  { sub: 'GV002', username: 'ntbinh', email: 'ntbinh@humg.edu.vn', fullName: 'TS. Nguyễn Thanh Bình', roles: ['staff'], tenants: ['humg', 'cntt'], units: ['BM-CNPM'], staffCode: 'GV0123' },
+  { sub: 'GV003', username: 'lvkhoa', email: 'lvkhoa@humg.edu.vn', fullName: 'PGS.TS. Lê Văn Khoa', roles: ['staff'], units: ['BM-KTM'], staffCode: 'GV0456' },
+]
 
 function build() {
   const cms = load('cms'); const pub = load('content'); const home = load('home')
@@ -40,39 +74,48 @@ function build() {
 
   /* languages & settings */
   s.collections.languages = cms.cmsLanguages.map((l) => ({ code: l.code, label: l.label, flag: l.flag, isSource: l.isSource, isEnabled: true }))
-  s.settings = {
+  const settings = {
     ...cms.cmsSettings,
     language: { ...cms.cmsLanguageSettings },
     backup: { cronSchedule: '0 3 * * *', retentionCount: 7, storagePath: '/backup/cms_humg' },
     home: { heroChips: home.heroChips },
   }
+  s.settings = { humg: settings }
   s.i18nCoverage = cms.cmsI18nCoverage
   s.trend = cms.cmsDashboard.trend
 
-  /* roles + permissions */
-  const m = cms.cmsPermissionMatrix
-  cms.cmsRoles.forEach((r) => add('roles', { code: ROLE_CODE[r.role], name: r.role, description: r.desc, isSystem: true }))
-  s.permissionMatrix = { roles: m.roles.map((n) => ROLE_CODE[n]), rows: m.rows.map((r) => ({ module: r.module, perms: r.perms })) }
-  const rolePerms = MODULE_PERMS
-  s.rolePermissions = {}
-  m.roles.forEach((rn, i) => {
-    const set = new Set()
-    m.rows.forEach((row) => row.perms[i] && rolePerms[row.module].forEach((p) => set.add(p)))
-    if (rn !== 'Viewer') set.add('cms.access')
-    s.rolePermissions[ROLE_CODE[rn]] = [...set]
+  /* ---------- Identity Server (mock): danh bạ người dùng + vai trò. CMS KHÔNG quản lý user/role. ---------- */
+  s.collections.orgUnits = ORG_UNITS.map(([code, name, kind, parentCode]) => ({ code, name, kind, parentCode }))
+  s.collections.tenants = [
+    { id: 'humg', name: 'Trường Đại học Mỏ - Địa chất', rootUnit: 'HUMG', domains: ['localhost:3002', '127.0.0.1:3002'], isActive: true },
+    { id: 'cntt', name: 'Khoa Công nghệ thông tin', rootUnit: 'CNTT', domains: ['cntt.localhost:3002'], isActive: true },
+  ]
+  const CMS_SCOPE = {
+    'tvanminh@humg.edu.vn': { tenants: ['humg', 'cntt'], units: ['P-TT'] },
+    'nthoa@humg.edu.vn': { tenants: ['humg'], units: ['P-TT'] },
+    'pvloc@humg.edu.vn': { tenants: ['humg', 'cntt'], units: ['CNTT'], roles: ['cms.editor'] },
+    'ltmai@humg.edu.vn': { tenants: ['humg'], units: ['P-TT'] },
+    'hdnam@humg.edu.vn': { tenants: ['humg'], units: ['P-DT'] },
+    'dvtung@humg.edu.vn': { tenants: ['humg', 'cntt'], units: ['BM-KHMT'] },
+    'vthuong@humg.edu.vn': { tenants: ['humg'], units: ['P-DT'], roles: ['cms.reviewer', 'staff'] },
+    'bmduc@humg.edu.vn': { tenants: ['humg'], units: ['P-DT'] },
+  }
+  const addUser = (u) => add('users', { status: 1, tenants: ['humg'], units: [], roles: [], staffCode: null, studentCode: null, lastLoginAt: null, createdAt: '2025-01-10T08:00:00+07:00', ...u })
+  cms.cmsUsers.forEach((u, i) => {
+    const sc = CMS_SCOPE[u.email] || {}
+    const username = u.email.split('@')[0]
+    addUser({
+      sub: `u-${username}`, username, email: u.email, fullName: u.name, roles: sc.roles || IDS_ROLE[u.role] || ['staff'], tenants: sc.tenants || ['humg'], units: sc.units || [],
+      staffCode: `CB${String(i + 1).padStart(4, '0')}`, status: u.status === 'Hoạt động' ? 1 : 0, lastLoginAt: iso(u.last.split(' ')[0], u.last.split(' ')[1]),
+    })
   })
-
-  /* users */
-  cms.cmsUsers.forEach((u) => add('users', {
-    username: u.email.split('@')[0], email: u.email, fullName: u.name, roleCode: ROLE_CODE[u.role],
-    status: u.status === 'Hoạt động' ? 1 : 0, lastLoginAt: iso(u.last.split(' ')[0], u.last.split(' ')[1]), createdAt: '2025-01-10T08:00:00+07:00',
-  }))
+  DIRECTORY.forEach((u) => addUser(u))
   const userByName = (n) => col('users').find((u) => u.fullName === n)
   for (const name of new Set(cms.cmsPosts.map((p) => p.author))) {
     if (userByName(name)) continue
     const parts = slugify(name).split('-')
     const uname = `${parts.slice(-1)[0]}${parts.slice(0, -1).map((w) => w[0]).join('')}`
-    add('users', { username: uname, email: `${uname}@humg.edu.vn`, fullName: name, roleCode: 'author', status: 1, lastLoginAt: null, createdAt: '2025-01-10T08:00:00+07:00' })
+    addUser({ sub: `u-${uname}`, username: uname, email: `${uname}@humg.edu.vn`, fullName: name, roles: ['cms.author'], units: ['P-TT'] })
   }
 
   /* categories (cây) */
@@ -89,7 +132,7 @@ function build() {
   /* media */
   cms.cmsMedia.forEach((f) => add('media', {
     fileName: f.name, kind: MEDIA_KIND[f.kind] || 'other', ext: f.ext, mimeType: null, sizeBytes: bytes(f.size), url: `/cms-api/uploads/${f.name}`,
-    altText: null, caption: null, folder: null, uploadedBy: userByName('Lê Thị Mai').id, createdAt: iso(f.date),
+    altText: null, caption: null, folder: null, uploadedBy: userByName('Lê Thị Mai').sub, createdAt: iso(f.date),
   }))
 
   /* contents (bài viết) = bài quản trị + bài công khai */
@@ -99,14 +142,17 @@ function build() {
   const used = new Set()
   const addContent = (o) => {
     const author = userByName(o.authorName) || col('users')[0]
+    const publishAt = o.status === 'published' ? iso(o.date) : null
     return add('contents', {
-      categoryId: catByName(o.category)?.id ?? null, title: o.title, slug: o.slug, excerpt: o.excerpt ?? null, status: o.status,
+      categoryId: catByName(o.category)?.id ?? null, ownerUnitCode: UNIT_BY_LABEL[o.unit] || (o.category === 'Nghiên cứu' ? 'CNTT' : 'P-TT'),
+      title: o.title, slug: o.slug, excerpt: o.excerpt ?? null, status: o.status,
       isFeatured: o.slug === featuredSlug, showOnHome: homeSlugs.has(o.slug), contentBody: JSON.stringify(o.body ?? []),
       metaTitle: o.seo?.title ?? null, metaDescription: o.seo?.desc ?? null, metaKeywords: o.seo?.keywords ?? null,
-      featuredImageId: null, attachmentId: null, authorId: author.id, authorName: author.fullName, source: null, unit: o.unit ?? null,
+      featuredImageId: null, attachmentId: null, authorSub: author.sub, authorName: author.fullName, source: null, unit: o.unit ?? null,
       viewCount: o.views ?? 0, tags: o.tags ?? [], attachments: (o.docs ?? []).map((d) => ({ title: d.name, meta: d.meta, url: null })),
-      translations: o.en ? { en: o.en } : {}, publishedAt: o.status === 2 ? iso(o.date) : null, expiredAt: null,
-      createdAt: iso(o.date), updatedAt: iso(o.date), deleteAt: null,
+      translations: o.en ? { en: o.en } : {}, publishAt, expireAt: null, firstPublishedAt: publishAt,
+      submittedAt: null, submittedBy: null, reviewedAt: null, reviewedBy: null, reviewNote: null, pendingRevisionId: null, version: 1,
+      createdAt: iso(o.date), createdBy: author.sub, updatedAt: iso(o.date), updatedBy: author.sub, deletedAt: null, deletedBy: null,
     })
   }
   cms.cmsPosts.forEach((p) => {
@@ -125,7 +171,7 @@ function build() {
   })
   pub.articles.forEach((a) => {
     if (used.has(a.slug)) return
-    addContent({ slug: a.slug, category: a.category, authorName: 'Nguyễn Thị Hoa', status: 2, date: a.date, title: a.title, excerpt: a.excerpt, body: a.body, unit: a.unit, views: a.views, tags: a.tags, docs: a.docs })
+    addContent({ slug: a.slug, category: a.category, authorName: 'Nguyễn Thị Hoa', status: 'published', date: a.date, title: a.title, excerpt: a.excerpt, body: a.body, unit: a.unit, views: a.views, tags: a.tags, docs: a.docs })
   })
   // bài #1 của editor mẫu không chiếm ô "nổi bật" trang chủ
   col('contents').forEach((c) => { if (c.slug === cms.cmsEditorDefaults.slug) { c.isFeatured = false; c.showOnHome = false } })
@@ -167,15 +213,116 @@ function build() {
   home.universityStats.forEach((x, i) => add('siteStats', { placement: 'about', value: x.value, label: x.label, sub: x.sub ?? null, isVisible: true, sortOrder: i }))
 
   /* nhật ký & sao lưu */
-  cms.cmsActivity.forEach((a) => add('activityLogs', { userId: userByName(a.user)?.id ?? null, userName: a.user, action: ACTION[a.action] || a.action, targetLabel: a.target, ipAddress: a.ip, createdAt: iso(a.time.split(' ')[0], a.time.split(' ')[1]) }))
+  cms.cmsActivity.forEach((a) => add('activityLogs', { tenantId: 'humg', actorSub: userByName(a.user)?.sub ?? null, userName: a.user, entityType: null, entityId: null, changes: null, action: ACTION[a.action] || a.action, targetLabel: a.target, ipAddress: a.ip, createdAt: iso(a.time.split(' ')[0], a.time.split(' ')[1]) }))
   cms.cmsBackups.forEach((b) => add('backups', { filePath: `/backup/cms_humg/cms_${b.time.split(' ')[0].split('/').reverse().join('')}.sql.gz`, sizeBytes: bytes(b.size), trigger: b.by.includes('Cron') ? 'cron' : 'manual', createdByName: b.by, status: 'success', createdAt: iso(b.time.split(' ')[0], b.time.split(' ')[1]) }))
+  /* ---------- tenant: toàn bộ dữ liệu trên thuộc tenant humg ---------- */
+  const GLOBAL = new Set(['languages', 'users', 'orgUnits', 'tenants'])
+  for (const [name, list] of Object.entries(s.collections)) if (!GLOBAL.has(name)) list.forEach((r) => { r.tenantId ??= 'humg' })
+  seedTenantCntt(s, add, col, settings)
+
+  /* ---------- phân quyền mức bản ghi (grants) ---------- */
+  const grant = (g) => add('grants', { tenantId: 'humg', resourceType: '*', scopeType: 'tenant', scopeId: null, note: null, expiresAt: null, createdBy: 'u-tvanminh', createdAt: '2025-01-10T08:00:00+07:00', deletedAt: null, ...g })
+  grant({ principalType: 'user', principalId: 'u-nthoa', permissions: ['view', 'edit', 'review', 'publish'], note: 'Biên tập viên chính — toàn trang Trường' })
+  grant({ principalType: 'role', principalId: 'cms.author', permissions: ['view'], note: 'Tác giả xem được mọi bài của Trường' })
+  grant({ principalType: 'unit', principalId: 'P-TT', resourceType: 'news', scopeType: 'unit', scopeId: 'P-TT', permissions: ['edit'], note: 'Thành viên Phòng Truyền thông sửa bài của phòng' })
+  grant({ principalType: 'user', principalId: 'u-pvloc', scopeType: 'unit', scopeId: 'CNTT', permissions: ['view', 'edit', 'review', 'publish'], note: 'Phụ trách nội dung Khoa CNTT trên trang Trường' })
+  grant({ principalType: 'user', principalId: 'u-vthuong', resourceType: 'announcement', scopeType: 'unit', scopeId: 'P-DT', permissions: ['review'], note: 'Duyệt thông báo của Phòng Đào tạo' })
+  grant({ principalType: 'unit', principalId: 'P-DT', resourceType: 'announcement', scopeType: 'unit', scopeId: 'P-DT', permissions: ['edit'], note: 'Cán bộ Phòng Đào tạo soạn thông báo của phòng' })
+  grant({ principalType: 'user', principalId: 'u-dvtung', resourceType: 'news', scopeType: 'category', scopeId: String(catByName('Nghiên cứu')?.id), permissions: ['edit'], note: 'Cộng tác viên chuyên mục Nghiên cứu' })
+  grant({ tenantId: 'cntt', principalType: 'user', principalId: 'u-pvloc', permissions: ['manage'], note: 'Quản trị trang Khoa CNTT' })
+  grant({ tenantId: 'cntt', principalType: 'unit', principalId: 'BM-KHMT', scopeType: 'unit', scopeId: 'BM-KHMT', permissions: ['edit'], note: 'Bộ môn KHMT tự soạn bài/thông báo của bộ môn' })
+
+  seedAnnouncements(add, col)
+
+  /* ---------- revision v1 cho mọi bản ghi có workflow ---------- */
+  for (const [name, type] of [['contents', 'news'], ['announcements', 'announcement']]) {
+    col(name).forEach((r) => add('revisions', { tenantId: r.tenantId, entityType: type, entityId: r.id, version: 1, state: 'current', snapshot: revisionSnapshot(r), reason: 'Khởi tạo', createdBy: r.createdBy, createdAt: r.createdAt }))
+  }
+  col('workflowHistory')
+  col('receipts')
+  s.schemaVersion = SCHEMA_VERSION
   return s
+}
+
+/** Trường không đưa vào snapshot revision (thay đổi liên tục / do hệ thống quản lý) */
+const VOLATILE = new Set(['id', 'tenantId', 'viewCount', 'version', 'pendingRevisionId', 'deletedAt', 'deletedBy', 'updatedAt', 'updatedBy'])
+export const revisionSnapshot = (r) => JSON.parse(JSON.stringify(Object.fromEntries(Object.entries(r).filter(([k]) => !VOLATILE.has(k)))))
+
+function seedTenantCntt(s, add, col, settings) {
+  const T = 'cntt'
+  s.settings[T] = JSON.parse(JSON.stringify(settings))
+  s.settings[T].general = { ...s.settings[T].general, siteName: 'Khoa Công nghệ thông tin – HUMG' }
+  const c1 = add('categories', { tenantId: T, parentId: null, name: 'Tin tức Khoa', slug: 'tin-tuc-khoa', description: null, sortOrder: 0, isActive: true, translations: {} })
+  const c2 = add('categories', { tenantId: T, parentId: null, name: 'Nghiên cứu – Học thuật', slug: 'nghien-cuu-hoc-thuat', description: null, sortOrder: 1, isActive: true, translations: {} })
+  const post = (o) => add('contents', {
+    tenantId: T, categoryId: c1.id, ownerUnitCode: 'CNTT', excerpt: null, status: 'published', isFeatured: false, showOnHome: true, contentBody: '[]',
+    metaTitle: null, metaDescription: null, metaKeywords: null, featuredImageId: null, attachmentId: null, authorSub: 'u-pvloc', authorName: 'Phạm Văn Lộc',
+    source: null, unit: 'Khoa CNTT', viewCount: 0, tags: [], attachments: [], translations: {}, expireAt: null,
+    submittedAt: null, submittedBy: null, reviewedAt: null, reviewedBy: null, reviewNote: null, pendingRevisionId: null, version: 1,
+    createdBy: 'u-pvloc', updatedBy: 'u-pvloc', deletedAt: null, deletedBy: null, ...o,
+    createdAt: o.publishAt || '2025-05-20T08:00:00+07:00', updatedAt: o.publishAt || '2025-05-20T08:00:00+07:00', firstPublishedAt: o.status === 'draft' ? null : o.publishAt,
+  })
+  post({ title: 'Khoa CNTT khai giảng lớp chuyên đề Trí tuệ nhân tạo ứng dụng', slug: 'khoa-cntt-khai-giang-chuyen-de-ai', excerpt: 'Lớp chuyên đề dành cho sinh viên năm 3, năm 4 các ngành CNTT, KHMT.', contentBody: JSON.stringify(['Khoa Công nghệ thông tin tổ chức lớp chuyên đề Trí tuệ nhân tạo ứng dụng trong khai thác mỏ và địa chất.']), publishAt: '2025-05-22T08:00:00+07:00', isFeatured: true, tags: ['AI', 'chuyên đề'] })
+  post({ title: 'Seminar Bộ môn Khoa học máy tính tháng 6', slug: 'seminar-bm-khmt-thang-6', categoryId: c2.id, ownerUnitCode: 'BM-KHMT', excerpt: 'Chủ đề: Xử lý ảnh viễn thám bằng học sâu.', contentBody: JSON.stringify(['Seminar định kỳ của Bộ môn KHMT.']), publishAt: '2025-05-25T14:00:00+07:00', authorSub: 'u-dvtung', authorName: 'Đỗ Văn Tùng', createdBy: 'u-dvtung' })
+  post({ title: 'Kế hoạch thực tập doanh nghiệp hè 2025 (bản nháp)', slug: 'ke-hoach-thuc-tap-he-2025', status: 'draft', publishAt: null, excerpt: 'Dự thảo kế hoạch thực tập.', showOnHome: false })
+  const pick = (name, n) => col(name).filter((r) => r.tenantId === 'humg').slice(0, n).map(({ id, tenantId, ...r }) => add(name, { ...r, tenantId: T }))
+  const [slide] = pick('heroSlides', 1)
+  Object.assign(slide, { code: 'cntt-hero', kicker: 'KHOA CNTT', title: 'CÔNG NGHỆ THÔNG TIN\nCHO NGÀNH MỎ – ĐỊA CHẤT', subtitle: 'HUMG', primaryLabel: 'Giới thiệu Khoa', primaryUrl: '/gioi-thieu', accentLabel: 'Tuyển sinh', accentUrl: '/hoc-tap/tuyen-sinh' })
+  pick('quickLinks', 4); pick('audiences', 6); pick('strengths', 3); pick('partners', 4)
+  add('events', { tenantId: T, slug: 'ngay-hoi-viec-lam-cntt-2025', title: 'Ngày hội việc làm CNTT 2025', startsAt: '2025-06-14T08:00:00+07:00', endsAt: '2025-06-14T16:30:00+07:00',
+    place: 'Sảnh nhà C', placeFull: 'Sảnh nhà C, Trường ĐH Mỏ - Địa chất', organizer: 'Khoa Công nghệ thông tin', audience: 'Sinh viên Khoa CNTT', contact: null,
+    status: 'upcoming', description: ['Gặp gỡ hơn 20 doanh nghiệp công nghệ.'], agenda: [], isVisible: true })
+  add('videos', { tenantId: T, slug: 'gioi-thieu-khoa-cntt', title: 'Giới thiệu Khoa Công nghệ thông tin', channel: 'Khoa CNTT', durationSec: 185, videoUrl: null, viewCount: 820,
+    publishedAt: '2025-04-02', description: 'Video giới thiệu ngành học và cơ sở vật chất của Khoa.', isVisible: true })
+  col('siteStats').filter((r) => r.tenantId === 'humg').forEach(({ id, tenantId, ...r }) => add('siteStats', { ...r, tenantId: T }))
+}
+
+function seedAnnouncements(add, col) {
+  const d = (days, h = 8) => { const x = new Date(Date.now() + days * 86400000); if (h !== null) x.setHours(h, 0, 0, 0); return x.toISOString() }
+  const ann = (o) => add('announcements', {
+    tenantId: 'humg', category: 'general', priority: 0, status: 'published', expireAt: null, pinnedUntil: null, requireAck: false, channels: ['portal'],
+    recallReason: null, bodyHtml: '', translations: {}, attachments: [], authorSub: 'u-nthoa', authorName: 'Nguyễn Thị Hoa',
+    submittedAt: null, submittedBy: null, reviewedAt: null, reviewedBy: null, reviewNote: null, pendingRevisionId: null, version: 1,
+    createdBy: o.authorSub || 'u-nthoa', updatedBy: o.authorSub || 'u-nthoa', deletedAt: null, deletedBy: null, ...o,
+    createdAt: o.publishAt || d(-1), updatedAt: o.publishAt || d(-1), firstPublishedAt: o.status && o.status !== 'published' ? null : o.publishAt,
+  })
+  ann({ title: 'Lịch thi học kỳ 2 năm học 2024–2025', ownerUnitCode: 'P-DT', category: 'exam', priority: 1, publishAt: d(-3), pinnedUntil: d(10), requireAck: true, channels: ['portal', 'email'],
+    bodyHtml: '<p>Phòng Đào tạo thông báo lịch thi học kỳ 2. Sinh viên kiểm tra phòng thi trên My eUni và <strong>xác nhận đã đọc</strong>.</p>',
+    translations: { en: { title: 'Semester 2 exam schedule 2024–2025', bodyHtml: '<p>The Academic Affairs Office announces the semester 2 exam schedule.</p>', status: 'done' } },
+    targets: [{ audience: 'student', unitCode: null, userSub: null, isExclude: false, label: 'Toàn bộ sinh viên' }], attachments: [{ title: 'Lich-thi-HK2.pdf', meta: 'PDF · 420 KB' }] })
+  ann({ title: 'Hạn nộp học phí học kỳ 2', ownerUnitCode: 'P-DT', category: 'tuition', priority: 2, publishAt: d(-2), expireAt: d(20), channels: ['portal', 'email', 'push'],
+    bodyHtml: '<p>Hạn cuối nộp học phí học kỳ 2 là ngày 30/06. Sinh viên quá hạn sẽ bị khóa đăng ký học phần.</p>',
+    targets: [{ audience: 'student', unitCode: null, userSub: null, isExclude: false, label: 'Toàn bộ sinh viên' }, { audience: 'parent', unitCode: null, userSub: null, isExclude: false, label: 'Phụ huynh' }] })
+  ann({ title: 'Họp giao ban Khoa CNTT tháng 6', ownerUnitCode: 'CNTT', category: 'admin', publishAt: d(-1), authorSub: 'u-pvloc', authorName: 'Phạm Văn Lộc',
+    bodyHtml: '<p>Kính mời toàn thể giảng viên Khoa CNTT dự họp giao ban lúc 14:00 thứ Sáu tại phòng 302-C.</p>',
+    targets: [{ audience: 'staff', unitCode: 'CNTT', userSub: null, isExclude: false, label: 'Giảng viên Khoa CNTT' }] })
+  ann({ title: 'Lớp DCCTKT66A: đổi phòng học môn Cơ sở dữ liệu', ownerUnitCode: 'BM-KHMT', category: 'academic', publishAt: d(-0.1, null), authorSub: 'u-dvtung', authorName: 'Đỗ Văn Tùng',
+    bodyHtml: '<p>Từ tuần 12, môn Cơ sở dữ liệu của lớp DCCTKT66A chuyển sang phòng 405-A.</p>',
+    targets: [{ audience: null, unitCode: 'DCCTKT66A', userSub: null, isExclude: false, label: 'Lớp DCCTKT66A' }] })
+  ann({ title: 'Xác nhận hướng dẫn đồ án tốt nghiệp', ownerUnitCode: 'BM-KHMT', category: 'academic', priority: 1, publishAt: d(-1), requireAck: true, authorSub: 'u-dvtung', authorName: 'Đỗ Văn Tùng',
+    bodyHtml: '<p>Em Nguyễn Văn Sinh đã được phân công GV hướng dẫn đồ án: TS. Nguyễn Thanh Bình.</p>',
+    targets: [{ audience: null, unitCode: null, userSub: 'SV001', isExclude: false, label: '2151000123 – Nguyễn Văn Sinh' }, { audience: null, unitCode: null, userSub: 'GV002', isExclude: false, label: 'GV0123 – TS. Nguyễn Thanh Bình' }] })
+  ann({ title: 'Khảo sát chất lượng dịch vụ (trừ lớp đang thực tập)', ownerUnitCode: 'P-CTSV', category: 'general', publishAt: d(-4),
+    bodyHtml: '<p>Mời sinh viên tham gia khảo sát chất lượng dịch vụ hỗ trợ người học.</p>',
+    targets: [{ audience: 'student', unitCode: null, userSub: null, isExclude: false, label: 'Toàn bộ sinh viên' }, { audience: null, unitCode: 'DCKTM66', userSub: null, isExclude: true, label: 'Trừ lớp DCKTM66' }] })
+  ann({ title: 'Kế hoạch nghỉ hè 2025 (chờ duyệt)', ownerUnitCode: 'P-DT', status: 'pending_review', publishAt: null, submittedAt: d(-0.05, null), submittedBy: 'u-hdnam', authorSub: 'u-hdnam', authorName: 'Hoàng Đức Nam',
+    bodyHtml: '<p>Dự thảo kế hoạch nghỉ hè cho cán bộ và sinh viên.</p>',
+    targets: [{ audience: null, unitCode: null, userSub: null, isExclude: false, label: 'Mọi người' }] })
+  ann({ title: 'Đăng ký học phần học kỳ hè (hẹn giờ)', ownerUnitCode: 'P-DT', category: 'academic', publishAt: d(3),
+    bodyHtml: '<p>Cổng đăng ký học phần học kỳ hè mở từ ngày đăng thông báo này.</p>',
+    targets: [{ audience: 'student', unitCode: null, userSub: null, isExclude: false, label: 'Toàn bộ sinh viên' }] })
+  ann({ tenantId: 'cntt', title: 'Sinh viên Khoa CNTT đăng ký đề tài NCKH 2025', ownerUnitCode: 'CNTT', category: 'academic', publishAt: d(-2), authorSub: 'u-pvloc', authorName: 'Phạm Văn Lộc',
+    bodyHtml: '<p>Khoa CNTT nhận đăng ký đề tài NCKH sinh viên đến hết 15/06.</p>',
+    targets: [{ audience: 'student', unitCode: 'CNTT', userSub: null, isExclude: false, label: 'Sinh viên Khoa CNTT' }] })
+  col('announcements')
 }
 
 let state
 export function getStore() {
   if (state) return state
-  if (existsSync(STORE_FILE)) { try { state = JSON.parse(readFileSync(STORE_FILE, 'utf8')); return state } catch { /* dựng lại */ } }
+  if (existsSync(STORE_FILE)) {
+    try { const saved = JSON.parse(readFileSync(STORE_FILE, 'utf8')); if (saved.schemaVersion === SCHEMA_VERSION) { state = saved; return state } } catch { /* dựng lại */ }
+  }
   state = build()
   persist()
   return state

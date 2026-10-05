@@ -15,6 +15,7 @@ const j = async (path, token, method = 'GET', body) => {
 }
 const loginRes = await j('/auth-api/api/auth/login', null, 'POST', { username: 'tvanminh', password: 'Humg@2025' })
 const T = loginRes.accessToken
+const SV = (await j('/auth-api/api/auth/login', null, 'POST', { role: 'student' })).accessToken
 
 /* ---------- suy luận schema từ dữ liệu mẫu ---------- */
 function infer(v, depth = 0) {
@@ -45,37 +46,57 @@ const CMS = [
   ['GET', '/api/Languages', 'public', 'Ngôn ngữ hỗ trợ.', [], null],
   ['GET', '/api/Media/{id}/url', 'public', 'URL tải file media.', [], null],
 
-  ['GET', '/api/Contents', 'post.view', 'Quản trị: danh sách bài viết mọi trạng thái.', [['status', 'integer', '0 nháp · 1 chờ duyệt · 2 xuất bản · 3 lưu trữ'], ['categoryId', 'integer', ''], ['translation', 'string', 'done | in_progress | missing (bản EN)'], ...PAGED], 'content'],
-  ['GET', '/api/Contents/{id}', 'post.view', 'Chi tiết bài viết (kèm bản dịch).', [], 'content'],
-  ['POST', '/api/Contents', 'post.create (+post.publish nếu status=2)', 'Tạo bài viết. Bắt buộc title; slug tự sinh nếu thiếu.', [], 'content'],
-  ['PUT', '/api/Contents/{id}', 'post.update', 'Cập nhật (merge các trường gửi lên). Đổi status sang 2 cần post.publish.', [], 'content'],
-  ['DELETE', '/api/Contents/{id}', 'post.update', 'Xóa mềm (deleteAt).', [], null],
-  ['POST', '/api/Categories · PUT/DELETE /api/Categories/{id}', 'category.manage', 'CRUD danh mục.', [], 'category'],
-  ['GET', '/api/Media', 'media.manage', 'Thư viện media.', [['kind', 'string', 'image | document | video | audio | other'], ['folder', 'string', ''], ...PAGED], 'media'],
-  ['POST', '/api/Media/upload', 'media.manage', 'multipart/form-data: file, uploadedBy, altText, caption, folder.', [], 'media'],
-  ['DELETE', '/api/Media/{id}', 'media.manage', 'Xóa media.', [], null],
-  ['GET', '/api/Users', 'user.manage', 'Người dùng CMS.', [['roleCode', 'string', ''], ['status', 'integer', '1 hoạt động · 0 khóa'], ...PAGED], 'user'],
-  ['POST', '/api/Users · PUT/DELETE /api/Users/{id}', 'user.manage', 'CRUD người dùng (không trả passwordHash). DELETE: 409 nếu xóa chính tài khoản đang đăng nhập.', [], 'user'],
-  ['GET', '/api/Roles · POST · PUT /api/Roles/{id}', 'user.manage', 'Vai trò + danh sách permission; POST nhận copyFrom (mã vai trò) để sao chép quyền.', [], 'role'],
-  ['DELETE', '/api/Roles/{id}', 'user.manage', 'Xóa vai trò không phải hệ thống và chưa gán cho người dùng (409 nếu vi phạm).', [], null],
-  ['GET/PUT', '/api/Roles/permission-matrix', 'user.manage', 'Ma trận quyền (module × vai trò) { roles:[mã], rows:[{module, perms:[bool]}] }. PUT phải đồng bộ quyền thật của từng vai trò (Super Admin luôn toàn quyền). Lưu ý: route này phải đặt trước /api/Roles/{id}.', [], null],
-  ['CRUD', '/api/Events · /api/Albums · /api/Videos · /api/Podcasts', 'post.update', 'Sự kiện, album ảnh, video, podcast hiển thị ở website.', PAGED, 'event'],
+  ['GET', '/api/Public/tenant', 'public', 'Tenant đang phục vụ (theo X-Tenant / host).', [], null],
+
+  ['GET', '/api/Me/context', 'đăng nhập', 'Ngữ cảnh người dùng: tenants được quản trị, permissions (từ role trong token), đơn vị (kèm đơn vị cha), can.{news|announcement}.{view|edit|review|publish}.', [], 'context'],
+  ['GET', '/api/Contents', 'news.view + ACL', 'Quản trị: danh sách bài viết user được xem (lọc theo grant). Mỗi dòng có allowedActions[], isScheduled, pendingRevision, version.', [['status', 'string', 'draft | pending_review | published | archived'], ['scheduled', 'boolean', 'chỉ bài hẹn giờ'], ['mine', 'boolean', 'chỉ bài tôi tạo'], ['categoryId', 'integer', ''], ['ownerUnitCode', 'string', ''], ['translation', 'string', 'done | in_progress | missing (bản EN)'], ...PAGED], 'content'],
+  ['GET', '/api/Contents/trash', 'news.edit|publish + ACL', 'Thùng rác (bài đã xóa mềm).', PAGED, null],
+  ['GET', '/api/Contents/{id}', 'news.view + ACL', 'Chi tiết bài viết (kèm bản dịch). Header ETag = version.', [], 'content'],
+  ['POST', '/api/Contents', 'news.edit + ACL (phạm vi chuyên mục/đơn vị)', 'Tạo bản nháp. ownerUnitCode mặc định = đơn vị đầu tiên của user. Có thể gửi status=pending_review|published để chuyển trạng thái ngay (cần quyền tương ứng).', [], 'content'],
+  ['PUT', '/api/Contents/{id}', 'news.edit + ACL', 'Sửa nội dung (status KHÔNG đổi qua PUT). Gửi version (hoặc If-Match) → 409 nếu đã có người sửa. Bài đang published mà user không có publish → 202, lưu thành bản sửa đổi chờ duyệt (pendingRevision).', [], 'content'],
+  ['DELETE', '/api/Contents/{id}', 'allowedActions có delete', 'Xóa mềm (deletedAt, deletedBy).', [], null],
+  ['POST', '/api/Contents/{id}/restore', 'allowedActions có restore', 'Khôi phục từ thùng rác.', [], null],
+  ['DELETE', '/api/Contents/{id}/purge', 'cms.*', 'Xóa vĩnh viễn bài trong thùng rác.', [], null],
+  ['POST', '/api/Contents/{id}/workflow/{action}', 'theo action', 'action: submit (edit) · reject (review, body.note bắt buộc) · approve (review) · publish (publish) · unpublish · archive (publish) · approve-revision / reject-revision (review). Body: { note?, publishAt?, version? }. publishAt tương lai = hẹn giờ.', [], 'content'],
+  ['GET', '/api/Contents/{id}/revisions', 'news.view + ACL', 'Danh sách phiên bản (state current | superseded | proposed | rejected).', [], 'revisions'],
+  ['GET', '/api/Contents/{id}/revisions/{version}', 'news.view + ACL', 'Một phiên bản: snapshot + changesFromCurrent.', [], null],
+  ['POST', '/api/Contents/{id}/revisions/{version}/restore', 'news.edit/publish + ACL', 'Khôi phục nội dung phiên bản cũ → tạo phiên bản mới (không ghi đè lịch sử).', [], null],
+  ['GET', '/api/Contents/{id}/history', 'news.view + ACL', 'Lịch sử workflow + audit của bản ghi.', [], 'history'],
+
+  ['GET/POST/PUT/DELETE', '/api/Announcements …', 'announcement.* + ACL', 'Thông báo: cùng bộ endpoint vòng đời như /api/Contents (trash, restore, workflow, revisions, history). Body có targets[] = [{ audience?, unitCode?, userSub? | userKey? (mã CB/mã SV/email), isExclude? }], priority 0|1|2, category, requireAck, channels[], pinnedUntil, expireAt. archive kèm note = thu hồi (recallReason).', [['status', 'string', ''], ['category', 'string', ''], ['ownerUnitCode', 'string', ''], ...PAGED], 'announcement'],
+  ['GET', '/api/Announcements/{id}/stats', 'announcement.view + ACL', 'Người nhận (ước tính từ danh bạ/Membership API), đã đọc, đã xác nhận.', [], null],
+  ['GET', '/api/Announcements/meta/options', 'announcement.view', 'Danh mục audiences, categories, priorities, channels.', [], null],
+  ['GET', '/api/Me/announcements', 'đăng nhập (mọi vai trò)', 'Hộp thư thông báo của tôi: so khớp targets với role (audience) + đơn vị (kèm đơn vị cha) + sub. Ghim → ưu tiên → mới nhất. X-Tenant: * = mọi tenant của user.', [['unread', 'boolean', ''], ['category', 'string', ''], ['lang', 'string', 'vi | en'], ...PAGED], 'inbox'],
+  ['GET', '/api/Me/announcements/unread-count', 'đăng nhập', 'Số thông báo chưa đọc.', [], null],
+  ['POST', '/api/Me/announcements/{id}/read · /api/Me/announcements/{id}/ack · /api/Me/announcements/read-all', 'đăng nhập', 'Đánh dấu đã đọc / xác nhận đã đọc (requireAck) / đọc tất cả.', [], null],
+
+  ['GET/POST/PUT/DELETE', '/api/Grants', 'grant.manage', 'Phân quyền mức bản ghi: { principalType user|unit|role, principalId, resourceType *|news|announcement|page|media, scopeType tenant|category|unit|record, scopeId, permissions[view|edit|review|publish|manage], expiresAt?, note? }. Grant theo đơn vị áp dụng cả đơn vị con.', PAGED, 'grant'],
+  ['GET', '/api/Grants/effective/{sub}', 'grant.manage', 'Quyền chức năng + các grant đang áp dụng cho một người.', [], null],
+  ['GET', '/api/Directory/users', 'cms.access', 'Danh bạ (IdS) — tìm theo tên, email, mã CB, mã SV. Chỉ đọc; user/role quản lý ở Identity Server.', [['keyword', 'string', ''], ['role', 'string', '']], 'directory'],
+  ['GET', '/api/Directory/roles', 'cms.access', 'Bảng role (IdS) → quyền chức năng CMS (cấu hình tĩnh).', [], null],
+  ['GET', '/api/OrgUnits', 'cms.access', 'Cây đơn vị (bản sao QLNS/QLĐT): code, name, kind, parentCode, path, depth.', [], 'orgUnits'],
+
+  ['POST', '/api/Categories · PUT/DELETE /api/Categories/{id}', 'category.manage', 'CRUD danh mục (theo tenant, xóa mềm, POST /{id}/restore).', [], 'category'],
+  ['GET', '/api/Media', 'media.manage', 'Thư viện media của tenant.', [['kind', 'string', 'image | document | video | audio | other'], ['folder', 'string', ''], ...PAGED], 'media'],
+  ['POST', '/api/Media/upload', 'media.manage', 'multipart/form-data: file, altText, caption, folder.', [], 'media'],
+  ['DELETE', '/api/Media/{id}', 'media.manage', 'Xóa mềm media.', [], null],
+  ['CRUD', '/api/Events · /api/Albums · /api/Videos · /api/Podcasts', 'site.manage', 'Sự kiện, album ảnh, video, podcast (theo tenant, xóa mềm + /{id}/restore, /trash).', PAGED, 'event'],
   ['CRUD', '/api/Pages · /api/MenuItems', 'page.manage / menu.manage', 'Trang tĩnh (cây) và mục menu.', PAGED, null],
-  ['CRUD', '/api/Banners', 'post.update', 'Banner/slider theo vị trí & khoảng ngày.', PAGED, 'banner'],
-  ['CRUD', '/api/HeroSlides · /api/QuickLinks · /api/Audiences · /api/Strengths · /api/Partners · /api/SiteStats', 'post.update', 'Các khối trang chủ.', PAGED, null],
-  ['GET/PUT', '/api/Settings · /api/Settings/{group}', 'settings.manage', 'Cấu hình hệ thống theo nhóm: general, seo, email, language, backup, home.', [], null],
-  ['GET', '/api/ActivityLogs', 'log.view', 'Nhật ký hoạt động.', [['action', 'string', ''], ['userId', 'integer', ''], ...PAGED], 'log'],
+  ['CRUD', '/api/Banners', 'site.manage', 'Banner/slider theo vị trí & khoảng ngày.', PAGED, 'banner'],
+  ['CRUD', '/api/HeroSlides · /api/QuickLinks · /api/Audiences · /api/Strengths · /api/Partners · /api/SiteStats', 'site.manage', 'Các khối trang chủ.', PAGED, null],
+  ['GET/PUT', '/api/Settings · /api/Settings/{group}', 'settings.manage', 'Cấu hình theo tenant, theo nhóm: general, seo, email, language, backup, home.', [], null],
+  ['GET', '/api/AuditLogs', 'log.view', 'Audit log chỉ ghi thêm: actorSub, action, entityType, entityId, changes {field:[cũ,mới]}, ip. (/api/ActivityLogs = tên cũ.)', [['action', 'string', ''], ['actor', 'string', 'sub'], ['entityType', 'string', ''], ['entityId', 'string', ''], ['from', 'string', 'ISO'], ['to', 'string', 'ISO'], ...PAGED], 'log'],
   ['GET/POST', '/api/Backups', 'backup.manage', 'Lịch sử sao lưu / tạo sao lưu thủ công.', PAGED, null],
   ['DELETE', '/api/Backups/{id}', 'backup.manage', 'Xóa bản sao lưu.', [], null],
-  ['GET', '/api/Backups/{id}/download', 'backup.manage', 'Tải tệp sao lưu (JSON). 404 nếu bản sao lưu không còn dữ liệu. Danh sách Backups trả thêm hasData.', [], null],
-  ['POST', '/api/Backups/{id}/restore', 'backup.manage', 'Phục hồi dữ liệu CMS từ một bản sao lưu (ghi đè dữ liệu hiện tại).', [], null],
-  ['POST', '/api/Backups/restore', 'backup.manage', 'multipart/form-data: file — phục hồi từ tệp sao lưu tải lên (422 nếu sai định dạng).', [], null],
-  ['POST', '/api/Settings/email/test', 'settings.manage', 'Gửi email thử bằng cấu hình SMTP hiện tại: { to } → { ok, message }.', [], null],
-  ['GET', '/api/Dashboard', 'cms.access', 'Số liệu trang tổng quan CMS.', [], 'dashboard'],
+  ['GET', '/api/Backups/{id}/download', 'backup.manage', 'Tải tệp sao lưu (JSON).', [], null],
+  ['POST', '/api/Backups/{id}/restore', 'backup.manage', 'Phục hồi dữ liệu CMS từ một bản sao lưu.', [], null],
+  ['POST', '/api/Backups/restore', 'backup.manage', 'multipart/form-data: file — phục hồi từ tệp sao lưu tải lên.', [], null],
+  ['POST', '/api/Settings/email/test', 'settings.manage', 'Gửi email thử: { to } → { ok, message }.', [], null],
+  ['GET', '/api/Dashboard', 'cms.access', 'Số liệu tổng quan theo quyền của user, kèm awaitingReview[].', [], 'dashboard'],
 ]
 
 /* ---------- mẫu response từ mock đang chạy ---------- */
-const first = async (p) => { const r = await j(p, T); return r.items ? r.items[0] : r }
+const first = async (p, t = T) => { const r = await j(p, t); return r.items ? r.items[0] : r }
 const samples = {
   publicContent: await j('/cms-api/api/Public/content'),
   publicHome: await j('/cms-api/api/Public/home'),
@@ -89,8 +110,14 @@ const samples = {
   content: await first('/cms-api/api/Contents?pageSize=1'),
   category: await first('/cms-api/api/Categories?pageSize=1'),
   media: await first('/cms-api/api/Media?pageSize=1'),
-  user: await first('/cms-api/api/Users?pageSize=1'),
-  role: (await j('/cms-api/api/Roles', T))[0],
+  context: await j('/cms-api/api/Me/context', T),
+  revisions: await j('/cms-api/api/Contents/1/revisions', T),
+  history: await j('/cms-api/api/Contents/1/history', T),
+  announcement: await first('/cms-api/api/Announcements?pageSize=1'),
+  inbox: await j('/cms-api/api/Me/announcements?pageSize=2', SV),
+  grant: await first('/cms-api/api/Grants?pageSize=1'),
+  directory: await j('/cms-api/api/Directory/users?keyword=nguyen&pageSize=2', T),
+  orgUnits: (await j('/cms-api/api/OrgUnits', T)).slice(0, 3),
   event: await first('/cms-api/api/Events?pageSize=1'),
   banner: await first('/cms-api/api/Banners?pageSize=1'),
   log: await first('/cms-api/api/ActivityLogs?pageSize=1'),
@@ -162,15 +189,19 @@ p('- **Phân trang** (mọi danh sách): query `pageIndex` (≥1), `pageSize`, `
 p('- **Envelope**: FE chấp nhận cả response thô (như mock) lẫn envelope của backend — cms-api `{ "success": true, "message": "...", "data": ... }`, qlns/qlkhcn `{ "code": 200, "message": "...", "data": ... }`. FE tự bóc `data`; `success:false` hoặc `code` ngoài 2xx được coi là lỗi. Danh sách có thể là **mảng thuần** hoặc đối tượng phân trang — FE chuẩn hóa (`asPage`). Các ví dụ dưới đây là dạng đã bóc `data`.')
 p('- **Xác thực**: `Authorization: Bearer <accessToken>`. 401 chưa đăng nhập / hết hạn · 403 thiếu quyền · 404 · 409 trùng · 422 sai dữ liệu `{ message, errors? }`.')
 p('- **Id** là số nguyên (int64). Bài viết **xóa mềm**. `contentBody` là **chuỗi HTML** do trình soạn thảo WYSIWYG của CMS tạo (p, h2–h4, ul/ol, blockquote, a, img, table…; **backend nên làm sạch HTML khi lưu**, website cũng làm sạch khi hiển thị), hoặc — với dữ liệu cũ — chuỗi JSON mảng khối (`"Đoạn văn"` | `{type:"h2"|"quote"|"img"|"list", ...}`).')
-p('- Tên endpoint nhóm CMS theo mẫu Swagger gateway demo (`/api/Categories`, `/api/Contents`, `/api/Media`, `/api/Users`); phần mở rộng cùng phong cách.')
+p('- **Tenant**: mọi request gửi header `X-Tenant: <tenant>` (vd. `humg`, `cntt`). Thiếu header → backend suy ra từ host, cuối cùng là tenant mặc định. API quản trị: tenant phải có trong claim `tenants` của token (trừ `cms.*`), sai → 403. Hộp thư `/api/Me/announcements` nhận `X-Tenant: *` = mọi tenant của user. Thiết kế: `docs/design/CMS_DESIGN.md` §2.')
+p('- **Workflow**: `status` là chuỗi `draft | pending_review | published | archived` (mã số cũ 0..3 vẫn nhận khi ghi). Bài công khai = `published` và `publishAt <= now` và (`expireAt` trống hoặc > now). Đổi trạng thái chỉ qua `POST …/workflow/{action}`.')
+p('- **Concurrency**: bản ghi có `version`; gửi `version` trong body hoặc header `If-Match: "<version>"` khi sửa → 409 `{ message, currentVersion }` nếu đã có người khác sửa.')
+p('- **Quyền**: quyền chức năng lấy từ role trong token (bảng `GET /api/Directory/roles`), cộng phân quyền mức bản ghi `/api/Grants`. Mỗi bản ghi trả `allowedActions[]` để UI chỉ hiện nút hợp lệ; backend vẫn kiểm tra lại.')
+p('- Tên endpoint nhóm CMS theo mẫu Swagger gateway demo (`/api/Categories`, `/api/Contents`, `/api/Media`); phần mở rộng cùng phong cách. `/api/Users`, `/api/Roles` **đã bỏ** — user/role quản lý ở Identity Server.')
 p('- **Đồng bộ CMS → website**: website **không cache** dữ liệu CMS (fetch `no-store`). Khi admin ghi (POST/PUT/DELETE) thì lần đọc `/api/Public/*` kế tiếp phải thấy thay đổi.\n')
 
 p('## 2. auth-api\n')
-p('> **SSO**: người dùng thật đăng nhập qua Keycloak (`https://sso-demo.humg.edu.vn/realms/humg-euni`, liên kết Microsoft 365). FE gửi `Authorization: Bearer <access_token của Keycloak>`; gateway/backend cần xác thực JWT bằng JWKS của realm và ánh xạ role → quyền. `auth-api` bên dưới là cho mock/dev và tài khoản nội bộ.\n')
+p('> **Identity Server**: người dùng thật đăng nhập qua IdS (OIDC + PKCE) bằng **tài khoản trường** hoặc **Microsoft 365** (IdS federate, cùng một `sub`). FE gửi `Authorization: Bearer <access_token của IdS>` (aud = cms-api); backend xác thực JWT bằng JWKS của IdS. Claim cần có: `sub, name, email, role[], tenant[], unit[], staff_code, student_code` (xem docs/design/CMS_DESIGN.md §3). `auth-api` bên dưới **chỉ là mock của IdS** khi phát triển.\n')
 p('| Method | Path | Mô tả |\n|---|---|---|')
 p('| POST | `/api/auth/login` | `{ username, password }` → `{ accessToken, user }`. Mock cho phép `{ role: "student|staff|parent|leader" }` để vào cổng demo. |')
 p('| GET | `/api/auth/me` | → `{ user }` |\n| POST | `/api/auth/refresh` | → `{ accessToken, user }` |\n| POST | `/api/auth/logout` | 204 |\n')
-p('`user`: `{ id, username, name, role, permissions[], portal }`. `role`: `student` `staff` `parent` `leader` `cms-admin` `cms-editor`. `permissions` hỗ trợ wildcard (`cms.*`). Người dùng CMS cần quyền `cms.access`.\n')
+p('`user`: `{ sub, username, name, email, role, roles[], permissions[], tenants[], units[], staffCode, studentCode, portal }`. `roles` là role trên IdS (`cms.admin` `cms.editor` `cms.reviewer` `cms.author` `student` `staff` `parent` `leader`); `role` là vai trò chính để FE điều hướng. `permissions` = quyền chức năng suy ra từ roles (wildcard `cms.*`).\n')
 p('```json\n' + short({ ...loginRes, accessToken: '<jwt>' }) + '\n```\n')
 
 p('## 3. cms-api — các endpoint\n')
@@ -178,7 +209,7 @@ p('Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quy
 p('| Method | Path | Quyền | Mô tả |\n|---|---|---|---|')
 for (const [m, path, perm, desc] of CMS) p(`| ${m} | \`${path}\` | ${perm} | ${desc} |`)
 p('\n### Ví dụ response\n')
-const ex = [['publicContent', 'GET /api/Public/content'], ['publicHome', 'GET /api/Public/home'], ['contentDetail', 'GET /api/Contents/slug/{slug}'], ['content', 'GET /api/Contents/{id} (quản trị)'], ['media', 'Media'], ['user', 'User'], ['role', 'Role'], ['banner', 'Banner'], ['event', 'Event'], ['log', 'ActivityLog'], ['dashboard', 'GET /api/Dashboard']]
+const ex = [['publicContent', 'GET /api/Public/content'], ['publicHome', 'GET /api/Public/home'], ['contentDetail', 'GET /api/Contents/slug/{slug}'], ['context', 'GET /api/Me/context'], ['content', 'GET /api/Contents/{id} (quản trị)'], ['revisions', 'GET /api/Contents/{id}/revisions'], ['history', 'GET /api/Contents/{id}/history'], ['announcement', 'GET /api/Announcements/{id}'], ['inbox', 'GET /api/Me/announcements'], ['grant', 'Grant'], ['directory', 'GET /api/Directory/users'], ['orgUnits', 'GET /api/OrgUnits'], ['media', 'Media'], ['banner', 'Banner'], ['event', 'Event'], ['log', 'AuditLog'], ['dashboard', 'GET /api/Dashboard']]
 for (const [k, title] of ex) {
   const big = JSON.stringify(samples[k]).length > 6000
   p(`#### ${title}\n`, '```json\n', big ? short(Object.fromEntries(Object.entries(samples[k]).map(([a, b]) => [a, Array.isArray(b) ? b.slice(0, 1) : b])), 1) : short(samples[k]), '\n```\n')
@@ -204,6 +235,6 @@ for (const [svc, mods] of Object.entries(bySvc)) {
 }
 p('\n> Các khóa `*Nav`, `*QuickLinks`, `forms`, `staffToolList`, `studentNavGroups`, `libraryGuide`… là **cấu hình giao diện tĩnh** (đã nằm trong code FE `src/config/static`); backend có thể bỏ qua hoặc cung cấp tùy ý, FE không phụ thuộc vào chúng khi gọi API.\n')
 p('## 5. Cơ sở dữ liệu CMS tham khảo\n')
-p('Thư mục `database/` có `schema.sql` (PostgreSQL, schema `cms`, 44 bảng) và `seed.sql` — mô hình dữ liệu gợi ý cho cms-api (bài viết đa ngôn ngữ, danh mục cây, media, trang/menu, banner, khối trang chủ, nhật ký, sao lưu…).\n')
+p('**`database/v2/schema.sql`** — schema đích cho backend .NET (PostgreSQL 16): multi-tenant + Row-Level Security, workflow, revisions, audit (partition), access_grants, announcements/targets/receipts, tìm kiếm `unaccent` + `pg_trgm`. Kiểm thử: `database/v2/test.sql`. Thư mục `database/` gốc (`schema.sql`, `seed.sql`) là bản v1 — chỉ để tham khảo lịch sử.\n')
 writeFileSync(join(out, 'API_CONTRACT.md'), md.join('\n'))
 console.log('✔ contract/openapi.json,', Object.keys(paths).length, 'paths · contract/API_CONTRACT.md,', md.join('\n').length, 'ký tự')

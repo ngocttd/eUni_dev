@@ -10,7 +10,7 @@ const stamp = Date.now().toString(36)
 await fetch(`${API}/cms-api/api/_dev/reset`, { method: 'POST' })
 const login = await (await fetch(`${API}/auth-api/api/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username: 'tvanminh', password: 'Humg@2025' }) })).json()
 
-const browser = await chromium.launch({ channel: 'msedge', headless: true })
+const browser = await chromium.launch(process.env.CHROME ? { executablePath: process.env.CHROME, headless: true } : { channel: 'msedge', headless: true })
 const ctx = await browser.newContext()
 await ctx.addInitScript((s) => window.sessionStorage.setItem('humg-session', JSON.stringify(s)), { accessToken: login.accessToken, user: login.user })
 const page = await ctx.newPage()

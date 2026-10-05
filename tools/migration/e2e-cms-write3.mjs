@@ -18,7 +18,7 @@ const A = { Authorization: `Bearer ${T}`, 'Content-Type': 'application/json' }
 const get = (p) => jfetch(`${API}${p}`, { headers: { Authorization: `Bearer ${T}` } })
 const send = (m, p, b) => jfetch(`${API}${p}`, { method: m, headers: A, body: b ? JSON.stringify(b) : undefined })
 
-const browser = await chromium.launch({ channel: 'msedge', headless: true })
+const browser = await chromium.launch(process.env.CHROME ? { executablePath: process.env.CHROME, headless: true } : { channel: 'msedge', headless: true })
 const ctx = await browser.newContext({ acceptDownloads: true })
 await ctx.addInitScript((s) => window.sessionStorage.setItem('humg-session', JSON.stringify(s)), { accessToken: T, user: login.user })
 const page = await ctx.newPage()
@@ -49,9 +49,11 @@ await step('Soạn bài: định dạng đậm/nghiêng, liên kết, bảng, �
   await page.locator('.rte input[type=file]').setInputFiles({ name: `anh-${stamp}.png`, mimeType: 'image/png', buffer: PNG })
   await page.waitForSelector('.rte .ProseMirror img', { timeout: 15000 })
   await page.getByRole('button', { name: 'Thông tin chung' }).click()
-  await page.locator('.cms-side-card select').first().selectOption('Đã xuất bản')
   await page.locator('.cms-side-actions .humg-btn--primary').click()
-  await page.waitForURL(/\/cms\/bai-viet$/, { timeout: 15000 })
+  await page.waitForURL(/\/cms\/bai-viet\/moi\/\d+$/, { timeout: 15000 })
+  await page.locator('.cms-wfbar button', { hasText: 'Xuất bản' }).first().click()
+  await page.getByRole('button', { name: 'Xác nhận: Xuất bản' }).click()
+  await page.waitForFunction(() => document.querySelector('.cms-wfbar__state')?.innerText.includes('Đã xuất bản'), null, { timeout: 15000 })
   const c = (await get('/Contents?pageSize=100')).body.items.find((x) => x.title === `Bài WYSIWYG ${stamp}`)
   assert.ok(c); postId = c.id; slug = c.slug
   assert.match(c.contentBody, /^<p>/); assert.match(c.contentBody, /<strong>Chữ đậm E2E<\/strong>/); assert.match(c.contentBody, /<table/); assert.match(c.contentBody, /<img[^>]+uploads/)
@@ -91,7 +93,7 @@ await step('Ảnh đại diện: chọn từ Media thư viện → lưu featured
   await page.locator('.cms-modal__item', { hasText: `anh-${stamp}.png` }).click()
   await page.waitForSelector('.cms-thumbpreview img')
   await page.locator('.cms-side-actions .humg-btn--primary').click()
-  await page.waitForURL(/\/cms\/bai-viet$/, { timeout: 15000 })
+  await status()
   const c = (await get(`/Contents/${postId}`)).body
   const m = (await get('/Media?pageSize=100')).body.items.find((x) => x.fileName === `anh-${stamp}.png`)
   assert.equal(c.featuredImageId, m.id)
@@ -99,7 +101,7 @@ await step('Ảnh đại diện: chọn từ Media thư viện → lưu featured
   await page.getByRole('button', { name: 'Hình ảnh & File' }).click()
   await page.getByRole('button', { name: /Gỡ ảnh/ }).click()
   await page.locator('.cms-side-actions .humg-btn--primary').click()
-  await page.waitForURL(/\/cms\/bai-viet$/, { timeout: 15000 })
+  await status()
   assert.equal((await get(`/Contents/${postId}`)).body.featuredImageId, null)
 })
 

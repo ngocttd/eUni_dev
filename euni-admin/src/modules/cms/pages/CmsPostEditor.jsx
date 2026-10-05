@@ -7,15 +7,15 @@ import Icon from "../../../shared/lib/Icon.jsx";
 import { Panel } from "../../../shared/components/ui/page.jsx";
 import { cmsApi } from "../../../lib/api/cmsApi.js";
 import { externalUrl } from "../../../config/apps.js";
-import { POST_STATUS_VALUE, TR_VALUE } from "../../../lib/datasets/loaders.js";
+import { TR_VALUE } from "../../../lib/datasets/loaders.js";
 import { bodyToHtml, toLocalInput, fromLocalInput } from "../../../lib/datasets/format.js";
 import { mediaUrl } from "../../../lib/api/media.js";
 import RichTextEditor from "../RichTextEditor.jsx";
 import MediaPicker from "../MediaPicker.jsx";
 import { useAction, Notice } from "../actions.jsx";
+import { WorkflowBar, HistoryPanel } from "../workflow.jsx";
 import { Head, LangPills, Toggle, slugify } from "../shared.jsx";
 
-const STATUSES = ['Đã xuất bản', 'Bản nháp', 'Chờ duyệt', 'Lưu trữ'];
 const TR_LABEL = { done: 'Đã dịch', in_progress: 'Đang dịch', missing: 'Chưa dịch' };
 const flatCats = list => list.flatMap(c => [{ id: c.id, name: c.name }, ...(c.children ? flatCats(c.children) : [])]);
 
@@ -37,7 +37,7 @@ const enFields = en => ({
 });
 
 export function CmsPostEditor() {
-  const { cmsPosts, cmsCategories, cmsEditorTabs, cmsUser, cmsMedia } = useModuleData('cms');
+  const { cmsPosts, cmsCategories, cmsEditorTabs, cmsUser, cmsMedia, cmsOrgUnits, cmsContext } = useModuleData('cms');
   const reload = useReloadDatasets();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -45,16 +45,19 @@ export function CmsPostEditor() {
   const post = id ? cmsPosts.find(p => String(p.id) === String(id)) : null;
   const raw = post?.raw;
   const editing = !!post;
+  const actions = raw?.allowedActions || [];
+  const readOnly = editing && !actions.includes('edit');
+  const tabs = editing ? [...cmsEditorTabs, 'Lịch sử'] : cmsEditorTabs;
   const cats = useMemo(() => flatCats(cmsCategories), [cmsCategories]);
 
   const [tab, setTab] = useState(cmsEditorTabs[0]);
   const [categoryId, setCategoryId] = useState(raw?.categoryId ?? cats[0]?.id ?? '');
   const [slug, setSlug] = useState(raw?.slug || '');
-  const [status, setStatus] = useState(post?.status || 'Bản nháp');
+  const [ownerUnitCode, setOwnerUnitCode] = useState(raw?.ownerUnitCode || cmsContext.user?.units?.[0] || '');
   const [showHome, setShowHome] = useState(!!raw?.showOnHome);
   const [featured, setFeatured] = useState(!!raw?.isFeatured);
-  const [publishAt, setPublishAt] = useState(toLocalInput(raw?.publishedAt));
-  const [expireAt, setExpireAt] = useState(toLocalInput(raw?.expiredAt));
+  const [publishAt, setPublishAt] = useState(toLocalInput(raw?.publishAt));
+  const [expireAt, setExpireAt] = useState(toLocalInput(raw?.expireAt));
   const [author, setAuthor] = useState(raw?.authorName || cmsUser.name);
   const [source, setSource] = useState(raw?.source || '');
   const [unit, setUnit] = useState(raw?.unit || '');
@@ -78,7 +81,12 @@ export function CmsPostEditor() {
   };
   const effSlug = slug || slugify(fields.vi.title);
 
-  const save = async statusLabel => {
+  /**
+   * Lưu nội dung (không đổi trạng thái — trạng thái đổi qua thanh workflow).
+   * Bài đang xuất bản mà bạn không có quyền xuất bản → server lưu thành "bản sửa đổi chờ duyệt" (202).
+   * then: 'submit' = lưu xong gửi duyệt luôn.
+   */
+  const save = async then => {
     if (!fields.vi.title.trim()) { act.run(async () => { throw new Error('Vui lòng nhập tiêu đề (Tiếng Việt).'); }); return; }
     const en = fields.en;
     const hasEn = enStatus !== 'Chưa dịch' || en.title.trim();
@@ -93,13 +101,19 @@ export function CmsPostEditor() {
     const body = {
       title: vi.title.trim(), slug: effSlug, categoryId: categoryId === '' ? null : Number(categoryId), excerpt: vi.excerpt,
       contentBody: vi.content, metaTitle: vi.seoTitle, metaDescription: vi.seoDesc, metaKeywords: vi.seoKeywords,
-      status: POST_STATUS_VALUE[statusLabel], showOnHome: showHome, isFeatured: featured,
-      publishedAt: fromLocalInput(publishAt), expiredAt: fromLocalInput(expireAt),
+      showOnHome: showHome, isFeatured: featured, ownerUnitCode: ownerUnitCode || undefined,
+      publishAt: fromLocalInput(publishAt), expireAt: fromLocalInput(expireAt),
       authorName: author, source: source || null, unit: unit || null, featuredImageId,
-      tags: tags.split(',').map(t => t.trim()).filter(Boolean), attachments, translations
+      tags: tags.split(',').map(t => t.trim()).filter(Boolean), attachments, translations,
+      ...(editing ? { version: raw.version } : {})
     };
-    const ok = await act.run(() => (editing ? cmsApi.contents.update(post.id, body) : cmsApi.contents.create(body)), editing ? 'Đã cập nhật bài viết' : 'Đã tạo bài viết');
-    if (ok) navigate('/cms/bai-viet');
+    let saved = null;
+    const ok = await act.run(async () => {
+      saved = editing ? await cmsApi.contents.update(post.id, body) : await cmsApi.contents.create(body);
+      if (then === 'submit' && saved?.allowedActions?.includes('submit')) saved = await cmsApi.contents.workflow(saved.id, 'submit');
+      return saved;
+    }, r => r?.message || (then === 'submit' ? 'Đã lưu và gửi duyệt' : editing ? 'Đã lưu bài viết' : 'Đã tạo bản nháp'));
+    if (ok && !editing && saved?.id) navigate(`/cms/bai-viet/moi/${saved.id}`, { replace: true });
   };
 
   /* Tải ảnh lên Media thư viện từ trình soạn thảo → trả URL để chèn vào bài */
@@ -135,8 +149,10 @@ export function CmsPostEditor() {
               <Icon name="download" size={13} /> Sao chép nội dung từ bản Tiếng Việt
             </button>
           </div>}
+        {editing && <div style={{ padding: '12px 16px 0' }}><WorkflowBar api={cmsApi.contents} record={raw} noun="bài viết" /></div>}
+        {readOnly && <p className="cms-banner is-info" style={{ margin: '0 16px 12px' }}><Icon name="eye" size={14} /> Bạn chỉ có quyền xem bài viết này{raw.status === 'pending_review' ? ' (đang chờ duyệt)' : ''}.</p>}
         <div className="ps-tabs">
-          {cmsEditorTabs.map(t => <button key={t} type="button" className={tab === t ? 'is-active' : ''} onClick={() => setTab(t)}>{t}</button>)}
+          {tabs.map(t => <button key={t} type="button" className={tab === t ? 'is-active' : ''} onClick={() => setTab(t)}>{t}</button>)}
         </div>
         <div className="ps-tabbody">
           <div className="cms-editor">
@@ -193,7 +209,13 @@ export function CmsPostEditor() {
                   </div>
                   <button type="button" className="humg-btn humg-btn--ghost humg-btn--sm" onClick={addAttachment}><Icon name="file" size={13} /> Thêm tệp đính kèm</button>
                 </div>}
+              {tab === 'Lịch sử' && editing && <HistoryPanel api={cmsApi.contents} record={raw} canRestore={!readOnly} />}
               {tab === 'Khác' && <div className="cms-form">
+                  <label>Đơn vị sở hữu (quyết định ai được sửa / duyệt theo phân quyền đơn vị)
+                    <select value={ownerUnitCode} onChange={e => setOwnerUnitCode(e.target.value)}>
+                      {cmsOrgUnits.filter(u => u.kind !== 'class').map(u => <option key={u.code} value={u.code}>{'— '.repeat(u.depth)}{u.name}</option>)}
+                    </select>
+                  </label>
                   <div className="cms-form__two">
                     <label>Tác giả hiển thị<input type="text" value={author} onChange={e => setAuthor(e.target.value)} /></label>
                     <label>Nguồn / Trích dẫn<input type="text" value={source} onChange={e => setSource(e.target.value)} placeholder="VD: Phòng Truyền thông" /></label>
@@ -207,13 +229,10 @@ export function CmsPostEditor() {
 
             <aside className="cms-editor__side">
               <div className="cms-side-card">
-                <h4>Xuất bản</h4>
-                <label>Trạng thái
-                  <select value={status} onChange={e => setStatus(e.target.value)}>{STATUSES.map(s => <option key={s}>{s}</option>)}</select>
-                </label>
+                <h4>Hiển thị & lịch đăng</h4>
                 <Toggle checked={showHome} onChange={setShowHome} label="Hiển thị trang chủ" />
                 <Toggle checked={featured} onChange={setFeatured} label="Bài viết nổi bật" />
-                <label>Thời gian xuất bản<input type="datetime-local" value={publishAt} onChange={e => setPublishAt(e.target.value)} /></label>
+                <label>Thời gian đăng (hẹn giờ)<input type="datetime-local" value={publishAt} onChange={e => setPublishAt(e.target.value)} /></label>
                 <label>Thời gian hết hạn<input type="datetime-local" value={expireAt} onChange={e => setExpireAt(e.target.value)} /></label>
               </div>
               <div className="cms-side-card">
@@ -226,9 +245,9 @@ export function CmsPostEditor() {
                 </label>
               </div>
               <div className="cms-side-actions">
-                <button type="button" disabled={act.busy} className="humg-btn humg-btn--ghost humg-btn--block humg-btn--sm" onClick={() => save('Bản nháp')}>Lưu bản nháp</button>
-                <button type="button" className="humg-btn humg-btn--ghost humg-btn--block humg-btn--sm" onClick={preview}><Icon name="eye" size={13} /> Xem trước</button>
-                <button type="button" disabled={act.busy} className="humg-btn humg-btn--primary humg-btn--block" onClick={() => save(status)}>{act.busy ? 'Đang lưu…' : editing ? 'Cập nhật' : status === 'Đã xuất bản' ? 'Đăng bài' : 'Lưu bài viết'}</button>
+                {!readOnly && <button type="button" disabled={act.busy} className="humg-btn humg-btn--primary humg-btn--block" onClick={() => save()}>{act.busy ? 'Đang lưu…' : editing ? (raw.status === 'published' && !actions.includes('unpublish') ? 'Gửi bản sửa đổi' : 'Lưu') : 'Lưu bản nháp'}</button>}
+                {!readOnly && (!editing || actions.includes('submit')) && <button type="button" disabled={act.busy} className="humg-btn humg-btn--ghost humg-btn--block humg-btn--sm" onClick={() => save('submit')}>Lưu & gửi duyệt</button>}
+                <button type="button" className="humg-btn humg-btn--ghost humg-btn--block humg-btn--sm" onClick={preview}><Icon name="eye" size={13} /> Xem trên website</button>
               </div>
             </aside>
           </div>

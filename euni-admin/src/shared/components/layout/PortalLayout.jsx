@@ -84,6 +84,7 @@ export default function PortalLayout({ config, variant = 'portal', children }) {
         <header className="portal-shell__topbar">
           <span className="portal-shell__topbar-title">{brandLabel} · {t(config.role)}</span>
           <div className="portal-shell__topbar-right">
+            {config.topbarExtra}
             <span className="portal-shell__lang">
               {LANGUAGES.map((l) => (
                 <button

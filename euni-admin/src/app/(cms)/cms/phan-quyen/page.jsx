@@ -1,6 +1,6 @@
 'use client'
-import { CmsRoles } from '@/modules/cms/pages/CmsRoles'
+import { CmsGrants } from '@/modules/cms/pages/CmsGrants'
 
 export default function Page() {
-  return <CmsRoles />
+  return <CmsGrants />
 }

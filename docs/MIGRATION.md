@@ -35,9 +35,19 @@ Mã nguồn cũ được sao lưu ở `../euni_legacy_vite_backup.zip` (ngoài t
 giải nén vào `tools/migration/legacy/` rồi `cd tools/migration && npm install && node scaffold.mjs public|admin`
 (công cụ sinh lại toàn bộ `src/` của repo đích — chỉ dùng khi cần so sánh, vì các repo đã được chỉnh tay sau đó).
 
+## Cập nhật theo thiết kế CMS v2 (`docs/design/CMS_DESIGN.md`)
+
+- Multi-tenant (`X-Tenant`, website theo host), đăng nhập qua Identity Server (tài khoản trường + M365), workflow Draft → PendingReview → Published → Archived + hẹn giờ,
+  bản sửa đổi chờ duyệt, revision / thùng rác / audit, phân quyền mức bản ghi (grants), thông báo theo đối tượng + hộp thư My eUni.
+- Bỏ màn hình & API Người dùng / Vai trò của CMS (quản lý trên Identity Server). `e2e-cms-write2.mjs` thay các bước người dùng/vai trò bằng bước phân quyền nội dung.
+- Kiểm thử: `npm --prefix euni-api-mock test` (67), `database/v2/test.sql`, `tools/migration/e2e-v2.mjs` (24 bước), `sso-test.mjs` (3 chế độ),
+  `sync-test.mjs`, `e2e-cms-write*.mjs` (chạy được bằng Chromium: `CHROME=/đường/dẫn/chrome`). Toàn bộ 133 route công khai × 2 tenant trả 200.
+
 ## Việc còn lại / lưu ý
 
-- **SSO M365**: đã nối đủ (cả website và CMS). Cần đảm bảo app Azure `5a7cce06-…` có Redirect URI loại SPA cho từng địa chỉ chạy; chưa thử đăng nhập thật. Role (cms-admin/cms-editor/leader/staff/parent/student) lấy từ app role/nhóm trong token — cần đối chiếu với cấu hình thực tế (`ROLE_RULES` trong `src/lib/sso/oidc.js`).
+- **Identity Server**: FE đã sẵn sàng (`NEXT_PUBLIC_SSO_PROVIDER=ids`, discovery). Cần IdS đăng ký client public + PKCE, Redirect URI `{origin}/dang-nhap/sso/callback`,
+  cấp claim `role`, `tenant`, `unit`, `staff_code`, `student_code` và API scope `cms-api`; xác nhận tên scheme M365 để đặt `NEXT_PUBLIC_SSO_M365_VALUE` (mặc định `idp:Microsoft`).
+  Chưa thử đăng nhập bằng tài khoản thật. Chế độ Entra trực tiếp (app `5a7cce06-…`) vẫn giữ để chuyển tiếp.
   Backend phải xác thực JWT của Entra ID (hoặc đặt `NEXT_PUBLIC_SSO_API_SCOPE` cho access token riêng); `euni-api-mock` chỉ nhận token của mock nên đăng nhập SSO khi chạy với mock thì các lời gọi API bị 401.
 - **Màn hình CMS**: đọc/ghi đầy đủ qua API, gồm trình soạn WYSIWYG, chọn ảnh từ Media, sao lưu/phục hồi, email thử. Mock lưu file trong thư mục `uploads/`; backend thật cần kho lưu trữ file và dịch vụ gửi email/sao lưu tương ứng.
 - **Nội dung đa ngôn ngữ**: bản dịch EN đã hoàn tất của bài viết/tin nổi bật hiển thị khi chọn EN; các nội dung khác (sự kiện, trang…) hiện chỉ tiếng Việt.

@@ -1,4 +1,4 @@
-import { loadDatasets } from '@/lib/datasets/loaders'
+import { loadDatasets } from '@/lib/datasets/server'
 import { DatasetProvider } from '@/lib/datasets/useModuleData'
 import { WorkCalendarPage } from '@/modules/public/utilities/pages/WorkCalendarPage'
 

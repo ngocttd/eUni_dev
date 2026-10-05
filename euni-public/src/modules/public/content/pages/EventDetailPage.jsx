@@ -1,4 +1,5 @@
 'use client'
+import NotFound from '../../../../views/NotFound.jsx';
 import { useModuleData } from '@/lib/datasets/useModuleData'
 import { useParams, Link } from '../../../../lib/router.jsx';
 
@@ -10,6 +11,7 @@ export function EventDetailPage() {
     slug
   } = useParams();
   const e = getEvent(slug) || events[0];
+  if (!e) return <NotFound />; // trang (tenant) chưa có nội dung loại này
   return <PageShell eyebrow="Sự kiện" title={e.title} crumbs={[{
     label: 'Sự kiện',
     to: '/su-kien'

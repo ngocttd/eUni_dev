@@ -1,6 +1,7 @@
 /**
- * Dataset "cms" cho CMS admin: gọi các endpoint quản trị của cms-api rồi đổi về dạng dữ liệu
- * mà các màn hình CMS đang dùng (cmsPosts, cmsUsers, cmsActivity…).
+ * Dataset "cms" cho CMS admin: gọi các endpoint quản trị của cms-api (theo tenant đang chọn) rồi đổi về dạng dữ liệu
+ * mà các màn hình CMS đang dùng (cmsPosts, cmsAnnouncements, cmsGrants, cmsActivity…).
+ * Người dùng / vai trò KHÔNG còn ở đây — quản lý trên Identity Server; CMS chỉ phân quyền mức bản ghi (grants).
  * Hằng số giao diện (tab, danh sách lựa chọn, giá trị mặc định form) nằm ở config/cmsUi.js — không lấy từ API.
  */
 import api, { SERVICE, asPage } from '../api/client.js'
@@ -14,8 +15,13 @@ const safe = (p, fallback) => p.catch((e) => (e.status === 403 || e.status === 4
 const empty = { items: [], totalItems: 0 }
 const page = (p) => p.then(asPage)
 
-export const POST_STATUS_LABEL = { 0: 'Bản nháp', 1: 'Chờ duyệt', 2: 'Đã xuất bản', 3: 'Lưu trữ' }
-export const POST_STATUS_VALUE = { 'Bản nháp': 0, 'Chờ duyệt': 1, 'Đã xuất bản': 2, 'Lưu trữ': 3 }
+/** Trạng thái workflow (docs/design/CMS_DESIGN.md §7). "Hẹn giờ" = published + publishAt trong tương lai. */
+export const STATUS_LABEL = { draft: 'Bản nháp', pending_review: 'Chờ duyệt', published: 'Đã xuất bản', archived: 'Lưu trữ' }
+export const statusLabel = (r) => (r.status === 'published' && r.isScheduled ? 'Hẹn giờ' : r.status === 'published' && r.isExpired ? 'Hết hạn' : STATUS_LABEL[r.status] || r.status)
+export const ACTION_LABEL_WF = {
+  edit: 'Sửa', submit: 'Gửi duyệt', approve: 'Duyệt & xuất bản', reject: 'Trả lại', publish: 'Xuất bản', unpublish: 'Gỡ xuống', archive: 'Lưu trữ',
+  'approve-revision': 'Duyệt bản sửa đổi', 'reject-revision': 'Từ chối bản sửa đổi', delete: 'Xóa', restore: 'Khôi phục',
+}
 const KIND_LABEL = { image: 'Hình ảnh', document: 'Tài liệu', video: 'Video', audio: 'Âm thanh', other: 'Khác' }
 const TR_LABEL = { done: 'Đã dịch', in_progress: 'Đang dịch', missing: 'Chưa dịch' }
 export const TR_VALUE = { 'Đã dịch': 'done', 'Đang dịch': 'in_progress', 'Chưa dịch': 'missing' }
@@ -26,20 +32,27 @@ const ACTION_LABEL = {
   login: 'Đăng nhập', 'post.publish': 'Đăng bài viết', 'post.create': 'Tạo bài viết', 'post.update': 'Cập nhật bài viết', 'post.delete': 'Xóa bài viết',
   'media.upload': 'Tải lên file', 'media.delete': 'Xóa file', 'user.delete': 'Xóa người dùng', 'user.create': 'Thêm người dùng', 'user.update': 'Cập nhật người dùng',
   'settings.update': 'Đổi cấu hình', 'backup.create': 'Sao lưu',
+  'news.create': 'Tạo bài viết', 'news.update': 'Cập nhật bài viết', 'news.delete': 'Xóa bài viết', 'news.restore': 'Khôi phục bài viết', 'news.submit': 'Gửi duyệt bài viết',
+  'news.approve': 'Duyệt bài viết', 'news.reject': 'Trả lại bài viết', 'news.publish': 'Xuất bản bài viết', 'news.unpublish': 'Gỡ bài viết', 'news.archive': 'Lưu trữ bài viết',
+  'news.propose': 'Đề xuất sửa bài viết', 'news.approve-revision': 'Duyệt bản sửa đổi', 'news.reject-revision': 'Từ chối bản sửa đổi',
+  'announcement.create': 'Tạo thông báo', 'announcement.update': 'Cập nhật thông báo', 'announcement.submit': 'Gửi duyệt thông báo', 'announcement.approve': 'Duyệt thông báo',
+  'announcement.publish': 'Phát hành thông báo', 'announcement.archive': 'Thu hồi / lưu trữ thông báo', 'announcement.delete': 'Xóa thông báo', 'announcement.reject': 'Trả lại thông báo',
+  'grant.create': 'Cấp quyền', 'grant.update': 'Sửa quyền', 'grant.delete': 'Thu hồi quyền',
 }
 const dm = (iso) => { const d = fmtDate(iso); return d ? d.slice(0, 5) : '' }
 
 export async function loadCms() {
-  const [dashApi, contents, cats, media, pages, menuItems, users, roles, matrix, settings, logs, backups, banners, langs] = await Promise.all([
+  const [ctx, dashApi, contents, cats, media, pages, menuItems, anns, grants, orgUnits, settings, logs, backups, banners, langs] = await Promise.all([
+    cms.get('/api/Me/context'),
     safe(cms.get('/api/Dashboard'), null),
     page(cms.get('/api/Contents', { query: big })),
     page(cms.get('/api/Categories', { query: big })),
     safe(page(cms.get('/api/Media', { query: big })), empty),
     safe(page(cms.get('/api/Pages', { query: big })), empty),
     safe(page(cms.get('/api/MenuItems', { query: big })), empty),
-    safe(page(cms.get('/api/Users', { query: big })), empty),
-    safe(cms.get('/api/Roles'), []),
-    safe(cms.get('/api/Roles/permission-matrix'), { roles: [], rows: [] }),
+    safe(page(cms.get('/api/Announcements', { query: big })), empty),
+    safe(page(cms.get('/api/Grants', { query: big })), null),
+    safe(cms.get('/api/OrgUnits'), []),
     safe(cms.get('/api/Settings'), {}),
     safe(page(cms.get('/api/ActivityLogs', { query: { pageSize: 200 } })), empty),
     safe(page(cms.get('/api/Backups', { query: big })), empty),
@@ -53,21 +66,22 @@ export async function loadCms() {
     const total = contents.items.length || 1
     const part = (label, value) => ({ label, value, pct: Math.round((value / total) * 1000) / 10 })
     return {
-      stats: { posts: contents.totalItems, pages: pages.totalItems, categories: cats.totalItems, users: users.totalItems },
-      status: { total: contents.items.length, parts: [part('published', by(2)), part('draft', by(0)), part('pending', by(1)), part('archived', by(3))] },
+      stats: { posts: contents.totalItems, pages: pages.totalItems, categories: cats.totalItems, announcements: anns.totalItems },
+      status: { total: contents.items.length, parts: [part('published', by('published')), part('draft', by('draft')), part('pending_review', by('pending_review')), part('archived', by('archived'))] },
+      awaitingReview: [],
       latestPosts: [...contents.items].sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt))).slice(0, 3),
       upcomingEvents: [], latestMedia: media.items.slice(0, 3), onlineUsers: 0, trend: [],
     }
   }
   const dash = dashApi || dashFallback()
   const catName = new Map(cats.items.map((c) => [c.id, c.name]))
-  const roleName = new Map(roles.map((r) => [r.code, r.name]))
   const postCount = new Map()
   contents.items.forEach((c) => postCount.set(c.categoryId, (postCount.get(c.categoryId) || 0) + 1))
 
   const cmsPosts = contents.items.map((c) => ({
     id: c.id, title: c.title, category: c.categoryName || catName.get(c.categoryId) || '', author: c.authorName || '',
-    status: POST_STATUS_LABEL[c.status] || '', date: fmtDate(c.createdAt), raw: c,
+    status: statusLabel(c), statusCode: c.status, date: fmtDate(c.updatedAt || c.createdAt), unit: c.ownerUnitName || c.ownerUnitCode || '',
+    actions: c.allowedActions || [], hasPendingRevision: !!c.pendingRevision, raw: c,
   }))
 
   const catNode = (c) => ({ id: c.id, name: c.name, posts: postCount.get(c.id) || 0, status: c.isActive ? 'Hiển thị' : 'Ẩn', slug: c.slug, parentId: c.parentId ?? null, sortOrder: c.sortOrder ?? 1, description: c.description || '' })
@@ -85,9 +99,10 @@ export async function loadCms() {
 
   const stat = (value, label) => ({ value: String(value ?? 0), label, delta: '' })
   const cmsDashboard = {
-    stats: [stat(dash.stats.posts, 'Bài viết'), stat(dash.stats.pages, 'Trang'), stat(dash.stats.categories, 'Danh mục'), stat(dash.stats.users, 'Người dùng')],
+    stats: [stat(dash.stats.posts, 'Bài viết'), stat(dash.stats.announcements ?? anns.totalItems, 'Thông báo'), stat(dash.stats.pages, 'Trang'), stat(dash.stats.categories, 'Danh mục')],
     trend: dash.trend || [],
-    status: { total: dash.status.total, parts: dash.status.parts.map((p) => ({ ...p, label: { published: 'Đã xuất bản', draft: 'Bản nháp', pending: 'Chờ duyệt', archived: 'Khác' }[p.label] || p.label })) },
+    status: { total: dash.status.total, parts: dash.status.parts.map((p) => ({ ...p, label: STATUS_LABEL[p.label] || p.label })) },
+    awaitingReview: (dash.awaitingReview || []).map((x) => ({ ...x, to: `/cms/${x.type === 'announcement' ? 'thong-bao' : 'bai-viet'}/moi/${x.id}`, meta: `${x.type === 'announcement' ? 'Thông báo' : 'Bài viết'} · ${x.hasPendingRevision ? 'bản sửa đổi chờ duyệt' : STATUS_LABEL[x.status]}` })),
     latestPosts: dash.latestPosts.map((c) => ({ title: c.title, meta: `${c.categoryName || ''} · ${fmtDate(c.createdAt)}` })),
     upcomingEvents: dash.upcomingEvents.map((e) => ({ title: e.title, meta: fmtDate(e.startsAt) })),
     latestMedia: dash.latestMedia.map((m) => ({ title: m.fileName, meta: `${KIND_LABEL[m.kind] || ''} · ${fmtDate(m.createdAt)}` })),
@@ -96,11 +111,24 @@ export async function loadCms() {
 
   const session = tokenService.getSession()?.user
   const lang = settings.language || {}
-  const roleNames = (matrix.roles || []).map((code) => roleName.get(code) || code)
+  const unitName = new Map(orgUnits.map((u) => [u.code, u.name]))
 
   return {
     ...ui,
-    cmsUser: { name: session?.name || '', role: roleName.get(session?.roleCode) || session?.roleCode || '' },
+    cmsUser: { name: session?.name || ctx.user?.name || '', role: session?.roleLabel || (ctx.user?.roles || []).filter((r) => r.startsWith('cms.')).join(', ') },
+    cmsContext: ctx,
+    cmsCan: ctx.can || {},
+    cmsTenants: ctx.tenants || [],
+    cmsTenant: ctx.currentTenant,
+    cmsOrgUnits: orgUnits,
+    cmsUnitName: (code) => unitName.get(code) || code,
+    cmsAnnouncements: anns.items.map((a) => ({
+      id: a.id, title: a.title, unit: a.ownerUnitName || a.ownerUnitCode, category: a.categoryLabel || a.category, priority: a.priority, priorityLabel: a.priorityLabel,
+      status: statusLabel(a), statusCode: a.status, targets: a.targetSummary || '', stats: a.stats || { recipients: 0, read: 0, acked: 0 },
+      date: fmtDateTime(a.publishAt || a.updatedAt), actions: a.allowedActions || [], hasPendingRevision: !!a.pendingRevision, raw: a,
+    })),
+    cmsAnnouncementTotal: anns.totalItems,
+    cmsGrants: grants ? grants.items : null,
     cmsDashboard,
     cmsPostCategories: ['Tất cả danh mục', ...cats.items.map((c) => c.name)],
     cmsPosts,
@@ -110,14 +138,10 @@ export async function loadCms() {
     cmsMediaTotal: media.totalItems,
     cmsPageTree,
     cmsMenus: menuItems.items.sort((a, b) => a.sortOrder - b.sortOrder).map((m) => ({ id: m.id, label: m.label, url: m.url, type: MENU_TYPE[m.type] || 'Liên kết', typeValue: m.type, order: m.sortOrder, groupCode: m.groupCode, translations: m.translations || {} })),
-    cmsUsers: users.items.map((u) => ({ id: u.id, name: u.fullName, email: u.email, role: roleName.get(u.roleCode) || u.roleCode, roleCode: u.roleCode, status: u.status === 1 ? 'Hoạt động' : 'Không hoạt động', last: fmtDateTime(u.lastLoginAt) })),
-    cmsUserTotal: users.totalItems,
-    cmsRoles: roles.map((r) => ({ id: r.id, code: r.code, role: r.name, users: r.userCount, desc: r.description || '', isSystem: !!r.isSystem })),
-    cmsPermissionMatrix: { roles: roleNames, roleCodes: matrix.roles || [], rows: matrix.rows || [] },
     cmsSettings: { general: settings.general || {}, seo: settings.seo || {}, email: settings.email || {} },
     cmsSettingsAll: settings,
     cmsLogUsers: ['Tất cả người dùng', ...new Set(logs.items.map((l) => l.userName).filter(Boolean))],
-    cmsActivity: logs.items.map((l) => ({ time: fmtDateTime(l.createdAt), user: l.userName, action: ACTION_LABEL[l.action] || l.action, target: l.targetLabel, ip: l.ipAddress })),
+    cmsActivity: logs.items.map((l) => ({ time: fmtDateTime(l.createdAt), user: l.userName, action: ACTION_LABEL[l.action] || l.action, target: l.targetLabel, ip: l.ipAddress, changes: l.changes || null })),
     cmsLogTotal: logs.totalItems,
     cmsBackups: backups.items.map((b) => ({ id: b.id, hasData: !!b.hasData, time: fmtDateTime(b.createdAt), size: fmtBytes(b.sizeBytes), by: b.trigger === 'cron' ? 'Hệ thống (Cron)' : b.createdByName, status: b.status === 'success' ? 'Thành công' : 'Lỗi' })),
     cmsBanners: banners.items.map((b) => ({ id: b.id, name: b.title, position: BANNER_POS[b.position] || b.position, status: b.isVisible ? 'Hiển thị' : 'Ẩn', order: b.sortOrder, period: `${b.startsOn ? dm(b.startsOn) : ''} – ${b.endsOn ? fmtDate(b.endsOn) : ''}` })),

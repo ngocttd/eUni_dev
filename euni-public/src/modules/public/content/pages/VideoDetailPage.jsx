@@ -1,4 +1,5 @@
 'use client'
+import NotFound from '../../../../views/NotFound.jsx';
 import { useModuleData } from '@/lib/datasets/useModuleData'
 import { useParams } from '../../../../lib/router.jsx';
 
@@ -10,6 +11,7 @@ export function VideoDetailPage() {
     slug
   } = useParams();
   const v = getVideo(slug) || videos[0];
+  if (!v) return <NotFound />; // trang (tenant) chưa có nội dung loại này
   return <PageShell eyebrow="Media · Video" title={v.title} crumbs={[{
     label: 'Media HUMG',
     to: '/media'

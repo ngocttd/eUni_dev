@@ -1,4 +1,5 @@
 'use client'
+import NotFound from '../../../../views/NotFound.jsx';
 import { useModuleData } from '@/lib/datasets/useModuleData'
 import { useParams } from '../../../../lib/router.jsx';
 
@@ -10,6 +11,7 @@ export function PodcastDetailPage() {
     slug
   } = useParams();
   const p = getPodcast(slug) || podcasts[0];
+  if (!p) return <NotFound />; // trang (tenant) chưa có nội dung loại này
   return <PageShell eyebrow="Media · Podcast" title={p.title} crumbs={[{
     label: 'Media HUMG',
     to: '/media'

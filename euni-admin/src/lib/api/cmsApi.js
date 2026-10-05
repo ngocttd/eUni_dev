@@ -4,8 +4,10 @@
  *
  * Ví dụ trong màn hình:
  *   const reload = useReloadDatasets()
- *   await cmsApi.contents.update(post.id, { status: POST_STATUS_VALUE['Đã xuất bản'] })
+ *   await cmsApi.contents.update(post.id, { title, version: post.version })      // 409 nếu người khác đã sửa
+ *   await cmsApi.contents.workflow(post.id, 'submit')                             // draft → pending_review
  *   await reload()
+ * Mọi lời gọi gửi X-Tenant = tenant đang chọn (shared/services/tenantService.js).
  */
 import api, { SERVICE } from './client.js'
 import { env } from '../../config/env.js'
@@ -22,15 +24,47 @@ const resource = (name) => ({
   remove: (id) => cms.delete(`/api/${name}/${id}`),
 })
 
+/**
+ * Nội dung có workflow (docs/design/CMS_DESIGN.md §7–8): status draft | pending_review | published | archived,
+ * đổi trạng thái qua workflow(id, action) — submit · reject · approve · publish · unpublish · archive · approve-revision · reject-revision.
+ */
+const lifecycle = (name) => ({
+  ...resource(name),
+  trash: (query) => cms.get(`/api/${name}/trash`, { query }),
+  restore: (id) => cms.post(`/api/${name}/${id}/restore`),
+  purge: (id) => cms.delete(`/api/${name}/${id}/purge`),
+  workflow: (id, action, body = {}) => cms.post(`/api/${name}/${id}/workflow/${action}`, body),
+  revisions: (id) => cms.get(`/api/${name}/${id}/revisions`),
+  revision: (id, version) => cms.get(`/api/${name}/${id}/revisions/${version}`),
+  restoreRevision: (id, version) => cms.post(`/api/${name}/${id}/revisions/${version}/restore`),
+  history: (id) => cms.get(`/api/${name}/${id}/history`),
+})
+
 export const cmsApi = {
-  /* Bài viết (Contents): status 0 Nháp · 1 Chờ duyệt · 2 Xuất bản · 3 Lưu trữ; contentBody = chuỗi JSON các khối */
-  contents: {
-    ...resource('Contents'),
-    publish: (id) => cms.put(`/api/Contents/${id}`, { status: 2 }),
-    unpublish: (id) => cms.put(`/api/Contents/${id}`, { status: 0 }),
+  /** Ngữ cảnh: tenants được quản trị, quyền chức năng, đơn vị của tôi */
+  me: { context: () => cms.get('/api/Me/context') },
+
+  /* Tin tức (Contents): contentBody = HTML; bản dịch ở translations.en */
+  contents: lifecycle('Contents'),
+  /* Thông báo theo đối tượng: targets[] = [{ audience?, unitCode?, userSub? | userKey?, isExclude? }] */
+  announcements: {
+    ...lifecycle('Announcements'),
+    stats: (id) => cms.get(`/api/Announcements/${id}/stats`),
+    options: () => cms.get('/api/Announcements/meta/options'),
   },
+  /* Phân quyền mức bản ghi — user/role quản lý ở Identity Server */
+  grants: {
+    ...resource('Grants'),
+    effective: (sub) => cms.get(`/api/Grants/effective/${encodeURIComponent(sub)}`),
+  },
+  directory: {
+    users: (keyword, query = {}) => cms.get('/api/Directory/users', { query: { keyword, ...query } }),
+    roles: () => cms.get('/api/Directory/roles'),
+  },
+  orgUnits: { list: () => cms.get('/api/OrgUnits') },
+  audit: { list: (query) => cms.get('/api/AuditLogs', { query }) },
+
   categories: resource('Categories'),
-  users: resource('Users'),
   events: resource('Events'),
   albums: resource('Albums'),
   videos: resource('Videos'),
@@ -44,15 +78,6 @@ export const cmsApi = {
   strengths: resource('Strengths'),
   partners: resource('Partners'),
   siteStats: resource('SiteStats'),
-
-  roles: {
-    list: () => cms.get('/api/Roles'),
-    create: (body) => cms.post('/api/Roles', body),
-    update: (id, body) => cms.put(`/api/Roles/${id}`, body),
-    remove: (id) => cms.delete(`/api/Roles/${id}`),
-    permissionMatrix: () => cms.get('/api/Roles/permission-matrix'),
-    savePermissionMatrix: (matrix) => cms.put('/api/Roles/permission-matrix', matrix),
-  },
 
   media: {
     list: (query) => cms.get('/api/Media', { query }),

@@ -9,7 +9,7 @@ export function CmsDashboard() {
   const { cmsDashboard, cmsUser } = useModuleData('cms');
   const d = cmsDashboard;
   return <>
-      <Head title={`Xin chào, ${cmsUser.name}!`} sub="Đây là tổng quan hoạt động của hệ thống CMS HUMG." right={<span className="cms-clock"><Icon name="clock" size={14} /> Thứ Sáu, 16/05/2025 · 10:30</span>} />
+      <Head title={`Xin chào, ${cmsUser.name}!`} sub="Đây là tổng quan hoạt động của hệ thống CMS HUMG." right={<span className="cms-clock"><Icon name="clock" size={14} /> {new Date().toLocaleString('vi-VN', { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>} />
 
       <div className="cms-stats">
         {d.stats.map(s => <div key={s.label} className="cms-stat">
@@ -34,8 +34,9 @@ export function CmsDashboard() {
         <Panel title="Media mới" icon="image" action={<Link to="/cms/media" className="humg-link-more">Xem thư viện <Icon name="external" size={12} /></Link>}>
           <ul className="cms-mini">{d.latestMedia.map(p => <li key={p.title}><p>{p.title}</p><span>{p.meta}</span></li>)}</ul>
         </Panel>
-        <Panel title="Người dùng online" icon="users">
-          <div className="cms-online"><strong>{d.onlineUsers}</strong><span>người đang truy cập CMS</span></div>
+        <Panel title="Chờ tôi duyệt" icon="clock">
+          {d.awaitingReview.length ? <ul className="cms-mini">{d.awaitingReview.map(p => <li key={`${p.type}${p.id}`}><p><Link to={p.to}>{p.title}</Link></p><span>{p.meta}</span></li>)}</ul>
+            : <p className="ps-muted" style={{ margin: 0 }}>Không có nội dung nào đang chờ bạn duyệt.</p>}
         </Panel>
       </div>
     </>;

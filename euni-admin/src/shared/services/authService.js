@@ -5,10 +5,10 @@ import { startLogin, refreshSession as refreshSso, logoutUrl } from '../../lib/s
 const auth = api(SERVICE.auth)
 
 /**
- * Hai cách đăng nhập:
- *  1. SSO Microsoft 365 qua Keycloak (OIDC + PKCE) — loginWithSso(); phiên có `sso: true`, token là token của Keycloak.
- *     Backend/gateway phải kiểm tra JWT của Keycloak (JWKS của realm).
- *  2. auth-api của gateway (mock/dev & tài khoản nội bộ):
+ * Đăng nhập (docs/design/CMS_DESIGN.md §3):
+ *  1. Identity Server (OIDC + PKCE) — loginWithSso({ method: 'school' | 'm365' }); phiên có `sso: true`, token do IdS cấp.
+ *     Tài khoản trường và Microsoft 365 là cùng một người dùng (`sub`) trên IdS. Backend kiểm tra JWT bằng JWKS của IdS.
+ *  2. auth-api của euni-api-mock (chỉ khi dev, NEXT_PUBLIC_AUTH_MODE=mock — mock đóng vai IdS):
  *       POST /api/auth/login   { username, password } | { role }
  *       GET  /api/auth/me · POST /api/auth/refresh · POST /api/auth/logout
  */
@@ -21,7 +21,7 @@ export const authService = {
   async loginAs(role) {
     return this.login({ role })
   },
-  /** Chuyển hướng sang Keycloak → Microsoft 365. `returnTo`: trang quay lại sau khi đăng nhập. */
+  /** Chuyển hướng sang Identity Server. `method`: 'school' | 'm365'; `returnTo`: trang quay lại sau khi đăng nhập. */
   async loginWithSso(opts) {
     return startLogin(opts)
   },
@@ -63,7 +63,7 @@ export const authService = {
   async logout() {
     const session = tokenService.getSession()
     tokenService.clear()
-    if (session?.sso) { window.location.assign(logoutUrl(session)); return }  // đăng xuất tập trung, Keycloak đưa về trang chủ
+    if (session?.sso) { window.location.assign(logoutUrl(session)); return }  // đăng xuất tập trung, IdS đưa về trang chủ
     try { await auth.post('/api/auth/logout') } catch { /* bỏ qua */ }
   },
 }

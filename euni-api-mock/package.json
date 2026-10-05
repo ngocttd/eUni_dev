@@ -8,10 +8,13 @@
     "dev": "node --watch src/server.js",
     "start": "node src/server.js",
     "reset": "node scripts/reset.mjs",
+    "test": "node scripts/smoke.mjs",
     "contract": "node scripts/gen-contract.mjs",
     "export:mock": "node scripts/export-mock-data.mjs",
     "db:migrate": "node database/migrate.mjs",
-    "db:fresh": "node database/migrate.mjs --fresh --seed"
+    "db:fresh": "node database/migrate.mjs --fresh --seed",
+    "db:v2": "psql -v ON_ERROR_STOP=1 -f database/v2/schema.sql",
+    "db:v2:test": "psql -v ON_ERROR_STOP=1 -f database/v2/schema.sql -f database/v2/test.sql"
   },
   "dependencies": {
     "cors": "^2.8.5",

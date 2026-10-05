@@ -7,16 +7,21 @@ export function useAction() {
   const reload = useReloadDatasets()
   const [state, setState] = useState({ busy: false, error: '', notice: '' })
 
-  /** run(fn, 'Đã lưu') → true nếu thành công. Tự reload dữ liệu CMS khi thành công. */
+  /**
+   * run(fn, 'Đã lưu') → true nếu thành công. Tự reload dữ liệu CMS khi thành công.
+   * okMessage có thể là hàm nhận kết quả của fn (vd. thông báo "đã gửi bản sửa đổi chờ duyệt" khi API trả message).
+   */
   const run = useCallback(async (fn, okMessage = 'Đã lưu') => {
     setState({ busy: true, error: '', notice: '' })
     try {
-      await fn()
+      const result = await fn()
       await reload()
-      setState({ busy: false, error: '', notice: `${okMessage} — website công khai cập nhật ngay.` })
+      const msg = typeof okMessage === 'function' ? okMessage(result) : result?.message || `${okMessage} — website công khai cập nhật theo quyền và lịch đăng.`
+      setState({ busy: false, error: '', notice: msg })
       return true
     } catch (e) {
-      setState({ busy: false, error: e?.message || 'Thao tác không thành công.', notice: '' })
+      const conflict = e?.status === 409 && e?.data?.currentVersion
+      setState({ busy: false, error: (e?.message || 'Thao tác không thành công.') + (conflict ? ' Tải lại trang để xem bản mới nhất rồi sửa lại.' : ''), notice: '' })
       return false
     }
   }, [reload])

@@ -1,5 +1,5 @@
-// E2E LƯU / XÓA trên các màn hình CMS còn lại (Bài viết, Danh mục, Media, Người dùng, Vai trò & Phân quyền,
-// Trang & Menu, Cấu hình, Sao lưu) bằng Edge thật.   node e2e-cms-write2.mjs
+// E2E LƯU / XÓA trên các màn hình CMS còn lại (Bài viết + workflow, Danh mục, Media, Phân quyền nội dung,
+// Trang & Menu, Cấu hình, Sao lưu) bằng trình duyệt thật.   node e2e-cms-write2.mjs   (CHROME=/đường/dẫn/chrome để dùng Chromium thay Edge)
 import { chromium } from 'playwright-core'
 import assert from 'node:assert/strict'
 
@@ -9,13 +9,14 @@ const PUBLIC = 'http://localhost:3002'
 const stamp = Date.now().toString(36)
 const post = async (u, b, t) => (await fetch(u, { method: 'POST', headers: { 'Content-Type': 'application/json', ...(t ? { Authorization: `Bearer ${t}` } : {}) }, body: JSON.stringify(b) })).json()
 const get = async (p, t) => { const r = await fetch(`${API}${p}`, { headers: t ? { Authorization: `Bearer ${t}` } : {} }); return { status: r.status, body: await r.json().catch(() => null) } }
+const wf = (label) => page.locator('.cms-wfbar button', { hasText: label }).first()
 
 await post(`${API}/_dev/reset`)
 const login = (u) => post('http://127.0.0.1:3000/auth-api/api/auth/login', { username: u, password: 'Humg@2025' })
 const admin = await login('tvanminh')
 const T = admin.accessToken
 
-const browser = await chromium.launch({ channel: 'msedge', headless: true })
+const browser = await chromium.launch(process.env.CHROME ? { executablePath: process.env.CHROME, headless: true } : { channel: 'msedge', headless: true })
 const ctx = await browser.newContext()
 await ctx.addInitScript((s) => window.sessionStorage.setItem('humg-session', JSON.stringify(s)), { accessToken: T, user: admin.user })
 const page = await ctx.newPage()
@@ -34,7 +35,7 @@ const accept = () => page.once('dialog', (d) => d.accept())
 
 /* ================= BÀI VIẾT ================= */
 let postId, postSlug
-await step('Bài viết: tạo mới (xuất bản) bằng trình soạn → public hiện, có tiêu đề mục + đoạn văn + danh sách', async () => {
+await step('Bài viết: tạo bản nháp bằng trình soạn → Xuất bản (workflow) → public hiện, có tiêu đề mục + đoạn văn + danh sách', async () => {
   await open('/cms/bai-viet/moi')
   await fill('Tiêu đề (VI)', `Bài E2E ${stamp}`)
   await fill('Tóm tắt (VI)', 'Tóm tắt bài E2E')
@@ -54,13 +55,15 @@ await step('Bài viết: tạo mới (xuất bản) bằng trình soạn → pub
   await page.getByRole('button', { name: 'Trích dẫn' }).click()
   await page.keyboard.type('Trích dẫn E2E')
   await page.getByRole('button', { name: 'Thông tin chung' }).click()
-  await page.locator('.cms-side-card select').first().selectOption('Đã xuất bản')
   await page.locator('.cms-side-actions .humg-btn--primary').click()
-  await page.waitForURL(/\/cms\/bai-viet$/, { timeout: 15000 })
+  await page.waitForURL(/\/cms\/bai-viet\/moi\/\d+$/, { timeout: 15000 })
+  await wf('Xuất bản').click()
+  await page.getByRole('button', { name: 'Xác nhận: Xuất bản' }).click()
+  await page.waitForFunction(() => document.querySelector('.cms-wfbar__state')?.innerText.includes('Đã xuất bản'), null, { timeout: 15000 })
   const list = (await get('/Contents?pageSize=100', T)).body.items
   const c = list.find((x) => x.title === `Bài E2E ${stamp}`)
   assert.ok(c, 'bài chưa có trong API'); postId = c.id; postSlug = c.slug
-  assert.equal(c.status, 2)
+  assert.equal(c.status, 'published')
   const html = await pub(`/tin-tuc/${postSlug}`)
   assert.match(html, /Đoạn mở đầu E2E/); assert.match(html, /Mục một/); assert.match(html, /ý B/); assert.match(html, /Trích dẫn E2E/)
   assert.match(await pub('/tin-tuc'), new RegExp(`Bài E2E ${stamp}`))
@@ -76,9 +79,9 @@ await step('Bài viết: sửa tiêu đề + bản dịch EN + SEO + thẻ → l
   await page.locator('.cms-langtabs button', { hasText: 'English' }).click()
   await page.getByRole('button', { name: 'Thông tin chung' }).click()
   await page.locator('.cms-editor__main .cms-form label', { hasText: 'Tiêu đề (EN)' }).locator('input').fill(`E2E post ${stamp}`)
-  await page.locator('.cms-side-card select').nth(1).selectOption('Đã dịch')
+  await page.locator('.cms-side-card label', { hasText: 'Tiếng Anh' }).locator('select').selectOption('Đã dịch')
   await page.locator('.cms-side-actions .humg-btn--primary').click()
-  await page.waitForURL(/\/cms\/bai-viet$/, { timeout: 15000 })
+  await status()
   const c = (await get(`/Contents/${postId}`, T)).body
   assert.equal(c.title, `Bài E2E ${stamp} (đã sửa)`); assert.equal(c.metaTitle, 'SEO E2E'); assert.deepEqual(c.tags, ['alpha', 'beta'])
   assert.equal(c.translations.en.title, `E2E post ${stamp}`); assert.equal(c.translations.en.status, 'done')
@@ -86,17 +89,18 @@ await step('Bài viết: sửa tiêu đề + bản dịch EN + SEO + thẻ → l
   assert.match(await pub(`/tin-tuc/${postSlug}`), /alpha/)
 })
 
-await step('Bài viết: "Lưu bản nháp" → biến mất khỏi public; xóa ở danh sách → mất khỏi API', async () => {
+await step('Bài viết: "Gỡ xuống" → biến mất khỏi public; xóa ở danh sách → vào thùng rác', async () => {
   await open(`/cms/bai-viet/moi/${postId}`)
-  await page.locator('.cms-side-actions .humg-btn--ghost').first().click()
-  await page.waitForURL(/\/cms\/bai-viet$/, { timeout: 15000 })
+  await wf('Gỡ xuống').click()
+  await page.waitForFunction(() => document.querySelector('.cms-wfbar__state')?.innerText.includes('Bản nháp'), null, { timeout: 15000 })
   assert.doesNotMatch(await pub('/tin-tuc'), new RegExp(`Bài E2E ${stamp}`))
-  await page.waitForSelector('tbody tr')
+  await open('/cms/bai-viet', 'tbody tr')
   await page.locator('.ui-filterbar input').first().fill(`Bài E2E ${stamp}`)
   accept()
   await page.locator('tbody tr', { hasText: `Bài E2E ${stamp}` }).getByRole('button', { name: /Xóa/ }).click()
   await page.waitForSelector('.cms-empty[role=status]')
   assert.equal((await get(`/Contents/${postId}`, T)).status, 404)
+  assert.ok((await get('/Contents/trash', T)).body.items.some((x) => x.id === postId), 'bài không nằm trong thùng rác')
 })
 
 /* ================= DANH MỤC ================= */
@@ -134,58 +138,25 @@ await step('Media: tải tệp lên → xuất hiện; xóa → mất', async ()
   assert.equal((await get(`/Media/${m.id}`, T)).status, 404)
 })
 
-/* ================= NGƯỜI DÙNG ================= */
-await step('Người dùng: tạo → sửa vai trò/khóa → xóa; không xóa được chính mình', async () => {
-  await open('/cms/nguoi-dung')
-  await fill('Họ và tên', `Người E2E ${stamp}`)
-  await fill('Email', `e2e${stamp}@humg.edu.vn`)
+/* ================= PHÂN QUYỀN NỘI DUNG (user/role quản lý ở Identity Server) ================= */
+await step('Phân quyền: cấp quyền sửa nội dung đơn vị P.Đào tạo cho một người (tra danh bạ) → thu hồi', async () => {
+  await open('/cms/phan-quyen', 'table')
+  await page.locator('.cms-form .cms-suggest input').first().fill('ltmai')
+  await page.locator('.cms-suggest li button', { hasText: 'Lê Thị Mai' }).click()
+  await page.locator('.cms-form label', { hasText: 'Đơn vị sở hữu nội dung' }).locator('select').selectOption('P-DT')
   await submit()
-  const u = (await get('/Users?pageSize=100', T)).body.items.find((x) => x.email === `e2e${stamp}@humg.edu.vn`); assert.ok(u)
-  await page.locator('tr', { hasText: `Người E2E ${stamp}` }).getByRole('button', { name: /Sửa/ }).click()
-  await page.locator('.cms-form label', { hasText: 'Vai trò' }).locator('select').selectOption('editor')
-  await page.locator('.cms-form label', { hasText: 'Trạng thái' }).locator('select').selectOption('Không hoạt động')
-  await submit()
-  const u2 = (await get(`/Users/${u.id}`, T)).body
-  assert.equal(u2.roleCode, 'editor'); assert.equal(u2.status, 0)
+  const g = (await get('/Grants?pageSize=500', T)).body.items.find((x) => x.principalId === 'u-ltmai' && x.scopeId === 'P-DT')
+  assert.ok(g, 'grant chưa có trong API'); assert.deepEqual(g.permissions, ['view', 'edit'])
   accept()
-  await page.locator('tr', { hasText: `Người E2E ${stamp}` }).getByRole('button', { name: /Xóa/ }).click()
+  await page.locator('tr', { hasText: 'Phòng Đào tạo' }).filter({ hasText: 'Lê Thị Mai' }).getByRole('button', { name: /Thu hồi/ }).click()
   await status()
-  assert.equal((await get(`/Users/${u.id}`, T)).status, 404)
-  // tự xóa chính mình bị từ chối
-  accept()
-  await page.locator('tr', { hasText: 'Trần Văn Minh' }).getByRole('button', { name: /Xóa/ }).click()
-  await page.waitForSelector('.cms-empty[role=alert]')
-  assert.match(await page.locator('.cms-empty[role=alert]').innerText(), /đang đăng nhập/)
+  assert.ok(!(await get('/Grants?pageSize=500', T)).body.items.some((x) => x.id === g.id))
 })
 
-/* ================= VAI TRÒ & PHÂN QUYỀN ================= */
-await step('Phân quyền: bật quyền "Người dùng" cho Editor → Editor gọi được /Users; tắt lại → 403', async () => {
+await step('Phân quyền: biên tập viên không quản lý được grants (403)', async () => {
   const editor = await login('nthoa')
-  assert.equal((await get('/Users', editor.accessToken)).status, 403)
-  await open('/cms/phan-quyen', '.cms-perm')
-  const cell = () => page.locator('tr', { hasText: 'Người dùng' }).locator('button.cms-perm').nth(1)
-  await cell().click()
-  await page.getByRole('button', { name: 'Lưu phân quyền' }).click(); await status(); await page.waitForLoadState('networkidle')
-  const e2 = await login('nthoa')
-  assert.equal((await get('/Users', e2.accessToken)).status, 200)
-  await cell().click()
-  await page.getByRole('button', { name: 'Lưu phân quyền' }).click(); await page.waitForLoadState('networkidle'); await page.waitForTimeout(500)
-  const e3 = await login('nthoa')
-  assert.equal((await get('/Users', e3.accessToken)).status, 403)
-})
-
-await step('Vai trò: tạo (sao chép quyền) → sửa mô tả → xóa', async () => {
-  await open('/cms/phan-quyen', '.cms-perm')
-  await fill('Tên vai trò', `Vai trò E2E ${stamp}`)
-  await fill('Mô tả', 'Mô tả E2E')
-  await page.locator('.cms-form label', { hasText: 'Sao chép quyền từ' }).locator('select').selectOption('editor')
-  await submit()
-  const r = (await get('/Roles', T)).body.find((x) => x.name === `Vai trò E2E ${stamp}`); assert.ok(r); assert.ok(r.permissions.length > 0)
-  await page.locator('.cms-rolecard', { hasText: `Vai trò E2E ${stamp}` }).click()
-  accept()
-  await page.getByRole('button', { name: /Xóa vai trò/ }).click()
-  await status()
-  assert.ok(!(await get('/Roles', T)).body.some((x) => x.id === r.id))
+  assert.equal((await get('/Grants', editor.accessToken)).status, 403)
+  assert.equal((await get('/Users', T)).status, 404)
 })
 
 /* ================= TRANG & MENU ================= */

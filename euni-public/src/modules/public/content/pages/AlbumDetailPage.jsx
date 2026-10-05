@@ -1,4 +1,5 @@
 'use client'
+import NotFound from '../../../../views/NotFound.jsx';
 import { useModuleData } from '@/lib/datasets/useModuleData'
 import { useParams } from '../../../../lib/router.jsx';
 
@@ -10,8 +11,9 @@ export function AlbumDetailPage() {
   const {
     slug
   } = useParams();
-  const a = getAlbum(slug) || albums[0];
   const [open, setOpen] = useState(null);
+  const a = getAlbum(slug) || albums[0];
+  if (!a) return <NotFound />; // trang (tenant) chưa có nội dung loại này
   return <PageShell eyebrow="Media · Thư viện ảnh" title={a.title} crumbs={[{
     label: 'Media HUMG',
     to: '/media'

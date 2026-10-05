@@ -341,17 +341,19 @@ export function FilterBar({
 }
 
 /* ---------- Phân trang (chỉ hiển thị) ---------- */
-export function Pagination({ page = 1, total = 1 }) {
+export function Pagination({ page = 1, total = 1, onChange }) {
   if (total <= 1) return null
-  const shown = Array.from({ length: Math.min(total, 5) }, (_, i) => i + 1)
+  const go = (p) => onChange && p >= 1 && p <= total && p !== page && onChange(p)
+  const start = Math.max(1, Math.min(page - 2, total - 4))
+  const shown = Array.from({ length: Math.min(total, 5) }, (_, i) => start + i)
   return (
     <div className="ui-pagination">
-      <button type="button" aria-label="Trang trước" disabled={page <= 1}><Icon name="chevron-left" size={16} /></button>
+      <button type="button" aria-label="Trang trước" disabled={page <= 1} onClick={() => go(page - 1)}><Icon name="chevron-left" size={16} /></button>
       {shown.map((p) => (
-        <button key={p} type="button" className={p === page ? 'is-active' : ''}>{p}</button>
+        <button key={p} type="button" className={p === page ? 'is-active' : ''} aria-current={p === page ? 'page' : undefined} onClick={() => go(p)}>{p}</button>
       ))}
-      {total > 5 && <><span>…</span><button type="button">{total}</button></>}
-      <button type="button" aria-label="Trang sau"><Icon name="chevron-right" size={16} /></button>
+      {shown[shown.length - 1] < total && <><span>…</span><button type="button" onClick={() => go(total)}>{total}</button></>}
+      <button type="button" aria-label="Trang sau" disabled={page >= total} onClick={() => go(page + 1)}><Icon name="chevron-right" size={16} /></button>
     </div>
   )
 }

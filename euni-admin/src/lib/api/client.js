@@ -1,5 +1,6 @@
 import { env } from '../../config/env.js'
 import tokenService from '../../shared/services/tokenService.js'
+import tenantService from '../../shared/services/tenantService.js'
 
 export class ApiError extends Error {
   constructor(message, { status = 0, data = null, url = '' } = {}) {
@@ -48,10 +49,11 @@ function buildUrl(service, path, query) {
   return url.toString()
 }
 
-async function request(service, path, { query, body, headers, method = 'GET', token, signal } = {}) {
+async function request(service, path, { query, body, headers, method = 'GET', token, tenant, signal } = {}) {
   const controller = new AbortController()
   const timer = setTimeout(() => controller.abort(), env.apiTimeout)
   const auth = token ?? tokenService.getAccessToken()
+  const tenantId = tenant ?? tenantService.get()
   const isForm = typeof FormData !== 'undefined' && body instanceof FormData
   const url = buildUrl(service, path, query)
   try {
@@ -63,6 +65,7 @@ async function request(service, path, { query, body, headers, method = 'GET', to
         Accept: 'application/json',
         ...(body != null && !isForm ? { 'Content-Type': 'application/json' } : {}),
         ...(auth ? { Authorization: `Bearer ${auth}` } : {}),
+        ...(tenantId ? { 'X-Tenant': tenantId } : {}),
         ...(headers || {}),
       },
       body: body == null ? undefined : isForm ? body : JSON.stringify(body),
@@ -82,7 +85,7 @@ async function request(service, path, { query, body, headers, method = 'GET', to
   }
 }
 
-/** Tạo client cho một service: api(SERVICE.cms).get('/api/Contents', { query }) */
+/** Tạo client cho một service: api(SERVICE.cms).get('/api/Contents', { query }). Tùy chọn: query, headers, token, tenant (mặc định tenantService). */
 export const api = (service) => ({
   get: (path, o = {}) => request(service, path, { ...o, method: 'GET' }),
   post: (path, body, o = {}) => request(service, path, { ...o, method: 'POST', body }),
