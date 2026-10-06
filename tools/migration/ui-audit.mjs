@@ -1,8 +1,12 @@
 // Rà giao diện CMS admin: đăng nhập, mở từng màn hình, chụp ảnh toàn trang và liệt kê nút/ô nhập/bảng thiếu nhãn.
 //   node ui-audit.mjs <thư-mục-ảnh>      (cần mock :3000 và euni-admin :3001; CHROME=<đường dẫn> nếu không dùng Chromium của Playwright)
 import { createRequire } from 'node:module'
+import { mkdtempSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
 const { chromium } = createRequire(import.meta.url)('playwright')
-const OUT = process.argv[2]
+const OUT = process.argv[2] || mkdtempSync(join(tmpdir(), 'ui-audit-')) // thư mục ảnh chụp (mặc định: thư mục tạm)
+console.log('ảnh chụp →', OUT)
 const ROUTES = ['', 'bai-viet', 'bai-viet/moi', 'thong-bao', 'thong-bao/moi', 'danh-muc', 'media', 'trang-chu', 'trang-menu', 'banner', 'su-kien', 'album', 'video', 'podcast', 'tuyen-sinh', 'hoc-tap', 'nghien-cuu', 'phan-quyen', 'nhat-ky', 'sao-luu', 'cau-hinh']
 const b = await chromium.launch({ executablePath: process.env.CHROME || undefined })
 const page = await b.newPage({ viewport: { width: 1440, height: 900 } })
