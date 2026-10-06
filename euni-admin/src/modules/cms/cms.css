@@ -14,6 +14,10 @@
 .cms-stat { padding: 16px; border: 1px solid var(--humg-border); border-radius: 12px; background: #fff; }
 .cms-stat strong { display: block; font-size: 24px; font-weight: 800; color: var(--humg-primary); }
 .cms-stat span { display: block; font-size: 12.5px; font-weight: 600; color: var(--humg-text); margin-top: 2px; }
+.cms-stat.is-link { text-decoration: none; transition: border-color .15s, box-shadow .15s; }
+.cms-stat.is-link:hover { border-color: var(--humg-secondary); box-shadow: 0 2px 10px rgba(10,61,145,.08); }
+.cms-stat.is-link:focus-visible { outline: 2px solid var(--humg-secondary); outline-offset: 2px; }
+.cms-morelink { white-space: nowrap; display: inline-flex; align-items: center; gap: 4px; }
 .cms-stat em { display: block; font-style: normal; font-size: 11px; color: var(--humg-success); margin-top: 6px; }
 
 .cms-quad { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
@@ -64,9 +68,13 @@
 .cms-tag.is-draft { background: #e3f0ff; color: var(--humg-secondary); }
 .cms-tag.is-wait { background: #fff4e5; color: var(--humg-accent-dark); }
 .cms-tag.is-off { background: var(--humg-surface-alt); color: var(--humg-text-secondary); }
+.cms-tag.is-urgent { background: #fdecec; color: var(--humg-danger); }
+.cms-readstat { display: grid; gap: 2px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.cms-readstat em { font-style: normal; font-size: 11px; color: var(--humg-text-secondary); }
+th .humg-icon, th svg { vertical-align: -2px; opacity: .7; }
 
 /* ---------- Row actions ---------- */
-.cms-rowact { display: inline-flex; gap: 6px; flex-wrap: wrap; }
+.cms-rowact { display: inline-flex; gap: 6px; flex-wrap: nowrap; white-space: nowrap; }
 .cms-rowbtn {
   display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px;
   border: 1px solid var(--humg-border); border-radius: 7px; background: #fff;
@@ -79,8 +87,14 @@
 .cms-rowbtn:disabled:hover { border-color: var(--humg-border); background: #fff; }
 
 /* ---------- Toggle switch ---------- */
-.cms-switch { display: flex; align-items: center; gap: 10px; font-size: 13px; cursor: pointer; }
-.cms-switch input { position: absolute; opacity: 0; pointer-events: none; }
+/* Công tắc luôn nằm cùng hàng với nhãn, kể cả khi đặt trong .cms-form / .cms-side-card (nơi label mặc định là cột dọc chữ in hoa) */
+.cms-switch, .cms-form .cms-switch, .cms-side-card .cms-switch {
+  position: relative; display: flex !important; flex-wrap: nowrap !important; align-items: center; gap: 10px; cursor: pointer;
+  font-size: 13px !important; font-weight: 500 !important; text-transform: none !important; letter-spacing: 0 !important; color: var(--humg-text) !important;
+}
+.cms-switch input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; pointer-events: none; }
+.cms-switch input:focus-visible + .cms-switch__track { outline: 2px solid var(--humg-secondary); outline-offset: 2px; }
+.cms-switch__hint { display: block; font-size: 11.5px; font-weight: 400; color: var(--humg-text-secondary); }
 .cms-switch__track {
   position: relative; width: 40px; height: 22px; border-radius: 999px;
   background: var(--humg-border); transition: background 0.16s ease; flex-shrink: 0;
@@ -104,7 +118,13 @@
 
 /* ---------- Forms ---------- */
 .cms-form { display: grid; gap: 14px; }
-.cms-form > label { display: grid; gap: 6px; font-size: 12px; font-weight: 700; color: var(--humg-text-secondary); text-transform: uppercase; letter-spacing: 0.03em; }
+/* Nhãn trường: chữ nhãn + dấu * trên cùng một dòng, ô nhập và gợi ý xuống dòng chiếm hết chiều ngang */
+.cms-form > label, .cms-form__two > label, .cms-form__two > div > label, .cms-side-card label {
+  display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 4px; row-gap: 6px;
+  font-size: 12px; font-weight: 700; color: var(--humg-text-secondary); text-transform: uppercase; letter-spacing: 0.03em;
+}
+.cms-form label > :is(input, select, textarea, div, .cms-hint, .ps-muted, .cms-file), .cms-side-card label > :is(input, select, textarea, div, .cms-hint, .ps-muted, .cms-file) { flex: 1 0 100%; min-width: 0; }
+.cms-hint { font-size: 11.5px; font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--humg-text-secondary); }
 .cms-form input, .cms-form select, .cms-form textarea {
   font: inherit; font-size: 13px; font-weight: 400; text-transform: none; letter-spacing: 0;
   padding: 9px 12px; border: 1px solid var(--humg-border); border-radius: 8px;
@@ -113,11 +133,34 @@
 .cms-form input:focus, .cms-form select:focus, .cms-form textarea:focus { outline: none; border-color: var(--humg-secondary); }
 .cms-form textarea { resize: vertical; }
 .cms-form__two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.cms-form__two > label, .cms-form__two > div > label { display: grid; gap: 6px; font-size: 12px; font-weight: 700; color: var(--humg-text-secondary); text-transform: uppercase; letter-spacing: 0.03em; }
 .cms-form__actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
-.cms-req { color: var(--humg-danger); }
-.cms-inline { display: flex !important; align-items: center; gap: 8px; font-size: 13px !important; font-weight: 500 !important; text-transform: none !important; letter-spacing: 0 !important; color: var(--humg-text) !important; }
-.cms-inline input { width: auto !important; }
+.cms-req { color: var(--humg-danger); flex: none !important; }
+.cms-inline { display: flex !important; flex-wrap: nowrap !important; align-items: center; gap: 8px; font-size: 13px !important; font-weight: 500 !important; text-transform: none !important; letter-spacing: 0 !important; color: var(--humg-text) !important; }
+.cms-inline input { width: auto !important; flex: none !important; }
+
+/* Nhóm checkbox (quyền, kênh gửi…): mỗi ô là một nhãn gọn, xếp lưới đều */
+.cms-checks { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; border: 0; }
+.cms-checks legend { width: 100%; padding: 0; margin-bottom: 6px; font-size: 12px; font-weight: 700; color: var(--humg-text-secondary); text-transform: uppercase; letter-spacing: 0.03em; }
+.cms-check { display: inline-flex !important; flex-wrap: nowrap !important; align-items: center; gap: 7px; padding: 6px 11px; border: 1px solid var(--humg-border); border-radius: 8px; background: #fff;
+  font-size: 12.5px !important; font-weight: 500 !important; text-transform: none !important; letter-spacing: 0 !important; color: var(--humg-text) !important; cursor: pointer; white-space: nowrap; }
+.cms-check input, .cms-form .cms-check input, .cms-side-card .cms-check input { width: 15px !important; height: 15px; padding: 0 !important; margin: 0; border: 0; flex: none !important; accent-color: var(--humg-secondary); }
+.cms-check:has(input:checked) { border-color: var(--humg-secondary); background: var(--humg-hover); }
+.cms-check:has(input:disabled) { opacity: .65; cursor: not-allowed; }
+
+/* Nút chọn tệp (thay cho nút "Choose File" tiếng Anh của trình duyệt) */
+.cms-file { display: flex !important; flex-wrap: nowrap !important; align-items: center; gap: 10px; padding: 8px 10px; border: 1px dashed var(--humg-border); border-radius: 8px; background: #fff; cursor: pointer;
+  font-size: 12.5px !important; font-weight: 500 !important; text-transform: none !important; letter-spacing: 0 !important; color: var(--humg-text-secondary) !important; }
+.cms-file input { position: absolute; width: 1px !important; height: 1px; opacity: 0; flex: none !important; }
+.cms-file__btn { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 6px; background: var(--humg-hover); color: var(--humg-primary); font-weight: 600; white-space: nowrap; }
+.cms-file:focus-within { border-color: var(--humg-secondary); }
+
+/* Công tắc Hiển thị/Ẩn ngay trong bảng */
+.cms-vistoggle { display: inline-flex; align-items: center; gap: 8px; line-height: 1; padding: 0; border: 0; background: none; font: inherit; font-size: 12px; font-weight: 600; color: var(--humg-text); cursor: pointer; white-space: nowrap; }
+.cms-vistoggle .cms-switch__track { width: 34px; height: 19px; }
+.cms-vistoggle .cms-switch__dot { width: 15px; height: 15px; }
+.cms-vistoggle[aria-pressed="true"] .cms-switch__track { background: var(--humg-success); }
+.cms-vistoggle[aria-pressed="true"] .cms-switch__dot { transform: translateX(15px); }
+.cms-vistoggle:focus-visible { outline: 2px solid var(--humg-secondary); outline-offset: 3px; border-radius: 4px; }
 
 /* ---------- Editor (CMS-03) ---------- */
 .cms-editor { display: grid; grid-template-columns: 1fr 300px; gap: 22px; align-items: start; }
@@ -128,7 +171,6 @@
 .cms-editor__side { display: grid; gap: 14px; }
 .cms-side-card { display: grid; gap: 12px; padding: 16px; border: 1px solid var(--humg-border); border-radius: 12px; background: var(--humg-surface-alt); }
 .cms-side-card h4 { margin: 0; font-size: 13px; color: var(--humg-primary); }
-.cms-side-card label { display: grid; gap: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--humg-text-secondary); }
 .cms-side-card input, .cms-side-card select { font: inherit; font-size: 12.5px; font-weight: 400; letter-spacing: 0; text-transform: none; padding: 8px 10px; border: 1px solid var(--humg-border); border-radius: 8px; background: #fff; width: 100%; }
 .cms-side-actions { display: grid; gap: 8px; }
 
@@ -327,3 +369,7 @@ button.cms-rolecard.is-active { border-color: var(--humg-primary); box-shadow: 0
   .cms-targetrow { grid-template-columns: 1fr 1fr; }
   .cms-timeline li { grid-template-columns: 1fr; }
 }
+
+.cms-media__thumb { position: relative; overflow: hidden; }
+.cms-media__thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.cms-media__thumb em { z-index: 1; }

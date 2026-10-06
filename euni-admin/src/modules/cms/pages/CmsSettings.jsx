@@ -49,15 +49,16 @@ export function CmsSettings() {
     act.run(() => cmsApi.settings.save(group, values), `Đã lưu cấu hình "${sec}"`);
   };
   const saveable = !!GROUP[sec];
+  const SECTION_ICON = { 'Thông tin chung': 'building', 'Ngôn ngữ': 'globe', 'SEO & Mạng xã hội': 'search', 'Email hệ thống': 'mail', 'Bảo mật': 'shield', 'Sao lưu dữ liệu': 'download', 'Tích hợp dịch vụ': 'layers', 'Lịch trình (Cron)': 'clock', 'Nhật ký hệ thống': 'file' };
 
   return <>
       <Head title="Cấu hình hệ thống" sub="Thiết lập chung, SEO, email, bảo mật và tích hợp" />
       <Notice error={act.error} notice={act.notice} />
       <div className="cms-settings">
         <nav className="cms-settings__nav">
-          {cmsSettingsSections.map(x => <button key={x} type="button" className={sec === x ? 'is-active' : ''} onClick={() => { setSec(x); act.clear(); }}>{x}</button>)}
+          {cmsSettingsSections.map(x => <button key={x} type="button" aria-current={sec === x ? 'page' : undefined} className={sec === x ? 'is-active' : ''} onClick={() => { setSec(x); act.clear(); }}>{x}</button>)}
         </nav>
-        <Panel title={sec} icon="lock">
+        <Panel title={sec} icon={SECTION_ICON[sec] || 'settings'}>
           <form className="cms-form" onSubmit={submit}>
             {sec === 'Thông tin chung' && <>
                 <label>Tên website<input type="text" name="siteName" defaultValue={g.siteName} /></label>

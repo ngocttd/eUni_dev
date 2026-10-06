@@ -90,9 +90,9 @@ export default function RichTextEditor({ value, onChange, placeholder, onUploadI
         <Btn title="Hoàn tác" onClick={() => c().undo().run()} disabled={!editor.can().undo()}>↶</Btn>
         <Btn title="Làm lại" onClick={() => c().redo().run()} disabled={!editor.can().redo()}>↷</Btn>
         <span className="rte__sep" />
-        <Btn title="Đoạn văn" active={editor.isActive('paragraph')} onClick={() => c().setParagraph().run()}>¶</Btn>
-        <Btn title="Tiêu đề 2" active={editor.isActive('heading', { level: 2 })} onClick={() => c().toggleHeading({ level: 2 }).run()}>H2</Btn>
-        <Btn title="Tiêu đề 3" active={editor.isActive('heading', { level: 3 })} onClick={() => c().toggleHeading({ level: 3 }).run()}>H3</Btn>
+        <Btn title="Đoạn văn" active={editor.isActive('paragraph')} onClick={() => c().setParagraph().run()}>Đoạn</Btn>
+        <Btn title="Tiêu đề mục (H2)" active={editor.isActive('heading', { level: 2 })} onClick={() => c().toggleHeading({ level: 2 }).run()}>H2</Btn>
+        <Btn title="Tiêu đề mục con (H3)" active={editor.isActive('heading', { level: 3 })} onClick={() => c().toggleHeading({ level: 3 }).run()}>H3</Btn>
         <span className="rte__sep" />
         <Btn title="In đậm" active={editor.isActive('bold')} onClick={() => c().toggleBold().run()}><b>B</b></Btn>
         <Btn title="In nghiêng" active={editor.isActive('italic')} onClick={() => c().toggleItalic().run()}><i>I</i></Btn>
@@ -103,13 +103,13 @@ export default function RichTextEditor({ value, onChange, placeholder, onUploadI
         <Btn title="Danh sách số" active={editor.isActive('orderedList')} onClick={() => c().toggleOrderedList().run()}>1. ≡</Btn>
         <Btn title="Trích dẫn" active={editor.isActive('blockquote')} onClick={() => c().toggleBlockquote().run()}>“ ”</Btn>
         <span className="rte__sep" />
-        <Btn title="Căn trái" active={editor.isActive({ textAlign: 'left' })} onClick={() => c().setTextAlign('left').run()}>⇤</Btn>
-        <Btn title="Căn giữa" active={editor.isActive({ textAlign: 'center' })} onClick={() => c().setTextAlign('center').run()}>↔</Btn>
+        <Btn title="Căn trái" active={editor.isActive({ textAlign: 'left' })} onClick={() => c().setTextAlign('left').run()}>Trái</Btn>
+        <Btn title="Căn giữa" active={editor.isActive({ textAlign: 'center' })} onClick={() => c().setTextAlign('center').run()}>Giữa</Btn>
         <span className="rte__sep" />
-        <Btn title="Chèn / sửa liên kết" active={editor.isActive('link')} onClick={setLink}>🔗</Btn>
-        <Btn title="Tải ảnh lên và chèn" disabled={busy || !onUploadImage} onClick={() => fileRef.current?.click()}>{busy ? '…' : '🖼'}</Btn>
-        <Btn title="Chèn ảnh theo URL" onClick={addImageUrl}>URL</Btn>
-        <Btn title="Chèn bảng 3×3" onClick={() => c().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()}>⌗</Btn>
+        <Btn title="Chèn / sửa liên kết" active={editor.isActive('link')} onClick={setLink}>Liên kết</Btn>
+        <Btn title="Tải ảnh lên và chèn" disabled={busy || !onUploadImage} onClick={() => fileRef.current?.click()}>{busy ? 'Đang tải…' : 'Tải ảnh'}</Btn>
+        <Btn title="Chèn ảnh theo URL" onClick={addImageUrl}>Ảnh từ URL</Btn>
+        <Btn title="Chèn bảng 3×3" onClick={() => c().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()}>Bảng</Btn>
         {editor.isActive('table') && <>
           <Btn title="Thêm hàng" onClick={() => c().addRowAfter().run()}>+Hàng</Btn>
           <Btn title="Thêm cột" onClick={() => c().addColumnAfter().run()}>+Cột</Btn>
@@ -118,7 +118,7 @@ export default function RichTextEditor({ value, onChange, placeholder, onUploadI
           <Btn title="Xóa bảng" onClick={() => c().deleteTable().run()}>✕ Bảng</Btn>
         </>}
         <span className="rte__sep" />
-        <Btn title="Xóa định dạng" onClick={() => c().unsetAllMarks().clearNodes().run()}>Tx</Btn>
+        <Btn title="Xóa định dạng" onClick={() => c().unsetAllMarks().clearNodes().run()}>Bỏ định dạng</Btn>
         <input ref={fileRef} type="file" accept="image/*" hidden onChange={onFile} />
       </div>
       {err && <p className="rte__err" role="alert">{err}</p>}

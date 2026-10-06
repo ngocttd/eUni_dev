@@ -39,18 +39,34 @@ export function Tag({
   const cls = /da xuat ban|hien thi|hoat dong|thanh cong/.test(s) ? 'is-done' : /ban nhap/.test(s) ? 'is-draft' : /cho duyet|hen gio/.test(s) ? 'is-wait' : 'is-off';
   return <span className={`cms-tag ${cls}`}>{v}</span>;
 }
+/** Nút Sửa / Xóa trên mỗi dòng. `name` (tên bản ghi) để nhãn đọc màn hình và tooltip nói rõ đang thao tác trên dòng nào. */
 export function RowActions({
   editTo,
   onEdit,
-  onDelete
+  onDelete,
+  name = '',
+  deleteLabel = 'Xóa'
 }) {
   const soon = !editTo && !onEdit;
+  const what = name ? ` “${name}”` : '';
   return <span className="cms-rowact">
-      {editTo ? <Link to={editTo} className="cms-rowbtn"><Icon name="file" size={13} /> Sửa</Link> : <button type="button" className="cms-rowbtn" onClick={onEdit} disabled={soon} title={soon ? 'Chức năng đang được phát triển' : undefined}>
-            <Icon name="file" size={13} /> Sửa
+      {editTo ? <Link to={editTo} className="cms-rowbtn" title={`Sửa${what}`} aria-label={`Sửa${what}`}><Icon name="edit" size={13} /> Sửa</Link> : <button type="button" className="cms-rowbtn" onClick={onEdit} disabled={soon} title={soon ? 'Chức năng đang được phát triển' : `Sửa${what}`} aria-label={`Sửa${what}`}>
+            <Icon name="edit" size={13} /> Sửa
           </button>}
-      <button type="button" className="cms-rowbtn is-danger" onClick={onDelete} disabled={!onDelete} title={onDelete ? undefined : 'Chức năng đang được phát triển'}><Icon name="x" size={13} /> Xóa</button>
+      <button type="button" className="cms-rowbtn is-danger" onClick={onDelete} disabled={!onDelete} title={onDelete ? `${deleteLabel}${what}` : 'Chức năng đang được phát triển'} aria-label={`${deleteLabel}${what}`}><Icon name="trash" size={13} /> {deleteLabel}</button>
     </span>;
+}
+/** Công tắc Hiển thị/Ẩn dùng trong bảng: nhìn là biết bấm được và bấm sẽ đổi gì */
+export function VisibilityToggle({
+  visible,
+  onToggle,
+  name = ''
+}) {
+  const what = name ? ` “${name}”` : '';
+  return <button type="button" className="cms-vistoggle" aria-pressed={!!visible} onClick={onToggle} title={visible ? `Đang hiển thị trên website — bấm để ẩn${what}` : `Đang ẩn — bấm để hiển thị${what} trên website`}>
+      <span className="cms-switch__track" aria-hidden="true"><span className="cms-switch__dot" /></span>
+      {visible ? 'Hiển thị' : 'Ẩn'}
+    </button>;
 }
 
 /* ============================ Đa ngôn ngữ nội dung (VI / EN) ============================
@@ -83,12 +99,13 @@ export function I18nBadges({
 export function Toggle({
   checked,
   onChange,
-  label
+  label,
+  hint
 }) {
   return <label className="cms-switch">
-      <input type="checkbox" checked={checked} onChange={e => onChange(e.target.checked)} />
+      <input type="checkbox" role="switch" checked={checked} onChange={e => onChange(e.target.checked)} />
       <span className="cms-switch__track" aria-hidden="true"><span className="cms-switch__dot" /></span>
-      {label && <span className="cms-switch__label">{label}</span>}
+      {label && <span className="cms-switch__label">{label}{hint && <span className="cms-switch__hint">{hint}</span>}</span>}
     </label>;
 }
 export const DONUT_COLORS = ['#0a3d91', '#1976d2', '#f59e0b', '#94a3b8'];
@@ -143,18 +160,18 @@ export function Spark({
 }
 export const PAGE_SIZE = 8;
 
-/* ============================ CMS-01 · Tổng quan ============================ */
-export /* ============================ CMS-02 · Quản lý bài viết ============================ */
+/* ---------- Bài viết ---------- */
+export
 const I18N_FILTERS = ['Tất cả ngôn ngữ', ...cmsI18nStatuses];
-export /* ============================ CMS-04 · Quản lý danh mục ============================ */
+export /* ---------- Danh mục ---------- */
 function catRows(list, onEdit, onDelete, depth = 0) {
   return list.flatMap(c => [[<span key="n" className="cms-tree__name" style={{
     paddingLeft: depth * 22
   }}>
         <Icon name={c.children ? 'layers' : 'file'} size={13} /> {c.name}
-      </span>, String(c.posts), <Tag key="t" v={c.status} />, <RowActions key="a" onEdit={() => onEdit(c)} onDelete={() => onDelete(c)} />], ...(c.children ? catRows(c.children, onEdit, onDelete, depth + 1) : [])]);
+      </span>, String(c.posts), <Tag key="t" v={c.status} />, <RowActions key="a" name={c.name} onEdit={() => onEdit(c)} onDelete={() => onDelete(c)} />], ...(c.children ? catRows(c.children, onEdit, onDelete, depth + 1) : [])]);
 }
-export /* ============================ CMS-06 · Quản lý trang & menu ============================ */
+export /* ---------- Trang & menu ---------- */
 function pageTreeItems(list, depth = 0) {
   return list.flatMap(p => [{
     ...p,

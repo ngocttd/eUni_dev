@@ -1,8 +1,19 @@
 'use client'
 import { useModuleData } from '@/lib/datasets/useModuleData'
 import { useState, useMemo, useRef } from "react";
+
+/* Ảnh xem trước; tệp không phải ảnh hoặc ảnh lỗi thì hiện icon theo loại */
+function Thumb({ m }) {
+  const [broken, setBroken] = useState(false);
+  const isImg = /^(png|jpe?g|gif|webp|svg)$/i.test(m.ext || '');
+  return <span className={`cms-media__thumb is-${m.ext === 'pdf' ? 'pdf' : 'img'}`}>
+      {isImg && m.url && !broken ? <img src={mediaUrl(m.url)} alt="" loading="lazy" onError={() => setBroken(true)} /> : m.ext === 'pdf' ? <Icon name="file" size={26} /> : <Icon name="image" size={22} />}
+      <em>{String(m.ext || '').toUpperCase()}</em>
+    </span>;
+}
 import Icon from "../../../shared/lib/Icon.jsx";
-import { Panel, FilterBar, Pagination } from "../../../shared/components/ui/page.jsx";
+import { Panel, FilterBar } from "../../../shared/components/ui/page.jsx";
+import { mediaUrl } from "../../../lib/api/media.js";
 import { cmsApi } from "../../../lib/api/cmsApi.js";
 import { useAction, Notice, confirmDelete } from "../actions.jsx";
 import { Head, norm } from "../shared.jsx";
@@ -10,6 +21,11 @@ import { Head, norm } from "../shared.jsx";
 export function CmsMedia() {
   const { cmsMedia, cmsMediaTotal, cmsMediaTabs, cmsMediaCategories } = useModuleData('cms');
   const act = useAction();
+  const [copied, setCopied] = useState(null);
+  const copyLink = async m => {
+    const url = mediaUrl(m.url);
+    try { await navigator.clipboard.writeText(url); setCopied(m.id); setTimeout(() => setCopied(null), 1500); } catch { window.prompt('Sao chép đường dẫn:', url); }
+  };
   const fileRef = useRef(null);
   const [tab, setTab] = useState('Tất cả');
   const [cat, setCat] = useState('Tất cả danh mục');
@@ -32,8 +48,8 @@ export function CmsMedia() {
   const remove = m => confirmDelete(`tệp "${m.name}"`) && act.run(() => cmsApi.media.remove(m.id), 'Đã xóa tệp');
 
   return <>
-      <Head title="Media thư viện" sub={`${cmsMediaTotal} tệp · hình ảnh, tài liệu, video, âm thanh`} right={<button type="button" className="humg-btn humg-btn--primary humg-btn--sm" onClick={() => setUploadOpen(v => !v)}>
-          <Icon name="image" size={13} /> Tải lên
+      <Head title="Media thư viện" sub={`${cmsMediaTotal} tệp · hình ảnh, tài liệu, video, âm thanh`} right={<button type="button" className="humg-btn humg-btn--primary humg-btn--sm" onClick={() => setUploadOpen(v => !v)} aria-expanded={uploadOpen}>
+          <Icon name="upload" size={13} /> {uploadOpen ? 'Đóng khung tải lên' : 'Tải lên'}
         </button>} />
       <Notice error={act.error} notice={act.notice} />
       <Panel flush>
@@ -44,7 +60,11 @@ export function CmsMedia() {
           {uploadOpen && <form className="cms-form cms-uploadpanel" onSubmit={upload}>
               <div className="cms-form__two">
                 <label>Chọn tệp
-                  <input ref={fileRef} type="file" multiple onChange={e => setFiles([...e.target.files])} />
+                  <span className="cms-file">
+                    <input ref={fileRef} type="file" multiple onChange={e => setFiles([...e.target.files])} />
+                    <span className="cms-file__btn"><Icon name="upload" size={13} /> Chọn tệp</span>
+                    <span>{files.length ? files.length === 1 ? files[0].name : `${files.length} tệp đã chọn` : 'Ảnh, PDF, video, âm thanh — chọn được nhiều tệp'}</span>
+                  </span>
                 </label>
                 <label>Danh mục
                   <select value={folder} onChange={e => setFolder(e.target.value)}>
@@ -53,7 +73,7 @@ export function CmsMedia() {
                 </label>
               </div>
               <div className="cms-form__actions">
-                <button type="submit" disabled={act.busy || !files.length} className="humg-btn humg-btn--primary humg-btn--sm"><Icon name="image" size={13} /> {act.busy ? 'Đang tải lên…' : `Tải lên${files.length ? ` (${files.length})` : ''}`}</button>
+                <button type="submit" disabled={act.busy || !files.length} className="humg-btn humg-btn--primary humg-btn--sm"><Icon name="upload" size={13} /> {act.busy ? 'Đang tải lên…' : `Tải lên${files.length ? ` (${files.length})` : ''}`}</button>
                 <button type="button" className="humg-btn humg-btn--ghost humg-btn--sm" onClick={() => setUploadOpen(false)}>Hủy</button>
               </div>
             </form>}
@@ -68,21 +88,20 @@ export function CmsMedia() {
         }} />
           <div className="cms-media">
             {list.map(m => <figure key={m.id} className="cms-media__item">
-                <span className={`cms-media__thumb is-${m.ext === 'pdf' ? 'pdf' : 'img'}`}>
-                  {m.ext === 'pdf' ? <Icon name="file" size={26} /> : <Icon name="image" size={22} />}
-                  <em>{String(m.ext || '').toUpperCase()}</em>
-                </span>
+                <Thumb m={m} />
                 <figcaption>
                   <strong title={m.name}>{m.name}</strong>
                   <span>{m.date} · {m.size}</span>
-                  <button type="button" className="cms-rowbtn is-danger" onClick={() => remove(m)} style={{ marginTop: 6 }}><Icon name="x" size={13} /> Xóa</button>
+                  <span className="cms-rowact" style={{ marginTop: 6 }}>
+                    <button type="button" className="cms-rowbtn" onClick={() => copyLink(m)} title={`Sao chép đường dẫn của ${m.name} để dán vào bài viết`} aria-label={`Sao chép đường dẫn ${m.name}`}><Icon name="copy" size={13} /> {copied === m.id ? 'Đã chép' : 'Chép link'}</button>
+                    <button type="button" className="cms-rowbtn is-danger" onClick={() => remove(m)} title={`Xóa ${m.name}`} aria-label={`Xóa ${m.name}`}><Icon name="trash" size={13} /> Xóa</button>
+                  </span>
                 </figcaption>
               </figure>)}
           </div>
           {!list.length && <p className="cms-empty">Không tìm thấy tệp phù hợp.</p>}
           <div className="cms-pagefoot">
-            <span>Hiển thị 1 – {list.length} trong tổng số {cmsMediaTotal} tệp</span>
-            <Pagination page={1} total={Math.max(1, Math.ceil(cmsMediaTotal / 20))} />
+            <span>Hiển thị {list.length} trong tổng số {cmsMediaTotal} tệp</span>
           </div>
         </div>
       </Panel>

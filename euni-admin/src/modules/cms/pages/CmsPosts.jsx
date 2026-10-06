@@ -42,11 +42,11 @@ export function CmsPosts({
   };
   return <>
       <Head title={meta ? `Bài viết · ${meta.title}` : 'Quản lý bài viết'} sub={meta ? `Lối tắt lọc nhanh theo chuyên mục ${meta.title}` : 'Soạn → gửi duyệt → xuất bản / hẹn giờ · danh sách theo phạm vi bạn được cấp quyền'} right={<>
-          <span className="cms-tabs-inline">
-            <button type="button" className={view === 'list' ? 'is-active' : ''} onClick={() => setView('list')}>Danh sách</button>
-            <button type="button" className={view === 'trash' ? 'is-active' : ''} onClick={() => setView('trash')}><Icon name="x" size={12} /> Thùng rác</button>
+          <span className="cms-tabs-inline" role="tablist" aria-label="Chế độ xem">
+            <button type="button" role="tab" aria-selected={view === 'list'} className={view === 'list' ? 'is-active' : ''} onClick={() => setView('list')}><Icon name="menu" size={12} /> Danh sách</button>
+            <button type="button" role="tab" aria-selected={view === 'trash'} className={view === 'trash' ? 'is-active' : ''} onClick={() => setView('trash')} title="Bài đã xóa — khôi phục được"><Icon name="trash" size={12} /> Thùng rác</button>
           </span>
-          {cmsCan.news?.edit && <Link to="/cms/bai-viet/moi" className="humg-btn humg-btn--primary humg-btn--sm"><Icon name="file" size={13} /> Thêm bài viết</Link>}
+          {cmsCan.news?.edit && <Link to="/cms/bai-viet/moi" className="humg-btn humg-btn--primary humg-btn--sm"><Icon name="plus" size={13} /> Thêm bài viết</Link>}
         </>} />
       <Notice error={act.error} notice={act.notice} />
       {view === 'trash' ? <Panel flush><TrashPanel api={cmsApi.contents} /></Panel> : <Panel flush>
@@ -78,13 +78,13 @@ export function CmsPosts({
         },
         options: I18N_FILTERS
       }]} count={pageRows.length} total={filtered.length} onReset={reset} />
-        <DataTable columns={['#', 'Tiêu đề', 'Danh mục', 'Đơn vị', 'Tác giả', 'Trạng thái', 'Ngôn ngữ', 'Cập nhật', 'Thao tác']} rows={pageRows.map((p, i) => [
+        <DataTable columns={['#', 'Tiêu đề', 'Danh mục', 'Đơn vị', 'Tác giả', 'Trạng thái', <span key="l" title="VI luôn là bản gốc. Màu của EN: xanh = đã dịch, cam = đang dịch, xám = chưa dịch">Bản dịch <Icon name="info" size={12} /></span>, 'Cập nhật', 'Thao tác']} rows={pageRows.map((p, i) => [
           String((page - 1) * PAGE_SIZE + i + 1),
           <span key="t">{p.title}{p.hasPendingRevision && <em className="cms-chip" title="Có bản sửa đổi chờ duyệt">sửa đổi chờ duyệt</em>}</span>,
           p.category, p.unit, p.author, <Tag key="s" v={p.status} />, <I18nBadges key="i18n" status={cmsPostI18n[p.id] || 'Chưa dịch'} />, p.date,
           <span key="a" className="cms-rowact">
-            <Link to={`/cms/bai-viet/moi/${p.id}`} className="cms-rowbtn"><Icon name={p.actions.includes('edit') ? 'file' : 'eye'} size={13} /> {p.actions.includes('edit') ? 'Sửa' : 'Xem'}</Link>
-            {p.actions.includes('delete') && <button type="button" className="cms-rowbtn is-danger" onClick={() => remove(p)}><Icon name="x" size={13} /> Xóa</button>}
+            <Link to={`/cms/bai-viet/moi/${p.id}`} className="cms-rowbtn" title={`${p.actions.includes('edit') ? 'Sửa' : 'Xem (bạn không có quyền sửa)'} “${p.title}”`} aria-label={`${p.actions.includes('edit') ? 'Sửa' : 'Xem'} “${p.title}”`}><Icon name={p.actions.includes('edit') ? 'edit' : 'eye'} size={13} /> {p.actions.includes('edit') ? 'Sửa' : 'Xem'}</Link>
+            {p.actions.includes('delete') && <button type="button" className="cms-rowbtn is-danger" onClick={() => remove(p)} title={`Chuyển “${p.title}” vào thùng rác`} aria-label={`Xóa “${p.title}”`}><Icon name="trash" size={13} /> Xóa</button>}
           </span>,
         ])} />
         {!pageRows.length && <p className="cms-empty">Không có bài viết nào khớp bộ lọc.</p>}

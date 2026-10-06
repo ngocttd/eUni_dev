@@ -7,12 +7,16 @@ import { cmsApi } from '../../../lib/api/cmsApi.js'
 import { fmtDate, fromLocalInput } from '../../../lib/datasets/format.js'
 import { useAction, Notice, confirmDelete } from '../actions.jsx'
 import { PersonPicker, UnitSelect, personLabel } from '../pickers.jsx'
-import { Head, norm } from '../shared.jsx'
+import { Head, norm, RowActions } from '../shared.jsx'
 
 const PRINCIPAL = { user: 'Người dùng', unit: 'Đơn vị (mọi thành viên)', role: 'Vai trò (SSO)' }
 const RESOURCE = { '*': 'Mọi loại nội dung', news: 'Tin tức', announcement: 'Thông báo', page: 'Trang', media: 'Media' }
 const SCOPE = { tenant: 'Toàn trang', category: 'Chuyên mục', unit: 'Đơn vị sở hữu (gồm đơn vị con)', record: 'Một bản ghi' }
 const PERMS = [['view', 'Xem'], ['edit', 'Soạn / sửa'], ['review', 'Duyệt'], ['publish', 'Xuất bản / gỡ / lưu trữ'], ['manage', 'Toàn quyền']]
+const PERM_HINT = {
+  view: 'Thấy nội dung trong phạm vi trong CMS', edit: 'Tạo bản nháp, sửa và gửi duyệt', review: 'Duyệt hoặc trả lại bài đang chờ duyệt',
+  publish: 'Đăng thẳng, gỡ bài, lưu trữ, sửa trực tiếp bài đã đăng', manage: 'Gồm tất cả quyền trên, kể cả cấp quyền trong phạm vi này',
+}
 /** Role trên SSO dùng làm principal: client role của cms-api (tầng 2) + realm role (tầng 1) */
 const ROLES = ['cms.admin', 'cms.editor', 'cms.reviewer', 'cms.author', 'cms.viewer', 'lecturer', 'staff', 'manager', 'student']
 const EMPTY = { principalType: 'user', principalId: '', principalName: '', resourceType: 'news', scopeType: 'unit', scopeId: '', permissions: ['view', 'edit'], note: '', expiresAt: '' }
@@ -50,9 +54,14 @@ export function CmsGrants() {
   const revoke = (g) => confirmDelete(`quyền của ${g.principalLabel} trên ${g.scopeLabel}`) && act.run(() => cmsApi.grants.remove(g.id), 'Đã thu hồi quyền')
   const check = async (u) => setEffective(await cmsApi.grants.effective(u.sub))
 
+  const missing = [
+    !form.principalId && (form.principalType === 'user' ? 'người dùng' : form.principalType === 'unit' ? 'đơn vị' : 'vai trò'),
+    form.scopeType !== 'tenant' && !form.scopeId && 'đối tượng của phạm vi',
+    !form.permissions.length && 'ít nhất một quyền',
+  ].filter(Boolean)
   return (
     <>
-      <Head title="Phân quyền nội dung" sub="Ai được xem / soạn / duyệt / xuất bản nội dung nào. Tài khoản & vai trò quản lý trên Identity Server." />
+      <Head title="Phân quyền nội dung" sub="Ai được xem / soạn / duyệt / xuất bản nội dung nào trên trang này. Tài khoản và vai trò (cms.author, cms.editor…) quản lý trên SSO; ở đây chỉ cấp phạm vi." />
       <Notice error={act.error} notice={act.notice} />
       <div className="ps-grid2">
         <Panel title={editId ? `Sửa quyền #${editId}` : 'Cấp quyền mới'} icon="shield">
@@ -72,22 +81,27 @@ export function CmsGrants() {
             {form.scopeType === 'category' && <label>Chuyên mục<select value={form.scopeId} onChange={(e) => set({ scopeId: e.target.value })}><option value="">— chọn —</option>{cats.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}</select></label>}
             {form.scopeType === 'unit' && <label>Đơn vị sở hữu nội dung<UnitSelect value={form.scopeId} onChange={(v) => set({ scopeId: v || '' })} includeClasses={false} emptyLabel="— chọn đơn vị —" /></label>}
             {form.scopeType === 'record' && <label>Mã bản ghi (ID bài viết / thông báo)<input type="number" min="1" value={form.scopeId} onChange={(e) => set({ scopeId: e.target.value })} /></label>}
-            <div className="cms-perms">{PERMS.map(([k, v]) => <label key={k}><input type="checkbox" checked={form.permissions.includes(k)} onChange={() => togglePerm(k)} /> {v}</label>)}</div>
+            <fieldset className="cms-checks">
+              <legend>Quyền được cấp <span className="cms-req">*</span></legend>
+              {PERMS.map(([k, v]) => <label key={k} className="cms-check" title={PERM_HINT[k]}><input type="checkbox" checked={form.permissions.includes(k)} onChange={() => togglePerm(k)} /> {v}</label>)}
+            </fieldset>
             <div className="cms-form__two">
-              <label>Hết hạn (tùy chọn)<input type="datetime-local" value={form.expiresAt} onChange={(e) => set({ expiresAt: e.target.value })} /></label>
+              <label>Hết hạn (tùy chọn)<input type="datetime-local" value={form.expiresAt} onChange={(e) => set({ expiresAt: e.target.value })} /><span className="cms-hint">Để trống nếu quyền không có thời hạn.</span></label>
               <label>Ghi chú<input type="text" value={form.note} onChange={(e) => set({ note: e.target.value })} placeholder="VD: Phụ trách chuyên mục Tuyển sinh" /></label>
             </div>
             <div className="cms-rowact">
               <button type="submit" disabled={act.busy || !form.principalId || !form.permissions.length || (form.scopeType !== 'tenant' && !form.scopeId)} className="humg-btn humg-btn--primary humg-btn--sm">{editId ? 'Lưu thay đổi' : 'Cấp quyền'}</button>
               {editId && <button type="button" className="humg-btn humg-btn--ghost humg-btn--sm" onClick={reset}>Hủy</button>}
             </div>
+            {missing.length > 0 && <p className="cms-hint" style={{ margin: 0 }}>Cần chọn thêm: {missing.join(', ')}.</p>}
           </form>
         </Panel>
         <Panel title="Tra cứu quyền hiệu lực của một người" icon="users">
           <div className="cms-form">
-            <PersonPicker onPick={check} />
+            <p className="cms-hint" style={{ margin: 0 }}>Gõ tên, email hoặc mã để xem một người đang có quyền chức năng nào (từ vai trò trên SSO) và những phạm vi nào được cấp ở trang này. Dùng khi cần trả lời “vì sao người này sửa được / không sửa được bài”.</p>
+            <PersonPicker onPick={check} label="Tra cứu quyền của một người" />
             {effective && <>
-              <p style={{ margin: 0 }}><strong>{effective.user.name}</strong> · vai trò IdS: {effective.user.roles.join(', ') || '—'} · đơn vị: {(effective.user.units || []).map(cmsUnitName).join(', ') || '—'}</p>
+              <p style={{ margin: 0 }}><strong>{effective.user.name}</strong> · vai trò SSO: {effective.user.roles.join(', ') || '—'} · đơn vị: {(effective.user.units || []).map(cmsUnitName).join(', ') || '—'}</p>
               <p className="ps-muted" style={{ margin: 0, fontSize: 12 }}>Quyền chức năng: {effective.permissions.join(', ') || 'không có'}</p>
               <ul className="cms-timeline">{effective.grants.map((g) => <li key={g.id}><em>{RESOURCE[g.resourceType]}</em><span>{g.scopeLabel}</span><em>{g.permissions.join(', ')}</em></li>)}
                 {!effective.grants.length && <li><span className="ps-muted">Không có grant nào áp dụng — người này không thao tác được nội dung (trừ bản nháp tự tạo).</span></li>}</ul>
@@ -101,10 +115,7 @@ export function CmsGrants() {
           <span key="p"><strong>{g.principalLabel}</strong><br /><em className="ps-muted" style={{ fontSize: 11 }}>{PRINCIPAL[g.principalType]}</em></span>,
           RESOURCE[g.resourceType] || g.resourceType, g.scopeLabel, g.permissions.map((p) => PERMS.find(([k]) => k === p)?.[1] || p).join(', '),
           g.expiresAt ? fmtDate(g.expiresAt) : '—', g.note || '',
-          <span key="a" className="cms-rowact">
-            <button type="button" className="cms-rowbtn" onClick={() => edit(g)}><Icon name="file" size={13} /> Sửa</button>
-            <button type="button" className="cms-rowbtn is-danger" onClick={() => revoke(g)}><Icon name="x" size={13} /> Thu hồi</button>
-          </span>,
+          <RowActions key="a" name={`${g.principalLabel} · ${g.scopeLabel}`} deleteLabel="Thu hồi" onEdit={() => edit(g)} onDelete={() => revoke(g)} />,
         ])} />
         {!rows.length && <p className="cms-empty">Chưa có quyền nào.</p>}
       </Panel>

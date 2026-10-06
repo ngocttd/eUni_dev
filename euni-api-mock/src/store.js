@@ -307,7 +307,7 @@ function seedAnnouncements(add, col) {
     targets: [{ audience: null, unitCode: null, userSub: 'SV001', isExclude: false, label: '2151000123 – Nguyễn Văn Sinh' }, { audience: null, unitCode: null, userSub: 'GV002', isExclude: false, label: 'GV0123 – TS. Nguyễn Thanh Bình' }] })
   ann({ title: 'Khảo sát chất lượng dịch vụ (trừ lớp đang thực tập)', ownerUnitCode: 'P-CTSV', category: 'general', publishAt: d(-4),
     bodyHtml: '<p>Mời sinh viên tham gia khảo sát chất lượng dịch vụ hỗ trợ người học.</p>',
-    targets: [{ audience: 'student', unitCode: null, userSub: null, isExclude: false, label: 'Toàn bộ sinh viên' }, { audience: null, unitCode: 'DCKTM66', userSub: null, isExclude: true, label: 'Trừ lớp DCKTM66' }] })
+    targets: [{ audience: 'student', unitCode: null, userSub: null, isExclude: false, label: 'Toàn bộ sinh viên' }, { audience: null, unitCode: 'DCKTM66', userSub: null, isExclude: true, label: 'Lớp DCKTM66' }] })
   ann({ title: 'Kế hoạch nghỉ hè 2025 (chờ duyệt)', ownerUnitCode: 'P-DT', status: 'pending_review', publishAt: null, submittedAt: d(-0.05, null), submittedBy: 'u-hdnam', authorSub: 'u-hdnam', authorName: 'Hoàng Đức Nam',
     bodyHtml: '<p>Dự thảo kế hoạch nghỉ hè cho cán bộ và sinh viên.</p>',
     targets: [{ audience: null, unitCode: null, userSub: null, isExclude: false, label: 'Mọi người' }] })

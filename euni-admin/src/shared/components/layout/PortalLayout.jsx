@@ -62,7 +62,8 @@ export default function PortalLayout({ config, variant = 'portal', children }) {
 
         <nav aria-label={`Menu ${config.role}`} className="portal-shell__nav">
           <ul>
-            {config.items.filter((it) => !it.hidden).map((it) => (
+            {config.items.filter((it) => !it.hidden).flatMap((it, i, all) => [
+              ...(it.group && it.group !== all[i - 1]?.group ? [<li key={`g-${it.group}`} className="portal-shell__navgroup" role="presentation">{t(it.group)}</li>] : []),
               <li key={it.path || 'index'}>
                 <NavLink
                   to={it.path ? `${config.base}/${it.path}` : config.base}
@@ -72,8 +73,8 @@ export default function PortalLayout({ config, variant = 'portal', children }) {
                   <Icon name={it.icon} size={17} />
                   <span>{t(it.title)}</span>
                 </NavLink>
-              </li>
-            ))}
+              </li>,
+            ])}
           </ul>
         </nav>
       </aside>

@@ -41,7 +41,7 @@ function TargetEditor({ targets, onChange, readOnly }) {
         {targets.map((t, i) => (
           <span key={i} className={`cms-chip ${t.isExclude ? 'is-exclude' : ''}`}>
             {t.isExclude ? 'Trừ: ' : ''}{t.label}
-            {!readOnly && <button type="button" aria-label="Bỏ" onClick={() => onChange(targets.filter((_, j) => j !== i))}>×</button>}
+            {!readOnly && <button type="button" aria-label={`Bỏ đối tượng “${t.label}”`} title="Bỏ đối tượng này" onClick={() => onChange(targets.filter((_, j) => j !== i))}>×</button>}
           </span>
         ))}
         {!targets.length && <p className="ps-muted" style={{ margin: 0 }}>Chưa chọn đối tượng nhận.</p>}
@@ -51,11 +51,11 @@ function TargetEditor({ targets, onChange, readOnly }) {
           <div className="cms-targetrow">
             <label>Đối tượng<select value={audience} onChange={(e) => setAudience(e.target.value)}>{AUDIENCES.map(([k, v]) => <option key={k} value={k}>{v}</option>)}</select></label>
             <label>Đơn vị / lớp (gồm đơn vị con)<UnitSelect value={unitCode} onChange={setUnitCode} emptyLabel="Toàn trường" /></label>
-            <label>Cá nhân {person && <em className="cms-chip">{personLabel(person)} <button type="button" onClick={() => setPerson(null)}>×</button></em>}
-              <PersonPicker onPick={setPerson} />
+            <label>Cá nhân {person && <em className="cms-chip">{personLabel(person)} <button type="button" aria-label="Bỏ chọn người này" title="Bỏ chọn" onClick={() => setPerson(null)}>×</button></em>}
+              <PersonPicker onPick={setPerson} label="Chọn một người nhận cụ thể" />
             </label>
-            <label className="cms-perms"><span><input type="checkbox" checked={exclude} onChange={(e) => setExclude(e.target.checked)} /> Loại trừ</span></label>
-            <button type="button" className="humg-btn humg-btn--ghost humg-btn--sm" onClick={add}><Icon name="users" size={13} /> Thêm</button>
+            <label className="cms-check" title="Đánh dấu để những người khớp dòng này KHÔNG nhận thông báo (vd. trừ một lớp đang thực tập)"><input type="checkbox" checked={exclude} onChange={(e) => setExclude(e.target.checked)} /> Loại trừ nhóm này</label>
+            <button type="button" className="humg-btn humg-btn--ghost humg-btn--sm" onClick={add} title="Thêm dòng đối tượng đã chọn vào danh sách nhận"><Icon name="plus" size={13} /> Thêm vào danh sách</button>
           </div>
           <p className="ps-muted" style={{ fontSize: 12, margin: 0 }}>Các trường trong một dòng kết hợp với nhau (VD: Sinh viên + Khoa CNTT = sinh viên Khoa CNTT). Chọn cá nhân thì gửi riêng người đó.</p>
         </>
@@ -173,11 +173,14 @@ export function CmsAnnouncementEditor() {
                 <label>Đơn vị phát hành<UnitSelect value={ownerUnitCode} onChange={setOwnerUnitCode} includeClasses={false} /></label>
                 <label>Loại<select value={category} onChange={(e) => setCategory(e.target.value)}>{CATEGORIES.map(([k, v]) => <option key={k} value={k}>{v}</option>)}</select></label>
                 <label>Mức ưu tiên<select value={priority} onChange={(e) => setPriority(Number(e.target.value))}>{PRIORITIES.map(([k, v]) => <option key={k} value={k}>{v}</option>)}</select></label>
-                <Toggle checked={requireAck} onChange={setRequireAck} label="Yêu cầu xác nhận đã đọc" />
-                <div className="cms-perms">{CHANNELS.map(([k, v]) => <label key={k}><input type="checkbox" checked={channels.includes(k)} onChange={() => toggleChannel(k)} disabled={k === 'portal'} /> {v}</label>)}</div>
-                <label>Thời gian đăng (hẹn giờ)<input type="datetime-local" value={publishAt} onChange={(e) => setPublishAt(e.target.value)} /></label>
+                <Toggle checked={requireAck} onChange={setRequireAck} label="Yêu cầu xác nhận đã đọc" hint="Người nhận phải bấm “Tôi đã đọc”; theo dõi ở tab Thống kê đọc" />
+                <fieldset className="cms-checks">
+                  <legend>Kênh gửi</legend>
+                  {CHANNELS.map(([k, v]) => <label key={k} className="cms-check" title={k === 'portal' ? 'Luôn gửi vào hộp thư My eUni' : `Gửi thêm qua ${v}`}><input type="checkbox" checked={channels.includes(k)} onChange={() => toggleChannel(k)} disabled={k === 'portal'} /> {v}</label>)}
+                </fieldset>
+                <label>Thời gian đăng (hẹn giờ)<input type="datetime-local" value={publishAt} onChange={(e) => setPublishAt(e.target.value)} /><span className="cms-hint">Để trống = đăng ngay khi được duyệt.</span></label>
                 <label>Hết hạn (tự rời hộp thư)<input type="datetime-local" value={expireAt} onChange={(e) => setExpireAt(e.target.value)} /></label>
-                <label>Ghim đến<input type="datetime-local" value={pinnedUntil} onChange={(e) => setPinnedUntil(e.target.value)} /></label>
+                <label>Ghim đầu hộp thư đến<input type="datetime-local" value={pinnedUntil} onChange={(e) => setPinnedUntil(e.target.value)} /><span className="cms-hint">Để trống nếu không ghim.</span></label>
               </div>
               <div className="cms-side-actions">
                 {!readOnly && <button type="button" disabled={act.busy} className="humg-btn humg-btn--primary humg-btn--block" onClick={() => save()}>{act.busy ? 'Đang lưu…' : editing ? 'Lưu' : 'Lưu bản nháp'}</button>}

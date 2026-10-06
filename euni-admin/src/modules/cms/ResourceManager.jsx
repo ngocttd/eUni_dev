@@ -11,12 +11,12 @@
  *   defaults   giá trị form khi thêm mới
  *   toForm(row) / toPayload(values)   chuyển đổi giữa dòng API và form
  */
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { cmsApi } from '../../lib/api/cmsApi.js'
 import { asPage } from '../../lib/api/client.js'
 import Icon from '../../shared/lib/Icon.jsx'
 import { Panel, FilterBar, DataTable } from '../../shared/components/ui/page.jsx'
-import { Head, Tag, norm } from './shared.jsx'
+import { Head, norm, VisibilityToggle, RowActions } from './shared.jsx'
 
 export const VISIBLE_OPTIONS = [{ value: 'true', label: 'Hiển thị' }, { value: 'false', label: 'Ẩn' }]
 
@@ -29,7 +29,7 @@ function Field({ f, value, onChange }) {
   return (
     <label>{f.label}{f.required && <span className="cms-req"> *</span>}
       {control}
-      {f.hint && <span className="ps-muted" style={{ fontSize: 11, textTransform: 'none', fontWeight: 400 }}>{f.hint}</span>}
+      {f.hint && <span className="cms-hint">{f.hint}</span>}
     </label>
   )
 }
@@ -56,6 +56,10 @@ export default function ResourceManager({ config, embedded = false }) {
 
   const list = useMemo(() => (rows || []).filter((r) => !q || norm(searchFields.map((k) => r[k] ?? '').join(' ')).includes(norm(q))), [rows, q, searchFields])
 
+  const labelOf = (r) => String(searchFields.map((k) => r[k]).find(Boolean) ?? '')
+  const formRef = useRef(null)
+  /* Nút "Thêm …" trên đầu trang: đưa biểu mẫu về chế độ thêm mới và đặt con trỏ vào ô đầu tiên */
+  const startNew = () => { reset(); setTimeout(() => { formRef.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); formRef.current?.querySelector('input, textarea, select')?.focus() }, 0) }
   const edit = (row) => { setSel(row); setValues(toForm(row)); setNotice(''); setError('') }
   const reset = () => { setSel(null); setValues(defaults); setNotice(''); setError('') }
   const set = (name) => (v) => setValues((s) => ({ ...s, [name]: v }))
@@ -93,7 +97,7 @@ export default function ResourceManager({ config, embedded = false }) {
 
   return (
     <>
-      {!embedded && <Head title={title} sub={sub} right={<button type="button" className="humg-btn humg-btn--primary humg-btn--sm" onClick={reset}><Icon name={icon} size={13} /> Thêm {noun}</button>} />}
+      {!embedded && <Head title={title} sub={sub} right={<button type="button" className="humg-btn humg-btn--primary humg-btn--sm" onClick={startNew} title={`Mở biểu mẫu thêm ${noun} mới ở cột bên phải`}><Icon name="plus" size={13} /> Thêm {noun}</button>} />}
       {error && <p className="cms-empty" role="alert" style={{ color: 'var(--humg-danger, #b42318)' }}>{error}</p>}
       {notice && <p className="cms-empty" role="status" style={{ color: 'var(--humg-success, #067647)' }}>{notice}</p>}
       <div className="ps-grid2">
@@ -104,18 +108,16 @@ export default function ResourceManager({ config, embedded = false }) {
               columns={cols}
               rows={list.map((r) => [
                 ...columns.map((c) => c.render(r)),
-                ...(hasVisible ? [<button key="v" type="button" className="cms-rowbtn" onClick={() => toggle(r)} title="Bấm để đổi hiển thị"><Tag v={r.isVisible ? 'Hiển thị' : 'Ẩn'} /></button>] : []),
-                <span key="a" className="cms-rowact">
-                  <button type="button" className="cms-rowbtn" onClick={() => edit(r)}><Icon name="file" size={13} /> Sửa</button>
-                  <button type="button" className="cms-rowbtn is-danger" onClick={() => remove(r)}><Icon name="x" size={13} /> Xóa</button>
-                </span>,
+                ...(hasVisible ? [<VisibilityToggle key="v" visible={r.isVisible} onToggle={() => toggle(r)} name={labelOf(r)} />] : []),
+                <RowActions key="a" name={labelOf(r)} onEdit={() => edit(r)} onDelete={() => remove(r)} />,
               ])}
             />
           )}
           {rows && !list.length && <p className="cms-empty">Chưa có {noun} nào.</p>}
         </Panel>
         <Panel title={sel ? `Chỉnh sửa ${noun}` : `Thêm ${noun} mới`} icon={icon}>
-          <form className="cms-form" onSubmit={submit}>
+          <form className="cms-form" onSubmit={submit} ref={formRef}>
+            {sel && <p className="cms-hint" style={{ margin: 0 }}>Đang sửa: <strong>{labelOf(sel)}</strong>. Bấm “Hủy” để quay lại thêm mới.</p>}
             {groups.map((g, i) => g.length === 2
               ? <div key={i} className="cms-form__two">{g.map((f) => <Field key={f.name} f={f} value={values[f.name]} onChange={set(f.name)} />)}</div>
               : <Field key={g[0].name} f={g[0]} value={values[g[0].name]} onChange={set(g[0].name)} />)}

@@ -6,7 +6,7 @@ import ResourceManager, { VISIBLE_OPTIONS, linesToArr, toBool, num } from '../Re
 import { Head } from '../shared.jsx'
 
 const ICONS = ['calendar', 'library', 'play', 'search', 'file', 'mail', 'grid', 'phone', 'graduation', 'user', 'users', 'award', 'briefcase', 'handshake', 'flask', 'book', 'building', 'globe', 'heart', 'rocket', 'target', 'newspaper', 'headphones'].map((v) => ({ value: v, label: v }))
-const sortField = { name: 'sortOrder', label: 'Thứ tự', type: 'number', half: true }
+const sortField = { name: 'sortOrder', label: 'Thứ tự', type: 'number', half: true, hint: 'Số nhỏ hiện trước' }
 const visField = { name: 'isVisible', label: 'Hiển thị', type: 'select', options: VISIBLE_OPTIONS, half: true }
 const common = (r) => ({ sortOrder: r.sortOrder ?? 1, isVisible: String(r.isVisible !== false) })
 const commonOut = (v) => ({ sortOrder: num(v.sortOrder, 1), isVisible: toBool(v.isVisible) })
@@ -18,12 +18,12 @@ const TABS = [
       resource: 'heroSlides', noun: 'slide', icon: 'image', searchFields: ['title', 'kicker'],
       columns: [{ header: 'Dòng nhấn', render: (r) => r.kicker }, { header: 'Tiêu đề', render: (r) => String(r.title).replace(/\n/g, ' ') }, { header: 'Nút chính', render: (r) => r.primaryLabel }],
       fields: [
-        { name: 'kicker', label: 'Dòng nhấn', placeholder: '60 NĂM' },
+        { name: 'kicker', label: 'Dòng nhấn', placeholder: '60 NĂM', hint: 'Chữ nhỏ in hoa phía trên tiêu đề slide' },
         { name: 'title', label: 'Tiêu đề (xuống dòng = ngắt dòng)', type: 'textarea', rows: 3, required: true },
         { name: 'subtitle', label: 'Dòng phụ', placeholder: '1966 – 2026' },
         { name: 'motto', label: 'Khẩu hiệu' },
-        { name: 'primaryLabel', label: 'Nút chính', half: true }, { name: 'primaryUrl', label: 'Liên kết nút chính', half: true },
-        { name: 'accentLabel', label: 'Nút phụ', half: true }, { name: 'accentUrl', label: 'Liên kết nút phụ', half: true },
+        { name: 'primaryLabel', label: 'Chữ trên nút chính', half: true, placeholder: 'VD: Khám phá HUMG' }, { name: 'primaryUrl', label: 'Liên kết nút chính', half: true, placeholder: '/gioi-thieu hoặc https://…' },
+        { name: 'accentLabel', label: 'Chữ trên nút phụ', half: true, placeholder: 'Để trống nếu không cần' }, { name: 'accentUrl', label: 'Liên kết nút phụ', half: true, placeholder: '/tuyen-sinh hoặc https://…' },
         sortField, visField,
       ],
       defaults: { kicker: '', title: '', subtitle: '', motto: '', primaryLabel: '', primaryUrl: '', accentLabel: '', accentUrl: '', sortOrder: 1, isVisible: 'true' },
@@ -38,7 +38,7 @@ const TABS = [
       columns: [{ header: 'Tên', render: (r) => r.label }, { header: 'Biểu tượng', render: (r) => r.icon }, { header: 'Liên kết', render: (r) => r.url }],
       fields: [
         { name: 'label', label: 'Tên hiển thị', required: true },
-        { name: 'icon', label: 'Biểu tượng', type: 'select', options: ICONS, half: true }, { name: 'url', label: 'Liên kết', required: true, half: true },
+        { name: 'icon', label: 'Biểu tượng', type: 'select', options: ICONS, half: true }, { name: 'url', label: 'Liên kết', required: true, half: true, placeholder: '/duong-dan hoặc https://…' },
         sortField, visField,
       ],
       defaults: { label: '', icon: 'grid', url: '', sortOrder: 1, isVisible: 'true' },
@@ -55,7 +55,7 @@ const TABS = [
         { name: 'title', label: 'Tên nhóm', required: true, half: true }, { name: 'code', label: 'Mã (không dấu)', half: true, required: true },
         { name: 'description', label: 'Mô tả ngắn' },
         { name: 'icon', label: 'Biểu tượng', type: 'select', options: ICONS, half: true }, { name: 'color', label: 'Màu (#rrggbb)', half: true },
-        { name: 'url', label: 'Liên kết', required: true },
+        { name: 'url', label: 'Liên kết', required: true, placeholder: '/duong-dan hoặc https://…' },
         sortField, visField,
       ],
       defaults: { title: '', code: '', description: '', icon: 'user', color: '#1976d2', url: '', sortOrder: 1, isVisible: 'true' },

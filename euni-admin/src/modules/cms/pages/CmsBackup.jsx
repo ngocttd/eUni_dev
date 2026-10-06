@@ -36,14 +36,14 @@ export function CmsBackup() {
         <div className="cms-col">
           <Panel title="Sao lưu dữ liệu" icon="download">
             <p className="ps-muted" style={{ marginBottom: 12 }}>
-              Tạo bản sao lưu toàn bộ dữ liệu (bài viết, danh mục, người dùng, media, cấu hình).
+              Tạo bản sao lưu toàn bộ dữ liệu CMS của trang đang chọn: bài viết, thông báo, danh mục, trang, menu, media, phân quyền, cấu hình.
             </p>
             <button type="button" disabled={act.busy} className="humg-btn humg-btn--primary" onClick={create}><Icon name="download" size={14} /> {act.busy ? 'Đang xử lý…' : 'Tạo sao lưu ngay'}</button>
           </Panel>
           <Panel title="Lịch sử sao lưu" icon="clock" flush>
             <DataTable columns={['Thời gian', 'Dung lượng', 'Người tạo', 'Trạng thái', 'Thao tác']} rows={cmsBackups.map(b => [b.time, b.size, b.by, <Tag key="t" v={b.status} />, <span key="a" className="cms-rowact">
-                  <button type="button" className="cms-rowbtn" disabled={!b.hasData || act.busy} onClick={() => download(b)} title={b.hasData ? 'Tải tệp sao lưu về máy' : 'Bản sao lưu cũ không còn dữ liệu để tải'}><Icon name="download" size={13} /> Tải</button>
-                  <button type="button" className="cms-rowbtn is-danger" onClick={() => remove(b)}><Icon name="x" size={13} /> Xóa</button>
+                  <button type="button" className="cms-rowbtn" disabled={!b.hasData || act.busy} onClick={() => download(b)} title={b.hasData ? `Tải tệp sao lưu ${b.time} về máy` : 'Bản sao lưu này chỉ còn bản ghi lịch sử, không còn tệp để tải'} aria-label={`Tải bản sao lưu ${b.time}`}><Icon name="download" size={13} /> Tải</button>
+                  <button type="button" className="cms-rowbtn is-danger" onClick={() => remove(b)} title={`Xóa bản sao lưu ${b.time}`} aria-label={`Xóa bản sao lưu ${b.time}`}><Icon name="trash" size={13} /> Xóa</button>
                 </span>])} />
           </Panel>
         </div>
@@ -56,13 +56,19 @@ export function CmsBackup() {
                 </select>
               </label>
               <label>Hoặc tải lên tệp sao lưu (.json)
-                <input ref={fileRef} type="file" accept=".json,application/json" onChange={e => setFile(e.target.files?.[0] || null)} />
+                <span className="cms-file">
+                  <input ref={fileRef} type="file" accept=".json,application/json" onChange={e => setFile(e.target.files?.[0] || null)} />
+                  <span className="cms-file__btn"><Icon name="upload" size={13} /> Chọn tệp</span>
+                  <span>{file ? file.name : 'Chưa chọn tệp nào'}</span>
+                </span>
               </label>
+              {file && <button type="button" className="cms-rowbtn" style={{ justifySelf: 'start' }} onClick={() => { setFile(null); if (fileRef.current) fileRef.current.value = '' }}><Icon name="x" size={13} /> Bỏ tệp đã chọn</button>}
               <div className="cms-warn"><Icon name="shield" size={14} /> Việc phục hồi sẽ ghi đè toàn bộ dữ liệu hiện tại. Hãy tạo bản sao lưu mới trước khi thực hiện.</div>
               <button type="submit" disabled={act.busy || (!file && !selected)} className="humg-btn humg-btn--primary">{act.busy ? 'Đang xử lý…' : 'Phục hồi ngay'}</button>
+              {!file && !selected && <p className="cms-hint" style={{ margin: 0 }}>Chọn một bản sao lưu có dữ liệu hoặc tải lên tệp .json để bật nút phục hồi.</p>}
             </form>
           </Panel>
-          <Panel title="Thông tin" icon="bell">
+          <Panel title="Lịch sao lưu tự động" icon="info">
             <ul className="ps-check">
               {cmsBackupInfo.map(t => <li key={t}><Icon name="check" size={14} /> {t}</li>)}
             </ul>

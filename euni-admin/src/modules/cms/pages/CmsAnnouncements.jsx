@@ -9,7 +9,8 @@ import { useAction, Notice, confirmDelete } from '../actions.jsx'
 import { TrashPanel } from '../workflow.jsx'
 import { Head, PAGE_SIZE, Tag, norm } from '../shared.jsx'
 
-const PRIORITY_CLS = { 0: '', 1: 'is-wait', 2: 'is-off' }
+/* Bình thường: xám nhạt · Quan trọng: cam · Khẩn: đỏ */
+const PRIORITY_CLS = { 0: 'is-off', 1: 'is-wait', 2: 'is-urgent' }
 
 /**
  * Thông báo theo đối tượng (SV/GV/phụ huynh, đơn vị, lớp, cá nhân) — tách khỏi tin tức (docs/design/CMS_DESIGN.md §6).
@@ -32,9 +33,9 @@ export function CmsAnnouncements() {
   return (
     <>
       <Head title="Thông báo" sub="Gửi tới sinh viên, cán bộ, phụ huynh theo đơn vị, lớp hoặc từng người · hiển thị trong My eUni Portal" right={<>
-        <span className="cms-tabs-inline">
-          <button type="button" className={view === 'list' ? 'is-active' : ''} onClick={() => setView('list')}>Danh sách</button>
-          <button type="button" className={view === 'trash' ? 'is-active' : ''} onClick={() => setView('trash')}><Icon name="x" size={12} /> Thùng rác</button>
+        <span className="cms-tabs-inline" role="tablist" aria-label="Chế độ xem">
+          <button type="button" role="tab" aria-selected={view === 'list'} className={view === 'list' ? 'is-active' : ''} onClick={() => setView('list')}><Icon name="menu" size={12} /> Danh sách</button>
+          <button type="button" role="tab" aria-selected={view === 'trash'} className={view === 'trash' ? 'is-active' : ''} onClick={() => setView('trash')} title="Thông báo đã xóa — khôi phục được"><Icon name="trash" size={12} /> Thùng rác</button>
         </span>
         {cmsCan.announcement?.edit && <Link to="/cms/thong-bao/moi" className="humg-btn humg-btn--primary humg-btn--sm"><Icon name="bell" size={13} /> Soạn thông báo</Link>}
       </>} />
@@ -45,14 +46,16 @@ export function CmsAnnouncements() {
             selects={[{ label: 'Trạng thái', value: status, onChange: (v) => { setStatus(v); setPage(1) }, options: cmsPostStatuses },
               { label: 'Loại', value: cat, onChange: (v) => { setCat(v); setPage(1) }, options: cats }]}
             count={rows.length} total={filtered.length} onReset={() => { setQ(''); setStatus(cmsPostStatuses[0]); setCat('Tất cả loại'); setPage(1) }} />
-          <DataTable columns={['Tiêu đề', 'Đơn vị phát hành', 'Đối tượng nhận', 'Ưu tiên', 'Trạng thái', 'Đã đọc', 'Ngày đăng', 'Thao tác']} rows={rows.map((a) => [
+          <DataTable columns={['Tiêu đề', 'Đơn vị phát hành', 'Đối tượng nhận', 'Ưu tiên', 'Trạng thái', <span key="r" title="Số người đã đọc / số người nhận. Với thông báo yêu cầu xác nhận, dòng dưới là số người đã bấm xác nhận">Đã đọc <Icon name="info" size={12} /></span>, 'Ngày đăng', 'Thao tác']} rows={rows.map((a) => [
             <span key="t">{a.title}{a.hasPendingRevision && <em className="cms-chip">sửa đổi chờ duyệt</em>}</span>,
             a.unit, <span key="g" className="ps-muted" style={{ fontSize: 12 }}>{a.targets}</span>,
             <span key="p" className={`cms-tag ${PRIORITY_CLS[a.priority]}`}>{a.priorityLabel}</span>, <Tag key="s" v={a.status} />,
-            a.statusCode === 'published' ? `${a.stats.read}/${a.stats.recipients}${a.raw.requireAck ? ` · XN ${a.stats.acked}` : ''}` : '—', a.date,
+            a.statusCode === 'published'
+              ? <span key="r" className="cms-readstat" title={`${a.stats.read} trên ${a.stats.recipients} người nhận đã đọc`}>{a.stats.read}/{a.stats.recipients}{a.raw.requireAck && <em>{a.stats.acked} đã xác nhận</em>}</span>
+              : <span key="r" className="ps-muted" title="Chỉ thống kê khi thông báo đã xuất bản">—</span>, a.date,
             <span key="a" className="cms-rowact">
-              <Link to={`/cms/thong-bao/moi/${a.id}`} className="cms-rowbtn"><Icon name={a.actions.includes('edit') ? 'file' : 'eye'} size={13} /> {a.actions.includes('edit') ? 'Sửa' : 'Xem'}</Link>
-              {a.actions.includes('delete') && <button type="button" className="cms-rowbtn is-danger" onClick={() => remove(a)}><Icon name="x" size={13} /> Xóa</button>}
+              <Link to={`/cms/thong-bao/moi/${a.id}`} className="cms-rowbtn" title={`${a.actions.includes('edit') ? 'Sửa' : 'Xem (bạn không có quyền sửa)'} “${a.title}”`} aria-label={`${a.actions.includes('edit') ? 'Sửa' : 'Xem'} “${a.title}”`}><Icon name={a.actions.includes('edit') ? 'edit' : 'eye'} size={13} /> {a.actions.includes('edit') ? 'Sửa' : 'Xem'}</Link>
+              {a.actions.includes('delete') && <button type="button" className="cms-rowbtn is-danger" onClick={() => remove(a)} title={`Chuyển “${a.title}” vào thùng rác`} aria-label={`Xóa “${a.title}”`}><Icon name="trash" size={13} /> Xóa</button>}
             </span>,
           ])} />
           {!rows.length && <p className="cms-empty">Không có thông báo nào khớp bộ lọc.</p>}

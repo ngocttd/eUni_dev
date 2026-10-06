@@ -5,7 +5,7 @@ import { Panel, FilterBar, DataTable } from "../../../shared/components/ui/page.
 import Icon from "../../../shared/lib/Icon.jsx";
 import { cmsApi } from "../../../lib/api/cmsApi.js";
 import { useAction, Notice, confirmDelete } from "../actions.jsx";
-import { Head, I18nBadges, LangPills, MENU_TYPES, RowActions, pageTreeItems, slugify } from "../shared.jsx";
+import { Head, I18nBadges, LangPills, MENU_TYPES, RowActions, norm, pageTreeItems, slugify } from "../shared.jsx";
 
 const TEMPLATES = [['default', 'Mặc định'], ['list', 'Trang danh sách'], ['detail', 'Trang chi tiết'], ['contact', 'Trang liên hệ']];
 const MENU_TYPE_VALUE = { 'Trang': 'page', 'Liên kết': 'link', 'Chuyên mục': 'category' };
@@ -57,7 +57,9 @@ export function CmsPagesMenu() {
   const [mv, setMv] = useState(emptyMenu);
   const [menuLang, setMenuLang] = useState('vi');
   const setM = k => e => setMv(s => ({ ...s, [k]: e.target.value }));
-  const menus = cmsMenus.filter(m => m.groupCode === groupCode);
+  const [menuQ, setMenuQ] = useState('');
+  const groupMenus = cmsMenus.filter(m => m.groupCode === groupCode);
+  const menus = groupMenus.filter(m => !menuQ || norm(`${m.label} ${m.url}`).includes(norm(menuQ)));
   const menuEditing = menuSel != null;
   const pickMenu = m => { setMenuSel(m); setMenuLang('vi'); act.clear(); setMv({ label: m.label, labelEn: m.translations?.en?.label || '', url: m.url, type: m.type, order: m.order }); };
   const newMenu = keep => { setMenuSel(null); setMv({ ...emptyMenu, order: menus.length + 1 }); setMenuLang('vi'); if (keep !== true) act.clear(); };
@@ -78,19 +80,19 @@ export function CmsPagesMenu() {
       <Notice error={act.error} notice={act.notice} />
       <Panel flush>
         <div className="ps-tabs">
-          <button type="button" className={tab === 'trang' ? 'is-active' : ''} onClick={() => setTab('trang')}>Cây trang</button>
-          <button type="button" className={tab === 'menu' ? 'is-active' : ''} onClick={() => setTab('menu')}>Menu</button>
+          <button type="button" role="tab" aria-selected={tab === 'trang'} className={tab === 'trang' ? 'is-active' : ''} onClick={() => setTab('trang')}>Cây trang</button>
+          <button type="button" role="tab" aria-selected={tab === 'menu'} className={tab === 'menu' ? 'is-active' : ''} onClick={() => setTab('menu')}>Menu</button>
         </div>
         <div className="ps-tabbody">
           {tab === 'trang' && <div className="cms-split">
               <div className="cms-split__tree">
                 <div className="cms-split__head">
                   <span>Cây trang</span>
-                  <button type="button" className="humg-btn humg-btn--ghost humg-btn--sm" onClick={newPage}>+ Thêm trang</button>
+                  <button type="button" className="humg-btn humg-btn--ghost humg-btn--sm" onClick={newPage} title="Mở biểu mẫu thêm trang mới"><Icon name="plus" size={13} /> Thêm trang</button>
                 </div>
                 <ul className="cms-pagetree">
                   {items.map(p => <li key={p.id}>
-                      <button type="button" className={page?.id === p.id ? 'is-active' : ''} style={{ paddingLeft: 10 + p.depth * 18 }} onClick={() => pickPage(p)}>
+                      <button type="button" className={page?.id === p.id ? 'is-active' : ''} style={{ paddingLeft: 10 + p.depth * 18 }} onClick={() => pickPage(p)} title={`Bấm để sửa trang “${p.name}”`} aria-current={page?.id === p.id ? 'true' : undefined}>
                         <Icon name="file" size={13} /> {p.name}
                       </button>
                     </li>)}
@@ -115,26 +117,26 @@ export function CmsPagesMenu() {
                   <label>Giao diện
                     <select value={pv.template} onChange={setP('template')}>{TEMPLATES.map(([val, label]) => <option key={val} value={val}>{label}</option>)}</select>
                   </label>
-                  <label>Thứ tự<input type="number" value={pv.order} onChange={setP('order')} /></label>
+                  <label>Thứ tự<input type="number" min="0" value={pv.order} onChange={setP('order')} /><span className="cms-hint">Số nhỏ đứng trước trong cùng cấp.</span></label>
                 </div>
                 <div className="cms-form__actions">
                   <button type="submit" disabled={act.busy} className="humg-btn humg-btn--primary humg-btn--sm">{act.busy ? 'Đang lưu…' : page ? 'Lưu' : 'Tạo trang'}</button>
                   {page && <button type="button" className="humg-btn humg-btn--ghost humg-btn--sm" onClick={newPage}>Hủy</button>}
-                  {page && <button type="button" className="cms-rowbtn is-danger" onClick={removePage}><Icon name="x" size={13} /> Xóa trang</button>}
+                  {page && <button type="button" className="cms-rowbtn is-danger" onClick={removePage} title={`Xóa trang “${page.name}”`}><Icon name="trash" size={13} /> Xóa trang</button>}
                 </div>
               </form>
             </div>}
           {tab === 'menu' && <div className="ps-grid2">
               <div>
-                <FilterBar search="" onSearch={() => {}} searchPlaceholder="Tìm mục menu…" selects={[{
+                <FilterBar search={menuQ} onSearch={setMenuQ} onReset={() => setMenuQ('')} searchPlaceholder="Tìm mục menu theo nhãn hoặc liên kết…" selects={[{
               label: 'Nhóm menu',
               value: menuGroup,
               onChange: g => { setMenuGroup(g); setMenuSel(null); setMv(emptyMenu); },
               options: cmsMenuGroups
-            }]} count={menus.length} total={menus.length} />
-                <DataTable columns={['Thứ tự', 'Nhãn hiển thị', 'Liên kết', 'Kiểu', 'Ngôn ngữ', 'Thao tác']} rows={menus.map(m => [String(m.order), m.label, m.url, m.type, <I18nBadges key="i18n" status={m.translations?.en?.label ? 'Đã dịch' : 'Chưa dịch'} />, <RowActions key="a" onEdit={() => pickMenu(m)} onDelete={() => removeMenu(m)} />])} />
+            }]} count={menus.length} total={groupMenus.length} />
+                <DataTable columns={['Thứ tự', 'Nhãn hiển thị', 'Liên kết', 'Kiểu', 'Ngôn ngữ', 'Thao tác']} rows={menus.map(m => [String(m.order), m.label, m.url, m.type, <I18nBadges key="i18n" status={m.translations?.en?.label ? 'Đã dịch' : 'Chưa dịch'} />, <RowActions key="a" name={m.label} onEdit={() => pickMenu(m)} onDelete={() => removeMenu(m)} />])} />
                 {!menus.length && <p className="cms-empty">Nhóm menu này chưa có mục nào.</p>}
-                <button type="button" className="humg-btn humg-btn--ghost humg-btn--sm" style={{ marginTop: 12 }} onClick={newMenu}>+ Thêm mục menu</button>
+                <button type="button" className="humg-btn humg-btn--ghost humg-btn--sm" style={{ marginTop: 12 }} onClick={newMenu}><Icon name="plus" size={13} /> Thêm mục menu</button>
               </div>
               <Panel title={menuEditing ? 'Chỉnh sửa mục menu' : 'Thêm mục menu'} icon="menu">
                 <form className="cms-form" onSubmit={saveMenu}>

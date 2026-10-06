@@ -134,7 +134,7 @@ export function CmsPostEditor() {
   };
 
   return <>
-      <Head title={editing ? 'Chỉnh sửa bài viết' : 'Thêm bài viết mới'} sub={editing ? `CMS-03 · ${post.title}` : 'CMS-03 · Biên tập nội dung'} right={<Link to="/cms/bai-viet" className="humg-btn humg-btn--ghost humg-btn--sm"><Icon name="external" size={13} /> Về danh sách</Link>} />
+      <Head title={editing ? 'Chỉnh sửa bài viết' : 'Thêm bài viết mới'} sub={editing ? post.title : 'Soạn bài, lưu nháp rồi gửi duyệt; bài chỉ lên website khi được duyệt hoặc xuất bản'} right={<Link to="/cms/bai-viet" className="humg-btn humg-btn--ghost humg-btn--sm"><Icon name="arrow-left" size={13} /> Về danh sách</Link>} />
       {id && !post && <p className="cms-empty" role="alert">Không tìm thấy bài viết #{id}.</p>}
       <Notice error={act.error} notice={act.notice} />
       <Panel flush key={id || 'new'}>
@@ -230,15 +230,15 @@ export function CmsPostEditor() {
             <aside className="cms-editor__side">
               <div className="cms-side-card">
                 <h4>Hiển thị & lịch đăng</h4>
-                <Toggle checked={showHome} onChange={setShowHome} label="Hiển thị trang chủ" />
-                <Toggle checked={featured} onChange={setFeatured} label="Bài viết nổi bật" />
-                <label>Thời gian đăng (hẹn giờ)<input type="datetime-local" value={publishAt} onChange={e => setPublishAt(e.target.value)} /></label>
-                <label>Thời gian hết hạn<input type="datetime-local" value={expireAt} onChange={e => setExpireAt(e.target.value)} /></label>
+                <Toggle checked={showHome} onChange={setShowHome} label="Hiện ở trang chủ" hint="Đưa vào khối Tin tức của trang chủ" />
+                <Toggle checked={featured} onChange={setFeatured} label="Bài viết nổi bật" hint="Bài lớn đầu khối Tin tức (cần bật “Hiện ở trang chủ”)" />
+                <label>Thời gian đăng (hẹn giờ)<input type="datetime-local" value={publishAt} onChange={e => setPublishAt(e.target.value)} /><span className="cms-hint">Để trống = đăng ngay khi được duyệt.</span></label>
+                <label>Thời gian hết hạn<input type="datetime-local" value={expireAt} onChange={e => setExpireAt(e.target.value)} /><span className="cms-hint">Để trống = không tự gỡ.</span></label>
               </div>
               <div className="cms-side-card">
                 <h4>Bản dịch</h4>
                 <p className="cms-langtabs__note">Tiếng Việt luôn là bản gốc. Chọn trạng thái cho các bản dịch phụ.</p>
-                <label>Tiếng Anh (EN)
+                <label>Trạng thái bản tiếng Anh (EN)
                   <select value={enStatus} onChange={e => setEnStatus(e.target.value)}>
                     {cmsI18nStatuses.map(s => <option key={s}>{s}</option>)}
                   </select>
@@ -247,7 +247,7 @@ export function CmsPostEditor() {
               <div className="cms-side-actions">
                 {!readOnly && <button type="button" disabled={act.busy} className="humg-btn humg-btn--primary humg-btn--block" onClick={() => save()}>{act.busy ? 'Đang lưu…' : editing ? (raw.status === 'published' && !actions.includes('unpublish') ? 'Gửi bản sửa đổi' : 'Lưu') : 'Lưu bản nháp'}</button>}
                 {!readOnly && (!editing || actions.includes('submit')) && <button type="button" disabled={act.busy} className="humg-btn humg-btn--ghost humg-btn--block humg-btn--sm" onClick={() => save('submit')}>Lưu & gửi duyệt</button>}
-                <button type="button" className="humg-btn humg-btn--ghost humg-btn--block humg-btn--sm" onClick={preview}><Icon name="eye" size={13} /> Xem trên website</button>
+                <button type="button" className="humg-btn humg-btn--ghost humg-btn--block humg-btn--sm" onClick={preview} title="Mở trang bài viết trên website ở tab mới (bài chưa xuất bản sẽ chưa hiện)"><Icon name="eye" size={13} /> Xem trên website</button>
               </div>
             </aside>
           </div>

@@ -41,8 +41,8 @@ export function CmsCategories() {
 
   const rows = catRows(cmsCategories, edit, remove);
   return <>
-      <Head title="Quản lý danh mục" sub="Cấu trúc chuyên mục nội dung của cổng thông tin" right={<button type="button" className="humg-btn humg-btn--primary humg-btn--sm" onClick={reset}>
-          <Icon name="layers" size={13} /> Thêm danh mục
+      <Head title="Quản lý danh mục" sub="Cấu trúc chuyên mục nội dung của cổng thông tin" right={<button type="button" className="humg-btn humg-btn--primary humg-btn--sm" onClick={() => { reset(); setTimeout(() => document.querySelector('.cms-form input')?.focus(), 0); }} title="Mở biểu mẫu thêm danh mục mới ở cột bên phải">
+          <Icon name="plus" size={13} /> Thêm danh mục
         </button>} />
       <Notice error={act.error} notice={act.notice} />
       <div className="ps-grid2">

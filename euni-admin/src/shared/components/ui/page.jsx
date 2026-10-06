@@ -161,7 +161,7 @@ export function DataTable({ columns, rows }) {
     <div className="ui-table-wrap">
       <table className="ui-table">
         <thead>
-          <tr>{columns.map((c) => <th key={c}>{c}</th>)}</tr>
+          <tr>{columns.map((c, i) => <th key={i} scope="col">{c}</th>)}</tr>
         </thead>
         <tbody>
           {rows.map((r, i) => (
@@ -303,6 +303,7 @@ export function FilterBar({
           <input
             type="search"
             value={search}
+            aria-label={searchPlaceholder.replace(/…$/, '')}
             placeholder={searchPlaceholder}
             onChange={(e) => onSearch(e.target.value)}
           />
@@ -350,9 +351,9 @@ export function Pagination({ page = 1, total = 1, onChange }) {
     <div className="ui-pagination">
       <button type="button" aria-label="Trang trước" disabled={page <= 1} onClick={() => go(page - 1)}><Icon name="chevron-left" size={16} /></button>
       {shown.map((p) => (
-        <button key={p} type="button" className={p === page ? 'is-active' : ''} aria-current={p === page ? 'page' : undefined} onClick={() => go(p)}>{p}</button>
+        <button key={p} type="button" className={p === page ? 'is-active' : ''} aria-current={p === page ? 'page' : undefined} aria-label={`Trang ${p}`} title={`Trang ${p}`} onClick={() => go(p)}>{p}</button>
       ))}
-      {shown[shown.length - 1] < total && <><span>…</span><button type="button" onClick={() => go(total)}>{total}</button></>}
+      {shown[shown.length - 1] < total && <><span aria-hidden="true">…</span><button type="button" aria-label={`Trang cuối (${total})`} title={`Trang cuối (${total})`} onClick={() => go(total)}>{total}</button></>}
       <button type="button" aria-label="Trang sau" disabled={page >= total} onClick={() => go(page + 1)}><Icon name="chevron-right" size={16} /></button>
     </div>
   )

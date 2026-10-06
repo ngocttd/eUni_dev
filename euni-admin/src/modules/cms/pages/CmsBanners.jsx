@@ -29,7 +29,7 @@ const config = {
     { name: 'linkUrl', label: 'Liên kết khi bấm vào', placeholder: 'https:// hoặc /duong-dan' },
     { name: 'startsOn', label: 'Từ ngày', type: 'date', half: true },
     { name: 'endsOn', label: 'Đến ngày', type: 'date', half: true },
-    { name: 'sortOrder', label: 'Thứ tự hiển thị', type: 'number' },
+    { name: 'sortOrder', label: 'Thứ tự hiển thị', type: 'number', hint: 'Số nhỏ hiện trước trong cùng vị trí' },
   ],
   defaults: { title: '', position: 'home_slider', isVisible: 'true', linkUrl: '', startsOn: '', endsOn: '', sortOrder: 1 },
   toForm: (r) => ({

@@ -37,7 +37,8 @@ export function CmsActivity() {
         setAction('Tất cả hành động');
         setUser('Tất cả người dùng');
       }} />
-        <DataTable columns={['Thời gian', 'Người dùng', 'Hành động', 'Đối tượng', 'Trường thay đổi', 'IP']} rows={rows.map(a => [a.time, a.user, <span key="t" className="cms-logaction">{a.action}</span>, a.target, <span key="c" className="ps-muted" style={{ fontSize: 12 }} title={a.changes ? JSON.stringify(a.changes, null, 1) : ''}>{changes(a.changes)}</span>, a.ip])} />
+        <DataTable columns={['Thời gian', 'Người dùng', 'Hành động', 'Đối tượng', 'Trường thay đổi', 'IP']} rows={rows.map(a => [a.time, a.user, <span key="t" className="cms-logaction">{a.action}</span>, a.target, changes(a.changes) ? <span key="c" className="ps-muted" style={{ fontSize: 12 }} title={`Giá trị cũ → mới:\n${Object.entries(a.changes).map(([k, v]) => `${k}: ${Array.isArray(v) ? `${JSON.stringify(v[0])} → ${JSON.stringify(v[1])}` : JSON.stringify(v)}`).join('\n')}`}>{changes(a.changes)}</span>
+          : <span key="c" className="ps-muted" title="Hành động này không sửa trường dữ liệu nào (vd. đăng nhập, tải tệp)">—</span>, a.ip])} />
         {!list.length && <p className="cms-empty">Không có nhật ký nào khớp bộ lọc.</p>}
         <div className="cms-pagefoot">
           <span>Hiển thị {rows.length ? (page - 1) * 20 + 1 : 0} – {(page - 1) * 20 + rows.length} trong {list.length} nhật ký</span>

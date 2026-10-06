@@ -5,7 +5,7 @@ import { useModuleData } from '@/lib/datasets/useModuleData'
 import { cmsApi } from '../../lib/api/cmsApi.js'
 
 /** Tìm theo tên, email, mã cán bộ, mã sinh viên. Một người dù đăng nhập M365 hay tài khoản trường vẫn là một `sub`. */
-export function PersonPicker({ onPick, placeholder = 'Tên, email, mã CB / mã SV…', roles }) {
+export function PersonPicker({ onPick, placeholder = 'Tên, email, mã CB / mã SV…', roles, label = 'Tìm người theo tên, email, mã cán bộ hoặc mã sinh viên' }) {
   const [q, setQ] = useState('')
   const [list, setList] = useState([])
   const [open, setOpen] = useState(false)
@@ -26,7 +26,8 @@ export function PersonPicker({ onPick, placeholder = 'Tên, email, mã CB / mã 
   const pick = (u) => { onPick(u); setQ(''); setList([]); setOpen(false) }
   return (
     <div className="cms-suggest">
-      <input type="text" value={q} onChange={(e) => setQ(e.target.value)} onFocus={() => list.length && setOpen(true)} placeholder={placeholder} />
+      <input type="search" value={q} aria-label={label} title={`${label} (gõ ít nhất 2 ký tự)`} autoComplete="off" onChange={(e) => setQ(e.target.value)} onFocus={() => list.length && setOpen(true)} placeholder={placeholder} />
+      {q.trim().length >= 2 && open && !list.length && <div className="cms-suggest__list"><span className="cms-hint" style={{ padding: '8px 10px', display: 'block' }}>Không tìm thấy ai khớp “{q.trim()}”.</span></div>}
       {open && list.length > 0 && (
         <ul role="listbox">
           {list.map((u) => (
