@@ -11,20 +11,27 @@ cp .env.example .env
 npm run dev          # http://127.0.0.1:3000   (npm run reset: nạp lại dữ liệu gốc)
 ```
 
-Gateway mock phục vụ cùng cấu trúc với `https://api-gateway-demo.humg.edu.vn`:
+Gateway mock phục vụ cùng cấu trúc với `https://api-gateway-demo.humg.edu.vn`. Khi deploy, mock được **tích hợp qua API gateway** như qlns-api, qlkhcn-api, edusoft-api:
+`https://api-gateway-demo.humg.edu.vn/euni-mock-api` (FE đặt `NEXT_PUBLIC_API_GATEWAY_URL` = URL này). Mock nhận cả URL có và không có tiền tố `BASE_PATH` (mặc định `/euni-mock-api`),
+và mọi URL trả về (vd. media `cms-api/uploads/x.png`) là **tương đối** để không làm mất tiền tố của base URL.
+
+Tên endpoint: chữ thường, ngăn cách bằng `-`, có version, tách nhóm `/api/v1/public/…` (không cần đăng nhập) · `/api/v1/me/…` (người dùng đã đăng nhập) · `/api/v1/admin/…` (quản trị).
+
 
 | Service | Nội dung | Nguồn dữ liệu mock |
 |---|---|---|
-| `cms-api` | Theo **tenant** (`X-Tenant`): tin tức + **thông báo** (workflow, hẹn giờ, revision, thùng rác, bản sửa đổi chờ duyệt), phân quyền mức bản ghi (grants), danh bạ & cây đơn vị (chỉ đọc), hộp thư `/api/v1/me/announcements`, danh mục, media, sự kiện, album/video/podcast, trang/menu, banner, khối trang chủ, cấu hình, audit, sao lưu — thay đổi hiện ngay ở `/Public/*` | `src/cms.js`, `lifecycle.js`, `acl.js`, `announcements.js`, `store.js` (bộ nhớ, lưu `data/store.json`) |
+| `cms-api` | Theo **tenant** (`X-Tenant`): tin tức + **thông báo** (workflow, hẹn giờ, revision, thùng rác, bản sửa đổi chờ duyệt), phân quyền mức bản ghi (grants), danh bạ & cây đơn vị (chỉ đọc), hộp thư `/api/v1/me/announcements`, danh mục, media, sự kiện, album/video/podcast, trang/menu, banner, khối trang chủ, cấu hình, audit, sao lưu — thay đổi hiện ngay ở `/api/v1/public/*`; nội dung tĩnh (cooperation, life, utilities) ở `/api/v1/public/datasets/{module}` | `src/cms.js`, `lifecycle.js`, `acl.js`, `announcements.js`, `store.js` (bộ nhớ, lưu `data/store.json`) |
 | `auth-api` | **Đóng vai Identity Server** khi dev: login / me / refresh / logout (JWT mang claim `sub, roles, tenants, units, staff_code, student_code`) | `src/auth.js` |
-| `qlns-api` · `qlkhcn-api` · `qldt-api` · `portal-api` | Dữ liệu các phân hệ ngoài (about, research, education, portal sinh viên…) — chỉ đọc | `mock-data/*.json` |
+| `qlns-api` · `qlkhcn-api` · `edusoft-api` · `esb-api` | Dữ liệu các phân hệ ngoài (about, research, education/tuyển sinh/portal SV, thư viện…) — chỉ đọc. Không có `portal-api`. | `mock-data/*.json` |
 
 Tài khoản CMS mock (mật khẩu `Humg@2025`): `tvanminh` (cms.admin, 2 tenant) · `nthoa` (biên tập trang Trường) · `pvloc` (biên tập Khoa CNTT) ·
 `vthuong` (duyệt thông báo P.Đào tạo) · `ltmai` (tác giả P.Truyền thông) · `dvtung` (CTV chuyên mục Nghiên cứu). Phân quyền mẫu: `GET /cms-api/api/v1/admin/grants`.
-Cổng demo: `POST /auth-api/api/v1/auth/login {"role":"student"}` (SV lớp DCCTKT66A), `staff` (GV BM-KHMT), `parent`, `leader`.
+Cổng demo: `POST /auth-api/api/v1/auth/login {"role":"student"}` (SV lớp DCCTKT66A), `lecturer` (GV BM-KHMT), `staff` (chuyên viên P.Đào tạo), `parent`, `manager`.
+Role theo mô hình 2 tầng trên SSO: realm role `student lecturer staff manager parent applicant alumni` + client role có tiền tố (`cms.*`, `euni.*`, `edusoft.*`, `qlns.*`, `qlkhcn.*`);
+tầng 3 (trang/tenant, chuyên mục, đơn vị, bản ghi) do CMS tự phân bằng grants — `GET /cms-api/api/v1/admin/directory/roles` liệt kê các role.
 Tenant mẫu: `humg` (mặc định) và `cntt` (Khoa CNTT) — gửi header `X-Tenant: cntt`.
 
-Kiểm thử hành vi: `npm test` (tự chạy server tạm, 67 kiểm tra).
+Kiểm thử hành vi: `npm test` (tự chạy server tạm, 84 kiểm tra).
 
 ## Hợp đồng API (cho backend)
 
@@ -45,13 +52,13 @@ Kiểm thử hành vi: `npm test` (tự chạy server tạm, 67 kiểm tra).
 ```text
 src/server.js     Express app, CORS, gắn service, middleware tenant
 src/tenant.js     X-Tenant → host → tenant mặc định
-src/auth.js       auth-api (mock IdS) + bảng role → quyền chức năng + middleware requireCms(permission)
+src/auth.js       auth-api (mock IdS) + realm/client role + bảng role → quyền chức năng + middleware requireCms(permission)
 src/acl.js        Phân quyền mức bản ghi: can(user, tenant, type, action, record), allowedActions
 src/lifecycle.js  Vòng đời dùng chung: workflow, revision, bản sửa đổi chờ duyệt, thùng rác, concurrency, lịch sử
 src/audit.js      Audit log + diff
 src/announcements.js  Thông báo: targets, receipts, hộp thư /api/v1/me/announcements
-src/cms.js        cms-api (Public/* + tin tức + grants + danh bạ + CRUD chung)
-src/datasets.js   qlns/qlkhcn/qldt/portal: /api/v1/public/datasets/{module} và /api/v1/{module}/{resource}
+src/cms.js        cms-api (/api/v1/public/* + tin tức + grants + danh bạ + CRUD chung /api/v1/admin/*)
+src/datasets.js   qlns/qlkhcn/edusoft/esb (+ dataset của cms): /api/v1/{public|me}/datasets/{module} và /api/v1/{public|me}/{module}/{resource}
 src/store.js      Kho dữ liệu CMS trong bộ nhớ
 mock-data/        JSON dữ liệu các module
 contract/         openapi.json + API_CONTRACT.md

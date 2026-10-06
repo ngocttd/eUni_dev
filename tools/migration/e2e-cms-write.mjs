@@ -7,8 +7,8 @@ const ADMIN = 'http://localhost:3001'
 const PUBLIC = 'http://localhost:3002'
 const stamp = Date.now().toString(36)
 
-await fetch(`${API}/cms-api/api/_dev/reset`, { method: 'POST' })
-const login = await (await fetch(`${API}/auth-api/api/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username: 'tvanminh', password: 'Humg@2025' }) })).json()
+await fetch(`${API}/cms-api/api/v1/dev/reset`, { method: 'POST' })
+const login = await (await fetch(`${API}/auth-api/api/v1/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username: 'tvanminh', password: 'Humg@2025' }) })).json()
 
 const browser = await chromium.launch(process.env.CHROME ? { executablePath: process.env.CHROME, headless: true } : { channel: 'msedge', headless: true })
 const ctx = await browser.newContext()
@@ -33,7 +33,7 @@ await step('Video: thêm trên CMS → hiện ở /media và trang chi tiết', 
   await fill('Mô tả', 'Mô tả video kiểm thử')
   await submit()
   assert.match(await pub('/media'), new RegExp(`Video CMS ${stamp}`))
-  const list = await (await fetch(`${API}/cms-api/api/Public/content`)).json()
+  const list = await (await fetch(`${API}/cms-api/api/v1/public/site-content`)).json()
   const v = list.videos.find((x) => x.title === `Video CMS ${stamp}`)
   assert.equal(v.durationSec, 12 * 60 + 34)
   assert.match(await pub(`/media/video/${v.slug}`), /12:34/)
@@ -74,7 +74,7 @@ await step('Album: thêm với 3 ảnh → /media ghi "3 ảnh"', async () => {
   await submit()
   const html = await pub('/media')
   assert.match(html, new RegExp(`Album CMS ${stamp}`))
-  const content = await (await fetch(`${API}/cms-api/api/Public/content`)).json()
+  const content = await (await fetch(`${API}/cms-api/api/v1/public/site-content`)).json()
   assert.equal(content.albums.find((a) => a.title === `Album CMS ${stamp}`).photos.length, 3)
 })
 
@@ -119,13 +119,13 @@ await step('Banner: thêm bằng form mới → có trong API công khai', async
   await open('/cms/banner')
   await fill('Tên banner', `Banner CMS ${stamp}`)
   await submit()
-  const b = await (await fetch(`${API}/cms-api/api/Public/banners`)).json()
+  const b = await (await fetch(`${API}/cms-api/api/v1/public/banners`)).json()
   assert.ok(b.some((x) => x.title === `Banner CMS ${stamp}`))
 })
 
 await step('Không có lỗi JS trong suốt phiên', async () => assert.deepEqual(errors, []))
 
 await browser.close()
-await fetch(`${API}/cms-api/api/_dev/reset`, { method: 'POST' })
+await fetch(`${API}/cms-api/api/v1/dev/reset`, { method: 'POST' })
 console.log(failed ? `\nCÓ ${failed} BƯỚC LỖI` : '\nGhi từ giao diện CMS → public: OK')
 process.exitCode = failed ? 1 : 0

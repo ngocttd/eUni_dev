@@ -9,11 +9,12 @@ import { useAction, Notice, confirmDelete } from '../actions.jsx'
 import { PersonPicker, UnitSelect, personLabel } from '../pickers.jsx'
 import { Head, norm } from '../shared.jsx'
 
-const PRINCIPAL = { user: 'Người dùng', unit: 'Đơn vị (mọi thành viên)', role: 'Vai trò (IdS)' }
+const PRINCIPAL = { user: 'Người dùng', unit: 'Đơn vị (mọi thành viên)', role: 'Vai trò (SSO)' }
 const RESOURCE = { '*': 'Mọi loại nội dung', news: 'Tin tức', announcement: 'Thông báo', page: 'Trang', media: 'Media' }
 const SCOPE = { tenant: 'Toàn trang', category: 'Chuyên mục', unit: 'Đơn vị sở hữu (gồm đơn vị con)', record: 'Một bản ghi' }
 const PERMS = [['view', 'Xem'], ['edit', 'Soạn / sửa'], ['review', 'Duyệt'], ['publish', 'Xuất bản / gỡ / lưu trữ'], ['manage', 'Toàn quyền']]
-const ROLES = ['cms.admin', 'cms.editor', 'cms.reviewer', 'cms.author', 'staff', 'student']
+/** Role trên SSO dùng làm principal: client role của cms-api (tầng 2) + realm role (tầng 1) */
+const ROLES = ['cms.admin', 'cms.editor', 'cms.reviewer', 'cms.author', 'cms.viewer', 'lecturer', 'staff', 'manager', 'student']
 const EMPTY = { principalType: 'user', principalId: '', principalName: '', resourceType: 'news', scopeType: 'unit', scopeId: '', permissions: ['view', 'edit'], note: '', expiresAt: '' }
 
 /**

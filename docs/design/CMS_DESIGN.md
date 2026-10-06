@@ -12,7 +12,7 @@ Các điểm dưới đây chưa được chốt; thiết kế chọn phương �
 |---|---|---|
 | A1 | **Tenant = một đơn vị có website riêng** trong HUMG (Trường `humg`, Khoa CNTT `cntt`, …). Mỗi tenant có một hoặc nhiều domain. Nội dung có thể **chia sẻ** từ tenant này sang tenant khác. | §2. Nếu là nhiều trường độc lập: bỏ bảng chia sẻ, cân nhắc tách schema/DB. |
 | A2 | **Identity Server (IdS)** là OIDC provider duy nhất. Nó tự xử lý cả **tài khoản trường** và **Microsoft 365** (federation), và đã link hai loại tài khoản thành một `sub`. | §3. Nếu IdS không federate M365 thì FE vẫn gọi IdS, chỉ khác tham số `idp`. |
-| A3 | Token của IdS có các claim `sub`, `name`, `email`, `role[]`, `tenant[]`, `unit[]`, `staff_code`/`student_code`. Lớp, bộ môn, khoa của user lấy từ claim `unit[]`, hoặc từ **Membership API** (QLĐT/QLNS) khi token không đủ. | §6.4. |
+| A3 | Token của IdS có các claim `sub`, `name`, `email`, realm role + client role (§5.1), `unit[]`, `staff_code`/`student_code`. **Không** có claim tenant/phạm vi (tầng 3 do app tự phân). Lớp, bộ môn, khoa của user lấy từ claim `unit[]`, hoặc từ **Membership API** (QLĐT/QLNS) khi token không đủ. | §6.4. |
 | A4 | Workflow chạy trên **bản ghi gốc**. Bản dịch EN chỉ có trạng thái dịch (`missing`/`in_progress`/`done`) và chỉ hiển thị công khai khi `done`. | §4. |
 | A5 | Giai đoạn 1 **chưa viết code .NET** trong repo này. Repo cung cấp hợp đồng API, DDL và mock chạy đúng hành vi để FE làm việc song song. | — |
 
@@ -68,7 +68,7 @@ Các quy ước xuyên suốt:
 | Kênh | Nguồn | Kiểm tra |
 |---|---|---|
 | API công khai (`/api/v1/public/*`) | Header `X-Tenant` do website gửi. Website suy ra tenant từ **host**, ví dụ `cntt.humg.edu.vn` → `cntt`. Thiếu header thì lấy theo host của gateway, cuối cùng mới về tenant mặc định. | Tenant phải tồn tại và đang bật. |
-| API quản trị | Header `X-Tenant` (tenant đang chọn ở CMS) | Tenant phải có trong claim `tenant[]` của token, hoặc user có `cms.*`. Sai thì trả **403**. |
+| API quản trị (`/api/v1/admin/*`) | Header `X-Tenant` (tenant đang chọn ở CMS) | User phải có ít nhất một grant đang hiệu lực trong tenant đó (§5.2), hoặc có `cms.*`. Sai thì trả **403**. Danh sách tenant được quản trị không lấy từ token (tầng 3, §5.1). |
 | Portal (`/api/v1/me/*`) | Header `X-Tenant` | Thông báo của user được lọc theo tenant đang xem. Muốn gom mọi tenant thì gửi `X-Tenant: *`, chỉ hợp lệ với `/api/v1/me/announcements`. |
 
 ### 2.3 Chia sẻ nội dung giữa tenant
@@ -93,12 +93,14 @@ Bảng `content_shares(tenant_id nguồn, entity_type, entity_id, target_tenant_
 |---|---|---|
 | `sub` | `8b1f…` | Định danh duy nhất |
 | `name`, `email` | | Hiển thị |
-| `role[]` | `cms.editor`, `student`, `staff` | Quyền chức năng (§5.1) và đối tượng của thông báo |
-| `tenant[]` | `humg`, `cntt` | Tenant user được quản trị |
+| realm role (Keycloak `realm_access.roles`, IdS `role[]`) | `lecturer`, `student` | Tầng 1 (§5.1): persona, đối tượng của thông báo, cổng My eUni |
+| client role (Keycloak `resource_access.cms-api.roles`) | `cms.editor` | Tầng 2 (§5.1): quyền chức năng trong CMS |
 | `unit[]` | `BM-KHMT`, `DCCTKT66A` | Đơn vị hoặc lớp **trực tiếp**. CMS tự mở rộng lên các đơn vị cha (§6.4). |
 | `staff_code` / `student_code` | `GV0123` / `2151000123` | Tra cứu khi nhắm thông báo theo mã |
 
-Nếu đưa `unit[]` vào token làm token quá lớn, CMS gọi **Membership API** (`GET /qldt-api/api/v1/users/{sub}/memberships`) và cache 15 phút ở `u:{sub}:membership`.
+Không cần claim tenant: trang (tenant) user được quản trị do CMS tự suy ra từ grants (§5.1, tầng 3).
+
+Nếu đưa `unit[]` vào token làm token quá lớn, CMS gọi **Membership API** (`GET /edusoft-api/api/v1/me/memberships`, hoặc qua `esb-api`) và cache 15 phút ở `u:{sub}:membership`.
 
 ### 3.3 Phiên đăng nhập ở FE
 - **Giai đoạn 1:** SPA public client + PKCE. Token giữ trong bộ nhớ và `sessionStorage` như hiện tại. `NEXT_PUBLIC_AUTH_MODE=oidc` bật luồng IdS. `mock` giữ form username/password gọi `auth-api` của mock, chỉ dùng khi phát triển.
@@ -116,25 +118,63 @@ Nếu đưa `unit[]` vào token làm token quá lớn, CMS gọi **Membership AP
 
 ## 5. Phân quyền
 
-### 5.1 Hai lớp quyền
+### 5.1 Mô hình role: 2 tầng trên SSO, tầng 3 do app tự phân
+
+Trước mắt chỉ triển khai **2 tầng trên SSO**. Tầng 3 (phạm vi chi tiết) cấu hình trên SSO không khả thi hoặc quá phức tạp, nên **mỗi client/app tự phân**.
+
+| Tầng | Ở đâu | Nội dung | Ví dụ |
+|---|---|---|---|
+| 1 | SSO — **realm role** | "Persona" của người dùng, dùng chung toàn hệ thống | `student`, `lecturer` |
+| 2 | SSO — **client role** của từng app/service, tên có **tiền tố** của client | Chức năng được dùng trong app đó | `cms.editor`, `edusoft.grade-entry` |
+| 3 | **Trong app** (CMS: bảng `access_grants`, §5.2) | Phạm vi: trang (tenant), chuyên mục, đơn vị sở hữu, bản ghi | "biên tập Khoa CNTT", "duyệt thông báo P.Đào tạo" |
+
+**Realm role** (tầng 1):
+
+| Role | Ý nghĩa | Nguồn gán khi import |
+|---|---|---|
+| `student` | Sinh viên, học viên | Web đào tạo |
+| `lecturer` | Giảng viên | Dữ liệu nhân sự / đào tạo |
+| `staff` | Cán bộ, chuyên viên phòng ban | Nhân sự |
+| `manager` | Lãnh đạo (BGH, trưởng/phó đơn vị) | Gán thủ công hoặc theo chức vụ |
+| `parent` | Phụ huynh | Đăng ký và liên kết với SV |
+| `applicant` | Thí sinh | Tuyển sinh |
+| `alumni` | Cựu người học (dự phòng) | Sau tốt nghiệp |
+
+Cổng My eUni theo realm role: `student` → `/euni/sinh-vien`, `lecturer` và `staff` → `/euni/giang-vien`, `manager` → `/euni/lanh-dao`, `parent` → `/euni/phu-huynh`; `applicant`, `alumni` chưa có cổng riêng.
+
+**Client role** (tầng 2) — đặt tên `<tiền tố client>.<role>` để dễ phân biệt; khi cấu hình SSO, mỗi nhóm được đẩy vào client tương ứng:
+
+| Client (API) | Client role | Ý nghĩa |
+|---|---|---|
+| `cms-api` | `cms.viewer`, `cms.author`, `cms.reviewer`, `cms.editor`, `cms.admin` | Xem; soạn bài; duyệt; biên tập + xuất bản; quản trị CMS và cấu hình site đơn vị |
+| `euni-admin-api` | `euni.dashboard-viewer`, `euni.report-viewer`, `euni.account-support`, `euni.admin` | Dashboard lãnh đạo; báo cáo; hỗ trợ tài khoản; quản trị eUni |
+| `edusoft-api` | `edusoft.training-officer`, `edusoft.grade-entry`, `edusoft.academic-advisor`, `edusoft.data-reader` | Cán bộ P.Đào tạo; nhập điểm; cố vấn học tập; đọc dữ liệu (cho job) |
+| `qlns-api` | `qlns.hr-officer`, `qlns.hr-viewer`, `qlns.data-reader` | Cán bộ nhân sự; xem nhân sự; đọc dữ liệu |
+| `qlkhcn-api` | `qlkhcn.research-officer`, `qlkhcn.researcher`, `qlkhcn.data-reader` | Cán bộ quản lý KHCN; nhà nghiên cứu; đọc dữ liệu |
+
+Đối chiếu với bảng gợi ý ban đầu của cms-api: `content-editor` ≈ `cms.author` (+ `cms.editor` nếu được xuất bản), `content-publisher` ≈ `cms.editor`, `site-admin` ≈ `cms.admin`; thêm `cms.reviewer` (chỉ duyệt) và `cms.viewer` (chỉ xem) cho workflow.
+
+**Quyền hiệu lực trong CMS:**
 
 ```text
 Quyền hiệu lực(user, hành động, bản ghi) =
-      Quyền chức năng  — role trong token → tập permission (cấu hình tĩnh ở CMS, không có màn hình quản lý role)
-  AND Phạm vi          — có grant khớp (user | đơn vị của user | role của user) × (tenant | chuyên mục | đơn vị sở hữu | chính bản ghi)
-  (ngoại lệ: tác giả luôn xem/sửa được bản nháp của mình; cms.* bỏ qua mọi kiểm tra)
+      Quyền chức năng  — client role cms.* trong token → tập permission (cấu hình tĩnh ở CMS, không có màn hình quản lý role)   [tầng 2]
+  AND Phạm vi          — có grant khớp (user | đơn vị của user | role của user) × (tenant | chuyên mục | đơn vị sở hữu | chính bản ghi) [tầng 3]
+  (ngoại lệ: tác giả luôn xem/sửa được bản nháp của mình; cms.admin bỏ qua mọi kiểm tra)
+Tenant được quản trị = các tenant có ít nhất một grant khớp user (tầng 3) — không lấy từ claim của SSO.
 ```
 
 Bảng ánh xạ role sang quyền chức năng nằm trong `appsettings.json`, mục `Cms:RolePermissions`:
 
-| Role (IdS) | Quyền chức năng |
+| Role (SSO) | Quyền chức năng |
 |---|---|
 | `cms.admin` | `cms.*` |
-| `cms.editor` | `cms.access`, `news.*`, `announcement.*`, `media.manage`, `category.manage`, `page.manage`, `menu.manage`, `log.view` |
+| `cms.editor` | `cms.access`, `news.*`, `announcement.*`, `media.manage`, `category.manage`, `page.manage`, `menu.manage`, `site.manage`, `log.view` |
 | `cms.reviewer` | `cms.access`, `news.view`, `news.review`, `announcement.view`, `announcement.review` |
 | `cms.author` | `cms.access`, `news.view`, `news.edit`, `announcement.view`, `announcement.edit`, `media.manage` |
+| `cms.viewer` | `cms.access`, `news.view`, `announcement.view` |
 | (chỉ `cms.admin`) | `grant.manage`, `settings.manage`, `backup.manage` |
-| `staff`, `student`, `parent`, `leader` | `portal.<role>.view` (đọc hộp thư thông báo của chính mình) |
+| realm role (`student`, `lecturer`, `staff`, `manager`, `parent`, `applicant`, `alumni`) | `portal.<role>.view` (đọc hộp thư thông báo của chính mình) |
 
 Các hành động: `view` · `edit` · `review` (duyệt hoặc từ chối) · `publish` (xuất bản, gỡ, lưu trữ) · `manage` (bao gồm tất cả, kể cả cấp quyền trên phạm vi đó).
 
@@ -174,7 +214,7 @@ cms.access_grants(id, tenant_id,
 Gộp hai loại vào một bảng sẽ có rất nhiều cột nullable. Rủi ro lớn hơn là **lộ thông báo nội bộ qua API tin tức công khai** chỉ vì quên một điều kiện lọc. Hai bảng chia sẻ chung: state machine (§7), revision và audit (§8), attachment, mẫu translation, `owner_unit_code` và ACL (§5).
 
 ### 6.2 Bảng News
-`cms.news` (thay `cms.posts`) có các cột: `tenant_id, category_id, owner_unit_code, status, publish_at, expire_at, is_featured, show_on_home, view_count, author_sub, …`, cùng các cột workflow và vòng đời (§7, §8). `cms.news_translations(news_id, lang, slug, title, excerpt, body_html, body_text, meta_*, translation_status, search_text)`. API giữ tên **`/api/v1/admin/contents`** để tương thích Swagger hiện có.
+`cms.news` (thay `cms.posts`) có các cột: `tenant_id, category_id, owner_unit_code, status, publish_at, expire_at, is_featured, show_on_home, view_count, author_sub, …`, cùng các cột workflow và vòng đời (§7, §8). `cms.news_translations(news_id, lang, slug, title, excerpt, body_html, body_text, meta_*, translation_status, search_text)`. API quản trị là **`/api/v1/admin/contents`**, công khai là `/api/v1/public/contents` (quy ước tên ở §11).
 
 ### 6.3 Bảng Announcement
 
@@ -193,13 +233,13 @@ cms.announcement_attachments(announcement_id, object_key, file_name, size, mime)
 | Ví dụ | audience | unit_code | user_sub |
 |---|---|---|---|
 | Toàn bộ sinh viên | `student` | | |
-| Giảng viên Khoa CNTT (kể cả các bộ môn) | `staff` | `CNTT` | |
+| Giảng viên Khoa CNTT (kể cả các bộ môn) | `lecturer` | `CNTT` | |
 | Lớp DCCTKT66A | | `DCCTKT66A` | |
 | Cá nhân nhập mã `GV0123` hoặc email | | | `sub` tra được từ `user_directory` |
 | Mọi người trong tenant | | | (dòng rỗng) |
 
 ### 6.4 Hộp thư của user (đọc khi truy vấn, không fan-out)
-1. Dựng **membership** của user: `audiences` lấy từ role (`student`, `staff`, `parent`, `leader`); `units` gồm `unit[]` trực tiếp **cộng mọi đơn vị cha**, ví dụ `DCCTKT66A → BM-KHMT → CNTT → HUMG`. Kết quả cache ở Redis.
+1. Dựng **membership** của user: `audiences` lấy từ realm role (`student`, `lecturer`, `staff`, `manager`, `parent`, `applicant`, `alumni`); `units` gồm `unit[]` trực tiếp **cộng mọi đơn vị cha**, ví dụ `DCCTKT66A → BM-KHMT → CNTT → HUMG`. Kết quả cache ở Redis.
 2. Truy vấn:
 ```sql
 SELECT a.* FROM cms.announcements a
@@ -305,6 +345,16 @@ CREATE INDEX ix_news_tr_search ON cms.news_translations USING gin (search_text g
 
 ## 11. Hợp đồng API: thay đổi so với hiện tại
 
+**Quy ước tên endpoint** (theo Swagger `cms-api` trên gateway demo, vd. `/api/v1/public/category-post`): chữ thường, ngăn cách bằng `-`, có version, tách nhóm theo đối tượng gọi:
+
+| Nhóm | Tiền tố | Xác thực |
+|---|---|---|
+| Công khai (website, app mobile khi chưa đăng nhập) | `/api/v1/public/…` | Không |
+| Của chính người dùng đã đăng nhập (portal, hộp thư) | `/api/v1/me/…` | Bearer, mọi role |
+| Quản trị | `/api/v1/admin/…` | Bearer + client role + grant |
+
+Mọi service (cms-api, edusoft-api, qlns-api, qlkhcn-api, esb-api…) nằm sau **API gateway**; web và mobile chỉ gọi qua gateway, không có `portal-api` riêng. Khi deploy, mock được tích hợp như một service của gateway: `https://api-gateway-demo.humg.edu.vn/euni-mock-api`. Base URL có thể có tiền tố nên client ghép chuỗi `{gateway}/{service}{path}` và mọi URL API trả về đều tương đối (không bắt đầu bằng `/`).
+
 Mọi request đều có header **`X-Tenant`**; request quản trị có thêm `Authorization: Bearer <token của IdS>`. Lỗi trả theo ProblemDetails (RFC 7807): `{ type, title, status, detail, errors }`.
 
 | Nhóm | Endpoint | Ghi chú |
@@ -316,10 +366,12 @@ Mọi request đều có header **`X-Tenant`**; request quản trị có thêm `
 | Thùng rác | `GET /api/v1/admin/contents/trash`, `POST /api/v1/admin/contents/{id}/restore` | |
 | Thông báo (quản trị) | Như tin tức nhưng là `/api/v1/admin/announcements…`, thêm `GET /api/v1/admin/announcements/{id}/stats` | `targets[]` trong body |
 | Hộp thư | `GET /api/v1/me/announcements?unread=&category=`, `GET /api/v1/me/announcements/unread-count`, `POST /api/v1/me/announcements/{id}/read`, `POST …/ack`, `POST /api/v1/me/announcements/read-all` | Dành cho portal SV/GV |
-| Phân quyền | `GET/POST /api/v1/admin/grants`, `PUT/DELETE /api/v1/admin/grants/{id}` | Thay `/api/v1/admin/users` và `/api/v1/admin/roles` (bị bỏ) |
+| Phân quyền | `GET/POST /api/v1/admin/grants`, `PUT/DELETE /api/v1/admin/grants/{id}` | Thay `/api/Users` và `/api/Roles` cũ (bị bỏ — user/role quản lý trên SSO) |
+| Danh mục role | `GET /api/v1/admin/directory/roles` | Realm role + client role (chỉ đọc) |
 | Danh bạ | `GET /api/v1/admin/directory/users?keyword=` (tên, email, mã), `GET /api/v1/admin/org-units` | Chỉ đọc |
 | Audit | `GET /api/v1/admin/audit-logs?entityType=&entityId=&actor=&from=&to=` | `/api/v1/admin/activity-logs` vẫn giữ làm alias |
-| CRUD khác | Banner, album, video, … giữ nguyên | Thêm soft delete và `POST /api/{res}/{id}/restore` |
+| CRUD khác | `/api/v1/admin/{banners,albums,videos,…}` | Thêm soft delete và `POST /api/v1/admin/{res}/{id}/restore` |
+| Công khai | `/api/v1/public/{home,site-content,contents,contents/slug/{slug},menus/{code},banners,settings,search,categories,…}` | Website đọc, không cần đăng nhập |
 
 ## 12. Thay đổi ở repo này (đã làm trong nhánh)
 
@@ -327,16 +379,16 @@ Kiểm thử đi kèm (tất cả đạt):
 
 | Lệnh | Phạm vi |
 |---|---|
-| `cd euni-api-mock && npm test` | 67 kiểm tra hành vi API: tenant, workflow, hẹn giờ, bản sửa đổi chờ duyệt, concurrency, revision, thùng rác, ACL theo đơn vị/chuyên mục/bản ghi, grants, announcements + hộp thư, audit |
+| `cd euni-api-mock && npm test` | 84 kiểm tra hành vi API: quy ước endpoint, chạy sau gateway có tiền tố, edusoft-api/esb-api, role 2 tầng + tenant theo grants, tenant, workflow, hẹn giờ, bản sửa đổi chờ duyệt, concurrency, revision, thùng rác, ACL theo đơn vị/chuyên mục/bản ghi, grants, announcements + hộp thư, audit |
 | `npm run db:v2:test` (cần PostgreSQL 16) | schema v2 + RLS chặn ghi/đọc chéo tenant, `v_news_live` theo giờ đăng, tìm kiếm không dấu, `news_allowed` theo cây đơn vị, `inbox()` với loại trừ, audit chỉ ghi thêm |
 | `node tools/migration/e2e-v2.mjs` | 24 bước trên trình duyệt thật: tác giả → biên tập duyệt, sửa bài đã đăng → duyệt bản sửa đổi, tab lịch sử, chọn tenant, thông báo cho lớp → SV nhận và xác nhận, GV thấy thông báo của khoa cha, phân quyền, audit, website theo host |
-| `node tools/migration/sso-test.mjs` (3 chế độ `entra` / `keycloak` / `ids`) | OIDC + PKCE, gợi ý IdP cho nút Microsoft 365, claim chuẩn của IdS (`role`, `tenant`, `unit`, `staff_code`) |
+| `node tools/migration/sso-test.mjs` (3 chế độ `entra` / `keycloak` / `ids`) | OIDC + PKCE, gợi ý IdP cho nút Microsoft 365, realm/client role, claim `unit`, `staff_code` |
 | `sync-test.mjs`, `e2e-cms-write*.mjs` | Kiểm thử cũ đã cập nhật theo workflow mới |
 
 
 | Repo | Thay đổi |
 |---|---|
-| `euni-api-mock` | Tenant (`X-Tenant`, 2 tenant mẫu `humg`, `cntt`). Workflow chuỗi, hẹn giờ và hết hạn, bản sửa đổi chờ duyệt. Revision, khôi phục, thùng rác, audit kèm diff, concurrency qua `version`. Grants với ACL theo tenant/chuyên mục/đơn vị/bản ghi, cùng `allowedActions`. Org units, danh bạ, Announcements kèm targets/receipts, hộp thư `/api/v1/me/*`. `auth-api` đóng vai IdS (claim `role`, `tenant`, `unit`). Bỏ `/api/v1/admin/users` và `/api/v1/admin/roles`. Có `database/v2/schema.sql`. |
+| `euni-api-mock` | Tenant (`X-Tenant`, 2 tenant mẫu `humg`, `cntt`). Workflow chuỗi, hẹn giờ và hết hạn, bản sửa đổi chờ duyệt. Revision, khôi phục, thùng rác, audit kèm diff, concurrency qua `version`. Grants với ACL theo tenant/chuyên mục/đơn vị/bản ghi, cùng `allowedActions`. Org units, danh bạ, Announcements kèm targets/receipts, hộp thư `/api/v1/me/*`. `auth-api` đóng vai IdS (realm role + client role, `unit`). Bỏ `/api/Users` và `/api/Roles` cũ. Có `database/v2/schema.sql`. |
 | `euni-admin` | Chọn tenant. Danh sách bài viết theo trạng thái mới kèm nút workflow và thùng rác. Trình soạn có nút workflow theo `allowedActions`, tab **Lịch sử** (revision, khôi phục, workflow) và xử lý xung đột phiên bản. Màn hình **Thông báo** (soạn, đối tượng nhận, duyệt, thống kê đọc). Màn hình **Phân quyền** chuyển sang grants. Bỏ màn hình Người dùng. |
 | `euni-public` | Đăng nhập qua IdS với 2 lựa chọn (tài khoản trường / M365); chế độ `mock` giữ form dev. Gửi `X-Tenant` theo host. Hộp thư thông báo của SV/GV đọc từ `/api/v1/me/announcements`. |
 

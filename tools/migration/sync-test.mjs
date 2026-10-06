@@ -19,7 +19,7 @@ const stamp = Date.now().toString(36)
 let created
 
 await step('Không đăng nhập thì API quản trị trả 401', async () => {
-  const res = await fetch(`${API}/cms-api/api/Contents`)
+  const res = await fetch(`${API}/cms-api/api/v1/admin/contents`)
   assert.equal(res.status, 401)
 })
 
@@ -50,7 +50,7 @@ await step('Bài nổi bật trang chủ: bật showOnHome + isFeatured → hi�
 })
 
 await step('Xóa bài viết → mất ở public (404 trang chi tiết)', async () => {
-  const res = await fetch(`${API}/cms-api/api/Contents/${created.id}`, { method: 'DELETE', headers: { Authorization: `Bearer ${t}` } })
+  const res = await fetch(`${API}/cms-api/api/v1/admin/contents/${created.id}`, { method: 'DELETE', headers: { Authorization: `Bearer ${t}` } })
   assert.equal(res.status, 204)
   assert.doesNotMatch(await page('/tin-tuc'), new RegExp(`Đã sửa tiêu đề ${stamp}`))
   assert.doesNotMatch(await page('/'), new RegExp(`Đã sửa tiêu đề ${stamp}`))

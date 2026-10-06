@@ -54,7 +54,7 @@ src/
 │  ├─ public/<module>/      about · admissions · audience · content · cooperation · education · home ·
 │  │                        library · life · research · staff-hub · student-hub · utilities
 │  │                          └─ pages/ + shared.jsx + <module>.css   (không còn data.js)
-│  ├─ portal/<role>/        student · staff · parent · leader  (pages/ + shared.jsx + css)
+│  ├─ portal/<role>/        student · staff (lecturer + staff) · parent · leader (manager)  (pages/ + shared.jsx + css)
 │  └─ authentication/       Các trang đăng nhập
 ├─ lib/
 │  ├─ api/client.js         Client gọi gateway: api(SERVICE.cms).get(...), tự gắn Bearer token

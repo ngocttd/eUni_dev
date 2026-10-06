@@ -12,7 +12,8 @@ import { WorkflowBar, HistoryPanel } from '../workflow.jsx'
 import { PersonPicker, UnitSelect, personLabel } from '../pickers.jsx'
 import { Head, Toggle } from '../shared.jsx'
 
-const AUDIENCES = [['', 'Mọi đối tượng'], ['student', 'Sinh viên'], ['staff', 'Cán bộ, giảng viên'], ['parent', 'Phụ huynh'], ['leader', 'Lãnh đạo']]
+/** Đối tượng nhận = realm role trên SSO */
+const AUDIENCES = [['', 'Mọi đối tượng'], ['student', 'Sinh viên'], ['lecturer', 'Giảng viên'], ['staff', 'Cán bộ, chuyên viên'], ['manager', 'Lãnh đạo'], ['parent', 'Phụ huynh'], ['applicant', 'Thí sinh'], ['alumni', 'Cựu người học']]
 const CATEGORIES = [['general', 'Chung'], ['academic', 'Đào tạo'], ['exam', 'Thi cử'], ['tuition', 'Học phí'], ['event', 'Sự kiện'], ['admin', 'Hành chính']]
 const PRIORITIES = [[0, 'Bình thường'], [1, 'Quan trọng'], [2, 'Khẩn']]
 const CHANNELS = [['portal', 'My eUni Portal'], ['email', 'Email'], ['push', 'Thông báo đẩy']]

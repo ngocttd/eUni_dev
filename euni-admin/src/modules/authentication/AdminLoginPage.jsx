@@ -8,7 +8,7 @@ import './auth.css'
 
 /**
  * Đăng nhập CMS admin qua Identity Server: tài khoản trường hoặc Microsoft 365 (cùng một người dùng trên IdS).
- * Quyền CMS lấy từ role trong token (cms.admin / cms.editor / cms.reviewer / cms.author) — CMS không quản lý user/role.
+ * Quyền CMS lấy từ role trong token (client role của cms-api: cms.admin / cms.editor / cms.reviewer / cms.author / cms.viewer) — CMS không quản lý user/role.
  * authMode "mock": form gọi auth-api của euni-api-mock (đóng vai IdS) khi phát triển.
  */
 export default function AdminLoginPage() {

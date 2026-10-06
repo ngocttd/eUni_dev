@@ -15,9 +15,10 @@ Hai app FE độc lập (build/deploy riêng). Chúng chỉ giao tiếp với nh
                          ┌───────────────────────── API gateway ─────────────────────────┐
  Trình duyệt ──► euni-public (:3002) ─┐                                                   │
                                       ├──► cms-api · auth-api · qlns-api · qlkhcn-api ·   │──► backend / DB
- Trình duyệt ──► euni-admin  (:3001) ─┘    qldt-api · portal-api                          │
+ Trình duyệt ──► euni-admin  (:3001) ─┘    edusoft-api · esb-api                          │
                          └─────────────────────────────────────────────────────────────┘
-        (dev: euni-api-mock :3000 đóng vai gateway)         admin ghi cms-api ⇒ public đọc lại thấy ngay
+        (dev: euni-api-mock :3000 đóng vai gateway; trên server: {gateway}/euni-mock-api)   admin ghi cms-api ⇒ public đọc lại thấy ngay
+        Web và mobile đều gọi qua API gateway — không có portal-api. Endpoint: /api/v1/{public|me|admin}/... (chữ thường, '-')
 ```
 
 ## 2. euni-public
@@ -40,7 +41,7 @@ src/
 ├─ modules/                  Giao diện theo nghiệp vụ (component dùng chung cho các route)
 │  ├─ public/                about · admissions · audience · content · cooperation · education · home ·
 │  │                         library · life · research · staff-hub · student-hub · utilities
-│  ├─ portal/                student · staff · parent · leader
+│  ├─ portal/                student · staff (giảng viên + cán bộ) · parent · leader (role manager)
 │  └─ authentication/        trang đăng nhập
 │        mỗi module:  pages/*.jsx + shared.jsx + <module>.css      (không còn data.js)
 ├─ lib/
@@ -85,10 +86,12 @@ database/schema.sql · seed.sql · migrate.mjs                  PostgreSQL (sche
 | Thông báo trong My eUni (SV, GV, phụ huynh) | `cms-api` `/api/v1/me/announcements` | Soạn ở CMS theo đối tượng nhận; hộp thư so khớp vai trò + đơn vị/lớp + cá nhân |
 | Giới thiệu (cơ cấu, giảng viên), cổng Giảng viên, Lãnh đạo | `qlns-api` | Hệ thống nhân sự |
 | Nghiên cứu (đề tài, công bố, chuyên gia…) | `qlkhcn-api` | Hệ thống KHCN |
-| Học tập, tuyển sinh, cổng Sinh viên/Phụ huynh | `qldt-api` | Hệ thống đào tạo |
-| Hợp tác, thư viện, đời sống, tiện ích | `portal-api` | Dịch vụ chung |
+| Học tập, tuyển sinh, cổng Sinh viên/Phụ huynh | `edusoft-api` | Hệ thống đào tạo |
+| Thư viện | `esb-api` | Tích hợp hệ thống thư viện qua ESB |
+| Hợp tác, đời sống, tiện ích | `cms-api` | Nội dung tĩnh của website (`/api/v1/public/datasets/{module}`) |
 | Đăng nhập | Identity Server (OIDC) | Tài khoản trường + Microsoft 365, cùng một `sub`; dev: `auth-api` của mock |
 
+Dữ liệu cá nhân của portal (`portal-*`) nằm ở nhóm `/api/v1/me/datasets/{module}`, còn lại `/api/v1/public/datasets/{module}`.
 Map này nằm ở `MODULE_SERVICE` (`src/lib/datasets/loaders.js`) và `euni-api-mock/src/datasets.js`; đổi ở đó nếu backend chia service khác.
 
 ## 6. Quy ước làm việc

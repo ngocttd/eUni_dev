@@ -65,7 +65,7 @@ src/
 Mọi đăng nhập đi qua **Identity Server** (OIDC + PKCE) — `NEXT_PUBLIC_AUTH_MODE=oidc`, `NEXT_PUBLIC_SSO_PROVIDER=ids`, `NEXT_PUBLIC_SSO_ISSUER`:
 hai nút **Tài khoản trường** và **Microsoft 365** (cùng một người dùng trên IdS). Quyền CMS lấy từ role trong token
 (`cms.admin`, `cms.editor`, `cms.reviewer`, `cms.author`) + phân quyền mức bản ghi ở màn hình **Phân quyền nội dung**.
-**CMS không quản lý người dùng / vai trò** (màn hình Người dùng, Vai trò cũ đã bỏ). Trang (tenant) được quản trị lấy từ claim `tenant`.
+**CMS không quản lý người dùng / vai trò** (màn hình Người dùng, Vai trò cũ đã bỏ). Quyền chức năng lấy từ client role `cms.*` (tầng 2 trên SSO); trang (tenant) được quản trị do CMS tự suy ra từ phân quyền (grants — tầng 3), không lấy từ claim.
 
 Chế độ `entra` (đăng nhập thẳng Entra ID, client `5a7cce06-…`) vẫn dùng được; chế độ `mock` dùng form gọi `auth-api` của euni-api-mock.
 Cấu hình đầy đủ: `.env.example`.

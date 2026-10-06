@@ -41,8 +41,9 @@ const CMS = [
   ['GET', '/api/v1/public/search', 'public', 'Tìm kiếm toàn site (bài viết, sự kiện, media, trang).', [['q', 'string', 'Từ khóa'], ...PAGED.slice(0, 2)], 'search'],
   ['GET', '/api/v1/public/contents', 'public', 'Danh sách bài viết đã xuất bản (không có contentBody), phân trang.', [['categoryId', 'integer', ''], ['lang', 'string', 'vi | en'], ...PAGED], 'contentList'],
   ['GET', '/api/v1/public/contents/slug/{slug}', 'public', 'Chi tiết bài viết đã xuất bản theo slug.', [['lang', 'string', 'vi | en']], 'contentDetail'],
-  ['GET', '/api/v1/public/contents/{id}/views', 'public', 'Ghi nhận +1 lượt xem cho bài viết.', [], null],
-  ['GET', '/api/v1/admin/categories', 'public', 'Danh mục (cây qua parentId).', PAGED, 'categories'],
+  ['POST', '/api/v1/public/contents/{id}/views', 'public', 'Ghi nhận +1 lượt xem cho bài viết.', [], null],
+  ['GET', '/api/v1/public/categories', 'public', 'Danh mục (cây qua parentId).', PAGED, 'categories'],
+  ['GET', '/api/v1/public/datasets/{module}', 'public', 'Nội dung tĩnh của website do CMS quản lý: cooperation, life, utilities (xem §4).', [], null],
   ['GET', '/api/v1/public/languages', 'public', 'Ngôn ngữ hỗ trợ.', [], null],
   ['GET', '/api/v1/public/media/{id}/url', 'public', 'URL tải file media.', [], null],
 
@@ -73,10 +74,10 @@ const CMS = [
   ['GET/POST/PUT/DELETE', '/api/v1/admin/grants', 'grant.manage', 'Phân quyền mức bản ghi: { principalType user|unit|role, principalId, resourceType *|news|announcement|page|media, scopeType tenant|category|unit|record, scopeId, permissions[view|edit|review|publish|manage], expiresAt?, note? }. Grant theo đơn vị áp dụng cả đơn vị con.', PAGED, 'grant'],
   ['GET', '/api/v1/admin/grants/effective/{sub}', 'grant.manage', 'Quyền chức năng + các grant đang áp dụng cho một người.', [], null],
   ['GET', '/api/v1/admin/directory/users', 'cms.access', 'Danh bạ (IdS) — tìm theo tên, email, mã CB, mã SV. Chỉ đọc; user/role quản lý ở Identity Server.', [['keyword', 'string', ''], ['role', 'string', '']], 'directory'],
-  ['GET', '/api/v1/admin/directory/roles', 'cms.access', 'Bảng role (IdS) → quyền chức năng CMS (cấu hình tĩnh).', [], null],
+  ['GET', '/api/v1/admin/directory/roles', 'cms.access', 'Danh mục role trên SSO: realm role (tầng 1) và client role theo app (tầng 2), kèm quyền chức năng CMS tương ứng (cấu hình tĩnh).', [], null],
   ['GET', '/api/v1/admin/org-units', 'cms.access', 'Cây đơn vị (bản sao QLNS/QLĐT): code, name, kind, parentCode, path, depth.', [], 'orgUnits'],
 
-  ['POST', '/api/v1/admin/categories · PUT/DELETE /api/v1/admin/categories/{id}', 'category.manage', 'CRUD danh mục (theo tenant, xóa mềm, POST /{id}/restore).', [], 'category'],
+  ['GET/POST', '/api/v1/admin/categories · PUT/DELETE /api/v1/admin/categories/{id}', 'category.manage', 'CRUD danh mục (theo tenant, xóa mềm, POST /{id}/restore).', [], 'category'],
   ['GET', '/api/v1/admin/media', 'media.manage', 'Thư viện media của tenant.', [['kind', 'string', 'image | document | video | audio | other'], ['folder', 'string', ''], ...PAGED], 'media'],
   ['POST', '/api/v1/admin/media/upload', 'media.manage', 'multipart/form-data: file, altText, caption, folder.', [], 'media'],
   ['DELETE', '/api/v1/admin/media/{id}', 'media.manage', 'Xóa mềm media.', [], null],
@@ -106,9 +107,9 @@ const samples = {
   search: await j('/cms-api/api/v1/public/search?q=tuyen&pageSize=2'),
   contentList: await j('/cms-api/api/v1/public/contents?pageSize=2'),
   contentDetail: await j('/cms-api/api/v1/public/contents/slug/le-ky-niem-60-nam-thanh-lap'),
-  categories: await j('/cms-api/api/v1/admin/categories?pageSize=2'),
+  categories: await j('/cms-api/api/v1/public/categories?pageSize=2'),
   content: await first('/cms-api/api/v1/admin/contents?pageSize=1'),
-  category: await first('/cms-api/api/v1/admin/categories?pageSize=1'),
+  category: await first('/cms-api/api/v1/admin/categories?pageSize=1', T),
   media: await first('/cms-api/api/v1/admin/media?pageSize=1'),
   context: await j('/cms-api/api/v1/me/context', T),
   revisions: await j('/cms-api/api/v1/admin/contents/1/revisions', T),
@@ -139,7 +140,7 @@ const add = (path, method, op) => { (paths[path] ||= {})[method] = op }
 const pq = (list) => list.map(([name, type, description]) => ({ name, in: 'query', description, schema: { type } }))
 const ok = (schema) => ({ 200: { description: 'OK', content: { 'application/json': { schema } } }, 401: { description: 'Chưa đăng nhập' }, 403: { description: 'Thiếu quyền' } })
 
-add('/auth-api/api/v1/auth/login', 'post', { tags: ['auth-api'], summary: 'Đăng nhập', requestBody: { content: { 'application/json': { schema: { type: 'object', properties: { username: { type: 'string' }, password: { type: 'string' }, role: { type: 'string', description: 'Chỉ dùng cho "vào cổng demo": student|staff|parent|leader' } } } } } }, responses: ok({ type: 'object', properties: { accessToken: { type: 'string' }, user: { type: 'object', properties: { id: {}, username: {}, name: {}, role: { type: 'string' }, permissions: { type: 'array', items: { type: 'string' } }, portal: { type: 'string' } } } } }) })
+add('/auth-api/api/v1/auth/login', 'post', { tags: ['auth-api'], summary: 'Đăng nhập', requestBody: { content: { 'application/json': { schema: { type: 'object', properties: { username: { type: 'string' }, password: { type: 'string' }, role: { type: 'string', description: 'Chỉ dùng cho "vào cổng demo": student|lecturer|staff|manager|parent' } } } } } }, responses: ok({ type: 'object', properties: { accessToken: { type: 'string' }, user: { type: 'object', properties: { id: {}, username: {}, name: {}, role: { type: 'string' }, permissions: { type: 'array', items: { type: 'string' } }, portal: { type: 'string' } } } } }) })
 add('/auth-api/api/v1/auth/me', 'get', { tags: ['auth-api'], summary: 'Người dùng hiện tại', security: [{ bearer: [] }], responses: ok({ type: 'object' }) })
 add('/auth-api/api/v1/auth/refresh', 'post', { tags: ['auth-api'], summary: 'Cấp lại access token', security: [{ bearer: [] }], responses: ok({ type: 'object' }) })
 add('/auth-api/api/v1/auth/logout', 'post', { tags: ['auth-api'], summary: 'Đăng xuất', responses: { 204: { description: 'No content' } } })
@@ -157,21 +158,21 @@ for (const [method, path, perm, desc, query, key] of CMS) {
     }
   }
 }
-const svcOf = (s) => s
+const groupOf = (m) => (m.startsWith('portal-') ? 'me' : 'public')
 for (const [module, data] of Object.entries(datasets)) {
   const service = MODULE_SERVICE[module]
-  add(`/${service}/api/v1/public/datasets/${module}`, 'get', { tags: [service], summary: `Toàn bộ dataset "${module}"`, responses: ok(infer(data, 1)) })
+  add(`/${service}/api/v1/${groupOf(module)}/datasets/${module}`, 'get', { tags: [service], summary: `Toàn bộ dataset "${module}"`, responses: ok(infer(data, 1)) })
   for (const [key, value] of Object.entries(data)) {
-    add(`/${service}/api/v1/${module}/${kebab(key)}`, 'get', { tags: [service], summary: `${module}.${key}`, parameters: Array.isArray(value) ? pq(PAGED) : [], responses: ok(Array.isArray(value) ? { type: 'object', properties: { items: infer(value, 2), pageIndex: { type: 'integer' }, pageSize: { type: 'integer' }, totalItems: { type: 'integer' }, totalPages: { type: 'integer' } } } : infer(value, 2)) })
+    add(`/${service}/api/v1/${groupOf(module)}/${module}/${kebab(key)}`, 'get', { tags: [service], summary: `${module}.${key}`, parameters: Array.isArray(value) ? pq(PAGED) : [], responses: ok(Array.isArray(value) ? { type: 'object', properties: { items: infer(value, 2), pageIndex: { type: 'integer' }, pageSize: { type: 'integer' }, totalItems: { type: 'integer' }, totalPages: { type: 'integer' } } } : infer(value, 2)) })
   }
 }
-add('/qlkhcn-api/api/v1/research-topic-categories', 'get', { tags: ['qlkhcn-api'], summary: 'Danh mục lĩnh vực đề tài (có trong Swagger gateway demo)', parameters: pq(PAGED), responses: ok({ type: 'object' }) })
-add('/qlns-api/api/v1/employees', 'get', { tags: ['qlns-api'], summary: 'Cán bộ, giảng viên (có trong Swagger gateway demo)', parameters: [...pq(PAGED), { name: 'isCurrentOnly', in: 'query', schema: { type: 'boolean' } }], responses: ok({ type: 'object' }) })
+add('/qlkhcn-api/api/v1/public/research-topic-categories', 'get', { tags: ['qlkhcn-api'], summary: 'Danh mục lĩnh vực đề tài (có trong Swagger gateway demo)', parameters: pq(PAGED), responses: ok({ type: 'object' }) })
+add('/qlns-api/api/v1/public/employees', 'get', { tags: ['qlns-api'], summary: 'Cán bộ, giảng viên (có trong Swagger gateway demo)', parameters: [...pq(PAGED), { name: 'isCurrentOnly', in: 'query', schema: { type: 'boolean' } }], responses: ok({ type: 'object' }) })
 
 writeFileSync(join(out, 'openapi.json'), JSON.stringify({
   openapi: '3.0.3',
   info: { title: 'HUMG eUni — API gateway (hợp đồng FE ↔ BE)', version: '1.0.0', description: 'Hợp đồng do FE định nghĩa để backend triển khai. Sinh từ euni-api-mock. Mọi service nằm dưới cùng gateway: {gateway}/{service}/...' },
-  servers: [{ url: 'http://127.0.0.1:3000', description: 'mock' }, { url: 'https://api-gateway-demo.humg.edu.vn', description: 'demo' }],
+  servers: [{ url: 'http://127.0.0.1:3000', description: 'mock (máy dev)' }, { url: 'https://api-gateway-demo.humg.edu.vn/euni-mock-api', description: 'mock trên server, qua gateway' }, { url: 'https://api-gateway-demo.humg.edu.vn', description: 'backend thật' }],
   components: { securitySchemes: { bearer: { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' } } },
   paths,
 }, null, 1))
@@ -182,26 +183,27 @@ const p = (...x) => md.push(x.join(''))
 p('# HUMG eUni — Hợp đồng API (FE ↔ BE)\n')
 p('> **Tài liệu do FE định nghĩa để backend triển khai.** Sinh tự động từ `euni-api-mock` (`npm run contract`), đi kèm `openapi.json`. FE chạy được ngay với mock; khi backend làm đúng hợp đồng này chỉ cần đổi `NEXT_PUBLIC_API_GATEWAY_URL`.\n')
 p('## 1. Quy ước chung\n')
-p('- **Gateway**: `{gateway}/{service}/...` — mock `http://127.0.0.1:3000`, demo `https://api-gateway-demo.humg.edu.vn`.')
-p('- **Service**: `cms-api` (nội dung CMS), `auth-api`, `qlns-api` (nhân sự), `qlkhcn-api` (khoa học công nghệ), `qldt-api` (đào tạo), `portal-api` (cổng dịch vụ chung).')
+p('- **Gateway**: `{gateway}/{service}/...` — mock trên máy dev `http://127.0.0.1:3000`; mock trên server **tích hợp qua gateway** `https://api-gateway-demo.humg.edu.vn/euni-mock-api` (như qlns-api, qlkhcn-api, edusoft-api); backend thật `https://api-gateway-demo.humg.edu.vn`. Base URL có thể có tiền tố nên client **ghép chuỗi** `{gateway}/{service}{path}`; mọi URL API trả về (vd. media `cms-api/uploads/x.png`) là **tương đối** với gateway, không bắt đầu bằng `/`.')
+p('- **Service**: `cms-api` (nội dung CMS + nội dung tĩnh của website), `auth-api` (mock IdS), `qlns-api` (nhân sự), `qlkhcn-api` (khoa học công nghệ), `edusoft-api` (đào tạo), `esb-api` (tích hợp hệ thống ngoài, vd. thư viện). Không có `portal-api`: web và mobile gọi thẳng các service qua API gateway.')
+p('- **Tên endpoint**: chữ thường, ngăn cách bằng `-`, có version: `/api/v1/{nhóm}/{tài-nguyên}` (vd. `/api/v1/public/category-post`). Nhóm: `public` (không cần đăng nhập) · `me` (người dùng đã đăng nhập, dữ liệu của chính họ) · `admin` (quản trị, cần quyền). Gateway/backend có thể áp chính sách xác thực theo tiền tố nhóm.')
 p('- **JSON camelCase**, thời gian ISO-8601 có múi giờ (`2025-05-15T08:00:00+07:00`), ngày `yyyy-MM-dd`. Giao diện tự định dạng hiển thị (dd/MM/yyyy…), API **không** trả chuỗi đã format.')
 p('- **Phân trang** (mọi danh sách): query `pageIndex` (≥1), `pageSize`, `keyword`; response `{ items, pageIndex, pageSize, totalItems, totalPages }`.')
 p('- **Envelope**: FE chấp nhận cả response thô (như mock) lẫn envelope của backend — cms-api `{ "success": true, "message": "...", "data": ... }`, qlns/qlkhcn `{ "code": 200, "message": "...", "data": ... }`. FE tự bóc `data`; `success:false` hoặc `code` ngoài 2xx được coi là lỗi. Danh sách có thể là **mảng thuần** hoặc đối tượng phân trang — FE chuẩn hóa (`asPage`). Các ví dụ dưới đây là dạng đã bóc `data`.')
 p('- **Xác thực**: `Authorization: Bearer <accessToken>`. 401 chưa đăng nhập / hết hạn · 403 thiếu quyền · 404 · 409 trùng · 422 sai dữ liệu `{ message, errors? }`.')
 p('- **Id** là số nguyên (int64). Bài viết **xóa mềm**. `contentBody` là **chuỗi HTML** do trình soạn thảo WYSIWYG của CMS tạo (p, h2–h4, ul/ol, blockquote, a, img, table…; **backend nên làm sạch HTML khi lưu**, website cũng làm sạch khi hiển thị), hoặc — với dữ liệu cũ — chuỗi JSON mảng khối (`"Đoạn văn"` | `{type:"h2"|"quote"|"img"|"list", ...}`).')
-p('- **Tenant**: mọi request gửi header `X-Tenant: <tenant>` (vd. `humg`, `cntt`). Thiếu header → backend suy ra từ host, cuối cùng là tenant mặc định. API quản trị: tenant phải có trong claim `tenants` của token (trừ `cms.*`), sai → 403. Hộp thư `/api/v1/me/announcements` nhận `X-Tenant: *` = mọi tenant của user. Thiết kế: `docs/design/CMS_DESIGN.md` §2.')
+p('- **Tenant**: mọi request gửi header `X-Tenant: <tenant>` (vd. `humg`, `cntt`). Thiếu header → backend suy ra từ host, cuối cùng là tenant mặc định. API quản trị: user phải có ít nhất một grant trong tenant đó (trừ `cms.*`), sai → 403 — phạm vi tenant là tầng 3, do CMS tự phân, không lấy từ SSO. Hộp thư `/api/v1/me/announcements` nhận `X-Tenant: *` = mọi tenant của user. Thiết kế: `docs/design/CMS_DESIGN.md` §2.')
 p('- **Workflow**: `status` là chuỗi `draft | pending_review | published | archived` (mã số cũ 0..3 vẫn nhận khi ghi). Bài công khai = `published` và `publishAt <= now` và (`expireAt` trống hoặc > now). Đổi trạng thái chỉ qua `POST …/workflow/{action}`.')
 p('- **Concurrency**: bản ghi có `version`; gửi `version` trong body hoặc header `If-Match: "<version>"` khi sửa → 409 `{ message, currentVersion }` nếu đã có người khác sửa.')
-p('- **Quyền**: quyền chức năng lấy từ role trong token (bảng `GET /api/v1/admin/directory/roles`), cộng phân quyền mức bản ghi `/api/v1/admin/grants`. Mỗi bản ghi trả `allowedActions[]` để UI chỉ hiện nút hợp lệ; backend vẫn kiểm tra lại.')
-p('- Tên endpoint nhóm CMS theo mẫu Swagger gateway demo (`/api/v1/admin/categories`, `/api/v1/admin/contents`, `/api/v1/admin/media`); phần mở rộng cùng phong cách. `/api/v1/admin/users`, `/api/v1/admin/roles` **đã bỏ** — user/role quản lý ở Identity Server.')
+p('- **Quyền** (2 tầng trên SSO + tầng 3 trong app): tầng 1 realm role `student lecturer staff manager parent applicant alumni`; tầng 2 client role có tiền tố theo app (`cms.viewer cms.author cms.reviewer cms.editor cms.admin`, `euni.*`, `edusoft.*`, `qlns.*`, `qlkhcn.*`) — bảng `GET /api/v1/admin/directory/roles`; tầng 3 phân quyền mức tenant/chuyên mục/đơn vị/bản ghi `/api/v1/admin/grants` do CMS tự quản lý. Mỗi bản ghi trả `allowedActions[]` để UI chỉ hiện nút hợp lệ; backend vẫn kiểm tra lại.')
+p('- Không có endpoint quản lý user/role trong CMS — user và role (tầng 1, 2) quản lý trên SSO; CMS chỉ đọc danh bạ.')
 p('- **Đồng bộ CMS → website**: website **không cache** dữ liệu CMS (fetch `no-store`). Khi admin ghi (POST/PUT/DELETE) thì lần đọc `/api/v1/public/*` kế tiếp phải thấy thay đổi.\n')
 
 p('## 2. auth-api\n')
-p('> **Identity Server**: người dùng thật đăng nhập qua IdS (OIDC + PKCE) bằng **tài khoản trường** hoặc **Microsoft 365** (IdS federate, cùng một `sub`). FE gửi `Authorization: Bearer <access_token của IdS>` (aud = cms-api); backend xác thực JWT bằng JWKS của IdS. Claim cần có: `sub, name, email, role[], tenant[], unit[], staff_code, student_code` (xem docs/design/CMS_DESIGN.md §3). `auth-api` bên dưới **chỉ là mock của IdS** khi phát triển.\n')
+p('> **Identity Server**: người dùng thật đăng nhập qua IdS (OIDC + PKCE) bằng **tài khoản trường** hoặc **Microsoft 365** (IdS federate, cùng một `sub`). FE gửi `Authorization: Bearer <access_token của IdS>` (aud = cms-api); backend xác thực JWT bằng JWKS của IdS. Claim cần có: `sub, name, email`, realm role + client role (Keycloak: `realm_access.roles`, `resource_access.{client}.roles`; IdS: `role[]`), `unit[]`, `staff_code, student_code`. Không cần claim tenant (tầng 3 do app tự phân) (xem docs/design/CMS_DESIGN.md §3). `auth-api` bên dưới **chỉ là mock của IdS** khi phát triển.\n')
 p('| Method | Path | Mô tả |\n|---|---|---|')
-p('| POST | `/api/v1/auth/login` | `{ username, password }` → `{ accessToken, user }`. Mock cho phép `{ role: "student|staff|parent|leader" }` để vào cổng demo. |')
+p('| POST | `/api/v1/auth/login` | `{ username, password }` → `{ accessToken, user }`. Mock cho phép `{ role: "student|lecturer|staff|manager|parent" }` để vào cổng demo. |')
 p('| GET | `/api/v1/auth/me` | → `{ user }` |\n| POST | `/api/v1/auth/refresh` | → `{ accessToken, user }` |\n| POST | `/api/v1/auth/logout` | 204 |\n')
-p('`user`: `{ sub, username, name, email, role, roles[], permissions[], tenants[], units[], staffCode, studentCode, portal }`. `roles` là role trên IdS (`cms.admin` `cms.editor` `cms.reviewer` `cms.author` `student` `staff` `parent` `leader`); `role` là vai trò chính để FE điều hướng. `permissions` = quyền chức năng suy ra từ roles (wildcard `cms.*`).\n')
+p('`user`: `{ sub, username, name, email, role, roles[], permissions[], tenants[], units[], staffCode, studentCode, portal }`. `roles` là role trên SSO (realm role + client role, vd. `lecturer`, `cms.editor`, `edusoft.academic-advisor`); `role` là vai trò chính để FE điều hướng; `tenants` chỉ là membership (trang user thuộc về, cho hộp thư thông báo), không phải quyền quản trị. `permissions` = quyền chức năng suy ra từ roles (wildcard `cms.*`).\n')
 p('```json\n' + short({ ...loginRes, accessToken: '<jwt>' }) + '\n```\n')
 
 p('## 3. cms-api — các endpoint\n')
@@ -215,20 +217,20 @@ for (const [k, title] of ex) {
   p(`#### ${title}\n`, '```json\n', big ? short(Object.fromEntries(Object.entries(samples[k]).map(([a, b]) => [a, Array.isArray(b) ? b.slice(0, 1) : b])), 1) : short(samples[k]), '\n```\n')
 }
 
-p('## 4. Các service ngoài (qlns / qlkhcn / qldt / portal)\n')
-p('Mỗi **module giao diện** có một dataset: `GET /{service}/api/v1/public/datasets/{module}` → object gồm các khóa dưới đây; mỗi khóa cũng có endpoint riêng `GET /{service}/api/v1/{module}/{khoa-kebab-case}` (mảng → phân trang). Nội dung/kiểu dữ liệu từng khóa lấy theo đúng mock trong `mock-data/{module}.json` (cấu trúc đó **là hợp đồng**).\n')
-p('Hai endpoint đã có thật ở gateway demo: `GET /qlkhcn-api/api/v1/research-topic-categories` và `GET /qlns-api/api/v1/employees` (`pageIndex,pageSize,keyword[,isCurrentOnly]`).\n')
+p('## 4. Dataset theo module (qlns / qlkhcn / edusoft / esb / cms)\n')
+p('Mỗi **module giao diện** có một dataset: `GET /{service}/api/v1/{nhóm}/datasets/{module}` (nhóm `me` cho dữ liệu cá nhân của portal `portal-*`, còn lại `public`) → object gồm các khóa dưới đây; mỗi khóa cũng có endpoint riêng `GET /{service}/api/v1/{nhóm}/{module}/{khoa-kebab-case}` (mảng → phân trang). Nội dung/kiểu dữ liệu từng khóa lấy theo đúng mock trong `mock-data/{module}.json` (cấu trúc đó **là hợp đồng**).\n')
+p('Hai endpoint tương ứng với Swagger gateway demo (đưa về quy ước nhóm): `GET /qlkhcn-api/api/v1/public/research-topic-categories` và `GET /qlns-api/api/v1/public/employees` (`pageIndex,pageSize,keyword[,isCurrentOnly]`).\n')
 const bySvc = {}
 for (const [m, svc] of Object.entries(MODULE_SERVICE)) (bySvc[svc] ||= []).push(m)
 for (const [svc, mods] of Object.entries(bySvc)) {
   p(`### ${svc}\n`)
   for (const m of mods) {
-    p(`**\`${m}\`** — \`GET /${svc}/api/v1/public/datasets/${m}\`\n`)
+    p(`**\`${m}\`** — \`GET /${svc}/api/v1/${groupOf(m)}/datasets/${m}\`\n`)
     p('| Khóa | Kiểu | Endpoint riêng | Ví dụ trường |\n|---|---|---|---|')
     for (const [k, v] of Object.entries(datasets[m])) {
       const type = Array.isArray(v) ? `mảng[${v.length}]` : typeof v === 'object' ? 'object' : typeof v
       const fields = Array.isArray(v) ? (v[0] && typeof v[0] === 'object' ? Object.keys(v[0]).slice(0, 6).join(', ') : typeof v[0]) : v && typeof v === 'object' ? Object.keys(v).slice(0, 6).join(', ') : ''
-      p(`| \`${k}\` | ${type} | \`/api/v1/${m}/${kebab(k)}\` | ${fields} |`)
+      p(`| \`${k}\` | ${type} | \`/api/v1/${groupOf(m)}/${m}/${kebab(k)}\` | ${fields} |`)
     }
     p('')
   }

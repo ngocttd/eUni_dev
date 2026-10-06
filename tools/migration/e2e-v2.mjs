@@ -13,7 +13,7 @@ const API = process.env.API_URL || 'http://127.0.0.1:3000'
 const results = []
 const ok = (name, cond, extra = '') => { results.push([cond, name, extra]); console.log(`${cond ? '✓' : '✗'} ${name}${!cond && extra ? ` — ${extra}` : ''}`) }
 
-await fetch(`${API}/cms-api/api/_dev/reset`, { method: 'POST' })
+await fetch(`${API}/cms-api/api/v1/dev/reset`, { method: 'POST' })
 const browser = await chromium.launch({ executablePath: process.env.CHROME || undefined })
 const errors = []
 const newPage = async () => {

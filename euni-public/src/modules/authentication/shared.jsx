@@ -15,6 +15,10 @@ export const DEMO_PORTALS = [{
 }, {
   label: 'Giảng viên',
   to: '/euni/giang-vien',
+  role: 'lecturer'
+}, {
+  label: 'Cán bộ',
+  to: '/euni/giang-vien',
   role: 'staff'
 }, {
   label: 'Phụ huynh',
@@ -23,7 +27,7 @@ export const DEMO_PORTALS = [{
 }, {
   label: 'Lãnh đạo',
   to: '/euni/lanh-dao',
-  role: 'leader'
+  role: 'manager'
 }];
 
 /* Ô nhập mật khẩu có nút ẩn/hiện */

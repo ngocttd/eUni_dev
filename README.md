@@ -56,7 +56,7 @@ IdS đã liên kết hai loại tài khoản nên là cùng một người dùng
 ## Kiểm thử
 
 ```bash
-npm --prefix euni-api-mock test                     # 67 kiểm tra hành vi API (tự chạy server tạm)
+npm --prefix euni-api-mock test                     # 84 kiểm tra hành vi API (tự chạy server tạm)
 psql … -f euni-api-mock/database/v2/schema.sql -f euni-api-mock/database/v2/test.sql   # schema v2 + RLS
 # với 3 app đang chạy (mock dữ liệu gốc, public build với NEXT_PUBLIC_TENANT_HOSTS="cntt.localhost:3002=cntt"):
 node tools/migration/e2e-v2.mjs                     # 24 bước trình duyệt: workflow, tenant, thông báo, phân quyền
@@ -65,6 +65,16 @@ node tools/migration/sync-test.mjs                  # đồng bộ CMS → websi
 
 ## Nối backend thật
 
-Đổi `NEXT_PUBLIC_API_GATEWAY_URL` ở `euni-public` và `euni-admin` (vd. `https://api-gateway-demo.humg.edu.vn`).
+Đổi `NEXT_PUBLIC_API_GATEWAY_URL` ở `euni-public` và `euni-admin`:
+
+| Môi trường | `NEXT_PUBLIC_API_GATEWAY_URL` |
+|---|---|
+| Dev (mock chạy máy) | `http://127.0.0.1:3000` |
+| Mock trên server (tích hợp qua gateway như qlns-api, qlkhcn-api, edusoft-api) | `https://api-gateway-demo.humg.edu.vn/euni-mock-api` |
+| Backend thật | `https://api-gateway-demo.humg.edu.vn` |
+
+FE ghép chuỗi `{gateway}/{service}/api/v1/...` nên tiền tố `/euni-mock-api` được giữ nguyên; URL media/tệp do API trả về là đường dẫn tương đối.
+Tên endpoint: chữ thường, `-`, có version, nhóm `/api/v1/public/` · `/api/v1/me/` · `/api/v1/admin/`. Service: `cms-api`, `edusoft-api` (đào tạo), `qlns-api`, `qlkhcn-api`, `esb-api`;
+web và mobile đều gọi qua API gateway (không có `portal-api`). Role: 2 tầng trên SSO (realm role + client role có tiền tố), tầng 3 do từng app tự phân — xem `docs/design/CMS_DESIGN.md` §5.1.
 Điểm chỉnh duy nhất khi shape dữ liệu thật khác hợp đồng: `src/lib/datasets/loaders.js` của từng repo (adapter).
 FE đã tương thích envelope của backend hiện có (`{success,message,data}` / `{code,message,data}`) và danh sách dạng mảng thuần.

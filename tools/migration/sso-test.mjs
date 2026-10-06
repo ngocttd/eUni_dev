@@ -72,11 +72,11 @@ await step('startLogin "Microsoft 365": PKCE S256, state, nonce, gợi ý IdP (k
   globalThis.__nonce = u.searchParams.get('nonce')
 })
 
-await step('completeLogin: đổi code → phiên SSO, vai trò staff, returnTo giữ nguyên', async () => {
+await step('completeLogin: đổi code → phiên SSO, vai trò lecturer, returnTo giữ nguyên', async () => {
   const { session, returnTo } = await completeLogin(`${origin}/dang-nhap/sso/callback?code=abc&state=${state}`)
   assert.equal(returnTo, '/euni/sinh-vien/lich-hoc')
   assert.equal(session.sso, true)
-  assert.equal(session.user.role, 'staff')
+  assert.equal(session.user.role, 'lecturer')
   assert.equal(session.user.portal, '/euni/giang-vien')
   assert.equal(session.user.name, 'Nguyễn Văn A')
   assert.equal(session.refreshToken, 'r1')
@@ -92,7 +92,7 @@ await step('refreshSession: dùng refresh_token, giữ idToken cũ; vai trò the
   assert.equal(next.refreshToken, 'r2')
   assert.equal(next.idToken, globalThis.__session.idToken)
   // access token làm mới mang realm_access=student: IdS/Keycloak đọc claim của access token; Entra chỉ tin id_token → giữ nguyên người dùng
-  assert.equal(next.user.role, PROVIDER === 'entra' ? 'staff' : 'student')
+  assert.equal(next.user.role, PROVIDER === 'entra' ? 'lecturer' : 'student')
 })
 
 await step('completeLogin: sai state bị từ chối', async () => {
@@ -120,18 +120,24 @@ await step('logoutUrl: end_session kèm id_token_hint và post_logout_redirect_u
   assert.equal(u.searchParams.get('post_logout_redirect_uri'), `${origin}/`)
 })
 
-await step('mapSsoUser: ánh xạ vai trò CMS / leader / parent / mặc định', async () => {
+await step('mapSsoUser: ánh xạ vai trò CMS / realm role (manager, lecturer, staff, parent) / mặc định', async () => {
   const role = (roles) => mapSsoUser({ sub: 's', realm_access: { roles } }).role
   assert.equal(role(['cms-admin']), 'cms-admin')
-  assert.equal(role(['editor']), 'cms-editor')
-  assert.equal(role(['lanh-dao']), 'leader')
+  assert.equal(role(['cms.editor']), 'cms-editor')
+  assert.equal(role(['cms.viewer']), 'cms-editor')
+  assert.equal(role(['lanh-dao']), 'manager')
+  assert.equal(role(['manager', 'lecturer']), 'manager')
+  assert.equal(role(['staff']), 'staff')
+  assert.equal(role(['lecturer']), 'lecturer')
+  assert.equal(role(['qlns.hr-officer']), 'student') // client role của app khác không quyết định cổng
   assert.equal(role(['phu-huynh']), 'parent')
   assert.equal(mapSsoUser({ sub: 's', roles: ['CMS-Admin'] }).role, 'cms-admin') // app role của Entra
   assert.equal(role([]), 'student')
   assert.deepEqual(mapSsoUser({ sub: 's', realm_access: { roles: ['cms-admin'] } }).permissions, ['cms.access', 'cms.*'])
   // claim chuẩn của Identity Server: role (chuỗi hoặc mảng), tenant, unit, staff_code
   const ids = mapSsoUser({ sub: 's', role: ['cms.editor', 'staff'], tenant: ['humg', 'cntt'], unit: 'BM-KHMT', staff_code: 'GV0123' })
-  assert.equal(ids.role, 'cms-editor'); assert.deepEqual(ids.tenants, ['humg', 'cntt']); assert.deepEqual(ids.units, ['BM-KHMT']); assert.equal(ids.staffCode, 'GV0123')
+  assert.equal(ids.role, 'cms-editor'); assert.equal(ids.tenants, undefined); // tenant: tầng 3, CMS tự phân
+   assert.deepEqual(ids.units, ['BM-KHMT']); assert.equal(ids.staffCode, 'GV0123')
   assert.equal(mapSsoUser({ sub: 's', role: 'cms.admin' }).role, 'cms-admin')
   assert.equal(mapSsoUser({ sub: 's', role: 'cms.reviewer' }).role, 'cms-editor')
 })

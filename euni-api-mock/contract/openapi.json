@@ -8,11 +8,15 @@
  "servers": [
   {
    "url": "http://127.0.0.1:3000",
-   "description": "mock"
+   "description": "mock (máy dev)"
+  },
+  {
+   "url": "https://api-gateway-demo.humg.edu.vn/euni-mock-api",
+   "description": "mock trên server, qua gateway"
   },
   {
    "url": "https://api-gateway-demo.humg.edu.vn",
-   "description": "demo"
+   "description": "backend thật"
   }
  ],
  "components": {
@@ -25,7 +29,7 @@
   }
  },
  "paths": {
-  "/auth-api/api/auth/login": {
+  "/auth-api/api/v1/auth/login": {
    "post": {
     "tags": [
      "auth-api"
@@ -45,7 +49,7 @@
          },
          "role": {
           "type": "string",
-          "description": "Chỉ dùng cho \"vào cổng demo\": student|staff|parent|leader"
+          "description": "Chỉ dùng cho \"vào cổng demo\": student|lecturer|staff|manager|parent"
          }
         }
        }
@@ -97,7 +101,7 @@
     }
    }
   },
-  "/auth-api/api/auth/me": {
+  "/auth-api/api/v1/auth/me": {
    "get": {
     "tags": [
      "auth-api"
@@ -128,7 +132,7 @@
     }
    }
   },
-  "/auth-api/api/auth/refresh": {
+  "/auth-api/api/v1/auth/refresh": {
    "post": {
     "tags": [
      "auth-api"
@@ -159,7 +163,7 @@
     }
    }
   },
-  "/auth-api/api/auth/logout": {
+  "/auth-api/api/v1/auth/logout": {
    "post": {
     "tags": [
      "auth-api"
@@ -172,7 +176,7 @@
     }
    }
   },
-  "/cms-api/api/Public/content": {
+  "/cms-api/api/v1/public/site-content": {
    "get": {
     "tags": [
      "cms-api"
@@ -505,7 +509,7 @@
     }
    }
   },
-  "/cms-api/api/Public/home": {
+  "/cms-api/api/v1/public/home": {
    "get": {
     "tags": [
      "cms-api"
@@ -1116,7 +1120,7 @@
     }
    }
   },
-  "/cms-api/api/Public/menus/{code}": {
+  "/cms-api/api/v1/public/menus/{code}": {
    "get": {
     "tags": [
      "cms-api"
@@ -1179,7 +1183,7 @@
     }
    }
   },
-  "/cms-api/api/Public/banners": {
+  "/cms-api/api/v1/public/banners": {
    "get": {
     "tags": [
      "cms-api"
@@ -1217,7 +1221,7 @@
     }
    }
   },
-  "/cms-api/api/Public/settings": {
+  "/cms-api/api/v1/public/settings": {
    "get": {
     "tags": [
      "cms-api"
@@ -1313,7 +1317,7 @@
     }
    }
   },
-  "/cms-api/api/Public/search": {
+  "/cms-api/api/v1/public/search": {
    "get": {
     "tags": [
      "cms-api"
@@ -1406,7 +1410,7 @@
     }
    }
   },
-  "/cms-api/api/Contents/view/list": {
+  "/cms-api/api/v1/public/contents": {
    "get": {
     "tags": [
      "cms-api"
@@ -1558,7 +1562,7 @@
     }
    }
   },
-  "/cms-api/api/Contents/slug/{slug}": {
+  "/cms-api/api/v1/public/contents/slug/{slug}": {
    "get": {
     "tags": [
      "cms-api"
@@ -1672,8 +1676,8 @@
     }
    }
   },
-  "/cms-api/api/Contents/function/{id}": {
-   "get": {
+  "/cms-api/api/v1/public/contents/{id}/views": {
+   "post": {
     "tags": [
      "cms-api"
     ],
@@ -1700,7 +1704,7 @@
     }
    }
   },
-  "/cms-api/api/Categories": {
+  "/cms-api/api/v1/public/categories": {
    "get": {
     "tags": [
      "cms-api"
@@ -1801,18 +1805,15 @@
       "description": "Thiếu quyền"
      }
     }
-   },
-   "post": {
+   }
+  },
+  "/cms-api/api/v1/public/datasets/{module}": {
+   "get": {
     "tags": [
      "cms-api"
     ],
-    "summary": "CRUD danh mục (theo tenant, xóa mềm, POST /{id}/restore).",
-    "description": "Cần Bearer token + quyền: category.manage",
-    "security": [
-     {
-      "bearer": []
-     }
-    ],
+    "summary": "Nội dung tĩnh của website do CMS quản lý: cooperation, life, utilities (xem §4).",
+    "description": "Không cần đăng nhập.",
     "parameters": [],
     "responses": {
      "200": {
@@ -1820,37 +1821,7 @@
       "content": {
        "application/json": {
         "schema": {
-         "type": "object",
-         "properties": {
-          "id": {
-           "type": "integer"
-          },
-          "parentId": {
-           "nullable": true
-          },
-          "name": {
-           "type": "string"
-          },
-          "slug": {
-           "type": "string"
-          },
-          "description": {
-           "nullable": true
-          },
-          "sortOrder": {
-           "type": "integer"
-          },
-          "isActive": {
-           "type": "boolean"
-          },
-          "translations": {
-           "type": "object",
-           "properties": {}
-          },
-          "tenantId": {
-           "type": "string"
-          }
-         }
+         "type": "object"
         }
        }
       }
@@ -1864,7 +1835,7 @@
     }
    }
   },
-  "/cms-api/api/Languages": {
+  "/cms-api/api/v1/public/languages": {
    "get": {
     "tags": [
      "cms-api"
@@ -1892,7 +1863,7 @@
     }
    }
   },
-  "/cms-api/api/Media/{id}/url": {
+  "/cms-api/api/v1/public/media/{id}/url": {
    "get": {
     "tags": [
      "cms-api"
@@ -1920,7 +1891,7 @@
     }
    }
   },
-  "/cms-api/api/Public/tenant": {
+  "/cms-api/api/v1/public/tenant": {
    "get": {
     "tags": [
      "cms-api"
@@ -1948,7 +1919,7 @@
     }
    }
   },
-  "/cms-api/api/Me/context": {
+  "/cms-api/api/v1/me/context": {
    "get": {
     "tags": [
      "cms-api"
@@ -2088,7 +2059,7 @@
     }
    }
   },
-  "/cms-api/api/Contents": {
+  "/cms-api/api/v1/admin/contents": {
    "get": {
     "tags": [
      "cms-api"
@@ -2553,7 +2524,7 @@
     }
    }
   },
-  "/cms-api/api/Contents/trash": {
+  "/cms-api/api/v1/admin/contents/trash": {
    "get": {
     "tags": [
      "cms-api"
@@ -2611,7 +2582,7 @@
     }
    }
   },
-  "/cms-api/api/Contents/{id}": {
+  "/cms-api/api/v1/admin/contents/{id}": {
    "get": {
     "tags": [
      "cms-api"
@@ -3034,7 +3005,7 @@
     }
    }
   },
-  "/cms-api/api/Contents/{id}/restore": {
+  "/cms-api/api/v1/admin/contents/{id}/restore": {
    "post": {
     "tags": [
      "cms-api"
@@ -3067,7 +3038,7 @@
     }
    }
   },
-  "/cms-api/api/Contents/{id}/purge": {
+  "/cms-api/api/v1/admin/contents/{id}/purge": {
    "delete": {
     "tags": [
      "cms-api"
@@ -3100,7 +3071,7 @@
     }
    }
   },
-  "/cms-api/api/Contents/{id}/workflow/{action}": {
+  "/cms-api/api/v1/admin/contents/{id}/workflow/{action}": {
    "post": {
     "tags": [
      "cms-api"
@@ -3297,7 +3268,7 @@
     }
    }
   },
-  "/cms-api/api/Contents/{id}/revisions": {
+  "/cms-api/api/v1/admin/contents/{id}/revisions": {
    "get": {
     "tags": [
      "cms-api"
@@ -3368,7 +3339,7 @@
     }
    }
   },
-  "/cms-api/api/Contents/{id}/revisions/{version}": {
+  "/cms-api/api/v1/admin/contents/{id}/revisions/{version}": {
    "get": {
     "tags": [
      "cms-api"
@@ -3401,7 +3372,7 @@
     }
    }
   },
-  "/cms-api/api/Contents/{id}/revisions/{version}/restore": {
+  "/cms-api/api/v1/admin/contents/{id}/revisions/{version}/restore": {
    "post": {
     "tags": [
      "cms-api"
@@ -3434,7 +3405,7 @@
     }
    }
   },
-  "/cms-api/api/Contents/{id}/history": {
+  "/cms-api/api/v1/admin/contents/{id}/history": {
    "get": {
     "tags": [
      "cms-api"
@@ -3477,12 +3448,12 @@
     }
    }
   },
-  "/cms-api/api/Announcements …": {
+  "/cms-api/api/v1/admin/announcements …": {
    "get": {
     "tags": [
      "cms-api"
     ],
-    "summary": "Thông báo: cùng bộ endpoint vòng đời như /api/Contents (trash, restore, workflow, revisions, history). Body có targets[] = [{ audience?, unitCode?, userSub? | userKey? (mã CB/mã SV/email), isExclude? }], priority 0|1|2, category, requireAck, channels[], pinnedUntil, expireAt. archive kèm note = thu hồi (recallReason).",
+    "summary": "Thông báo: cùng bộ endpoint vòng đời như /api/v1/admin/contents (trash, restore, workflow, revisions, history). Body có targets[] = [{ audience?, unitCode?, userSub? | userKey? (mã CB/mã SV/email), isExclude? }], priority 0|1|2, category, requireAck, channels[], pinnedUntil, expireAt. archive kèm note = thu hồi (recallReason).",
     "description": "Cần Bearer token + quyền: announcement.* + ACL",
     "security": [
      {
@@ -3732,7 +3703,7 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Thông báo: cùng bộ endpoint vòng đời như /api/Contents (trash, restore, workflow, revisions, history). Body có targets[] = [{ audience?, unitCode?, userSub? | userKey? (mã CB/mã SV/email), isExclude? }], priority 0|1|2, category, requireAck, channels[], pinnedUntil, expireAt. archive kèm note = thu hồi (recallReason).",
+    "summary": "Thông báo: cùng bộ endpoint vòng đời như /api/v1/admin/contents (trash, restore, workflow, revisions, history). Body có targets[] = [{ audience?, unitCode?, userSub? | userKey? (mã CB/mã SV/email), isExclude? }], priority 0|1|2, category, requireAck, channels[], pinnedUntil, expireAt. archive kèm note = thu hồi (recallReason).",
     "description": "Cần Bearer token + quyền: announcement.* + ACL",
     "security": [
      {
@@ -3982,7 +3953,7 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Thông báo: cùng bộ endpoint vòng đời như /api/Contents (trash, restore, workflow, revisions, history). Body có targets[] = [{ audience?, unitCode?, userSub? | userKey? (mã CB/mã SV/email), isExclude? }], priority 0|1|2, category, requireAck, channels[], pinnedUntil, expireAt. archive kèm note = thu hồi (recallReason).",
+    "summary": "Thông báo: cùng bộ endpoint vòng đời như /api/v1/admin/contents (trash, restore, workflow, revisions, history). Body có targets[] = [{ audience?, unitCode?, userSub? | userKey? (mã CB/mã SV/email), isExclude? }], priority 0|1|2, category, requireAck, channels[], pinnedUntil, expireAt. archive kèm note = thu hồi (recallReason).",
     "description": "Cần Bearer token + quyền: announcement.* + ACL",
     "security": [
      {
@@ -4232,7 +4203,7 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Thông báo: cùng bộ endpoint vòng đời như /api/Contents (trash, restore, workflow, revisions, history). Body có targets[] = [{ audience?, unitCode?, userSub? | userKey? (mã CB/mã SV/email), isExclude? }], priority 0|1|2, category, requireAck, channels[], pinnedUntil, expireAt. archive kèm note = thu hồi (recallReason).",
+    "summary": "Thông báo: cùng bộ endpoint vòng đời như /api/v1/admin/contents (trash, restore, workflow, revisions, history). Body có targets[] = [{ audience?, unitCode?, userSub? | userKey? (mã CB/mã SV/email), isExclude? }], priority 0|1|2, category, requireAck, channels[], pinnedUntil, expireAt. archive kèm note = thu hồi (recallReason).",
     "description": "Cần Bearer token + quyền: announcement.* + ACL",
     "security": [
      {
@@ -4479,7 +4450,7 @@
     }
    }
   },
-  "/cms-api/api/Announcements/{id}/stats": {
+  "/cms-api/api/v1/admin/announcements/{id}/stats": {
    "get": {
     "tags": [
      "cms-api"
@@ -4512,7 +4483,7 @@
     }
    }
   },
-  "/cms-api/api/Announcements/meta/options": {
+  "/cms-api/api/v1/admin/announcements/meta/options": {
    "get": {
     "tags": [
      "cms-api"
@@ -4545,7 +4516,7 @@
     }
    }
   },
-  "/cms-api/api/Me/announcements": {
+  "/cms-api/api/v1/me/announcements": {
    "get": {
     "tags": [
      "cms-api"
@@ -4732,7 +4703,7 @@
     }
    }
   },
-  "/cms-api/api/Me/announcements/unread-count": {
+  "/cms-api/api/v1/me/announcements/unread-count": {
    "get": {
     "tags": [
      "cms-api"
@@ -4765,7 +4736,7 @@
     }
    }
   },
-  "/cms-api/api/Me/announcements/{id}/read": {
+  "/cms-api/api/v1/me/announcements/{id}/read": {
    "post": {
     "tags": [
      "cms-api"
@@ -4798,7 +4769,7 @@
     }
    }
   },
-  "/cms-api/api/Me/announcements/{id}/ack": {
+  "/cms-api/api/v1/me/announcements/{id}/ack": {
    "post": {
     "tags": [
      "cms-api"
@@ -4831,7 +4802,7 @@
     }
    }
   },
-  "/cms-api/api/Me/announcements/read-all": {
+  "/cms-api/api/v1/me/announcements/read-all": {
    "post": {
     "tags": [
      "cms-api"
@@ -4864,7 +4835,7 @@
     }
    }
   },
-  "/cms-api/api/Grants": {
+  "/cms-api/api/v1/admin/grants": {
    "get": {
     "tags": [
      "cms-api"
@@ -5302,7 +5273,7 @@
     }
    }
   },
-  "/cms-api/api/Grants/effective/{sub}": {
+  "/cms-api/api/v1/admin/grants/effective/{sub}": {
    "get": {
     "tags": [
      "cms-api"
@@ -5335,7 +5306,7 @@
     }
    }
   },
-  "/cms-api/api/Directory/users": {
+  "/cms-api/api/v1/admin/directory/users": {
    "get": {
     "tags": [
      "cms-api"
@@ -5437,12 +5408,12 @@
     }
    }
   },
-  "/cms-api/api/Directory/roles": {
+  "/cms-api/api/v1/admin/directory/roles": {
    "get": {
     "tags": [
      "cms-api"
     ],
-    "summary": "Bảng role (IdS) → quyền chức năng CMS (cấu hình tĩnh).",
+    "summary": "Danh mục role trên SSO: realm role (tầng 1) và client role theo app (tầng 2), kèm quyền chức năng CMS tương ứng (cấu hình tĩnh).",
     "description": "Cần Bearer token + quyền: cms.access",
     "security": [
      {
@@ -5470,7 +5441,7 @@
     }
    }
   },
-  "/cms-api/api/OrgUnits": {
+  "/cms-api/api/v1/admin/org-units": {
    "get": {
     "tags": [
      "cms-api"
@@ -5526,7 +5497,68 @@
     }
    }
   },
-  "/cms-api/api/Categories/{id}": {
+  "/cms-api/api/v1/admin/categories": {
+   "get": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "CRUD danh mục (theo tenant, xóa mềm, POST /{id}/restore).",
+    "description": "Cần Bearer token + quyền: category.manage",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "id": {
+           "type": "integer"
+          },
+          "parentId": {
+           "nullable": true
+          },
+          "name": {
+           "type": "string"
+          },
+          "slug": {
+           "type": "string"
+          },
+          "description": {
+           "nullable": true
+          },
+          "sortOrder": {
+           "type": "integer"
+          },
+          "isActive": {
+           "type": "boolean"
+          },
+          "translations": {
+           "type": "object",
+           "properties": {}
+          },
+          "tenantId": {
+           "type": "string"
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   },
    "post": {
     "tags": [
      "cms-api"
@@ -5589,7 +5621,131 @@
     }
    }
   },
-  "/cms-api/api/Media": {
+  "/cms-api/api/v1/admin/categories/{id}": {
+   "get": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "CRUD danh mục (theo tenant, xóa mềm, POST /{id}/restore).",
+    "description": "Cần Bearer token + quyền: category.manage",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "id": {
+           "type": "integer"
+          },
+          "parentId": {
+           "nullable": true
+          },
+          "name": {
+           "type": "string"
+          },
+          "slug": {
+           "type": "string"
+          },
+          "description": {
+           "nullable": true
+          },
+          "sortOrder": {
+           "type": "integer"
+          },
+          "isActive": {
+           "type": "boolean"
+          },
+          "translations": {
+           "type": "object",
+           "properties": {}
+          },
+          "tenantId": {
+           "type": "string"
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   },
+   "post": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "CRUD danh mục (theo tenant, xóa mềm, POST /{id}/restore).",
+    "description": "Cần Bearer token + quyền: category.manage",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "id": {
+           "type": "integer"
+          },
+          "parentId": {
+           "nullable": true
+          },
+          "name": {
+           "type": "string"
+          },
+          "slug": {
+           "type": "string"
+          },
+          "description": {
+           "nullable": true
+          },
+          "sortOrder": {
+           "type": "integer"
+          },
+          "isActive": {
+           "type": "boolean"
+          },
+          "translations": {
+           "type": "object",
+           "properties": {}
+          },
+          "tenantId": {
+           "type": "string"
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   }
+  },
+  "/cms-api/api/v1/admin/media": {
    "get": {
     "tags": [
      "cms-api"
@@ -5704,7 +5860,7 @@
     }
    }
   },
-  "/cms-api/api/Media/upload": {
+  "/cms-api/api/v1/admin/media/upload": {
    "post": {
     "tags": [
      "cms-api"
@@ -5778,7 +5934,7 @@
     }
    }
   },
-  "/cms-api/api/Media/{id}": {
+  "/cms-api/api/v1/admin/media/{id}": {
    "delete": {
     "tags": [
      "cms-api"
@@ -5811,7 +5967,7 @@
     }
    }
   },
-  "/cms-api/api/Events": {
+  "/cms-api/api/v1/admin/events": {
    "get": {
     "tags": [
      "cms-api"
@@ -6047,7 +6203,7 @@
     }
    }
   },
-  "/cms-api/api/Albums": {
+  "/cms-api/api/v1/admin/albums": {
    "get": {
     "tags": [
      "cms-api"
@@ -6283,7 +6439,7 @@
     }
    }
   },
-  "/cms-api/api/Videos": {
+  "/cms-api/api/v1/admin/videos": {
    "get": {
     "tags": [
      "cms-api"
@@ -6519,7 +6675,7 @@
     }
    }
   },
-  "/cms-api/api/Podcasts": {
+  "/cms-api/api/v1/admin/podcasts": {
    "get": {
     "tags": [
      "cms-api"
@@ -6755,121 +6911,7 @@
     }
    }
   },
-  "/cms-api/api/Pages": {
-   "get": {
-    "tags": [
-     "cms-api"
-    ],
-    "summary": "Trang tĩnh (cây) và mục menu.",
-    "description": "Cần Bearer token + quyền: page.manage / menu.manage",
-    "security": [
-     {
-      "bearer": []
-     }
-    ],
-    "parameters": [
-     {
-      "name": "pageIndex",
-      "in": "query",
-      "description": "Trang (mặc định 1)",
-      "schema": {
-       "type": "integer"
-      }
-     },
-     {
-      "name": "pageSize",
-      "in": "query",
-      "description": "Số dòng/trang (mặc định 20, tối đa 500)",
-      "schema": {
-       "type": "integer"
-      }
-     },
-     {
-      "name": "keyword",
-      "in": "query",
-      "description": "Từ khóa tìm kiếm",
-      "schema": {
-       "type": "string"
-      }
-     }
-    ],
-    "responses": {
-     "200": {
-      "description": "OK",
-      "content": {
-       "application/json": {
-        "schema": {
-         "type": "object"
-        }
-       }
-      }
-     },
-     "401": {
-      "description": "Chưa đăng nhập"
-     },
-     "403": {
-      "description": "Thiếu quyền"
-     }
-    }
-   },
-   "post": {
-    "tags": [
-     "cms-api"
-    ],
-    "summary": "Trang tĩnh (cây) và mục menu.",
-    "description": "Cần Bearer token + quyền: page.manage / menu.manage",
-    "security": [
-     {
-      "bearer": []
-     }
-    ],
-    "parameters": [
-     {
-      "name": "pageIndex",
-      "in": "query",
-      "description": "Trang (mặc định 1)",
-      "schema": {
-       "type": "integer"
-      }
-     },
-     {
-      "name": "pageSize",
-      "in": "query",
-      "description": "Số dòng/trang (mặc định 20, tối đa 500)",
-      "schema": {
-       "type": "integer"
-      }
-     },
-     {
-      "name": "keyword",
-      "in": "query",
-      "description": "Từ khóa tìm kiếm",
-      "schema": {
-       "type": "string"
-      }
-     }
-    ],
-    "responses": {
-     "200": {
-      "description": "OK",
-      "content": {
-       "application/json": {
-        "schema": {
-         "type": "object"
-        }
-       }
-      }
-     },
-     "401": {
-      "description": "Chưa đăng nhập"
-     },
-     "403": {
-      "description": "Thiếu quyền"
-     }
-    }
-   }
-  },
-  "/cms-api/api/MenuItems": {
+  "/cms-api/api/v1/admin/pages": {
    "get": {
     "tags": [
      "cms-api"
@@ -6983,7 +7025,121 @@
     }
    }
   },
-  "/cms-api/api/Banners": {
+  "/cms-api/api/v1/admin/menu-items": {
+   "get": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Trang tĩnh (cây) và mục menu.",
+    "description": "Cần Bearer token + quyền: page.manage / menu.manage",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "pageIndex",
+      "in": "query",
+      "description": "Trang (mặc định 1)",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "pageSize",
+      "in": "query",
+      "description": "Số dòng/trang (mặc định 20, tối đa 500)",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "keyword",
+      "in": "query",
+      "description": "Từ khóa tìm kiếm",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   },
+   "post": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Trang tĩnh (cây) và mục menu.",
+    "description": "Cần Bearer token + quyền: page.manage / menu.manage",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "pageIndex",
+      "in": "query",
+      "description": "Trang (mặc định 1)",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "pageSize",
+      "in": "query",
+      "description": "Số dòng/trang (mặc định 20, tối đa 500)",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "name": "keyword",
+      "in": "query",
+      "description": "Từ khóa tìm kiếm",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   }
+  },
+  "/cms-api/api/v1/admin/banners": {
    "get": {
     "tags": [
      "cms-api"
@@ -7161,7 +7317,7 @@
     }
    }
   },
-  "/cms-api/api/HeroSlides": {
+  "/cms-api/api/v1/admin/hero-slides": {
    "get": {
     "tags": [
      "cms-api"
@@ -7275,7 +7431,7 @@
     }
    }
   },
-  "/cms-api/api/QuickLinks": {
+  "/cms-api/api/v1/admin/quick-links": {
    "get": {
     "tags": [
      "cms-api"
@@ -7389,7 +7545,7 @@
     }
    }
   },
-  "/cms-api/api/Audiences": {
+  "/cms-api/api/v1/admin/audiences": {
    "get": {
     "tags": [
      "cms-api"
@@ -7503,7 +7659,7 @@
     }
    }
   },
-  "/cms-api/api/Strengths": {
+  "/cms-api/api/v1/admin/strengths": {
    "get": {
     "tags": [
      "cms-api"
@@ -7617,7 +7773,7 @@
     }
    }
   },
-  "/cms-api/api/Partners": {
+  "/cms-api/api/v1/admin/partners": {
    "get": {
     "tags": [
      "cms-api"
@@ -7731,7 +7887,7 @@
     }
    }
   },
-  "/cms-api/api/SiteStats": {
+  "/cms-api/api/v1/admin/site-stats": {
    "get": {
     "tags": [
      "cms-api"
@@ -7845,7 +8001,7 @@
     }
    }
   },
-  "/cms-api/api/Settings": {
+  "/cms-api/api/v1/admin/settings": {
    "get": {
     "tags": [
      "cms-api"
@@ -7909,7 +8065,7 @@
     }
    }
   },
-  "/cms-api/api/Settings/{group}": {
+  "/cms-api/api/v1/admin/settings/{group}": {
    "get": {
     "tags": [
      "cms-api"
@@ -7973,12 +8129,12 @@
     }
    }
   },
-  "/cms-api/api/AuditLogs": {
+  "/cms-api/api/v1/admin/audit-logs": {
    "get": {
     "tags": [
      "cms-api"
     ],
-    "summary": "Audit log chỉ ghi thêm: actorSub, action, entityType, entityId, changes {field:[cũ,mới]}, ip. (/api/ActivityLogs = tên cũ.)",
+    "summary": "Audit log chỉ ghi thêm: actorSub, action, entityType, entityId, changes {field:[cũ,mới]}, ip. (/api/v1/admin/activity-logs = tên cũ.)",
     "description": "Cần Bearer token + quyền: log.view",
     "security": [
      {
@@ -8114,7 +8270,7 @@
     }
    }
   },
-  "/cms-api/api/Backups": {
+  "/cms-api/api/v1/admin/backups": {
    "get": {
     "tags": [
      "cms-api"
@@ -8228,7 +8384,7 @@
     }
    }
   },
-  "/cms-api/api/Backups/{id}": {
+  "/cms-api/api/v1/admin/backups/{id}": {
    "delete": {
     "tags": [
      "cms-api"
@@ -8261,7 +8417,7 @@
     }
    }
   },
-  "/cms-api/api/Backups/{id}/download": {
+  "/cms-api/api/v1/admin/backups/{id}/download": {
    "get": {
     "tags": [
      "cms-api"
@@ -8294,7 +8450,7 @@
     }
    }
   },
-  "/cms-api/api/Backups/{id}/restore": {
+  "/cms-api/api/v1/admin/backups/{id}/restore": {
    "post": {
     "tags": [
      "cms-api"
@@ -8327,7 +8483,7 @@
     }
    }
   },
-  "/cms-api/api/Backups/restore": {
+  "/cms-api/api/v1/admin/backups/restore": {
    "post": {
     "tags": [
      "cms-api"
@@ -8360,7 +8516,7 @@
     }
    }
   },
-  "/cms-api/api/Settings/email/test": {
+  "/cms-api/api/v1/admin/settings/email/test": {
    "post": {
     "tags": [
      "cms-api"
@@ -8393,7 +8549,7 @@
     }
    }
   },
-  "/cms-api/api/Dashboard": {
+  "/cms-api/api/v1/admin/dashboard": {
    "get": {
     "tags": [
      "cms-api"
@@ -8760,7 +8916,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/datasets/about": {
+  "/qlns-api/api/v1/public/datasets/about": {
    "get": {
     "tags": [
      "qlns-api"
@@ -9125,7 +9281,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/about/about-nav": {
+  "/qlns-api/api/v1/public/about/about-nav": {
    "get": {
     "tags": [
      "qlns-api"
@@ -9208,7 +9364,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/about/achievements": {
+  "/qlns-api/api/v1/public/about/achievements": {
    "get": {
     "tags": [
      "qlns-api"
@@ -9292,7 +9448,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/about/board": {
+  "/qlns-api/api/v1/public/about/board": {
    "get": {
     "tags": [
      "qlns-api"
@@ -9347,7 +9503,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/about/faculty-departments": {
+  "/qlns-api/api/v1/public/about/faculty-departments": {
    "get": {
     "tags": [
      "qlns-api"
@@ -9424,7 +9580,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/about/history": {
+  "/qlns-api/api/v1/public/about/history": {
    "get": {
     "tags": [
      "qlns-api"
@@ -9507,7 +9663,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/about/numbers": {
+  "/qlns-api/api/v1/public/about/numbers": {
    "get": {
     "tags": [
      "qlns-api"
@@ -9560,7 +9716,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/about/org-chart": {
+  "/qlns-api/api/v1/public/about/org-chart": {
    "get": {
     "tags": [
      "qlns-api"
@@ -9604,7 +9760,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/about/overview": {
+  "/qlns-api/api/v1/public/about/overview": {
    "get": {
     "tags": [
      "qlns-api"
@@ -9657,7 +9813,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/about/rector-message": {
+  "/qlns-api/api/v1/public/about/rector-message": {
    "get": {
     "tags": [
      "qlns-api"
@@ -9707,7 +9863,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/about/units": {
+  "/qlns-api/api/v1/public/about/units": {
    "get": {
     "tags": [
      "qlns-api"
@@ -9808,7 +9964,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/about/vision": {
+  "/qlns-api/api/v1/public/about/vision": {
    "get": {
     "tags": [
      "qlns-api"
@@ -9852,10 +10008,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/datasets/admissions": {
+  "/edusoft-api/api/v1/public/datasets/admissions": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "Toàn bộ dataset \"admissions\"",
     "responses": {
@@ -10086,10 +10242,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/admissions/admission": {
+  "/edusoft-api/api/v1/public/admissions/admission": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "admissions.admission",
     "parameters": [],
@@ -10170,10 +10326,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/admissions/admission-advisory": {
+  "/edusoft-api/api/v1/public/admissions/admission-advisory": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "admissions.admissionAdvisory",
     "parameters": [],
@@ -10208,10 +10364,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/admissions/admission-benchmarks": {
+  "/edusoft-api/api/v1/public/admissions/admission-benchmarks": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "admissions.admissionBenchmarks",
     "parameters": [],
@@ -10263,10 +10419,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/admissions/admission-combos": {
+  "/edusoft-api/api/v1/public/admissions/admission-combos": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "admissions.admissionCombos",
     "parameters": [],
@@ -10305,10 +10461,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/admissions/admission-dossier": {
+  "/edusoft-api/api/v1/public/admissions/admission-dossier": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "admissions.admissionDossier",
     "parameters": [],
@@ -10350,10 +10506,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/admissions/admission-regulations": {
+  "/edusoft-api/api/v1/public/admissions/admission-regulations": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "admissions.admissionRegulations",
     "parameters": [
@@ -10430,10 +10586,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/admissions/admission-timeline": {
+  "/edusoft-api/api/v1/public/admissions/admission-timeline": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "admissions.admissionTimeline",
     "parameters": [
@@ -10513,10 +10669,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/admissions/admission-videos": {
+  "/edusoft-api/api/v1/public/admissions/admission-videos": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "admissions.admissionVideos",
     "parameters": [
@@ -10593,10 +10749,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/admissions/admissions-nav": {
+  "/edusoft-api/api/v1/public/admissions/admissions-nav": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "admissions.admissionsNav",
     "parameters": [
@@ -10676,10 +10832,10 @@
     }
    }
   },
-  "/portal-api/api/v1/datasets/cooperation": {
+  "/cms-api/api/v1/public/datasets/cooperation": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "Toàn bộ dataset \"cooperation\"",
     "responses": {
@@ -11048,10 +11204,10 @@
     }
    }
   },
-  "/portal-api/api/v1/cooperation/coop-fields": {
+  "/cms-api/api/v1/public/cooperation/coop-fields": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "cooperation.coopFields",
     "parameters": [
@@ -11120,10 +11276,10 @@
     }
    }
   },
-  "/portal-api/api/v1/cooperation/coop-hub": {
+  "/cms-api/api/v1/public/cooperation/coop-hub": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "cooperation.coopHub",
     "parameters": [],
@@ -11185,10 +11341,10 @@
     }
    }
   },
-  "/portal-api/api/v1/cooperation/coop-nav": {
+  "/cms-api/api/v1/public/cooperation/coop-nav": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "cooperation.coopNav",
     "parameters": [
@@ -11268,10 +11424,10 @@
     }
    }
   },
-  "/portal-api/api/v1/cooperation/coop-program-types": {
+  "/cms-api/api/v1/public/cooperation/coop-program-types": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "cooperation.coopProgramTypes",
     "parameters": [
@@ -11340,10 +11496,10 @@
     }
    }
   },
-  "/portal-api/api/v1/cooperation/coop-programs": {
+  "/cms-api/api/v1/public/cooperation/coop-programs": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "cooperation.coopPrograms",
     "parameters": [
@@ -11456,10 +11612,10 @@
     }
    }
   },
-  "/portal-api/api/v1/cooperation/exchange": {
+  "/cms-api/api/v1/public/cooperation/exchange": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "cooperation.exchange",
     "parameters": [],
@@ -11524,10 +11680,10 @@
     }
    }
   },
-  "/portal-api/api/v1/cooperation/intl-lecturers": {
+  "/cms-api/api/v1/public/cooperation/intl-lecturers": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "cooperation.intlLecturers",
     "parameters": [],
@@ -11580,10 +11736,10 @@
     }
    }
   },
-  "/portal-api/api/v1/cooperation/intl-students": {
+  "/cms-api/api/v1/public/cooperation/intl-students": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "cooperation.intlStudents",
     "parameters": [],
@@ -11659,10 +11815,10 @@
     }
    }
   },
-  "/portal-api/api/v1/cooperation/opportunities": {
+  "/cms-api/api/v1/public/cooperation/opportunities": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "cooperation.opportunities",
     "parameters": [],
@@ -11726,10 +11882,10 @@
     }
    }
   },
-  "/portal-api/api/v1/cooperation/partner-categories": {
+  "/cms-api/api/v1/public/cooperation/partner-categories": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "cooperation.partnerCategories",
     "parameters": [
@@ -11798,10 +11954,10 @@
     }
    }
   },
-  "/portal-api/api/v1/cooperation/partners": {
+  "/cms-api/api/v1/public/cooperation/partners": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "cooperation.partners",
     "parameters": [
@@ -11908,10 +12064,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/datasets/education": {
+  "/edusoft-api/api/v1/public/datasets/education": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "Toàn bộ dataset \"education\"",
     "responses": {
@@ -12341,10 +12497,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/education/academic-calendar": {
+  "/edusoft-api/api/v1/public/education/academic-calendar": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "education.academicCalendar",
     "parameters": [],
@@ -12428,10 +12584,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/education/edu-hub": {
+  "/edusoft-api/api/v1/public/education/edu-hub": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "education.eduHub",
     "parameters": [],
@@ -12481,10 +12637,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/education/edu-nav": {
+  "/edusoft-api/api/v1/public/education/edu-nav": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "education.eduNav",
     "parameters": [
@@ -12564,10 +12720,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/education/general-info": {
+  "/edusoft-api/api/v1/public/education/general-info": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "education.generalInfo",
     "parameters": [],
@@ -12624,10 +12780,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/education/outcomes-general": {
+  "/edusoft-api/api/v1/public/education/outcomes-general": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "education.outcomesGeneral",
     "parameters": [],
@@ -12674,10 +12830,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/education/program-types": {
+  "/edusoft-api/api/v1/public/education/program-types": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "education.programTypes",
     "parameters": [
@@ -12746,10 +12902,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/education/programs": {
+  "/edusoft-api/api/v1/public/education/programs": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "education.programs",
     "parameters": [
@@ -12883,10 +13039,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/education/result-lookup": {
+  "/edusoft-api/api/v1/public/education/result-lookup": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "education.resultLookup",
     "parameters": [],
@@ -12961,10 +13117,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/education/study-guides": {
+  "/edusoft-api/api/v1/public/education/study-guides": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "education.studyGuides",
     "parameters": [],
@@ -13014,10 +13170,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/education/surveys": {
+  "/edusoft-api/api/v1/public/education/surveys": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "education.surveys",
     "parameters": [],
@@ -13064,10 +13220,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/education/tuition": {
+  "/edusoft-api/api/v1/public/education/tuition": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "education.tuition",
     "parameters": [],
@@ -13136,10 +13292,10 @@
     }
    }
   },
-  "/portal-api/api/v1/datasets/library": {
+  "/esb-api/api/v1/public/datasets/library": {
    "get": {
     "tags": [
-     "portal-api"
+     "esb-api"
     ],
     "summary": "Toàn bộ dataset \"library\"",
     "responses": {
@@ -13454,10 +13610,10 @@
     }
    }
   },
-  "/portal-api/api/v1/library/collections": {
+  "/esb-api/api/v1/public/library/collections": {
    "get": {
     "tags": [
-     "portal-api"
+     "esb-api"
     ],
     "summary": "library.collections",
     "parameters": [
@@ -13543,10 +13699,10 @@
     }
    }
   },
-  "/portal-api/api/v1/library/database-groups": {
+  "/esb-api/api/v1/public/library/database-groups": {
    "get": {
     "tags": [
-     "portal-api"
+     "esb-api"
     ],
     "summary": "library.databaseGroups",
     "parameters": [
@@ -13624,10 +13780,10 @@
     }
    }
   },
-  "/portal-api/api/v1/library/items": {
+  "/esb-api/api/v1/public/library/items": {
    "get": {
     "tags": [
-     "portal-api"
+     "esb-api"
     ],
     "summary": "library.items",
     "parameters": [
@@ -13755,10 +13911,10 @@
     }
    }
   },
-  "/portal-api/api/v1/library/language-facets": {
+  "/esb-api/api/v1/public/library/language-facets": {
    "get": {
     "tags": [
-     "portal-api"
+     "esb-api"
     ],
     "summary": "library.languageFacets",
     "parameters": [
@@ -13830,10 +13986,10 @@
     }
    }
   },
-  "/portal-api/api/v1/library/library-guide": {
+  "/esb-api/api/v1/public/library/library-guide": {
    "get": {
     "tags": [
-     "portal-api"
+     "esb-api"
     ],
     "summary": "library.libraryGuide",
     "parameters": [],
@@ -13904,10 +14060,10 @@
     }
    }
   },
-  "/portal-api/api/v1/library/library-hub": {
+  "/esb-api/api/v1/public/library/library-hub": {
    "get": {
     "tags": [
-     "portal-api"
+     "esb-api"
     ],
     "summary": "library.libraryHub",
     "parameters": [],
@@ -13960,10 +14116,10 @@
     }
    }
   },
-  "/portal-api/api/v1/library/library-nav": {
+  "/esb-api/api/v1/public/library/library-nav": {
    "get": {
     "tags": [
-     "portal-api"
+     "esb-api"
     ],
     "summary": "library.libraryNav",
     "parameters": [
@@ -14043,10 +14199,10 @@
     }
    }
   },
-  "/portal-api/api/v1/library/my-items": {
+  "/esb-api/api/v1/public/library/my-items": {
    "get": {
     "tags": [
-     "portal-api"
+     "esb-api"
     ],
     "summary": "library.myItems",
     "parameters": [],
@@ -14108,10 +14264,10 @@
     }
    }
   },
-  "/portal-api/api/v1/library/resource-type-facets": {
+  "/esb-api/api/v1/public/library/resource-type-facets": {
    "get": {
     "tags": [
-     "portal-api"
+     "esb-api"
     ],
     "summary": "library.resourceTypeFacets",
     "parameters": [
@@ -14191,10 +14347,10 @@
     }
    }
   },
-  "/portal-api/api/v1/library/search-faculties": {
+  "/esb-api/api/v1/public/library/search-faculties": {
    "get": {
     "tags": [
-     "portal-api"
+     "esb-api"
     ],
     "summary": "library.searchFaculties",
     "parameters": [
@@ -14263,10 +14419,10 @@
     }
    }
   },
-  "/portal-api/api/v1/library/search-langs": {
+  "/esb-api/api/v1/public/library/search-langs": {
    "get": {
     "tags": [
-     "portal-api"
+     "esb-api"
     ],
     "summary": "library.searchLangs",
     "parameters": [
@@ -14335,10 +14491,10 @@
     }
    }
   },
-  "/portal-api/api/v1/library/year-facets": {
+  "/esb-api/api/v1/public/library/year-facets": {
    "get": {
     "tags": [
-     "portal-api"
+     "esb-api"
     ],
     "summary": "library.yearFacets",
     "parameters": [
@@ -14410,10 +14566,10 @@
     }
    }
   },
-  "/portal-api/api/v1/datasets/life": {
+  "/cms-api/api/v1/public/datasets/life": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "Toàn bộ dataset \"life\"",
     "responses": {
@@ -14822,10 +14978,10 @@
     }
    }
   },
-  "/portal-api/api/v1/life/activities": {
+  "/cms-api/api/v1/public/life/activities": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "life.activities",
     "parameters": [
@@ -14931,10 +15087,10 @@
     }
    }
   },
-  "/portal-api/api/v1/life/campus": {
+  "/cms-api/api/v1/public/life/campus": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "life.campus",
     "parameters": [],
@@ -14979,10 +15135,10 @@
     }
    }
   },
-  "/portal-api/api/v1/life/campus-services": {
+  "/cms-api/api/v1/public/life/campus-services": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "life.campusServices",
     "parameters": [
@@ -15062,10 +15218,10 @@
     }
    }
   },
-  "/portal-api/api/v1/life/club-categories": {
+  "/cms-api/api/v1/public/life/club-categories": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "life.clubCategories",
     "parameters": [
@@ -15134,10 +15290,10 @@
     }
    }
   },
-  "/portal-api/api/v1/life/clubs": {
+  "/cms-api/api/v1/public/life/clubs": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "life.clubs",
     "parameters": [
@@ -15246,10 +15402,10 @@
     }
    }
   },
-  "/portal-api/api/v1/life/dorm": {
+  "/cms-api/api/v1/public/life/dorm": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "life.dorm",
     "parameters": [],
@@ -15316,10 +15472,10 @@
     }
    }
   },
-  "/portal-api/api/v1/life/health": {
+  "/cms-api/api/v1/public/life/health": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "life.health",
     "parameters": [],
@@ -15381,10 +15537,10 @@
     }
    }
   },
-  "/portal-api/api/v1/life/jobs": {
+  "/cms-api/api/v1/public/life/jobs": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "life.jobs",
     "parameters": [],
@@ -15431,10 +15587,10 @@
     }
    }
   },
-  "/portal-api/api/v1/life/life-hub": {
+  "/cms-api/api/v1/public/life/life-hub": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "life.lifeHub",
     "parameters": [],
@@ -15481,10 +15637,10 @@
     }
    }
   },
-  "/portal-api/api/v1/life/life-nav": {
+  "/cms-api/api/v1/public/life/life-nav": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "life.lifeNav",
     "parameters": [
@@ -15564,10 +15720,10 @@
     }
    }
   },
-  "/portal-api/api/v1/life/sports-culture": {
+  "/cms-api/api/v1/public/life/sports-culture": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "life.sportsCulture",
     "parameters": [],
@@ -15614,10 +15770,10 @@
     }
    }
   },
-  "/portal-api/api/v1/life/student-support": {
+  "/cms-api/api/v1/public/life/student-support": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "life.studentSupport",
     "parameters": [],
@@ -15667,10 +15823,10 @@
     }
    }
   },
-  "/portal-api/api/v1/life/youth-union": {
+  "/cms-api/api/v1/public/life/youth-union": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "life.youthUnion",
     "parameters": [],
@@ -15728,7 +15884,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/datasets/portal-leader": {
+  "/qlns-api/api/v1/me/datasets/portal-leader": {
    "get": {
     "tags": [
      "qlns-api"
@@ -16155,7 +16311,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-leader/pl-approvals": {
+  "/qlns-api/api/v1/me/portal-leader/pl-approvals": {
    "get": {
     "tags": [
      "qlns-api"
@@ -16214,7 +16370,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-leader/pl-bi": {
+  "/qlns-api/api/v1/me/portal-leader/pl-bi": {
    "get": {
     "tags": [
      "qlns-api"
@@ -16274,7 +16430,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-leader/pl-dashboard": {
+  "/qlns-api/api/v1/me/portal-leader/pl-dashboard": {
    "get": {
     "tags": [
      "qlns-api"
@@ -16351,7 +16507,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-leader/pl-domains": {
+  "/qlns-api/api/v1/me/portal-leader/pl-domains": {
    "get": {
     "tags": [
      "qlns-api"
@@ -16518,7 +16674,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-leader/pl-notifications": {
+  "/qlns-api/api/v1/me/portal-leader/pl-notifications": {
    "get": {
     "tags": [
      "qlns-api"
@@ -16559,7 +16715,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-leader/pl-portal-settings": {
+  "/qlns-api/api/v1/me/portal-leader/pl-portal-settings": {
    "get": {
     "tags": [
      "qlns-api"
@@ -16612,7 +16768,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-leader/pl-reports": {
+  "/qlns-api/api/v1/me/portal-leader/pl-reports": {
    "get": {
     "tags": [
      "qlns-api"
@@ -16654,7 +16810,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-leader/pl-sys-log": {
+  "/qlns-api/api/v1/me/portal-leader/pl-sys-log": {
    "get": {
     "tags": [
      "qlns-api"
@@ -16699,7 +16855,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-leader/pl-system": {
+  "/qlns-api/api/v1/me/portal-leader/pl-system": {
    "get": {
     "tags": [
      "qlns-api"
@@ -16741,7 +16897,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-leader/pl-terms": {
+  "/qlns-api/api/v1/me/portal-leader/pl-terms": {
    "get": {
     "tags": [
      "qlns-api"
@@ -16813,7 +16969,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-leader/pl-units": {
+  "/qlns-api/api/v1/me/portal-leader/pl-units": {
    "get": {
     "tags": [
      "qlns-api"
@@ -16885,7 +17041,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-leader/pl-user": {
+  "/qlns-api/api/v1/me/portal-leader/pl-user": {
    "get": {
     "tags": [
      "qlns-api"
@@ -16920,7 +17076,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-leader/pl-years": {
+  "/qlns-api/api/v1/me/portal-leader/pl-years": {
    "get": {
     "tags": [
      "qlns-api"
@@ -16992,10 +17148,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/datasets/portal-parent": {
+  "/edusoft-api/api/v1/me/datasets/portal-parent": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "Toàn bộ dataset \"portal-parent\"",
     "responses": {
@@ -17391,10 +17547,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-parent/pp-attendance": {
+  "/edusoft-api/api/v1/me/portal-parent/pp-attendance": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-parent.ppAttendance",
     "parameters": [],
@@ -17445,10 +17601,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-parent/pp-child": {
+  "/edusoft-api/api/v1/me/portal-parent/pp-child": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-parent.ppChild",
     "parameters": [],
@@ -17532,10 +17688,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-parent/pp-contact-info": {
+  "/edusoft-api/api/v1/me/portal-parent/pp-contact-info": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-parent.ppContactInfo",
     "parameters": [
@@ -17615,10 +17771,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-parent/pp-dashboard": {
+  "/edusoft-api/api/v1/me/portal-parent/pp-dashboard": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-parent.ppDashboard",
     "parameters": [],
@@ -17687,10 +17843,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-parent/pp-links": {
+  "/edusoft-api/api/v1/me/portal-parent/pp-links": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-parent.ppLinks",
     "parameters": [
@@ -17762,10 +17918,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-parent/pp-notices": {
+  "/edusoft-api/api/v1/me/portal-parent/pp-notices": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-parent.ppNotices",
     "parameters": [],
@@ -17806,10 +17962,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-parent/pp-parent": {
+  "/edusoft-api/api/v1/me/portal-parent/pp-parent": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-parent.ppParent",
     "parameters": [],
@@ -17853,10 +18009,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-parent/pp-request-history": {
+  "/edusoft-api/api/v1/me/portal-parent/pp-request-history": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-parent.ppRequestHistory",
     "parameters": [
@@ -17928,10 +18084,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-parent/pp-request-types": {
+  "/edusoft-api/api/v1/me/portal-parent/pp-request-types": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-parent.ppRequestTypes",
     "parameters": [
@@ -18000,10 +18156,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-parent/pp-results": {
+  "/edusoft-api/api/v1/me/portal-parent/pp-results": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-parent.ppResults",
     "parameters": [],
@@ -18061,10 +18217,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-parent/pp-schedule": {
+  "/edusoft-api/api/v1/me/portal-parent/pp-schedule": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-parent.ppSchedule",
     "parameters": [],
@@ -18115,10 +18271,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-parent/pp-services": {
+  "/edusoft-api/api/v1/me/portal-parent/pp-services": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-parent.ppServices",
     "parameters": [],
@@ -18157,10 +18313,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-parent/pp-term": {
+  "/edusoft-api/api/v1/me/portal-parent/pp-term": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-parent.ppTerm",
     "parameters": [],
@@ -18184,10 +18340,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-parent/pp-tuition": {
+  "/edusoft-api/api/v1/me/portal-parent/pp-tuition": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-parent.ppTuition",
     "parameters": [],
@@ -18260,10 +18416,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-parent/pp-working-hours": {
+  "/edusoft-api/api/v1/me/portal-parent/pp-working-hours": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-parent.ppWorkingHours",
     "parameters": [
@@ -18332,7 +18488,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/datasets/portal-staff-tools": {
+  "/qlns-api/api/v1/me/datasets/portal-staff-tools": {
    "get": {
     "tags": [
      "qlns-api"
@@ -19064,7 +19220,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-staff-tools/staff-tool-list": {
+  "/qlns-api/api/v1/me/portal-staff-tools/staff-tool-list": {
    "get": {
     "tags": [
      "qlns-api"
@@ -19157,7 +19313,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-staff-tools/staff-tool-map": {
+  "/qlns-api/api/v1/me/portal-staff-tools/staff-tool-map": {
    "get": {
     "tags": [
      "qlns-api"
@@ -19858,7 +20014,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/datasets/portal-staff": {
+  "/qlns-api/api/v1/me/datasets/portal-staff": {
    "get": {
     "tags": [
      "qlns-api"
@@ -20540,7 +20696,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-staff/pg-admin": {
+  "/qlns-api/api/v1/me/portal-staff/pg-admin": {
    "get": {
     "tags": [
      "qlns-api"
@@ -20602,7 +20758,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-staff/pg-classes": {
+  "/qlns-api/api/v1/me/portal-staff/pg-classes": {
    "get": {
     "tags": [
      "qlns-api"
@@ -20655,7 +20811,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-staff/pg-dashboard": {
+  "/qlns-api/api/v1/me/portal-staff/pg-dashboard": {
    "get": {
     "tags": [
      "qlns-api"
@@ -20717,7 +20873,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-staff/pg-finance": {
+  "/qlns-api/api/v1/me/portal-staff/pg-finance": {
    "get": {
     "tags": [
      "qlns-api"
@@ -20776,7 +20932,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-staff/pg-grades": {
+  "/qlns-api/api/v1/me/portal-staff/pg-grades": {
    "get": {
     "tags": [
      "qlns-api"
@@ -20839,7 +20995,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-staff/pg-internship": {
+  "/qlns-api/api/v1/me/portal-staff/pg-internship": {
    "get": {
     "tags": [
      "qlns-api"
@@ -20899,7 +21055,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-staff/pg-materials": {
+  "/qlns-api/api/v1/me/portal-staff/pg-materials": {
    "get": {
     "tags": [
      "qlns-api"
@@ -20947,7 +21103,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-staff/pg-modules": {
+  "/qlns-api/api/v1/me/portal-staff/pg-modules": {
    "get": {
     "tags": [
      "qlns-api"
@@ -20988,7 +21144,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-staff/pg-notifications": {
+  "/qlns-api/api/v1/me/portal-staff/pg-notifications": {
    "get": {
     "tags": [
      "qlns-api"
@@ -21032,7 +21188,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-staff/pg-profile": {
+  "/qlns-api/api/v1/me/portal-staff/pg-profile": {
    "get": {
     "tags": [
      "qlns-api"
@@ -21102,7 +21258,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-staff/pg-research": {
+  "/qlns-api/api/v1/me/portal-staff/pg-research": {
    "get": {
     "tags": [
      "qlns-api"
@@ -21178,7 +21334,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-staff/pg-schedule": {
+  "/qlns-api/api/v1/me/portal-staff/pg-schedule": {
    "get": {
     "tags": [
      "qlns-api"
@@ -21238,7 +21394,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-staff/pg-scholar": {
+  "/qlns-api/api/v1/me/portal-staff/pg-scholar": {
    "get": {
     "tags": [
      "qlns-api"
@@ -21286,7 +21442,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-staff/pg-settings": {
+  "/qlns-api/api/v1/me/portal-staff/pg-settings": {
    "get": {
     "tags": [
      "qlns-api"
@@ -21335,7 +21491,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-staff/pg-staff": {
+  "/qlns-api/api/v1/me/portal-staff/pg-staff": {
    "get": {
     "tags": [
      "qlns-api"
@@ -21409,7 +21565,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-staff/pg-students": {
+  "/qlns-api/api/v1/me/portal-staff/pg-students": {
    "get": {
     "tags": [
      "qlns-api"
@@ -21457,7 +21613,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-staff/pg-supervision": {
+  "/qlns-api/api/v1/me/portal-staff/pg-supervision": {
    "get": {
     "tags": [
      "qlns-api"
@@ -21511,7 +21667,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-staff/pg-syllabus": {
+  "/qlns-api/api/v1/me/portal-staff/pg-syllabus": {
    "get": {
     "tags": [
      "qlns-api"
@@ -21577,7 +21733,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-staff/pg-term": {
+  "/qlns-api/api/v1/me/portal-staff/pg-term": {
    "get": {
     "tags": [
      "qlns-api"
@@ -21604,7 +21760,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-staff/pg-tickets": {
+  "/qlns-api/api/v1/me/portal-staff/pg-tickets": {
    "get": {
     "tags": [
      "qlns-api"
@@ -21657,7 +21813,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/portal-staff/pg-tools": {
+  "/qlns-api/api/v1/me/portal-staff/pg-tools": {
    "get": {
     "tags": [
      "qlns-api"
@@ -21698,10 +21854,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/datasets/portal-student": {
+  "/edusoft-api/api/v1/me/datasets/portal-student": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "Toàn bộ dataset \"portal-student\"",
     "responses": {
@@ -22290,10 +22446,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-student/ps-dashboard": {
+  "/edusoft-api/api/v1/me/portal-student/ps-dashboard": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-student.psDashboard",
     "parameters": [],
@@ -22370,10 +22526,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-student/ps-forms": {
+  "/edusoft-api/api/v1/me/portal-student/ps-forms": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-student.psForms",
     "parameters": [],
@@ -22418,10 +22574,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-student/ps-library": {
+  "/edusoft-api/api/v1/me/portal-student/ps-library": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-student.psLibrary",
     "parameters": [],
@@ -22466,10 +22622,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-student/ps-notifications": {
+  "/edusoft-api/api/v1/me/portal-student/ps-notifications": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-student.psNotifications",
     "parameters": [],
@@ -22510,10 +22666,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-student/ps-progress": {
+  "/edusoft-api/api/v1/me/portal-student/ps-progress": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-student.psProgress",
     "parameters": [],
@@ -22571,10 +22727,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-student/ps-reg-courses": {
+  "/edusoft-api/api/v1/me/portal-student/ps-reg-courses": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-student.psRegCourses",
     "parameters": [],
@@ -22624,10 +22780,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-student/ps-reg-intern": {
+  "/edusoft-api/api/v1/me/portal-student/ps-reg-intern": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-student.psRegIntern",
     "parameters": [],
@@ -22668,10 +22824,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-student/ps-reg-thesis": {
+  "/edusoft-api/api/v1/me/portal-student/ps-reg-thesis": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-student.psRegThesis",
     "parameters": [],
@@ -22718,10 +22874,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-student/ps-results": {
+  "/edusoft-api/api/v1/me/portal-student/ps-results": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-student.psResults",
     "parameters": [],
@@ -22779,10 +22935,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-student/ps-schedule": {
+  "/edusoft-api/api/v1/me/portal-student/ps-schedule": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-student.psSchedule",
     "parameters": [],
@@ -22845,10 +23001,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-student/ps-services": {
+  "/edusoft-api/api/v1/me/portal-student/ps-services": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-student.psServices",
     "parameters": [],
@@ -22887,10 +23043,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-student/ps-settings": {
+  "/edusoft-api/api/v1/me/portal-student/ps-settings": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-student.psSettings",
     "parameters": [],
@@ -22936,10 +23092,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-student/ps-student": {
+  "/edusoft-api/api/v1/me/portal-student/ps-student": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-student.psStudent",
     "parameters": [],
@@ -23051,10 +23207,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-student/ps-study-corner": {
+  "/edusoft-api/api/v1/me/portal-student/ps-study-corner": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-student.psStudyCorner",
     "parameters": [],
@@ -23106,10 +23262,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-student/ps-term": {
+  "/edusoft-api/api/v1/me/portal-student/ps-term": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-student.psTerm",
     "parameters": [],
@@ -23133,10 +23289,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-student/ps-tickets": {
+  "/edusoft-api/api/v1/me/portal-student/ps-tickets": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-student.psTickets",
     "parameters": [],
@@ -23186,10 +23342,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/portal-student/ps-tuition": {
+  "/edusoft-api/api/v1/me/portal-student/ps-tuition": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "portal-student.psTuition",
     "parameters": [],
@@ -23262,7 +23418,7 @@
     }
    }
   },
-  "/qlkhcn-api/api/v1/datasets/research": {
+  "/qlkhcn-api/api/v1/public/datasets/research": {
    "get": {
     "tags": [
      "qlkhcn-api"
@@ -23701,7 +23857,7 @@
     }
    }
   },
-  "/qlkhcn-api/api/v1/research/conferences": {
+  "/qlkhcn-api/api/v1/public/research/conferences": {
    "get": {
     "tags": [
      "qlkhcn-api"
@@ -23799,7 +23955,7 @@
     }
    }
   },
-  "/qlkhcn-api/api/v1/research/expert-stats": {
+  "/qlkhcn-api/api/v1/public/research/expert-stats": {
    "get": {
     "tags": [
      "qlkhcn-api"
@@ -23879,7 +24035,7 @@
     }
    }
   },
-  "/qlkhcn-api/api/v1/research/experts": {
+  "/qlkhcn-api/api/v1/public/research/experts": {
    "get": {
     "tags": [
      "qlkhcn-api"
@@ -23984,7 +24140,7 @@
     }
    }
   },
-  "/qlkhcn-api/api/v1/research/labs": {
+  "/qlkhcn-api/api/v1/public/research/labs": {
    "get": {
     "tags": [
      "qlkhcn-api"
@@ -24081,7 +24237,7 @@
     }
    }
   },
-  "/qlkhcn-api/api/v1/research/phd-training": {
+  "/qlkhcn-api/api/v1/public/research/phd-training": {
    "get": {
     "tags": [
      "qlkhcn-api"
@@ -24143,7 +24299,7 @@
     }
    }
   },
-  "/qlkhcn-api/api/v1/research/project-levels": {
+  "/qlkhcn-api/api/v1/public/research/project-levels": {
    "get": {
     "tags": [
      "qlkhcn-api"
@@ -24215,7 +24371,7 @@
     }
    }
   },
-  "/qlkhcn-api/api/v1/research/projects": {
+  "/qlkhcn-api/api/v1/public/research/projects": {
    "get": {
     "tags": [
      "qlkhcn-api"
@@ -24345,7 +24501,7 @@
     }
    }
   },
-  "/qlkhcn-api/api/v1/research/publication-types": {
+  "/qlkhcn-api/api/v1/public/research/publication-types": {
    "get": {
     "tags": [
      "qlkhcn-api"
@@ -24417,7 +24573,7 @@
     }
    }
   },
-  "/qlkhcn-api/api/v1/research/publications": {
+  "/qlkhcn-api/api/v1/public/research/publications": {
    "get": {
     "tags": [
      "qlkhcn-api"
@@ -24537,7 +24693,7 @@
     }
    }
   },
-  "/qlkhcn-api/api/v1/research/res-hub": {
+  "/qlkhcn-api/api/v1/public/research/res-hub": {
    "get": {
     "tags": [
      "qlkhcn-api"
@@ -24590,7 +24746,7 @@
     }
    }
   },
-  "/qlkhcn-api/api/v1/research/res-nav": {
+  "/qlkhcn-api/api/v1/public/research/res-nav": {
    "get": {
     "tags": [
      "qlkhcn-api"
@@ -24673,7 +24829,7 @@
     }
    }
   },
-  "/qlkhcn-api/api/v1/research/research-fields": {
+  "/qlkhcn-api/api/v1/public/research/research-fields": {
    "get": {
     "tags": [
      "qlkhcn-api"
@@ -24745,7 +24901,7 @@
     }
    }
   },
-  "/qlkhcn-api/api/v1/research/research-groups": {
+  "/qlkhcn-api/api/v1/public/research/research-groups": {
    "get": {
     "tags": [
      "qlkhcn-api"
@@ -24840,7 +24996,7 @@
     }
    }
   },
-  "/qlkhcn-api/api/v1/research/strong-fields": {
+  "/qlkhcn-api/api/v1/public/research/strong-fields": {
    "get": {
     "tags": [
      "qlkhcn-api"
@@ -24920,7 +25076,7 @@
     }
    }
   },
-  "/qlkhcn-api/api/v1/research/tech-transfer": {
+  "/qlkhcn-api/api/v1/public/research/tech-transfer": {
    "get": {
     "tags": [
      "qlkhcn-api"
@@ -24976,7 +25132,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/datasets/staff-hub": {
+  "/qlns-api/api/v1/public/datasets/staff-hub": {
    "get": {
     "tags": [
      "qlns-api"
@@ -25234,7 +25390,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/staff-hub/staff-directory": {
+  "/qlns-api/api/v1/public/staff-hub/staff-directory": {
    "get": {
     "tags": [
      "qlns-api"
@@ -25275,7 +25431,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/staff-hub/staff-hub": {
+  "/qlns-api/api/v1/public/staff-hub/staff-hub": {
    "get": {
     "tags": [
      "qlns-api"
@@ -25343,7 +25499,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/staff-hub/staff-nav": {
+  "/qlns-api/api/v1/public/staff-hub/staff-nav": {
    "get": {
     "tags": [
      "qlns-api"
@@ -25426,7 +25582,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/staff-hub/staff-quick-links": {
+  "/qlns-api/api/v1/public/staff-hub/staff-quick-links": {
    "get": {
     "tags": [
      "qlns-api"
@@ -25506,7 +25662,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/staff-hub/stf-forms": {
+  "/qlns-api/api/v1/public/staff-hub/stf-forms": {
    "get": {
     "tags": [
      "qlns-api"
@@ -25550,7 +25706,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/staff-hub/stf-portal": {
+  "/qlns-api/api/v1/public/staff-hub/stf-portal": {
    "get": {
     "tags": [
      "qlns-api"
@@ -25594,7 +25750,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/staff-hub/stf-regulations": {
+  "/qlns-api/api/v1/public/staff-hub/stf-regulations": {
    "get": {
     "tags": [
      "qlns-api"
@@ -25638,7 +25794,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/staff-hub/stf-research": {
+  "/qlns-api/api/v1/public/staff-hub/stf-research": {
    "get": {
     "tags": [
      "qlns-api"
@@ -25682,7 +25838,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/staff-hub/stf-teaching": {
+  "/qlns-api/api/v1/public/staff-hub/stf-teaching": {
    "get": {
     "tags": [
      "qlns-api"
@@ -25744,7 +25900,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/staff-hub/stf-utilities": {
+  "/qlns-api/api/v1/public/staff-hub/stf-utilities": {
    "get": {
     "tags": [
      "qlns-api"
@@ -25788,10 +25944,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/datasets/student-hub": {
+  "/edusoft-api/api/v1/public/datasets/student-hub": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "Toàn bộ dataset \"student-hub\"",
     "responses": {
@@ -26147,10 +26303,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/student-hub/stu-faq": {
+  "/edusoft-api/api/v1/public/student-hub/stu-faq": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "student-hub.stuFaq",
     "parameters": [
@@ -26227,10 +26383,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/student-hub/stu-forms": {
+  "/edusoft-api/api/v1/public/student-hub/stu-forms": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "student-hub.stuForms",
     "parameters": [],
@@ -26271,10 +26427,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/student-hub/stu-jobs": {
+  "/edusoft-api/api/v1/public/student-hub/stu-jobs": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "student-hub.stuJobs",
     "parameters": [],
@@ -26327,10 +26483,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/student-hub/stu-learning": {
+  "/edusoft-api/api/v1/public/student-hub/stu-learning": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "student-hub.stuLearning",
     "parameters": [],
@@ -26371,10 +26527,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/student-hub/stu-library": {
+  "/edusoft-api/api/v1/public/student-hub/stu-library": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "student-hub.stuLibrary",
     "parameters": [],
@@ -26430,10 +26586,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/student-hub/stu-life": {
+  "/edusoft-api/api/v1/public/student-hub/stu-life": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "student-hub.stuLife",
     "parameters": [],
@@ -26471,10 +26627,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/student-hub/stu-onboarding": {
+  "/edusoft-api/api/v1/public/student-hub/stu-onboarding": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "student-hub.stuOnboarding",
     "parameters": [],
@@ -26521,10 +26677,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/student-hub/stu-portal": {
+  "/edusoft-api/api/v1/public/student-hub/stu-portal": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "student-hub.stuPortal",
     "parameters": [],
@@ -26565,10 +26721,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/student-hub/stu-regulations": {
+  "/edusoft-api/api/v1/public/student-hub/stu-regulations": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "student-hub.stuRegulations",
     "parameters": [],
@@ -26612,10 +26768,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/student-hub/stu-tuition": {
+  "/edusoft-api/api/v1/public/student-hub/stu-tuition": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "student-hub.stuTuition",
     "parameters": [],
@@ -26687,10 +26843,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/student-hub/student-hub": {
+  "/edusoft-api/api/v1/public/student-hub/student-hub": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "student-hub.studentHub",
     "parameters": [],
@@ -26755,10 +26911,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/student-hub/student-nav-groups": {
+  "/edusoft-api/api/v1/public/student-hub/student-nav-groups": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "student-hub.studentNavGroups",
     "parameters": [
@@ -26836,10 +26992,10 @@
     }
    }
   },
-  "/qldt-api/api/v1/student-hub/student-quick-links": {
+  "/edusoft-api/api/v1/public/student-hub/student-quick-links": {
    "get": {
     "tags": [
-     "qldt-api"
+     "edusoft-api"
     ],
     "summary": "student-hub.studentQuickLinks",
     "parameters": [
@@ -26916,10 +27072,10 @@
     }
    }
   },
-  "/portal-api/api/v1/datasets/utilities": {
+  "/cms-api/api/v1/public/datasets/utilities": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "Toàn bộ dataset \"utilities\"",
     "responses": {
@@ -27173,10 +27329,10 @@
     }
    }
   },
-  "/portal-api/api/v1/utilities/admission": {
+  "/cms-api/api/v1/public/utilities/admission": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "utilities.admission",
     "parameters": [],
@@ -27257,10 +27413,10 @@
     }
    }
   },
-  "/portal-api/api/v1/utilities/contact": {
+  "/cms-api/api/v1/public/utilities/contact": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "utilities.contact",
     "parameters": [],
@@ -27317,10 +27473,10 @@
     }
    }
   },
-  "/portal-api/api/v1/utilities/digilib": {
+  "/cms-api/api/v1/public/utilities/digilib": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "utilities.digilib",
     "parameters": [],
@@ -27376,10 +27532,10 @@
     }
    }
   },
-  "/portal-api/api/v1/utilities/elearning": {
+  "/cms-api/api/v1/public/utilities/elearning": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "utilities.elearning",
     "parameters": [],
@@ -27429,10 +27585,10 @@
     }
    }
   },
-  "/portal-api/api/v1/utilities/forms": {
+  "/cms-api/api/v1/public/utilities/forms": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "utilities.forms",
     "parameters": [],
@@ -27464,10 +27620,10 @@
     }
    }
   },
-  "/portal-api/api/v1/utilities/utility-groups": {
+  "/cms-api/api/v1/public/utilities/utility-groups": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "utilities.utilityGroups",
     "parameters": [
@@ -27545,10 +27701,10 @@
     }
    }
   },
-  "/portal-api/api/v1/utilities/webmail": {
+  "/cms-api/api/v1/public/utilities/webmail": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "utilities.webmail",
     "parameters": [],
@@ -27592,10 +27748,10 @@
     }
    }
   },
-  "/portal-api/api/v1/utilities/work-calendar": {
+  "/cms-api/api/v1/public/utilities/work-calendar": {
    "get": {
     "tags": [
-     "portal-api"
+     "cms-api"
     ],
     "summary": "utilities.workCalendar",
     "parameters": [],
@@ -27636,7 +27792,7 @@
     }
    }
   },
-  "/qlkhcn-api/api/v1/research-topic-categories": {
+  "/qlkhcn-api/api/v1/public/research-topic-categories": {
    "get": {
     "tags": [
      "qlkhcn-api"
@@ -27688,7 +27844,7 @@
     }
    }
   },
-  "/qlns-api/api/v1/employees": {
+  "/qlns-api/api/v1/public/employees": {
    "get": {
     "tags": [
      "qlns-api"

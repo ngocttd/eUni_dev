@@ -55,7 +55,8 @@ export function AuthProvider({ children }) {
     loginWithSso,
     logout,
     refreshSession: bootstrap,
-    hasRole: (roles) => !roles || (Array.isArray(roles) ? roles.includes(user?.role) : user?.role === roles),
+    // vai trò chính (user.role) hoặc bất kỳ role nào trên SSO (user.roles) — vd. biên tập CMS đồng thời là giảng viên
+    hasRole: (roles) => !roles || [].concat(roles).some((r) => r === user?.role || (user?.roles || []).includes(r)),
     hasPermission: (permission) => matchPermission(user?.permissions || [], permission),
   }), [user, isLoading, login, loginAs, loginWithSso, logout, bootstrap])
 

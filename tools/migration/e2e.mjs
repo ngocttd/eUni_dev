@@ -5,7 +5,7 @@ import { readdirSync, statSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 
 const API = 'http://127.0.0.1:3000'
-const login = async (body) => (await fetch(`${API}/auth-api/api/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })).json()
+const login = async (body) => (await fetch(`${API}/auth-api/api/v1/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })).json()
 
 const routesOf = (repo, prefix) => {
   const out = []
@@ -50,7 +50,7 @@ async function run(label, base, session, routes, fill = (r) => r) {
 }
 
 const portalRoutes = routesOf('../../euni-public', '/euni')
-for (const [role, prefix] of [['student', '/euni/sinh-vien'], ['staff', '/euni/giang-vien'], ['parent', '/euni/phu-huynh'], ['leader', '/euni/lanh-dao']]) {
+for (const [role, prefix] of [['student', '/euni/sinh-vien'], ['lecturer', '/euni/giang-vien'], ['staff', '/euni/giang-vien'], ['parent', '/euni/phu-huynh'], ['manager', '/euni/lanh-dao']]) {
   const s = await login({ role })
   await run(`portal/${role}`, 'http://localhost:3002', { accessToken: s.accessToken, user: s.user }, portalRoutes.filter((r) => r.startsWith(prefix)))
 }

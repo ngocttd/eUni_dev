@@ -59,8 +59,8 @@ async function compare(label, paths, setupOld, setupNew) {
 }
 
 await compare('public', list)
-const login = async (role) => (await fetch(`${API}/auth-api/api/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ role }) })).json()
-const MOCK = { student: ['sinh-vien', 'student'], staff: ['giang-vien', 'staff'], parent: ['phu-huynh', 'parent'], leader: ['lanh-dao', 'leader'] }
+const login = async (role) => (await fetch(`${API}/auth-api/api/v1/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ role }) })).json()
+const MOCK = { student: ['sinh-vien', 'student'], lecturer: ['giang-vien', 'lecturer'], parent: ['phu-huynh', 'parent'], manager: ['lanh-dao', 'manager'] }
 for (const [role, [seg]] of Object.entries(MOCK)) {
   const s = await login(role)
   const set = (user) => { window.localStorage.setItem('humg-mock-user', JSON.stringify(user)) }

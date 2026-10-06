@@ -40,18 +40,26 @@ async function endpoints() {
 const asList = (v) => (Array.isArray(v) ? v : v == null || v === '' ? [] : [v])
 
 /**
- * Vai trò FE từ claim. Ưu tiên claim chuẩn của IdS (`role`/`roles`: cms.admin, cms.editor, cms.reviewer, cms.author,
- * student, staff, parent, leader); vẫn nhận realm_access / resource_access (Keycloak) và groups / app roles (Entra).
+ * Vai trò chính để FE điều hướng, suy từ role trên SSO (docs/design/CMS_DESIGN.md §5.1):
+ *  - Tầng 1, realm role: student · lecturer · staff · manager · parent · applicant · alumni (Keycloak: realm_access.roles)
+ *  - Tầng 2, client role có tiền tố: cms.viewer · cms.author · cms.reviewer · cms.editor · cms.admin, euni.*, edusoft.* …
+ *    (Keycloak: resource_access.{client}.roles)
+ *  - Tầng 3 (phạm vi theo trang/đơn vị/chuyên mục) KHÔNG nằm trong token — app tự phân (CMS: grants).
+ * Vẫn nhận claim `role`/`roles` của IdS và groups / app roles (Entra). Role không có tiền tố client được so khớp đúng tên.
  */
 const ROLE_RULES = [
-  ['cms-admin', /^cms[-_.]?admin$|super[-_]?admin/],
-  ['cms-editor', /^cms[-_.]?(editor|author|reviewer)$|editor/],
-  ['leader', /leader|lanh[-_]?dao|rector|hieu[-_]?truong/],
-  ['staff', /staff|lecturer|giang[-_]?vien|can[-_]?bo|teacher|employee/],
-  ['parent', /parent|phu[-_]?huynh/],
-  ['student', /student|sinh[-_]?vien/],
+  ['cms-admin', /^cms[-_.]admin$|^super[-_]?admin$/],
+  ['cms-editor', /^cms[-_.](editor|reviewer|author|viewer)$/],
+  ['manager', /^(manager|lanh[-_]?dao)$/],
+  ['lecturer', /^(lecturer|giang[-_]?vien)$/],
+  ['staff', /^(staff|can[-_]?bo)$/],
+  ['student', /^(student|sinh[-_]?vien)$/],
+  ['parent', /^(parent|phu[-_]?huynh)$/],
+  ['applicant', /^(applicant|thi[-_]?sinh)$/],
+  ['alumni', /^(alumni|cuu[-_]?sinh[-_]?vien)$/],
 ]
-const PORTAL = { student: '/euni/sinh-vien', staff: '/euni/giang-vien', parent: '/euni/phu-huynh', leader: '/euni/lanh-dao', 'cms-admin': '/cms', 'cms-editor': '/cms' }
+/** Cán bộ (staff) dùng chung cổng với giảng viên; thí sinh, cựu người học chưa có cổng riêng → trang chủ */
+const PORTAL = { student: '/euni/sinh-vien', lecturer: '/euni/giang-vien', staff: '/euni/giang-vien', manager: '/euni/lanh-dao', parent: '/euni/phu-huynh', 'cms-admin': '/cms', 'cms-editor': '/cms' }
 
 export function mapSsoUser(claims) {
   const roles = [
@@ -73,7 +81,7 @@ export function mapSsoUser(claims) {
     role,
     roles,
     permissions,
-    tenants: asList(claims.tenant ?? claims.tenants),
+    // trang (tenant) được quản trị không lấy từ token — CMS trả về qua /api/v1/me/context (tầng 3)
     units: asList(claims.unit ?? claims.units),
     staffCode: claims.staff_code || null,
     studentCode: claims.student_code || null,
