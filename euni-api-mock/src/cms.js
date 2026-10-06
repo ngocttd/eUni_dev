@@ -1,5 +1,9 @@
-// CMS API mock — /cms-api/api/...
-// Tên endpoint theo mẫu Swagger HUMG.CMS (Categories, Contents, Media) + phần mở rộng (docs/design/CMS_DESIGN.md §11).
+// CMS API mock — /cms-api/api/v1/...
+// Quy ước endpoint (giống Swagger cms-api trên gateway demo): chữ thường, ngăn cách bằng '-', có version, tách nhóm:
+//   /api/v1/public/...  website đọc, không cần đăng nhập
+//   /api/v1/me/...      người dùng đã đăng nhập (portal): ngữ cảnh, hộp thư thông báo
+//   /api/v1/admin/...   quản trị CMS (Bearer token + quyền)
+// Danh sách đầy đủ: contract/API_CONTRACT.md · docs/design/CMS_DESIGN.md §11.
 // Mọi request thuộc một tenant (header X-Tenant, xem tenant.js). Ghi ở CMS → các endpoint /Public/* đổi ngay.
 import { Router } from 'express'
 import multer from 'multer'
@@ -7,9 +11,9 @@ import { mkdirSync, readFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { getStore, persist, rows, insert, update, remove, resetStore, slugify, SCHEMA_VERSION } from './store.js'
-import { requireCms, requireUser, isSuper, ROLE_PERMISSIONS } from './auth.js'
+import { requireCms, requireUser, isSuper, hasPerm, ROLE_PERMISSIONS, REALM_ROLES, CLIENT_ROLES } from './auth.js'
 import { tenants, tenantById } from './tenant.js'
-import { can, grantsFor, withAncestors } from './acl.js'
+import { can, grantsFor, withAncestors, tenantsOf } from './acl.js'
 import { log, diff } from './audit.js'
 import { workflowResource, paged, norm, now, isLive } from './lifecycle.js'
 import { announcementRoutes } from './announcements.js'
@@ -25,6 +29,7 @@ export const cms = Router()
 
 /* ---------- tiện ích ---------- */
 const notFound = (res, what = 'Không tìm thấy dữ liệu.') => res.status(404).json({ message: what })
+const kebab = (s) => s.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()
 const matchKeyword = (row, q, fields) => !q.keyword || norm(fields.map((f) => row[f]).join(' ')).includes(norm(q.keyword))
 const ts = (v) => (v ? Date.parse(v) || 0 : 0)
 /** Dòng của tenant hiện hành, chưa xóa mềm */
@@ -62,7 +67,7 @@ const byDate = (list) => [...list].sort((a, b) => String(b.publishedAt).localeCo
 /* ============================================================
  * PUBLIC (không cần đăng nhập) — website người dùng đọc từ đây, theo tenant
  * ============================================================ */
-cms.get('/api/Public/content', (req, res) => {
+cms.get('/api/v1/public/site-content', (req, res) => {
   const lang = req.query.lang || 'vi'
   res.json({
     categories: bySort(trows(req, 'categories')).filter((c) => c.isActive).map((c) => ({ id: c.id, parentId: c.parentId, name: c.name, slug: c.slug })),
@@ -75,7 +80,7 @@ cms.get('/api/Public/content', (req, res) => {
   })
 })
 
-cms.get('/api/Public/home', (req, res) => {
+cms.get('/api/v1/public/home', (req, res) => {
   const lang = req.query.lang || 'vi'
   const live = liveContents(req)
   const homeItems = live.filter((c) => c.showOnHome)
@@ -101,16 +106,16 @@ cms.get('/api/Public/home', (req, res) => {
   })
 })
 
-cms.get('/api/Public/menus/:code', (req, res) => res.json(bySort(trows(req, 'menuItems').filter((m) => m.groupCode === req.params.code && m.isVisible))))
-cms.get('/api/Public/banners', (req, res) => {
+cms.get('/api/v1/public/menus/:code', (req, res) => res.json(bySort(trows(req, 'menuItems').filter((m) => m.groupCode === req.params.code && m.isVisible))))
+cms.get('/api/v1/public/banners', (req, res) => {
   const today = new Date().toISOString().slice(0, 10)
   res.json(bySort(trows(req, 'banners').filter((b) => b.isVisible && (!req.query.position || b.position === req.query.position) && (!b.startsOn || b.startsOn <= today) && (!b.endsOn || b.endsOn >= today))))
 })
-cms.get('/api/Public/settings', (req, res) => { const { general, seo, language } = settingsOf(req.tenant); res.json({ tenant: req.tenant, general, seo, language }) })
-cms.get('/api/Public/tenant', (req, res) => { const t = tenantById(req.tenant); res.json({ id: t.id, name: t.name, rootUnit: t.rootUnit }) })
+cms.get('/api/v1/public/settings', (req, res) => { const { general, seo, language } = settingsOf(req.tenant); res.json({ tenant: req.tenant, general, seo, language }) })
+cms.get('/api/v1/public/tenant', (req, res) => { const t = tenantById(req.tenant); res.json({ id: t.id, name: t.name, rootUnit: t.rootUnit }) })
 
-/* Danh sách bài viết công khai (theo mẫu Swagger: Contents/view/list) */
-cms.get('/api/Contents/view/list', (req, res) => {
+/* Danh sách bài viết công khai (phân trang) */
+cms.get('/api/v1/public/contents', (req, res) => {
   const lang = req.query.lang || 'vi'
   let list = liveContents(req)
   if (req.query.categoryId) list = list.filter((c) => c.categoryId === Number(req.query.categoryId))
@@ -118,19 +123,19 @@ cms.get('/api/Contents/view/list', (req, res) => {
   const p = paged(list, req.query)
   res.json({ ...p, items: p.items.map((c) => publicArticle(c, lang, false)) })
 })
-cms.get('/api/Contents/slug/:slug', (req, res) => {
+cms.get('/api/v1/public/contents/slug/:slug', (req, res) => {
   const c = liveContents(req).find((x) => x.slug === req.params.slug)
   return c ? res.json(publicArticle(c, req.query.lang || 'vi')) : notFound(res, 'Không tìm thấy bài viết.')
 })
-/* Contents/function/{id}: ghi nhận lượt xem bài viết công khai */
-cms.get('/api/Contents/function/:id', (req, res) => {
+/* Ghi nhận lượt xem bài viết công khai */
+cms.post('/api/v1/public/contents/:id/views', (req, res) => {
   const c = liveContents(req).find((x) => x.id === Number(req.params.id))
   if (!c) return notFound(res, 'Không tìm thấy bài viết.')
   update('contents', c.id, { viewCount: (c.viewCount || 0) + 1 })
   res.json({ id: c.id, viewCount: c.viewCount })
 })
 /* Tìm kiếm không dấu (backend thật: unaccent + pg_trgm, xem database/v2/schema.sql) */
-cms.get('/api/Public/search', (req, res) => {
+cms.get('/api/v1/public/search', (req, res) => {
   const q = norm(req.query.q || '')
   const hit = (...f) => !q || f.some((x) => norm(x).includes(q))
   const out = []
@@ -146,9 +151,10 @@ cms.get('/api/Public/search', (req, res) => {
 /* ============================================================
  * NGỮ CẢNH NGƯỜI DÙNG · TENANT · ĐƠN VỊ · DANH BẠ
  * ============================================================ */
-cms.get('/api/Me/context', requireUser, (req, res) => {
+cms.get('/api/v1/me/context', requireUser, (req, res) => {
   const t = req.user
-  const list = isSuper(t.perms) ? tenants() : tenants().filter((x) => (t.tenants || []).includes(x.id))
+  const mine = tenantsOf(t)
+  const list = isSuper(t.perms) ? tenants() : hasPerm(t.perms, 'cms.access') ? tenants().filter((x) => mine.includes(x.id)) : []
   const tenant = list.find((x) => x.id === req.tenant) ? req.tenant : list[0]?.id ?? null
   res.json({
     user: { sub: t.sub, name: t.name, email: t.email, roles: t.roles, units: t.units },
@@ -158,7 +164,7 @@ cms.get('/api/Me/context', requireUser, (req, res) => {
   })
 })
 
-cms.get('/api/OrgUnits', requireCms(), (_req, res) => {
+cms.get('/api/v1/admin/org-units', requireCms(), (_req, res) => {
   const list = rows('orgUnits')
   const depth = (u) => withAncestors([u.code]).length - 1
   const path = (u) => withAncestors([u.code]).reverse().join('.')
@@ -167,21 +173,25 @@ cms.get('/api/OrgUnits', requireCms(), (_req, res) => {
 
 /* Danh bạ (IdS) — tìm người theo tên, email, mã cán bộ, mã sinh viên. Chỉ đọc. */
 const directoryOut = (u) => ({ sub: u.sub, name: u.fullName, email: u.email, staffCode: u.staffCode, studentCode: u.studentCode, roles: u.roles, units: u.units, active: u.status === 1 })
-cms.get('/api/Directory/users', requireCms(), (req, res) => {
+cms.get('/api/v1/admin/directory/users', requireCms(), (req, res) => {
   const kw = norm(req.query.keyword || '')
   let list = rows('users')
   if (kw) list = list.filter((u) => norm([u.fullName, u.email, u.username, u.staffCode, u.studentCode].join(' ')).includes(kw))
   if (req.query.role) list = list.filter((u) => (u.roles || []).includes(req.query.role))
   res.json(paged(list.map(directoryOut), { pageSize: 20, ...req.query }))
 })
-cms.get('/api/Directory/users/:sub', requireCms(), (req, res) => {
+cms.get('/api/v1/admin/directory/users/:sub', requireCms(), (req, res) => {
   const u = rows('users').find((x) => x.sub === req.params.sub)
   return u ? res.json(directoryOut(u)) : notFound(res)
 })
-cms.get('/api/Directory/roles', requireCms(), (_req, res) => res.json(Object.entries(ROLE_PERMISSIONS).map(([code, permissions]) => ({ code, permissions }))))
+/* Danh mục role trên SSO: realm role (tầng 1) + client role của các app (tầng 2); permissions = quyền chức năng trong CMS */
+cms.get('/api/v1/admin/directory/roles', requireCms(), (_req, res) => res.json([
+  ...Object.entries(REALM_ROLES).map(([code, label]) => ({ code, label, kind: 'realm', client: null, permissions: ROLE_PERMISSIONS[code] || [] })),
+  ...Object.entries(CLIENT_ROLES).flatMap(([client, roles]) => Object.entries(roles).map(([code, label]) => ({ code, label, kind: 'client', client, permissions: ROLE_PERMISSIONS[code] || [] }))),
+]))
 
 /* ============================================================
- * PHÂN QUYỀN MỨC BẢN GHI (grants) — thay /api/Users, /api/Roles (user/role quản lý ở IdS)
+ * PHÂN QUYỀN MỨC BẢN GHI (grants) — thay /api/v1/admin/users, /api/v1/admin/roles (user/role quản lý ở IdS)
  * ============================================================ */
 const GRANT_PERMS = ['view', 'edit', 'review', 'publish', 'manage']
 const grantOut = (g) => {
@@ -205,21 +215,21 @@ function grantFields(b, req) {
   if (f.scopeType === 'category' && f.scopeId && !trows(req, 'categories').some((c) => String(c.id) === f.scopeId)) return 'Chuyên mục không thuộc trang này.'
   return f
 }
-cms.get('/api/Grants', requireCms('grant.manage'), (req, res) => {
+cms.get('/api/v1/admin/grants', requireCms('grant.manage'), (req, res) => {
   let list = trows(req, 'grants')
   for (const k of ['principalType', 'principalId', 'resourceType', 'scopeType', 'scopeId']) if (req.query[k]) list = list.filter((g) => String(g[k]) === String(req.query[k]))
   if (req.query.keyword) list = list.filter((g) => norm(Object.values(grantOut(g)).join(' ')).includes(norm(req.query.keyword)))
   res.json(paged(list.map(grantOut), { pageSize: 500, ...req.query }))
 })
 /* Quyền hiệu lực của một người — để kiểm tra "vì sao A sửa được bài này" */
-cms.get('/api/Grants/effective/:sub', requireCms('grant.manage'), (req, res) => {
+cms.get('/api/v1/admin/grants/effective/:sub', requireCms('grant.manage'), (req, res) => {
   const u = rows('users').find((x) => x.sub === req.params.sub)
   if (!u) return notFound(res)
   const perms = [...new Set((u.roles || []).flatMap((r) => ROLE_PERMISSIONS[r] || []))]
   const principal = { sub: u.sub, roles: u.roles, units: u.units, perms }
   res.json({ user: directoryOut(u), permissions: perms, grants: ['news', 'announcement'].flatMap((t) => grantsFor(principal, req.tenant, t)).filter((g, i, a) => a.indexOf(g) === i).map(grantOut) })
 })
-cms.post('/api/Grants', requireCms('grant.manage'), (req, res) => {
+cms.post('/api/v1/admin/grants', requireCms('grant.manage'), (req, res) => {
   const f = grantFields(req.body || {}, req)
   if (typeof f === 'string') return res.status(422).json({ message: f })
   for (const k of ['principalType', 'principalId', 'scopeType', 'permissions']) if (!f[k]) return res.status(422).json({ message: `Thiếu ${k}.` })
@@ -228,7 +238,7 @@ cms.post('/api/Grants', requireCms('grant.manage'), (req, res) => {
   log(req, 'grant.create', 'grant', { id: row.id, title: `${grantOut(row).principalLabel} → ${grantOut(row).scopeLabel}` }, { permissions: [null, row.permissions] })
   res.status(201).json(grantOut(row))
 })
-cms.put('/api/Grants/:id', requireCms('grant.manage'), (req, res) => {
+cms.put('/api/v1/admin/grants/:id', requireCms('grant.manage'), (req, res) => {
   const g = trows(req, 'grants').find((x) => x.id === Number(req.params.id)); if (!g) return notFound(res)
   const f = grantFields(req.body || {}, req)
   if (typeof f === 'string') return res.status(422).json({ message: f })
@@ -237,7 +247,7 @@ cms.put('/api/Grants/:id', requireCms('grant.manage'), (req, res) => {
   log(req, 'grant.update', 'grant', { id: g.id, title: grantOut(g).principalLabel }, diff(before, g))
   res.json(grantOut(g))
 })
-cms.delete('/api/Grants/:id', requireCms('grant.manage'), (req, res) => {
+cms.delete('/api/v1/admin/grants/:id', requireCms('grant.manage'), (req, res) => {
   const g = trows(req, 'grants').find((x) => x.id === Number(req.params.id)); if (!g) return notFound(res)
   update('grants', g.id, { deletedAt: now(), deletedBy: req.user.sub })
   log(req, 'grant.delete', 'grant', { id: g.id, title: grantOut(g).principalLabel })
@@ -281,7 +291,7 @@ const wrapNormalize = (fn) => (b, existing, req) => {
 }
 const tenantRoot = (req) => tenantById(req.tenant)?.rootUnit || 'HUMG'
 workflowResource(cms, {
-  path: 'Contents', col: 'contents', type: 'news',
+  path: 'contents', col: 'contents', type: 'news',
   normalize: wrapNormalize(contentFields),
   defaults: (req) => ({
     categoryId: null, ownerUnitCode: req.user.units?.[0] || tenantRoot(req), excerpt: null, isFeatured: false, showOnHome: false, contentBody: '[]',
@@ -302,7 +312,7 @@ announcementRoutes(cms)
 /* ============================================================
  * CRUD chung cho các tài nguyên còn lại — theo tenant, xóa mềm, audit diff
  * ============================================================ */
-function crud(path, name, { perm, fields = ['title'], defaults = {}, publicRead = false, slugFrom, label = (r) => r.title ?? r.name ?? r.label ?? r.id }) {
+function crud(name, { perm, fields = ['title'], defaults = {}, publicRead = false, slugFrom, label = (r) => r.title ?? r.name ?? r.label ?? r.id }) {
   const list = (req, res) => {
     let l = trows(req, name)
     if (req.query.keyword) l = l.filter((r) => matchKeyword(r, req.query, fields))
@@ -310,77 +320,79 @@ function crud(path, name, { perm, fields = ['title'], defaults = {}, publicRead 
     res.json(paged(l, req.query))
   }
   const one = (req) => trows(req, name).find((x) => x.id === Number(req.params.id) || (x.slug && x.slug === req.params.id))
-  cms.get(`/api/${path}`, publicRead ? list : [requireCms(perm), list])
-  cms.get(`/api/${path}/trash`, requireCms(perm), (req, res) => res.json(paged(rows(name).filter((r) => r.tenantId === req.tenant && r.deletedAt), req.query)))
-  cms.get(`/api/${path}/:id`, requireCms(perm), (req, res) => { const r = one(req); return r ? res.json(r) : notFound(res) })
-  cms.post(`/api/${path}`, requireCms(perm), (req, res) => {
+  const path = kebab(name)
+  if (publicRead) cms.get(`/api/v1/public/${path}`, list)
+  cms.get(`/api/v1/admin/${path}`, publicRead ? [requireCms(), list] : [requireCms(perm), list])
+  cms.get(`/api/v1/admin/${path}/trash`, requireCms(perm), (req, res) => res.json(paged(rows(name).filter((r) => r.tenantId === req.tenant && r.deletedAt), req.query)))
+  cms.get(`/api/v1/admin/${path}/:id`, requireCms(perm), (req, res) => { const r = one(req); return r ? res.json(r) : notFound(res) })
+  cms.post(`/api/v1/admin/${path}`, requireCms(perm), (req, res) => {
     const b = { ...(req.body || {}) }; delete b.id; delete b.tenantId
     if (slugFrom && !b.slug && b[slugFrom]) b.slug = slugify(b[slugFrom])
     const row = insert(name, { ...defaults, ...b, tenantId: req.tenant, createdAt: now(), createdBy: req.user.sub, deletedAt: null })
     log(req, `${name}.create`, name, { id: row.id, title: label(row) }); res.status(201).json(row)
   })
-  cms.put(`/api/${path}/:id`, requireCms(perm), (req, res) => {
+  cms.put(`/api/v1/admin/${path}/:id`, requireCms(perm), (req, res) => {
     const r = one(req); if (!r) return notFound(res)
     const b = { ...(req.body || {}) }; delete b.id; delete b.tenantId
     const before = { ...r }
     update(name, r.id, { ...b, updatedAt: now(), updatedBy: req.user.sub })
     log(req, `${name}.update`, name, { id: r.id, title: label(r) }, diff(before, r)); res.json(r)
   })
-  cms.delete(`/api/${path}/:id`, requireCms(perm), (req, res) => {
+  cms.delete(`/api/v1/admin/${path}/:id`, requireCms(perm), (req, res) => {
     const r = one(req); if (!r) return notFound(res)
     update(name, r.id, { deletedAt: now(), deletedBy: req.user.sub })
     log(req, `${name}.delete`, name, { id: r.id, title: label(r) }); res.status(204).end()
   })
-  cms.post(`/api/${path}/:id/restore`, requireCms(perm), (req, res) => {
+  cms.post(`/api/v1/admin/${path}/:id/restore`, requireCms(perm), (req, res) => {
     const r = rows(name).find((x) => x.tenantId === req.tenant && x.deletedAt && x.id === Number(req.params.id)); if (!r) return notFound(res)
     update(name, r.id, { deletedAt: null, deletedBy: null })
     log(req, `${name}.restore`, name, { id: r.id, title: label(r) }); res.json(r)
   })
 }
 
-crud('Categories', 'categories', { perm: 'category.manage', fields: ['name', 'slug'], publicRead: true, slugFrom: 'name', defaults: { parentId: null, isActive: true, sortOrder: 99, description: null, translations: {} } })
-crud('Events', 'events', { perm: 'site.manage', fields: ['title', 'place'], slugFrom: 'title', defaults: { status: 'upcoming', isVisible: true, description: [], agenda: [], contact: null, endsAt: null } })
-crud('Albums', 'albums', { perm: 'site.manage', fields: ['title'], slugFrom: 'title', defaults: { photos: [], isVisible: true, publishedAt: now().slice(0, 10) } })
-crud('Videos', 'videos', { perm: 'site.manage', fields: ['title'], slugFrom: 'title', defaults: { viewCount: 0, isVisible: true, publishedAt: now().slice(0, 10) } })
-crud('Podcasts', 'podcasts', { perm: 'site.manage', fields: ['title'], slugFrom: 'title', defaults: { playCount: 0, notes: [], isVisible: true, publishedAt: now().slice(0, 10) } })
-crud('Pages', 'pages', { perm: 'page.manage', fields: ['title', 'slug'], defaults: { parentId: null, template: 'default', status: 'published', sortOrder: 99, body: [] } })
-crud('MenuItems', 'menuItems', { perm: 'menu.manage', fields: ['label', 'url'], label: (r) => r.label, defaults: { groupCode: 'header', parentId: null, type: 'page', sortOrder: 99, isVisible: true, openInNewTab: false } })
-crud('Banners', 'banners', { perm: 'site.manage', fields: ['title'], defaults: { isVisible: true, sortOrder: 99, imageId: null, linkUrl: null } })
-crud('HeroSlides', 'heroSlides', { perm: 'site.manage', fields: ['title'], defaults: { isVisible: true, sortOrder: 99 } })
-crud('QuickLinks', 'quickLinks', { perm: 'site.manage', fields: ['label'], label: (r) => r.label, defaults: { isVisible: true, sortOrder: 99 } })
-crud('Audiences', 'audiences', { perm: 'site.manage', fields: ['title'], defaults: { isVisible: true, sortOrder: 99 } })
-crud('Strengths', 'strengths', { perm: 'site.manage', fields: ['title'], defaults: { isVisible: true, sortOrder: 99 } })
-crud('Partners', 'partners', { perm: 'site.manage', fields: ['name', 'shortName'], defaults: { isVisible: true, sortOrder: 99, website: null } })
-crud('SiteStats', 'siteStats', { perm: 'site.manage', fields: ['label', 'value'], label: (r) => `${r.label}: ${r.value}`, defaults: { placement: 'hero', isVisible: true, sortOrder: 99, sub: null } })
+crud('categories', { perm: 'category.manage', fields: ['name', 'slug'], publicRead: true, slugFrom: 'name', defaults: { parentId: null, isActive: true, sortOrder: 99, description: null, translations: {} } })
+crud('events', { perm: 'site.manage', fields: ['title', 'place'], slugFrom: 'title', defaults: { status: 'upcoming', isVisible: true, description: [], agenda: [], contact: null, endsAt: null } })
+crud('albums', { perm: 'site.manage', fields: ['title'], slugFrom: 'title', defaults: { photos: [], isVisible: true, publishedAt: now().slice(0, 10) } })
+crud('videos', { perm: 'site.manage', fields: ['title'], slugFrom: 'title', defaults: { viewCount: 0, isVisible: true, publishedAt: now().slice(0, 10) } })
+crud('podcasts', { perm: 'site.manage', fields: ['title'], slugFrom: 'title', defaults: { playCount: 0, notes: [], isVisible: true, publishedAt: now().slice(0, 10) } })
+crud('pages', { perm: 'page.manage', fields: ['title', 'slug'], defaults: { parentId: null, template: 'default', status: 'published', sortOrder: 99, body: [] } })
+crud('menuItems', { perm: 'menu.manage', fields: ['label', 'url'], label: (r) => r.label, defaults: { groupCode: 'header', parentId: null, type: 'page', sortOrder: 99, isVisible: true, openInNewTab: false } })
+crud('banners', { perm: 'site.manage', fields: ['title'], defaults: { isVisible: true, sortOrder: 99, imageId: null, linkUrl: null } })
+crud('heroSlides', { perm: 'site.manage', fields: ['title'], defaults: { isVisible: true, sortOrder: 99 } })
+crud('quickLinks', { perm: 'site.manage', fields: ['label'], label: (r) => r.label, defaults: { isVisible: true, sortOrder: 99 } })
+crud('audiences', { perm: 'site.manage', fields: ['title'], defaults: { isVisible: true, sortOrder: 99 } })
+crud('strengths', { perm: 'site.manage', fields: ['title'], defaults: { isVisible: true, sortOrder: 99 } })
+crud('partners', { perm: 'site.manage', fields: ['name', 'shortName'], defaults: { isVisible: true, sortOrder: 99, website: null } })
+crud('siteStats', { perm: 'site.manage', fields: ['label', 'value'], label: (r) => `${r.label}: ${r.value}`, defaults: { placement: 'hero', isVisible: true, sortOrder: 99, sub: null } })
 
-cms.get('/api/MenuGroups', requireCms('menu.manage'), (_req, res) => res.json(getStore().menuGroups))
-cms.get('/api/Languages', (_req, res) => res.json(rows('languages')))
+cms.get('/api/v1/admin/menu-groups', requireCms('menu.manage'), (_req, res) => res.json(getStore().menuGroups))
+cms.get(['/api/v1/public/languages', '/api/v1/admin/languages'], (_req, res) => res.json(rows('languages')))
 
 /* ============================================================
- * MEDIA (theo mẫu Swagger: POST /api/Media/upload multipart) — theo tenant
+ * MEDIA (theo mẫu Swagger: POST /api/v1/admin/media/upload multipart) — theo tenant
  * Thật: MinIO bucket cms-public (tin tức) / cms-private (đính kèm thông báo, presigned URL)
  * ============================================================ */
 const kindOf = (mime = '', ext = '') => mime.startsWith('image/') ? 'image' : mime.startsWith('video/') ? 'video' : mime.startsWith('audio/') ? 'audio' : /pdf|doc|xls|ppt|txt/i.test(ext + mime) ? 'document' : 'other'
-cms.get('/api/Media', requireCms('media.manage'), (req, res) => {
+cms.get('/api/v1/admin/media', requireCms('media.manage'), (req, res) => {
   let l = [...trows(req, 'media')].sort((a, b) => b.createdAt.localeCompare(a.createdAt))
   if (req.query.kind) l = l.filter((m) => m.kind === req.query.kind)
   if (req.query.folder) l = l.filter((m) => m.folder === req.query.folder)
   if (req.query.keyword) l = l.filter((m) => matchKeyword(m, req.query, ['fileName']))
   res.json(paged(l, req.query))
 })
-cms.get('/api/Media/:id', requireCms('media.manage'), (req, res) => { const m = trows(req, 'media').find((x) => x.id === Number(req.params.id)); return m ? res.json(m) : notFound(res) })
-cms.get('/api/Media/:id/url', (req, res) => { const m = trows(req, 'media').find((x) => x.id === Number(req.params.id)); return m ? res.json({ url: m.url }) : notFound(res) })
-cms.post('/api/Media/upload', requireCms('media.manage'), upload.single('file'), (req, res) => {
+cms.get('/api/v1/admin/media/:id', requireCms('media.manage'), (req, res) => { const m = trows(req, 'media').find((x) => x.id === Number(req.params.id)); return m ? res.json(m) : notFound(res) })
+cms.get('/api/v1/public/media/:id/url', (req, res) => { const m = trows(req, 'media').find((x) => x.id === Number(req.params.id)); return m ? res.json({ url: m.url }) : notFound(res) })
+cms.post('/api/v1/admin/media/upload', requireCms('media.manage'), upload.single('file'), (req, res) => {
   if (!req.file) return res.status(422).json({ message: 'Thiếu file.' })
   const ext = (req.file.originalname.match(/\.([^.]+)$/)?.[1] || '').toLowerCase()
   const row = insert('media', {
-    tenantId: req.tenant, fileName: req.file.originalname, kind: kindOf(req.file.mimetype, ext), ext, mimeType: req.file.mimetype, sizeBytes: req.file.size, url: `/cms-api/uploads/${req.file.filename}`,
+    tenantId: req.tenant, fileName: req.file.originalname, kind: kindOf(req.file.mimetype, ext), ext, mimeType: req.file.mimetype, sizeBytes: req.file.size, url: `cms-api/uploads/${req.file.filename}`,
     altText: req.body.altText ?? null, caption: req.body.caption ?? null, folder: req.body.folder ?? null, uploadedBy: req.user.sub, createdAt: now(), deletedAt: null,
   })
   log(req, 'media.upload', 'media', row)
   res.status(201).json(row)
 })
-cms.delete('/api/Media/:id', requireCms('media.manage'), (req, res) => {
+cms.delete('/api/v1/admin/media/:id', requireCms('media.manage'), (req, res) => {
   const m = trows(req, 'media').find((x) => x.id === Number(req.params.id)); if (!m) return notFound(res)
   update('media', m.id, { deletedAt: now(), deletedBy: req.user.sub }); log(req, 'media.delete', 'media', m); res.status(204).end()
 })
@@ -388,23 +400,23 @@ cms.delete('/api/Media/:id', requireCms('media.manage'), (req, res) => {
 /* ============================================================
  * SETTINGS (theo tenant) · AUDIT · BACKUPS · DASHBOARD
  * ============================================================ */
-cms.get('/api/Settings', requireCms('settings.manage'), (req, res) => res.json({ ...settingsOf(req.tenant), i18nCoverage: getStore().i18nCoverage }))
-cms.get('/api/Settings/:group', requireCms('settings.manage'), (req, res) => { const g = settingsOf(req.tenant)[req.params.group]; return g ? res.json(g) : notFound(res) })
+cms.get('/api/v1/admin/settings', requireCms('settings.manage'), (req, res) => res.json({ ...settingsOf(req.tenant), i18nCoverage: getStore().i18nCoverage }))
+cms.get('/api/v1/admin/settings/:group', requireCms('settings.manage'), (req, res) => { const g = settingsOf(req.tenant)[req.params.group]; return g ? res.json(g) : notFound(res) })
 /* Gửi email thử (mock: không gửi thật) */
-cms.post('/api/Settings/email/test', requireCms('settings.manage'), (req, res) => {
+cms.post('/api/v1/admin/settings/email/test', requireCms('settings.manage'), (req, res) => {
   const to = String((req.body || {}).to || '').trim()
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(to)) return res.status(422).json({ message: 'Email nhận không hợp lệ.' })
   const mail = settingsOf(req.tenant).email || {}
   log(req, 'settings.email_test', 'settings', to)
   res.json({ ok: true, message: 'Đã gửi email thử tới ' + to + ' (mock: qua ' + (mail.smtpHost || 'SMTP') + ').' })
 })
-cms.put('/api/Settings/:group', requireCms('settings.manage'), (req, res) => {
+cms.put('/api/v1/admin/settings/:group', requireCms('settings.manage'), (req, res) => {
   const s = settingsOf(req.tenant); const before = { ...(s[req.params.group] || {}) }
   s[req.params.group] = { ...before, ...(req.body || {}) }; persist()
   log(req, 'settings.update', 'settings', req.params.group, diff(before, s[req.params.group])); res.json(s[req.params.group])
 })
 
-/* Audit log (chỉ ghi thêm). /api/ActivityLogs giữ làm tên cũ. */
+/* Audit log (chỉ ghi thêm). /api/v1/admin/activity-logs giữ làm tên cũ. */
 const auditList = (req, res) => {
   const q = req.query
   let l = rows('activityLogs').filter((x) => x.tenantId === req.tenant).sort((a, b) => b.createdAt.localeCompare(a.createdAt))
@@ -417,8 +429,8 @@ const auditList = (req, res) => {
   if (q.keyword) l = l.filter((x) => matchKeyword(x, q, ['userName', 'targetLabel']))
   res.json(paged(l, q))
 }
-cms.get('/api/AuditLogs', requireCms('log.view'), auditList)
-cms.get('/api/ActivityLogs', requireCms('log.view'), auditList)
+cms.get('/api/v1/admin/audit-logs', requireCms('log.view'), auditList)
+cms.get('/api/v1/admin/activity-logs', requireCms('log.view'), auditList)
 
 /* Sao lưu: chụp toàn bộ dữ liệu CMS (trừ nhật ký/sao lưu) để tải về hoặc phục hồi — chỉ quản trị hệ thống */
 const SNAP_SKIP = new Set(['backups', 'activityLogs'])
@@ -445,44 +457,44 @@ const applySnapshot = (json) => {
 const backupOut = (b) => ({ ...b, hasData: Boolean(getStore().snapshots?.[b.id]) })
 const backupRows = () => rows('backups')
 
-cms.get('/api/Backups', requireCms('backup.manage'), (req, res) => {
+cms.get('/api/v1/admin/backups', requireCms('backup.manage'), (req, res) => {
   const p = paged([...backupRows()].sort((a, b) => ts(b.createdAt) - ts(a.createdAt) || b.id - a.id), req.query)
   res.json({ ...p, items: p.items.map(backupOut) })
 })
-cms.post('/api/Backups', requireCms('backup.manage'), (req, res) => {
+cms.post('/api/v1/admin/backups', requireCms('backup.manage'), (req, res) => {
   const snap = takeSnapshot()
   const row = insert('backups', { tenantId: req.tenant, filePath: '/backup/cms_humg/cms_' + Date.now() + '.json', sizeBytes: Buffer.byteLength(snap), trigger: 'manual', createdByName: req.user.name, status: 'success', createdAt: now() })
   const s = getStore(); s.snapshots = s.snapshots || {}; s.snapshots[row.id] = snap
   Object.keys(s.snapshots).map(Number).sort((a, b) => b - a).slice(8).forEach((id) => delete s.snapshots[id])
   persist(); log(req, 'backup.create', 'backup', row.filePath); res.status(201).json(backupOut(row))
 })
-cms.get('/api/Backups/:id/download', requireCms('backup.manage'), (req, res) => {
+cms.get('/api/v1/admin/backups/:id/download', requireCms('backup.manage'), (req, res) => {
   const snap = getStore().snapshots?.[Number(req.params.id)]
   if (!snap) return res.status(404).json({ message: 'Bản sao lưu này không còn dữ liệu để tải.' })
   res.setHeader('Content-Type', 'application/json; charset=utf-8')
   res.setHeader('Content-Disposition', 'attachment; filename="cms-backup-' + req.params.id + '.json"')
   res.send(snap)
 })
-cms.post('/api/Backups/restore', requireCms('backup.manage'), upload.single('file'), (req, res) => {
+cms.post('/api/v1/admin/backups/restore', requireCms('backup.manage'), upload.single('file'), (req, res) => {
   if (!req.file) return res.status(422).json({ message: 'Thiếu tệp sao lưu.' })
   const err = applySnapshot(readFileSync(req.file.path, 'utf8'))
   if (err) return res.status(422).json({ message: err })
   log(req, 'backup.restore', 'backup', req.file.originalname); res.json({ ok: true })
 })
-cms.post('/api/Backups/:id/restore', requireCms('backup.manage'), (req, res) => {
+cms.post('/api/v1/admin/backups/:id/restore', requireCms('backup.manage'), (req, res) => {
   const snap = getStore().snapshots?.[Number(req.params.id)]
   if (!snap) return res.status(404).json({ message: 'Bản sao lưu này không còn dữ liệu để phục hồi.' })
   const err = applySnapshot(snap)
   if (err) return res.status(422).json({ message: err })
   log(req, 'backup.restore', 'backup', 'Bản #' + req.params.id); res.json({ ok: true })
 })
-cms.delete('/api/Backups/:id', requireCms('backup.manage'), (req, res) => {
+cms.delete('/api/v1/admin/backups/:id', requireCms('backup.manage'), (req, res) => {
   const b = backupRows().find((x) => x.id === Number(req.params.id)); if (!b) return notFound(res)
   remove('backups', b.id); if (getStore().snapshots) delete getStore().snapshots[b.id]; persist()
   log(req, 'backup.delete', 'backup', b.filePath); res.status(204).end()
 })
 
-cms.get('/api/Dashboard', requireCms(), (req, res) => {
+cms.get('/api/v1/admin/dashboard', requireCms(), (req, res) => {
   const contents = trows(req, 'contents').filter((c) => can(req.user, req.tenant, 'news', 'view', c))
   const anns = trows(req, 'announcements').filter((a) => can(req.user, req.tenant, 'announcement', 'view', a))
   const by = (s) => contents.filter((c) => c.status === s).length
@@ -504,7 +516,7 @@ cms.get('/api/Dashboard', requireCms(), (req, res) => {
 })
 
 /* Đặt lại dữ liệu mock về trạng thái ban đầu (chỉ dùng khi phát triển) */
-cms.post('/api/_dev/reset', (_req, res) => { resetStore(); res.json({ ok: true }) })
+cms.post('/api/v1/dev/reset', (_req, res) => { resetStore(); res.json({ ok: true }) })
 
 /* lỗi ném từ normalize() trong lifecycle → trả HTTP status tương ứng */
 cms.use((err, req, res, next) => {

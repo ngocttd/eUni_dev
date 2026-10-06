@@ -37,6 +37,15 @@ function scopeMatches(g, rec) {
   return false
 }
 
+/**
+ * Tầng 3 (app tự phân, không cấu hình trên SSO): các trang (tenant) user được vào CMS = các tenant có ít nhất một grant
+ * khớp user (theo sub, đơn vị kèm đơn vị cha, hoặc role). cms.* (super) được vào mọi tenant — xử lý ở nơi gọi.
+ */
+export function tenantsOf(user) {
+  const mine = principals(user)
+  return [...new Set(rows('grants').filter((g) => !g.deletedAt && (!g.expiresAt || Date.parse(g.expiresAt) > Date.now()) && mine.has(`${g.principalType}:${g.principalId}`)).map((g) => g.tenantId))]
+}
+
 /** Các grant (đang hiệu lực) của user trong tenant cho loại tài nguyên `type` */
 export function grantsFor(user, tenant, type) {
   const mine = principals(user)

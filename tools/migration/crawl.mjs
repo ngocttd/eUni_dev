@@ -29,7 +29,7 @@ const collect = (v) => {
   }
 }
 for (const f of readdirSync(mock)) collect(JSON.parse(readFileSync(join(mock, f), 'utf8')))
-const cms = await (await fetch('http://127.0.0.1:3000/cms-api/api/Public/content')).json()
+const cms = await (await fetch('http://127.0.0.1:3000/cms-api/api/v1/public/site-content')).json()
 cms.articles.forEach((a) => slugs.add(a.slug)); cms.events.forEach((a) => slugs.add(a.slug)); cms.albums.forEach((a) => slugs.add(a.slug)); cms.videos.forEach((a) => slugs.add(a.slug)); cms.podcasts.forEach((a) => slugs.add(a.slug))
 
 const bad = []

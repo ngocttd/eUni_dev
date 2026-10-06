@@ -36,7 +36,7 @@ Kiểm tra trước khi tạo PR: `npm run build`.
 Tenant (website theo đơn vị, §2): trang công khai suy ra tenant từ host theo `NEXT_PUBLIC_TENANT_HOSTS` (vd. `cntt.humg.edu.vn=cntt`),
 không khớp → `NEXT_PUBLIC_DEFAULT_TENANT`. Mọi lời gọi API gửi header `X-Tenant` (`src/shared/services/tenantService.js`; phía server: `src/lib/datasets/server.js`).
 
-Thông báo: các trang Thông báo của cổng Sinh viên / Giảng viên / Phụ huynh và chuông trên topbar đọc hộp thư `/cms-api/api/Me/announcements`
+Thông báo: các trang Thông báo của cổng Sinh viên / Giảng viên / Phụ huynh và chuông trên topbar đọc hộp thư `/cms-api/api/v1/me/announcements`
 (`src/shared/portal/AnnouncementInbox.jsx`) — thông báo do CMS soạn theo đối tượng (vai trò, đơn vị/lớp, cá nhân), có xác nhận đã đọc.
 
 ## Cấu trúc
@@ -85,7 +85,7 @@ Portal (client)  ──<ClientDatasets modules=['portal-student']>──► load
 ```
 
 - Dữ liệu CMS (`content`, `home`) gọi `cms-api` mỗi request (`cache: 'no-store'`) → admin sửa, trang public đổi ngay.
-- Dữ liệu từ hệ thống khác (nhân sự, KHCN, đào tạo, portal) gọi `GET /{service}/api/v1/datasets/{module}`.
+- Dữ liệu từ hệ thống khác (nhân sự, KHCN, đào tạo, portal) gọi `GET /{service}/api/v1/public/datasets/{module}`.
 - Map module → service nằm ở `MODULE_SERVICE` trong `loaders.js`.
 
 ## Thêm / sửa

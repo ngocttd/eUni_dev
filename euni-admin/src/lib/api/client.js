@@ -30,16 +30,23 @@ export const asPage = (res) => (Array.isArray(res)
   ? { items: res, pageIndex: 1, pageSize: res.length, totalItems: res.length, totalPages: 1 }
   : res ?? { items: [], pageIndex: 1, pageSize: 0, totalItems: 0, totalPages: 1 })
 
-/** Tên service trên API gateway (khớp https://api-gateway-demo.humg.edu.vn/<service>/swagger). */
+/**
+ * Tên service trên API gateway (khớp https://api-gateway-demo.humg.edu.vn/<service>/swagger).
+ * Web và mobile đều gọi API qua gateway; không có service `portal-api` riêng.
+ */
 export const SERVICE = Object.freeze({
   cms: 'cms-api',
   auth: 'auth-api',
   qlns: 'qlns-api',
   qlkhcn: 'qlkhcn-api',
-  qldt: 'qldt-api',
-  portal: 'portal-api',
+  edusoft: 'edusoft-api',
+  esb: 'esb-api',
 })
 
+/**
+ * Ghép URL bằng chuỗi `${gateway}/${service}${path}` — KHÔNG dùng new URL(path, gateway): base có thể có tiền tố
+ * (vd. https://api-gateway-demo.humg.edu.vn/euni-mock-api) và đường dẫn tuyệt đối sẽ làm mất tiền tố đó.
+ */
 function buildUrl(service, path, query) {
   const url = new URL(`${env.apiGateway}/${service}${path.startsWith('/') ? path : `/${path}`}`)
   Object.entries(query || {}).forEach(([k, v]) => {
@@ -85,7 +92,7 @@ async function request(service, path, { query, body, headers, method = 'GET', to
   }
 }
 
-/** Tạo client cho một service: api(SERVICE.cms).get('/api/Contents', { query }). Tùy chọn: query, headers, token, tenant (mặc định tenantService). */
+/** Tạo client cho một service: api(SERVICE.cms).get('/api/v1/admin/contents', { query }). Tùy chọn: query, headers, token, tenant (mặc định tenantService). */
 export const api = (service) => ({
   get: (path, o = {}) => request(service, path, { ...o, method: 'GET' }),
   post: (path, body, o = {}) => request(service, path, { ...o, method: 'POST', body }),

@@ -11,8 +11,8 @@ const post = async (u, b, t) => (await fetch(u, { method: 'POST', headers: { 'Co
 const get = async (p, t) => { const r = await fetch(`${API}${p}`, { headers: t ? { Authorization: `Bearer ${t}` } : {} }); return { status: r.status, body: await r.json().catch(() => null) } }
 const wf = (label) => page.locator('.cms-wfbar button', { hasText: label }).first()
 
-await post(`${API}/_dev/reset`)
-const login = (u) => post('http://127.0.0.1:3000/auth-api/api/auth/login', { username: u, password: 'Humg@2025' })
+await post(`${API}/v1/dev/reset`)
+const login = (u) => post('http://127.0.0.1:3000/auth-api/api/v1/auth/login', { username: u, password: 'Humg@2025' })
 const admin = await login('tvanminh')
 const T = admin.accessToken
 
@@ -183,7 +183,7 @@ await step('Menu: thêm mục → hiện ở API công khai; xóa → mất', as
   await fill('Nhãn hiển thị (VI)', `Menu E2E ${stamp}`)
   await fill('Liên kết (URL)', '/e2e')
   await submit()
-  const has = async () => (await (await fetch(`${API}/Public/menus/header`)).json()).some((m) => m.label === `Menu E2E ${stamp}`)
+  const has = async () => (await (await fetch(`${API}/v1/public/menus/header`)).json()).some((m) => m.label === `Menu E2E ${stamp}`)
   assert.ok(await has())
   accept()
   await page.locator('tr', { hasText: `Menu E2E ${stamp}` }).getByRole('button', { name: /Xóa/ }).click()
@@ -197,7 +197,7 @@ await step('Cấu hình: lưu "Thông tin chung" và "Bảo mật" → API công
   const name = `HUMG E2E ${stamp}`
   await page.locator('.cms-form label', { hasText: 'Tên website' }).locator('input').fill(name)
   await page.getByRole('button', { name: 'Lưu cấu hình' }).click(); await status(); await page.waitForLoadState('networkidle')
-  assert.equal((await (await fetch(`${API}/Public/settings`)).json()).general.siteName, name)
+  assert.equal((await (await fetch(`${API}/v1/public/settings`)).json()).general.siteName, name)
   await page.locator('.cms-settings__nav button', { hasText: 'Bảo mật' }).click()
   await page.locator('input[name=sessionMinutes]').fill('45')
   await page.locator('input[name=ipRestrict]').check()
@@ -231,6 +231,6 @@ await step('Sao lưu: tạo bản mới → xóa', async () => {
 await step('Không có lỗi JS trong suốt phiên', async () => assert.deepEqual(errors, []))
 
 await browser.close()
-await post(`${API}/_dev/reset`)
+await post(`${API}/v1/dev/reset`)
 console.log(failed ? `\nCÓ ${failed} BƯỚC LỖI` : '\nLưu/xóa trên các màn hình CMS còn lại: OK')
 process.exitCode = failed ? 1 : 0

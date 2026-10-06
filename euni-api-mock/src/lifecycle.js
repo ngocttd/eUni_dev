@@ -49,7 +49,7 @@ const handle = (fn) => (req, res) => {
 /** Đăng ký đầy đủ API vòng đời cho một loại nội dung. */
 export function workflowResource(router, cfg) {
   const { path, col, type, label = (r) => r.title } = cfg
-  const base = `/api/${path}`
+  const base = `/api/v1/admin/${path}`
   const userName = (sub) => rows('users').find((u) => u.sub === sub)?.fullName ?? sub
   const mine = (req) => rows(col).filter((r) => r.tenantId === req.tenant)
   const find = (req, id, { deleted = false } = {}) => {

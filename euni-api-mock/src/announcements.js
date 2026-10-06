@@ -1,14 +1,15 @@
 // Thông báo (Announcement) — bảng riêng với tin tức (docs/design/CMS_DESIGN.md §6):
 //   · quản trị: cùng vòng đời workflow/revision/thùng rác với tin tức (lifecycle.js), ACL theo đơn vị sở hữu
 //   · đối tượng nhận: targets[] — mỗi dòng AND (audience × unitCode × userSub), các dòng OR, dòng isExclude bị trừ
-//   · hộp thư: /api/Me/announcements — so khớp lúc đọc với membership của user (role → audience, đơn vị + đơn vị cha)
+//   · hộp thư: /api/v1/me/announcements — so khớp lúc đọc với membership của user (role → audience, đơn vị + đơn vị cha)
 //   · receipts: đã đọc / đã xác nhận theo từng user
 import { rows, insert, persist } from './store.js'
 import { requireCms, requireUser } from './auth.js'
 import { withAncestors } from './acl.js'
 import { workflowResource, paged, isLive, now } from './lifecycle.js'
 
-export const AUDIENCES = { student: 'Sinh viên', staff: 'Cán bộ, giảng viên', parent: 'Phụ huynh', leader: 'Lãnh đạo' }
+/** Đối tượng nhận = realm role trên SSO (tầng 1) */
+export const AUDIENCES = { student: 'Sinh viên', lecturer: 'Giảng viên', staff: 'Cán bộ, chuyên viên', manager: 'Lãnh đạo', parent: 'Phụ huynh', applicant: 'Thí sinh', alumni: 'Cựu người học' }
 export const CATEGORIES = { general: 'Chung', academic: 'Đào tạo', exam: 'Thi cử', tuition: 'Học phí', event: 'Sự kiện', admin: 'Hành chính' }
 const PRIORITY = { 0: 'Bình thường', 1: 'Quan trọng', 2: 'Khẩn' }
 const CHANNELS = ['portal', 'email', 'push']
@@ -81,7 +82,7 @@ const receiptsOf = (a) => rows('receipts').filter((r) => r.announcementId === a.
 
 export function announcementRoutes(cms) {
   const { find } = workflowResource(cms, {
-    path: 'Announcements', col: 'announcements', type: 'announcement',
+    path: 'announcements', col: 'announcements', type: 'announcement',
     normalize,
     defaults: (req) => ({
       ownerUnitCode: req.user.units?.[0] || 'HUMG', category: 'general', priority: 0, bodyHtml: '', publishAt: null, expireAt: null, pinnedUntil: null,
@@ -105,7 +106,7 @@ export function announcementRoutes(cms) {
   })
 
   /* Thống kê đọc / xác nhận của một thông báo */
-  cms.get('/api/Announcements/:id/stats', requireCms('announcement.view'), (req, res, next) => {
+  cms.get('/api/v1/admin/announcements/:id/stats', requireCms('announcement.view'), (req, res, next) => {
     try {
       const a = find(req, req.params.id)
       const rc = receiptsOf(a)
@@ -118,7 +119,7 @@ export function announcementRoutes(cms) {
   })
 
   /* Danh mục dùng cho form soạn thông báo */
-  cms.get('/api/Announcements/meta/options', requireCms('announcement.view'), (_req, res) => {
+  cms.get('/api/v1/admin/announcements/meta/options', requireCms('announcement.view'), (_req, res) => {
     res.json({ audiences: AUDIENCES, categories: CATEGORIES, priorities: PRIORITY, channels: CHANNELS })
   })
 
@@ -145,14 +146,14 @@ export function announcementRoutes(cms) {
   }
   const order = (a, b) => (Number(b.pinned) - Number(a.pinned)) || (b.priority - a.priority) || String(b.publishAt).localeCompare(String(a.publishAt))
 
-  cms.get('/api/Me/announcements', requireUser, (req, res) => {
+  cms.get('/api/v1/me/announcements', requireUser, (req, res) => {
     let list = inbox(req).map((a) => view(req, a))
     const unreadCount = list.filter((x) => !x.readAt).length
     if (req.query.unread === 'true') list = list.filter((x) => !x.readAt)
     if (req.query.category) list = list.filter((x) => x.category === req.query.category)
     res.json({ ...paged(list.sort(order), { pageSize: 50, ...req.query }), unreadCount, categories: CATEGORIES })
   })
-  cms.get('/api/Me/announcements/unread-count', requireUser, (req, res) => {
+  cms.get('/api/v1/me/announcements/unread-count', requireUser, (req, res) => {
     res.json({ unread: inbox(req).filter((a) => !receipt(a, req.user.sub)?.readAt).length })
   })
   const mark = (field) => (req, res) => {
@@ -164,11 +165,11 @@ export function announcementRoutes(cms) {
     persist()
     res.json(view(req, a))
   }
-  cms.get('/api/Me/announcements/:id', requireUser, (req, res) => {
+  cms.get('/api/v1/me/announcements/:id', requireUser, (req, res) => {
     const a = inbox(req).find((x) => x.id === Number(req.params.id))
     return a ? res.json(view(req, a)) : res.status(404).json({ message: 'Không có thông báo này trong hộp thư của bạn.' })
   })
-  cms.post('/api/Me/announcements/read-all', requireUser, (req, res) => {
+  cms.post('/api/v1/me/announcements/read-all', requireUser, (req, res) => {
     let n = 0
     inbox(req).forEach((a) => {
       const r = receipt(a, req.user.sub)
@@ -179,6 +180,6 @@ export function announcementRoutes(cms) {
     persist()
     res.json({ marked: n })
   })
-  cms.post('/api/Me/announcements/:id/read', requireUser, mark('readAt'))
-  cms.post('/api/Me/announcements/:id/ack', requireUser, mark('ackedAt'))
+  cms.post('/api/v1/me/announcements/:id/read', requireUser, mark('readAt'))
+  cms.post('/api/v1/me/announcements/:id/ack', requireUser, mark('ackedAt'))
 }

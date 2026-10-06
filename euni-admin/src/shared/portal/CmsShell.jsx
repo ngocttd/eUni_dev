@@ -11,7 +11,7 @@ import tenantService from '../services/tenantService.js'
 import { cmsConfig } from '../../routes/cmsConfig.js'
 import Icon from '../lib/Icon.jsx'
 
-/** Chọn trang (tenant) đang quản trị — danh sách lấy từ claim tenant[] của token qua /api/Me/context. */
+/** Chọn trang (tenant) đang quản trị — danh sách lấy từ claim tenant[] của token qua /api/v1/me/context. */
 function TenantSwitcher({ tenants, current }) {
   if (!tenants.length) return null
   const change = (id) => { tenantService.set(id); window.location.reload() }

@@ -15,13 +15,13 @@ import tokenService from '../../shared/services/tokenService.js'
 
 const cms = api(SERVICE.cms)
 
-/** CRUD chuẩn: GET list (phân trang) · GET {id} · POST · PUT {id} · DELETE {id} */
+/** CRUD chuẩn dưới /api/v1/admin/{name}: GET list (phân trang) · GET {id} · POST · PUT {id} · DELETE {id} */
 const resource = (name) => ({
-  list: (query) => cms.get(`/api/${name}`, { query }),
-  get: (id) => cms.get(`/api/${name}/${id}`),
-  create: (body) => cms.post(`/api/${name}`, body),
-  update: (id, body) => cms.put(`/api/${name}/${id}`, body),
-  remove: (id) => cms.delete(`/api/${name}/${id}`),
+  list: (query) => cms.get(`/api/v1/admin/${name}`, { query }),
+  get: (id) => cms.get(`/api/v1/admin/${name}/${id}`),
+  create: (body) => cms.post(`/api/v1/admin/${name}`, body),
+  update: (id, body) => cms.put(`/api/v1/admin/${name}/${id}`, body),
+  remove: (id) => cms.delete(`/api/v1/admin/${name}/${id}`),
 })
 
 /**
@@ -30,87 +30,87 @@ const resource = (name) => ({
  */
 const lifecycle = (name) => ({
   ...resource(name),
-  trash: (query) => cms.get(`/api/${name}/trash`, { query }),
-  restore: (id) => cms.post(`/api/${name}/${id}/restore`),
-  purge: (id) => cms.delete(`/api/${name}/${id}/purge`),
-  workflow: (id, action, body = {}) => cms.post(`/api/${name}/${id}/workflow/${action}`, body),
-  revisions: (id) => cms.get(`/api/${name}/${id}/revisions`),
-  revision: (id, version) => cms.get(`/api/${name}/${id}/revisions/${version}`),
-  restoreRevision: (id, version) => cms.post(`/api/${name}/${id}/revisions/${version}/restore`),
-  history: (id) => cms.get(`/api/${name}/${id}/history`),
+  trash: (query) => cms.get(`/api/v1/admin/${name}/trash`, { query }),
+  restore: (id) => cms.post(`/api/v1/admin/${name}/${id}/restore`),
+  purge: (id) => cms.delete(`/api/v1/admin/${name}/${id}/purge`),
+  workflow: (id, action, body = {}) => cms.post(`/api/v1/admin/${name}/${id}/workflow/${action}`, body),
+  revisions: (id) => cms.get(`/api/v1/admin/${name}/${id}/revisions`),
+  revision: (id, version) => cms.get(`/api/v1/admin/${name}/${id}/revisions/${version}`),
+  restoreRevision: (id, version) => cms.post(`/api/v1/admin/${name}/${id}/revisions/${version}/restore`),
+  history: (id) => cms.get(`/api/v1/admin/${name}/${id}/history`),
 })
 
 export const cmsApi = {
   /** Ngữ cảnh: tenants được quản trị, quyền chức năng, đơn vị của tôi */
-  me: { context: () => cms.get('/api/Me/context') },
+  me: { context: () => cms.get('/api/v1/me/context') },
 
   /* Tin tức (Contents): contentBody = HTML; bản dịch ở translations.en */
-  contents: lifecycle('Contents'),
+  contents: lifecycle('contents'),
   /* Thông báo theo đối tượng: targets[] = [{ audience?, unitCode?, userSub? | userKey?, isExclude? }] */
   announcements: {
-    ...lifecycle('Announcements'),
-    stats: (id) => cms.get(`/api/Announcements/${id}/stats`),
-    options: () => cms.get('/api/Announcements/meta/options'),
+    ...lifecycle('announcements'),
+    stats: (id) => cms.get(`/api/v1/admin/announcements/${id}/stats`),
+    options: () => cms.get('/api/v1/admin/announcements/meta/options'),
   },
   /* Phân quyền mức bản ghi — user/role quản lý ở Identity Server */
   grants: {
-    ...resource('Grants'),
-    effective: (sub) => cms.get(`/api/Grants/effective/${encodeURIComponent(sub)}`),
+    ...resource('grants'),
+    effective: (sub) => cms.get(`/api/v1/admin/grants/effective/${encodeURIComponent(sub)}`),
   },
   directory: {
-    users: (keyword, query = {}) => cms.get('/api/Directory/users', { query: { keyword, ...query } }),
-    roles: () => cms.get('/api/Directory/roles'),
+    users: (keyword, query = {}) => cms.get('/api/v1/admin/directory/users', { query: { keyword, ...query } }),
+    roles: () => cms.get('/api/v1/admin/directory/roles'),
   },
-  orgUnits: { list: () => cms.get('/api/OrgUnits') },
-  audit: { list: (query) => cms.get('/api/AuditLogs', { query }) },
+  orgUnits: { list: () => cms.get('/api/v1/admin/org-units') },
+  audit: { list: (query) => cms.get('/api/v1/admin/audit-logs', { query }) },
 
-  categories: resource('Categories'),
-  events: resource('Events'),
-  albums: resource('Albums'),
-  videos: resource('Videos'),
-  podcasts: resource('Podcasts'),
-  pages: resource('Pages'),
-  menuItems: resource('MenuItems'),
-  banners: resource('Banners'),
-  heroSlides: resource('HeroSlides'),
-  quickLinks: resource('QuickLinks'),
-  audiences: resource('Audiences'),
-  strengths: resource('Strengths'),
-  partners: resource('Partners'),
-  siteStats: resource('SiteStats'),
+  categories: resource('categories'),
+  events: resource('events'),
+  albums: resource('albums'),
+  videos: resource('videos'),
+  podcasts: resource('podcasts'),
+  pages: resource('pages'),
+  menuItems: resource('menu-items'),
+  banners: resource('banners'),
+  heroSlides: resource('hero-slides'),
+  quickLinks: resource('quick-links'),
+  audiences: resource('audiences'),
+  strengths: resource('strengths'),
+  partners: resource('partners'),
+  siteStats: resource('site-stats'),
 
   media: {
-    list: (query) => cms.get('/api/Media', { query }),
-    get: (id) => cms.get(`/api/Media/${id}`),
+    list: (query) => cms.get('/api/v1/admin/media', { query }),
+    get: (id) => cms.get(`/api/v1/admin/media/${id}`),
     /** multipart: file, altText, caption, folder, uploadedBy */
     upload: (file, extra = {}) => {
       const form = new FormData()
       form.append('file', file)
       Object.entries(extra).forEach(([k, v]) => v != null && form.append(k, v))
-      return cms.upload('/api/Media/upload', form)
+      return cms.upload('/api/v1/admin/media/upload', form)
     },
-    remove: (id) => cms.delete(`/api/Media/${id}`),
+    remove: (id) => cms.delete(`/api/v1/admin/media/${id}`),
   },
 
   settings: {
-    get: (group) => cms.get(group ? `/api/Settings/${group}` : '/api/Settings'),
-    save: (group, values) => cms.put(`/api/Settings/${group}`, values),
+    get: (group) => cms.get(group ? `/api/v1/admin/settings/${group}` : '/api/v1/admin/settings'),
+    save: (group, values) => cms.put(`/api/v1/admin/settings/${group}`, values),
     /** Gửi email thử tới địa chỉ `to` bằng cấu hình SMTP hiện tại */
-    testEmail: (to) => cms.post('/api/Settings/email/test', { to }),
+    testEmail: (to) => cms.post('/api/v1/admin/settings/email/test', { to }),
   },
 
-  logs: { list: (query) => cms.get('/api/ActivityLogs', { query }) },
+  logs: { list: (query) => cms.get('/api/v1/admin/activity-logs', { query }) },
   backups: {
-    list: (query) => cms.get('/api/Backups', { query }),
-    create: () => cms.post('/api/Backups'),
-    remove: (id) => cms.delete(`/api/Backups/${id}`),
+    list: (query) => cms.get('/api/v1/admin/backups', { query }),
+    create: () => cms.post('/api/v1/admin/backups'),
+    remove: (id) => cms.delete(`/api/v1/admin/backups/${id}`),
     /** Phục hồi từ bản sao lưu có sẵn / từ tệp JSON tải lên (ghi đè dữ liệu CMS hiện tại) */
-    restore: (id) => cms.post(`/api/Backups/${id}/restore`),
-    restoreFile: (file) => { const f = new FormData(); f.append('file', file); return cms.upload('/api/Backups/restore', f) },
+    restore: (id) => cms.post(`/api/v1/admin/backups/${id}/restore`),
+    restoreFile: (file) => { const f = new FormData(); f.append('file', file); return cms.upload('/api/v1/admin/backups/restore', f) },
     /** Tải tệp sao lưu về máy (kèm Bearer token nên không dùng thẻ <a> trực tiếp) */
     download: async (id) => {
       const token = tokenService.getAccessToken()
-      const res = await fetch(`${env.apiGateway}/${SERVICE.cms}/api/Backups/${id}/download`, { headers: token ? { Authorization: `Bearer ${token}` } : {} })
+      const res = await fetch(`${env.apiGateway}/${SERVICE.cms}/api/v1/admin/backups/${id}/download`, { headers: token ? { Authorization: `Bearer ${token}` } : {} })
       if (!res.ok) throw new Error((await res.json().catch(() => ({}))).message || `HTTP ${res.status}`)
       const blob = await res.blob()
       const a = document.createElement('a')

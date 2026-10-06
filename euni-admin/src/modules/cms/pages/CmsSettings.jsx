@@ -10,7 +10,7 @@ import { mediaUrl } from "../../../lib/api/media.js";
 import MediaPicker from "../MediaPicker.jsx";
 import { Head, Tag, Toggle } from "../shared.jsx";
 
-/** Mỗi mục cấu hình ↔ một nhóm trong cms-api /api/Settings/{group} (mục không có nhóm = chỉ để xem) */
+/** Mỗi mục cấu hình ↔ một nhóm trong cms-api /api/v1/admin/settings/{group} (mục không có nhóm = chỉ để xem) */
 const GROUP = {
   'Thông tin chung': 'general', 'Ngôn ngữ': 'language', 'SEO & Mạng xã hội': 'seo', 'Email hệ thống': 'email',
   'Bảo mật': 'security', 'Sao lưu dữ liệu': 'backup', 'Tích hợp dịch vụ': 'integration'

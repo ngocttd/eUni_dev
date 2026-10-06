@@ -82,7 +82,7 @@ database/schema.sql · seed.sql · migrate.mjs                  PostgreSQL (sche
 | Khu vực giao diện | Service | Ghi chú |
 |---|---|---|
 | Tin tức, sự kiện, media, trang chủ, banner, menu | `cms-api` | Do CMS quản trị theo tenant; ghi ở admin → public đổi ngay (theo workflow & giờ đăng) |
-| Thông báo trong My eUni (SV, GV, phụ huynh) | `cms-api` `/api/Me/announcements` | Soạn ở CMS theo đối tượng nhận; hộp thư so khớp vai trò + đơn vị/lớp + cá nhân |
+| Thông báo trong My eUni (SV, GV, phụ huynh) | `cms-api` `/api/v1/me/announcements` | Soạn ở CMS theo đối tượng nhận; hộp thư so khớp vai trò + đơn vị/lớp + cá nhân |
 | Giới thiệu (cơ cấu, giảng viên), cổng Giảng viên, Lãnh đạo | `qlns-api` | Hệ thống nhân sự |
 | Nghiên cứu (đề tài, công bố, chuyên gia…) | `qlkhcn-api` | Hệ thống KHCN |
 | Học tập, tuyển sinh, cổng Sinh viên/Phụ huynh | `qldt-api` | Hệ thống đào tạo |

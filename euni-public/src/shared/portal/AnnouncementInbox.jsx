@@ -1,6 +1,6 @@
 'use client'
 /**
- * Hộp thư thông báo của người dùng (sinh viên, giảng viên, phụ huynh) — đọc từ cms-api /api/Me/announcements.
+ * Hộp thư thông báo của người dùng (sinh viên, giảng viên, phụ huynh) — đọc từ cms-api /api/v1/me/announcements.
  * Server so khớp đối tượng nhận (vai trò, đơn vị / lớp kèm đơn vị cha, cá nhân) với tài khoản đang đăng nhập
  * và tự ẩn thông báo chưa đến giờ đăng / đã hết hạn / đã thu hồi (docs/design/CMS_DESIGN.md §6.4).
  */
@@ -17,11 +17,11 @@ const ALL = 'Tất cả'
 const UNREAD = 'Chưa đọc'
 
 export const inboxApi = {
-  list: (lang) => cms.get('/api/Me/announcements', { query: { lang, pageSize: 100 } }),
-  unread: () => cms.get('/api/Me/announcements/unread-count'),
-  read: (id) => cms.post(`/api/Me/announcements/${id}/read`),
-  ack: (id) => cms.post(`/api/Me/announcements/${id}/ack`),
-  readAll: () => cms.post('/api/Me/announcements/read-all'),
+  list: (lang) => cms.get('/api/v1/me/announcements', { query: { lang, pageSize: 100 } }),
+  unread: () => cms.get('/api/v1/me/announcements/unread-count'),
+  read: (id) => cms.post(`/api/v1/me/announcements/${id}/read`),
+  ack: (id) => cms.post(`/api/v1/me/announcements/${id}/ack`),
+  readAll: () => cms.post('/api/v1/me/announcements/read-all'),
 }
 
 export default function AnnouncementInbox({ renderHead }) {

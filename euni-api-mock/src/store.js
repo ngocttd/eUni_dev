@@ -19,12 +19,12 @@ export const STATUSES = ['draft', 'pending_review', 'published', 'archived']
 /** Mã số cũ (0..3) vẫn được chấp nhận ở API để tương thích */
 export const LEGACY_STATUS = { 0: 'draft', 1: 'pending_review', 2: 'published', 3: 'archived', pending: 'pending_review' }
 const STATUS_BY_LABEL = { 'Đã xuất bản': 'published', 'Bản nháp': 'draft', 'Chờ duyệt': 'pending_review' }
-export const SCHEMA_VERSION = 2
+export const SCHEMA_VERSION = 3
 export const DEFAULT_TENANT = 'humg'
 const TR_BY_LABEL = { 'Đã dịch': 'done', 'Đang dịch': 'in_progress', 'Chưa dịch': 'missing' }
 const BANNER_POS = { 'Trang chủ – Slider': 'home_slider', 'Trang chủ – Popup': 'home_popup', 'Cột phải': 'sidebar_right', 'Chân trang': 'footer' }
 /** Vai trò trên Identity Server (mock) — CMS chỉ đọc từ token, không quản lý */
-const IDS_ROLE = { 'Super Admin': ['cms.admin'], Editor: ['cms.editor'], Author: ['cms.author'], Viewer: ['staff'] }
+const IDS_ROLE = { 'Super Admin': ['cms.admin', 'staff'], Editor: ['cms.editor', 'staff'], Author: ['cms.author', 'staff'], Viewer: ['cms.viewer', 'staff'] }
 const UNIT_BY_LABEL = { 'Khoa CNTT': 'CNTT', 'Khoa Mỏ': 'MO', 'Khoa Trắc địa – Bản đồ': 'TDBD', 'Phòng Đào tạo': 'P-DT', 'Phòng KHCN': 'P-KHCN', 'Phòng Hợp tác quốc tế': 'P-HTQT', 'Phòng CTSV': 'P-CTSV', 'Văn phòng': 'VP' }
 const ACTION = { 'Đăng nhập': 'login', 'Đăng bài viết': 'post.publish', 'Cập nhật bài viết': 'post.update', 'Xóa bài viết': 'post.delete', 'Tải lên file': 'media.upload', 'Xóa người dùng': 'user.delete', 'Đổi cấu hình': 'settings.update' }
 const MEDIA_KIND = { 'Hình ảnh': 'image', 'Tài liệu': 'document', 'Video': 'video', 'Âm thanh': 'audio' }
@@ -54,15 +54,16 @@ export const ORG_UNITS = [
 /** Danh bạ người dùng portal (IdS mock). 4 tài khoản demo dùng sub cố định SV001/GV001/PH001/LD001. */
 const DIRECTORY = [
   { sub: 'SV001', username: '2151000123', email: '2151000123@student.humg.edu.vn', fullName: 'Nguyễn Văn Sinh', roles: ['student'], tenants: ['humg', 'cntt'], units: ['DCCTKT66A'], studentCode: '2151000123' },
-  { sub: 'GV001', username: 'giangvien', email: 'giangvien@humg.edu.vn', fullName: 'Giảng viên HUMG', roles: ['staff'], tenants: ['humg', 'cntt'], units: ['BM-KHMT'], staffCode: 'GV0001' },
+  { sub: 'GV001', username: 'giangvien', email: 'giangvien@humg.edu.vn', fullName: 'Giảng viên HUMG', roles: ['lecturer'], tenants: ['humg', 'cntt'], units: ['BM-KHMT'], staffCode: 'GV0001' },
   { sub: 'PH001', username: 'phuhuynh', email: 'phuhuynh@gmail.com', fullName: 'Phụ huynh', roles: ['parent'], tenants: ['humg'], units: ['DCCTKT66A'] },
-  { sub: 'LD001', username: 'lanhdao', email: 'lanhdao@humg.edu.vn', fullName: 'Lãnh đạo HUMG', roles: ['leader', 'staff'], tenants: ['humg', 'cntt'], units: ['HUMG'], staffCode: 'CB0100' },
+  { sub: 'LD001', username: 'lanhdao', email: 'lanhdao@humg.edu.vn', fullName: 'Lãnh đạo HUMG', roles: ['manager', 'lecturer', 'euni.dashboard-viewer', 'euni.report-viewer'], tenants: ['humg', 'cntt'], units: ['HUMG'], staffCode: 'CB0100' },
+  { sub: 'CB001', username: 'canbo', email: 'canbo@humg.edu.vn', fullName: 'Chuyên viên Phòng Đào tạo', roles: ['staff', 'edusoft.training-officer'], tenants: ['humg'], units: ['P-DT'], staffCode: 'CB0001' },
   { sub: 'SV002', username: '2151000124', email: '2151000124@student.humg.edu.vn', fullName: 'Trần Thị Lan', roles: ['student'], units: ['DCCTKT66A'], studentCode: '2151000124' },
   { sub: 'SV003', username: '2151000125', email: '2151000125@student.humg.edu.vn', fullName: 'Lê Minh Quân', roles: ['student'], units: ['DCCTKT66A'], studentCode: '2151000125' },
   { sub: 'SV004', username: '2151000201', email: '2151000201@student.humg.edu.vn', fullName: 'Phạm Thu Hà', roles: ['student'], units: ['DCCTKT66B'], studentCode: '2151000201' },
   { sub: 'SV005', username: '2151000301', email: '2151000301@student.humg.edu.vn', fullName: 'Hoàng Văn Đức', roles: ['student'], units: ['DCKTM66'], studentCode: '2151000301' },
-  { sub: 'GV002', username: 'ntbinh', email: 'ntbinh@humg.edu.vn', fullName: 'TS. Nguyễn Thanh Bình', roles: ['staff'], tenants: ['humg', 'cntt'], units: ['BM-CNPM'], staffCode: 'GV0123' },
-  { sub: 'GV003', username: 'lvkhoa', email: 'lvkhoa@humg.edu.vn', fullName: 'PGS.TS. Lê Văn Khoa', roles: ['staff'], units: ['BM-KTM'], staffCode: 'GV0456' },
+  { sub: 'GV002', username: 'ntbinh', email: 'ntbinh@humg.edu.vn', fullName: 'TS. Nguyễn Thanh Bình', roles: ['lecturer', 'edusoft.academic-advisor'], tenants: ['humg', 'cntt'], units: ['BM-CNPM'], staffCode: 'GV0123' },
+  { sub: 'GV003', username: 'lvkhoa', email: 'lvkhoa@humg.edu.vn', fullName: 'PGS.TS. Lê Văn Khoa', roles: ['lecturer', 'qlkhcn.researcher'], units: ['BM-KTM'], staffCode: 'GV0456' },
 ]
 
 function build() {
@@ -91,21 +92,22 @@ function build() {
     { id: 'cntt', name: 'Khoa Công nghệ thông tin', rootUnit: 'CNTT', domains: ['cntt.localhost:3002'], isActive: true },
   ]
   const CMS_SCOPE = {
-    'tvanminh@humg.edu.vn': { tenants: ['humg', 'cntt'], units: ['P-TT'] },
-    'nthoa@humg.edu.vn': { tenants: ['humg'], units: ['P-TT'] },
-    'pvloc@humg.edu.vn': { tenants: ['humg', 'cntt'], units: ['CNTT'], roles: ['cms.editor'] },
-    'ltmai@humg.edu.vn': { tenants: ['humg'], units: ['P-TT'] },
-    'hdnam@humg.edu.vn': { tenants: ['humg'], units: ['P-DT'] },
-    'dvtung@humg.edu.vn': { tenants: ['humg', 'cntt'], units: ['BM-KHMT'] },
-    'vthuong@humg.edu.vn': { tenants: ['humg'], units: ['P-DT'], roles: ['cms.reviewer', 'staff'] },
-    'bmduc@humg.edu.vn': { tenants: ['humg'], units: ['P-DT'] },
+    /* chỉ đơn vị (membership) + role trên SSO; trang được quản trị suy ra từ grants (tầng 3, acl.js tenantsOf) */
+    'tvanminh@humg.edu.vn': { units: ['P-TT'] },
+    'nthoa@humg.edu.vn': { units: ['P-TT'] },
+    'pvloc@humg.edu.vn': { units: ['CNTT'], roles: ['cms.editor', 'lecturer'] },
+    'ltmai@humg.edu.vn': { units: ['P-TT'] },
+    'hdnam@humg.edu.vn': { units: ['P-DT'] },
+    'dvtung@humg.edu.vn': { units: ['BM-KHMT'], roles: ['cms.author', 'lecturer'] },
+    'vthuong@humg.edu.vn': { units: ['P-DT'], roles: ['cms.reviewer', 'staff'] },
+    'bmduc@humg.edu.vn': { units: ['P-DT'] },
   }
   const addUser = (u) => add('users', { status: 1, tenants: ['humg'], units: [], roles: [], staffCode: null, studentCode: null, lastLoginAt: null, createdAt: '2025-01-10T08:00:00+07:00', ...u })
   cms.cmsUsers.forEach((u, i) => {
     const sc = CMS_SCOPE[u.email] || {}
     const username = u.email.split('@')[0]
     addUser({
-      sub: `u-${username}`, username, email: u.email, fullName: u.name, roles: sc.roles || IDS_ROLE[u.role] || ['staff'], tenants: sc.tenants || ['humg'], units: sc.units || [],
+      sub: `u-${username}`, username, email: u.email, fullName: u.name, roles: sc.roles || IDS_ROLE[u.role] || ['staff'], units: sc.units || [],
       staffCode: `CB${String(i + 1).padStart(4, '0')}`, status: u.status === 'Hoạt động' ? 1 : 0, lastLoginAt: iso(u.last.split(' ')[0], u.last.split(' ')[1]),
     })
   })
@@ -115,7 +117,7 @@ function build() {
     if (userByName(name)) continue
     const parts = slugify(name).split('-')
     const uname = `${parts.slice(-1)[0]}${parts.slice(0, -1).map((w) => w[0]).join('')}`
-    addUser({ sub: `u-${uname}`, username: uname, email: `${uname}@humg.edu.vn`, fullName: name, roles: ['cms.author'], units: ['P-TT'] })
+    addUser({ sub: `u-${uname}`, username: uname, email: `${uname}@humg.edu.vn`, fullName: name, roles: ['cms.author', 'staff'], units: ['P-TT'] })
   }
 
   /* categories (cây) */
@@ -131,7 +133,7 @@ function build() {
 
   /* media */
   cms.cmsMedia.forEach((f) => add('media', {
-    fileName: f.name, kind: MEDIA_KIND[f.kind] || 'other', ext: f.ext, mimeType: null, sizeBytes: bytes(f.size), url: `/cms-api/uploads/${f.name}`,
+    fileName: f.name, kind: MEDIA_KIND[f.kind] || 'other', ext: f.ext, mimeType: null, sizeBytes: bytes(f.size), url: `cms-api/uploads/${f.name}`,
     altText: null, caption: null, folder: null, uploadedBy: userByName('Lê Thị Mai').sub, createdAt: iso(f.date),
   }))
 
@@ -224,6 +226,7 @@ function build() {
   const grant = (g) => add('grants', { tenantId: 'humg', resourceType: '*', scopeType: 'tenant', scopeId: null, note: null, expiresAt: null, createdBy: 'u-tvanminh', createdAt: '2025-01-10T08:00:00+07:00', deletedAt: null, ...g })
   grant({ principalType: 'user', principalId: 'u-nthoa', permissions: ['view', 'edit', 'review', 'publish'], note: 'Biên tập viên chính — toàn trang Trường' })
   grant({ principalType: 'role', principalId: 'cms.author', permissions: ['view'], note: 'Tác giả xem được mọi bài của Trường' })
+  grant({ principalType: 'role', principalId: 'cms.viewer', permissions: ['view'], note: 'Người xem CMS xem được mọi bài của Trường' })
   grant({ principalType: 'unit', principalId: 'P-TT', resourceType: 'news', scopeType: 'unit', scopeId: 'P-TT', permissions: ['edit'], note: 'Thành viên Phòng Truyền thông sửa bài của phòng' })
   grant({ principalType: 'user', principalId: 'u-pvloc', scopeType: 'unit', scopeId: 'CNTT', permissions: ['view', 'edit', 'review', 'publish'], note: 'Phụ trách nội dung Khoa CNTT trên trang Trường' })
   grant({ principalType: 'user', principalId: 'u-vthuong', resourceType: 'announcement', scopeType: 'unit', scopeId: 'P-DT', permissions: ['review'], note: 'Duyệt thông báo của Phòng Đào tạo' })
@@ -295,7 +298,7 @@ function seedAnnouncements(add, col) {
     targets: [{ audience: 'student', unitCode: null, userSub: null, isExclude: false, label: 'Toàn bộ sinh viên' }, { audience: 'parent', unitCode: null, userSub: null, isExclude: false, label: 'Phụ huynh' }] })
   ann({ title: 'Họp giao ban Khoa CNTT tháng 6', ownerUnitCode: 'CNTT', category: 'admin', publishAt: d(-1), authorSub: 'u-pvloc', authorName: 'Phạm Văn Lộc',
     bodyHtml: '<p>Kính mời toàn thể giảng viên Khoa CNTT dự họp giao ban lúc 14:00 thứ Sáu tại phòng 302-C.</p>',
-    targets: [{ audience: 'staff', unitCode: 'CNTT', userSub: null, isExclude: false, label: 'Giảng viên Khoa CNTT' }] })
+    targets: [{ audience: 'lecturer', unitCode: 'CNTT', userSub: null, isExclude: false, label: 'Giảng viên Khoa CNTT' }] })
   ann({ title: 'Lớp DCCTKT66A: đổi phòng học môn Cơ sở dữ liệu', ownerUnitCode: 'BM-KHMT', category: 'academic', publishAt: d(-0.1, null), authorSub: 'u-dvtung', authorName: 'Đỗ Văn Tùng',
     bodyHtml: '<p>Từ tuần 12, môn Cơ sở dữ liệu của lớp DCCTKT66A chuyển sang phòng 405-A.</p>',
     targets: [{ audience: null, unitCode: 'DCCTKT66A', userSub: null, isExclude: false, label: 'Lớp DCCTKT66A' }] })

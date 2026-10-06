@@ -1,7 +1,8 @@
-// Mock API cho các phân hệ KHÔNG thuộc CMS (dữ liệu sẽ do các hệ thống ngoài cung cấp: qlns, qlkhcn, qldt, portal).
-// Dữ liệu lấy từ mock-data/<module>.json. Với mỗi module có 2 kiểu endpoint:
-//   GET /{service}/api/v1/datasets/{module}            → toàn bộ dataset của module (FE dùng 1 lần/trang)
-//   GET /{service}/api/v1/{module}/{resource}          → từng tài nguyên (mảng có phân trang pageIndex/pageSize/keyword)
+// Mock API cho các phân hệ KHÔNG thuộc tin tức CMS (dữ liệu do các hệ thống ngoài cung cấp qua API gateway: qlns, qlkhcn, edusoft, esb).
+// Dữ liệu lấy từ mock-data/<module>.json. Quy ước endpoint: chữ thường, ngăn cách bằng '-', có version, tách nhóm /public/ · /me/ · /admin/.
+//   GET /{service}/api/v1/{group}/datasets/{module}     → toàn bộ dataset của module (FE dùng 1 lần/trang)
+//   GET /{service}/api/v1/{group}/{module}/{resource}   → từng tài nguyên (mảng có phân trang pageIndex/pageSize/keyword)
+// group = 'me' cho dữ liệu cá nhân của portal (module portal-*), 'public' cho phần còn lại.
 import { Router } from 'express'
 import { readFileSync, readdirSync } from 'node:fs'
 import { dirname, join } from 'node:path'
@@ -10,14 +11,22 @@ import { paged } from './cms.js'
 
 const dir = join(dirname(fileURLToPath(import.meta.url)), '..', 'mock-data')
 
-/** module → service gateway. Đổi ở đây (và ở FE: lib/api/registry.js) khi backend thật chia service khác. */
+/**
+ * module → service gateway. Đổi ở đây (và ở FE: lib/datasets/loaders.js) khi backend thật chia service khác.
+ * Không có `portal-api`: web/mobile gọi thẳng các service qua API gateway (edusoft-api = đào tạo, esb-api = tích hợp hệ thống ngoài),
+ * nội dung tĩnh của website (hợp tác, đời sống, tiện ích) do cms-api phục vụ.
+ */
 export const MODULE_SERVICE = {
   about: 'qlns-api', 'staff-hub': 'qlns-api', 'portal-staff': 'qlns-api', 'portal-staff-tools': 'qlns-api', 'portal-leader': 'qlns-api',
   research: 'qlkhcn-api',
-  admissions: 'qldt-api', education: 'qldt-api', 'student-hub': 'qldt-api', 'portal-student': 'qldt-api', 'portal-parent': 'qldt-api',
-  cooperation: 'portal-api', library: 'portal-api', life: 'portal-api', utilities: 'portal-api',
+  admissions: 'edusoft-api', education: 'edusoft-api', 'student-hub': 'edusoft-api', 'portal-student': 'edusoft-api', 'portal-parent': 'edusoft-api',
+  library: 'esb-api',
+  cooperation: 'cms-api', life: 'cms-api', utilities: 'cms-api',
 }
-export const SERVICES = [...new Set(Object.values(MODULE_SERVICE))]
+/** Service chỉ có dataset (cms-api có router riêng trong cms.js, chỉ gắn thêm phần dataset) */
+export const SERVICES = [...new Set(Object.values(MODULE_SERVICE))].filter((s) => s !== 'cms-api')
+/** Nhóm endpoint của module: dữ liệu cá nhân portal → /me/, còn lại → /public/ */
+export const groupOf = (module) => (module.startsWith('portal-') ? 'me' : 'public')
 const data = {}
 for (const f of readdirSync(dir)) { const m = f.replace('.json', ''); if (MODULE_SERVICE[m]) data[m] = JSON.parse(readFileSync(join(dir, f), 'utf8')) }
 
@@ -26,14 +35,15 @@ const norm = (s) => String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u
 
 export function serviceRouter(service) {
   const r = Router()
-  r.get('/api/v1/datasets/:module', (req, res) => {
-    const d = MODULE_SERVICE[req.params.module] === service && data[req.params.module]
+  r.get('/api/v1/:group(public|me)/datasets/:module', (req, res) => {
+    const m = req.params.module
+    const d = MODULE_SERVICE[m] === service && groupOf(m) === req.params.group && data[m]
     return d ? res.json(d) : res.status(404).json({ message: 'Không có dataset.' })
   })
   for (const [module, d] of Object.entries(data)) {
     if (MODULE_SERVICE[module] !== service) continue
     for (const [key, value] of Object.entries(d)) {
-      r.get(`/api/v1/${module}/${kebab(key)}`, (req, res) => {
+      r.get(`/api/v1/${groupOf(module)}/${module}/${kebab(key)}`, (req, res) => {
         if (!Array.isArray(value)) return res.json(value)
         const kw = req.query.keyword && norm(req.query.keyword)
         const list = kw ? value.filter((x) => norm(JSON.stringify(x)).includes(kw)) : value
@@ -41,16 +51,16 @@ export function serviceRouter(service) {
       })
     }
   }
-  /* Hai endpoint có trong Swagger thật của gateway demo */
+  /* Hai endpoint có trong Swagger thật của gateway demo (đưa về quy ước /api/v1/public/...) */
   if (service === 'qlkhcn-api') {
-    r.get('/api/v1/research-topic-categories', (req, res) => {
+    r.get('/api/v1/public/research-topic-categories', (req, res) => {
       const list = data.research.researchFields.map((name, i) => ({ id: i + 1, code: `LV${String(i + 1).padStart(2, '0')}`, name }))
       const kw = req.query.keyword && norm(req.query.keyword)
       res.json(paged(kw ? list.filter((x) => norm(x.name).includes(kw)) : list, req.query))
     })
   }
   if (service === 'qlns-api') {
-    r.get('/api/v1/employees', (req, res) => {
+    r.get('/api/v1/public/employees', (req, res) => {
       const out = []
       for (const khoa of Object.values(data.about.facultyDepartments)) for (const dept of khoa) for (const l of dept.lecturers || []) out.push({ id: l.id, fullName: l.name, position: l.position, email: l.email, department: dept.name, publications: l.pubs, isCurrent: true })
       const kw = req.query.keyword && norm(req.query.keyword)

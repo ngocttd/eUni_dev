@@ -67,9 +67,9 @@ Các quy ước xuyên suốt:
 
 | Kênh | Nguồn | Kiểm tra |
 |---|---|---|
-| API công khai (`/api/Public/*`) | Header `X-Tenant` do website gửi. Website suy ra tenant từ **host**, ví dụ `cntt.humg.edu.vn` → `cntt`. Thiếu header thì lấy theo host của gateway, cuối cùng mới về tenant mặc định. | Tenant phải tồn tại và đang bật. |
+| API công khai (`/api/v1/public/*`) | Header `X-Tenant` do website gửi. Website suy ra tenant từ **host**, ví dụ `cntt.humg.edu.vn` → `cntt`. Thiếu header thì lấy theo host của gateway, cuối cùng mới về tenant mặc định. | Tenant phải tồn tại và đang bật. |
 | API quản trị | Header `X-Tenant` (tenant đang chọn ở CMS) | Tenant phải có trong claim `tenant[]` của token, hoặc user có `cms.*`. Sai thì trả **403**. |
-| Portal (`/api/Me/*`) | Header `X-Tenant` | Thông báo của user được lọc theo tenant đang xem. Muốn gom mọi tenant thì gửi `X-Tenant: *`, chỉ hợp lệ với `/api/Me/announcements`. |
+| Portal (`/api/v1/me/*`) | Header `X-Tenant` | Thông báo của user được lọc theo tenant đang xem. Muốn gom mọi tenant thì gửi `X-Tenant: *`, chỉ hợp lệ với `/api/v1/me/announcements`. |
 
 ### 2.3 Chia sẻ nội dung giữa tenant
 Bảng `content_shares(tenant_id nguồn, entity_type, entity_id, target_tenant_id, approved_by, approved_at)`.
@@ -174,7 +174,7 @@ cms.access_grants(id, tenant_id,
 Gộp hai loại vào một bảng sẽ có rất nhiều cột nullable. Rủi ro lớn hơn là **lộ thông báo nội bộ qua API tin tức công khai** chỉ vì quên một điều kiện lọc. Hai bảng chia sẻ chung: state machine (§7), revision và audit (§8), attachment, mẫu translation, `owner_unit_code` và ACL (§5).
 
 ### 6.2 Bảng News
-`cms.news` (thay `cms.posts`) có các cột: `tenant_id, category_id, owner_unit_code, status, publish_at, expire_at, is_featured, show_on_home, view_count, author_sub, …`, cùng các cột workflow và vòng đời (§7, §8). `cms.news_translations(news_id, lang, slug, title, excerpt, body_html, body_text, meta_*, translation_status, search_text)`. API giữ tên **`/api/Contents`** để tương thích Swagger hiện có.
+`cms.news` (thay `cms.posts`) có các cột: `tenant_id, category_id, owner_unit_code, status, publish_at, expire_at, is_featured, show_on_home, view_count, author_sub, …`, cùng các cột workflow và vòng đời (§7, §8). `cms.news_translations(news_id, lang, slug, title, excerpt, body_html, body_text, meta_*, translation_status, search_text)`. API giữ tên **`/api/v1/admin/contents`** để tương thích Swagger hiện có.
 
 ### 6.3 Bảng Announcement
 
@@ -309,16 +309,16 @@ Mọi request đều có header **`X-Tenant`**; request quản trị có thêm `
 
 | Nhóm | Endpoint | Ghi chú |
 |---|---|---|
-| Ngữ cảnh | `GET /api/Me/context` | user, `tenants[]` user được quản trị, `permissions[]`, membership |
-| Tin tức | `GET/POST /api/Contents`, `GET/PUT/DELETE /api/Contents/{id}` | `status` dạng chuỗi `draft\|pending_review\|published\|archived`. Có `version` (If-Match) và `allowedActions[]`. DELETE là xóa mềm. |
-| Workflow | `POST /api/Contents/{id}/workflow/{action}` body `{ note?, publishAt? }` | Các action ở §7.1, cộng `approve-revision` và `reject-revision` |
-| Lịch sử | `GET /api/Contents/{id}/revisions`, `GET …/revisions/{version}`, `POST …/revisions/{version}/restore`, `GET /api/Contents/{id}/history` | |
-| Thùng rác | `GET /api/Contents/trash`, `POST /api/Contents/{id}/restore` | |
-| Thông báo (quản trị) | Như tin tức nhưng là `/api/Announcements…`, thêm `GET /api/Announcements/{id}/stats` | `targets[]` trong body |
-| Hộp thư | `GET /api/Me/announcements?unread=&category=`, `GET /api/Me/announcements/unread-count`, `POST /api/Me/announcements/{id}/read`, `POST …/ack`, `POST /api/Me/announcements/read-all` | Dành cho portal SV/GV |
-| Phân quyền | `GET/POST /api/Grants`, `PUT/DELETE /api/Grants/{id}` | Thay `/api/Users` và `/api/Roles` (bị bỏ) |
-| Danh bạ | `GET /api/Directory/users?keyword=` (tên, email, mã), `GET /api/OrgUnits` | Chỉ đọc |
-| Audit | `GET /api/AuditLogs?entityType=&entityId=&actor=&from=&to=` | `/api/ActivityLogs` vẫn giữ làm alias |
+| Ngữ cảnh | `GET /api/v1/me/context` | user, `tenants[]` user được quản trị, `permissions[]`, membership |
+| Tin tức | `GET/POST /api/v1/admin/contents`, `GET/PUT/DELETE /api/v1/admin/contents/{id}` | `status` dạng chuỗi `draft\|pending_review\|published\|archived`. Có `version` (If-Match) và `allowedActions[]`. DELETE là xóa mềm. |
+| Workflow | `POST /api/v1/admin/contents/{id}/workflow/{action}` body `{ note?, publishAt? }` | Các action ở §7.1, cộng `approve-revision` và `reject-revision` |
+| Lịch sử | `GET /api/v1/admin/contents/{id}/revisions`, `GET …/revisions/{version}`, `POST …/revisions/{version}/restore`, `GET /api/v1/admin/contents/{id}/history` | |
+| Thùng rác | `GET /api/v1/admin/contents/trash`, `POST /api/v1/admin/contents/{id}/restore` | |
+| Thông báo (quản trị) | Như tin tức nhưng là `/api/v1/admin/announcements…`, thêm `GET /api/v1/admin/announcements/{id}/stats` | `targets[]` trong body |
+| Hộp thư | `GET /api/v1/me/announcements?unread=&category=`, `GET /api/v1/me/announcements/unread-count`, `POST /api/v1/me/announcements/{id}/read`, `POST …/ack`, `POST /api/v1/me/announcements/read-all` | Dành cho portal SV/GV |
+| Phân quyền | `GET/POST /api/v1/admin/grants`, `PUT/DELETE /api/v1/admin/grants/{id}` | Thay `/api/v1/admin/users` và `/api/v1/admin/roles` (bị bỏ) |
+| Danh bạ | `GET /api/v1/admin/directory/users?keyword=` (tên, email, mã), `GET /api/v1/admin/org-units` | Chỉ đọc |
+| Audit | `GET /api/v1/admin/audit-logs?entityType=&entityId=&actor=&from=&to=` | `/api/v1/admin/activity-logs` vẫn giữ làm alias |
 | CRUD khác | Banner, album, video, … giữ nguyên | Thêm soft delete và `POST /api/{res}/{id}/restore` |
 
 ## 12. Thay đổi ở repo này (đã làm trong nhánh)
@@ -336,9 +336,9 @@ Kiểm thử đi kèm (tất cả đạt):
 
 | Repo | Thay đổi |
 |---|---|
-| `euni-api-mock` | Tenant (`X-Tenant`, 2 tenant mẫu `humg`, `cntt`). Workflow chuỗi, hẹn giờ và hết hạn, bản sửa đổi chờ duyệt. Revision, khôi phục, thùng rác, audit kèm diff, concurrency qua `version`. Grants với ACL theo tenant/chuyên mục/đơn vị/bản ghi, cùng `allowedActions`. Org units, danh bạ, Announcements kèm targets/receipts, hộp thư `/api/Me/*`. `auth-api` đóng vai IdS (claim `role`, `tenant`, `unit`). Bỏ `/api/Users` và `/api/Roles`. Có `database/v2/schema.sql`. |
+| `euni-api-mock` | Tenant (`X-Tenant`, 2 tenant mẫu `humg`, `cntt`). Workflow chuỗi, hẹn giờ và hết hạn, bản sửa đổi chờ duyệt. Revision, khôi phục, thùng rác, audit kèm diff, concurrency qua `version`. Grants với ACL theo tenant/chuyên mục/đơn vị/bản ghi, cùng `allowedActions`. Org units, danh bạ, Announcements kèm targets/receipts, hộp thư `/api/v1/me/*`. `auth-api` đóng vai IdS (claim `role`, `tenant`, `unit`). Bỏ `/api/v1/admin/users` và `/api/v1/admin/roles`. Có `database/v2/schema.sql`. |
 | `euni-admin` | Chọn tenant. Danh sách bài viết theo trạng thái mới kèm nút workflow và thùng rác. Trình soạn có nút workflow theo `allowedActions`, tab **Lịch sử** (revision, khôi phục, workflow) và xử lý xung đột phiên bản. Màn hình **Thông báo** (soạn, đối tượng nhận, duyệt, thống kê đọc). Màn hình **Phân quyền** chuyển sang grants. Bỏ màn hình Người dùng. |
-| `euni-public` | Đăng nhập qua IdS với 2 lựa chọn (tài khoản trường / M365); chế độ `mock` giữ form dev. Gửi `X-Tenant` theo host. Hộp thư thông báo của SV/GV đọc từ `/api/Me/announcements`. |
+| `euni-public` | Đăng nhập qua IdS với 2 lựa chọn (tài khoản trường / M365); chế độ `mock` giữ form dev. Gửi `X-Tenant` theo host. Hộp thư thông báo của SV/GV đọc từ `/api/v1/me/announcements`. |
 
 ## 13. Lộ trình
 

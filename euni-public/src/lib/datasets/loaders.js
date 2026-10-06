@@ -2,7 +2,7 @@
  * Nạp dataset của từng module cho website người dùng.
  *
  *  - content, home  → CMS API (cms-api) — dữ liệu do quản trị CMS cập nhật; adapter đổi về dạng giao diện đang dùng.
- *  - module khác    → service ngoài theo MODULE_SERVICE:  GET {gateway}/{service}/api/v1/datasets/{module}
+ *  - module khác    → service theo MODULE_SERVICE:  GET {gateway}/{service}/api/v1/{public|me}/datasets/{module}
  *
  * Khi backend thật sẵn sàng chỉ sửa file này (đổi endpoint / viết adapter) — giao diện không phải đổi.
  *
@@ -16,8 +16,9 @@ import { fmtDate, fmtTime, dayMonth, fmtDuration, parseBody } from './format.js'
 export const MODULE_SERVICE = {
   about: SERVICE.qlns, 'staff-hub': SERVICE.qlns, 'portal-staff': SERVICE.qlns, 'portal-staff-tools': SERVICE.qlns, 'portal-leader': SERVICE.qlns,
   research: SERVICE.qlkhcn,
-  admissions: SERVICE.qldt, education: SERVICE.qldt, 'student-hub': SERVICE.qldt, 'portal-student': SERVICE.qldt, 'portal-parent': SERVICE.qldt,
-  cooperation: SERVICE.portal, library: SERVICE.portal, life: SERVICE.portal, utilities: SERVICE.portal,
+  admissions: SERVICE.edusoft, education: SERVICE.edusoft, 'student-hub': SERVICE.edusoft, 'portal-student': SERVICE.edusoft, 'portal-parent': SERVICE.edusoft,
+  library: SERVICE.esb,
+  cooperation: SERVICE.cms, life: SERVICE.cms, utilities: SERVICE.cms,
 }
 
 const EVENT_STATUS = { upcoming: 'Sắp diễn ra', ongoing: 'Đang diễn ra', finished: 'Đã kết thúc', cancelled: 'Đã hủy' }
@@ -50,7 +51,7 @@ async function cleanBodies(articles) {
 }
 
 export async function loadContent(opts = {}) {
-  const d = await cms.get('/api/Public/content', { tenant: opts.tenant })
+  const d = await cms.get('/api/v1/public/site-content', { tenant: opts.tenant })
   return {
     newsCategories: d.categories.map((c) => c.name),
     articles: await cleanBodies(d.articles.map(toArticle)),
@@ -65,7 +66,7 @@ export async function loadContent(opts = {}) {
 const homeEn = (n) => (n.translations?.en ? { en: { title: n.translations.en.title, excerpt: n.translations.en.excerpt } } : {})
 
 export async function loadHome(opts = {}) {
-  const d = await cms.get('/api/Public/home', { tenant: opts.tenant })
+  const d = await cms.get('/api/v1/public/home', { tenant: opts.tenant })
   const media = (list, map) => list.map((x, i) => ({ label: map(x), size: i === 0 ? 'wide' : 'small' }))
   return {
     heroSlides: d.heroSlides.map((s) => ({ id: s.code, kicker: s.kicker, title: s.title, years: s.subtitle, motto: s.motto, primary: { label: s.primaryLabel, to: s.primaryUrl }, accent: { label: s.accentLabel, to: s.accentUrl } })),
@@ -92,7 +93,8 @@ export async function loadDataset(module, opts = {}) {
   if (module === 'home') return loadHome(opts)
   const service = MODULE_SERVICE[module]
   if (!service) throw new Error(`Module "${module}" chưa được khai báo trong MODULE_SERVICE.`)
-  return api(service).get(`/api/v1/datasets/${module}`, { tenant: opts.tenant })
+  // dữ liệu cá nhân của portal (portal-*) thuộc nhóm /me/, còn lại /public/
+  return api(service).get(`/api/v1/${module.startsWith('portal-') ? 'me' : 'public'}/datasets/${module}`, { tenant: opts.tenant })
 }
 
 export const loadDatasets = async (modules, opts = {}) => Object.fromEntries(await Promise.all(modules.map(async (m) => [m, await loadDataset(m, opts)])))

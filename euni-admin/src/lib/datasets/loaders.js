@@ -43,24 +43,24 @@ const dm = (iso) => { const d = fmtDate(iso); return d ? d.slice(0, 5) : '' }
 
 export async function loadCms() {
   const [ctx, dashApi, contents, cats, media, pages, menuItems, anns, grants, orgUnits, settings, logs, backups, banners, langs] = await Promise.all([
-    cms.get('/api/Me/context'),
-    safe(cms.get('/api/Dashboard'), null),
-    page(cms.get('/api/Contents', { query: big })),
-    page(cms.get('/api/Categories', { query: big })),
-    safe(page(cms.get('/api/Media', { query: big })), empty),
-    safe(page(cms.get('/api/Pages', { query: big })), empty),
-    safe(page(cms.get('/api/MenuItems', { query: big })), empty),
-    safe(page(cms.get('/api/Announcements', { query: big })), empty),
-    safe(page(cms.get('/api/Grants', { query: big })), null),
-    safe(cms.get('/api/OrgUnits'), []),
-    safe(cms.get('/api/Settings'), {}),
-    safe(page(cms.get('/api/ActivityLogs', { query: { pageSize: 200 } })), empty),
-    safe(page(cms.get('/api/Backups', { query: big })), empty),
-    safe(page(cms.get('/api/Banners', { query: big })), empty),
-    safe(cms.get('/api/Languages'), []),
+    cms.get('/api/v1/me/context'),
+    safe(cms.get('/api/v1/admin/dashboard'), null),
+    page(cms.get('/api/v1/admin/contents', { query: big })),
+    page(cms.get('/api/v1/admin/categories', { query: big })),
+    safe(page(cms.get('/api/v1/admin/media', { query: big })), empty),
+    safe(page(cms.get('/api/v1/admin/pages', { query: big })), empty),
+    safe(page(cms.get('/api/v1/admin/menu-items', { query: big })), empty),
+    safe(page(cms.get('/api/v1/admin/announcements', { query: big })), empty),
+    safe(page(cms.get('/api/v1/admin/grants', { query: big })), null),
+    safe(cms.get('/api/v1/admin/org-units'), []),
+    safe(cms.get('/api/v1/admin/settings'), {}),
+    safe(page(cms.get('/api/v1/admin/activity-logs', { query: { pageSize: 200 } })), empty),
+    safe(page(cms.get('/api/v1/admin/backups', { query: big })), empty),
+    safe(page(cms.get('/api/v1/admin/banners', { query: big })), empty),
+    safe(cms.get('/api/v1/public/languages'), []),
   ])
 
-  // /api/Dashboard là endpoint mở rộng: nếu backend chưa có thì tự tính từ dữ liệu đã tải
+  // /api/v1/admin/dashboard là endpoint mở rộng: nếu backend chưa có thì tự tính từ dữ liệu đã tải
   const dashFallback = () => {
     const by = (st) => contents.items.filter((c) => c.status === st).length
     const total = contents.items.length || 1

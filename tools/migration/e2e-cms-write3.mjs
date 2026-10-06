@@ -11,8 +11,8 @@ const stamp = Date.now().toString(36)
 const PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==', 'base64')
 
 const jfetch = async (url, o = {}) => { const r = await fetch(url, o); const t = await r.text(); let b = null; try { b = JSON.parse(t) } catch { b = t } return { status: r.status, body: b } }
-await jfetch(`${API}/_dev/reset`, { method: 'POST' })
-const login = (await jfetch('http://127.0.0.1:3000/auth-api/api/auth/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username: 'tvanminh', password: 'Humg@2025' }) })).body
+await jfetch(`${API}/v1/dev/reset`, { method: 'POST' })
+const login = (await jfetch('http://127.0.0.1:3000/auth-api/api/v1/auth/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username: 'tvanminh', password: 'Humg@2025' }) })).body
 const T = login.accessToken
 const A = { Authorization: `Bearer ${T}`, 'Content-Type': 'application/json' }
 const get = (p) => jfetch(`${API}${p}`, { headers: { Authorization: `Bearer ${T}` } })
@@ -174,13 +174,13 @@ await step('Phục hồi từ tệp tải lên; tệp sai định dạng bị t�
   const names = (await get('/Categories?pageSize=100')).body.items.map((c) => c.name)
   assert.ok(names.includes(`Mất lần hai ${stamp}`)); assert.ok(!names.includes(`Chỉ có sau sao lưu ${stamp}`))
   const form = new FormData(); form.append('file', new Blob(['không phải JSON'], { type: 'application/json' }), 'x.json')
-  const bad = await jfetch(`${API}/Backups/restore`, { method: 'POST', headers: { Authorization: `Bearer ${T}` }, body: form })
+  const bad = await jfetch(`${API}/v1/admin/backups/restore`, { method: 'POST', headers: { Authorization: `Bearer ${T}` }, body: form })
   assert.equal(bad.status, 422)
 })
 
 await step('Không có lỗi JS trong suốt phiên', async () => assert.deepEqual(errors, []))
 
 await browser.close()
-await jfetch(`${API}/_dev/reset`, { method: 'POST' })
+await jfetch(`${API}/v1/dev/reset`, { method: 'POST' })
 console.log(failed ? `\nCÓ ${failed} BƯỚC LỖI` : '\nTrình soạn WYSIWYG, ảnh, EN, sao lưu, email thử: OK')
 process.exitCode = failed ? 1 : 0
