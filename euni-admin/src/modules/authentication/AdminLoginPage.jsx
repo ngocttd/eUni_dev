@@ -1,10 +1,11 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from '../../lib/router.jsx'
 import { useAuth } from '../../shared/auth/AuthContext.jsx'
 import Icon from '../../shared/lib/Icon.jsx'
 import { sso, ssoEndpoints, authMode } from '../../lib/sso/config.js'
 import './auth.css'
+import authNotice, { AUTH_NOTICE_TEXT } from '../../shared/services/authNotice.js'
 
 /**
  * Đăng nhập CMS admin qua Identity Server: tài khoản trường hoặc Microsoft 365 (cùng một người dùng trên IdS).
@@ -19,6 +20,9 @@ export default function AdminLoginPage() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
+  /* thông báo sau khi đăng xuất / hết phiên (đọc một lần) */
+  const [notice, setNotice] = useState('')
+  useEffect(() => { setNotice(AUTH_NOTICE_TEXT[authNotice.take()] || '') }, [])
 
   const goSso = async (method) => {
     setBusy(true)
@@ -34,6 +38,7 @@ export default function AdminLoginPage() {
       const { user } = await login({ username, password })
       if (!String(user.role).startsWith('cms-') || !user.permissions.some((p) => p === 'cms.access' || p === 'cms.*')) {
         await logout()
+        authNotice.take()
         throw new Error('Tài khoản không có quyền truy cập CMS.')
       }
       navigate(new URLSearchParams(search).get('next') || '/cms', { replace: true })
@@ -61,6 +66,7 @@ export default function AdminLoginPage() {
           <button disabled={busy} type="submit" className="humg-btn humg-btn--primary humg-btn--block">{busy ? 'Đang đăng nhập...' : 'Đăng nhập bằng tài khoản trường'}</button>
         </form>
       )}
+      {notice && !error && <p className="auth-note auth-note--ok" role="status">{notice}</p>}
       {error && <p className="auth-note" role="alert">{error}</p>}
       {sso.enabled && (
         <>

@@ -1,6 +1,7 @@
 import { env } from '../../config/env.js'
 import tokenService from '../../shared/services/tokenService.js'
 import tenantService from '../../shared/services/tenantService.js'
+import { AUTH_EXPIRED_EVENT } from '../../shared/services/authNotice.js'
 
 export class ApiError extends Error {
   constructor(message, { status = 0, data = null, url = '' } = {}) {
@@ -81,6 +82,8 @@ async function request(service, path, { query, body, headers, method = 'GET', to
     const text = res.status === 204 ? '' : await res.text()
     let data = text
     try { data = text ? JSON.parse(text) : null } catch { /* giữ nguyên text */ }
+    /* 401 cho request có gửi token = phiên hết hạn/bị thu hồi → AuthContext đăng xuất và đưa về trang đăng nhập */
+    if (res.status === 401 && auth && service !== SERVICE.auth && typeof window !== 'undefined') window.dispatchEvent(new CustomEvent(AUTH_EXPIRED_EVENT))
     if (!res.ok) throw new ApiError(data?.message || `HTTP ${res.status}`, { status: res.status, data, url })
     return unwrap(data, { status: res.status, url })
   } catch (err) {

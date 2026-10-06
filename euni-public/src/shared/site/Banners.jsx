@@ -27,7 +27,7 @@ function BannerLink({ b, className, children }) {
 function BannerCard({ b, compact }) {
   return (
     <BannerLink b={b} className={`site-banner ${compact ? 'is-compact' : ''} ${b.imageUrl ? 'has-image' : ''}`}>
-      {b.imageUrl && <img src={mediaUrl(b.imageUrl)} alt="" loading="lazy" />}
+      {b.imageUrl && <img src={mediaUrl(b.imageUrl)} alt="" loading="lazy" onError={(e) => { e.currentTarget.style.display = 'none' }} />}
       <span className="site-banner__text">
         <strong>{b.title}</strong>
         {b.subtitle && <em>{b.subtitle}</em>}
@@ -78,7 +78,7 @@ export function BannerPopup() {
     <div className="site-popup" role="dialog" aria-modal="true" aria-labelledby={`popup-${b.id}`} onClick={(e) => e.target === e.currentTarget && close()}>
       <div className="site-popup__box">
         <button type="button" className="site-popup__close" onClick={close} aria-label="Đóng thông báo"><Icon name="x" size={18} /></button>
-        {b.imageUrl && <img src={mediaUrl(b.imageUrl)} alt="" />}
+        {b.imageUrl && <img src={mediaUrl(b.imageUrl)} alt="" onError={(e) => { e.currentTarget.style.display = 'none' }} />}
         <h2 id={`popup-${b.id}`}>{b.title}</h2>
         {b.subtitle && <p>{b.subtitle}</p>}
         {b.linkUrl && (isExternal(b.linkUrl)

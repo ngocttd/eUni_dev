@@ -1,5 +1,6 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import authNotice, { AUTH_NOTICE_TEXT } from '../../../shared/services/authNotice.js'
 import { useLocation, useNavigate, Link } from '../../../lib/router.jsx'
 import Icon from '../../../shared/lib/Icon.jsx'
 import { useAuth } from '../../../shared/auth/AuthContext.jsx'
@@ -13,6 +14,9 @@ export function LoginPage() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [submitting, setSubmitting] = useState(false)
+  /* thông báo sau khi đăng xuất / hết phiên (đọc một lần) */
+  const [notice, setNotice] = useState('')
+  useEffect(() => { setNotice(AUTH_NOTICE_TEXT[authNotice.take()] || '') }, [])
 
   const afterLogin = (result) => {
     const from = new URLSearchParams(location.search).get('next')
@@ -51,6 +55,7 @@ export function LoginPage() {
   return <div className="auth-form">
     <h1>Đăng nhập</h1>
     <p className="auth-form__sub">Dùng tài khoản trường (HUMG ID) hoặc tài khoản Microsoft 365 của trường</p>
+    {notice && !error && <p className="auth-note auth-note--ok" role="status">{notice}</p>}
     {authMode === 'oidc' ? <SsoButton method="school" /> : <form onSubmit={handleSubmit}>
       <div className="auth-field">
         <Icon name="user" size={17} />

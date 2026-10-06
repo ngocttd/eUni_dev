@@ -273,7 +273,12 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
     "sortOrder": 1,
     "isVisible": true,
     "openInNewTab": false,
-    "translations": {},
+    "translations": {
+      "en": {
+        "label": "About HUMG",
+        "status": "done"
+      }
+    },
     "tenantId": "humg"
   }
 ]

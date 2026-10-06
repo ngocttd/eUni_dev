@@ -80,12 +80,20 @@
 .portal-shell__nav a.active svg { color: var(--humg-accent); opacity: 1; }
 
 /* Nút thoát cổng — nằm ở góc trên phải, cạnh thông tin người dùng */
-.portal-shell__exit {
+.portal-shell__exit { font: inherit; cursor: pointer; background: #fff;
   flex-shrink: 0; display: inline-flex; align-items: center; gap: 7px;
   height: 38px; padding: 0 14px; margin-left: 2px; border-radius: 8px;
   border: 1px solid var(--humg-border); background: #fff;
   font-size: 12.5px; font-weight: 600; color: var(--humg-text-secondary);
 }
+.portal-shell__site {
+  flex-shrink: 0; display: inline-flex; align-items: center; gap: 7px;
+  height: 38px; padding: 0 14px; margin-left: 2px; border-radius: 8px;
+  border: 1px solid var(--humg-border); background: #fff;
+  font-size: 12.5px; font-weight: 600; color: var(--humg-text-secondary);
+}
+.portal-shell__site:hover { border-color: var(--humg-secondary); color: var(--humg-primary); background: var(--humg-hover); }
+.portal-shell__exit:disabled { opacity: .6; cursor: progress; }
 .portal-shell__exit:hover { border-color: var(--humg-danger); color: var(--humg-danger); background: #fdecec; }
 .portal-shell__scrim { display: none; }
 
@@ -180,6 +188,9 @@
 @media (max-width: 560px) {
   .portal-shell__topbar { padding: 0 14px; }
   .portal-shell__topbar-right { gap: 10px; }
-  .portal-shell__exit { width: 38px; padding: 0; justify-content: center; }
-  .portal-shell__exit span { display: none; }
+  .portal-shell__exit, .portal-shell__site { width: 38px; padding: 0; justify-content: center; }
+  .portal-shell__exit span, .portal-shell__site span { display: none; }
 }
+
+/* tiêu đề topbar 1 dòng */
+.portal-shell__topbar-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }

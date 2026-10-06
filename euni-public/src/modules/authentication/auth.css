@@ -71,3 +71,6 @@
   .auth-demo { grid-template-columns: 1fr; }
   .auth-demo__wide { grid-column: auto; }
 }
+
+/* thông báo sau khi đăng xuất / hết phiên */
+.auth-note--ok { padding: 10px 12px; border-radius: 8px; border: 1px solid #b7e1c1; background: #e6f4ea; color: var(--humg-success, #067647) !important; }

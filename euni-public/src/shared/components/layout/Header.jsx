@@ -5,6 +5,7 @@ import Brand from '../common/Brand.jsx'
 import Icon from '../../lib/Icon.jsx'
 import { headerNav, mainNav } from '../../../routes/sitemap.js'
 import { useSite } from '../../site/SiteContext.jsx'
+import { useAuth } from '../../auth/AuthContext.jsx'
 import { useLanguage, LANGUAGES } from '../../../i18n/LanguageContext.jsx'
 import './Header.css'
 
@@ -15,6 +16,9 @@ const fromCms = (tree) => (tree || []).map((m) => ({ label: m.label, labelEn: m.
 export default function Header() {
   const { lang, setLang, t } = useLanguage()
   const site = useSite()
+  const { user, logout } = useAuth()
+  /* Đã đăng nhập: nút chính dẫn vào cổng My eUni của vai trò, kèm nút Đăng xuất */
+  const doLogout = async () => { setOpenMobile(false); const r = await logout(); if (!r?.redirected) navigate('/dang-nhap', { replace: true }) }
   const cmsNav = fromCms(site.menus?.header)
   const nav = cmsNav.length ? cmsNav : headerNav
   /* drawer di động: menu CMS + các mục khác của sơ đồ tĩnh (trang chủ, cổng portal…) chưa có trong menu CMS */
@@ -126,10 +130,18 @@ export default function Header() {
                 </button>
               ))}
             </span>
-            <Link to="/dang-nhap" className="humg-btn humg-btn--primary site-header__login">
+            {user ? <>
+              <Link to={user.portal || '/'} className="humg-btn humg-btn--primary site-header__login" title={`${user.name} — ${t('vào My eUni')}`}>
+                <Icon name="user" size={15} />
+                <span>My eUni</span>
+              </Link>
+              <button type="button" className="site-header__icon-btn" onClick={doLogout} aria-label={t('Đăng xuất')} title={`${t('Đăng xuất')} (${user.name})`}>
+                <Icon name="lock" size={19} />
+              </button>
+            </> : <Link to="/dang-nhap" className="humg-btn humg-btn--primary site-header__login">
               <Icon name="lock" size={15} />
               <span>{t('Đăng nhập eUni')}</span>
-            </Link>
+            </Link>}
             <button
               className="site-header__burger"
               type="button"
@@ -224,9 +236,16 @@ export default function Header() {
             ))}
           </ul>
         </nav>
-        <Link to="/dang-nhap" className="humg-btn humg-btn--primary humg-btn--block" onClick={() => setOpenMobile(false)}>
+        {user ? <>
+          <Link to={user.portal || '/'} className="humg-btn humg-btn--primary humg-btn--block" onClick={() => setOpenMobile(false)}>
+            <Icon name="user" size={15} /> My eUni · {user.name}
+          </Link>
+          <button type="button" className="humg-btn humg-btn--ghost humg-btn--block" onClick={doLogout} style={{ marginTop: 8 }}>
+            <Icon name="lock" size={15} /> {t('Đăng xuất')}
+          </button>
+        </> : <Link to="/dang-nhap" className="humg-btn humg-btn--primary humg-btn--block" onClick={() => setOpenMobile(false)}>
           <Icon name="lock" size={15} /> {t('Đăng nhập eUni')}
-        </Link>
+        </Link>}
       </div>
       {openMobile && <div className="site-header__scrim" onClick={() => setOpenMobile(false)} />}
       </div>

@@ -1,6 +1,8 @@
 'use client'
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import authService from '../services/authService.js'
+import tokenService from '../services/tokenService.js'
+import authNotice, { AUTH_EXPIRED_EVENT } from '../services/authNotice.js'
 
 const AuthContext = createContext(null)
 
@@ -27,6 +29,13 @@ export function AuthProvider({ children }) {
 
   useEffect(() => { bootstrap() }, [bootstrap])
 
+  /* API trả 401 (token hết hạn / bị thu hồi): xóa phiên; các trang cần đăng nhập tự chuyển về /dang-nhap */
+  useEffect(() => {
+    const onExpired = () => { if (!tokenService.getSession()) return; tokenService.clear(); authNotice.set('expired'); setUser(null) }
+    window.addEventListener(AUTH_EXPIRED_EVENT, onExpired)
+    return () => window.removeEventListener(AUTH_EXPIRED_EVENT, onExpired)
+  }, [])
+
   const login = useCallback(async (credentials) => {
     const result = await authService.login(credentials)
     setUser(result?.user || null)
@@ -41,9 +50,11 @@ export function AuthProvider({ children }) {
 
   const loginWithSso = useCallback((opts) => authService.loginWithSso(opts), [])
 
+  /** → { redirected } — true khi đang chuyển sang trang đăng xuất SSO (không cần điều hướng tiếp) */
   const logout = useCallback(async () => {
-    await authService.logout()
+    const r = await authService.logout()
     setUser(null)
+    return r || { redirected: false }
   }, [])
 
   const value = useMemo(() => ({

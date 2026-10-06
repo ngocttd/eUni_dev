@@ -19,7 +19,7 @@ export const STATUSES = ['draft', 'pending_review', 'published', 'archived']
 /** Mã số cũ (0..3) vẫn được chấp nhận ở API để tương thích */
 export const LEGACY_STATUS = { 0: 'draft', 1: 'pending_review', 2: 'published', 3: 'archived', pending: 'pending_review' }
 const STATUS_BY_LABEL = { 'Đã xuất bản': 'published', 'Bản nháp': 'draft', 'Chờ duyệt': 'pending_review' }
-export const SCHEMA_VERSION = 4
+export const SCHEMA_VERSION = 5
 export const DEFAULT_TENANT = 'humg'
 const TR_BY_LABEL = { 'Đã dịch': 'done', 'Đang dịch': 'in_progress', 'Chưa dịch': 'missing' }
 const BANNER_POS = { 'Trang chủ – Slider': 'home_slider', 'Trang chủ – Popup': 'home_popup', 'Cột phải': 'sidebar_right', 'Chân trang': 'footer' }
@@ -28,9 +28,13 @@ const IDS_ROLE = { 'Super Admin': ['cms.admin', 'staff'], Editor: ['cms.editor',
 const UNIT_BY_LABEL = { 'Khoa CNTT': 'CNTT', 'Khoa Mỏ': 'MO', 'Khoa Trắc địa – Bản đồ': 'TDBD', 'Phòng Đào tạo': 'P-DT', 'Phòng KHCN': 'P-KHCN', 'Phòng Hợp tác quốc tế': 'P-HTQT', 'Phòng CTSV': 'P-CTSV', 'Văn phòng': 'VP' }
 const ACTION = { 'Đăng nhập': 'login', 'Đăng bài viết': 'post.publish', 'Cập nhật bài viết': 'post.update', 'Xóa bài viết': 'post.delete', 'Tải lên file': 'media.upload', 'Xóa người dùng': 'user.delete', 'Đổi cấu hình': 'settings.update' }
 const MEDIA_KIND = { 'Hình ảnh': 'image', 'Tài liệu': 'document', 'Video': 'video', 'Âm thanh': 'audio' }
+const PAGE_EN = { 'Trang chủ': 'Home', 'Giới thiệu': 'About', 'Media thư viện': 'Media library', 'Đơn vị': 'Units', 'Ban giám hiệu': 'Board of Rectors', 'Phòng ban chức năng': 'Offices',
+  'Khoa chuyên môn': 'Faculties', 'Đào tạo': 'Education', 'Nghiên cứu': 'Research', 'Sinh viên': 'Students', 'Tin tức – Sự kiện': 'News & Events', 'Thư viện số': 'Digital library', 'Liên hệ': 'Contact' }
 const CMS_PAGES = [
-  { slug: 'chinh-sach-bao-mat', title: 'Chính sách bảo mật', bodyHtml: '<p>Trường Đại học Mỏ – Địa chất cam kết bảo vệ thông tin cá nhân của người dùng Cổng thông tin điện tử.</p><h2>1. Thông tin thu thập</h2><p>Họ tên, email, số điện thoại khi người dùng gửi liên hệ hoặc đăng ký sự kiện; thông tin đăng nhập do hệ thống SSO của Trường quản lý.</p><h2>2. Mục đích sử dụng</h2><ul><li>Phản hồi yêu cầu, gửi thông báo liên quan.</li><li>Thống kê truy cập để cải thiện dịch vụ.</li></ul><h2>3. Liên hệ</h2><p>Mọi thắc mắc về dữ liệu cá nhân xin gửi về Phòng Truyền thông.</p>' },
-  { slug: 'dieu-khoan-su-dung', title: 'Điều khoản sử dụng', bodyHtml: '<p>Khi truy cập Cổng thông tin, người dùng đồng ý với các điều khoản dưới đây.</p><h2>Bản quyền nội dung</h2><p>Nội dung, hình ảnh thuộc quyền của Trường Đại học Mỏ – Địa chất. Trích dẫn cần ghi rõ nguồn.</p><h2>Trách nhiệm người dùng</h2><p>Không sử dụng Cổng thông tin cho mục đích trái pháp luật hoặc gây ảnh hưởng tới hệ thống.</p>' },
+  { slug: 'chinh-sach-bao-mat', title: 'Chính sách bảo mật', bodyHtml: '<p>Trường Đại học Mỏ – Địa chất cam kết bảo vệ thông tin cá nhân của người dùng Cổng thông tin điện tử.</p><h2>1. Thông tin thu thập</h2><p>Họ tên, email, số điện thoại khi người dùng gửi liên hệ hoặc đăng ký sự kiện; thông tin đăng nhập do hệ thống SSO của Trường quản lý.</p><h2>2. Mục đích sử dụng</h2><ul><li>Phản hồi yêu cầu, gửi thông báo liên quan.</li><li>Thống kê truy cập để cải thiện dịch vụ.</li></ul><h2>3. Liên hệ</h2><p>Mọi thắc mắc về dữ liệu cá nhân xin gửi về Phòng Truyền thông.</p>',
+    translations: { en: { status: 'done', title: 'Privacy policy', bodyHtml: '<p>Hanoi University of Mining and Geology is committed to protecting the personal data of portal users.</p><h2>1. Data we collect</h2><p>Name, email and phone number when you contact us or register for events; sign-in data is managed by the University SSO.</p><h2>2. How we use it</h2><ul><li>To answer requests and send related notices.</li><li>Usage statistics to improve our services.</li></ul><h2>3. Contact</h2><p>Questions about personal data can be sent to the Communications Office.</p>' } } },
+  { slug: 'dieu-khoan-su-dung', title: 'Điều khoản sử dụng', bodyHtml: '<p>Khi truy cập Cổng thông tin, người dùng đồng ý với các điều khoản dưới đây.</p><h2>Bản quyền nội dung</h2><p>Nội dung, hình ảnh thuộc quyền của Trường Đại học Mỏ – Địa chất. Trích dẫn cần ghi rõ nguồn.</p><h2>Trách nhiệm người dùng</h2><p>Không sử dụng Cổng thông tin cho mục đích trái pháp luật hoặc gây ảnh hưởng tới hệ thống.</p>',
+    translations: { en: { status: 'done', title: 'Terms of use', bodyHtml: '<p>By using the portal you agree to the following terms.</p><h2>Copyright</h2><p>Content and images belong to Hanoi University of Mining and Geology. Please cite the source when quoting.</p><h2>User responsibilities</h2><p>Do not use the portal for unlawful purposes or in ways that harm the system.</p>' } } },
 ]
 const MENU_TYPE = { 'Trang': 'page', 'Liên kết': 'link', 'Chuyên mục': 'category' }
 
@@ -199,7 +203,8 @@ function build() {
    * Trang "system": trang có sẵn trong code website (route riêng) — CMS quản lý tên, thứ tự, menu; nội dung do website.
    * Trang "default": nội dung soạn ở CMS (bodyHtml), website hiển thị ở /trang/{slug}. */
   let po = 0
-  const addPage = (n, parentId = null) => { const r = add('pages', { parentId, slug: n.slug, title: n.name, template: 'system', path: `/${n.slug}`, status: 'published', sortOrder: po++, bodyHtml: '', translations: {} }); (n.children || []).forEach((c) => addPage(c, r.id)) }
+  const addPage = (n, parentId = null) => { const r = add('pages', { parentId, slug: n.slug, title: n.name, template: 'system', path: `/${n.slug}`, status: 'published', sortOrder: po++, bodyHtml: '',
+    translations: PAGE_EN[n.name] ? { en: { title: PAGE_EN[n.name], status: 'done' } } : {} }); (n.children || []).forEach((c) => addPage(c, r.id)) }
   cms.cmsPageTree.forEach((n) => addPage(n))
   for (const pg of CMS_PAGES) add('pages', { parentId: null, template: 'default', path: null, status: 'published', sortOrder: po++, translations: {}, updatedAt: '2025-05-10T09:00:00+07:00', ...pg })
   s.menuGroups = cms.cmsMenuGroups.map((name, i) => ({ code: ['header', 'footer', 'utility'][i], name }))
@@ -207,7 +212,7 @@ function build() {
   const menuIds = []
   load('site-menus').forEach((m) => {
     const r = add('menuItems', { groupCode: m.group, parentId: m.parent == null ? null : menuIds[m.parent], type: m.url ? 'page' : 'heading', url: m.url || null, label: m.label, icon: m.icon,
-      sortOrder: m.order, isVisible: true, openInNewTab: false, translations: {} })
+      sortOrder: m.order, isVisible: true, openInNewTab: false, translations: m.labelEn ? { en: { label: m.labelEn, status: 'done' } } : {} })
     menuIds.push(r.id)
   })
 

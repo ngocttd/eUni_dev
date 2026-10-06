@@ -156,7 +156,8 @@ export async function refreshSession(session) {
 
 export function logoutUrl(session) {
   const ep = discovered || ssoEndpoints
-  const p = new URLSearchParams({ post_logout_redirect_uri: `${window.location.origin}/` })
+  /* IdS đưa về trang đăng nhập của chính app (cần đăng ký Post-logout redirect URI: {origin}/dang-nhap) */
+  const p = new URLSearchParams({ post_logout_redirect_uri: `${window.location.origin}/dang-nhap` })
   if (sso.provider === 'entra') {
     if (session?.user?.username) p.set('logout_hint', session.user.username)
   } else {

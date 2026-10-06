@@ -70,6 +70,9 @@ IdS đã liên kết hai loại tài khoản nên là cùng một người dùng
 
 ## Kiểm thử
 
+Đăng xuất: nút **Đăng xuất** ở thanh trên cùng CMS và cổng My eUni, và ở header website khi đã đăng nhập; đăng xuất xong về `/dang-nhap` của chính app.
+Với SSO cần đăng ký Post-logout redirect URI `{origin}/dang-nhap` cho cả 2 app. Kiểm thử: `node tools/migration/e2e-logout.mjs` (15 bước).
+
 ```bash
 npm --prefix euni-api-mock test                     # 90 kiểm tra hành vi API (tự chạy server tạm)
 psql … -f euni-api-mock/database/v2/schema.sql -f euni-api-mock/database/v2/test.sql   # schema v2 + RLS

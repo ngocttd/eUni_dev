@@ -11,7 +11,7 @@
  *                  Nút "Microsoft 365" gửi kèm gợi ý nhà cung cấp (mặc định Duende: acr_values=idp:<scheme>).
  *   - "keycloak" — Keycloak HUMG, gợi ý IdP bằng kc_idp_hint.
  *   - "entra"    — (cũ) đăng nhập thẳng Microsoft Entra ID; chỉ có lựa chọn Microsoft 365.
- * Redirect URI cần đăng ký: {origin}/dang-nhap/sso/callback · Post-logout: {origin}/
+ * Redirect URI cần đăng ký: {origin}/dang-nhap/sso/callback · Post-logout: {origin}/dang-nhap
  */
 const trim = (s) => String(s || '').replace(/\/+$/, '')
 const env = (k, d = '') => process.env[k] ?? d

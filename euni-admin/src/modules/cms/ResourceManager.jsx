@@ -7,7 +7,8 @@
  * config:
  *   resource   khóa trong cmsApi (vd. 'videos')
  *   columns    [{ header, render(row) }]
- *   fields     [{ name, label, type: text|textarea|number|date|select|lines, options:[{value,label}], half, required, placeholder, hint }]
+ *   fields     [{ name, label, type: text|textarea|number|date|select|lines|media, options:[{value,label}], half, required, placeholder, hint }]
+ *              type 'media': giá trị là id ảnh trong Media thư viện, chọn qua hộp thoại MediaPicker
  *   defaults   giá trị form khi thêm mới
  *   toForm(row) / toPayload(values)   chuyển đổi giữa dòng API và form
  */
@@ -17,10 +18,34 @@ import { asPage } from '../../lib/api/client.js'
 import Icon from '../../shared/lib/Icon.jsx'
 import { Panel, FilterBar, DataTable } from '../../shared/components/ui/page.jsx'
 import { Head, norm, VisibilityToggle, RowActions } from './shared.jsx'
+import MediaPicker from './MediaPicker.jsx'
+import { mediaUrl } from '../../lib/api/media.js'
+import { useModuleData } from '../../lib/datasets/useModuleData.jsx'
 
 export const VISIBLE_OPTIONS = [{ value: 'true', label: 'Hiển thị' }, { value: 'false', label: 'Ẩn' }]
 
+/** Ô chọn ảnh từ Media thư viện: xem trước + nút Chọn / Bỏ ảnh */
+function MediaField({ f, value, onChange }) {
+  const { cmsMedia } = useModuleData('cms')
+  const [open, setOpen] = useState(false)
+  const m = value ? cmsMedia.find((x) => String(x.id) === String(value)) : null
+  return (
+    <div className="cms-form__block">
+      <span className="cms-form__label">{f.label}</span>
+      <div className="cms-mediafield">
+        <span className="cms-mediafield__thumb">{m ? <img src={mediaUrl(m.url)} alt="" onError={(e) => { e.currentTarget.style.display = 'none' }} /> : <Icon name="image" size={20} />}</span>
+        <span className="cms-mediafield__name">{m ? m.name : value ? `Ảnh #${value}` : 'Chưa chọn ảnh'}</span>
+        <button type="button" className="cms-rowbtn" onClick={() => setOpen(true)}><Icon name="image" size={13} /> {value ? 'Đổi ảnh' : 'Chọn ảnh'}</button>
+        {value && <button type="button" className="cms-rowbtn is-danger" onClick={() => onChange('')} title="Bỏ ảnh"><Icon name="x" size={13} /> Bỏ ảnh</button>}
+      </div>
+      {f.hint && <span className="cms-hint">{f.hint}</span>}
+      {open && <MediaPicker folder={f.folder || 'Banner'} onClose={() => setOpen(false)} onPick={(x) => { onChange(String(x.id)); setOpen(false) }} />}
+    </div>
+  )
+}
+
 function Field({ f, value, onChange }) {
+  if (f.type === 'media') return <MediaField f={f} value={value} onChange={onChange} />
   const common = { value: value ?? '', onChange: (e) => onChange(e.target.value), placeholder: f.placeholder, required: f.required }
   let control
   if (f.type === 'textarea' || f.type === 'lines') control = <textarea rows={f.rows || (f.type === 'lines' ? 5 : 3)} {...common} />

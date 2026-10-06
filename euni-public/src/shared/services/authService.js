@@ -1,6 +1,8 @@
 import api, { SERVICE } from '../../lib/api/client.js'
 import tokenService from './tokenService.js'
 import { startLogin, refreshSession as refreshSso, logoutUrl } from '../../lib/sso/oidc.js'
+import tenantService from './tenantService.js'
+import authNotice from './authNotice.js'
 
 const auth = api(SERVICE.auth)
 
@@ -35,7 +37,7 @@ export const authService = {
     if (!session?.accessToken) return null
     if (session.sso) {
       if (session.expiresAt && session.expiresAt - Date.now() < 30_000) {
-        try { const next = await refreshSso(session); tokenService.setSession(next); return next.user } catch { tokenService.clear(); return null }
+        try { const next = await refreshSso(session); tokenService.setSession(next); return next.user } catch { tokenService.clear(); authNotice.set('expired'); return null }
       }
       return session.user
     }
@@ -43,7 +45,7 @@ export const authService = {
       const data = await auth.get('/api/v1/auth/me')
       return data?.user || null
     } catch (err) {
-      if (err.status === 401) { tokenService.clear(); return null }
+      if (err.status === 401) { tokenService.clear(); authNotice.set('expired'); return null }
       throw err
     }
   },
@@ -60,11 +62,19 @@ export const authService = {
       return null
     }
   },
+  /**
+   * Đăng xuất: xóa phiên ở trình duyệt (token, trang quản trị đang chọn) rồi
+   *  - phiên SSO: chuyển sang trang đăng xuất tập trung của IdS, IdS đưa về {origin}/dang-nhap → trả { redirected: true }
+   *  - phiên mock: báo auth-api, trả { redirected: false } để giao diện tự về trang đăng nhập.
+   */
   async logout() {
     const session = tokenService.getSession()
     tokenService.clear()
-    if (session?.sso) { window.location.assign(logoutUrl(session)); return }  // đăng xuất tập trung, IdS đưa về trang chủ
-    try { await auth.post('/api/v1/auth/logout') } catch { /* bỏ qua */ }
+    tenantService.set(null)
+    authNotice.set('logged_out')
+    if (session?.sso) { window.location.assign(logoutUrl(session)); return { redirected: true } }
+    try { await auth.post('/api/v1/auth/logout', null, { token: session?.accessToken }) } catch { /* bỏ qua */ }
+    return { redirected: false }
   },
 }
 

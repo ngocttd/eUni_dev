@@ -117,7 +117,7 @@ await step('logoutUrl: end_session kèm id_token_hint và post_logout_redirect_u
   const u = new URL(logoutUrl({ idToken: 'abc' }))
   assert.match(u.pathname, EXPECT.logout)
   if (PROVIDER !== 'entra') assert.equal(u.searchParams.get('id_token_hint'), 'abc')
-  assert.equal(u.searchParams.get('post_logout_redirect_uri'), `${origin}/`)
+  assert.equal(u.searchParams.get('post_logout_redirect_uri'), `${origin}/dang-nhap`) // IdS đưa về trang đăng nhập của app
 })
 
 await step('mapSsoUser: ánh xạ vai trò CMS / realm role (manager, lecturer, staff, parent) / mặc định', async () => {

@@ -1170,7 +1170,19 @@
            },
            "translations": {
             "type": "object",
-            "properties": {}
+            "properties": {
+             "en": {
+              "type": "object",
+              "properties": {
+               "label": {
+                "type": "string"
+               },
+               "status": {
+                "type": "string"
+               }
+              }
+             }
+            }
            },
            "tenantId": {
             "type": "string"

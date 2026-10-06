@@ -103,6 +103,10 @@ Không cần claim tenant: trang (tenant) user được quản trị do CMS tự
 Nếu đưa `unit[]` vào token làm token quá lớn, CMS gọi **Membership API** (`GET /edusoft-api/api/v1/me/memberships`, hoặc qua `esb-api`) và cache 15 phút ở `u:{sub}:membership`.
 
 ### 3.3 Phiên đăng nhập ở FE
+- **Đăng xuất** (nút ở thanh trên cùng CMS, cổng My eUni và header website): xóa phiên ở trình duyệt rồi
+  - phiên SSO: chuyển tới `end_session` của IdS kèm `post_logout_redirect_uri = {origin}/dang-nhap` → **cần đăng ký URI này cho cả 2 client** (admin, public);
+  - phiên mock: gọi `POST /auth-api/api/v1/auth/logout`, về `/dang-nhap` của chính app (CMS về trang đăng nhập CMS, không về trang chủ website).
+  Trang đăng nhập hiện “Bạn đã đăng xuất”. API trả **401** với request có token → coi như hết phiên: tự xóa phiên, về đăng nhập, báo “Phiên đăng nhập đã hết hạn”.
 - **Giai đoạn 1:** SPA public client + PKCE. Token giữ trong bộ nhớ và `sessionStorage` như hiện tại. `NEXT_PUBLIC_AUTH_MODE=oidc` bật luồng IdS. `mock` giữ form username/password gọi `auth-api` của mock, chỉ dùng khi phát triển.
 - **Giai đoạn 2 (khuyến nghị):** **BFF**. Next.js route handler giữ refresh token ở cookie HttpOnly và proxy `/api/*` sang gateway, để trình duyệt không cầm token.
 - Bỏ cách dùng id_token làm Bearer (đang có ở chế độ Entra trực tiếp). Access token phải có `aud = cms-api`.

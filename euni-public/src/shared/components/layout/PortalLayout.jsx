@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
-import { NavLink, Link } from '../../../lib/router.jsx'
+import { NavLink, Link, useNavigate } from '../../../lib/router.jsx'
+import { useAuth } from '../../auth/AuthContext.jsx'
 import Brand from '../common/Brand.jsx'
 import Icon from '../../lib/Icon.jsx'
 import ScrollToTop from '../common/ScrollToTop.jsx'
@@ -28,6 +29,16 @@ export default function PortalLayout({ config, variant = 'portal', children }) {
   const [open, setOpen] = useState(false)
   const [notifOpen, setNotifOpen] = useState(false)
   const close = () => setOpen(false)
+  const { logout } = useAuth()
+  const navigate = useNavigate()
+  const [leaving, setLeaving] = useState(false)
+  /* Đăng xuất: xóa phiên rồi về trang đăng nhập của chính app (CMS → /dang-nhap của admin, portal → /dang-nhap của website).
+     Phiên SSO thì đi qua trang đăng xuất của IdS, IdS đưa về /dang-nhap. */
+  const doLogout = async () => {
+    setLeaving(true); close()
+    const r = await logout()
+    if (!r?.redirected) navigate('/dang-nhap', { replace: true })
+  }
 
   const notifs = config.notifications && config.notifications.length ? config.notifications : DEFAULT_NOTIFS
   const unread = notifs.filter((n) => n.unread).length
@@ -142,10 +153,19 @@ export default function PortalLayout({ config, variant = 'portal', children }) {
                 <em>{config.meta || t(config.role)}</em>
               </span>
             </span>
-            <Link to="/" className="portal-shell__exit" onClick={close} title={t('Thoát cổng')}>
-              <Icon name="arrow-left" size={16} />
-              <span>{t('Thoát cổng')}</span>
-            </Link>
+            {variant === 'cms'
+              ? <Link to="/" className="portal-shell__site" target="_blank" rel="noopener noreferrer" title={t('Mở website công khai ở tab mới (vẫn giữ đăng nhập CMS)')}>
+                  <Icon name="globe" size={16} />
+                  <span>{t('Xem website')}</span>
+                </Link>
+              : <Link to="/" className="portal-shell__site" onClick={close} title={t('Về trang chủ website (vẫn giữ đăng nhập)')}>
+                  <Icon name="home" size={16} />
+                  <span>{t('Trang chủ')}</span>
+                </Link>}
+            <button type="button" className="portal-shell__exit" onClick={doLogout} disabled={leaving} title={t('Đăng xuất khỏi tài khoản')}>
+              <Icon name="lock" size={16} />
+              <span>{leaving ? t('Đang đăng xuất…') : t('Đăng xuất')}</span>
+            </button>
           </div>
         </header>
         <div className="portal-shell__content">
