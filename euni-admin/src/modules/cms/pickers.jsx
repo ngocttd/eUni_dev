@@ -23,6 +23,7 @@ export function PersonPicker({ onPick, placeholder = 'Tên, email, mã CB / mã 
     }, 250)
     return () => clearTimeout(t)
   }, [q, roles])
+  /* preventDefault: picker thường nằm trong <label>; nút gợi ý biến mất sau khi chọn → label sẽ chuyển cú click sang nút “×” của chip vừa hiện và bỏ chọn ngay */
   const pick = (u) => { onPick(u); setQ(''); setList([]); setOpen(false) }
   return (
     <div className="cms-suggest">
@@ -31,7 +32,7 @@ export function PersonPicker({ onPick, placeholder = 'Tên, email, mã CB / mã 
       {open && list.length > 0 && (
         <ul role="listbox">
           {list.map((u) => (
-            <li key={u.sub}><button type="button" onClick={() => pick(u)}>
+            <li key={u.sub}><button type="button" onClick={(e) => { e.preventDefault(); pick(u) }}>
               <strong>{u.name}</strong> · {u.staffCode || u.studentCode || ''} {u.email ? `· ${u.email}` : ''} {!u.active ? '(đã khóa)' : ''}
             </button></li>
           ))}

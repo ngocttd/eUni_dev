@@ -168,6 +168,7 @@ function Strengths() {
 function FeaturedNews() {
   const { featuredNews, newsList } = useModuleData('home');
   const { t } = useLanguage()
+  if (!featuredNews) return null // trang chưa có bài viết hiện ở trang chủ
   return (
     <div className="humg-card panel panel--news">
       <div className="panel__head">
@@ -245,7 +246,7 @@ function Events() {
 function MediaHumg() {
   const { mediaTabs } = useModuleData('home');
   const { t } = useLanguage()
-  const [tab, setTab] = useState(mediaTabs[0].key)
+  const [tab, setTab] = useState(mediaTabs[0]?.key)
   const active = mediaTabs.find((mt) => mt.key === tab)
   return (
     <div className="humg-card panel panel--media">

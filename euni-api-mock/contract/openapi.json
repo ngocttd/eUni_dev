@@ -2005,6 +2005,51 @@
     }
    }
   },
+  "/cms-api/api/v1/public/tenants/resolve": {
+   "get": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Tên miền → trang đơn vị: { id, name } nếu tên miền gắn với một trang đang bật, ngược lại 404. Website gọi phía server (nhớ tạm ~15 giây) để nhận tên miền của Khoa/Phòng mới tạo mà không phải build lại; 404 → phục vụ trang Trường.",
+    "description": "Không cần đăng nhập.",
+    "parameters": [
+     {
+      "name": "host",
+      "in": "query",
+      "description": "Tên miền (kèm cổng nếu có), vd. cntt.humg.edu.vn",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "id": {
+           "type": "string"
+          },
+          "name": {
+           "type": "string"
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   }
+  },
   "/cms-api/api/v1/public/tenant": {
    "get": {
     "tags": [
@@ -8662,6 +8707,223 @@
        "application/json": {
         "schema": {
          "type": "object"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   }
+  },
+  "/cms-api/api/v1/admin/tenants": {
+   "get": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Danh sách trang đơn vị (Trường, Khoa, Phòng ban…): { id, name, rootUnit, rootUnitName, domains[], isActive, createdAt, stats { contents, pages, grants } }. Không phụ thuộc X-Tenant.",
+    "description": "Cần Bearer token + quyền: cms.admin",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "id": {
+           "type": "string"
+          },
+          "name": {
+           "type": "string"
+          },
+          "rootUnit": {
+           "type": "string"
+          },
+          "rootUnitName": {
+           "type": "string"
+          },
+          "domains": {
+           "type": "array",
+           "items": {
+            "type": "string"
+           }
+          },
+          "isActive": {
+           "type": "boolean"
+          },
+          "createdAt": {
+           "nullable": true
+          },
+          "stats": {
+           "type": "object",
+           "properties": {
+            "contents": {
+             "type": "integer"
+            },
+            "pages": {
+             "type": "integer"
+            },
+            "grants": {
+             "type": "integer"
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   },
+   "post": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Tạo trang đơn vị: { id (a-z0-9-, 2–32 ký tự, bắt đầu bằng chữ; không đổi được), name, rootUnit? (mã đơn vị trong cây), domains[] (chuẩn hóa chữ thường, bỏ http(s):// và đường dẫn; không trùng trang khác), scaffold? (mặc định true: sinh cấu hình theo tên trang, menu header/footer/utility, trang Giới thiệu/Liên hệ/Chính sách/Điều khoản, chuyên mục Tin tức, slide + khối trang chủ), ownerSub? (cấp grant manage toàn trang cho người này) }. 201 → bản ghi như GET; 409 mã trùng; 422 dữ liệu sai.",
+    "description": "Cần Bearer token + quyền: cms.admin",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "id": {
+           "type": "string"
+          },
+          "name": {
+           "type": "string"
+          },
+          "rootUnit": {
+           "type": "string"
+          },
+          "rootUnitName": {
+           "type": "string"
+          },
+          "domains": {
+           "type": "array",
+           "items": {
+            "type": "string"
+           }
+          },
+          "isActive": {
+           "type": "boolean"
+          },
+          "createdAt": {
+           "nullable": true
+          },
+          "stats": {
+           "type": "object",
+           "properties": {
+            "contents": {
+             "type": "integer"
+            },
+            "pages": {
+             "type": "integer"
+            },
+            "grants": {
+             "type": "integer"
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   }
+  },
+  "/cms-api/api/v1/admin/tenants/{id}": {
+   "put": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Sửa name, rootUnit, domains[], isActive. Không xóa cứng: isActive=false → tên miền không còn được tra ra, X-Tenant của trang trả 400, trang biến mất khỏi me/context; dữ liệu giữ nguyên, bật lại là dùng tiếp. Trang humg (mặc định) không tắt được (422).",
+    "description": "Cần Bearer token + quyền: cms.admin",
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "parameters": [],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "id": {
+           "type": "string"
+          },
+          "name": {
+           "type": "string"
+          },
+          "rootUnit": {
+           "type": "string"
+          },
+          "rootUnitName": {
+           "type": "string"
+          },
+          "domains": {
+           "type": "array",
+           "items": {
+            "type": "string"
+           }
+          },
+          "isActive": {
+           "type": "boolean"
+          },
+          "createdAt": {
+           "nullable": true
+          },
+          "stats": {
+           "type": "object",
+           "properties": {
+            "contents": {
+             "type": "integer"
+            },
+            "pages": {
+             "type": "integer"
+            },
+            "grants": {
+             "type": "integer"
+            }
+           }
+          }
+         }
         }
        }
       }

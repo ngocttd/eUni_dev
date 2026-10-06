@@ -62,6 +62,12 @@ export const cmsApi = {
     roles: () => cms.get('/api/v1/admin/directory/roles'),
   },
   orgUnits: { list: () => cms.get('/api/v1/admin/org-units') },
+  /* Trang đơn vị (tenant) — chỉ cms.admin. create({ id, name, rootUnit, domains[], ownerSub?, scaffold? }) */
+  tenants: {
+    list: () => cms.get('/api/v1/admin/tenants'),
+    create: (body) => cms.post('/api/v1/admin/tenants', body),
+    update: (id, body) => cms.put(`/api/v1/admin/tenants/${id}`, body),
+  },
   audit: { list: (query) => cms.get('/api/v1/admin/audit-logs', { query }) },
 
   categories: resource('categories'),

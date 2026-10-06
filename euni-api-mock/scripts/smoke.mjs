@@ -218,6 +218,44 @@ try {
   check('cấp grant ở cntt → nthoa vào được cntt (không cần sửa SSO)', (await call('GET', `${C}/v1/admin/contents`, { token: editor, tenant: 'cntt' })).status === 200)
   await call('DELETE', `${C}/v1/admin/grants/${tmpGrant.id}`, { token: admin, tenant: 'cntt' })
   check('thu hồi grant → nthoa hết vào cntt', (await call('GET', `${C}/v1/admin/contents`, { token: editor, tenant: 'cntt' })).status === 403)
+
+  /* ---------- trang đơn vị (tenant): tạo / sửa / tắt, website nhận tên miền qua API ---------- */
+  const T = `${C}/v1/admin/tenants`
+  check('chỉ cms.admin quản lý trang đơn vị (editor → 403)', (await call('GET', T, { token: editor })).status === 403)
+  const tl = (await call('GET', T, { token: admin })).data
+  check('danh sách trang kèm thống kê', tl.some((t) => t.id === 'humg' && t.stats.contents > 0) && tl.some((t) => t.id === 'cntt'), tl)
+  check('mã trang sai định dạng → 422', (await call('POST', T, { token: admin, body: { id: 'Dia Chat', name: 'x' } })).status === 422)
+  check('mã trang trùng → 409', (await call('POST', T, { token: admin, body: { id: 'cntt', name: 'x' } })).status === 409)
+  const cnttHost = tl.find((t) => t.id === 'cntt').domains[0]
+  check('tên miền đã dùng ở trang khác → 422', (await call('POST', T, { token: admin, body: { id: 'thu-nghiem', name: 'x', domains: [cnttHost] } })).status === 422)
+  check('đơn vị gốc không có trong cây → 422', (await call('POST', T, { token: admin, body: { id: 'thu-nghiem', name: 'x', rootUnit: 'KHONG-CO' } })).status === 422)
+  const nt = await call('POST', T, { token: admin, body: { id: 'dia-chat', name: 'Khoa Địa chất', domains: ['https://DiaChat.humg.edu.vn/'], ownerSub: 'u-nthoa' } })
+  check('tạo trang Khoa Địa chất → 201, tên miền được chuẩn hóa', nt.status === 201 && nt.data.domains.join() === 'diachat.humg.edu.vn', nt.data)
+  const R = (host) => call('GET', `${C}/v1/public/tenants/resolve?host=${encodeURIComponent(host)}`)
+  check('website tra tên miền → mã trang', (await R('diachat.humg.edu.vn')).data?.id === 'dia-chat')
+  check('tên miền chưa gắn → 404', (await R('khong-co.humg.edu.vn')).status === 404)
+  const dcSet = (await call('GET', `${C}/v1/public/settings`, { tenant: 'dia-chat' })).data
+  check('nội dung mẫu: cấu hình theo tên trang', dcSet?.general?.siteName?.startsWith('Khoa Địa chất') && dcSet.general.brandName === 'KHOA ĐỊA CHẤT', dcSet?.general)
+  const dcMenu = (await call('GET', `${C}/v1/public/menus/header`, { tenant: 'dia-chat' })).data
+  check('nội dung mẫu: menu đầu trang', Array.isArray(dcMenu) && dcMenu.some((m) => m.label === 'Giới thiệu') && dcMenu.some((m) => m.label === 'Liên hệ'), dcMenu)
+  check('nội dung mẫu: trang Giới thiệu + Chính sách', (await call('GET', `${C}/v1/public/pages/slug/gioi-thieu`, { tenant: 'dia-chat' })).status === 200
+    && (await call('GET', `${C}/v1/public/pages/slug/chinh-sach-bao-mat`, { tenant: 'dia-chat' })).status === 200)
+  check('nội dung mẫu: trang chủ có slide', (await call('GET', `${C}/v1/public/home`, { tenant: 'dia-chat' })).data?.heroSlides?.length > 0)
+  check('dữ liệu trang mới tách riêng (không có bài của Trường)', (await publicTitles('dia-chat')).length === 0)
+  check('header Host theo tên miền → đúng trang', (await (await fetch(`${API}${C}/v1/public/settings`, { headers: { 'X-Forwarded-Host': 'diachat.humg.edu.vn' } })).json()).general?.brandName === 'KHOA ĐỊA CHẤT')
+  const ntCtx = (await call('GET', `${C}/v1/me/context`, { token: editor })).data
+  check('người phụ trách được cấp quyền trang mới (thấy trong me/context)', ntCtx.tenants.some((t) => t.id === 'dia-chat'), ntCtx.tenants)
+  check('người phụ trách vào được CMS của trang mới', (await call('GET', `${C}/v1/admin/contents`, { token: editor, tenant: 'dia-chat' })).status === 200)
+  check('không tắt được trang Trường', (await call('PUT', `${T}/humg`, { token: admin, body: { isActive: false } })).status === 422)
+  const off = await call('PUT', `${T}/dia-chat`, { token: admin, body: { isActive: false } })
+  check('tắt trang', off.status === 200 && off.data.isActive === false, off.data)
+  check('trang đã tắt: tra tên miền → 404', (await R('diachat.humg.edu.vn')).status === 404)
+  check('trang đã tắt: X-Tenant → 400', (await call('GET', `${C}/v1/public/settings`, { tenant: 'dia-chat' })).status === 400)
+  check('trang đã tắt: không còn trong me/context', !(await call('GET', `${C}/v1/me/context`, { token: editor })).data.tenants.some((t) => t.id === 'dia-chat'))
+  const on = await call('PUT', `${T}/dia-chat`, { token: admin, body: { isActive: true, name: 'Khoa Khoa học và Kỹ thuật Địa chất', domains: ['diachat.humg.edu.vn', 'geology.humg.edu.vn'] } })
+  check('bật lại + đổi tên + thêm tên miền', on.data.isActive && (await R('geology.humg.edu.vn')).data?.id === 'dia-chat', on.data)
+  check('trang tạo không kèm nội dung mẫu (scaffold=false)', (await call('POST', T, { token: admin, body: { id: 'phong-dt', name: 'Phòng Đào tạo', scaffold: false } })).status === 201
+    && (await call('GET', `${C}/v1/public/menus/header`, { tenant: 'phong-dt' })).data.length === 0)
 } catch (e) {
   failures.push(`✗ lỗi không mong đợi: ${e.stack}`)
 } finally {

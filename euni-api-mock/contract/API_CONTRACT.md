@@ -82,6 +82,7 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
 | GET | `/api/v1/public/datasets/{module}` | public | Nội dung tĩnh của website do CMS quản lý: cooperation, life, utilities (xem §4). |
 | GET | `/api/v1/public/languages` | public | Ngôn ngữ hỗ trợ. |
 | GET | `/api/v1/public/media/{id}/url` | public | URL tải file media. |
+| GET | `/api/v1/public/tenants/resolve` | public | Tên miền → trang đơn vị: { id, name } nếu tên miền gắn với một trang đang bật, ngược lại 404. Website gọi phía server (nhớ tạm ~15 giây) để nhận tên miền của Khoa/Phòng mới tạo mà không phải build lại; 404 → phục vụ trang Trường. |
 | GET | `/api/v1/public/tenant` | public | Tenant đang phục vụ (theo X-Tenant / host). |
 | GET | `/api/v1/me/context` | đăng nhập | Ngữ cảnh người dùng: tenants được quản trị ({ id, name, rootUnit, domains[] } — domains để CMS mở đúng website của trang), permissions (từ role trong token), đơn vị (kèm đơn vị cha), can.{news|announcement}.{view|edit|review|publish}. |
 | GET | `/api/v1/admin/contents` | news.view + ACL | Quản trị: danh sách bài viết user được xem (lọc theo grant). Mỗi dòng có allowedActions[], isScheduled, pendingRevision, version. |
@@ -124,6 +125,9 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
 | POST | `/api/v1/admin/backups/{id}/restore` | backup.manage | Phục hồi dữ liệu CMS từ một bản sao lưu. |
 | POST | `/api/v1/admin/backups/restore` | backup.manage | multipart/form-data: file — phục hồi từ tệp sao lưu tải lên. |
 | POST | `/api/v1/admin/settings/email/test` | settings.manage | Gửi email thử: { to } → { ok, message }. |
+| GET | `/api/v1/admin/tenants` | cms.admin | Danh sách trang đơn vị (Trường, Khoa, Phòng ban…): { id, name, rootUnit, rootUnitName, domains[], isActive, createdAt, stats { contents, pages, grants } }. Không phụ thuộc X-Tenant. |
+| POST | `/api/v1/admin/tenants` | cms.admin | Tạo trang đơn vị: { id (a-z0-9-, 2–32 ký tự, bắt đầu bằng chữ; không đổi được), name, rootUnit? (mã đơn vị trong cây), domains[] (chuẩn hóa chữ thường, bỏ http(s):// và đường dẫn; không trùng trang khác), scaffold? (mặc định true: sinh cấu hình theo tên trang, menu header/footer/utility, trang Giới thiệu/Liên hệ/Chính sách/Điều khoản, chuyên mục Tin tức, slide + khối trang chủ), ownerSub? (cấp grant manage toàn trang cho người này) }. 201 → bản ghi như GET; 409 mã trùng; 422 dữ liệu sai. |
+| PUT | `/api/v1/admin/tenants/{id}` | cms.admin | Sửa name, rootUnit, domains[], isActive. Không xóa cứng: isActive=false → tên miền không còn được tra ra, X-Tenant của trang trả 400, trang biến mất khỏi me/context; dữ liệu giữ nguyên, bật lại là dùng tiếp. Trang humg (mặc định) không tắt được (422). |
 | GET | `/api/v1/admin/dashboard` | cms.access | Số liệu tổng quan theo quyền của user, kèm awaitingReview[]. |
 
 ### Ví dụ response

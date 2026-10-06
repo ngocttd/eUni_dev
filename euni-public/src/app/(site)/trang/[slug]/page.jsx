@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation'
-import { loadCmsPage } from '@/lib/datasets/loaders'
-import { currentTenant } from '@/lib/datasets/server'
+import { loadCmsPageFor } from '@/lib/datasets/server'
 import CmsPage from '@/modules/public/cms-page/CmsPage'
 
 export const dynamic = 'force-dynamic'
@@ -8,7 +7,7 @@ export const dynamic = 'force-dynamic'
 /** Trang tĩnh soạn ở CMS (Trang & Menu → Cây trang, giao diện khác "Trang hệ thống"). Sửa/ẩn/xóa ở admin → trang đổi theo ngay. */
 async function load(params) {
   const { slug } = await params
-  return loadCmsPage(slug, { tenant: await currentTenant() })
+  return loadCmsPageFor(slug)
 }
 
 export async function generateMetadata({ params }) {

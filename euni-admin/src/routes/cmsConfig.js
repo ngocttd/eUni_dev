@@ -33,6 +33,7 @@ export const cmsConfig = {
     { path: 'video', title: 'Video', icon: 'play', wireframe: 'CMS-02', group: 'Website' },
     { path: 'podcast', title: 'Podcast', icon: 'headphones', wireframe: 'CMS-02', group: 'Website' },
     /* Người dùng & vai trò quản lý trên SSO; CMS chỉ phân quyền mức bản ghi */
+    { path: 'trang-don-vi', title: 'Trang đơn vị', icon: 'building', wireframe: 'CMS-11', requires: 'tenant.manage', group: 'Quản trị' },
     { path: 'phan-quyen', title: 'Phân quyền nội dung', icon: 'shield', wireframe: 'CMS-07', requires: 'grant.manage', group: 'Quản trị' },
     { path: 'cau-hinh', title: 'Cấu hình hệ thống', icon: 'settings', wireframe: 'CMS-08', requires: 'settings.manage', group: 'Quản trị' },
     { path: 'nhat-ky', title: 'Nhật ký hoạt động', icon: 'clock', wireframe: 'CMS-09', requires: 'log.view', group: 'Quản trị' },

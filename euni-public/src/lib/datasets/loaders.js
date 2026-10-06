@@ -69,7 +69,8 @@ export async function loadHome(opts = {}) {
   const d = await cms.get('/api/v1/public/home', { tenant: opts.tenant })
   const media = (list, map) => list.map((x, i) => ({ label: map(x), size: i === 0 ? 'wide' : 'small' }))
   return {
-    heroSlides: d.heroSlides.map((s) => ({ id: s.code, kicker: s.kicker, title: s.title, years: s.subtitle, motto: s.motto, primary: { label: s.primaryLabel, to: s.primaryUrl }, accent: { label: s.accentLabel, to: s.accentUrl } })),
+    /* trang đơn vị mới chưa có slide → một slide mặc định theo tên trang để trang chủ vẫn hiển thị */
+    heroSlides: (d.heroSlides.length ? d.heroSlides : [{ code: 'default', kicker: 'HUMG', title: (opts.siteName || 'Trường Đại học Mỏ - Địa chất').toUpperCase(), subtitle: '', motto: '', primaryLabel: 'Giới thiệu', primaryUrl: '/trang/gioi-thieu', accentLabel: 'Tin tức', accentUrl: '/tin-tuc' }]).map((s) => ({ id: s.code, kicker: s.kicker, title: s.title, years: s.subtitle, motto: s.motto, primary: { label: s.primaryLabel, to: s.primaryUrl }, accent: { label: s.accentLabel, to: s.accentUrl } })),
     quickLinks: d.quickLinks.map((q) => ({ label: q.label, icon: q.icon, to: q.url })),
     audiences: d.audiences.map((a) => ({ id: a.code, icon: a.icon, color: a.color, title: a.title, desc: a.description, to: a.url })),
     strengths: d.strengths.map((s) => ({ icon: s.icon, title: s.title, text: s.text })),

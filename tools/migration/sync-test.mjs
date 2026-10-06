@@ -218,5 +218,23 @@ await step('Cấu hình Khoa: biên tập viên Khoa không có quyền (403); q
   assert.doesNotMatch(await page('/lien-he'), new RegExp(`024.7777.${stamp.slice(-4)}`))
 })
 
+/* ---------- Trang đơn vị mới tạo trong CMS: website nhận tên miền ngay, không build lại ---------- */
+const MOI = `pdt${stamp}.localhost:3002`
+await step('Tạo trang đơn vị mới (Trang đơn vị) → tên miền mới hiện website riêng với tên, menu, trang Giới thiệu', async () => {
+  await j('POST', '/cms-api/api/v1/admin/tenants', { id: `pdt-${stamp}`, name: `Phòng Thử nghiệm ${stamp}`, rootUnit: 'P-DT', domains: [MOI] }, t)
+  const home = await pageOn(MOI, '/')
+  assert.match(home, new RegExp(`PHÒNG THỬ NGHIỆM ${stamp.toUpperCase()}`))
+  assert.match(home, /Tin tức – Sự kiện/)
+  assert.match(await pageOn(MOI, '/trang/gioi-thieu'), new RegExp(`Giới thiệu Phòng Thử nghiệm ${stamp}`))
+  assert.doesNotMatch(await page('/'), new RegExp(`PHÒNG THỬ NGHIỆM ${stamp.toUpperCase()}`))
+})
+
+await step('Tắt trang đơn vị → tên miền không còn phục vụ nội dung của trang (về website Trường, không lỗi)', async () => {
+  await j('PUT', `/cms-api/api/v1/admin/tenants/pdt-${stamp}`, { isActive: false }, t)
+  assert.equal(await statusOn(MOI, '/'), 200)
+  assert.doesNotMatch(await pageOn(MOI, '/'), new RegExp(`PHÒNG THỬ NGHIỆM ${stamp.toUpperCase()}`))
+  assert.equal(await statusOn(MOI, '/trang/gioi-thieu'), 404)
+})
+
 await j('POST', '/cms-api/api/v1/dev/reset')
 console.log(process.exitCode ? '\nCÓ LỖI' : '\nĐồng bộ admin → public: OK')

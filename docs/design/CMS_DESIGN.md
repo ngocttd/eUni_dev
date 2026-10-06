@@ -71,6 +71,16 @@ Các quy ước xuyên suốt:
 | API quản trị (`/api/v1/admin/*`) | Header `X-Tenant` (tenant đang chọn ở CMS) | User phải có ít nhất một grant đang hiệu lực trong tenant đó (§5.2), hoặc có `cms.*`. Sai thì trả **403**. Danh sách tenant được quản trị không lấy từ token (tầng 3, §5.1). |
 | Portal (`/api/v1/me/*`) | Header `X-Tenant` | Thông báo của user được lọc theo tenant đang xem. Muốn gom mọi tenant thì gửi `X-Tenant: *`, chỉ hợp lệ với `/api/v1/me/announcements`. |
 
+### 2.2a Quản lý trang đơn vị (tenant)
+- Bảng `tenants(id, name, root_unit, is_active, …)` + `tenant_domains(host → tenant_id)`. Mã trang (`id`) theo `^[a-z][a-z0-9-]{1,31}$`, không đổi sau khi tạo (là khóa `tenant_id` của mọi bảng).
+- Chỉ `cms.admin` (`cms.*`) quản lý: `GET/POST /api/v1/admin/tenants`, `PUT /api/v1/admin/tenants/{id}` — không phụ thuộc `X-Tenant`, ghi audit `tenant.create|update`.
+- Tạo trang có tùy chọn `scaffold` (mặc định bật): sinh cấu hình (tên trang, thương hiệu), menu `header/footer/utility`, trang Giới thiệu/Liên hệ/Chính sách/Điều khoản, chuyên mục Tin tức,
+  slide + khối trang chủ (chép từ trang Trường) trong **cùng transaction** với bản ghi tenant. `ownerSub` → thêm grant `manage` phạm vi toàn trang.
+- Không xóa cứng: `is_active=false` → resolve tên miền trả 404, `X-Tenant` của trang trả 400, trang không còn trong `me/context`. Trang mặc định (`humg`) không tắt được.
+- Website tra `GET /api/v1/public/tenants/resolve?host=` phía server, nhớ tạm ~15 giây (backend nên cache Redis `tenant:host:{host}`, xóa khi sửa tenant).
+  Không có trang (404) → phục vụ trang mặc định. Nếu tenant trong bộ nhớ tạm vừa bị tắt (API trả 400), website tra lại tên miền và thử lại một lần.
+  `NEXT_PUBLIC_TENANT_HOSTS` vẫn dùng được để cố định ánh xạ (ưu tiên hơn API).
+
 ### 2.3 Chia sẻ nội dung giữa tenant
 Bảng `content_shares(tenant_id nguồn, entity_type, entity_id, target_tenant_id, approved_by, approved_at)`.
 - Website của tenant B hiển thị bài của tenant A đã được chia sẻ **và đã được B chấp nhận**, ở chế độ chỉ đọc. Link canonical trỏ về A để tránh trùng lặp SEO.

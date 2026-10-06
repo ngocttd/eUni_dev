@@ -17,6 +17,7 @@ import { can, grantsFor, withAncestors, tenantsOf } from './acl.js'
 import { log, diff } from './audit.js'
 import { workflowResource, paged, norm, now, isLive } from './lifecycle.js'
 import { announcementRoutes } from './announcements.js'
+import { tenantRoutes } from './tenants.js'
 
 export { paged }
 
@@ -170,7 +171,8 @@ cms.get('/api/v1/public/search', (req, res) => {
 cms.get('/api/v1/me/context', requireUser, (req, res) => {
   const t = req.user
   const mine = tenantsOf(t)
-  const list = isSuper(t.perms) ? tenants() : hasPerm(t.perms, 'cms.access') ? tenants().filter((x) => mine.includes(x.id)) : []
+  const active = tenants().filter((x) => x.isActive !== false)
+  const list = isSuper(t.perms) ? active : hasPerm(t.perms, 'cms.access') ? active.filter((x) => mine.includes(x.id)) : []
   const tenant = list.find((x) => x.id === req.tenant) ? req.tenant : list[0]?.id ?? null
   res.json({
     user: { sub: t.sub, name: t.name, email: t.email, roles: t.roles, units: t.units },
@@ -324,6 +326,7 @@ workflowResource(cms, {
 })
 
 announcementRoutes(cms)
+tenantRoutes(cms)
 
 /* ============================================================
  * CRUD chung cho các tài nguyên còn lại — theo tenant, xóa mềm, audit diff

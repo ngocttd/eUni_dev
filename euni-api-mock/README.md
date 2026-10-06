@@ -29,9 +29,10 @@ Tài khoản CMS mock (mật khẩu `Humg@2025`): `tvanminh` (cms.admin, 2 tenan
 Cổng demo: `POST /auth-api/api/v1/auth/login {"role":"student"}` (SV lớp DCCTKT66A), `lecturer` (GV BM-KHMT), `staff` (chuyên viên P.Đào tạo), `parent`, `manager`.
 Role theo mô hình 2 tầng trên SSO: realm role `student lecturer staff manager parent applicant alumni` + client role có tiền tố (`cms.*`, `euni.*`, `edusoft.*`, `qlns.*`, `qlkhcn.*`);
 tầng 3 (trang/tenant, chuyên mục, đơn vị, bản ghi) do CMS tự phân bằng grants — `GET /cms-api/api/v1/admin/directory/roles` liệt kê các role.
-Tenant mẫu: `humg` (mặc định) và `cntt` (Khoa CNTT) — gửi header `X-Tenant: cntt`.
+Tenant mẫu: `humg` (mặc định) và `cntt` (Khoa CNTT) — gửi header `X-Tenant: cntt`. Thêm trang Khoa/Phòng mới: `POST /cms-api/api/v1/admin/tenants` (cms.admin, `src/tenants.js`) —
+sinh sẵn cấu hình, menu, trang mẫu; website tra tên miền qua `GET /cms-api/api/v1/public/tenants/resolve?host=`.
 
-Kiểm thử hành vi: `npm test` (tự chạy server tạm, 94 kiểm tra).
+Kiểm thử hành vi: `npm test` (tự chạy server tạm, 118 kiểm tra).
 
 ## Hợp đồng API (cho backend)
 
@@ -52,6 +53,7 @@ Kiểm thử hành vi: `npm test` (tự chạy server tạm, 94 kiểm tra).
 ```text
 src/server.js     Express app, CORS, gắn service, middleware tenant
 src/tenant.js     X-Tenant → host → tenant mặc định
+src/tenants.js    Quản lý trang đơn vị (tạo/sửa/tắt, nội dung mẫu, tra tên miền)
 src/auth.js       auth-api (mock IdS) + realm/client role + bảng role → quyền chức năng + middleware requireCms(permission)
 src/acl.js        Phân quyền mức bản ghi: can(user, tenant, type, action, record), allowedActions
 src/lifecycle.js  Vòng đời dùng chung: workflow, revision, bản sửa đổi chờ duyệt, thùng rác, concurrency, lịch sử

@@ -7,17 +7,20 @@
 import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { loadSite } from '../../lib/datasets/loaders.js'
+import tenantService from '../services/tenantService.js'
 
 const SiteContext = createContext({ settings: null, menus: {}, banners: null })
 
 export function SiteProvider({ initial, children }) {
+  /* tenant do server xác định theo tên miền → các lời gọi API từ trình duyệt dùng cùng tenant */
+  if (initial?.tenant) tenantService.setResolved(initial.tenant)
   const [site, setSite] = useState(initial || { settings: null, menus: {}, banners: null })
   const pathname = usePathname()
   const first = useRef(true)
   useEffect(() => {
     if (first.current) { first.current = false; return }
     let alive = true
-    loadSite().then((s) => { if (alive) setSite(s) }).catch(() => {})
+    loadSite().then((s) => { if (alive) setSite({ ...s, tenant: initial?.tenant }) }).catch(() => {})
     return () => { alive = false }
   }, [pathname])
   return <SiteContext.Provider value={site}>{children}</SiteContext.Provider>

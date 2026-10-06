@@ -197,7 +197,7 @@ details.fold .tbl-wrap { border-radius: 6px; }
     </div>
     <div class="card"><h4>Đã có sẵn để đối chiếu</h4>
       <ul>
-        <li><code>euni-api-mock</code>: mock chạy đúng hành vi (workflow, ACL, revision, hộp thư…), 94 kiểm thử tự động.</li>
+        <li><code>euni-api-mock</code>: mock chạy đúng hành vi (workflow, ACL, revision, hộp thư…), 118 kiểm thử tự động.</li>
         <li><code>contract/openapi.json</code> (268 path) và <code>API_CONTRACT.md</code>, sinh từ mock.</li>
         <li><code>database/v2/schema.sql</code>: DDL đích có RLS theo tenant, kèm <code>test.sql</code>.</li>
         <li>Hai web Next.js đã gọi đúng các endpoint dưới đây.</li>
@@ -269,6 +269,7 @@ flowchart LR
     <thead><tr><th>Chủ đề</th><th>Quy ước</th></tr></thead>
     <tbody class="wrapcells">
       <tr><td>Header</td><td class="wrap">Mọi request gửi <code>X-Tenant: &lt;tenant&gt;</code> (vd. <code>humg</code>, <code>cntt</code>). Thiếu header thì suy ra từ host, cuối cùng về tenant mặc định. Request cần đăng nhập gửi <code>Authorization: Bearer &lt;access_token&gt;</code>.</td></tr>
+      <tr><td>Trang đơn vị</td><td class="wrap">Khoa/Phòng mới tạo ở CMS (<code>POST /api/v1/admin/tenants</code>, chỉ <code>cms.admin</code>) kèm tên miền. Website tra <code>GET /api/v1/public/tenants/resolve?host=</code> phía server (nhớ ~15 giây) nên không phải build lại; 404 → trang Trường. Tắt trang (<code>isActive=false</code>) → resolve 404, <code>X-Tenant</code> của trang trả 400, dữ liệu giữ nguyên.</td></tr>
       <tr><td>JSON</td><td class="wrap">camelCase. Thời gian ISO-8601 có múi giờ (<code>2025-05-15T08:00:00+07:00</code>), ngày <code>yyyy-MM-dd</code>. API không trả chuỗi đã định dạng hiển thị.</td></tr>
       <tr><td>Phân trang</td><td class="wrap">Query <code>pageIndex</code> (≥1), <code>pageSize</code>, <code>keyword</code>. Response <code>{ items, pageIndex, pageSize, totalItems, totalPages }</code>. FE cũng nhận mảng thuần.</td></tr>
       <tr><td>Envelope</td><td class="wrap">FE nhận cả response thô lẫn <code>{ success, message, data }</code> (cms-api) và <code>{ code, message, data }</code> (qlns/qlkhcn). <code>success:false</code> hoặc <code>code</code> ngoài 2xx được coi là lỗi dù HTTP 200.</td></tr>
@@ -443,10 +444,10 @@ npm run dev:api        # http://127.0.0.1:3000  (cũng nhận tiền tố /euni-
 npm run dev:public     # http://localhost:3002
 npm run dev:admin      # http://localhost:3001
 
-npm --prefix euni-api-mock test          # 94 kiểm tra hành vi API
+npm --prefix euni-api-mock test          # 118 kiểm tra hành vi API
 npm run contract                         # sinh lại contract/openapi.json + API_CONTRACT.md (cần mock đang chạy)
 node tools/migration/e2e-v2.mjs          # 24 bước trên trình duyệt (cần 3 app chạy)
-node tools/migration/sync-test.mjs       # 23 kịch bản: admin ghi → website (Trường và Khoa) đổi ngay</pre>
+node tools/migration/sync-test.mjs       # 25 kịch bản: admin ghi → website (Trường, Khoa, trang mới tạo) đổi ngay</pre>
   <h3>Tài khoản mock</h3>
   <div class="tbl-wrap"><table>
     <thead><tr><th>Tài khoản</th><th>Role trên SSO</th><th>Phạm vi (grant, tầng 3)</th></tr></thead>
@@ -520,7 +521,7 @@ node tools/migration/sync-test.mjs       # 23 kịch bản: admin ghi → websit
   const counts = { public: 0, me: 0, admin: 0 }; D.eps.forEach((e) => counts[e.g]++)
   $('#stats').innerHTML = [
     [D.eps.length, 'nhóm endpoint cms-api'], [counts.public + ' / ' + counts.me + ' / ' + counts.admin, 'public / me / admin'],
-    [nMods, 'dataset module'], [D.tables.length, 'bảng PostgreSQL'], ['94', 'kiểm thử mock tự động'],
+    [nMods, 'dataset module'], [D.tables.length, 'bảng PostgreSQL'], ['118', 'kiểm thử mock tự động'],
   ].map(([b, s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join('')
 
   /* bảng service */
@@ -575,6 +576,7 @@ node tools/migration/sync-test.mjs       # 23 kịch bản: admin ghi → websit
   const TODO = [
     ['Khung .NET: xác thực JWT qua JWKS của SSO, kiểm tra aud, đọc realm role + client role cms.*', '1a'],
     ['Tenant: middleware X-Tenant → host → mặc định; RLS PostgreSQL với SET LOCAL', '1a'],
+    ['Trang đơn vị: /api/v1/admin/tenants (cms.admin; tạo kèm nội dung mẫu + grant người phụ trách trong 1 transaction, bật/tắt), /api/v1/public/tenants/resolve?host= (cache Redis)', '1a'],
     ['Đặt route theo quy ước /api/v1/{public|me|admin}; áp chính sách xác thực theo nhóm trên gateway', '1a'],
     ['Tin tức: CRUD admin, workflow, hẹn giờ/hết hạn, revision + bản sửa đổi chờ duyệt, thùng rác, concurrency (version/If-Match)', '1a'],
     ['API công khai: site-content, home, contents, slug, menus, banners, settings, search (unaccent + pg_trgm), categories, views', '1a'],
