@@ -1,0 +1,608 @@
+<title>Bàn giao Backend eUni</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+/* Bố cục: mục lục dính bên trái + cột nội dung đọc được; tra cứu endpoint là phần "dụng cụ" chính của trang.
+   Màu: đá phiến xanh lạnh (nền, chữ) + xanh malachit (khoáng vật — gợi Mỏ - Địa chất) làm nhấn; đồng làm nhấn phụ. */
+:root {
+  --bg: #f5f7f7;
+  --surface: #ffffff;
+  --sunk: #eaeff0;
+  --line: #d3dcde;
+  --fg: #142024;
+  --muted: #56676c;
+  --accent: #0b7a5c;
+  --accent-soft: #d9f0e8;
+  --copper: #a2532a;
+  --copper-soft: #f6e4d9;
+  --me: #2b5fb4;
+  --me-soft: #dfe8f8;
+  --warn: #8a6100;
+  --warn-soft: #fbefcf;
+  --code-bg: #0f1a1d;
+  --code-fg: #d7e4e2;
+  --font-display: "Be Vietnam Pro", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Be Vietnam Pro", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+  --r: 8px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1517; --surface: #141e21; --sunk: #1a272b; --line: #2a3a3f; --fg: #e3ecec; --muted: #94a7ab;
+    --accent: #3fc79c; --accent-soft: #123a30; --copper: #e39167; --copper-soft: #3d2518; --me: #7ea6ef; --me-soft: #1a2b4a;
+    --warn: #e3b84f; --warn-soft: #3a2f10; --code-bg: #091012; --code-fg: #d7e4e2; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1517; --surface: #141e21; --sunk: #1a272b; --line: #2a3a3f; --fg: #e3ecec; --muted: #94a7ab;
+  --accent: #3fc79c; --accent-soft: #123a30; --copper: #e39167; --copper-soft: #3d2518; --me: #7ea6ef; --me-soft: #1a2b4a;
+  --warn: #e3b84f; --warn-soft: #3a2f10; --code-bg: #091012; --code-fg: #d7e4e2; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--bg); color: var(--fg); font: 15px/1.65 var(--font-body); }
+a { color: var(--accent); text-underline-offset: 2px; }
+a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+code, .mono { font-family: var(--font-mono); font-size: .86em; }
+:not(pre) > code { background: var(--sunk); padding: .08em .35em; border-radius: 4px; overflow-wrap: anywhere; }
+h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.25; text-wrap: balance; margin: 0; }
+h2 { font-size: 1.55rem; font-weight: 800; letter-spacing: -.01em; }
+h3 { font-size: 1.1rem; font-weight: 700; margin-top: 1.6rem; }
+h4 { font-size: .95rem; font-weight: 700; }
+p { margin: 0; max-width: 72ch; }
+ul, ol { margin: 0; padding-left: 1.2rem; max-width: 72ch; }
+li + li { margin-top: .25rem; }
+
+.shell { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 40px; max-width: 1280px; margin: 0 auto; padding-inline: 24px; }
+.toc { position: sticky; top: env(safe-area-inset-top, 0px); align-self: start; max-height: 100vh; overflow-y: auto; padding-block: 28px; }
+.toc .brand { font-family: var(--font-display); font-weight: 800; font-size: 1.05rem; line-height: 1.3; }
+.toc .brand small { display: block; font-weight: 500; font-size: .78rem; color: var(--muted); margin-top: 2px; }
+.toc nav { margin-top: 18px; display: grid; gap: 1px; }
+.toc nav a { color: var(--muted); text-decoration: none; font-size: .88rem; padding: 5px 10px; border-radius: 6px; display: grid; grid-template-columns: 1.6em 1fr; }
+.toc nav a span { font-variant-numeric: tabular-nums; color: var(--line); font-weight: 600; }
+.toc nav a:hover { background: var(--sunk); color: var(--fg); }
+.toc nav a.on { background: var(--accent-soft); color: var(--fg); font-weight: 600; }
+.toc nav a.on span { color: var(--accent); }
+.theme-btn { margin-top: 18px; font: inherit; font-size: .8rem; color: var(--muted); background: none; border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+
+main { padding-block: 28px 80px; min-width: 0; display: grid; gap: 56px; }
+section { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; scroll-margin-top: 16px; min-width: 0; }
+.eyebrow { font-size: .74rem; letter-spacing: .09em; text-transform: uppercase; font-weight: 700; color: var(--accent); }
+
+.hero { display: grid; gap: 16px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+.hero h1 { font-size: clamp(1.8rem, 3.6vw, 2.6rem); font-weight: 800; letter-spacing: -.02em; max-width: 22ch; }
+.hero p.lead { font-size: 1.05rem; color: var(--muted); }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: .86rem; color: var(--muted); }
+.facts b { color: var(--fg); font-weight: 600; }
+.stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 12px 14px; }
+.stat b { display: block; font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.stat span { font-size: .8rem; color: var(--muted); }
+
+.callout { border-left: 3px solid var(--copper); background: var(--copper-soft); padding: 12px 16px; border-radius: 0 var(--r) var(--r) 0; max-width: 80ch; }
+.callout.info { border-color: var(--accent); background: var(--accent-soft); }
+.callout.warn { border-color: var(--warn); background: var(--warn-soft); }
+.callout p + p { margin-top: 6px; }
+
+.tbl-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: .88rem; }
+th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: .74rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); background: var(--sunk); font-weight: 700; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+td code { white-space: nowrap; }
+td.wrap code { white-space: normal; }
+
+.pill { display: inline-block; font: 600 .72rem/1 var(--font-mono); padding: 4px 7px; border-radius: 4px; white-space: nowrap; }
+.g-public { background: var(--accent-soft); color: var(--accent); }
+.g-me { background: var(--me-soft); color: var(--me); }
+.g-admin { background: var(--copper-soft); color: var(--copper); }
+.m { font: 700 .72rem/1 var(--font-mono); color: var(--muted); min-width: 4.2em; display: inline-block; }
+
+.cols2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 14px 16px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.card h4 { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+
+pre { background: var(--code-bg); color: var(--code-fg); padding: 14px 16px; border-radius: var(--r); overflow-x: auto; font: 12.5px/1.55 var(--font-mono); margin: 0; max-width: 100%; }
+pre.mermaid { background: var(--surface); border: 1px solid var(--line); color: var(--fg); text-align: center; }
+.diagram { overflow-x: auto; }
+
+/* Tra cứu endpoint */
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; position: sticky; top: env(safe-area-inset-top, 0px); background: var(--bg); padding-block: 8px; z-index: 2; }
+.toolbar input { flex: 1 1 260px; min-width: 0; font: inherit; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chip { font: 600 .8rem var(--font-body); padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--muted); cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.count { font-size: .82rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.eps { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; }
+details.ep { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); min-width: 0; }
+details.ep > summary { list-style: none; cursor: pointer; padding: 10px 14px; display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto; gap: 10px; align-items: center; }
+details.ep > summary::-webkit-details-marker { display: none; }
+details.ep > summary .path { font: 500 .86rem var(--font-mono); overflow-wrap: anywhere; }
+details.ep > summary .ex { font-size: .72rem; color: var(--muted); white-space: nowrap; }
+details.ep[open] > summary { border-bottom: 1px solid var(--line); }
+.ep-body { padding: 12px 14px 14px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; min-width: 0; }
+.kv { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 4px 12px; font-size: .88rem; }
+.kv dt { color: var(--muted); font-size: .8rem; padding-top: 2px; }
+.kv dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.copy { font: 600 .74rem var(--font-body); border: 1px solid var(--line); background: var(--sunk); color: var(--fg); border-radius: 5px; padding: 3px 8px; cursor: pointer; justify-self: start; }
+
+details.fold { border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); min-width: 0; }
+details.fold > summary { cursor: pointer; padding: 10px 14px; font-weight: 600; display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+details.fold > summary small { color: var(--muted); font-weight: 400; font-family: var(--font-mono); font-size: .78rem; }
+details.fold[open] > summary { border-bottom: 1px solid var(--line); }
+details.fold > .inner { padding: 12px 14px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; min-width: 0; }
+details.fold .tbl-wrap { border-radius: 6px; }
+
+.check { list-style: none; padding: 0; display: grid; gap: 8px; max-width: none; }
+.check li { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 10px; align-items: start; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 10px 12px; margin: 0; }
+.check input { margin-top: 4px; accent-color: var(--accent); width: 16px; height: 16px; }
+.check .tag { font-size: .72rem; font-weight: 700; color: var(--muted); white-space: nowrap; }
+
+@media (max-width: 900px) {
+  .shell { grid-template-columns: minmax(0, 1fr); gap: 0; padding-inline: 16px; }
+  .toc { position: static; max-height: none; padding-block: 18px 0; }
+  .toc nav { grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+  details.ep > summary { grid-template-columns: auto minmax(0, 1fr); }
+  details.ep > summary .m, details.ep > summary .ex { display: none; }
+  .kv { grid-template-columns: minmax(0, 1fr); }
+}
+</style>
+
+<div class="shell">
+<aside class="toc">
+  <div class="brand">HUMG eUni<small>Gói bàn giao cho đội Backend</small></div>
+  <nav id="toc">
+    <a href="#tong-quan"><span>1</span>Tổng quan bàn giao</a>
+    <a href="#kien-truc"><span>2</span>Kiến trúc &amp; gateway</a>
+    <a href="#quy-uoc"><span>3</span>Quy ước API</a>
+    <a href="#xac-thuc"><span>4</span>Đăng nhập &amp; phân quyền</a>
+    <a href="#vong-doi"><span>5</span>Workflow &amp; vòng đời</a>
+    <a href="#thong-bao"><span>6</span>Thông báo</a>
+    <a href="#endpoint"><span>7</span>Tra cứu endpoint cms-api</a>
+    <a href="#dataset"><span>8</span>Dataset các service</a>
+    <a href="#csdl"><span>9</span>Cơ sở dữ liệu</a>
+    <a href="#mock"><span>10</span>Mock &amp; kiểm thử</a>
+    <a href="#doi-ten"><span>11</span>Đổi tên so với bản cũ</a>
+    <a href="#viec-can-lam"><span>12</span>Việc BE cần làm</a>
+  </nav>
+  <button class="theme-btn" id="themeBtn" type="button">Đổi giao diện sáng/tối</button>
+</aside>
+
+<main>
+<header class="hero">
+  <div class="eyebrow">Hợp đồng FE ↔ BE · cập nhật 06/10/2026</div>
+  <h1>Bàn giao Backend cho Cổng thông tin eUni</h1>
+  <p class="lead">Trang này gom mọi thứ đội Backend cần để dựng <code>cms-api</code> và nối các service đào tạo, nhân sự, KHCN vào hai web <code>euni-public</code> và <code>euni-admin</code>. Hai web đã chạy hoàn chỉnh trên mock; backend làm đúng hợp đồng ở đây thì chỉ cần đổi một biến môi trường.</p>
+  <div class="facts">
+    <span>Repo: <b>ngocttd/euni_dev</b></span>
+    <span>Nhánh: <b class="mono">claude/quirky-mendel-6dtes4</b></span>
+    <span>Nguồn sự thật: <b class="mono">euni-api-mock/contract/</b></span>
+    <span>Thiết kế: <b class="mono">docs/design/CMS_DESIGN.md</b></span>
+  </div>
+  <div class="stat-row" id="stats"></div>
+</header>
+
+<section id="tong-quan">
+  <div class="eyebrow">1 · Tổng quan</div>
+  <h2>Bàn giao những gì</h2>
+  <div class="cols2">
+    <div class="card"><h4>BE cần xây</h4>
+      <ul>
+        <li><b>cms-api</b> (.NET 8, PostgreSQL 16, Redis, MinIO): tin tức, thông báo, trang, menu, banner, media, khối trang chủ, cấu hình, phân quyền mức bản ghi, audit, sao lưu. Đa tenant.</li>
+        <li>Dataset/endpoint đọc của <b>edusoft-api</b>, <b>qlns-api</b>, <b>qlkhcn-api</b>, <b>esb-api</b> theo đúng cấu trúc JSON trong mục 8.</li>
+        <li>Cấu hình SSO: realm role và client role (mục 4).</li>
+      </ul>
+    </div>
+    <div class="card"><h4>Đã có sẵn để đối chiếu</h4>
+      <ul>
+        <li><code>euni-api-mock</code>: mock chạy đúng hành vi (workflow, ACL, revision, hộp thư…), 84 kiểm thử tự động.</li>
+        <li><code>contract/openapi.json</code> (268 path) và <code>API_CONTRACT.md</code>, sinh từ mock.</li>
+        <li><code>database/v2/schema.sql</code>: DDL đích có RLS theo tenant, kèm <code>test.sql</code>.</li>
+        <li>Hai web Next.js đã gọi đúng các endpoint dưới đây.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout info"><p><b>Nguyên tắc:</b> hành vi của mock là hợp đồng. Khi tài liệu và mock khác nhau, lấy mock làm chuẩn và báo lại FE để sửa tài liệu. Nếu dữ liệu thật buộc phải khác shape, FE chỉ sửa một chỗ: <code>src/lib/datasets/loaders.js</code> (adapter) của từng app.</p></div>
+</section>
+
+<section id="kien-truc">
+  <div class="eyebrow">2 · Kiến trúc</div>
+  <h2>Mọi lời gọi đi qua API gateway</h2>
+  <p>Web và app mobile chỉ gọi API qua gateway <code>https://api-gateway-demo.humg.edu.vn</code>. Không có <code>portal-api</code> riêng; các BFF và <code>esb-api</code> đã có sẵn trên gateway.</p>
+  <div class="diagram"><pre class="mermaid">
+flowchart LR
+  subgraph Clients
+    P[euni-public<br/>website + My eUni]
+    A[euni-admin<br/>CMS]
+    M[App mobile]
+  end
+  IDS[(SSO / Identity Server<br/>realm role + client role)]
+  GW{{API gateway<br/>api-gateway-demo.humg.edu.vn}}
+  P --> GW
+  A --> GW
+  M --> GW
+  P -. OIDC + PKCE .-> IDS
+  A -. OIDC + PKCE .-> IDS
+  GW --> CMS[cms-api]
+  GW --> EDU[edusoft-api]
+  GW --> NS[qlns-api]
+  GW --> KH[qlkhcn-api]
+  GW --> ESB[esb-api]
+  GW --> MOCK[euni-mock-api<br/>khi chưa có BE]
+  CMS --> PG[(PostgreSQL 16)]
+  CMS --> RD[(Redis)]
+  CMS --> MN[(MinIO)]
+</pre></div>
+  <h3>Base URL theo môi trường</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Môi trường</th><th>NEXT_PUBLIC_API_GATEWAY_URL</th><th>Ghi chú</th></tr></thead>
+    <tbody>
+      <tr><td>Dev (mock chạy máy)</td><td><code>http://127.0.0.1:3000</code></td><td>Mock đóng vai gateway</td></tr>
+      <tr><td>Mock trên server</td><td><code>https://api-gateway-demo.humg.edu.vn/euni-mock-api</code></td><td>Tích hợp qua gateway như qlns-api, qlkhcn-api, edusoft-api</td></tr>
+      <tr><td>Backend thật</td><td><code>https://api-gateway-demo.humg.edu.vn</code></td><td>FE gọi <code>{gateway}/{service}/api/v1/...</code></td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout warn"><p><b>Đường dẫn trả về phải là tương đối.</b> Base URL có thể có tiền tố (<code>/euni-mock-api</code>). FE ghép chuỗi <code>{gateway}/{service}{path}</code>; mọi URL mà API trả về (media, tệp đính kèm, link tải) phải tương đối với gateway, ví dụ <code>cms-api/uploads/anh.png</code>, không bắt đầu bằng <code>/</code>. Một đường dẫn tuyệt đối như <code>/cms-api/uploads/anh.png</code> sẽ làm mất tiền tố. URL đầy đủ <code>https://…</code> (presigned MinIO) thì dùng được.</p></div>
+  <h3>Service và module giao diện</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Service</th><th>Hệ thống</th><th>Module giao diện dùng</th></tr></thead>
+    <tbody id="svcTable"></tbody>
+  </table></div>
+</section>
+
+<section id="quy-uoc">
+  <div class="eyebrow">3 · Quy ước</div>
+  <h2>Quy ước chung cho mọi endpoint</h2>
+  <p>Theo mẫu Swagger cms-api trên gateway demo, ví dụ <code>/api/v1/public/category-post</code>: <b>chữ thường</b>, ngăn cách bằng <b>dấu gạch ngang</b>, có <b>version</b>, tách theo nhóm người gọi.</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Nhóm</th><th>Tiền tố</th><th>Ai gọi</th><th>Xác thực</th></tr></thead>
+    <tbody>
+      <tr><td><span class="pill g-public">public</span></td><td><code>/api/v1/public/…</code></td><td>Website, mobile khi chưa đăng nhập</td><td>Không</td></tr>
+      <tr><td><span class="pill g-me">me</span></td><td><code>/api/v1/me/…</code></td><td>Người đã đăng nhập, dữ liệu của chính họ (hộp thư, portal)</td><td>Bearer, mọi role</td></tr>
+      <tr><td><span class="pill g-admin">admin</span></td><td><code>/api/v1/admin/…</code></td><td>Màn hình quản trị CMS</td><td>Bearer + client role <code>cms.*</code> + grant</td></tr>
+    </tbody>
+  </table></div>
+  <p>Nhóm <code>me</code> được thêm vì các endpoint này cần đăng nhập nhưng không phải quản trị; tách riêng giúp gateway áp chính sách xác thực theo tiền tố.</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Chủ đề</th><th>Quy ước</th></tr></thead>
+    <tbody class="wrapcells">
+      <tr><td>Header</td><td class="wrap">Mọi request gửi <code>X-Tenant: &lt;tenant&gt;</code> (vd. <code>humg</code>, <code>cntt</code>). Thiếu header thì suy ra từ host, cuối cùng về tenant mặc định. Request cần đăng nhập gửi <code>Authorization: Bearer &lt;access_token&gt;</code>.</td></tr>
+      <tr><td>JSON</td><td class="wrap">camelCase. Thời gian ISO-8601 có múi giờ (<code>2025-05-15T08:00:00+07:00</code>), ngày <code>yyyy-MM-dd</code>. API không trả chuỗi đã định dạng hiển thị.</td></tr>
+      <tr><td>Phân trang</td><td class="wrap">Query <code>pageIndex</code> (≥1), <code>pageSize</code>, <code>keyword</code>. Response <code>{ items, pageIndex, pageSize, totalItems, totalPages }</code>. FE cũng nhận mảng thuần.</td></tr>
+      <tr><td>Envelope</td><td class="wrap">FE nhận cả response thô lẫn <code>{ success, message, data }</code> (cms-api) và <code>{ code, message, data }</code> (qlns/qlkhcn). <code>success:false</code> hoặc <code>code</code> ngoài 2xx được coi là lỗi dù HTTP 200.</td></tr>
+      <tr><td>Lỗi</td><td class="wrap">401 chưa đăng nhập/hết hạn · 403 thiếu quyền · 404 · 409 trùng hoặc xung đột phiên bản · 422 sai dữ liệu. Body có <code>message</code>; khuyến nghị ProblemDetails (RFC 7807) <code>{ type, title, status, detail, errors }</code>.</td></tr>
+      <tr><td>Id, xóa</td><td class="wrap">Id số nguyên int64. Bản ghi nội dung xóa mềm (<code>deletedAt</code>, <code>deletedBy</code>), có thùng rác và <code>POST …/{id}/restore</code>.</td></tr>
+      <tr><td>Concurrency</td><td class="wrap">Bản ghi có <code>version</code>. Khi sửa gửi <code>version</code> trong body hoặc <code>If-Match: "&lt;version&gt;"</code>; sai thì 409 <code>{ message, currentVersion }</code>.</td></tr>
+      <tr><td>Nội dung bài</td><td class="wrap"><code>contentBody</code> là chuỗi HTML từ trình soạn WYSIWYG. Backend làm sạch HTML khi lưu; website cũng làm sạch khi hiển thị.</td></tr>
+      <tr><td>Đồng bộ</td><td class="wrap">Website không cache dữ liệu CMS. Sau khi admin ghi, lần đọc <code>/api/v1/public/*</code> kế tiếp phải thấy thay đổi (nếu BE cache Redis thì phải xóa cache khi ghi).</td></tr>
+      <tr><td>Song ngữ</td><td class="wrap">Tiếng Việt là bản gốc. Chỉ bản dịch có trạng thái <code>done</code> được trả ở API công khai; thiếu thì trả tiếng Việt kèm <code>language: "vi"</code>. Query <code>lang=vi|en</code>.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="xac-thuc">
+  <div class="eyebrow">4 · Đăng nhập và phân quyền</div>
+  <h2>SSO giữ 2 tầng role, tầng 3 do app tự phân</h2>
+  <p>Người dùng đăng nhập qua SSO (OIDC + PKCE) bằng tài khoản trường hoặc Microsoft 365; hai cách cho ra cùng một <code>sub</code>. App không nhận mật khẩu. Backend xác thực JWT bằng JWKS của SSO, kiểm tra <code>aud</code> là client của service.</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Tầng</th><th>Ở đâu</th><th>Nội dung</th><th>Ví dụ</th></tr></thead>
+    <tbody>
+      <tr><td><b>1</b></td><td>SSO · realm role</td><td>Persona của người dùng, dùng chung toàn hệ thống</td><td><code>student</code>, <code>lecturer</code></td></tr>
+      <tr><td><b>2</b></td><td>SSO · client role của từng app, có tiền tố tên client</td><td>Chức năng được dùng trong app đó</td><td><code>cms.editor</code>, <code>edusoft.grade-entry</code></td></tr>
+      <tr><td><b>3</b></td><td>Trong app (CMS: bảng <code>access_grants</code>)</td><td>Phạm vi: trang/tenant, chuyên mục, đơn vị sở hữu, bản ghi</td><td>"Biên tập Khoa CNTT"</td></tr>
+    </tbody>
+  </table></div>
+  <div class="cols2">
+    <div class="card"><h4>Realm role (tầng 1)</h4>
+      <div class="tbl-wrap"><table><thead><tr><th>Role</th><th>Ý nghĩa</th><th>Cổng My eUni</th></tr></thead><tbody>
+        <tr><td><code>student</code></td><td>Sinh viên, học viên</td><td>/euni/sinh-vien</td></tr>
+        <tr><td><code>lecturer</code></td><td>Giảng viên</td><td>/euni/giang-vien</td></tr>
+        <tr><td><code>staff</code></td><td>Cán bộ, chuyên viên phòng ban</td><td>/euni/giang-vien</td></tr>
+        <tr><td><code>manager</code></td><td>Lãnh đạo (BGH, trưởng/phó đơn vị)</td><td>/euni/lanh-dao</td></tr>
+        <tr><td><code>parent</code></td><td>Phụ huynh</td><td>/euni/phu-huynh</td></tr>
+        <tr><td><code>applicant</code></td><td>Thí sinh</td><td>chưa có</td></tr>
+        <tr><td><code>alumni</code></td><td>Cựu người học</td><td>chưa có</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="card"><h4>Client role (tầng 2)</h4>
+      <div class="tbl-wrap"><table><thead><tr><th>Client</th><th>Role</th></tr></thead><tbody>
+        <tr><td><code>cms-api</code></td><td class="wrap"><code>cms.viewer</code> <code>cms.author</code> <code>cms.reviewer</code> <code>cms.editor</code> <code>cms.admin</code></td></tr>
+        <tr><td><code>euni-admin-api</code></td><td class="wrap"><code>euni.dashboard-viewer</code> <code>euni.report-viewer</code> <code>euni.account-support</code> <code>euni.admin</code></td></tr>
+        <tr><td><code>edusoft-api</code></td><td class="wrap"><code>edusoft.training-officer</code> <code>edusoft.grade-entry</code> <code>edusoft.academic-advisor</code> <code>edusoft.data-reader</code></td></tr>
+        <tr><td><code>qlns-api</code></td><td class="wrap"><code>qlns.hr-officer</code> <code>qlns.hr-viewer</code> <code>qlns.data-reader</code></td></tr>
+        <tr><td><code>qlkhcn-api</code></td><td class="wrap"><code>qlkhcn.research-officer</code> <code>qlkhcn.researcher</code> <code>qlkhcn.data-reader</code></td></tr>
+      </tbody></table></div>
+    </div>
+  </div>
+  <h3>Claim cần có trong access token</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Claim</th><th>Ví dụ</th><th>Dùng cho</th></tr></thead>
+    <tbody>
+      <tr><td><code>sub</code></td><td><code>8b1f…</code></td><td>Định danh duy nhất. Mọi dữ liệu CMS tham chiếu <code>sub</code>, không tham chiếu email hay mã cán bộ.</td></tr>
+      <tr><td><code>name</code>, <code>email</code></td><td></td><td>Hiển thị</td></tr>
+      <tr><td><code>realm_access.roles</code> (Keycloak) / <code>role[]</code> (IdS)</td><td><code>lecturer</code></td><td>Tầng 1: đối tượng nhận thông báo, cổng My eUni</td></tr>
+      <tr><td><code>resource_access.cms-api.roles</code></td><td><code>cms.editor</code></td><td>Tầng 2: quyền chức năng CMS</td></tr>
+      <tr><td><code>unit[]</code></td><td><code>BM-KHMT</code>, <code>DCCTKT66A</code></td><td>Đơn vị/lớp trực tiếp; CMS tự mở rộng lên đơn vị cha. Token quá lớn thì lấy từ Membership API.</td></tr>
+      <tr><td><code>staff_code</code> / <code>student_code</code></td><td><code>GV0123</code> / <code>2151000123</code></td><td>Tra cứu khi nhắm thông báo theo mã</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout"><p><b>Không có claim tenant.</b> Trang (tenant) một người được vào CMS là các tenant có ít nhất một grant đang hiệu lực khớp với họ (theo <code>sub</code>, đơn vị kèm đơn vị cha, hoặc role). <code>cms.admin</code> vào được mọi tenant. Cấp grant là vào được, thu hồi grant là mất quyền, không phải sửa SSO.</p></div>
+  <h3>Quyền chức năng của CMS (cấu hình tĩnh, <code>Cms:RolePermissions</code>)</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Role</th><th>Quyền chức năng</th></tr></thead>
+    <tbody>
+      <tr><td><code>cms.admin</code></td><td class="wrap"><code>cms.*</code> (bỏ qua mọi kiểm tra; riêng có <code>grant.manage</code>, <code>settings.manage</code>, <code>backup.manage</code>)</td></tr>
+      <tr><td><code>cms.editor</code></td><td class="wrap"><code>cms.access</code> <code>news.*</code> <code>announcement.*</code> <code>media.manage</code> <code>category.manage</code> <code>page.manage</code> <code>menu.manage</code> <code>site.manage</code> <code>log.view</code></td></tr>
+      <tr><td><code>cms.reviewer</code></td><td class="wrap"><code>cms.access</code> <code>news.view</code> <code>news.review</code> <code>announcement.view</code> <code>announcement.review</code></td></tr>
+      <tr><td><code>cms.author</code></td><td class="wrap"><code>cms.access</code> <code>news.view</code> <code>news.edit</code> <code>announcement.view</code> <code>announcement.edit</code> <code>media.manage</code></td></tr>
+      <tr><td><code>cms.viewer</code></td><td class="wrap"><code>cms.access</code> <code>news.view</code> <code>announcement.view</code></td></tr>
+      <tr><td>realm role</td><td class="wrap"><code>portal.&lt;role&gt;.view</code> (đọc hộp thư thông báo của chính mình)</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Quyền hiệu lực trên một bản ghi</h3>
+<pre>Quyền hiệu lực(user, hành động, bản ghi) =
+      Quyền chức năng  — client role cms.* → permission            [tầng 2, từ token]
+  AND Phạm vi          — có grant khớp                             [tầng 3, trong CMS]
+                         principal: user | unit (gồm đơn vị con) | role
+                         scope:     tenant | category | unit (gồm đơn vị con) | record
+                         permissions ⊆ { view, edit, review, publish, manage }
+  Ngoại lệ: tác giả luôn xem được bài mình tạo và sửa được khi còn là bản nháp; cms.admin bỏ qua mọi kiểm tra.
+  Mỗi bản ghi trả allowedActions[] để UI chỉ hiện nút hợp lệ; backend vẫn kiểm tra lại ở mỗi lệnh.</pre>
+  <p>Lọc danh sách phải làm trong SQL (<code>EXISTS</code> trên <code>access_grants</code>), không lọc sau khi đã truy vấn. Gợi ý cache tập principal và grant ở Redis <code>t:{tenant}:acl:{sub}</code>, TTL 5 phút, xóa khi grant đổi.</p>
+</section>
+
+<section id="vong-doi">
+  <div class="eyebrow">5 · Vòng đời nội dung</div>
+  <h2>Workflow, revision, thùng rác, audit</h2>
+  <div class="diagram"><pre class="mermaid">
+stateDiagram-v2
+  direction LR
+  [*] --> draft
+  draft --> pending_review: submit (edit)
+  pending_review --> draft: reject (review, bắt buộc lý do)
+  pending_review --> published: approve (review)
+  draft --> published: publish (publish)
+  published --> draft: unpublish (publish)
+  published --> archived: archive (publish)
+  draft --> archived: archive (publish)
+  archived --> published: publish (publish)
+</pre></div>
+  <ul>
+    <li><b>Hẹn giờ không phải trạng thái</b>: là <code>published</code> với <code>publishAt &gt; now</code>. Công khai khi <code>status = 'published' AND publishAt &lt;= now AND (expireAt IS NULL OR expireAt &gt; now)</code>.</li>
+    <li>Đổi trạng thái chỉ qua <code>POST …/{id}/workflow/{action}</code>; <code>PUT</code> không đổi <code>status</code>. Mỗi chuyển trạng thái ghi một dòng <code>workflow_history</code>.</li>
+    <li><b>Sửa bài đang published</b>: người có <code>publish</code> sửa thẳng. Người chỉ có <code>edit</code> thì thay đổi lưu thành bản sửa đổi chờ duyệt (<code>revisions.state = 'proposed'</code>), API trả <b>202</b>; người duyệt dùng <code>approve-revision</code> / <code>reject-revision</code>. Mỗi bản ghi tối đa một bản chờ.</li>
+    <li><b>Revision</b>: mỗi lần lưu tăng <code>version</code>, snapshot đầy đủ (kèm bản dịch, targets, đính kèm). Khôi phục v5 tạo v(n+1), không ghi đè lịch sử.</li>
+    <li><b>Thùng rác</b>: xóa mềm; xóa vĩnh viễn (<code>purge</code>) chỉ <code>cms.admin</code>; job dọn sau 90 ngày.</li>
+    <li><b>Audit</b>: chỉ ghi thêm, diff gọn <code>{ field: [cũ, mới] }</code>, partition theo tháng, ghi cả cấp quyền và cấu hình.</li>
+    <li>Job <code>PublishScheduler</code> mỗi phút: xử lý bài đến giờ đăng/hết hạn, xóa cache, phân phát thông báo (giữ lock Redis).</li>
+  </ul>
+</section>
+
+<section id="thong-bao">
+  <div class="eyebrow">6 · Thông báo</div>
+  <h2>Thông báo tách bảng khỏi tin tức</h2>
+  <p>Tin tức đọc công khai; thông báo chỉ người nhận đã đăng nhập mới đọc được, tệp đính kèm ở bucket private với presigned URL 5 phút. Hai loại dùng chung workflow, revision, audit và ACL nhưng là hai bảng, để không lộ thông báo nội bộ qua API tin tức.</p>
+  <h3>Đối tượng nhận (<code>targets[]</code>)</h3>
+  <p>Mỗi dòng là phép AND của các trường khác null; các dòng nối với nhau bằng OR, rồi trừ các dòng <code>isExclude</code>. <code>audience</code> là realm role.</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Ví dụ</th><th>audience</th><th>unitCode</th><th>userSub</th><th>isExclude</th></tr></thead>
+    <tbody>
+      <tr><td>Toàn bộ sinh viên</td><td><code>student</code></td><td></td><td></td><td></td></tr>
+      <tr><td>Giảng viên Khoa CNTT (gồm các bộ môn)</td><td><code>lecturer</code></td><td><code>CNTT</code></td><td></td><td></td></tr>
+      <tr><td>Lớp DCCTKT66A</td><td></td><td><code>DCCTKT66A</code></td><td></td><td></td></tr>
+      <tr><td>Một người (nhập mã hoặc email, BE tra ra sub)</td><td></td><td></td><td><code>sub</code></td><td></td></tr>
+      <tr><td>Trừ lớp DCKTM66</td><td></td><td><code>DCKTM66</code></td><td></td><td><code>true</code></td></tr>
+    </tbody>
+  </table></div>
+  <p><b>Hộp thư</b> (<code>GET /api/v1/me/announcements</code>) đọc khi truy vấn, không fan-out: dựng membership (realm role → audience, đơn vị kèm mọi đơn vị cha) rồi so khớp với targets. Sắp xếp: ghim → ưu tiên → mới nhất. <code>X-Tenant: *</code> gom mọi tenant của người dùng. Biên nhận đọc/xác nhận lưu ở <code>announcement_receipts</code>.</p>
+</section>
+
+<section id="endpoint">
+  <div class="eyebrow">7 · cms-api</div>
+  <h2>Tra cứu endpoint</h2>
+  <p>Đường dẫn tính từ <code>{gateway}/cms-api</code>. Bấm vào một dòng để xem quyền, mô tả và response mẫu lấy từ mock. Danh sách đầy đủ kèm schema có trong <code>contract/openapi.json</code>.</p>
+  <div class="toolbar">
+    <input id="q" type="search" placeholder="Tìm theo đường dẫn, quyền, mô tả…" aria-label="Tìm endpoint">
+    <div class="chips" role="group" aria-label="Lọc theo nhóm">
+      <button class="chip" type="button" data-g="all" aria-pressed="true">Tất cả</button>
+      <button class="chip" type="button" data-g="public" aria-pressed="false">public</button>
+      <button class="chip" type="button" data-g="me" aria-pressed="false">me</button>
+      <button class="chip" type="button" data-g="admin" aria-pressed="false">admin</button>
+    </div>
+    <span class="count" id="epCount"></span>
+  </div>
+  <div class="eps" id="eps"></div>
+  <h3>auth-api (chỉ là mock của SSO khi dev)</h3>
+  <p>Hệ thống thật đăng nhập qua SSO; các endpoint này chỉ để dev và test. <code>POST /auth-api/api/v1/auth/login</code> nhận <code>{ username, password }</code> hoặc <code>{ role: "student|lecturer|staff|manager|parent" }</code>; có thêm <code>GET …/auth/me</code>, <code>POST …/auth/refresh</code>, <code>POST …/auth/logout</code>.</p>
+  <details class="fold"><summary>Response mẫu của login <small>POST /auth-api/api/v1/auth/login</small></summary><div class="inner"><pre id="loginEx"></pre></div></details>
+</section>
+
+<section id="dataset">
+  <div class="eyebrow">8 · Service ngoài CMS</div>
+  <h2>Dataset theo module giao diện</h2>
+  <p>Mỗi module giao diện có một dataset: <code>GET /{service}/api/v1/{nhóm}/datasets/{module}</code>, trả một object gồm các khóa dưới đây. Mỗi khóa cũng có endpoint riêng <code>GET /{service}/api/v1/{nhóm}/{module}/{khóa}</code> (mảng thì phân trang). Nhóm là <code>me</code> cho dữ liệu cá nhân của portal (<code>portal-*</code>), còn lại là <code>public</code>. Cấu trúc JSON trong <code>euni-api-mock/mock-data/{module}.json</code> chính là hợp đồng.</p>
+  <div class="callout info"><p>Hai endpoint tương ứng Swagger hiện có, đã đưa về quy ước nhóm: <code>GET /qlkhcn-api/api/v1/public/research-topic-categories</code> và <code>GET /qlns-api/api/v1/public/employees</code> (<code>pageIndex, pageSize, keyword, isCurrentOnly</code>). Các khóa <code>*Nav</code>, <code>*QuickLinks</code>, <code>forms</code>… là cấu hình giao diện tĩnh đã có trong FE; BE có thể bỏ qua.</p></div>
+  <div id="dsList" style="display:grid;gap:18px"></div>
+</section>
+
+<section id="csdl">
+  <div class="eyebrow">9 · PostgreSQL 16</div>
+  <h2>Cơ sở dữ liệu tham khảo</h2>
+  <p>File <code>euni-api-mock/database/v2/schema.sql</code> là DDL đích: schema <code>cms</code>, Row-Level Security theo <code>tenant_id</code> (dùng <code>SET LOCAL</code> trong transaction, không dùng <code>SET</code> thường để tránh rò tenant qua connection pool), tìm kiếm không dấu bằng <code>unaccent</code> + <code>pg_trgm</code>, audit partition theo tháng, view <code>v_news_live</code>, hàm <code>inbox()</code> và <code>news_allowed()</code>. Kiểm thử: <code>psql … -f schema.sql -f test.sql</code>.</p>
+  <div class="toolbar"><input id="tq" type="search" placeholder="Lọc bảng hoặc cột…" aria-label="Lọc bảng"><span class="count" id="tCount"></span></div>
+  <div id="tables" style="display:grid;gap:6px"></div>
+</section>
+
+<section id="mock">
+  <div class="eyebrow">10 · Chạy và kiểm thử</div>
+  <h2>Mock và bộ kiểm thử</h2>
+<pre>npm run install:all
+npm run dev:api        # http://127.0.0.1:3000  (cũng nhận tiền tố /euni-mock-api)
+npm run dev:public     # http://localhost:3002
+npm run dev:admin      # http://localhost:3001
+
+npm --prefix euni-api-mock test          # 84 kiểm tra hành vi API
+npm run contract                         # sinh lại contract/openapi.json + API_CONTRACT.md (cần mock đang chạy)
+node tools/migration/e2e-v2.mjs          # 24 bước trên trình duyệt (cần 3 app chạy)
+node tools/migration/sync-test.mjs       # admin ghi → website đổi ngay</pre>
+  <h3>Tài khoản mock</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Tài khoản</th><th>Role trên SSO</th><th>Phạm vi (grant, tầng 3)</th></tr></thead>
+    <tbody>
+      <tr><td><code>tvanminh</code></td><td><code>cms.admin</code>, <code>staff</code></td><td>Mọi tenant</td></tr>
+      <tr><td><code>nthoa</code></td><td><code>cms.editor</code>, <code>staff</code></td><td>Toàn trang humg</td></tr>
+      <tr><td><code>pvloc</code></td><td><code>cms.editor</code>, <code>lecturer</code></td><td>Đơn vị CNTT trên humg; toàn quyền trang cntt</td></tr>
+      <tr><td><code>vthuong</code></td><td><code>cms.reviewer</code>, <code>staff</code></td><td>Duyệt thông báo P.Đào tạo</td></tr>
+      <tr><td><code>ltmai</code></td><td><code>cms.author</code>, <code>staff</code></td><td>Sửa bài của P.Truyền thông</td></tr>
+      <tr><td><code>dvtung</code></td><td><code>cms.author</code>, <code>lecturer</code></td><td>Chuyên mục Nghiên cứu (humg); bộ môn KHMT (cntt)</td></tr>
+    </tbody>
+  </table></div>
+  <p>Mật khẩu CMS mock: <code>Humg@2025</code>. Cổng demo: đăng nhập bằng <code>{ "role": "student" | "lecturer" | "staff" | "manager" | "parent" }</code>. Tenant mẫu: <code>humg</code> (mặc định) và <code>cntt</code>.</p>
+</section>
+
+<section id="doi-ten">
+  <div class="eyebrow">11 · Thay đổi</div>
+  <h2>Đổi tên so với bản trước</h2>
+  <p>Nếu BE đã bắt đầu theo hợp đồng cũ, đây là bảng đối chiếu. Endpoint kiểu cũ đã bỏ hẳn ở mock (trả 404).</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Cũ</th><th>Mới</th></tr></thead>
+    <tbody>
+      <tr><td><code>/api/Public/content</code></td><td><code>/api/v1/public/site-content</code></td></tr>
+      <tr><td><code>/api/Public/home · menus/{code} · banners · settings · search · tenant</code></td><td><code>/api/v1/public/home · menus/{code} · …</code></td></tr>
+      <tr><td><code>/api/Contents/view/list</code></td><td><code>/api/v1/public/contents</code></td></tr>
+      <tr><td><code>/api/Contents/slug/{slug}</code></td><td><code>/api/v1/public/contents/slug/{slug}</code></td></tr>
+      <tr><td><code>GET /api/Contents/function/{id}</code></td><td><code>POST /api/v1/public/contents/{id}/views</code></td></tr>
+      <tr><td><code>/api/Me/context · /api/Me/announcements…</code></td><td><code>/api/v1/me/context · /api/v1/me/announcements…</code></td></tr>
+      <tr><td><code>/api/Contents · /api/HeroSlides · /api/OrgUnits …</code></td><td><code>/api/v1/admin/contents · /api/v1/admin/hero-slides · /api/v1/admin/org-units …</code></td></tr>
+      <tr><td><code>GET /api/Categories</code> (công khai)</td><td><code>GET /api/v1/public/categories</code>; CRUD ở <code>/api/v1/admin/categories</code></td></tr>
+      <tr><td><code>/auth-api/api/auth/login</code></td><td><code>/auth-api/api/v1/auth/login</code></td></tr>
+      <tr><td><code>/{service}/api/v1/datasets/{module}</code></td><td><code>/{service}/api/v1/public|me/datasets/{module}</code></td></tr>
+      <tr><td><code>qldt-api</code></td><td><code>edusoft-api</code></td></tr>
+      <tr><td><code>portal-api</code> (cooperation, library, life, utilities)</td><td>Bỏ: <code>library</code> → <code>esb-api</code>; <code>cooperation</code>, <code>life</code>, <code>utilities</code> → <code>cms-api</code></td></tr>
+      <tr><td>Role <code>leader</code>, <code>staff</code> (= giảng viên)</td><td><code>manager</code>, <code>lecturer</code>; <code>staff</code> nay là cán bộ phòng ban</td></tr>
+      <tr><td>Claim <code>tenant[]</code> quyết định quyền quản trị</td><td>Bỏ; tenant suy ra từ grants</td></tr>
+      <tr><td>URL media <code>/cms-api/uploads/x.png</code></td><td><code>cms-api/uploads/x.png</code> (tương đối)</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="viec-can-lam">
+  <div class="eyebrow">12 · Kế hoạch</div>
+  <h2>Việc BE cần làm</h2>
+  <p>Đánh dấu chỉ lưu trên trình duyệt của bạn, để tự theo dõi.</p>
+  <ul class="check" id="todo"></ul>
+  <h3>Câu hỏi mở cần chốt cùng FE</h3>
+  <ul>
+    <li><b>Tên tài nguyên trên Swagger thật</b>: FE chưa đối chiếu được Swagger demo (ví dụ <code>category-post</code> hay <code>categories</code>). Khi BE chốt tên, báo FE để đổi mock và hai web cùng lúc.</li>
+    <li><b>Nguồn membership</b> (lớp, bộ môn của người dùng) cho thông báo: claim <code>unit[]</code> hay Membership API của edusoft-api/qlns-api.</li>
+    <li><b>Kích thước token</b> khi <code>unit[]</code> dài: nên chuyển sang API riêng.</li>
+    <li><b>Gửi email hàng loạt</b> cho "toàn bộ sinh viên": nhà cung cấp email, gửi theo lô và giới hạn tốc độ.</li>
+    <li><b>Đơn vị đổi mã hoặc sáp nhập</b>: cần bảng alias hoặc job ánh xạ lại grant và target.</li>
+    <li><b>Cổng cho <code>applicant</code>, <code>alumni</code></b>: chưa có, chốt sau.</li>
+  </ul>
+</section>
+</main>
+</div>
+
+<script type="application/json" id="data">__DATA__</script>
+<script>
+(function () {
+  const D = JSON.parse(document.getElementById('data').textContent)
+  const $ = (s, r = document) => r.querySelector(s)
+  const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]))
+  const md = (s) => esc(s).replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>').replace(/\*([^*]+)\*/g, '<i>$1</i>')
+  const store = { get(k) { try { return JSON.parse(localStorage.getItem(k)) } catch { return null } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)) } catch {} } }
+
+  /* thống kê */
+  const nMods = Object.values(D.ds).reduce((a, l) => a + l.length, 0)
+  const counts = { public: 0, me: 0, admin: 0 }; D.eps.forEach((e) => counts[e.g]++)
+  $('#stats').innerHTML = [
+    [D.eps.length, 'nhóm endpoint cms-api'], [counts.public + ' / ' + counts.me + ' / ' + counts.admin, 'public / me / admin'],
+    [nMods, 'dataset module'], [D.tables.length, 'bảng PostgreSQL'], ['84', 'kiểm thử mock tự động'],
+  ].map(([b, s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join('')
+
+  /* bảng service */
+  const SVC = { 'cms-api': 'CMS (xây mới)', 'edusoft-api': 'Đào tạo (Edusoft)', 'qlns-api': 'Quản lý nhân sự', 'qlkhcn-api': 'Quản lý KHCN', 'esb-api': 'ESB tích hợp hệ thống ngoài (thư viện)' }
+  const svcMods = {}; for (const [s, l] of Object.entries(D.ds)) svcMods[s] = l.map((m) => m.module)
+  $('#svcTable').innerHTML = Object.entries(SVC).map(([s, n]) => `<tr><td><code>${s}</code></td><td>${n}</td><td class="wrap">${s === 'cms-api' ? 'Tin tức, sự kiện, media, trang chủ, menu, banner, thông báo; ' : ''}${(svcMods[s] || []).map((m) => `<code>${m}</code>`).join(' ')}</td></tr>`).join('') +
+    '<tr><td><code>auth-api</code></td><td>Chỉ có ở mock (đóng vai SSO)</td><td>Đăng nhập khi dev</td></tr>'
+
+  /* endpoint */
+  let G = 'all'
+  const exFor = (e) => (e.ex || []).map((x) => `<div><div class="eyebrow" style="color:var(--muted)">Response mẫu · ${esc(x.t)}</div><pre>${esc(x.j)}</pre></div>`).join('')
+  const exampleTitles = Object.keys(D.ex)
+  function renderEps() {
+    const q = $('#q').value.trim().toLowerCase()
+    const list = D.eps.filter((e) => (G === 'all' || e.g === G) && (!q || (e.m + e.p + e.perm + e.d).toLowerCase().includes(q)))
+    $('#epCount').textContent = `${list.length} / ${D.eps.length}`
+    $('#eps').innerHTML = list.map((e, i) => `<details class="ep"><summary><span class="m">${esc(e.m)}</span><span class="pill g-${e.g}">${e.g}</span><span class="path">${esc(e.p)}</span><span class="ex">${e.ex && e.ex.length ? 'có mẫu' : ''}</span></summary>
+      <div class="ep-body"><dl class="kv"><dt>Method</dt><dd><code>${esc(e.m)}</code></dd><dt>Đường dẫn</dt><dd><code>/cms-api${esc(e.p)}</code></dd><dt>Quyền</dt><dd>${md(e.perm)}</dd><dt>Mô tả</dt><dd>${md(e.d)}</dd></dl>
+      <button class="copy" type="button" data-copy="/cms-api${esc(e.p.split(' ')[0])}">Sao chép đường dẫn</button>${exFor(e)}</div></details>`).join('') || '<p class="count">Không có endpoint khớp.</p>'
+  }
+  $('#q').addEventListener('input', renderEps)
+  document.querySelectorAll('.chip').forEach((b) => b.addEventListener('click', () => {
+    G = b.dataset.g; document.querySelectorAll('.chip').forEach((x) => x.setAttribute('aria-pressed', String(x === b))); renderEps()
+  }))
+  document.addEventListener('click', (ev) => {
+    const b = ev.target.closest('.copy'); if (!b) return
+    const t = b.dataset.copy, old = b.textContent
+    const done = () => { b.textContent = 'Đã sao chép'; setTimeout(() => { b.textContent = old }, 1400) }
+    try { navigator.clipboard.writeText(t).then(done, () => { b.textContent = t }) } catch { b.textContent = t }
+  })
+  renderEps()
+  $('#loginEx').textContent = D.login
+
+  /* dataset */
+  $('#dsList').innerHTML = Object.entries(D.ds).map(([svc, mods]) => `<div style="display:grid;gap:6px"><h3 style="margin:0">${svc} <span class="count">· ${SVC[svc] || ''}</span></h3>` + mods.map((m) => `
+    <details class="fold"><summary>${m.module}<small>GET /${svc}${esc(m.path.replace('/' + svc, ''))}</small><span class="pill g-${m.path.includes('/me/') ? 'me' : 'public'}">${m.path.includes('/me/') ? 'me' : 'public'}</span></summary>
+    <div class="inner"><div class="tbl-wrap"><table><thead><tr><th>Khóa</th><th>Kiểu</th><th>Endpoint riêng</th><th>Ví dụ trường</th></tr></thead><tbody>
+    ${m.keys.map((k) => `<tr><td><code>${esc(k.k)}</code></td><td>${esc(k.t)}</td><td><code>${esc(k.p)}</code></td><td class="wrap">${esc(k.f)}</td></tr>`).join('')}
+    </tbody></table></div></div></details>`).join('') + '</div>').join('')
+
+  /* bảng CSDL */
+  function renderTables() {
+    const q = $('#tq').value.trim().toLowerCase()
+    const list = D.tables.filter((t) => !q || t.name.includes(q) || t.cols.some((c) => c.n.includes(q)))
+    $('#tCount').textContent = `${list.length} / ${D.tables.length} bảng`
+    $('#tables').innerHTML = list.map((t) => `<details class="fold"${q && list.length <= 3 ? ' open' : ''}><summary>${t.name}<small>${t.cols.length} cột</small></summary><div class="inner"><div class="tbl-wrap"><table><thead><tr><th>Cột</th><th>Kiểu / ràng buộc</th><th>Ghi chú</th></tr></thead><tbody>
+      ${t.cols.map((c) => `<tr><td><code>${esc(c.n)}</code></td><td class="wrap"><code>${esc(c.t)}</code></td><td class="wrap">${esc(c.c)}</td></tr>`).join('')}</tbody></table></div></div></details>`).join('')
+  }
+  $('#tq').addEventListener('input', renderTables); renderTables()
+
+  /* việc cần làm */
+  const TODO = [
+    ['Khung .NET: xác thực JWT qua JWKS của SSO, kiểm tra aud, đọc realm role + client role cms.*', '1a'],
+    ['Tenant: middleware X-Tenant → host → mặc định; RLS PostgreSQL với SET LOCAL', '1a'],
+    ['Đặt route theo quy ước /api/v1/{public|me|admin}; áp chính sách xác thực theo nhóm trên gateway', '1a'],
+    ['Tin tức: CRUD admin, workflow, hẹn giờ/hết hạn, revision + bản sửa đổi chờ duyệt, thùng rác, concurrency (version/If-Match)', '1a'],
+    ['API công khai: site-content, home, contents, slug, menus, banners, settings, search (unaccent + pg_trgm), categories, views', '1a'],
+    ['Grants (tầng 3): CRUD, effective/{sub}, lọc danh sách trong SQL, allowedActions[], tenant được quản trị suy ra từ grants', '1a'],
+    ['Audit chỉ ghi thêm (partition tháng), workflow_history, cache Redis + xóa cache khi ghi', '1a'],
+    ['Media: upload multipart, MinIO cms-public, URL trả về tương đối hoặc https đầy đủ', '1a'],
+    ['Thông báo: targets, hộp thư /api/v1/me/announcements, receipts (read/ack), stats, MinIO private + presigned', '1b'],
+    ['Đồng bộ org units từ QLNS/Edusoft (job OrgUnitSync) và user_directory', '1b'],
+    ['Các khối website: events, albums, videos, podcasts, pages, menu-items, banners, hero-slides, quick-links, audiences, strengths, partners, site-stats, settings, backups, dashboard', '1b'],
+    ['Dataset cms-api: cooperation, life, utilities (/api/v1/public/datasets/{module})', '1b'],
+    ['edusoft-api / qlns-api / qlkhcn-api / esb-api: cung cấp dataset đúng cấu trúc mục 8 (portal-* ở nhóm /me/)', 'service'],
+    ['SSO: tạo realm role và client role theo mục 4, đẩy client role vào đúng client', 'SSO'],
+    ['Chạy bộ e2e của FE với base URL backend thật, đối chiếu từng màn hình', 'nghiệm thu'],
+  ]
+  const saved = store.get('euni-be-todo') || {}
+  $('#todo').innerHTML = TODO.map(([t, tag], i) => `<li><input type="checkbox" id="todo-${i}" ${saved[i] ? 'checked' : ''}><label for="todo-${i}">${esc(t)}</label><span class="tag">${tag}</span></li>`).join('')
+  $('#todo').addEventListener('change', (e) => { const i = e.target.id.split('-')[1]; saved[i] = e.target.checked; store.set('euni-be-todo', saved) })
+
+  /* mục lục đang đọc */
+  const links = [...document.querySelectorAll('#toc a')]
+  const io = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) links.forEach((a) => a.classList.toggle('on', a.getAttribute('href') === '#' + en.target.id)) }), { rootMargin: '-20% 0px -70% 0px' })
+  document.querySelectorAll('main section[id]').forEach((s) => io.observe(s))
+
+  /* giao diện sáng/tối */
+  const root = document.documentElement
+  const t0 = store.get('euni-be-theme'); if (t0) root.dataset.theme = t0
+  $('#themeBtn').addEventListener('click', () => {
+    const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches
+    root.dataset.theme = dark ? 'light' : 'dark'; store.set('euni-be-theme', root.dataset.theme)
+  })
+})()
+</script>

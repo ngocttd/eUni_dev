@@ -42,6 +42,7 @@ Kiểm thử tự động: `node tools/migration/sync-test.mjs` (10 kịch bản
 | [euni-api-mock/database/v2/schema.sql](euni-api-mock/database/v2/schema.sql) | DDL PostgreSQL đích cho backend (RLS theo tenant, unaccent + pg_trgm) + `test.sql` |
 | [docs/SITE_STRUCTURE.md](docs/SITE_STRUCTURE.md) | Cấu trúc website sau khi tách: repo, thư mục, sơ đồ route, luồng dữ liệu |
 | [euni-api-mock/contract/API_CONTRACT.md](euni-api-mock/contract/API_CONTRACT.md) | **Hợp đồng API cho backend** (+ `openapi.json`) |
+| [docs/ban-giao-be.html](docs/ban-giao-be.html) | **Trang bàn giao cho đội Backend** (mở bằng trình duyệt): kiến trúc, quy ước endpoint, phân quyền, tra cứu endpoint, dataset, CSDL, việc cần làm |
 | [docs/GIT_WORKFLOW.md](docs/GIT_WORKFLOW.md) | Quy trình branch / PR cho các repo |
 | [docs/MIGRATION.md](docs/MIGRATION.md) | Đã chuyển đổi gì, kiểm thử ra sao, cách khôi phục bản Vite cũ |
 
