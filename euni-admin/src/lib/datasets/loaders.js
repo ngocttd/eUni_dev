@@ -25,7 +25,7 @@ export const ACTION_LABEL_WF = {
 const KIND_LABEL = { image: 'Hình ảnh', document: 'Tài liệu', video: 'Video', audio: 'Âm thanh', other: 'Khác' }
 const TR_LABEL = { done: 'Đã dịch', in_progress: 'Đang dịch', missing: 'Chưa dịch' }
 export const TR_VALUE = { 'Đã dịch': 'done', 'Đang dịch': 'in_progress', 'Chưa dịch': 'missing' }
-const MENU_TYPE = { page: 'Trang', link: 'Liên kết', category: 'Chuyên mục' }
+const MENU_TYPE = { page: 'Trang', link: 'Liên kết', category: 'Chuyên mục', heading: 'Tiêu đề nhóm' }
 const BANNER_POS = { home_slider: 'Trang chủ – Slider', home_popup: 'Trang chủ – Popup', sidebar_right: 'Cột phải', footer: 'Chân trang' }
 export const BANNER_POS_VALUE = Object.fromEntries(Object.entries(BANNER_POS).map(([k, v]) => [v, k]))
 const ACTION_LABEL = {
@@ -93,7 +93,7 @@ export async function loadCms() {
 
   const pageNode = (p) => {
     const children = pages.items.filter((x) => x.parentId === p.id).sort((a, b) => a.sortOrder - b.sortOrder).map(pageNode)
-    return { id: p.id, name: p.title, slug: p.slug, parentId: p.parentId ?? null, template: p.template, sortOrder: p.sortOrder, translations: p.translations || {}, ...(children.length ? { children } : {}) }
+    return { id: p.id, name: p.title, slug: p.slug, parentId: p.parentId ?? null, template: p.template, path: p.path || null, status: p.status || 'published', bodyHtml: p.bodyHtml || '', updatedAt: p.updatedAt || null, sortOrder: p.sortOrder, translations: p.translations || {}, ...(children.length ? { children } : {}) }
   }
   const cmsPageTree = pages.items.filter((p) => isRoot(pages.items, p)).sort((a, b) => a.sortOrder - b.sortOrder).map(pageNode)
 
@@ -137,7 +137,7 @@ export async function loadCms() {
     cmsMedia: media.items.map((m) => ({ id: m.id, name: m.fileName, kind: KIND_LABEL[m.kind] || 'Khác', ext: m.ext, date: fmtDate(m.createdAt), size: fmtBytes(m.sizeBytes), url: m.url })),
     cmsMediaTotal: media.totalItems,
     cmsPageTree,
-    cmsMenus: menuItems.items.sort((a, b) => a.sortOrder - b.sortOrder).map((m) => ({ id: m.id, label: m.label, url: m.url, type: MENU_TYPE[m.type] || 'Liên kết', typeValue: m.type, order: m.sortOrder, groupCode: m.groupCode, translations: m.translations || {} })),
+    cmsMenus: menuItems.items.sort((a, b) => a.sortOrder - b.sortOrder).map((m) => ({ id: m.id, label: m.label, url: m.url || '', type: MENU_TYPE[m.type] || 'Liên kết', typeValue: m.type, order: m.sortOrder, groupCode: m.groupCode, parentId: m.parentId ?? null, icon: m.icon || '', isVisible: m.isVisible !== false, openInNewTab: !!m.openInNewTab, translations: m.translations || {} })),
     cmsSettings: { general: settings.general || {}, seo: settings.seo || {}, email: settings.email || {} },
     cmsSettingsAll: settings,
     cmsLogUsers: ['Tất cả người dùng', ...new Set(logs.items.map((l) => l.userName).filter(Boolean))],

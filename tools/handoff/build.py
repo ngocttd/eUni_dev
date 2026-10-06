@@ -1,7 +1,7 @@
 import json, re, sys
 d = json.load(open(sys.argv[1], encoding='utf8'))
 ALIAS = {'Grant': '/api/v1/admin/grants', 'Media': '/api/v1/admin/media', 'Banner': '/api/v1/admin/banners', 'Event': '/api/v1/admin/events',
-         'AuditLog': '/api/v1/admin/audit-logs', 'GET /api/v1/admin/announcements/{id}': '/api/v1/admin/announcements'}
+         'AuditLog': '/api/v1/admin/audit-logs', 'GET /api/v1/public/menus/header (3 mục đầu)': '/api/v1/public/menus/{code}', 'GET /api/v1/admin/announcements/{id}': '/api/v1/admin/announcements'}
 for e in d['eps']: e['ex'] = []
 for title, j in d['ex'].items():
     path = ALIAS.get(title) or re.sub(r'^GET\s+', '', title).replace(' (quản trị)', '')

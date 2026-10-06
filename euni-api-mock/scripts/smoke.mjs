@@ -182,6 +182,17 @@ try {
   check('esb-api: thư viện · cms-api: đời sống', (await call('GET', '/esb-api/api/v1/public/datasets/library')).status === 200 && (await call('GET', `${C}/v1/public/datasets/life`)).status === 200)
   check('dữ liệu portal ở nhóm /me/', (await call('GET', '/edusoft-api/api/v1/me/datasets/portal-student')).status === 200 && (await call('GET', '/edusoft-api/api/v1/public/datasets/portal-student')).status === 404)
 
+  /* ---------- dữ liệu chung website: menu, banner, cấu hình, trang tĩnh ---------- */
+  const hdr = (await call('GET', `${C}/v1/public/menus/header`)).data
+  check('menu header nhiều tầng (có parentId)', hdr.some((m) => !m.parentId) && hdr.some((m) => m.parentId), hdr.length)
+  const bns = (await call('GET', `${C}/v1/public/banners`)).data
+  check('banner công khai: đang hiệu lực, có imageUrl/subtitle', bns.length > 0 && bns.every((b) => 'imageUrl' in b && 'subtitle' in b && b.position), bns)
+  check('trang CMS xuất bản đọc được theo slug', (await call('GET', `${C}/v1/public/pages/slug/chinh-sach-bao-mat`)).data?.bodyHtml?.includes('Thông tin thu thập'))
+  check('trang hệ thống không trả qua API trang tĩnh (404)', (await call('GET', `${C}/v1/public/pages/slug/gioi-thieu`)).status === 404)
+  const draft = (await call('POST', `${C}/v1/admin/pages`, { token: admin, body: { title: 'Trang nháp smoke', status: 'draft', bodyHtml: '<p>x</p>' } })).data
+  check('trang nháp chưa công khai (404)', (await call('GET', `${C}/v1/public/pages/slug/${draft.slug}`)).status === 404, draft)
+  check('tìm kiếm có trang CMS', (await call('GET', `${C}/v1/public/search?q=bao%20mat`)).data.items.some((x) => x.to === '/trang/chinh-sach-bao-mat'))
+
   /* ---------- role 2 tầng trên SSO · tầng 3 do CMS tự phân ---------- */
   const who = async (role) => (await call('POST', '/auth-api/api/v1/auth/login', { body: { role } })).data.user
   const [gvU, cbU, ldU, legacy] = await Promise.all(['lecturer', 'staff', 'manager', 'leader'].map(who))

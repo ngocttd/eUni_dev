@@ -5,6 +5,7 @@ import { useParams, Link } from '../../../../lib/router.jsx';
 
 import { PageShell, MetaBar, ShareBar, Panel, NewsMini, LinkList, ArticleBody } from "../../../../shared/components/ui/page.jsx";
 import Icon from "../../../../shared/lib/Icon.jsx";
+import { BannerSide } from "../../../../shared/site/Banners.jsx";
 export function NewsDetailPage() {
   const { getArticle, articles, relatedArticles } = useModuleData('content');
   const {
@@ -30,6 +31,7 @@ export function NewsDetailPage() {
     }]} />
           <ShareBar />
         </div>} sidebar={<>
+          <BannerSide />
           <Panel title="Tin tức liên quan" icon="newspaper">
             <NewsMini items={relatedArticles(a.slug).map(x => ({
         date: x.date,

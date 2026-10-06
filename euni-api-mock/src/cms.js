@@ -109,7 +109,22 @@ cms.get('/api/v1/public/home', (req, res) => {
 cms.get('/api/v1/public/menus/:code', (req, res) => res.json(bySort(trows(req, 'menuItems').filter((m) => m.groupCode === req.params.code && m.isVisible))))
 cms.get('/api/v1/public/banners', (req, res) => {
   const today = new Date().toISOString().slice(0, 10)
-  res.json(bySort(trows(req, 'banners').filter((b) => b.isVisible && (!req.query.position || b.position === req.query.position) && (!b.startsOn || b.startsOn <= today) && (!b.endsOn || b.endsOn >= today))))
+  const mediaUrl = (id) => (id ? trows(req, 'media').find((m) => m.id === Number(id))?.url ?? null : null)
+  res.json(bySort(trows(req, 'banners').filter((b) => b.isVisible && (!req.query.position || b.position === req.query.position) && (!b.startsOn || b.startsOn <= today) && (!b.endsOn || b.endsOn >= today)))
+    .map((b) => ({ id: b.id, position: b.position, title: b.title, subtitle: b.subtitle ?? null, linkUrl: b.linkUrl, imageUrl: mediaUrl(b.imageId), sortOrder: b.sortOrder, startsOn: b.startsOn, endsOn: b.endsOn })))
+})
+/* Trang tĩnh soạn ở CMS (template khác "system"), đã xuất bản. Website hiển thị ở /trang/{slug}. */
+cms.get('/api/v1/public/pages/slug/:slug', (req, res) => {
+  const lang = req.query.lang || 'vi'
+  const all = trows(req, 'pages')
+  const pg = all.find((x) => x.slug === req.params.slug && x.status === 'published' && x.template !== 'system')
+  if (!pg) return notFound(res, 'Không tìm thấy trang.')
+  const tr = lang !== 'vi' ? pg.translations?.[lang] : null
+  const ok = tr && tr.status === 'done' && tr.title
+  const parents = []
+  for (let p = all.find((x) => x.id === pg.parentId), g = 0; p && g < 10; p = all.find((x) => x.id === p.parentId), g++) parents.unshift({ title: p.title, url: p.template === 'system' ? p.path : `/trang/${p.slug}` })
+  res.json({ id: pg.id, slug: pg.slug, title: ok ? tr.title : pg.title, bodyHtml: ok && tr.bodyHtml ? tr.bodyHtml : pg.bodyHtml || '', language: ok ? lang : 'vi',
+    template: pg.template, parents, updatedAt: pg.updatedAt ?? pg.createdAt ?? null })
 })
 cms.get('/api/v1/public/settings', (req, res) => { const { general, seo, language } = settingsOf(req.tenant); res.json({ tenant: req.tenant, general, seo, language }) })
 cms.get('/api/v1/public/tenant', (req, res) => { const t = tenantById(req.tenant); res.json({ id: t.id, name: t.name, rootUnit: t.rootUnit }) })
@@ -145,6 +160,7 @@ cms.get('/api/v1/public/search', (req, res) => {
   trows(req, 'podcasts').forEach((p) => hit(p.title, p.description) && out.push({ type: 'Media', title: p.title, excerpt: p.description, publishedAt: p.publishedAt, to: `/media/podcast/${p.slug}` }))
   trows(req, 'albums').forEach((a) => hit(a.title) && out.push({ type: 'Media', title: a.title, excerpt: `Album ảnh · ${a.photos.length} ảnh`, publishedAt: a.publishedAt, to: `/media/anh/${a.slug}` }))
   getStore().searchPages.forEach((p) => hit(p.title, p.excerpt) && out.push(p))
+  trows(req, 'pages').filter((p) => p.status === 'published' && p.template !== 'system').forEach((p) => hit(p.title, String(p.bodyHtml || '').replace(/<[^>]+>/g, ' ')) && out.push({ type: 'Trang', title: p.title, excerpt: String(p.bodyHtml || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 160), to: `/trang/${p.slug}` }))
   res.json(paged(out, req.query))
 })
 
@@ -355,9 +371,9 @@ crud('events', { perm: 'site.manage', fields: ['title', 'place'], slugFrom: 'tit
 crud('albums', { perm: 'site.manage', fields: ['title'], slugFrom: 'title', defaults: { photos: [], isVisible: true, publishedAt: now().slice(0, 10) } })
 crud('videos', { perm: 'site.manage', fields: ['title'], slugFrom: 'title', defaults: { viewCount: 0, isVisible: true, publishedAt: now().slice(0, 10) } })
 crud('podcasts', { perm: 'site.manage', fields: ['title'], slugFrom: 'title', defaults: { playCount: 0, notes: [], isVisible: true, publishedAt: now().slice(0, 10) } })
-crud('pages', { perm: 'page.manage', fields: ['title', 'slug'], defaults: { parentId: null, template: 'default', status: 'published', sortOrder: 99, body: [] } })
-crud('menuItems', { perm: 'menu.manage', fields: ['label', 'url'], label: (r) => r.label, defaults: { groupCode: 'header', parentId: null, type: 'page', sortOrder: 99, isVisible: true, openInNewTab: false } })
-crud('banners', { perm: 'site.manage', fields: ['title'], defaults: { isVisible: true, sortOrder: 99, imageId: null, linkUrl: null } })
+crud('pages', { perm: 'page.manage', fields: ['title', 'slug'], slugFrom: 'title', defaults: { parentId: null, template: 'default', path: null, status: 'draft', sortOrder: 99, bodyHtml: '', translations: {} } })
+crud('menuItems', { perm: 'menu.manage', fields: ['label', 'url'], label: (r) => r.label, defaults: { groupCode: 'header', parentId: null, type: 'page', icon: null, sortOrder: 99, isVisible: true, openInNewTab: false, translations: {} } })
+crud('banners', { perm: 'site.manage', fields: ['title'], defaults: { isVisible: true, sortOrder: 99, imageId: null, linkUrl: null, subtitle: null, startsOn: null, endsOn: null } })
 crud('heroSlides', { perm: 'site.manage', fields: ['title'], defaults: { isVisible: true, sortOrder: 99 } })
 crud('quickLinks', { perm: 'site.manage', fields: ['label'], label: (r) => r.label, defaults: { isVisible: true, sortOrder: 99 } })
 crud('audiences', { perm: 'site.manage', fields: ['title'], defaults: { isVisible: true, sortOrder: 99 } })

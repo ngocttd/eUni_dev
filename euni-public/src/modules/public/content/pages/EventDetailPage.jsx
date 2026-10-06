@@ -5,6 +5,7 @@ import { useParams, Link } from '../../../../lib/router.jsx';
 
 import { PageShell, MetaBar, Panel, NewsMini, ArticleBody, DataTable } from "../../../../shared/components/ui/page.jsx";
 import Icon from "../../../../shared/lib/Icon.jsx";
+import { BannerSide } from "../../../../shared/site/Banners.jsx";
 export function EventDetailPage() {
   const { getEvent, events, otherEvents } = useModuleData('content');
   const {
@@ -30,6 +31,7 @@ export function EventDetailPage() {
     }]} />
           <Link to="/lien-he" className="humg-btn humg-btn--accent">Đăng ký tham dự <Icon name="arrow-right" size={15} /></Link>
         </div>} sidebar={<>
+          <BannerSide />
           <Panel title="Sự kiện khác" icon="calendar">
             <NewsMini items={otherEvents(e.slug).map(x => ({
         date: x.date,

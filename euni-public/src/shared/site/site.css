@@ -1,0 +1,34 @@
+/* Banner do CMS quản lý (shared/site/Banners.jsx) */
+.site-banners { padding: 18px 0; }
+.site-banners--home_slider { background: var(--humg-surface-alt, #f4f7fb); }
+.site-banners--footer { padding: 12px 0; background: #fff4e5; border-top: 1px solid #ffe0b2; }
+.site-banners__row { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.site-banner {
+  position: relative; display: flex; align-items: center; gap: 14px; min-height: 92px; padding: 18px 20px; overflow: hidden;
+  border-radius: 14px; color: #fff; text-decoration: none;
+  background: linear-gradient(120deg, var(--humg-primary, #0a3d91), #1976d2);
+  box-shadow: 0 6px 18px rgba(10, 61, 145, 0.16); transition: transform .15s ease, box-shadow .15s ease;
+}
+a.site-banner:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(10, 61, 145, 0.22); }
+a.site-banner:focus-visible { outline: 3px solid var(--humg-accent, #ff9800); outline-offset: 2px; }
+.site-banner img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .28; }
+.site-banner__text { position: relative; display: grid; gap: 4px; min-width: 0; flex: 1; }
+.site-banner__text strong { font-size: 16px; line-height: 1.3; }
+.site-banner__text em { font-style: normal; font-size: 13px; opacity: .88; line-height: 1.4; }
+.site-banner__go { position: relative; flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,.18); }
+.site-banner.is-compact { min-height: 0; padding: 12px 14px; border-radius: 10px; box-shadow: none; }
+.site-banners--footer .site-banner { background: transparent; color: var(--humg-accent-dark, #b45309); }
+.site-banners--footer .site-banner__go { background: rgba(180, 83, 9, .1); }
+.site-banners--side { display: grid; gap: 10px; }
+.site-banners--side .site-banner { background: linear-gradient(140deg, var(--humg-accent, #ff9800), #f57c00); }
+
+.site-popup { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 16px; background: rgba(8, 20, 45, .55); }
+.site-popup__box { position: relative; width: min(460px, 100%); padding: 28px 24px 24px; border-radius: 16px; background: #fff; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,.3); display: grid; gap: 12px; justify-items: center; }
+.site-popup__box img { width: 100%; border-radius: 10px; }
+.site-popup__box h2 { margin: 0; font-size: 20px; color: var(--humg-primary, #0a3d91); }
+.site-popup__box p { margin: 0; color: var(--humg-text-secondary, #555); }
+.site-popup__close { position: absolute; top: 10px; right: 10px; width: 34px; height: 34px; border: 0; border-radius: 50%; background: #f1f4f9; cursor: pointer; display: grid; place-items: center; }
+.site-popup__close:focus-visible { outline: 2px solid var(--humg-primary, #0a3d91); }
+
+/* Trang tĩnh soạn ở CMS (/trang/[slug]) */
+.cms-page__updated { font-size: 13px; color: var(--humg-text-secondary, #666); }

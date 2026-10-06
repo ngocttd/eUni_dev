@@ -70,8 +70,9 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
 |---|---|---|---|
 | GET | `/api/v1/public/site-content` | public | Toàn bộ nội dung công khai cho website: danh mục, bài viết đã xuất bản (kèm contentBody và translations.en — chỉ bản dịch ĐÃ HOÀN TẤT, thiếu thì website dùng tiếng Việt), sự kiện, album, video, podcast, trang tĩnh cho tìm kiếm. ?lang=vi|en (thiếu bản dịch → tự quay về vi). |
 | GET | `/api/v1/public/home` | public | Dữ liệu trang chủ: heroSlides, quickLinks, audiences, strengths, partners, heroStats, universityStats, heroChips, featuredNews, newsList (3 bài), upcomingEvents (5), mediaTabs. |
-| GET | `/api/v1/public/menus/{code}` | public | Menu hiển thị theo nhóm: header | footer | utility. |
-| GET | `/api/v1/public/banners` | public | Banner đang hiệu lực (đúng khoảng ngày, isVisible) theo vị trí. |
+| GET | `/api/v1/public/menus/{code}` | public | Mục menu đang hiển thị của nhóm (header = menu đầu trang, footer = các cột chân trang, utility = liên kết dòng cuối chân trang), danh sách phẳng có parentId để dựng cây: { id, parentId, label, url, icon, type page|link|category|heading, sortOrder, openInNewTab, translations.en.label }. Website lấy làm menu, không cache. |
+| GET | `/api/v1/public/banners` | public | Banner đang hiệu lực (isVisible và hôm nay nằm trong startsOn..endsOn): { id, position, title, subtitle, linkUrl, imageUrl (tương đối với gateway), sortOrder }. Vị trí: home_slider (dải dưới slide trang chủ), home_popup (cửa sổ nổi trang chủ), sidebar_right (cột phải trang tin), footer (dải trên chân trang). |
+| GET | `/api/v1/public/pages/slug/{slug}` | public | Trang tĩnh soạn ở CMS (template khác system, status published): { id, slug, title, bodyHtml, language, parents[{title,url}], updatedAt }. 404 nếu nháp/không có. Website hiển thị ở /trang/{slug}. Trang template=system là trang có sẵn trong code website, không trả ở đây. |
 | GET | `/api/v1/public/settings` | public | Cấu hình công khai (general, seo, language). |
 | GET | `/api/v1/public/search` | public | Tìm kiếm toàn site (bài viết, sự kiện, media, trang). |
 | GET | `/api/v1/public/contents` | public | Danh sách bài viết đã xuất bản (không có contentBody), phân trang. |
@@ -112,8 +113,8 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
 | POST | `/api/v1/admin/media/upload` | media.manage | multipart/form-data: file, altText, caption, folder. |
 | DELETE | `/api/v1/admin/media/{id}` | media.manage | Xóa mềm media. |
 | CRUD | `/api/v1/admin/events · /api/v1/admin/albums · /api/v1/admin/videos · /api/v1/admin/podcasts` | site.manage | Sự kiện, album ảnh, video, podcast (theo tenant, xóa mềm + /{id}/restore, /trash). |
-| CRUD | `/api/v1/admin/pages · /api/v1/admin/menu-items` | page.manage / menu.manage | Trang tĩnh (cây) và mục menu. |
-| CRUD | `/api/v1/admin/banners` | site.manage | Banner/slider theo vị trí & khoảng ngày. |
+| CRUD | `/api/v1/admin/pages · /api/v1/admin/menu-items` | page.manage / menu.manage | Trang: { title, slug, parentId, template default|system, status published|draft, bodyHtml, sortOrder, translations.en{title,bodyHtml} }. Mục menu: { groupCode header|footer|utility, parentId, label, url, type, icon, isVisible, openInNewTab, sortOrder, translations.en.label }. |
+| CRUD | `/api/v1/admin/banners` | site.manage | Banner: { title, subtitle, position, linkUrl, imageId, isVisible, startsOn, endsOn, sortOrder }. |
 | CRUD | `/api/v1/admin/hero-slides · /api/v1/admin/quick-links · /api/v1/admin/audiences · /api/v1/admin/strengths · /api/v1/admin/partners · /api/v1/admin/site-stats` | site.manage | Các khối trang chủ. |
 | GET/PUT | `/api/v1/admin/settings · /api/v1/admin/settings/{group}` | settings.manage | Cấu hình theo tenant, theo nhóm: general, seo, email, language, backup, home. |
 | GET | `/api/v1/admin/audit-logs` | log.view | Audit log chỉ ghi thêm: actorSub, action, entityType, entityId, changes {field:[cũ,mới]}, ip. (/api/v1/admin/activity-logs = tên cũ.) |
@@ -255,6 +256,57 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
       "to": "/nghien-cuu"
     }
   ]
+}
+```
+
+#### GET /api/v1/public/menus/header (3 mục đầu)
+```json
+[
+  {
+    "id": 1,
+    "groupCode": "header",
+    "parentId": null,
+    "type": "page",
+    "url": "/gioi-thieu",
+    "label": "Giới thiệu HUMG",
+    "icon": "building",
+    "sortOrder": 1,
+    "isVisible": true,
+    "openInNewTab": false,
+    "translations": {},
+    "tenantId": "humg"
+  }
+]
+```
+
+#### GET /api/v1/public/banners
+```json
+[
+  {
+    "id": 1,
+    "position": "home_slider",
+    "title": "Banner tuyển sinh đại học 2025",
+    "subtitle": "Xét tuyển 15 ngành Kỹ thuật – Công nghệ, nhận hồ sơ trực tuyến",
+    "linkUrl": "/hoc-tap/tuyen-sinh",
+    "imageUrl": null,
+    "sortOrder": 1,
+    "startsOn": "2026-09-26",
+    "endsOn": "2026-12-05"
+  }
+]
+```
+
+#### GET /api/v1/public/pages/slug/{slug}
+```json
+{
+  "id": 14,
+  "slug": "chinh-sach-bao-mat",
+  "title": "Chính sách bảo mật",
+  "bodyHtml": "<p>Trường Đại học Mỏ – Địa chất cam kết bảo vệ thông tin cá nhân của người dùng Cổng thông tin điện tử.</p><h2>1. Thông tin thu thập</h2><p>Họ tên, email, số điện thoại khi người dùng gửi liên hệ hoặc đăng ký sự kiện; thông tin đăng nhập do hệ thống SSO của Trường quản lý.</p><h2>2. Mục đích sử dụng</h2><ul><li>Phản hồi yêu cầu, gửi thông báo liên quan.</li><li>Thống kê truy cập để cải thiện dịch vụ.</li></ul><h2>3. Liên hệ</h2><p>Mọi thắc mắc về dữ liệu cá nhân xin gửi về Phòng Truyền thông.</p>",
+  "language": "vi",
+  "template": "default",
+  "parents": [],
+  "updatedAt": "2025-05-10T09:00:00+07:00"
 }
 ```
 
@@ -860,11 +912,12 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
   "position": "home_slider",
   "title": "Banner tuyển sinh đại học 2025",
   "imageId": null,
-  "linkUrl": null,
   "isVisible": true,
   "sortOrder": 1,
-  "startsOn": "2025-05-01",
-  "endsOn": "2025-06-30",
+  "linkUrl": "/hoc-tap/tuyen-sinh",
+  "subtitle": "Xét tuyển 15 ngành Kỹ thuật – Công nghệ, nhận hồ sơ trực tuyến",
+  "startsOn": "2026-09-26",
+  "endsOn": "2026-12-05",
   "tenantId": "humg"
 }
 ```
@@ -919,7 +972,7 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
 {
   "stats": {
     "posts": 22,
-    "pages": 13,
+    "pages": 15,
     "categories": 10,
     "announcements": 8
   },

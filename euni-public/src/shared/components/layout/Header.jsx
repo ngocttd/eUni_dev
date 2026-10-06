@@ -4,11 +4,22 @@ import { Link, NavLink, useNavigate, useLocation } from '../../../lib/router.jsx
 import Brand from '../common/Brand.jsx'
 import Icon from '../../lib/Icon.jsx'
 import { headerNav, mainNav } from '../../../routes/sitemap.js'
+import { useSite } from '../../site/SiteContext.jsx'
 import { useLanguage, LANGUAGES } from '../../../i18n/LanguageContext.jsx'
 import './Header.css'
 
+/** Menu header từ CMS (nhóm "Menu chính"): mục có con → menu thả xuống, mục không có con → liên kết có icon. Trống/lỗi → menu tĩnh. */
+const fromCms = (tree) => (tree || []).map((m) => ({ label: m.label, labelEn: m.labelEn, path: m.path, icon: m.icon || 'chevron-right', newTab: m.newTab,
+  mode: m.children.length ? 'menu' : 'link', children: m.children.length ? m.children.map((c) => ({ label: c.label, labelEn: c.labelEn, path: c.path, newTab: c.newTab })) : undefined }))
+
 export default function Header() {
   const { lang, setLang, t } = useLanguage()
+  const site = useSite()
+  const cmsNav = fromCms(site.menus?.header)
+  const nav = cmsNav.length ? cmsNav : headerNav
+  /* drawer di động: menu CMS + các mục khác của sơ đồ tĩnh (trang chủ, cổng portal…) chưa có trong menu CMS */
+  const drawerNav = cmsNav.length ? [mainNav[0], ...cmsNav, ...mainNav.slice(1).filter((m) => !cmsNav.some((c) => c.path === m.path))] : mainNav
+  const L = (item) => (lang !== 'vi' && item.labelEn ? item.labelEn : t(item.label))
   const [openMobile, setOpenMobile] = useState(false)
   const [openGroup, setOpenGroup] = useState(null)
   const [openIdx, setOpenIdx] = useState(null) // mega-menu desktop đang mở
@@ -51,7 +62,7 @@ export default function Header() {
 
           <nav className="site-header__nav" aria-label="Menu chính">
             <ul>
-              {headerNav.map((item, i) => (
+              {nav.map((item, i) => (
                 <li
                   key={item.label}
                   className={`${item.children ? 'has-children' : ''} ${openIdx === i ? 'is-open' : ''}`}
@@ -63,7 +74,7 @@ export default function Header() {
                 >
                   <NavLink to={item.path} onClick={() => setOpenIdx(null)}>
                     {item.mode === 'link' && <Icon name={item.icon} size={16} />}
-                    <span>{t(item.label)}</span>
+                    <span>{L(item)}</span>
                     {item.mode === 'menu' && item.children && (
                       <Icon name="chevron-down" size={13} className="site-header__caret" />
                     )}
@@ -72,15 +83,14 @@ export default function Header() {
                     <div className="site-header__mega" role="menu">
                       <div className="site-header__mega-head">
                         <Icon name={item.icon} size={18} />
-                        <span>{t(item.label)}</span>
-                        {item.wireframe && <em>{item.wireframe}</em>}
+                        <span>{L(item)}</span>
                       </div>
                       <ul>
                         {item.children.map((c) => (
                           <li key={c.path + c.label} role="none">
-                            <Link role="menuitem" to={c.path} onClick={() => setOpenIdx(null)}>
+                            <Link role="menuitem" to={c.path} onClick={() => setOpenIdx(null)} {...(c.newTab ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
                               <Icon name="chevron-right" size={13} />
-                              {t(c.label)}
+                              {L(c)}
                             </Link>
                           </li>
                         ))}
@@ -184,11 +194,11 @@ export default function Header() {
         </form>
         <nav aria-label="Menu chính (mobile)">
           <ul>
-            {mainNav.map((item, i) => (
+            {drawerNav.map((item, i) => (
               <li key={item.label}>
                 <div className="site-header__drawer-row">
                   <NavLink to={item.path} end={item.path === '/'} onClick={() => setOpenMobile(false)}>
-                    <Icon name={item.icon} size={16} /> {t(item.label)}
+                    <Icon name={item.icon || 'chevron-right'} size={16} /> {L(item)}
                   </NavLink>
                   {item.children && (
                     <button
@@ -205,7 +215,7 @@ export default function Header() {
                   <ul className="site-header__drawer-sub">
                     {item.children.map((c) => (
                       <li key={c.path + c.label}>
-                        <Link to={c.path} onClick={() => setOpenMobile(false)}>{t(c.label)}</Link>
+                        <Link to={c.path} onClick={() => setOpenMobile(false)}>{L(c)}</Link>
                       </li>
                     ))}
                   </ul>

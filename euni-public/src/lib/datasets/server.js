@@ -15,3 +15,9 @@ export async function currentTenant() {
 export async function loadDatasets(modules) {
   return load(modules, { tenant: await currentTenant() })
 }
+
+/** Dữ liệu chung (cấu hình, menu, banner) cho khung website — xem shared/site/SiteContext.jsx */
+export async function loadSiteData() {
+  const { loadSite } = await import('./loaders.js')
+  return loadSite({ tenant: await currentTenant() })
+}

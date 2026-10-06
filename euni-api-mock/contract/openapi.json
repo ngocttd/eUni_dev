@@ -1125,7 +1125,7 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Menu hiển thị theo nhóm: header | footer | utility.",
+    "summary": "Mục menu đang hiển thị của nhóm (header = menu đầu trang, footer = các cột chân trang, utility = liên kết dòng cuối chân trang), danh sách phẳng có parentId để dựng cây: { id, parentId, label, url, icon, type page|link|category|heading, sortOrder, openInNewTab, translations.en.label }. Website lấy làm menu, không cache.",
     "description": "Không cần đăng nhập.",
     "parameters": [],
     "responses": {
@@ -1156,6 +1156,9 @@
            "label": {
             "type": "string"
            },
+           "icon": {
+            "type": "string"
+           },
            "sortOrder": {
             "type": "integer"
            },
@@ -1164,6 +1167,10 @@
            },
            "openInNewTab": {
             "type": "boolean"
+           },
+           "translations": {
+            "type": "object",
+            "properties": {}
            },
            "tenantId": {
             "type": "string"
@@ -1188,7 +1195,7 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Banner đang hiệu lực (đúng khoảng ngày, isVisible) theo vị trí.",
+    "summary": "Banner đang hiệu lực (isVisible và hôm nay nằm trong startsOn..endsOn): { id, position, title, subtitle, linkUrl, imageUrl (tương đối với gateway), sortOrder }. Vị trí: home_slider (dải dưới slide trang chủ), home_popup (cửa sổ nổi trang chủ), sidebar_right (cột phải trang tin), footer (dải trên chân trang).",
     "description": "Không cần đăng nhập.",
     "parameters": [
      {
@@ -1207,7 +1214,102 @@
        "application/json": {
         "schema": {
          "type": "array",
-         "items": {}
+         "items": {
+          "type": "object",
+          "properties": {
+           "id": {
+            "type": "integer"
+           },
+           "position": {
+            "type": "string"
+           },
+           "title": {
+            "type": "string"
+           },
+           "subtitle": {
+            "type": "string"
+           },
+           "linkUrl": {
+            "type": "string"
+           },
+           "imageUrl": {
+            "nullable": true
+           },
+           "sortOrder": {
+            "type": "integer"
+           },
+           "startsOn": {
+            "type": "string"
+           },
+           "endsOn": {
+            "type": "string"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Chưa đăng nhập"
+     },
+     "403": {
+      "description": "Thiếu quyền"
+     }
+    }
+   }
+  },
+  "/cms-api/api/v1/public/pages/slug/{slug}": {
+   "get": {
+    "tags": [
+     "cms-api"
+    ],
+    "summary": "Trang tĩnh soạn ở CMS (template khác system, status published): { id, slug, title, bodyHtml, language, parents[{title,url}], updatedAt }. 404 nếu nháp/không có. Website hiển thị ở /trang/{slug}. Trang template=system là trang có sẵn trong code website, không trả ở đây.",
+    "description": "Không cần đăng nhập.",
+    "parameters": [
+     {
+      "name": "lang",
+      "in": "query",
+      "description": "vi | en",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "id": {
+           "type": "integer"
+          },
+          "slug": {
+           "type": "string"
+          },
+          "title": {
+           "type": "string"
+          },
+          "bodyHtml": {
+           "type": "string"
+          },
+          "language": {
+           "type": "string"
+          },
+          "template": {
+           "type": "string"
+          },
+          "parents": {
+           "type": "array",
+           "items": {}
+          },
+          "updatedAt": {
+           "type": "string"
+          }
+         }
         }
        }
       }
@@ -6916,7 +7018,7 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Trang tĩnh (cây) và mục menu.",
+    "summary": "Trang: { title, slug, parentId, template default|system, status published|draft, bodyHtml, sortOrder, translations.en{title,bodyHtml} }. Mục menu: { groupCode header|footer|utility, parentId, label, url, type, icon, isVisible, openInNewTab, sortOrder, translations.en.label }.",
     "description": "Cần Bearer token + quyền: page.manage / menu.manage",
     "security": [
      {
@@ -6972,7 +7074,7 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Trang tĩnh (cây) và mục menu.",
+    "summary": "Trang: { title, slug, parentId, template default|system, status published|draft, bodyHtml, sortOrder, translations.en{title,bodyHtml} }. Mục menu: { groupCode header|footer|utility, parentId, label, url, type, icon, isVisible, openInNewTab, sortOrder, translations.en.label }.",
     "description": "Cần Bearer token + quyền: page.manage / menu.manage",
     "security": [
      {
@@ -7030,7 +7132,7 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Trang tĩnh (cây) và mục menu.",
+    "summary": "Trang: { title, slug, parentId, template default|system, status published|draft, bodyHtml, sortOrder, translations.en{title,bodyHtml} }. Mục menu: { groupCode header|footer|utility, parentId, label, url, type, icon, isVisible, openInNewTab, sortOrder, translations.en.label }.",
     "description": "Cần Bearer token + quyền: page.manage / menu.manage",
     "security": [
      {
@@ -7086,7 +7188,7 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Trang tĩnh (cây) và mục menu.",
+    "summary": "Trang: { title, slug, parentId, template default|system, status published|draft, bodyHtml, sortOrder, translations.en{title,bodyHtml} }. Mục menu: { groupCode header|footer|utility, parentId, label, url, type, icon, isVisible, openInNewTab, sortOrder, translations.en.label }.",
     "description": "Cần Bearer token + quyền: page.manage / menu.manage",
     "security": [
      {
@@ -7144,7 +7246,7 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Banner/slider theo vị trí & khoảng ngày.",
+    "summary": "Banner: { title, subtitle, position, linkUrl, imageId, isVisible, startsOn, endsOn, sortOrder }.",
     "description": "Cần Bearer token + quyền: site.manage",
     "security": [
      {
@@ -7197,14 +7299,17 @@
           "imageId": {
            "nullable": true
           },
-          "linkUrl": {
-           "nullable": true
-          },
           "isVisible": {
            "type": "boolean"
           },
           "sortOrder": {
            "type": "integer"
+          },
+          "linkUrl": {
+           "type": "string"
+          },
+          "subtitle": {
+           "type": "string"
           },
           "startsOn": {
            "type": "string"
@@ -7232,7 +7337,7 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Banner/slider theo vị trí & khoảng ngày.",
+    "summary": "Banner: { title, subtitle, position, linkUrl, imageId, isVisible, startsOn, endsOn, sortOrder }.",
     "description": "Cần Bearer token + quyền: site.manage",
     "security": [
      {
@@ -7285,14 +7390,17 @@
           "imageId": {
            "nullable": true
           },
-          "linkUrl": {
-           "nullable": true
-          },
           "isVisible": {
            "type": "boolean"
           },
           "sortOrder": {
            "type": "integer"
+          },
+          "linkUrl": {
+           "type": "string"
+          },
+          "subtitle": {
+           "type": "string"
           },
           "startsOn": {
            "type": "string"

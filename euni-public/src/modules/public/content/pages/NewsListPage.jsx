@@ -3,6 +3,7 @@ import { useModuleData } from '@/lib/datasets/useModuleData'
 import { useState, useMemo } from "react";
 
 import { PageShell, HeroSearch, Panel, NewsMini, SupportCard, Chips, ArticleRow, Pagination } from "../../../../shared/components/ui/page.jsx";
+import { BannerSide } from "../../../../shared/site/Banners.jsx";
 export function NewsListPage() {
   const { categoryCounts, articles, newsCategories } = useModuleData('content');
   const [cat, setCat] = useState('Tất cả');
@@ -27,6 +28,7 @@ export function NewsListPage() {
   return <PageShell eyebrow="Trang chủ" title="Tin tức & Sự kiện" lead="Cập nhật những thông tin, hoạt động và thông báo mới nhất của Trường Đại học Mỏ - Địa chất." crumbs={[{
     label: 'Tin tức & Sự kiện'
   }]} hero={<HeroSearch placeholder="Tìm tin tức, sự kiện…" />} sidebar={<>
+          <BannerSide />
           <Panel title="Danh mục tin" icon="layers" flush>
             <ul className="content-catlist">
               {chipOpts.map(o => <li key={o.key}>

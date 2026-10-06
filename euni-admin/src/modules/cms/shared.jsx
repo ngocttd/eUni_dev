@@ -179,7 +179,7 @@ function pageTreeItems(list, depth = 0) {
     depth
   }, ...(p.children ? pageTreeItems(p.children, depth + 1) : [])]);
 }
-export const MENU_TYPES = ['Trang', 'Liên kết', 'Chuyên mục'];
+export const MENU_TYPES = ['Trang', 'Liên kết', 'Chuyên mục', 'Tiêu đề nhóm'];
 /* Bản Anh mẫu cho demo (chỉ 1 trang / 1 mục menu có sẵn — phần còn lại coi như chưa dịch) */
 export const PAGE_TITLE_EN_SEED = {
   'Đơn vị': 'Units'

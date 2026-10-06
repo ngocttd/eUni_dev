@@ -98,3 +98,42 @@ export async function loadDataset(module, opts = {}) {
 }
 
 export const loadDatasets = async (modules, opts = {}) => Object.fromEntries(await Promise.all(modules.map(async (m) => [m, await loadDataset(m, opts)])))
+
+/* ---------------- dữ liệu chung của website: cấu hình, menu, banner ----------------
+ * Mỗi phần lỗi riêng thì trả null để giao diện dùng cấu hình tĩnh dự phòng (routes/sitemap.js),
+ * website vẫn chạy khi cms-api tạm lỗi. */
+const tryGet = (p) => p.catch(() => null)
+/** Danh sách phẳng (parentId) → cây, bỏ mục ẩn và con của mục ẩn */
+export const menuTree = (rows) => {
+  if (!Array.isArray(rows)) return null
+  const visible = rows.filter((m) => m.isVisible !== false)
+  const ids = new Set(visible.map((m) => m.id))
+  const byOrder = (a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0)
+  const node = (m) => ({ id: m.id, label: m.label, labelEn: m.translations?.en?.label || null, path: m.url || '', icon: m.icon || null, newTab: !!m.openInNewTab,
+    children: visible.filter((c) => c.parentId === m.id).sort(byOrder).map(node) })
+  return visible.filter((m) => !m.parentId || !ids.has(m.parentId)).filter((m) => !m.parentId).sort(byOrder).map(node)
+}
+
+export async function loadSite(opts = {}) {
+  const o = { tenant: opts.tenant }
+  const [settings, header, footer, utility, banners] = await Promise.all([
+    tryGet(cms.get('/api/v1/public/settings', o)),
+    tryGet(cms.get('/api/v1/public/menus/header', o)),
+    tryGet(cms.get('/api/v1/public/menus/footer', o)),
+    tryGet(cms.get('/api/v1/public/menus/utility', o)),
+    tryGet(cms.get('/api/v1/public/banners', o)),
+  ])
+  return { settings, menus: { header: menuTree(header), footer: menuTree(footer), utility: menuTree(utility) }, banners: Array.isArray(banners) ? banners : null, loadedAt: Date.now() }
+}
+
+/** Trang tĩnh soạn ở CMS: null nếu không có (404) */
+export async function loadCmsPage(slug, opts = {}) {
+  try {
+    const p = await cms.get(`/api/v1/public/pages/slug/${encodeURIComponent(slug)}`, { tenant: opts.tenant, query: { lang: opts.lang } })
+    const { cleanHtml } = await import('./sanitize.js')
+    return { ...p, bodyHtml: cleanHtml(p.bodyHtml || '') }
+  } catch (e) {
+    if (e?.status === 404) return null
+    throw e
+  }
+}

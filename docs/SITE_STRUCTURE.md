@@ -84,6 +84,8 @@ database/schema.sql · seed.sql · migrate.mjs                  PostgreSQL (sche
 |---|---|---|
 | Tin tức, sự kiện, media, trang chủ, banner, menu | `cms-api` | Do CMS quản trị theo tenant; ghi ở admin → public đổi ngay (theo workflow & giờ đăng) |
 | Thông báo trong My eUni (SV, GV, phụ huynh) | `cms-api` `/api/v1/me/announcements` | Soạn ở CMS theo đối tượng nhận; hộp thư so khớp vai trò + đơn vị/lớp + cá nhân |
+| Menu đầu trang, chân trang; thông tin liên hệ; banner | `cms-api` `/api/v1/public/menus/{header\|footer\|utility}`, `/settings`, `/banners` | Nạp ở `app/(site)/layout.jsx` → `shared/site/SiteContext.jsx`; lỗi API thì dùng `routes/sitemap.js` |
+| Trang tĩnh soạn ở CMS | `cms-api` `/api/v1/public/pages/slug/{slug}` | Route `/trang/[slug]` |
 | Giới thiệu (cơ cấu, giảng viên), cổng Giảng viên, Lãnh đạo | `qlns-api` | Hệ thống nhân sự |
 | Nghiên cứu (đề tài, công bố, chuyên gia…) | `qlkhcn-api` | Hệ thống KHCN |
 | Học tập, tuyển sinh, cổng Sinh viên/Phụ huynh | `edusoft-api` | Hệ thống đào tạo |

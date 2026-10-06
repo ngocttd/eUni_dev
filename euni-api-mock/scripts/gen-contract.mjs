@@ -35,8 +35,9 @@ const CMS = [
   // [method, path, auth/permission, mô tả, query[], mẫu response key]
   ['GET', '/api/v1/public/site-content', 'public', 'Toàn bộ nội dung công khai cho website: danh mục, bài viết đã xuất bản (kèm contentBody và translations.en — chỉ bản dịch ĐÃ HOÀN TẤT, thiếu thì website dùng tiếng Việt), sự kiện, album, video, podcast, trang tĩnh cho tìm kiếm. ?lang=vi|en (thiếu bản dịch → tự quay về vi).', [['lang', 'string', 'vi | en']], 'publicContent'],
   ['GET', '/api/v1/public/home', 'public', 'Dữ liệu trang chủ: heroSlides, quickLinks, audiences, strengths, partners, heroStats, universityStats, heroChips, featuredNews, newsList (3 bài), upcomingEvents (5), mediaTabs.', [['lang', 'string', 'vi | en']], 'publicHome'],
-  ['GET', '/api/v1/public/menus/{code}', 'public', 'Menu hiển thị theo nhóm: header | footer | utility.', [], 'menu'],
-  ['GET', '/api/v1/public/banners', 'public', 'Banner đang hiệu lực (đúng khoảng ngày, isVisible) theo vị trí.', [['position', 'string', 'home_slider | home_popup | sidebar_right | footer']], 'banners'],
+  ['GET', '/api/v1/public/menus/{code}', 'public', 'Mục menu đang hiển thị của nhóm (header = menu đầu trang, footer = các cột chân trang, utility = liên kết dòng cuối chân trang), danh sách phẳng có parentId để dựng cây: { id, parentId, label, url, icon, type page|link|category|heading, sortOrder, openInNewTab, translations.en.label }. Website lấy làm menu, không cache.', [], 'menu'],
+  ['GET', '/api/v1/public/banners', 'public', 'Banner đang hiệu lực (isVisible và hôm nay nằm trong startsOn..endsOn): { id, position, title, subtitle, linkUrl, imageUrl (tương đối với gateway), sortOrder }. Vị trí: home_slider (dải dưới slide trang chủ), home_popup (cửa sổ nổi trang chủ), sidebar_right (cột phải trang tin), footer (dải trên chân trang).', [['position', 'string', 'home_slider | home_popup | sidebar_right | footer']], 'banners'],
+  ['GET', '/api/v1/public/pages/slug/{slug}', 'public', 'Trang tĩnh soạn ở CMS (template khác system, status published): { id, slug, title, bodyHtml, language, parents[{title,url}], updatedAt }. 404 nếu nháp/không có. Website hiển thị ở /trang/{slug}. Trang template=system là trang có sẵn trong code website, không trả ở đây.', [['lang', 'string', 'vi | en']], 'cmsPage'],
   ['GET', '/api/v1/public/settings', 'public', 'Cấu hình công khai (general, seo, language).', [], 'settings'],
   ['GET', '/api/v1/public/search', 'public', 'Tìm kiếm toàn site (bài viết, sự kiện, media, trang).', [['q', 'string', 'Từ khóa'], ...PAGED.slice(0, 2)], 'search'],
   ['GET', '/api/v1/public/contents', 'public', 'Danh sách bài viết đã xuất bản (không có contentBody), phân trang.', [['categoryId', 'integer', ''], ['lang', 'string', 'vi | en'], ...PAGED], 'contentList'],
@@ -82,8 +83,8 @@ const CMS = [
   ['POST', '/api/v1/admin/media/upload', 'media.manage', 'multipart/form-data: file, altText, caption, folder.', [], 'media'],
   ['DELETE', '/api/v1/admin/media/{id}', 'media.manage', 'Xóa mềm media.', [], null],
   ['CRUD', '/api/v1/admin/events · /api/v1/admin/albums · /api/v1/admin/videos · /api/v1/admin/podcasts', 'site.manage', 'Sự kiện, album ảnh, video, podcast (theo tenant, xóa mềm + /{id}/restore, /trash).', PAGED, 'event'],
-  ['CRUD', '/api/v1/admin/pages · /api/v1/admin/menu-items', 'page.manage / menu.manage', 'Trang tĩnh (cây) và mục menu.', PAGED, null],
-  ['CRUD', '/api/v1/admin/banners', 'site.manage', 'Banner/slider theo vị trí & khoảng ngày.', PAGED, 'banner'],
+  ['CRUD', '/api/v1/admin/pages · /api/v1/admin/menu-items', 'page.manage / menu.manage', 'Trang: { title, slug, parentId, template default|system, status published|draft, bodyHtml, sortOrder, translations.en{title,bodyHtml} }. Mục menu: { groupCode header|footer|utility, parentId, label, url, type, icon, isVisible, openInNewTab, sortOrder, translations.en.label }.', PAGED, null],
+  ['CRUD', '/api/v1/admin/banners', 'site.manage', 'Banner: { title, subtitle, position, linkUrl, imageId, isVisible, startsOn, endsOn, sortOrder }.', PAGED, 'banner'],
   ['CRUD', '/api/v1/admin/hero-slides · /api/v1/admin/quick-links · /api/v1/admin/audiences · /api/v1/admin/strengths · /api/v1/admin/partners · /api/v1/admin/site-stats', 'site.manage', 'Các khối trang chủ.', PAGED, null],
   ['GET/PUT', '/api/v1/admin/settings · /api/v1/admin/settings/{group}', 'settings.manage', 'Cấu hình theo tenant, theo nhóm: general, seo, email, language, backup, home.', [], null],
   ['GET', '/api/v1/admin/audit-logs', 'log.view', 'Audit log chỉ ghi thêm: actorSub, action, entityType, entityId, changes {field:[cũ,mới]}, ip. (/api/v1/admin/activity-logs = tên cũ.)', [['action', 'string', ''], ['actor', 'string', 'sub'], ['entityType', 'string', ''], ['entityId', 'string', ''], ['from', 'string', 'ISO'], ['to', 'string', 'ISO'], ...PAGED], 'log'],
@@ -101,7 +102,8 @@ const first = async (p, t = T) => { const r = await j(p, t); return r.items ? r.
 const samples = {
   publicContent: await j('/cms-api/api/v1/public/site-content'),
   publicHome: await j('/cms-api/api/v1/public/home'),
-  menu: await j('/cms-api/api/v1/public/menus/header'),
+  menu: (await j('/cms-api/api/v1/public/menus/header')).slice(0, 3),
+  cmsPage: await j('/cms-api/api/v1/public/pages/slug/chinh-sach-bao-mat'),
   banners: await j('/cms-api/api/v1/public/banners'),
   settings: await j('/cms-api/api/v1/public/settings'),
   search: await j('/cms-api/api/v1/public/search?q=tuyen&pageSize=2'),
@@ -211,7 +213,7 @@ p('Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quy
 p('| Method | Path | Quyền | Mô tả |\n|---|---|---|---|')
 for (const [m, path, perm, desc] of CMS) p(`| ${m} | \`${path}\` | ${perm} | ${desc} |`)
 p('\n### Ví dụ response\n')
-const ex = [['publicContent', 'GET /api/v1/public/site-content'], ['publicHome', 'GET /api/v1/public/home'], ['contentDetail', 'GET /api/v1/public/contents/slug/{slug}'], ['context', 'GET /api/v1/me/context'], ['content', 'GET /api/v1/admin/contents/{id} (quản trị)'], ['revisions', 'GET /api/v1/admin/contents/{id}/revisions'], ['history', 'GET /api/v1/admin/contents/{id}/history'], ['announcement', 'GET /api/v1/admin/announcements/{id}'], ['inbox', 'GET /api/v1/me/announcements'], ['grant', 'Grant'], ['directory', 'GET /api/v1/admin/directory/users'], ['orgUnits', 'GET /api/v1/admin/org-units'], ['media', 'Media'], ['banner', 'Banner'], ['event', 'Event'], ['log', 'AuditLog'], ['dashboard', 'GET /api/v1/admin/dashboard']]
+const ex = [['publicContent', 'GET /api/v1/public/site-content'], ['menu', 'GET /api/v1/public/menus/header (3 mục đầu)'], ['banners', 'GET /api/v1/public/banners'], ['cmsPage', 'GET /api/v1/public/pages/slug/{slug}'], ['publicHome', 'GET /api/v1/public/home'], ['contentDetail', 'GET /api/v1/public/contents/slug/{slug}'], ['context', 'GET /api/v1/me/context'], ['content', 'GET /api/v1/admin/contents/{id} (quản trị)'], ['revisions', 'GET /api/v1/admin/contents/{id}/revisions'], ['history', 'GET /api/v1/admin/contents/{id}/history'], ['announcement', 'GET /api/v1/admin/announcements/{id}'], ['inbox', 'GET /api/v1/me/announcements'], ['grant', 'Grant'], ['directory', 'GET /api/v1/admin/directory/users'], ['orgUnits', 'GET /api/v1/admin/org-units'], ['media', 'Media'], ['banner', 'Banner'], ['event', 'Event'], ['log', 'AuditLog'], ['dashboard', 'GET /api/v1/admin/dashboard']]
 for (const [k, title] of ex) {
   const big = JSON.stringify(samples[k]).length > 6000
   p(`#### ${title}\n`, '```json\n', big ? short(Object.fromEntries(Object.entries(samples[k]).map(([a, b]) => [a, Array.isArray(b) ? b.slice(0, 1) : b])), 1) : short(samples[k]), '\n```\n')

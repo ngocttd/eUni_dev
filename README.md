@@ -30,9 +30,23 @@ Mỗi app cần `.env.local` (copy từ `.env.example`); mặc định đã tr�
 
 ## Đồng bộ CMS ↔ website
 
-CMS admin và website public **cùng đọc/ghi `cms-api`**. Website không cache dữ liệu CMS, nên khi admin tạo/sửa/xóa
-bài viết, sự kiện, banner, khối trang chủ… thì lần tải trang kế tiếp trên website đã thấy thay đổi.
-Kiểm thử tự động: `node tools/migration/sync-test.mjs` (10 kịch bản: tạo/sửa/ẩn/xóa bài, bài nổi bật, hero slide, đối tác, sự kiện, video).
+CMS admin và website public **cùng đọc/ghi `cms-api`**. Website không cache dữ liệu CMS, nên khi admin tạo/sửa/ẩn/xóa thì lần tải trang
+kế tiếp trên website đã thấy thay đổi (khi người dùng chuyển trang trong website, menu/cấu hình/banner cũng được nạp lại ngầm).
+
+| Màn hình admin | Hiển thị trên website |
+|---|---|
+| Bài viết, Danh mục, Sự kiện/Tuyển sinh/… (lối tắt chuyên mục) | `/tin-tuc`, chi tiết bài, trang chủ, tìm kiếm |
+| Album, Video, Podcast | `/media`, khối media trang chủ |
+| Trang chủ (slide, lối tắt, nhóm đối tượng, thế mạnh, đối tác, chỉ số, chip) | Trang chủ |
+| Thông báo | Hộp thư My eUni (SV, GV, phụ huynh) |
+| Trang & Menu → Menu | Menu đầu trang (`header`, gồm menu thả xuống), các cột chân trang (`footer`), liên kết dòng cuối chân trang (`utility`) |
+| Trang & Menu → Cây trang | Trang nội dung soạn ở CMS hiện ở `/trang/{slug}`; “trang hệ thống” giữ route có sẵn |
+| Banner / Slider | Dải banner trang chủ, popup trang chủ, cột phải trang tin/sự kiện, dải trên chân trang — theo khoảng ngày |
+| Cấu hình → Thông tin chung, SEO & Mạng xã hội | Tên trường, địa chỉ, điện thoại, email, mạng xã hội ở chân trang |
+
+Nếu `cms-api` lỗi, header/footer dùng cấu hình tĩnh `euni-public/src/routes/sitemap.js` để website vẫn chạy.
+Kiểm thử tự động: `node tools/migration/sync-test.mjs` (17 kịch bản: bài viết, hero slide, đối tác, sự kiện, video, cấu hình chân trang,
+menu đầu trang/chân trang, banner theo vị trí và hạn hiển thị, trang tĩnh xuất bản/nháp/xóa).
 
 ## Tài liệu
 
@@ -57,7 +71,7 @@ IdS đã liên kết hai loại tài khoản nên là cùng một người dùng
 ## Kiểm thử
 
 ```bash
-npm --prefix euni-api-mock test                     # 84 kiểm tra hành vi API (tự chạy server tạm)
+npm --prefix euni-api-mock test                     # 90 kiểm tra hành vi API (tự chạy server tạm)
 psql … -f euni-api-mock/database/v2/schema.sql -f euni-api-mock/database/v2/test.sql   # schema v2 + RLS
 # với 3 app đang chạy (mock dữ liệu gốc, public build với NEXT_PUBLIC_TENANT_HOSTS="cntt.localhost:3002=cntt"):
 node tools/migration/e2e-v2.mjs                     # 24 bước trình duyệt: workflow, tenant, thông báo, phân quyền

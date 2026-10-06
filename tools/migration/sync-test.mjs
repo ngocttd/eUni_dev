@@ -81,5 +81,79 @@ await step('Ẩn video → mất ở /media', async () => {
   assert.doesNotMatch(await page('/media'), new RegExp(v.title.slice(0, 20)))
 })
 
+/* ---------- Cấu hình chung, menu, banner, trang tĩnh ---------- */
+const C = '/cms-api/api/v1/admin'
+
+await step('Sửa Cấu hình → Thông tin chung (điện thoại, địa chỉ) → chân trang đổi theo', async () => {
+  const general = await j('GET', `${C}/settings/general`, null, t)
+  await j('PUT', `${C}/settings/general`, { ...general, phone: `024.9999.${stamp.slice(-4)}`, address: `Địa chỉ kiểm thử ${stamp}` }, t)
+  const html = await page('/tin-tuc')
+  assert.match(html, new RegExp(`024.9999.${stamp.slice(-4)}`))
+  assert.match(html, new RegExp(`Địa chỉ kiểm thử ${stamp}`))
+})
+
+let menuItem
+await step('Thêm mục con vào menu đầu trang → hiện trên header; ẩn → mất', async () => {
+  const all = (await j('GET', `${C}/menu-items?pageSize=500`, null, t)).items
+  const parent = all.find((m) => m.groupCode === 'header' && !m.parentId && m.label === 'Giới thiệu HUMG')
+  menuItem = await j('POST', `${C}/menu-items`, { groupCode: 'header', parentId: parent.id, label: `Mục menu ${stamp}`, url: '/gioi-thieu/lich-su', type: 'page', sortOrder: 99, isVisible: true }, t)
+  assert.match(await page('/'), new RegExp(`Mục menu ${stamp}`))
+  await j('PUT', `${C}/menu-items/${menuItem.id}`, { isVisible: false }, t)
+  assert.doesNotMatch(await page('/'), new RegExp(`Mục menu ${stamp}`))
+})
+
+await step('Đổi nhãn cột và liên kết chân trang → đổi theo; xóa liên kết → mất', async () => {
+  const all = (await j('GET', `${C}/menu-items?pageSize=500`, null, t)).items
+  const col = all.find((m) => m.groupCode === 'footer' && !m.parentId)
+  await j('PUT', `${C}/menu-items/${col.id}`, { label: `Cột chân trang ${stamp}` }, t)
+  const child = all.find((m) => m.parentId === col.id)
+  await j('PUT', `${C}/menu-items/${child.id}`, { label: `Liên kết chân trang ${stamp}` }, t)
+  let html = await page('/lien-he')
+  assert.match(html, new RegExp(`Cột chân trang ${stamp}`))
+  assert.match(html, new RegExp(`Liên kết chân trang ${stamp}`))
+  await j('DELETE', `${C}/menu-items/${child.id}`, null, t)
+  html = await page('/lien-he')
+  assert.doesNotMatch(html, new RegExp(`Liên kết chân trang ${stamp}`))
+})
+
+await step('Thêm banner trang chủ → hiện; hết hạn hoặc ẩn → không hiện', async () => {
+  const today = new Date().toISOString().slice(0, 10)
+  const bn = await j('POST', `${C}/banners`, { title: `Banner kiểm thử ${stamp}`, subtitle: 'Dòng mô tả', position: 'home_slider', linkUrl: '/tin-tuc', isVisible: true, startsOn: today, endsOn: null, sortOrder: 1 }, t)
+  assert.match(await page('/'), new RegExp(`Banner kiểm thử ${stamp}`))
+  await j('PUT', `${C}/banners/${bn.id}`, { endsOn: '2020-01-01' }, t)
+  assert.doesNotMatch(await page('/'), new RegExp(`Banner kiểm thử ${stamp}`))
+  await j('PUT', `${C}/banners/${bn.id}`, { endsOn: null, isVisible: false }, t)
+  assert.doesNotMatch(await page('/'), new RegExp(`Banner kiểm thử ${stamp}`))
+})
+
+await step('Banner cột phải hiện ở trang tin tức', async () => {
+  const bn = await j('POST', `${C}/banners`, { title: `Banner cột phải ${stamp}`, position: 'sidebar_right', isVisible: true, sortOrder: 1 }, t)
+  assert.match(await page('/tin-tuc'), new RegExp(`Banner cột phải ${stamp}`))
+  await j('DELETE', `${C}/banners/${bn.id}`, null, t)
+  assert.doesNotMatch(await page('/tin-tuc'), new RegExp(`Banner cột phải ${stamp}`))
+})
+
+await step('Trang tĩnh: tạo + xuất bản → /trang/{slug} hiện; sửa → đổi; nháp → 404; xóa → 404', async () => {
+  const slug = `trang-kiem-thu-${stamp}`
+  const pg = await j('POST', `${C}/pages`, { title: `Trang kiểm thử ${stamp}`, slug, template: 'default', status: 'published', bodyHtml: '<p>Nội dung ban đầu</p>' }, t)
+  let res = await fetch(`${PUBLIC}/trang/${slug}`)
+  assert.equal(res.status, 200)
+  assert.match(await res.text(), /Nội dung ban đầu/)
+  await j('PUT', `${C}/pages/${pg.id}`, { bodyHtml: '<p>Nội dung đã sửa</p><script>alert(1)</script>' }, t)
+  const html = await page(`/trang/${slug}`)
+  assert.match(html, /Nội dung đã sửa/)
+  assert.doesNotMatch(html, /alert\(1\)/, 'HTML phải được làm sạch')
+  await j('PUT', `${C}/pages/${pg.id}`, { status: 'draft' }, t)
+  assert.equal((await fetch(`${PUBLIC}/trang/${slug}`)).status, 404)
+  await j('PUT', `${C}/pages/${pg.id}`, { status: 'published' }, t)
+  await j('DELETE', `${C}/pages/${pg.id}`, null, t)
+  assert.equal((await fetch(`${PUBLIC}/trang/${slug}`)).status, 404)
+})
+
+await step('Trang tĩnh mẫu được liên kết từ chân trang', async () => {
+  assert.match(await page('/'), /\/trang\/chinh-sach-bao-mat/)
+  assert.match(await page('/trang/chinh-sach-bao-mat'), /Thông tin thu thập/)
+})
+
 await j('POST', '/cms-api/api/v1/dev/reset')
 console.log(process.exitCode ? '\nCÓ LỖI' : '\nĐồng bộ admin → public: OK')

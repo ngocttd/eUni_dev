@@ -19,7 +19,7 @@ export const STATUSES = ['draft', 'pending_review', 'published', 'archived']
 /** Mã số cũ (0..3) vẫn được chấp nhận ở API để tương thích */
 export const LEGACY_STATUS = { 0: 'draft', 1: 'pending_review', 2: 'published', 3: 'archived', pending: 'pending_review' }
 const STATUS_BY_LABEL = { 'Đã xuất bản': 'published', 'Bản nháp': 'draft', 'Chờ duyệt': 'pending_review' }
-export const SCHEMA_VERSION = 3
+export const SCHEMA_VERSION = 4
 export const DEFAULT_TENANT = 'humg'
 const TR_BY_LABEL = { 'Đã dịch': 'done', 'Đang dịch': 'in_progress', 'Chưa dịch': 'missing' }
 const BANNER_POS = { 'Trang chủ – Slider': 'home_slider', 'Trang chủ – Popup': 'home_popup', 'Cột phải': 'sidebar_right', 'Chân trang': 'footer' }
@@ -28,6 +28,10 @@ const IDS_ROLE = { 'Super Admin': ['cms.admin', 'staff'], Editor: ['cms.editor',
 const UNIT_BY_LABEL = { 'Khoa CNTT': 'CNTT', 'Khoa Mỏ': 'MO', 'Khoa Trắc địa – Bản đồ': 'TDBD', 'Phòng Đào tạo': 'P-DT', 'Phòng KHCN': 'P-KHCN', 'Phòng Hợp tác quốc tế': 'P-HTQT', 'Phòng CTSV': 'P-CTSV', 'Văn phòng': 'VP' }
 const ACTION = { 'Đăng nhập': 'login', 'Đăng bài viết': 'post.publish', 'Cập nhật bài viết': 'post.update', 'Xóa bài viết': 'post.delete', 'Tải lên file': 'media.upload', 'Xóa người dùng': 'user.delete', 'Đổi cấu hình': 'settings.update' }
 const MEDIA_KIND = { 'Hình ảnh': 'image', 'Tài liệu': 'document', 'Video': 'video', 'Âm thanh': 'audio' }
+const CMS_PAGES = [
+  { slug: 'chinh-sach-bao-mat', title: 'Chính sách bảo mật', bodyHtml: '<p>Trường Đại học Mỏ – Địa chất cam kết bảo vệ thông tin cá nhân của người dùng Cổng thông tin điện tử.</p><h2>1. Thông tin thu thập</h2><p>Họ tên, email, số điện thoại khi người dùng gửi liên hệ hoặc đăng ký sự kiện; thông tin đăng nhập do hệ thống SSO của Trường quản lý.</p><h2>2. Mục đích sử dụng</h2><ul><li>Phản hồi yêu cầu, gửi thông báo liên quan.</li><li>Thống kê truy cập để cải thiện dịch vụ.</li></ul><h2>3. Liên hệ</h2><p>Mọi thắc mắc về dữ liệu cá nhân xin gửi về Phòng Truyền thông.</p>' },
+  { slug: 'dieu-khoan-su-dung', title: 'Điều khoản sử dụng', bodyHtml: '<p>Khi truy cập Cổng thông tin, người dùng đồng ý với các điều khoản dưới đây.</p><h2>Bản quyền nội dung</h2><p>Nội dung, hình ảnh thuộc quyền của Trường Đại học Mỏ – Địa chất. Trích dẫn cần ghi rõ nguồn.</p><h2>Trách nhiệm người dùng</h2><p>Không sử dụng Cổng thông tin cho mục đích trái pháp luật hoặc gây ảnh hưởng tới hệ thống.</p>' },
+]
 const MENU_TYPE = { 'Trang': 'page', 'Liên kết': 'link', 'Chuyên mục': 'category' }
 
 
@@ -191,18 +195,33 @@ function build() {
   pub.podcasts.forEach((p) => add('podcasts', { slug: p.slug, title: p.title, episode: p.episode, host: p.host, durationSec: secs(p.duration), audioUrl: null, playCount: p.plays, publishedAt: isoDate(p.date), description: p.desc, notes: p.notes ?? [], isVisible: true }))
   s.searchPages = pub.searchPages
 
-  /* trang & menu */
+  /* trang & menu
+   * Trang "system": trang có sẵn trong code website (route riêng) — CMS quản lý tên, thứ tự, menu; nội dung do website.
+   * Trang "default": nội dung soạn ở CMS (bodyHtml), website hiển thị ở /trang/{slug}. */
   let po = 0
-  const addPage = (n, parentId = null) => { const r = add('pages', { parentId, slug: n.slug, title: n.name, template: 'default', status: 'published', sortOrder: po++, body: [] }); (n.children || []).forEach((c) => addPage(c, r.id)) }
+  const addPage = (n, parentId = null) => { const r = add('pages', { parentId, slug: n.slug, title: n.name, template: 'system', path: `/${n.slug}`, status: 'published', sortOrder: po++, bodyHtml: '', translations: {} }); (n.children || []).forEach((c) => addPage(c, r.id)) }
   cms.cmsPageTree.forEach((n) => addPage(n))
+  for (const pg of CMS_PAGES) add('pages', { parentId: null, template: 'default', path: null, status: 'published', sortOrder: po++, translations: {}, updatedAt: '2025-05-10T09:00:00+07:00', ...pg })
   s.menuGroups = cms.cmsMenuGroups.map((name, i) => ({ code: ['header', 'footer', 'utility'][i], name }))
-  cms.cmsMenus.forEach((it) => add('menuItems', { groupCode: 'header', parentId: null, type: MENU_TYPE[it.type] || 'link', url: it.url, label: it.label, sortOrder: it.order, isVisible: true, openInNewTab: false }))
+  /* menu nhiều tầng (parentId), sinh từ sitemap website: scripts/gen-site-menus.mjs */
+  const menuIds = []
+  load('site-menus').forEach((m) => {
+    const r = add('menuItems', { groupCode: m.group, parentId: m.parent == null ? null : menuIds[m.parent], type: m.url ? 'page' : 'heading', url: m.url || null, label: m.label, icon: m.icon,
+      sortOrder: m.order, isVisible: true, openInNewTab: false, translations: {} })
+    menuIds.push(r.id)
+  })
 
-  /* banners */
+  /* banners — khoảng ngày tính theo hôm nay để bản demo luôn có banner đang hiệu lực */
+  const day = (n) => new Date(Date.now() + n * 864e5).toISOString().slice(0, 10)
+  const BANNER_SEED = {
+    'Banner tuyển sinh đại học 2025': { subtitle: 'Xét tuyển 15 ngành Kỹ thuật – Công nghệ, nhận hồ sơ trực tuyến', linkUrl: '/hoc-tap/tuyen-sinh', startsOn: day(-10), endsOn: day(60) },
+    'Hội thảo quốc tế Trắc địa – GIS 2025': { subtitle: 'Đăng ký tham dự và gửi bài báo', linkUrl: '/su-kien', startsOn: day(-5), endsOn: day(30) },
+    'Chào mừng 60 năm thành lập Trường': { subtitle: '1966 – 2026 · Chuỗi hoạt động kỷ niệm', linkUrl: '/gioi-thieu/lich-su', startsOn: day(-3), endsOn: day(40) },
+    'Ngày hội việc làm HUMG 2025': { subtitle: 'Hơn 80 doanh nghiệp tuyển dụng', linkUrl: '/doi-song/viec-lam', startsOn: day(-7), endsOn: day(45) },
+    'Thông báo học bổng khuyến khích học tập': { subtitle: 'Hạn nộp hồ sơ trong tháng này', linkUrl: '/hoc-tap/hoc-phi-hoc-bong', startsOn: day(-2), endsOn: day(25) },
+  }
   cms.cmsBanners.forEach((b) => {
-    const [from, to] = b.period.split('–').map((x) => x.trim()); const y = to.split('/')[2] || '2025'
-    const sh = (x) => { const [d, mo] = x.split('/'); return `${y}-${mo}-${d}` }
-    add('banners', { position: BANNER_POS[b.position], title: b.name, imageId: null, linkUrl: null, isVisible: b.status === 'Hiển thị', sortOrder: b.order, startsOn: sh(from), endsOn: sh(to) })
+    add('banners', { position: BANNER_POS[b.position], title: b.name, imageId: null, isVisible: b.status === 'Hiển thị', sortOrder: b.order, linkUrl: null, subtitle: null, ...BANNER_SEED[b.name] })
   })
 
   /* khối trang chủ */

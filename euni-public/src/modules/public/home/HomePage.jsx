@@ -5,6 +5,7 @@ import { Link } from '../../../lib/router.jsx'
 import Icon from '../../../shared/lib/Icon.jsx'
 import { useLanguage } from '../../../i18n/LanguageContext.jsx'
 
+import { BannerStrip, BannerPopup } from '../../../shared/site/Banners.jsx'
 import './home.css'
 
 /* Tiêu đề khối dùng chung: chip icon + tên + link "Xem tất cả" */
@@ -330,6 +331,9 @@ export default function HomePage() {
     <>
       <Hero />
       <QuickBar />
+      {/* Banner vị trí "Trang chủ – Slider" và "Trang chủ – Popup" (CMS → Banner / Slider) */}
+      <BannerStrip position="home_slider" label="Banner trang chủ" />
+      <BannerPopup />
       <Audiences />
       <Strengths />
       <ContentBlocks />

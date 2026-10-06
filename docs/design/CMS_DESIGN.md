@@ -379,7 +379,7 @@ Kiểm thử đi kèm (tất cả đạt):
 
 | Lệnh | Phạm vi |
 |---|---|
-| `cd euni-api-mock && npm test` | 84 kiểm tra hành vi API: quy ước endpoint, chạy sau gateway có tiền tố, edusoft-api/esb-api, role 2 tầng + tenant theo grants, tenant, workflow, hẹn giờ, bản sửa đổi chờ duyệt, concurrency, revision, thùng rác, ACL theo đơn vị/chuyên mục/bản ghi, grants, announcements + hộp thư, audit |
+| `cd euni-api-mock && npm test` | 90 kiểm tra hành vi API: quy ước endpoint, chạy sau gateway có tiền tố, edusoft-api/esb-api, role 2 tầng + tenant theo grants, tenant, workflow, hẹn giờ, bản sửa đổi chờ duyệt, concurrency, revision, thùng rác, ACL theo đơn vị/chuyên mục/bản ghi, grants, announcements + hộp thư, audit |
 | `npm run db:v2:test` (cần PostgreSQL 16) | schema v2 + RLS chặn ghi/đọc chéo tenant, `v_news_live` theo giờ đăng, tìm kiếm không dấu, `news_allowed` theo cây đơn vị, `inbox()` với loại trừ, audit chỉ ghi thêm |
 | `node tools/migration/e2e-v2.mjs` | 24 bước trên trình duyệt thật: tác giả → biên tập duyệt, sửa bài đã đăng → duyệt bản sửa đổi, tab lịch sử, chọn tenant, thông báo cho lớp → SV nhận và xác nhận, GV thấy thông báo của khoa cha, phân quyền, audit, website theo host |
 | `node tools/migration/sso-test.mjs` (3 chế độ `entra` / `keycloak` / `ids`) | OIDC + PKCE, gợi ý IdP cho nút Microsoft 365, realm/client role, claim `unit`, `staff_code` |

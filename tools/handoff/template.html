@@ -190,13 +190,14 @@ details.fold .tbl-wrap { border-radius: 6px; }
     <div class="card"><h4>BE cần xây</h4>
       <ul>
         <li><b>cms-api</b> (.NET 8, PostgreSQL 16, Redis, MinIO): tin tức, thông báo, trang, menu, banner, media, khối trang chủ, cấu hình, phân quyền mức bản ghi, audit, sao lưu. Đa tenant.</li>
+        <li>Dữ liệu chung của website: menu header/footer/utility, banner theo vị trí, cấu hình liên hệ, trang tĩnh <code>/trang/{slug}</code> (đều là endpoint <code>/api/v1/public/…</code> của cms-api).</li>
         <li>Dataset/endpoint đọc của <b>edusoft-api</b>, <b>qlns-api</b>, <b>qlkhcn-api</b>, <b>esb-api</b> theo đúng cấu trúc JSON trong mục 8.</li>
         <li>Cấu hình SSO: realm role và client role (mục 4).</li>
       </ul>
     </div>
     <div class="card"><h4>Đã có sẵn để đối chiếu</h4>
       <ul>
-        <li><code>euni-api-mock</code>: mock chạy đúng hành vi (workflow, ACL, revision, hộp thư…), 84 kiểm thử tự động.</li>
+        <li><code>euni-api-mock</code>: mock chạy đúng hành vi (workflow, ACL, revision, hộp thư…), 90 kiểm thử tự động.</li>
         <li><code>contract/openapi.json</code> (268 path) và <code>API_CONTRACT.md</code>, sinh từ mock.</li>
         <li><code>database/v2/schema.sql</code>: DDL đích có RLS theo tenant, kèm <code>test.sql</code>.</li>
         <li>Hai web Next.js đã gọi đúng các endpoint dưới đây.</li>
@@ -442,10 +443,10 @@ npm run dev:api        # http://127.0.0.1:3000  (cũng nhận tiền tố /euni-
 npm run dev:public     # http://localhost:3002
 npm run dev:admin      # http://localhost:3001
 
-npm --prefix euni-api-mock test          # 84 kiểm tra hành vi API
+npm --prefix euni-api-mock test          # 90 kiểm tra hành vi API
 npm run contract                         # sinh lại contract/openapi.json + API_CONTRACT.md (cần mock đang chạy)
 node tools/migration/e2e-v2.mjs          # 24 bước trên trình duyệt (cần 3 app chạy)
-node tools/migration/sync-test.mjs       # admin ghi → website đổi ngay</pre>
+node tools/migration/sync-test.mjs       # 17 kịch bản: admin ghi → website đổi ngay</pre>
   <h3>Tài khoản mock</h3>
   <div class="tbl-wrap"><table>
     <thead><tr><th>Tài khoản</th><th>Role trên SSO</th><th>Phạm vi (grant, tầng 3)</th></tr></thead>
@@ -519,7 +520,7 @@ node tools/migration/sync-test.mjs       # admin ghi → website đổi ngay</pr
   const counts = { public: 0, me: 0, admin: 0 }; D.eps.forEach((e) => counts[e.g]++)
   $('#stats').innerHTML = [
     [D.eps.length, 'nhóm endpoint cms-api'], [counts.public + ' / ' + counts.me + ' / ' + counts.admin, 'public / me / admin'],
-    [nMods, 'dataset module'], [D.tables.length, 'bảng PostgreSQL'], ['84', 'kiểm thử mock tự động'],
+    [nMods, 'dataset module'], [D.tables.length, 'bảng PostgreSQL'], ['90', 'kiểm thử mock tự động'],
   ].map(([b, s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join('')
 
   /* bảng service */

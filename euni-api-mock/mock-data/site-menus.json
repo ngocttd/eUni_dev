@@ -1,0 +1,578 @@
+[
+ {
+  "group": "header",
+  "label": "Giới thiệu HUMG",
+  "url": "/gioi-thieu",
+  "icon": "building",
+  "parent": null,
+  "order": 1
+ },
+ {
+  "group": "header",
+  "label": "Tổng quan",
+  "url": "/gioi-thieu",
+  "icon": null,
+  "parent": 0,
+  "order": 1
+ },
+ {
+  "group": "header",
+  "label": "Thông điệp Hiệu trưởng",
+  "url": "/gioi-thieu/thong-diep-hieu-truong",
+  "icon": null,
+  "parent": 0,
+  "order": 2
+ },
+ {
+  "group": "header",
+  "label": "Lịch sử phát triển",
+  "url": "/gioi-thieu/lich-su",
+  "icon": null,
+  "parent": 0,
+  "order": 3
+ },
+ {
+  "group": "header",
+  "label": "Sứ mạng – Tầm nhìn – Giá trị",
+  "url": "/gioi-thieu/tam-nhin-su-mang",
+  "icon": null,
+  "parent": 0,
+  "order": 4
+ },
+ {
+  "group": "header",
+  "label": "Thành tựu & con số nổi bật",
+  "url": "/gioi-thieu/thanh-tuu",
+  "icon": null,
+  "parent": 0,
+  "order": 5
+ },
+ {
+  "group": "header",
+  "label": "Cơ cấu tổ chức",
+  "url": "/gioi-thieu/co-cau-to-chuc",
+  "icon": null,
+  "parent": 0,
+  "order": 6
+ },
+ {
+  "group": "header",
+  "label": "Đội ngũ cán bộ, giảng viên",
+  "url": "/gioi-thieu/giang-vien",
+  "icon": null,
+  "parent": 0,
+  "order": 7
+ },
+ {
+  "group": "header",
+  "label": "Học tập",
+  "url": "/hoc-tap",
+  "icon": "graduation",
+  "parent": null,
+  "order": 2
+ },
+ {
+  "group": "header",
+  "label": "Tổng quan Học tập",
+  "url": "/hoc-tap",
+  "icon": null,
+  "parent": 8,
+  "order": 1
+ },
+ {
+  "group": "header",
+  "label": "Tuyển sinh",
+  "url": "/hoc-tap/tuyen-sinh",
+  "icon": null,
+  "parent": 8,
+  "order": 2
+ },
+ {
+  "group": "header",
+  "label": "Chương trình đào tạo",
+  "url": "/hoc-tap/chuong-trinh-dao-tao",
+  "icon": null,
+  "parent": 8,
+  "order": 3
+ },
+ {
+  "group": "header",
+  "label": "Chuẩn đầu ra",
+  "url": "/hoc-tap/chuan-dau-ra",
+  "icon": null,
+  "parent": 8,
+  "order": 4
+ },
+ {
+  "group": "header",
+  "label": "Thông tin chung",
+  "url": "/hoc-tap/thong-tin-chung",
+  "icon": null,
+  "parent": 8,
+  "order": 5
+ },
+ {
+  "group": "header",
+  "label": "Học phí & Học bổng",
+  "url": "/hoc-tap/hoc-phi-hoc-bong",
+  "icon": null,
+  "parent": 8,
+  "order": 6
+ },
+ {
+  "group": "header",
+  "label": "Biểu mẫu",
+  "url": "/hoc-tap/bieu-mau",
+  "icon": null,
+  "parent": 8,
+  "order": 7
+ },
+ {
+  "group": "header",
+  "label": "Lịch học – Lịch thi",
+  "url": "/hoc-tap/lich-hoc",
+  "icon": null,
+  "parent": 8,
+  "order": 8
+ },
+ {
+  "group": "header",
+  "label": "Tra cứu kết quả học tập",
+  "url": "/hoc-tap/tra-cuu-ket-qua",
+  "icon": null,
+  "parent": 8,
+  "order": 9
+ },
+ {
+  "group": "header",
+  "label": "Hướng dẫn học tập",
+  "url": "/hoc-tap/huong-dan",
+  "icon": null,
+  "parent": 8,
+  "order": 10
+ },
+ {
+  "group": "header",
+  "label": "E-learning & LMS",
+  "url": "/hoc-tap/e-learning",
+  "icon": null,
+  "parent": 8,
+  "order": 11
+ },
+ {
+  "group": "header",
+  "label": "Khảo sát & Đánh giá",
+  "url": "/hoc-tap/khao-sat",
+  "icon": null,
+  "parent": 8,
+  "order": 12
+ },
+ {
+  "group": "header",
+  "label": "Nghiên cứu",
+  "url": "/nghien-cuu",
+  "icon": "flask",
+  "parent": null,
+  "order": 3
+ },
+ {
+  "group": "header",
+  "label": "Khoa học & Công nghệ (Tổng quan)",
+  "url": "/nghien-cuu",
+  "icon": null,
+  "parent": 21,
+  "order": 1
+ },
+ {
+  "group": "header",
+  "label": "Đề tài / Dự án",
+  "url": "/nghien-cuu/de-tai",
+  "icon": null,
+  "parent": 21,
+  "order": 2
+ },
+ {
+  "group": "header",
+  "label": "Công bố khoa học",
+  "url": "/nghien-cuu/cong-bo",
+  "icon": null,
+  "parent": 21,
+  "order": 3
+ },
+ {
+  "group": "header",
+  "label": "Danh sách chuyên gia",
+  "url": "/nghien-cuu/chuyen-gia",
+  "icon": null,
+  "parent": 21,
+  "order": 4
+ },
+ {
+  "group": "header",
+  "label": "Nhóm nghiên cứu",
+  "url": "/nghien-cuu/nhom-nghien-cuu",
+  "icon": null,
+  "parent": 21,
+  "order": 5
+ },
+ {
+  "group": "header",
+  "label": "Hội nghị / Hội thảo",
+  "url": "/nghien-cuu/hoi-nghi-hoi-thao",
+  "icon": null,
+  "parent": 21,
+  "order": 6
+ },
+ {
+  "group": "header",
+  "label": "Phòng thí nghiệm",
+  "url": "/nghien-cuu/phong-thi-nghiem",
+  "icon": null,
+  "parent": 21,
+  "order": 7
+ },
+ {
+  "group": "header",
+  "label": "Chuyển giao công nghệ",
+  "url": "/nghien-cuu/chuyen-giao-cong-nghe",
+  "icon": null,
+  "parent": 21,
+  "order": 8
+ },
+ {
+  "group": "header",
+  "label": "Nghiên cứu sinh",
+  "url": "/nghien-cuu/nghien-cuu-sinh",
+  "icon": null,
+  "parent": 21,
+  "order": 9
+ },
+ {
+  "group": "header",
+  "label": "Hợp tác",
+  "url": "/hop-tac",
+  "icon": "handshake",
+  "parent": null,
+  "order": 4
+ },
+ {
+  "group": "header",
+  "label": "Tổng quan hợp tác",
+  "url": "/hop-tac",
+  "icon": null,
+  "parent": 31,
+  "order": 1
+ },
+ {
+  "group": "header",
+  "label": "Danh sách đối tác",
+  "url": "/hop-tac/doi-tac",
+  "icon": null,
+  "parent": 31,
+  "order": 2
+ },
+ {
+  "group": "header",
+  "label": "Đối tác trong nước",
+  "url": "/hop-tac/doi-tac-trong-nuoc",
+  "icon": null,
+  "parent": 31,
+  "order": 3
+ },
+ {
+  "group": "header",
+  "label": "Đối tác quốc tế",
+  "url": "/hop-tac/doi-tac-quoc-te",
+  "icon": null,
+  "parent": 31,
+  "order": 4
+ },
+ {
+  "group": "header",
+  "label": "Chương trình / Dự án",
+  "url": "/hop-tac/chuong-trinh-du-an",
+  "icon": null,
+  "parent": 31,
+  "order": 5
+ },
+ {
+  "group": "header",
+  "label": "Chương trình trao đổi",
+  "url": "/hop-tac/trao-doi",
+  "icon": null,
+  "parent": 31,
+  "order": 6
+ },
+ {
+  "group": "header",
+  "label": "Sinh viên quốc tế",
+  "url": "/hop-tac/sinh-vien-quoc-te",
+  "icon": null,
+  "parent": 31,
+  "order": 7
+ },
+ {
+  "group": "header",
+  "label": "Giảng viên quốc tế",
+  "url": "/hop-tac/giang-vien-quoc-te",
+  "icon": null,
+  "parent": 31,
+  "order": 8
+ },
+ {
+  "group": "header",
+  "label": "Cơ hội hợp tác",
+  "url": "/hop-tac/co-hoi-hop-tac",
+  "icon": null,
+  "parent": 31,
+  "order": 9
+ },
+ {
+  "group": "header",
+  "label": "Đời sống",
+  "url": "/doi-song",
+  "icon": "heart",
+  "parent": null,
+  "order": 5
+ },
+ {
+  "group": "header",
+  "label": "Đời sống HUMG (Hub)",
+  "url": "/doi-song",
+  "icon": null,
+  "parent": 41,
+  "order": 1
+ },
+ {
+  "group": "header",
+  "label": "Campus & Cơ sở vật chất",
+  "url": "/doi-song/campus-co-so-vat-chat",
+  "icon": null,
+  "parent": 41,
+  "order": 2
+ },
+ {
+  "group": "header",
+  "label": "Hoạt động sinh viên",
+  "url": "/doi-song/hoat-dong-sinh-vien",
+  "icon": null,
+  "parent": 41,
+  "order": 3
+ },
+ {
+  "group": "header",
+  "label": "Câu lạc bộ sinh viên",
+  "url": "/doi-song/cau-lac-bo",
+  "icon": null,
+  "parent": 41,
+  "order": 4
+ },
+ {
+  "group": "header",
+  "label": "Đoàn – Hội",
+  "url": "/doi-song/doan-hoi",
+  "icon": null,
+  "parent": 41,
+  "order": 5
+ },
+ {
+  "group": "header",
+  "label": "Thể thao – Văn hóa",
+  "url": "/doi-song/the-thao-van-hoa",
+  "icon": null,
+  "parent": 41,
+  "order": 6
+ },
+ {
+  "group": "header",
+  "label": "Ký túc xá",
+  "url": "/doi-song/ky-tuc-xa",
+  "icon": null,
+  "parent": 41,
+  "order": 7
+ },
+ {
+  "group": "header",
+  "label": "Y tế – Chăm sóc sức khỏe",
+  "url": "/doi-song/y-te",
+  "icon": null,
+  "parent": 41,
+  "order": 8
+ },
+ {
+  "group": "header",
+  "label": "Dịch vụ Campus",
+  "url": "/doi-song/dich-vu-campus",
+  "icon": null,
+  "parent": 41,
+  "order": 9
+ },
+ {
+  "group": "header",
+  "label": "Hỗ trợ sinh viên",
+  "url": "/doi-song/ho-tro-sinh-vien",
+  "icon": null,
+  "parent": 41,
+  "order": 10
+ },
+ {
+  "group": "header",
+  "label": "Việc làm – Khởi nghiệp",
+  "url": "/doi-song/viec-lam-khoi-nghiep",
+  "icon": null,
+  "parent": 41,
+  "order": 11
+ },
+ {
+  "group": "header",
+  "label": "Thư viện",
+  "url": "/thu-vien",
+  "icon": "library",
+  "parent": null,
+  "order": 6
+ },
+ {
+  "group": "header",
+  "label": "Sinh viên",
+  "url": "/sinh-vien",
+  "icon": "user",
+  "parent": null,
+  "order": 7
+ },
+ {
+  "group": "header",
+  "label": "Giảng viên / Cán bộ",
+  "url": "/giang-vien",
+  "icon": "users",
+  "parent": null,
+  "order": 8
+ },
+ {
+  "group": "footer",
+  "label": "Liên kết nhanh",
+  "url": "",
+  "icon": null,
+  "parent": null,
+  "order": 1
+ },
+ {
+  "group": "footer",
+  "label": "Giới thiệu HUMG",
+  "url": "/gioi-thieu",
+  "icon": null,
+  "parent": 56,
+  "order": 1
+ },
+ {
+  "group": "footer",
+  "label": "Tuyển sinh",
+  "url": "/hoc-tap/tuyen-sinh",
+  "icon": null,
+  "parent": 56,
+  "order": 2
+ },
+ {
+  "group": "footer",
+  "label": "Đào tạo",
+  "url": "/hoc-tap/chuong-trinh-dao-tao",
+  "icon": null,
+  "parent": 56,
+  "order": 3
+ },
+ {
+  "group": "footer",
+  "label": "Khoa học – Công nghệ",
+  "url": "/nghien-cuu",
+  "icon": null,
+  "parent": 56,
+  "order": 4
+ },
+ {
+  "group": "footer",
+  "label": "Hợp tác quốc tế",
+  "url": "/hop-tac",
+  "icon": null,
+  "parent": 56,
+  "order": 5
+ },
+ {
+  "group": "footer",
+  "label": "Đời sống",
+  "url": "/doi-song",
+  "icon": null,
+  "parent": 56,
+  "order": 6
+ },
+ {
+  "group": "footer",
+  "label": "Tin tức",
+  "url": "/tin-tuc",
+  "icon": null,
+  "parent": 56,
+  "order": 7
+ },
+ {
+  "group": "footer",
+  "label": "Chính sách & Quy định",
+  "url": "",
+  "icon": null,
+  "parent": null,
+  "order": 2
+ },
+ {
+  "group": "footer",
+  "label": "Chính sách bảo mật",
+  "url": "/trang/chinh-sach-bao-mat",
+  "icon": null,
+  "parent": 64,
+  "order": 1
+ },
+ {
+  "group": "footer",
+  "label": "Quy chế học vụ",
+  "url": "/hoc-tap/thong-tin-chung",
+  "icon": null,
+  "parent": 64,
+  "order": 2
+ },
+ {
+  "group": "footer",
+  "label": "Điều khoản sử dụng",
+  "url": "/trang/dieu-khoan-su-dung",
+  "icon": null,
+  "parent": 64,
+  "order": 3
+ },
+ {
+  "group": "footer",
+  "label": "Thông tin truy cập chính phủ",
+  "url": "/lien-he",
+  "icon": null,
+  "parent": 64,
+  "order": 4
+ },
+ {
+  "group": "footer",
+  "label": "Sơ đồ trang",
+  "url": "/sitemap",
+  "icon": null,
+  "parent": 64,
+  "order": 5
+ },
+ {
+  "group": "utility",
+  "label": "Sơ đồ trang",
+  "url": "/sitemap",
+  "icon": null,
+  "parent": null,
+  "order": 1
+ },
+ {
+  "group": "utility",
+  "label": "Liên hệ",
+  "url": "/lien-he",
+  "icon": null,
+  "parent": null,
+  "order": 2
+ }
+]
