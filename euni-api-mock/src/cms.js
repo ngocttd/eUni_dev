@@ -174,7 +174,7 @@ cms.get('/api/v1/me/context', requireUser, (req, res) => {
   const tenant = list.find((x) => x.id === req.tenant) ? req.tenant : list[0]?.id ?? null
   res.json({
     user: { sub: t.sub, name: t.name, email: t.email, roles: t.roles, units: t.units },
-    permissions: t.perms, tenants: list.map(({ id, name, rootUnit }) => ({ id, name, rootUnit })), currentTenant: tenant,
+    permissions: t.perms, tenants: list.map(({ id, name, rootUnit, domains }) => ({ id, name, rootUnit, domains: domains || [] })), currentTenant: tenant,
     units: withAncestors(t.units || []).map((code) => ({ code, name: unitName(code) })),
     can: Object.fromEntries(['news', 'announcement'].map((type) => [type, Object.fromEntries(['view', 'edit', 'review', 'publish'].map((a) => [a, can(t, tenant, type, a)]))])),
   })

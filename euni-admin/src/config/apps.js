@@ -28,3 +28,14 @@ export function externalUrl(path) {
   const owner = ownerOf(path)
   return owner === SELF ? null : `${APP_URLS[owner]}${path}`
 }
+
+/* ---------- Website của trang (tenant) đang quản trị trong CMS ----------
+ * Mỗi tenant có domain riêng (vd. Khoa CNTT: cntt.humg.edu.vn). Các nút "Xem website / Xem trên website" của CMS
+ * phải mở đúng website của tenant đang chọn, không phải website Trường. CmsShell gọi setTenantSite(domains) khi biết tenant. */
+let tenantSite = null
+export function setTenantSite(domains = []) {
+  const base = new URL(APP_URLS.public)
+  tenantSite = !domains.length || domains.includes(base.host) ? APP_URLS.public : `${base.protocol}//${domains[0]}`
+}
+/** URL tuyệt đối trên website của tenant đang quản trị */
+export const publicSiteUrl = (path = '/') => `${tenantSite || APP_URLS.public}${path.startsWith('/') ? path : `/${path}`}`

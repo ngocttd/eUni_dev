@@ -2038,7 +2038,7 @@
     "tags": [
      "cms-api"
     ],
-    "summary": "Ngữ cảnh người dùng: tenants được quản trị, permissions (từ role trong token), đơn vị (kèm đơn vị cha), can.{news|announcement}.{view|edit|review|publish}.",
+    "summary": "Ngữ cảnh người dùng: tenants được quản trị ({ id, name, rootUnit, domains[] } — domains để CMS mở đúng website của trang), permissions (từ role trong token), đơn vị (kèm đơn vị cha), can.{news|announcement}.{view|edit|review|publish}.",
     "description": "Cần Bearer token + quyền: đăng nhập",
     "security": [
      {
@@ -2099,6 +2099,12 @@
              },
              "rootUnit": {
               "type": "string"
+             },
+             "domains": {
+              "type": "array",
+              "items": {
+               "type": "string"
+              }
              }
             }
            }

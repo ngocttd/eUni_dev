@@ -5,7 +5,7 @@ import { Panel, FilterBar, DataTable } from "../../../shared/components/ui/page.
 import Icon from "../../../shared/lib/Icon.jsx";
 import { cmsApi } from "../../../lib/api/cmsApi.js";
 import { mediaUrl } from "../../../lib/api/media.js";
-import { APP_URLS } from "../../../config/apps.js";
+import { publicSiteUrl } from "../../../config/apps.js";
 import { useAction, Notice, confirmDelete } from "../actions.jsx";
 import RichTextEditor from "../RichTextEditor.jsx";
 import { Head, I18nBadges, LangPills, MENU_TYPES, RowActions, Toggle, norm, pageTreeItems, slugify } from "../shared.jsx";
@@ -181,7 +181,7 @@ export function CmsPagesMenu() {
                 <div className="cms-form__actions">
                   <button type="submit" disabled={act.busy} className="humg-btn humg-btn--primary humg-btn--sm">{act.busy ? 'Đang lưu…' : page ? 'Lưu' : 'Tạo trang'}</button>
                   {page && <button type="button" className="humg-btn humg-btn--ghost humg-btn--sm" onClick={newPage}>Hủy</button>}
-                  {page && (page.template === 'system' || page.status === 'published') && <a className="humg-btn humg-btn--ghost humg-btn--sm" href={`${APP_URLS.public}${pageUrl(page)}`} target="_blank" rel="noopener noreferrer" title="Mở trang trên website ở tab mới"><Icon name="eye" size={13} /> Xem trên website</a>}
+                  {page && (page.template === 'system' || page.status === 'published') && <a className="humg-btn humg-btn--ghost humg-btn--sm" href={publicSiteUrl(pageUrl(page))} target="_blank" rel="noopener noreferrer" title="Mở trang trên website ở tab mới"><Icon name="eye" size={13} /> Xem trên website</a>}
                   {page && <button type="button" className="cms-rowbtn is-danger" onClick={removePage} title={`Xóa trang “${page.name}”`}><Icon name="trash" size={13} /> Xóa trang</button>}
                 </div>
               </form>

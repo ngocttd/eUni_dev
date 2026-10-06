@@ -13,7 +13,7 @@ async function load(params) {
 
 export async function generateMetadata({ params }) {
   const page = await load(params)
-  return { title: page ? `${page.title} | HUMG` : 'Không tìm thấy trang | HUMG' }
+  return { title: page ? page.title : 'Không tìm thấy trang' }
 }
 
 export default async function Page({ params }) {

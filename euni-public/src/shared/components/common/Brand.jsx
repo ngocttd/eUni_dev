@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { Link } from '../../../lib/router.jsx'
+import { useSite } from '../../site/SiteContext.jsx'
 import { useLanguage } from '../../../i18n/LanguageContext.jsx'
 
 /**
@@ -35,10 +36,15 @@ export default function Brand({
 }) {
   const light = variant === 'light'
   const [imgOk, setImgOk] = useState(true)
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
+  /* Tên cạnh logo theo Cấu hình → Thông tin chung của trang (vd. website Khoa); để trống = tên Trường */
+  const g = useSite().settings?.general || {}
+  const en = lang !== 'vi'
+  const name = (en && g.brandNameEn) || g.brandName || t('TRƯỜNG ĐẠI HỌC MỎ - ĐỊA CHẤT')
+  const tagline = (en && g.taglineEn) || g.tagline || t('Tri thức - Bản lĩnh - Sáng tạo - Hội nhập')
 
   return (
-    <Link to={to} className={`brand ${light ? 'brand--light' : ''}`} aria-label={t('TRƯỜNG ĐẠI HỌC MỎ - ĐỊA CHẤT')}>
+    <Link to={to} className={`brand ${light ? 'brand--light' : ''}`} aria-label={name}>
       <span className="brand__crest" aria-hidden="true">
         {imgOk ? (
           <img
@@ -53,8 +59,8 @@ export default function Brand({
       </span>
       {!compact && (
         <span className="brand__text">
-          <strong>{t('TRƯỜNG ĐẠI HỌC MỎ - ĐỊA CHẤT')}</strong>
-          {subtitle && <em>{t('Tri thức - Bản lĩnh - Sáng tạo - Hội nhập')}</em>}
+          <strong>{name}</strong>
+          {subtitle && <em>{tagline}</em>}
         </span>
       )}
       {anniversary && (

@@ -64,7 +64,7 @@
   margin-top: -42px; margin-bottom: 4px;
 }
 .quickbar {
-  display: grid; grid-template-columns: repeat(8, 1fr);
+  display: grid; grid-template-columns: repeat(var(--qb-cols, 8), 1fr); /* số cột = số lối tắt (tối đa 8) */
   gap: 1px;
   background: var(--humg-border);
   border: 1px solid var(--humg-border);

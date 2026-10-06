@@ -19,7 +19,7 @@ export const STATUSES = ['draft', 'pending_review', 'published', 'archived']
 /** Mã số cũ (0..3) vẫn được chấp nhận ở API để tương thích */
 export const LEGACY_STATUS = { 0: 'draft', 1: 'pending_review', 2: 'published', 3: 'archived', pending: 'pending_review' }
 const STATUS_BY_LABEL = { 'Đã xuất bản': 'published', 'Bản nháp': 'draft', 'Chờ duyệt': 'pending_review' }
-export const SCHEMA_VERSION = 5
+export const SCHEMA_VERSION = 6
 export const DEFAULT_TENANT = 'humg'
 const TR_BY_LABEL = { 'Đã dịch': 'done', 'Đang dịch': 'in_progress', 'Chưa dịch': 'missing' }
 const BANNER_POS = { 'Trang chủ – Slider': 'home_slider', 'Trang chủ – Popup': 'home_popup', 'Cột phải': 'sidebar_right', 'Chân trang': 'footer' }
@@ -278,7 +278,12 @@ export const revisionSnapshot = (r) => JSON.parse(JSON.stringify(Object.fromEntr
 function seedTenantCntt(s, add, col, settings) {
   const T = 'cntt'
   s.settings[T] = JSON.parse(JSON.stringify(settings))
-  s.settings[T].general = { ...s.settings[T].general, siteName: 'Khoa Công nghệ thông tin – HUMG' }
+  s.settings[T].general = {
+    ...s.settings[T].general, siteName: 'Khoa Công nghệ thông tin – HUMG', email: 'cntt@humg.edu.vn', phone: '024.3838.9633', address: 'Tầng 3, nhà C12, Trường Đại học Mỏ - Địa chất, 18 Phố Viên, Bắc Từ Liêm, Hà Nội',
+    /* tên hiển thị cạnh logo (để trống = tên Trường mặc định) */
+    brandName: 'KHOA CÔNG NGHỆ THÔNG TIN', brandNameEn: 'FACULTY OF INFORMATION TECHNOLOGY', tagline: 'Trường Đại học Mỏ - Địa chất', taglineEn: 'Hanoi University of Mining and Geology',
+  }
+  s.settings[T].seo = { ...s.settings[T].seo, metaTitle: 'Khoa Công nghệ thông tin | HUMG', facebook: 'https://facebook.com/cntt.humg', youtube: '' }
   const c1 = add('categories', { tenantId: T, parentId: null, name: 'Tin tức Khoa', slug: 'tin-tuc-khoa', description: null, sortOrder: 0, isActive: true, translations: {} })
   const c2 = add('categories', { tenantId: T, parentId: null, name: 'Nghiên cứu – Học thuật', slug: 'nghien-cuu-hoc-thuat', description: null, sortOrder: 1, isActive: true, translations: {} })
   const post = (o) => add('contents', {
@@ -302,6 +307,47 @@ function seedTenantCntt(s, add, col, settings) {
   add('videos', { tenantId: T, slug: 'gioi-thieu-khoa-cntt', title: 'Giới thiệu Khoa Công nghệ thông tin', channel: 'Khoa CNTT', durationSec: 185, videoUrl: null, viewCount: 820,
     publishedAt: '2025-04-02', description: 'Video giới thiệu ngành học và cơ sở vật chất của Khoa.', isVisible: true })
   col('siteStats').filter((r) => r.tenantId === 'humg').forEach(({ id, tenantId, ...r }) => add('siteStats', { ...r, tenantId: T }))
+
+  /* trang tĩnh của Khoa (soạn ở CMS, hiện ở /trang/{slug} trên website Khoa) */
+  const pg = (o) => add('pages', { tenantId: T, parentId: null, template: 'default', path: null, status: 'published', sortOrder: 0, translations: {}, updatedAt: '2025-05-20T08:00:00+07:00', createdAt: '2025-05-20T08:00:00+07:00', deletedAt: null, ...o })
+  const intro = pg({ slug: 'gioi-thieu-khoa', title: 'Giới thiệu Khoa', sortOrder: 0,
+    bodyHtml: '<p>Khoa Công nghệ thông tin được thành lập năm 2001, đào tạo kỹ sư và thạc sĩ Công nghệ thông tin, Khoa học máy tính, Hệ thống thông tin, gắn với ứng dụng trong ngành Mỏ – Địa chất – Năng lượng.</p><h2>Sứ mạng</h2><p>Đào tạo nguồn nhân lực CNTT chất lượng cao, nghiên cứu và chuyển giao công nghệ số cho các lĩnh vực Trái đất và Tài nguyên.</p><h2>Con số</h2><ul><li>4 bộ môn, hơn 60 cán bộ, giảng viên</li><li>Hơn 2.000 sinh viên đang học</li><li>3 phòng thí nghiệm chuyên sâu: AI, GIS, An toàn thông tin</li></ul>',
+    translations: { en: { status: 'done', title: 'About the Faculty', bodyHtml: '<p>The Faculty of Information Technology was founded in 2001 and trains engineers and masters in IT, Computer Science and Information Systems, with applications in mining, geology and energy.</p>' } } })
+  pg({ slug: 'cac-bo-mon', title: 'Các bộ môn', parentId: intro.id, sortOrder: 1,
+    bodyHtml: '<ul><li><strong>Bộ môn Khoa học máy tính</strong> — trí tuệ nhân tạo, xử lý ảnh viễn thám.</li><li><strong>Bộ môn Công nghệ phần mềm</strong> — phát triển phần mềm, kiểm thử.</li><li><strong>Bộ môn Hệ thống thông tin</strong> — cơ sở dữ liệu, GIS.</li><li><strong>Bộ môn Mạng máy tính</strong> — mạng, an toàn thông tin.</li></ul>',
+    translations: { en: { status: 'done', title: 'Departments' } } })
+  pg({ slug: 'lien-he-khoa', title: 'Liên hệ Khoa', sortOrder: 2,
+    bodyHtml: '<p><strong>Văn phòng Khoa Công nghệ thông tin</strong></p><p>Tầng 3, nhà C12, Trường Đại học Mỏ - Địa chất, 18 Phố Viên, Bắc Từ Liêm, Hà Nội</p><p>Điện thoại: 024.3838.9633 · Email: cntt@humg.edu.vn</p><p>Giờ làm việc: 7h30 – 17h00, thứ Hai đến thứ Sáu.</p>',
+    translations: { en: { status: 'done', title: 'Contact the Faculty' } } })
+  /* chính sách, điều khoản: dùng chung nội dung với trang Trường */
+  CMS_PAGES.forEach((x, i) => pg({ ...x, sortOrder: 10 + i }))
+
+  /* menu của Khoa */
+  const menu = (o) => add('menuItems', { tenantId: T, groupCode: 'header', parentId: null, type: 'page', icon: null, sortOrder: 1, isVisible: true, openInNewTab: false, deletedAt: null, ...o,
+    translations: o.en ? { en: { label: o.en, status: 'done' } } : {} })
+  const top = (label, en, sortOrder, children = [], extra = {}) => {
+    const r = menu({ label, en, sortOrder, url: children[0]?.[2] ?? extra.url, ...extra })
+    children.forEach(([l, e, url], i) => menu({ label: l, en: e, url, parentId: r.id, sortOrder: i + 1 }))
+    return r
+  }
+  top('Giới thiệu Khoa', 'About', 1, [['Giới thiệu chung', 'Overview', '/trang/gioi-thieu-khoa'], ['Các bộ môn', 'Departments', '/trang/cac-bo-mon']], { icon: 'building' })
+  top('Đào tạo', 'Education', 2, [['Chương trình đào tạo', 'Programs', '/hoc-tap/chuong-trinh-dao-tao'], ['Tuyển sinh', 'Admissions', '/hoc-tap/tuyen-sinh'], ['Lịch học – Lịch thi', 'Timetable & Exams', '/hoc-tap/lich-hoc']], { icon: 'graduation' })
+  top('Tin tức – Sự kiện', 'News & Events', 3, [['Tin tức Khoa', 'Faculty news', '/tin-tuc'], ['Sự kiện', 'Events', '/su-kien'], ['Media', 'Media', '/media']], { icon: 'newspaper' })
+  menu({ label: 'Liên hệ', en: 'Contact', url: '/trang/lien-he-khoa', icon: 'phone', sortOrder: 4 })
+  menu({ label: 'Website Trường', en: 'University website', url: 'https://humg.edu.vn', icon: 'globe', sortOrder: 5, openInNewTab: true, type: 'link' })
+  const col1 = menu({ groupCode: 'footer', label: 'Khoa Công nghệ thông tin', en: 'Faculty of IT', type: 'heading', url: null, sortOrder: 1 })
+  ;[['Giới thiệu Khoa', 'About', '/trang/gioi-thieu-khoa'], ['Các bộ môn', 'Departments', '/trang/cac-bo-mon'], ['Tin tức Khoa', 'Faculty news', '/tin-tuc'], ['Liên hệ Khoa', 'Contact', '/trang/lien-he-khoa']]
+    .forEach(([l, e, url], i) => menu({ groupCode: 'footer', parentId: col1.id, label: l, en: e, url, sortOrder: i + 1 }))
+  const col2 = menu({ groupCode: 'footer', label: 'Chính sách & Quy định', en: 'Policies', type: 'heading', url: null, sortOrder: 2 })
+  ;[['Chính sách bảo mật', 'Privacy policy', '/trang/chinh-sach-bao-mat'], ['Điều khoản sử dụng', 'Terms of use', '/trang/dieu-khoan-su-dung']]
+    .forEach(([l, e, url], i) => menu({ groupCode: 'footer', parentId: col2.id, label: l, en: e, url, sortOrder: i + 1 }))
+  menu({ groupCode: 'utility', label: 'Liên hệ', en: 'Contact', url: '/trang/lien-he-khoa', sortOrder: 1 })
+  menu({ groupCode: 'utility', label: 'Website Trường', en: 'University website', url: 'https://humg.edu.vn', sortOrder: 2, openInNewTab: true, type: 'link' })
+
+  /* banner của Khoa */
+  const day = (n) => new Date(Date.now() + n * 864e5).toISOString().slice(0, 10)
+  add('banners', { tenantId: T, position: 'home_slider', title: 'Tuyển sinh ngành Khoa học dữ liệu 2026', subtitle: 'Chương trình mới của Khoa CNTT — học bổng cho 20 thí sinh đầu vào', linkUrl: '/hoc-tap/tuyen-sinh', imageId: null, isVisible: true, sortOrder: 1, startsOn: day(-5), endsOn: day(60), deletedAt: null })
+  add('banners', { tenantId: T, position: 'sidebar_right', title: 'Ngày hội việc làm CNTT', subtitle: 'Hơn 20 doanh nghiệp công nghệ', linkUrl: '/su-kien', imageId: null, isVisible: true, sortOrder: 1, startsOn: day(-3), endsOn: day(40), deletedAt: null })
 }
 
 function seedAnnouncements(add, col) {

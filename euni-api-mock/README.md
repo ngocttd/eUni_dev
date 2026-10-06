@@ -31,7 +31,7 @@ Role theo mô hình 2 tầng trên SSO: realm role `student lecturer staff manag
 tầng 3 (trang/tenant, chuyên mục, đơn vị, bản ghi) do CMS tự phân bằng grants — `GET /cms-api/api/v1/admin/directory/roles` liệt kê các role.
 Tenant mẫu: `humg` (mặc định) và `cntt` (Khoa CNTT) — gửi header `X-Tenant: cntt`.
 
-Kiểm thử hành vi: `npm test` (tự chạy server tạm, 90 kiểm tra).
+Kiểm thử hành vi: `npm test` (tự chạy server tạm, 94 kiểm tra).
 
 ## Hợp đồng API (cho backend)
 

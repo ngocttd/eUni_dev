@@ -44,8 +44,12 @@ kế tiếp trên website đã thấy thay đổi (khi người dùng chuyển t
 | Banner / Slider | Dải banner trang chủ, popup trang chủ, cột phải trang tin/sự kiện, dải trên chân trang — theo khoảng ngày |
 | Cấu hình → Thông tin chung, SEO & Mạng xã hội | Tên trường, địa chỉ, điện thoại, email, mạng xã hội ở chân trang |
 
+**Website đơn vị (vd. Khoa CNTT, tenant `cntt`)** dùng chung API và màn hình quản trị với Trường, dữ liệu tách riêng theo header `X-Tenant`:
+người quản trị chọn trang ở góc trên CMS; website suy ra tenant theo domain (`NEXT_PUBLIC_TENANT_HOSTS`, dev: `cntt.localhost:3002`).
+Tên cạnh logo, liên hệ, menu, banner, trang tĩnh, tin tức của Khoa đều lấy từ dữ liệu của Khoa; nút “Xem website” trong CMS mở đúng website của trang đang quản trị.
+
 Nếu `cms-api` lỗi, header/footer dùng cấu hình tĩnh `euni-public/src/routes/sitemap.js` để website vẫn chạy.
-Kiểm thử tự động: `node tools/migration/sync-test.mjs` (17 kịch bản: bài viết, hero slide, đối tác, sự kiện, video, cấu hình chân trang,
+Kiểm thử tự động: `node tools/migration/sync-test.mjs` (23 kịch bản, gồm 6 kịch bản website Khoa: bài viết, hero slide, đối tác, sự kiện, video, cấu hình chân trang,
 menu đầu trang/chân trang, banner theo vị trí và hạn hiển thị, trang tĩnh xuất bản/nháp/xóa).
 
 ## Tài liệu
@@ -74,7 +78,7 @@ IdS đã liên kết hai loại tài khoản nên là cùng một người dùng
 Với SSO cần đăng ký Post-logout redirect URI `{origin}/dang-nhap` cho cả 2 app. Kiểm thử: `node tools/migration/e2e-logout.mjs` (15 bước).
 
 ```bash
-npm --prefix euni-api-mock test                     # 90 kiểm tra hành vi API (tự chạy server tạm)
+npm --prefix euni-api-mock test                     # 94 kiểm tra hành vi API (tự chạy server tạm)
 psql … -f euni-api-mock/database/v2/schema.sql -f euni-api-mock/database/v2/test.sql   # schema v2 + RLS
 # với 3 app đang chạy (mock dữ liệu gốc, public build với NEXT_PUBLIC_TENANT_HOSTS="cntt.localhost:3002=cntt"):
 node tools/migration/e2e-v2.mjs                     # 24 bước trình duyệt: workflow, tenant, thông báo, phân quyền

@@ -155,5 +155,68 @@ await step('Trang tĩnh mẫu được liên kết từ chân trang', async () =
   assert.match(await page('/trang/chinh-sach-bao-mat'), /Thông tin thu thập/)
 })
 
+/* ---------- Website Khoa (tenant cntt): cùng API, dữ liệu riêng ---------- */
+const KHOA = 'cntt.localhost:3002'
+const jt = async (method, path, body, token, tenant) => {
+  const res = await fetch(API + path, { method, headers: { 'Content-Type': 'application/json', 'X-Tenant': tenant, ...(token ? { Authorization: `Bearer ${token}` } : {}) }, body: body ? JSON.stringify(body) : undefined })
+  const text = await res.text()
+  if (!res.ok) throw Object.assign(new Error(`${method} ${path} → ${res.status} ${text}`), { status: res.status })
+  return text ? JSON.parse(text) : null
+}
+/* website suy ra tenant theo host (x-forwarded-host khi đi qua proxy/gateway) */
+const pageOn = async (host, path) => (await fetch(PUBLIC + path, { headers: { 'x-forwarded-host': host } })).text()
+const statusOn = async (host, path) => (await fetch(PUBLIC + path, { headers: { 'x-forwarded-host': host } })).status
+const { accessToken: tk } = await j('POST', '/auth-api/api/v1/auth/login', { username: 'pvloc', password: 'Humg@2025' })
+
+await step('Website Khoa: tên, menu, liên hệ của Khoa — không lẫn của Trường', async () => {
+  const html = await pageOn(KHOA, '/')
+  assert.match(html, /KHOA CÔNG NGHỆ THÔNG TIN/)
+  assert.match(html, /Giới thiệu Khoa/)
+  assert.match(html, /024\.3838\.9633/)
+  assert.doesNotMatch(html, /Thông điệp Hiệu trưởng/, 'không được hiện menu của Trường')
+  const truong = await page('/')
+  assert.match(truong, /Thông điệp Hiệu trưởng/)
+  assert.doesNotMatch(truong, /Giới thiệu Khoa/)
+})
+
+await step('Admin Khoa thêm mục menu → hiện ở website Khoa, website Trường không có', async () => {
+  const all = (await jt('GET', `${C}/menu-items?pageSize=500`, null, tk, 'cntt')).items
+  const parent = all.find((m) => m.groupCode === 'header' && !m.parentId && m.label === 'Giới thiệu Khoa')
+  await jt('POST', `${C}/menu-items`, { groupCode: 'header', parentId: parent.id, label: `Menu Khoa ${stamp}`, url: '/trang/cac-bo-mon', type: 'page', sortOrder: 9, isVisible: true }, tk, 'cntt')
+  assert.match(await pageOn(KHOA, '/'), new RegExp(`Menu Khoa ${stamp}`))
+  assert.doesNotMatch(await page('/'), new RegExp(`Menu Khoa ${stamp}`))
+})
+
+await step('Admin Khoa thêm banner → chỉ website Khoa hiện', async () => {
+  await jt('POST', `${C}/banners`, { title: `Banner Khoa ${stamp}`, position: 'home_slider', isVisible: true, sortOrder: 1 }, tk, 'cntt')
+  assert.match(await pageOn(KHOA, '/'), new RegExp(`Banner Khoa ${stamp}`))
+  assert.doesNotMatch(await page('/'), new RegExp(`Banner Khoa ${stamp}`))
+})
+
+await step('Admin Khoa tạo trang tĩnh → /trang/{slug} có ở Khoa, Trường 404', async () => {
+  const slug = `trang-khoa-${stamp}`
+  await jt('POST', `${C}/pages`, { title: `Trang Khoa ${stamp}`, slug, status: 'published', bodyHtml: '<p>Nội dung của Khoa</p>' }, tk, 'cntt')
+  assert.equal(await statusOn(KHOA, `/trang/${slug}`), 200)
+  assert.match(await pageOn(KHOA, `/trang/${slug}`), /Nội dung của Khoa/)
+  assert.equal(await statusOn('localhost:3002', `/trang/${slug}`), 404)
+})
+
+await step('Admin Khoa đăng bài → hiện ở /tin-tuc của Khoa, không lên website Trường', async () => {
+  const cats = (await jt('GET', `${C}/categories?pageSize=50`, null, tk, 'cntt')).items
+  await jt('POST', `${C}/contents`, { title: `Tin Khoa ${stamp}`, categoryId: cats[0].id, ownerUnitCode: 'CNTT', status: 'published', contentBody: '<p>x</p>' }, tk, 'cntt')
+  assert.match(await pageOn(KHOA, '/tin-tuc'), new RegExp(`Tin Khoa ${stamp}`))
+  assert.doesNotMatch(await page('/tin-tuc'), new RegExp(`Tin Khoa ${stamp}`))
+})
+
+await step('Cấu hình Khoa: biên tập viên Khoa không có quyền (403); quản trị sửa → chỉ chân trang Khoa đổi', async () => {
+  await assert.rejects(() => jt('PUT', `${C}/settings/general`, { phone: '000' }, tk, 'cntt'), (e) => e.status === 403)
+  const g = await jt('GET', `${C}/settings/general`, null, t, 'cntt')
+  await jt('PUT', `${C}/settings/general`, { ...g, phone: `024.7777.${stamp.slice(-4)}`, brandName: `KHOA CNTT ${stamp}` }, t, 'cntt')
+  const html = await pageOn(KHOA, '/lien-he')
+  assert.match(html, new RegExp(`024.7777.${stamp.slice(-4)}`))
+  assert.match(html, new RegExp(`KHOA CNTT ${stamp}`))
+  assert.doesNotMatch(await page('/lien-he'), new RegExp(`024.7777.${stamp.slice(-4)}`))
+})
+
 await j('POST', '/cms-api/api/v1/dev/reset')
 console.log(process.exitCode ? '\nCÓ LỖI' : '\nĐồng bộ admin → public: OK')

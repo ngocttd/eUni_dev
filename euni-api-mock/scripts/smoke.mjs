@@ -193,6 +193,14 @@ try {
   check('trang nháp chưa công khai (404)', (await call('GET', `${C}/v1/public/pages/slug/${draft.slug}`)).status === 404, draft)
   check('tìm kiếm có trang CMS', (await call('GET', `${C}/v1/public/search?q=bao%20mat`)).data.items.some((x) => x.to === '/trang/chinh-sach-bao-mat'))
 
+  /* ---------- website Khoa: dữ liệu riêng theo tenant ---------- */
+  const khoaMenu = (await call('GET', `${C}/v1/public/menus/header`, { tenant: 'cntt' })).data
+  check('menu header của Khoa riêng, không lẫn menu Trường', khoaMenu.some((m) => m.label === 'Giới thiệu Khoa') && !khoaMenu.some((m) => m.label === 'Giới thiệu HUMG'), khoaMenu.map((m) => m.label))
+  const khoaSet = (await call('GET', `${C}/v1/public/settings`, { tenant: 'cntt' })).data.general
+  check('cấu hình Khoa có liên hệ, tên logo riêng', khoaSet.phone !== (await call('GET', `${C}/v1/public/settings`)).data.general.phone && !!khoaSet.brandName, khoaSet)
+  check('trang Giới thiệu Khoa chỉ có ở tenant cntt', (await call('GET', `${C}/v1/public/pages/slug/gioi-thieu-khoa`, { tenant: 'cntt' })).status === 200 && (await call('GET', `${C}/v1/public/pages/slug/gioi-thieu-khoa`)).status === 404)
+  check('me/context trả domain của từng trang (để CMS mở đúng website)', ctx.data.tenants.find((x) => x.id === 'cntt')?.domains?.length > 0, ctx.data.tenants)
+
   /* ---------- role 2 tầng trên SSO · tầng 3 do CMS tự phân ---------- */
   const who = async (role) => (await call('POST', '/auth-api/api/v1/auth/login', { body: { role } })).data.user
   const [gvU, cbU, ldU, legacy] = await Promise.all(['lecturer', 'staff', 'manager', 'leader'].map(who))

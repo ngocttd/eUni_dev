@@ -10,6 +10,7 @@ import { cmsApi } from '../../lib/api/cmsApi.js'
 import tenantService from '../services/tenantService.js'
 import { cmsConfig } from '../../routes/cmsConfig.js'
 import Icon from '../lib/Icon.jsx'
+import { setTenantSite, publicSiteUrl } from '../../config/apps.js'
 
 /** Chọn trang (tenant) đang quản trị — danh sách lấy từ claim tenant[] của token qua /api/v1/me/context. */
 function TenantSwitcher({ tenants, current }) {
@@ -40,6 +41,7 @@ function CmsFrame({ children }) {
       if (!alive) return
       if (!c.currentTenant) { setError('Tài khoản chưa được giao quản trị trang nào. Liên hệ quản trị hệ thống.'); return }
       if (tenantService.get() !== c.currentTenant) tenantService.set(c.currentTenant)
+      setTenantSite(c.tenants.find((x) => x.id === c.currentTenant)?.domains)
       setCtx(c)
     }).catch((e) => alive && setError(e?.message || 'Không tải được ngữ cảnh người dùng.'))
     return () => { alive = false }
@@ -54,6 +56,8 @@ function CmsFrame({ children }) {
       meta: [roleLabel, tenantName].filter(Boolean).join(' · ') || cmsConfig.meta,
       items: cmsConfig.items.filter((it) => !it.requires || (user?.permissions || []).some((p) => p === 'cms.*' || p === it.requires)),
       topbarExtra: ctx ? <TenantSwitcher tenants={ctx.tenants} current={ctx.currentTenant} /> : null,
+      /* nút "Xem website" mở website của trang đang quản trị */
+      siteUrl: ctx ? publicSiteUrl('/') : null,
     }
   }, [user, ctx])
 

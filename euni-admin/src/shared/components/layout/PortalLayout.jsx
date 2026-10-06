@@ -155,7 +155,7 @@ export default function PortalLayout({ config, variant = 'portal', children }) {
               </span>
             </span>
             {variant === 'cms'
-              ? <Link to="/" className="portal-shell__site" target="_blank" rel="noopener noreferrer" title={t('Mở website công khai ở tab mới (vẫn giữ đăng nhập CMS)')}>
+              ? <Link to={config.siteUrl || '/'} className="portal-shell__site" target="_blank" rel="noopener noreferrer" title={t('Mở website công khai ở tab mới (vẫn giữ đăng nhập CMS)')}>
                   <Icon name="globe" size={16} />
                   <span>{t('Xem website')}</span>
                 </Link>

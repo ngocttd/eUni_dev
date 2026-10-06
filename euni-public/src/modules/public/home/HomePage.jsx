@@ -98,7 +98,7 @@ function QuickBar() {
   return (
     <div className="quickbar-wrap">
       <div className="home-wide">
-        <nav className="quickbar" aria-label="Truy cập nhanh">
+        <nav className="quickbar" aria-label="Truy cập nhanh" style={{ "--qb-cols": Math.min(quickLinks.length, 8) || 1 }}>
           {quickLinks.map((l) => (
             <Link key={l.label} to={l.to} className="quickbar__item">
               <span className="quickbar__ic"><Icon name={l.icon} size={22} /></span>

@@ -61,7 +61,15 @@ export function CmsSettings() {
         <Panel title={sec} icon={SECTION_ICON[sec] || 'settings'}>
           <form className="cms-form" onSubmit={submit}>
             {sec === 'Thông tin chung' && <>
-                <label>Tên website<input type="text" name="siteName" defaultValue={g.siteName} /></label>
+                <label>Tên website<input type="text" name="siteName" defaultValue={g.siteName} /><span className="cms-hint">Dùng ở dòng bản quyền chân trang và tiêu đề trình duyệt.</span></label>
+                <div className="cms-form__two">
+                  <label>Tên cạnh logo<input type="text" name="brandName" defaultValue={g.brandName || ''} placeholder="Để trống = TRƯỜNG ĐẠI HỌC MỎ - ĐỊA CHẤT" /><span className="cms-hint">Vd. KHOA CÔNG NGHỆ THÔNG TIN cho website Khoa.</span></label>
+                  <label>Tên cạnh logo (EN)<input type="text" name="brandNameEn" defaultValue={g.brandNameEn || ''} placeholder="Để trống = tên tiếng Anh của Trường" /></label>
+                </div>
+                <div className="cms-form__two">
+                  <label>Dòng phụ dưới tên<input type="text" name="tagline" defaultValue={g.tagline || ''} placeholder="Để trống = Tri thức - Bản lĩnh - Sáng tạo - Hội nhập" /></label>
+                  <label>Dòng phụ (EN)<input type="text" name="taglineEn" defaultValue={g.taglineEn || ''} placeholder="Để trống = khẩu hiệu tiếng Anh" /></label>
+                </div>
                 <div className="cms-form__two">
                   <label>Email liên hệ<input type="email" name="email" defaultValue={g.email} /></label>
                   <label>Số điện thoại<input type="text" name="phone" defaultValue={g.phone} /></label>

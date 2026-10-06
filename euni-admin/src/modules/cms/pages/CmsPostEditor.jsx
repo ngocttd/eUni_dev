@@ -6,7 +6,7 @@ import { useMemo, useState } from "react";
 import Icon from "../../../shared/lib/Icon.jsx";
 import { Panel } from "../../../shared/components/ui/page.jsx";
 import { cmsApi } from "../../../lib/api/cmsApi.js";
-import { externalUrl } from "../../../config/apps.js";
+import { publicSiteUrl } from "../../../config/apps.js";
 import { TR_VALUE } from "../../../lib/datasets/loaders.js";
 import { bodyToHtml, toLocalInput, fromLocalInput } from "../../../lib/datasets/format.js";
 import { mediaUrl } from "../../../lib/api/media.js";
@@ -124,7 +124,7 @@ export function CmsPostEditor() {
   };
 
   const preview = () => {
-    const url = externalUrl(`/tin-tuc/${effSlug}`);
+    const url = publicSiteUrl(`/tin-tuc/${effSlug}`); // website của trang đang quản trị (Trường hoặc Khoa)
     if (url) window.open(url, '_blank', 'noopener');
   };
   const addAttachment = () => {

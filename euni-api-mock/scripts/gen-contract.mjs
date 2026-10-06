@@ -50,7 +50,7 @@ const CMS = [
 
   ['GET', '/api/v1/public/tenant', 'public', 'Tenant đang phục vụ (theo X-Tenant / host).', [], null],
 
-  ['GET', '/api/v1/me/context', 'đăng nhập', 'Ngữ cảnh người dùng: tenants được quản trị, permissions (từ role trong token), đơn vị (kèm đơn vị cha), can.{news|announcement}.{view|edit|review|publish}.', [], 'context'],
+  ['GET', '/api/v1/me/context', 'đăng nhập', 'Ngữ cảnh người dùng: tenants được quản trị ({ id, name, rootUnit, domains[] } — domains để CMS mở đúng website của trang), permissions (từ role trong token), đơn vị (kèm đơn vị cha), can.{news|announcement}.{view|edit|review|publish}.', [], 'context'],
   ['GET', '/api/v1/admin/contents', 'news.view + ACL', 'Quản trị: danh sách bài viết user được xem (lọc theo grant). Mỗi dòng có allowedActions[], isScheduled, pendingRevision, version.', [['status', 'string', 'draft | pending_review | published | archived'], ['scheduled', 'boolean', 'chỉ bài hẹn giờ'], ['mine', 'boolean', 'chỉ bài tôi tạo'], ['categoryId', 'integer', ''], ['ownerUnitCode', 'string', ''], ['translation', 'string', 'done | in_progress | missing (bản EN)'], ...PAGED], 'content'],
   ['GET', '/api/v1/admin/contents/trash', 'news.edit|publish + ACL', 'Thùng rác (bài đã xóa mềm).', PAGED, null],
   ['GET', '/api/v1/admin/contents/{id}', 'news.view + ACL', 'Chi tiết bài viết (kèm bản dịch). Header ETag = version.', [], 'content'],

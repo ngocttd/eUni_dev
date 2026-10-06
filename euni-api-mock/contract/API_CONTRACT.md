@@ -83,7 +83,7 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
 | GET | `/api/v1/public/languages` | public | Ngôn ngữ hỗ trợ. |
 | GET | `/api/v1/public/media/{id}/url` | public | URL tải file media. |
 | GET | `/api/v1/public/tenant` | public | Tenant đang phục vụ (theo X-Tenant / host). |
-| GET | `/api/v1/me/context` | đăng nhập | Ngữ cảnh người dùng: tenants được quản trị, permissions (từ role trong token), đơn vị (kèm đơn vị cha), can.{news|announcement}.{view|edit|review|publish}. |
+| GET | `/api/v1/me/context` | đăng nhập | Ngữ cảnh người dùng: tenants được quản trị ({ id, name, rootUnit, domains[] } — domains để CMS mở đúng website của trang), permissions (từ role trong token), đơn vị (kèm đơn vị cha), can.{news|announcement}.{view|edit|review|publish}. |
 | GET | `/api/v1/admin/contents` | news.view + ACL | Quản trị: danh sách bài viết user được xem (lọc theo grant). Mỗi dòng có allowedActions[], isScheduled, pendingRevision, version. |
 | GET | `/api/v1/admin/contents/trash` | news.edit|publish + ACL | Thùng rác (bài đã xóa mềm). |
 | GET | `/api/v1/admin/contents/{id}` | news.view + ACL | Chi tiết bài viết (kèm bản dịch). Header ETag = version. |
@@ -599,7 +599,10 @@ Quyền: *public* = không cần đăng nhập; còn lại cần Bearer + quyề
     {
       "id": "humg",
       "name": "Trường Đại học Mỏ - Địa chất",
-      "rootUnit": "HUMG"
+      "rootUnit": "HUMG",
+      "domains": [
+        "localhost:3002"
+      ]
     }
   ],
   "currentTenant": "humg",
