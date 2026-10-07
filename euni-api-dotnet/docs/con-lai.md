@@ -31,3 +31,7 @@ Cập nhật: sau khi chuyển sang lược đồ quan hệ v2, outbox, S3/MinIO
 ## 3. Khác biệt chủ ý so với mock Node (không phải việc còn lại, để tham chiếu)
 
 `announcements/{id}/stats` kiểm tra quyền bản ghi (403); lỗi giữa chừng rollback cả request; bản ghi có `createdAt/updatedAt`; id khối trang chủ/album-video-podcast dùng dãy chung; vi phạm ràng buộc DB → 409/422; mock rò trường `en` vào menu Khoa CNTT (bản .NET không có).
+
+## Dataset phân hệ ngoài vẫn đọc từ file JSON
+
+Các dataset của `qlns-api`, `qlkhcn-api`, `edusoft-api`, `esb-api` (về, tổ chức, khoa học công nghệ, tuyển sinh, đào tạo, thư viện, cổng My eUni) và `cooperation`, `life`, `utilities` của cms-api được nạp từ `mock-data/*.json` khi API khởi động qua `FileMockData`. Chúng chưa nằm trong PostgreSQL. Nội dung CMS (tin, thông báo, trang, menu, banner, người dùng, quyền…) thì đã đọc trực tiếp từ database. Khi có hệ thống nguồn thật (QLNS, QLKHCN, Edusoft, ESB), thay `DatasetService` bằng client gọi hệ thống đó, hoặc đưa dữ liệu vào bảng riêng nếu CMS tự quản.
