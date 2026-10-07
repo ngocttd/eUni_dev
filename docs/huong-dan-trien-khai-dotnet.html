@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Triển khai cms-api .NET</title>
+<style>
+:root {
+  --bg: #f5f7f7; --surface: #fff; --sunk: #eaeff0; --line: #d3dcde; --fg: #142024; --muted: #56676c;
+  --accent: #0b7a5c; --accent-soft: #d9f0e8; --copper: #a2532a; --copper-soft: #f6e4d9; --me: #2b5fb4; --me-soft: #dfe8f8;
+  --warn: #8a6100; --warn-soft: #fbefcf; --bad: #a3262a; --bad-soft: #fbe3e3; --code-bg: #0f1a1d; --code-fg: #d7e4e2;
+  --font: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace; --r: 8px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1517; --surface: #141e21; --sunk: #1a272b; --line: #2a3a3f; --fg: #e3ecec; --muted: #94a7ab; --accent: #3fc79c; --accent-soft: #123a30;
+    --copper: #e39167; --copper-soft: #3d2518; --me: #7ea6ef; --me-soft: #1a2b4a; --warn: #e3b84f; --warn-soft: #3a2f10; --bad: #f08a8d; --bad-soft: #3d1a1c;
+    --code-bg: #091012; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1517; --surface: #141e21; --sunk: #1a272b; --line: #2a3a3f; --fg: #e3ecec; --muted: #94a7ab; --accent: #3fc79c; --accent-soft: #123a30;
+  --copper: #e39167; --copper-soft: #3d2518; --me: #7ea6ef; --me-soft: #1a2b4a; --warn: #e3b84f; --warn-soft: #3a2f10; --bad: #f08a8d; --bad-soft: #3d1a1c;
+  --code-bg: #091012; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 20px; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.65 var(--font); }
+a { color: var(--accent); }
+.layout { display: grid; grid-template-columns: 270px minmax(0, 1fr); max-width: 1240px; margin: 0 auto; gap: 0 40px; padding: 0 16px; }
+nav.toc { position: sticky; top: 0; align-self: start; max-height: 100vh; overflow: auto; padding: 28px 0 28px; font-size: 14px; }
+nav.toc .brand { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+nav.toc .sub { color: var(--muted); font-size: 12.5px; margin-bottom: 16px; }
+nav.toc ol { list-style: none; margin: 0; padding: 0; counter-reset: s; }
+nav.toc li { counter-increment: s; }
+nav.toc a { display: block; padding: 6px 10px; border-left: 2px solid var(--line); color: var(--muted); text-decoration: none; }
+nav.toc a::before { content: counter(s) ". "; color: var(--muted); }
+nav.toc a:hover { color: var(--fg); border-color: var(--accent); }
+nav.toc a.on { color: var(--fg); border-color: var(--accent); background: var(--accent-soft); font-weight: 600; }
+.theme { margin-top: 14px; font: inherit; font-size: 13px; background: var(--surface); color: var(--fg); border: 1px solid var(--line); border-radius: var(--r); padding: 6px 10px; cursor: pointer; }
+main { padding: 36px 0 80px; min-width: 0; }
+header.hero { padding-bottom: 22px; border-bottom: 1px solid var(--line); margin-bottom: 8px; }
+.hero h1 { font-size: 32px; line-height: 1.2; margin: 0 0 8px; letter-spacing: -.01em; }
+.hero p { color: var(--muted); margin: 0; max-width: 62ch; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.chip { font-size: 12.5px; padding: 3px 10px; border-radius: 99px; background: var(--sunk); border: 1px solid var(--line); }
+section { padding-top: 34px; }
+h2 { font-size: 22px; margin: 0 0 12px; display: flex; gap: 10px; align-items: baseline; }
+h2 .n { color: var(--accent); font-variant-numeric: tabular-nums; }
+h3 { font-size: 16.5px; margin: 24px 0 6px; }
+p { margin: 8px 0; max-width: 78ch; }
+ul, ol { padding-left: 22px; max-width: 78ch; } li { margin: 4px 0; }
+code { overflow-wrap: anywhere; font: 13.5px var(--mono); background: var(--sunk); padding: 1px 5px; border-radius: 5px; }
+.code { position: relative; margin: 12px 0; }
+.code pre { margin: 0; background: var(--code-bg); color: var(--code-fg); border-radius: var(--r); padding: 14px 16px; overflow-x: auto; font: 13px/1.6 var(--mono); }
+.code .lbl { position: absolute; left: 12px; top: -10px; font-size: 11.5px; background: var(--accent); color: #fff; padding: 1px 8px; border-radius: 99px; }
+.code button { position: absolute; right: 8px; top: 8px; font: 12px var(--font); background: #ffffff1c; color: var(--code-fg); border: 1px solid #ffffff30; border-radius: 6px; padding: 3px 9px; cursor: pointer; }
+.code button:hover { background: #ffffff33; }
+pre code { overflow-wrap: normal; background: none; padding: 0; color: inherit; }
+.note { border-left: 3px solid var(--me); background: var(--me-soft); padding: 10px 14px; border-radius: 0 var(--r) var(--r) 0; margin: 14px 0; max-width: 78ch; }
+.note.warn { border-color: var(--warn); background: var(--warn-soft); }
+.note.bad { border-color: var(--bad); background: var(--bad-soft); }
+.note b:first-child { display: block; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 2px; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14.5px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { background: var(--sunk); font-size: 12.5px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+tr:last-child td { border-bottom: 0; }
+.tw { overflow-x: auto; }
+.steps { counter-reset: st; list-style: none; padding: 0; max-width: none; }
+.steps > li { counter-increment: st; position: relative; padding: 4px 0 4px 46px; margin: 14px 0; }
+.steps > li::before { content: counter(st); position: absolute; left: 0; top: 2px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; display: grid; place-items: center; font-size: 14px; }
+.diagram { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 16px; margin: 14px 0; overflow-x: auto; }
+.diagram svg { display: block; margin: 0 auto; max-width: 100%; height: auto; min-width: 640px; }
+.diagram text { font: 13px var(--font); fill: var(--fg); }
+.diagram .box { fill: var(--surface); stroke: var(--line); stroke-width: 1.4; }
+.diagram .acc { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.4; }
+.diagram .cu { fill: var(--copper-soft); stroke: var(--copper); stroke-width: 1.4; }
+.diagram .me { fill: var(--me-soft); stroke: var(--me); stroke-width: 1.4; }
+.diagram .ln { stroke: var(--muted); stroke-width: 1.4; fill: none; }
+.diagram .sm { font-size: 11.5px; fill: var(--muted); }
+.check { list-style: none; padding: 0; max-width: none; }
+.check li { display: flex; gap: 10px; align-items: flex-start; padding: 8px 12px; border: 1px solid var(--line); background: var(--surface); border-radius: var(--r); margin: 6px 0; cursor: pointer; }
+.check input { margin-top: 5px; accent-color: var(--accent); }
+.check input:checked + span { color: var(--muted); text-decoration: line-through; }
+.prog { font-size: 13px; color: var(--muted); margin: 6px 0; }
+details { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 4px 14px; margin: 8px 0; max-width: 78ch; }
+summary { cursor: pointer; font-weight: 600; padding: 8px 0; }
+footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13.5px; }
+@media (max-width: 880px) {
+  .layout { grid-template-columns: minmax(0, 1fr); }
+  nav.toc { position: static; max-height: none; padding-bottom: 0; } nav.toc ol { display: flex; flex-wrap: wrap; gap: 4px; }
+  nav.toc a { border: 1px solid var(--line); border-radius: 99px; padding: 4px 10px; } nav.toc a::before { content: ""; }
+  .hero h1 { font-size: 26px; }
+}
+@media print { nav.toc, .code button, .theme { display: none; } .layout { display: block; } body { background: #fff; } }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc" aria-label="Mục lục">
+  <div class="brand">Triển khai cms-api .NET</div>
+  <div class="sub">euni-api-dotnet · .NET 8 · PostgreSQL 16</div>
+  <ol id="toc">
+    <li><a href="#tong-quan">Tổng quan</a></li>
+    <li><a href="#chuan-bi">Chuẩn bị</a></li>
+    <li><a href="#database">Database</a></li>
+    <li><a href="#cau-hinh">Cấu hình</a></li>
+    <li><a href="#chay">Build và chạy</a></li>
+    <li><a href="#gateway">Gateway, FE</a></li>
+    <li><a href="#storage">File media</a></li>
+    <li><a href="#sso">Đăng nhập SSO</a></li>
+    <li><a href="#van-hanh">Vận hành</a></li>
+    <li><a href="#kiem-tra">Kiểm tra sau triển khai</a></li>
+    <li><a href="#loi">Xử lý lỗi</a></li>
+    <li><a href="#bao-mat">Danh sách bảo mật</a></li>
+  </ol>
+  <button class="theme" id="theme" type="button">Đổi sáng / tối</button>
+</nav>
+
+<main>
+<header class="hero">
+  <h1>Hướng dẫn triển khai cms-api (.NET + PostgreSQL)</h1>
+  <p>Đưa bản .NET của <code>euni-api-mock</code> lên máy chủ thật, thay thế mock Node mà <code>euni-admin</code> và <code>euni-public</code> không phải sửa. Làm lần lượt từng bước; mỗi bước có lệnh kiểm tra.</p>
+  <div class="chips"><span class="chip">1 API · 1 database</span><span class="chip">Row-Level Security theo tenant</span><span class="chip">2 role DB: cms_app · cms_admin</span><span class="chip">Outbox worker cùng tiến trình</span></div>
+</header>
+
+<section id="tong-quan">
+  <h2><span class="n">1</span> Tổng quan</h2>
+  <p>API là một ứng dụng ASP.NET Core duy nhất, kết nối một database PostgreSQL. Mọi request nghiệp vụ đi qua role <code>cms_app</code> (bị RLS giới hạn theo tenant); các tác vụ dựng lược đồ, nạp dữ liệu mẫu, sao lưu và worker outbox đi qua role <code>cms_admin</code>.</p>
+  <div class="diagram" role="img" aria-label="Sơ đồ triển khai">
+    <svg viewBox="0 0 860 300" xmlns="http://www.w3.org/2000/svg">
+      <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--muted)"/></marker></defs>
+      <rect class="me" x="10" y="20" width="150" height="46" rx="8"/><text x="85" y="48" text-anchor="middle">euni-public :3002</text>
+      <rect class="me" x="10" y="90" width="150" height="46" rx="8"/><text x="85" y="118" text-anchor="middle">euni-admin :3001</text>
+      <rect class="box" x="215" y="50" width="150" height="70" rx="8"/><text x="290" y="80" text-anchor="middle">API gateway</text><text class="sm" x="290" y="100" text-anchor="middle">Nginx / APISIX</text>
+      <rect class="acc" x="420" y="30" width="190" height="110" rx="8"/><text x="515" y="58" text-anchor="middle" style="font-weight:700">cms-api (.NET 8)</text><text class="sm" x="515" y="80" text-anchor="middle">Api → Application → Domain</text><text class="sm" x="515" y="98" text-anchor="middle">+ OutboxRelay (nền)</text><text class="sm" x="515" y="116" text-anchor="middle">cổng 3000</text>
+      <rect class="cu" x="680" y="10" width="170" height="70" rx="8"/><text x="765" y="40" text-anchor="middle" style="font-weight:700">PostgreSQL 16</text><text class="sm" x="765" y="60" text-anchor="middle">schema cms (v2 + v2.1)</text>
+      <rect class="box" x="680" y="105" width="170" height="52" rx="8"/><text x="765" y="130" text-anchor="middle">MinIO / S3</text><text class="sm" x="765" y="146" text-anchor="middle">bucket cms-public</text>
+      <rect class="box" x="420" y="200" width="190" height="52" rx="8"/><text x="515" y="224" text-anchor="middle">Identity Server (SSO)</text><text class="sm" x="515" y="241" text-anchor="middle">chỉ cấp token</text>
+      <path class="ln" d="M160 43L215 75" marker-end="url(#ar)"/><path class="ln" d="M160 113L215 95" marker-end="url(#ar)"/>
+      <path class="ln" d="M365 85L420 85" marker-end="url(#ar)"/>
+      <path class="ln" d="M610 60L680 45" marker-end="url(#ar)"/><path class="ln" d="M610 115L680 128" marker-end="url(#ar)"/>
+      <path class="ln" stroke-dasharray="5 4" d="M515 200L515 140" marker-end="url(#ar)"/>
+      <text class="sm" x="680" y="205">API → DB dùng 2 role:</text><text class="sm" x="680" y="223">cms_app (request nghiệp vụ)</text><text class="sm" x="680" y="241">cms_admin (bảo trì, worker)</text><text class="sm" x="528" y="176" >kiểm tra JWT</text>
+    </svg>
+  </div>
+  <div class="tw"><table>
+    <tr><th>Thành phần</th><th>Việc của nó</th></tr>
+    <tr><td><code>euni-api-dotnet/src/HUMG.CMS.Api</code></td><td>Ứng dụng chạy: HTTP, xác định tenant, lỗi chuẩn hóa</td></tr>
+    <tr><td><code>database/v2/schema.sql</code> + <code>amendments.sql</code></td><td>Lược đồ quan hệ (RLS, bảng con đã vá) — ứng dụng tự áp khi khởi động</td></tr>
+    <tr><td><code>mock-data/</code></td><td>Chỉ để nạp database <b>trống</b> lần đầu và làm dataset cho hệ thống ngoài; không phải nguồn dữ liệu lúc chạy</td></tr>
+  </table></div>
+  <div class="note"><b>Lưu ý</b>Chỉ chạy <b>một</b> trong hai API (mock Node hoặc .NET) ở cổng 3000 — hai app FE đều mặc định trỏ vào đó.</div>
+</section>
+
+<section id="chuan-bi">
+  <h2><span class="n">2</span> Chuẩn bị</h2>
+  <div class="tw"><table>
+    <tr><th>Yêu cầu</th><th>Phiên bản</th><th>Ghi chú</th></tr>
+    <tr><td>.NET SDK (build) / ASP.NET Runtime (chạy)</td><td>8.0</td><td>Ubuntu 24.04: <code>apt install dotnet-sdk-8.0</code></td></tr>
+    <tr><td>PostgreSQL</td><td>16</td><td>Cần extension <code>unaccent</code>, <code>pg_trgm</code>, <code>ltree</code> (gói contrib; đều là extension "trusted")</td></tr>
+    <tr><td>MinIO hoặc S3 tương thích</td><td>bất kỳ</td><td>Tùy chọn. Không có thì lưu file trên đĩa (<code>STORAGE_PROVIDER=local</code>) — chỉ nên dùng khi dev</td></tr>
+    <tr><td>Identity Server</td><td>OIDC</td><td>Tùy chọn. Không có thì dùng <code>AUTH_MODE=mock</code> (chỉ để thử, không dùng thật)</td></tr>
+    <tr><td>Node.js</td><td>22</td><td>Chỉ để chạy bộ kiểm thử trong <code>tests/</code>, không cần trên máy chủ chạy API</td></tr>
+  </table></div>
+  <div class="code"><span class="lbl">lấy mã nguồn</span><button type="button">Sao chép</button><pre><code>git clone &lt;repo-eUni_dev&gt;
+cd eUni_dev/euni-api-dotnet</code></pre></div>
+</section>
+
+<section id="database">
+  <h2><span class="n">3</span> Database</h2>
+  <p>Cần <b>hai role đăng nhập khác nhau</b> — đây là nguyên tắc của tài liệu kiến trúc: role ứng dụng không được bỏ qua RLS, tác vụ đồng bộ/bảo trì dùng role riêng.</p>
+  <div class="tw"><table>
+    <tr><th>Role</th><th>Thuộc tính</th><th>Dùng cho</th><th>Biến môi trường</th></tr>
+    <tr><td><code>cms_app</code></td><td>LOGIN · <b>NOBYPASSRLS</b></td><td>Mọi request nghiệp vụ</td><td><code>DATABASE_URL</code></td></tr>
+    <tr><td><code>cms_admin</code></td><td>LOGIN · BYPASSRLS · chủ sở hữu database</td><td>Áp lược đồ, nạp dữ liệu mẫu, sao lưu/phục hồi, worker outbox</td><td><code>DATABASE_ADMIN_URL</code></td></tr>
+  </table></div>
+  <ol class="steps">
+    <li><b>Tạo role và database</b> (bằng superuser). Đổi mật khẩu ngay trong lệnh — đừng dùng mật khẩu dev.
+      <div class="code"><span class="lbl">bash</span><button type="button">Sao chép</button><pre><code>sudo -u postgres env DB_NAME=euni_cms \
+  ADMIN_PASSWORD='&lt;mật-khẩu-cms_admin&gt;' APP_PASSWORD='&lt;mật-khẩu-cms_app&gt;' \
+  ./database/v2/setup-dev.sh</code></pre></div></li>
+    <li><b>Áp lược đồ</b> — có hai cách, chọn một.
+      <ul>
+        <li><b>Tự động (mặc định):</b> API tự chạy <code>schema.sql</code> + <code>amendments.sql</code> khi khởi động (idempotent, có khóa nên nhiều instance khởi động cùng lúc vẫn an toàn).</li>
+        <li><b>DBA chạy tay:</b> đặt <code>DB_MIGRATE=false</code> cho API rồi chạy:
+          <div class="code"><span class="lbl">bash</span><button type="button">Sao chép</button><pre><code>PGPASSWORD='&lt;mật-khẩu-cms_admin&gt;' psql -h &lt;host&gt; -U cms_admin -d euni_cms -v ON_ERROR_STOP=1 \
+  -f database/v2/schema.sql -f database/v2/amendments.sql</code></pre></div></li>
+      </ul></li>
+    <li><b>Dữ liệu ban đầu.</b> Lần khởi động đầu, nếu database chưa có dữ liệu, API nạp dữ liệu mẫu từ <code>mock-data/</code> (2 tenant <code>humg</code>, <code>cntt</code>, tài khoản mẫu…). Với môi trường thật, dữ liệu này đến từ đồng bộ danh bạ/đơn vị; xem mục <a href="#loi">Xử lý lỗi</a> nếu muốn khởi tạo trống.</li>
+    <li><b>Kiểm tra RLS đã hoạt động</b> bằng chính role ứng dụng — không có ngữ cảnh tenant thì không thấy dòng nào:
+      <div class="code"><span class="lbl">bash</span><button type="button">Sao chép</button><pre><code>PGPASSWORD='&lt;mật-khẩu-cms_app&gt;' psql -h &lt;host&gt; -U cms_app -d euni_cms -At -c "select count(*) from cms.news"
+# kết quả mong đợi: 0</code></pre></div></li>
+  </ol>
+  <div class="note warn"><b>Không làm</b>Không cấp BYPASSRLS cho <code>cms_app</code> và không đặt <code>DATABASE_URL</code> = <code>DATABASE_ADMIN_URL</code>: khi đó RLS không còn bảo vệ tenant.</div>
+  <div class="note"><b>Sao lưu database</b>Ngoài tính năng sao lưu trong CMS (xuất JSON toàn bộ dữ liệu), cần <code>pg_dump</code> định kỳ ở tầng hạ tầng: <code>pg_dump -Fc -d euni_cms -n cms</code>. Bảng <code>audit_logs</code> là partition theo tháng — gọi <code>select cms.ensure_audit_partition(current_date + interval '1 month')</code> mỗi tháng (API tự tạo tháng hiện tại và tháng sau lúc khởi động).</div>
+</section>
+
+<section id="cau-hinh">
+  <h2><span class="n">4</span> Cấu hình</h2>
+  <p>Toàn bộ qua biến môi trường. Giá trị trong cột "Mặc định" chỉ phù hợp khi dev.</p>
+  <div class="tw"><table>
+    <tr><th>Biến</th><th>Mặc định</th><th>Ý nghĩa · khuyến nghị khi triển khai</th></tr>
+    <tr><td><code>DATABASE_URL</code></td><td>…cms_app / cms_app_dev</td><td>Chuỗi Npgsql hoặc <code>postgres://user:pass@host:5432/db</code>. Role <b>cms_app</b></td></tr>
+    <tr><td><code>DATABASE_ADMIN_URL</code></td><td>…cms_admin / cms_admin_dev</td><td>Role <b>cms_admin</b>. Giữ bí mật hơn; chỉ API và worker dùng</td></tr>
+    <tr><td><code>DB_MIGRATE</code></td><td>true</td><td><code>false</code> nếu DBA áp lược đồ bằng tay</td></tr>
+    <tr><td><code>PORT</code> · <code>HOST</code></td><td>3000 · 127.0.0.1</td><td>Sau reverse proxy: <code>HOST=0.0.0.0</code> hoặc giữ 127.0.0.1 nếu proxy cùng máy</td></tr>
+    <tr><td><code>BASE_PATH</code></td><td>/euni-mock-api</td><td>Tiền tố khi đặt sau gateway. API nhận <b>cả</b> URL có và không có tiền tố, nên gateway cắt hay giữ tiền tố đều chạy</td></tr>
+    <tr><td><code>CORS_ORIGINS</code></td><td>localhost:3001/3002</td><td><b>Bắt buộc đổi</b> thành origin thật của hai website, phân tách bằng dấu phẩy</td></tr>
+    <tr><td><code>AUTH_MODE</code></td><td>mock</td><td><code>oidc</code> khi có Identity Server (xem mục 8). <b>Thật phải là oidc</b></td></tr>
+    <tr><td><code>JWT_SECRET</code> · <code>JWT_EXPIRES_IN</code></td><td>dev-only-change-me · 8h</td><td>Chỉ dùng ở <code>AUTH_MODE=mock</code>. Nếu vẫn dùng: ≥ 32 ký tự ngẫu nhiên</td></tr>
+    <tr><td><code>STORAGE_PROVIDER</code></td><td>local</td><td><code>s3</code> cho MinIO/S3 (mục 7)</td></tr>
+    <tr><td><code>OUTBOX_RELAY</code> · <code>OUTBOX_POLL_SECONDS</code></td><td>true · 5</td><td>Worker sự kiện chạy cùng API. <code>false</code> nếu muốn chạy riêng</td></tr>
+    <tr><td><code>API_LOG</code></td><td>true</td><td>Ghi mỗi request ra stdout; <code>false</code> ở môi trường thật nếu đã có log ở proxy</td></tr>
+  </table></div>
+  <div class="note bad"><b>Không đưa vào git</b>Mật khẩu database, <code>S3_SECRET_KEY</code>, <code>JWT_SECRET</code> đặt trong biến môi trường/secret store của máy chủ, không commit. File mẫu <code>.env.example</code> chỉ chứa giá trị dev.</div>
+</section>
+
+<section id="chay">
+  <h2><span class="n">5</span> Build và chạy</h2>
+  <h3>Cách A — chạy trực tiếp (systemd)</h3>
+  <ol class="steps">
+    <li><b>Publish</b>
+      <div class="code"><span class="lbl">bash</span><button type="button">Sao chép</button><pre><code>dotnet publish src/HUMG.CMS.Api -c Release -o /opt/euni-api
+ls /opt/euni-api/mock-data | head -3           # dữ liệu mẫu đi kèm bản publish
+ls /opt/euni-api/contract                      # openapi.json (phục vụ ở /docs/openapi.json)</code></pre></div></li>
+    <li><b>Tạo file môi trường</b> <code>/etc/euni-api.env</code> (quyền <code>600</code>, chủ sở hữu là user chạy dịch vụ):
+      <div class="code"><span class="lbl">/etc/euni-api.env</span><button type="button">Sao chép</button><pre><code>PORT=3000
+HOST=127.0.0.1
+API_LOG=false
+BASE_PATH=/euni-api
+CORS_ORIGINS=https://portal.humg.edu.vn,https://cms.humg.edu.vn
+DATABASE_URL=Host=db.noi-bo;Database=euni_cms;Username=cms_app;Password=...
+DATABASE_ADMIN_URL=Host=db.noi-bo;Database=euni_cms;Username=cms_admin;Password=...
+AUTH_MODE=oidc
+OIDC_AUTHORITY=https://id.humg.edu.vn
+OIDC_AUDIENCE=cms-api
+STORAGE_PROVIDER=s3
+S3_ENDPOINT=http://minio.noi-bo:9000
+S3_ACCESS_KEY=...
+S3_SECRET_KEY=...</code></pre></div></li>
+    <li><b>Dịch vụ systemd</b> <code>/etc/systemd/system/euni-api.service</code>:
+      <div class="code"><span class="lbl">systemd</span><button type="button">Sao chép</button><pre><code>[Unit]
+Description=HUMG eUni cms-api
+After=network-online.target postgresql.service
+
+[Service]
+WorkingDirectory=/opt/euni-api
+ExecStart=/usr/bin/dotnet /opt/euni-api/HUMG.CMS.Api.dll
+EnvironmentFile=/etc/euni-api.env
+User=euni
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target</code></pre></div>
+      <div class="code"><span class="lbl">bash</span><button type="button">Sao chép</button><pre><code>sudo systemctl daemon-reload &amp;&amp; sudo systemctl enable --now euni-api
+journalctl -u euni-api -f          # lần đầu: áp lược đồ + nạp dữ liệu mẫu, rồi in "eUni API gateway (.NET)"</code></pre></div></li>
+  </ol>
+  <h3>Cách B — Docker</h3>
+  <p><code>Dockerfile</code> và <code>docker-compose.yml</code> (API + PostgreSQL + MinIO) có sẵn trong <code>euni-api-dotnet/</code>. Truyền cấu hình qua biến môi trường như bảng ở mục 4.</p>
+  <div class="code"><span class="lbl">bash</span><button type="button">Sao chép</button><pre><code>docker build -t euni-api .
+docker run -d --name euni-api -p 127.0.0.1:3000:3000 --env-file /etc/euni-api.env euni-api</code></pre></div>
+  <div class="note warn"><b>Chưa kiểm chứng</b><code>docker-compose.yml</code> và image chưa được chạy thử (môi trường dựng repo không có Docker). Hãy chạy thử ở môi trường staging trước.</div>
+  <h3>Cập nhật phiên bản</h3>
+  <ul>
+    <li>Triển khai bản mới → khởi động lại dịch vụ. Lược đồ được áp lại an toàn (idempotent); không có bước migrate riêng.</li>
+    <li>Nhiều instance chạy song song được (khóa advisory khi khởi động; worker outbox dùng <code>SKIP LOCKED</code>), nhưng API hiện xử lý tuần tự từng request trong mỗi instance.</li>
+  </ul>
+</section>
+
+<section id="gateway">
+  <h2><span class="n">6</span> Gateway và hai website</h2>
+  <h3>Reverse proxy (Nginx)</h3>
+  <p>Cần chuyển nguyên header <code>Host</code>/<code>X-Forwarded-Host</code> — tenant được suy ra từ tên miền khi không có <code>X-Tenant</code> — và cho phép upload tệp lớn.</p>
+  <div class="code"><span class="lbl">nginx</span><button type="button">Sao chép</button><pre><code>location /euni-api/ {
+    proxy_pass http://127.0.0.1:3000;            # giữ nguyên tiền tố: API nhận cả có và không có BASE_PATH
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-Host $host;
+    proxy_set_header X-Forwarded-For $remote_addr;
+    client_max_body_size 50m;
+}</code></pre></div>
+  <h3>Trỏ hai website vào API</h3>
+  <p>Hai app gọi <code>${NEXT_PUBLIC_API_GATEWAY_URL}/&lt;service&gt;/api/v1/…</code>. Đặt biến này <b>tại thời điểm build</b> rồi build lại:</p>
+  <div class="tw"><table>
+    <tr><th>Biến (euni-admin và euni-public)</th><th>Giá trị ví dụ</th></tr>
+    <tr><td><code>NEXT_PUBLIC_API_GATEWAY_URL</code></td><td><code>https://api.humg.edu.vn/euni-api</code> (= gateway + <code>BASE_PATH</code>)</td></tr>
+    <tr><td><code>NEXT_PUBLIC_AUTH_MODE</code></td><td><code>oidc</code> khi dùng Identity Server; <code>mock</code> chỉ để thử</td></tr>
+    <tr><td><code>NEXT_PUBLIC_TENANT_HOSTS</code> · <code>NEXT_PUBLIC_DEFAULT_TENANT</code></td><td>Tên miền → tenant (website Khoa/Phòng). Tên miền mới có thể thêm trong CMS, không cần build lại</td></tr>
+  </table></div>
+  <div class="note"><b>Không cần sửa mã</b>Không dòng nào của <code>euni-admin</code>/<code>euni-public</code> phải đổi: hợp đồng API được giữ nguyên và đã kiểm chứng (118 kiểm tra hành vi, 724 yêu cầu đối chiếu, 25 kịch bản đồng bộ với website thật).</div>
+</section>
+
+<section id="storage">
+  <h2><span class="n">7</span> File media (MinIO / S3)</h2>
+  <ol class="steps">
+    <li>Tạo user MinIO có quyền đọc/ghi/xóa trên bucket <code>cms-public</code> (API tự tạo bucket nếu chưa có và user được phép).</li>
+    <li>Đặt <code>STORAGE_PROVIDER=s3</code>, <code>S3_ENDPOINT</code>, <code>S3_ACCESS_KEY</code>, <code>S3_SECRET_KEY</code>; <code>S3_BUCKET</code> (mặc định <code>cms-public</code>), <code>S3_FORCE_PATH_STYLE=true</code> với MinIO.</li>
+    <li>Không cần mở bucket ra Internet: API phục vụ file qua đúng URL tương đối cũ <code>cms-api/uploads/&lt;object_key&gt;</code>, nên ảnh trên website không đổi đường dẫn.</li>
+  </ol>
+  <p>Object key có dạng <code>{tenant}/yyyy/MM/{uuid}.{ext}</code>; thông tin file nằm ở bảng <code>cms.media</code>. Nếu ghi database lỗi sau khi đã upload, API tự xóa file vừa tải lên (bù trừ); nếu việc xóa cũng lỗi thì lỗi được ghi ra stderr và trả về, không bị bỏ qua.</p>
+  <div class="note warn"><b>Chưa có</b>Bucket <code>cms-private</code> (đính kèm thông báo, presigned URL) chưa làm. Chuyển file đang lưu đĩa sang MinIO: sao chép nội dung thư mục <code>uploads/</code> vào bucket theo đúng <code>object_key</code> trong bảng <code>cms.media</code>.</div>
+</section>
+
+<section id="sso">
+  <h2><span class="n">8</span> Đăng nhập: Identity Server</h2>
+  <p>Ở <code>AUTH_MODE=oidc</code>, API <b>chỉ kiểm tra</b> token do Identity Server cấp (chữ ký lấy từ <code>{OIDC_AUTHORITY}/.well-known/openid-configuration</code>, issuer, audience, hạn dùng). Các endpoint đăng nhập của mock (<code>/auth-api/…/login</code>, <code>refresh</code>) trả 501. Không đổi cấu hình SSO hay gateway.</p>
+  <div class="tw"><table>
+    <tr><th>Cần có ở Identity Server</th><th>Chi tiết</th></tr>
+    <tr><td>Audience</td><td>Access token có <code>aud = cms-api</code> (biến <code>OIDC_AUDIENCE</code>)</td></tr>
+    <tr><td>Role</td><td>Đọc từ claim <code>roles</code>, <code>realm_access.roles</code> và <code>resource_access.&lt;OIDC_ROLE_CLIENT&gt;.roles</code>. Realm role: <code>student lecturer staff manager parent applicant alumni</code>; client role: <code>cms.viewer cms.author cms.reviewer cms.editor cms.admin</code></td></tr>
+    <tr><td>Claim bổ sung</td><td><code>tenants</code> (mặc định <code>humg</code>), <code>units</code> (mã đơn vị), <code>staff_code</code>, <code>student_code</code>, <code>name</code>, <code>email</code></td></tr>
+    <tr><td>Phân quyền chi tiết</td><td>Không cấu hình trên SSO: CMS tự quản bằng bảng grants (trang, chuyên mục, đơn vị, bản ghi) tại màn hình Phân quyền</td></tr>
+  </table></div>
+  <div class="note warn"><b>Cần xác nhận</b>Tên claim thật của Identity Server chưa được thử với hệ thống thật (mới thử bằng khóa RSA cục bộ). Nếu khác, chỉnh <code>OidcTokenService.ToPrincipal</code>. Người dùng phải có grant tương ứng trong CMS mới thấy được trang quản trị của tenant.</div>
+  <div class="note bad"><b>Quan trọng</b>Không dùng <code>AUTH_MODE=mock</code> ở môi trường thật: mật khẩu dev <code>Humg@2025</code> và khóa HS256 là công khai trong repo.</div>
+</section>
+
+<section id="van-hanh">
+  <h2><span class="n">9</span> Vận hành</h2>
+  <div class="tw"><table>
+    <tr><th>Việc</th><th>Cách làm</th></tr>
+    <tr><td>Log</td><td><code>journalctl -u euni-api</code>. Lỗi nghiệp vụ trả JSON <code>{"message": …}</code>; lỗi hệ thống ghi stack ra log, trả 500 "Lỗi hệ thống."</td></tr>
+    <tr><td>Worker outbox</td><td>Sự kiện (xuất bản, gỡ, cập nhật, xóa) nằm ở <code>cms.outbox</code>. Xem tồn đọng:
+      <code>select type, attempts, last_error, available_at from cms.outbox where processed_at is null order by available_at;</code>
+      Sự kiện lỗi được thử lại với độ trễ tăng dần, tối đa 8 lần rồi dừng để người vận hành xem <code>last_error</code>.</td></tr>
+    <tr><td>Thông báo hẹn giờ</td><td>Hiển thị ngay khi <code>publishAt</code> đến (tính lúc đọc). Outbox chỉ chốt số người nhận (<code>recipient_count</code>) đúng lúc đến giờ.</td></tr>
+    <tr><td>Sao lưu / phục hồi</td><td>CMS → Sao lưu (chỉ <code>cms.admin</code>): tải JSON toàn bộ dữ liệu mọi trang, phục hồi từ bản đã lưu hoặc tệp tải lên. Nhật ký audit và danh sách sao lưu được giữ nguyên khi phục hồi. Không thay thế <code>pg_dump</code>.</td></tr>
+    <tr><td>Thêm website Khoa/Phòng</td><td>CMS → Quản trị → Trang đơn vị (không cần build lại FE; DNS trỏ về máy chủ website, proxy giữ <code>Host</code>)</td></tr>
+    <tr><td>Quay lui phiên bản</td><td>Triển khai lại bản trước. Lược đồ chỉ thêm (không xóa cột), nên bản trước vẫn chạy được trên database đã nâng.</td></tr>
+  </table></div>
+  <div class="note warn"><b>Không dùng ở môi trường thật</b><code>POST /cms-api/api/v1/dev/reset</code> xóa toàn bộ dữ liệu và nạp lại dữ liệu mẫu. Chặn đường dẫn <code>/api/v1/dev/</code> ở gateway.</div>
+</section>
+
+<section id="kiem-tra">
+  <h2><span class="n">10</span> Kiểm tra sau triển khai</h2>
+  <p>Tick từng mục (trạng thái lưu trong trình duyệt của bạn). Thay <code>$API</code> bằng URL gateway.</p>
+  <div class="prog" id="prog"></div>
+  <ul class="check" id="checks">
+    <li><label><input type="checkbox"><span>API lên: <code>curl $API/</code> trả JSON có <code>"name":"HUMG eUni API gateway (.NET)"</code></span></label></li>
+    <li><label><input type="checkbox"><span>Dữ liệu công khai đọc từ database: <code>curl "$API/cms-api/api/v1/public/home"</code> trả slide, tin; <code>curl -H "X-Tenant: cntt" …/public/settings</code> trả cấu hình Khoa</span></label></li>
+    <li><label><input type="checkbox"><span>RLS: role <code>cms_app</code> không có ngữ cảnh tenant đọc <code>cms.news</code> được 0 dòng (mục 3)</span></label></li>
+    <li><label><input type="checkbox"><span>Không có token: <code>curl -i $API/cms-api/api/v1/admin/contents</code> trả 401</span></label></li>
+    <li><label><input type="checkbox"><span>Đăng nhập qua SSO vào <code>euni-admin</code> → vào được CMS, danh sách bài viết hiện</span></label></li>
+    <li><label><input type="checkbox"><span>Tạo bài nháp → gửi duyệt → duyệt → bài hiện trên <code>euni-public</code> (tin tức mới sau lần tải trang kế tiếp)</span></label></li>
+    <li><label><input type="checkbox"><span>Đổi trang sang <code>cntt</code> ở CMS → chỉ thấy dữ liệu của Khoa; website Khoa (tên miền riêng) không lẫn dữ liệu của Trường</span></label></li>
+    <li><label><input type="checkbox"><span>Tải ảnh lên Media → ảnh hiện ở bài viết; kiểm tra object có trong MinIO và dòng trong <code>cms.media</code></span></label></li>
+    <li><label><input type="checkbox"><span>Thông báo hẹn giờ vài phút sau → <code>cms.outbox</code> có sự kiện <code>processed_at</code> đúng lúc đến giờ, <code>recipient_count</code> được điền</span></label></li>
+    <li><label><input type="checkbox"><span>Trình duyệt không báo lỗi CORS khi hai website gọi API (kiểm tra <code>CORS_ORIGINS</code>)</span></label></li>
+    <li><label><input type="checkbox"><span>Đã chặn <code>/api/v1/dev/reset</code> ở gateway; đã đổi mọi mật khẩu/khóa dev</span></label></li>
+  </ul>
+  <details><summary>Chạy bộ kiểm thử tự động (máy tính của lập trình viên / staging)</summary>
+    <p>Dùng một database <b>riêng cho kiểm thử</b> — các bài này gọi <code>/dev/reset</code> nên sẽ xóa dữ liệu của database mà chúng trỏ tới.</p>
+    <div class="code"><span class="lbl">bash</span><button type="button">Sao chép</button><pre><code>cd euni-api-dotnet
+dotnet test                                   # 50 test (đặt TEST_DATABASE_URL, TEST_DATABASE_ADMIN_URL, TEST_S3_ENDPOINT để chạy phần database/S3)
+SMOKE_DB=euni_test node tests/contract/smoke.mjs          # 118 kiểm tra hành vi API
+node ../tools/migration/sync-test.mjs         # 25 kịch bản CMS → website (cần API :3000 + euni-public :3002)</code></pre></div>
+  </details>
+</section>
+
+<section id="loi">
+  <h2><span class="n">11</span> Xử lý lỗi thường gặp</h2>
+  <details><summary>API thoát ngay lúc khởi động, log có <code>permission denied</code> / <code>must be owner</code></summary>
+    <p><code>DATABASE_ADMIN_URL</code> phải là role sở hữu database/schema <code>cms</code> (<code>cms_admin</code>). Nếu schema đã được tạo bởi superuser, chuyển chủ sở hữu hoặc chạy lược đồ bằng đúng role này.</p></details>
+  <details><summary><code>extension "ltree" is not available</code> hoặc không tạo được extension</summary>
+    <p>Cài gói contrib của PostgreSQL (<code>postgresql-16</code> trên Debian/Ubuntu đã gồm). Extension là loại "trusted" nên chủ sở hữu database tạo được; nếu vẫn lỗi, superuser chạy <code>CREATE EXTENSION unaccent, pg_trgm, ltree</code> trong database.</p></details>
+  <details><summary>Mọi request đọc đều rỗng / 403 "Không được ghi dữ liệu của trang này"</summary>
+    <p>Gần như chắc chắn <code>DATABASE_URL</code> đang là role không đúng, hoặc tenant gửi lên (header <code>X-Tenant</code>/tên miền) không có trong <code>cms.tenants</code> (khi đó API trả 400 "Tenant … không tồn tại hoặc đã tắt"). Kiểm tra <code>select id, is_active from cms.tenants</code>.</p></details>
+  <details><summary>Trình duyệt báo CORS</summary>
+    <p>Origin của website chưa nằm trong <code>CORS_ORIGINS</code> (so khớp chính xác scheme + host + cổng). Header tùy biến <code>X-Tenant</code>, <code>If-Match</code> đã được cho phép.</p></details>
+  <details><summary>Ảnh vỡ sau khi đặt sau gateway</summary>
+    <p>URL media là đường dẫn <b>tương đối</b> (<code>cms-api/uploads/…</code>) được FE ghép vào <code>NEXT_PUBLIC_API_GATEWAY_URL</code>; đảm bảo biến này gồm cả tiền tố gateway và proxy chuyển <code>/cms-api/uploads/</code> về API.</p></details>
+  <details><summary>Trả 409 "Dữ liệu bị trùng …" hoặc 422 "Dữ liệu không hợp lệ …"</summary>
+    <p>Vi phạm ràng buộc database (trùng slug/mã, tham chiếu không tồn tại, giá trị ngoài danh sách). Đây là lỗi của dữ liệu gửi lên, không phải lỗi hệ thống; tên ràng buộc nằm trong thông báo.</p></details>
+  <details><summary>Muốn khởi động với database trống, không nạp dữ liệu mẫu</summary>
+    <p>Hiện chưa có công tắc. Cách làm: áp lược đồ bằng <code>psql</code> (<code>DB_MIGRATE=false</code>), tự tạo dòng <code>cms.app_meta(key='schemaVersion')</code> để API coi như đã khởi tạo, rồi đồng bộ tenant, đơn vị, danh bạ vào <code>cms.tenants</code>, <code>cms.org_units</code>, <code>cms.user_directory</code>. Nên bổ sung công tắc này khi có nguồn đồng bộ thật.</p></details>
+  <details><summary>Sự kiện outbox kẹt (<code>attempts = 8</code>, <code>processed_at</code> rỗng)</summary>
+    <p>Đọc <code>last_error</code>, khắc phục nguyên nhân, rồi đặt lại: <code>update cms.outbox set attempts = 0, available_at = now() where id = …</code>.</p></details>
+</section>
+
+<section id="bao-mat">
+  <h2><span class="n">12</span> Danh sách bảo mật trước khi mở ra ngoài</h2>
+  <ul class="check" id="sec">
+    <li><label><input type="checkbox"><span>Mật khẩu <code>cms_app</code>, <code>cms_admin</code> đã đổi; <code>cms_app</code> vẫn NOBYPASSRLS (<code>select rolname, rolbypassrls from pg_roles where rolname like 'cms_%'</code>)</span></label></li>
+    <li><label><input type="checkbox"><span><code>AUTH_MODE=oidc</code>, <code>OIDC_AUTHORITY</code> là https và <code>OIDC_REQUIRE_HTTPS</code> không bị tắt</span></label></li>
+    <li><label><input type="checkbox"><span>API chỉ nghe ở mạng nội bộ hoặc sau proxy TLS; PostgreSQL và MinIO không mở ra Internet</span></label></li>
+    <li><label><input type="checkbox"><span><code>CORS_ORIGINS</code> chỉ gồm origin thật của hai website</span></label></li>
+    <li><label><input type="checkbox"><span><code>/api/v1/dev/reset</code> bị chặn ở gateway</span></label></li>
+    <li><label><input type="checkbox"><span>File <code>/etc/euni-api.env</code> quyền 600; bí mật không nằm trong git, image, hay log</span></label></li>
+    <li><label><input type="checkbox"><span>Có lịch <code>pg_dump</code> và đã thử phục hồi ít nhất một lần</span></label></li>
+    <li><label><input type="checkbox"><span>Có người phụ trách xem bảng <code>cms.outbox</code> (sự kiện lỗi) và dung lượng <code>cms.audit_logs</code></span></label></li>
+  </ul>
+  <p>Các phần chưa làm (gửi email/push, bucket riêng, tìm kiếm trong database, tách worker…) nằm ở <a href="DOTNET_API_CON_LAI.md">DOTNET_API_CON_LAI.md</a>. Tài liệu đánh giá và kết quả kiểm chứng: <a href="DOTNET_API_ASSESSMENT.md">DOTNET_API_ASSESSMENT.md</a>.</p>
+</section>
+
+<footer>Trang này mô tả bản <code>euni-api-dotnet</code> hiện có trong repo. Lệnh và biến môi trường lấy từ <code>euni-api-dotnet/README.md</code>, <code>.env.example</code>, <code>database/v2/setup-dev.sh</code>.</footer>
+</main>
+</div>
+<script>
+// Mục lục: đánh dấu mục đang đọc
+const links = [...document.querySelectorAll('#toc a')];
+const secs = links.map((a) => document.querySelector(a.getAttribute('href')));
+const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { links.forEach((l) => l.classList.toggle('on', l.getAttribute('href') === '#' + e.target.id)); } }), { rootMargin: '-20% 0px -70% 0px' });
+secs.forEach((s) => s && io.observe(s));
+// Nút sao chép
+document.querySelectorAll('.code button').forEach((b) => b.addEventListener('click', async () => {
+  const text = b.parentElement.querySelector('pre').innerText;
+  try { await navigator.clipboard.writeText(text); b.textContent = 'Đã chép'; } catch { b.textContent = 'Không chép được'; }
+  setTimeout(() => (b.textContent = 'Sao chép'), 1500);
+}));
+// Danh sách kiểm tra: lưu tiến độ (nếu trình duyệt cho phép)
+const store = { get(k) { try { return localStorage.getItem(k); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch { /* bỏ qua */ } } };
+function wire(id, key) {
+  const boxes = [...document.querySelectorAll(`#${id} input`)];
+  const saved = (store.get(key) || '').split(',');
+  boxes.forEach((b, i) => { b.checked = saved.includes(String(i)); b.addEventListener('change', update); });
+  function update() {
+    store.set(key, boxes.map((b, i) => (b.checked ? i : null)).filter((x) => x !== null).join(','));
+    const p = document.getElementById('prog'); if (id === 'checks' && p) p.textContent = `${boxes.filter((b) => b.checked).length}/${boxes.length} mục đã kiểm tra`;
+  }
+  update();
+}
+wire('checks', 'euni-deploy-checks'); wire('sec', 'euni-deploy-sec');
+// Chuyển giao diện sáng/tối
+document.getElementById('theme').addEventListener('click', () => {
+  const root = document.documentElement; const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  root.dataset.theme = dark ? 'light' : 'dark';
+});
+</script>
+</body>
+</html>
