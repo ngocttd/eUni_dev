@@ -1,0 +1,9 @@
+bin/
+obj/
+data/
+uploads/*
+!uploads/.gitkeep
+*.user
+.vs/
+TestResults/
+.env

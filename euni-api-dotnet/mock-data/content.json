@@ -1,0 +1,879 @@
+{
+ "albums": [
+  {
+   "slug": "le-ky-niem-60-nam",
+   "title": "Toàn cảnh Lễ kỷ niệm 60 năm thành lập Trường",
+   "date": "15/05/2026",
+   "count": 12,
+   "photos": [
+    {
+     "label": "Ảnh 1 · Lễ kỷ niệm 60 năm"
+    },
+    {
+     "label": "Ảnh 2 · Lễ kỷ niệm 60 năm"
+    },
+    {
+     "label": "Ảnh 3 · Lễ kỷ niệm 60 năm"
+    },
+    {
+     "label": "Ảnh 4 · Lễ kỷ niệm 60 năm"
+    },
+    {
+     "label": "Ảnh 5 · Lễ kỷ niệm 60 năm"
+    },
+    {
+     "label": "Ảnh 6 · Lễ kỷ niệm 60 năm"
+    },
+    {
+     "label": "Ảnh 7 · Lễ kỷ niệm 60 năm"
+    },
+    {
+     "label": "Ảnh 8 · Lễ kỷ niệm 60 năm"
+    },
+    {
+     "label": "Ảnh 9 · Lễ kỷ niệm 60 năm"
+    },
+    {
+     "label": "Ảnh 10 · Lễ kỷ niệm 60 năm"
+    },
+    {
+     "label": "Ảnh 11 · Lễ kỷ niệm 60 năm"
+    },
+    {
+     "label": "Ảnh 12 · Lễ kỷ niệm 60 năm"
+    }
+   ]
+  },
+  {
+   "slug": "phong-thi-nghiem-trong-diem",
+   "title": "Phòng thí nghiệm trọng điểm",
+   "date": "20/04/2026",
+   "count": 9,
+   "photos": [
+    {
+     "label": "Ảnh 1 · Phòng thí nghiệm"
+    },
+    {
+     "label": "Ảnh 2 · Phòng thí nghiệm"
+    },
+    {
+     "label": "Ảnh 3 · Phòng thí nghiệm"
+    },
+    {
+     "label": "Ảnh 4 · Phòng thí nghiệm"
+    },
+    {
+     "label": "Ảnh 5 · Phòng thí nghiệm"
+    },
+    {
+     "label": "Ảnh 6 · Phòng thí nghiệm"
+    },
+    {
+     "label": "Ảnh 7 · Phòng thí nghiệm"
+    },
+    {
+     "label": "Ảnh 8 · Phòng thí nghiệm"
+    },
+    {
+     "label": "Ảnh 9 · Phòng thí nghiệm"
+    }
+   ]
+  },
+  {
+   "slug": "hoat-dong-sinh-vien-2025",
+   "title": "Hoạt động sinh viên năm học 2025",
+   "date": "10/04/2026",
+   "count": 15,
+   "photos": [
+    {
+     "label": "Ảnh 1 · Hoạt động sinh viên"
+    },
+    {
+     "label": "Ảnh 2 · Hoạt động sinh viên"
+    },
+    {
+     "label": "Ảnh 3 · Hoạt động sinh viên"
+    },
+    {
+     "label": "Ảnh 4 · Hoạt động sinh viên"
+    },
+    {
+     "label": "Ảnh 5 · Hoạt động sinh viên"
+    },
+    {
+     "label": "Ảnh 6 · Hoạt động sinh viên"
+    },
+    {
+     "label": "Ảnh 7 · Hoạt động sinh viên"
+    },
+    {
+     "label": "Ảnh 8 · Hoạt động sinh viên"
+    },
+    {
+     "label": "Ảnh 9 · Hoạt động sinh viên"
+    },
+    {
+     "label": "Ảnh 10 · Hoạt động sinh viên"
+    },
+    {
+     "label": "Ảnh 11 · Hoạt động sinh viên"
+    },
+    {
+     "label": "Ảnh 12 · Hoạt động sinh viên"
+    },
+    {
+     "label": "Ảnh 13 · Hoạt động sinh viên"
+    },
+    {
+     "label": "Ảnh 14 · Hoạt động sinh viên"
+    },
+    {
+     "label": "Ảnh 15 · Hoạt động sinh viên"
+    }
+   ]
+  },
+  {
+   "slug": "khuon-vien-humg",
+   "title": "Khuôn viên Trường Đại học Mỏ - Địa chất",
+   "date": "01/04/2026",
+   "count": 10,
+   "photos": [
+    {
+     "label": "Ảnh 1 · Khuôn viên HUMG"
+    },
+    {
+     "label": "Ảnh 2 · Khuôn viên HUMG"
+    },
+    {
+     "label": "Ảnh 3 · Khuôn viên HUMG"
+    },
+    {
+     "label": "Ảnh 4 · Khuôn viên HUMG"
+    },
+    {
+     "label": "Ảnh 5 · Khuôn viên HUMG"
+    },
+    {
+     "label": "Ảnh 6 · Khuôn viên HUMG"
+    },
+    {
+     "label": "Ảnh 7 · Khuôn viên HUMG"
+    },
+    {
+     "label": "Ảnh 8 · Khuôn viên HUMG"
+    },
+    {
+     "label": "Ảnh 9 · Khuôn viên HUMG"
+    },
+    {
+     "label": "Ảnh 10 · Khuôn viên HUMG"
+    }
+   ]
+  }
+ ],
+ "articles": [
+  {
+   "slug": "le-ky-niem-60-nam-thanh-lap",
+   "category": "Sự kiện",
+   "date": "15/05/2025",
+   "views": 1235,
+   "unit": "Văn phòng",
+   "title": "Lễ kỷ niệm 60 năm thành lập Trường Đại học Mỏ – Địa chất",
+   "excerpt": "Sáng 15/05/2025, Trường Đại học Mỏ – Địa chất long trọng tổ chức Lễ kỷ niệm 60 năm thành lập, ôn lại chặng đường xây dựng và phát triển của Nhà trường.",
+   "tags": [
+    "60 năm",
+    "Truyền thống",
+    "Sự kiện"
+   ],
+   "body": [
+    "Trong không khí trang trọng và ấm áp, Trường Đại học Mỏ – Địa chất đã tổ chức Lễ kỷ niệm 60 năm thành lập (1966 – 2026) với sự tham dự của lãnh đạo Bộ Giáo dục và Đào tạo, các thế hệ cán bộ, giảng viên, cựu sinh viên và đối tác trong, ngoài nước.",
+    {
+     "type": "h2",
+     "text": "Một chặng đường tự hào"
+    },
+    "Từ những ngày đầu thành lập với vài trăm sinh viên, đến nay HUMG đã đào tạo hàng chục nghìn kỹ sư, cử nhân, thạc sĩ và tiến sĩ, đóng góp quan trọng cho ngành công nghiệp mỏ, địa chất, dầu khí và trắc địa – bản đồ của đất nước.",
+    {
+     "type": "quote",
+     "text": "“60 năm là hành trình của tri thức, bản lĩnh và khát vọng hội nhập. HUMG sẽ tiếp tục đổi mới để đồng hành cùng sự phát triển bền vững của đất nước.”"
+    },
+    {
+     "type": "img",
+     "label": "Toàn cảnh buổi lễ tại Hội trường A",
+     "caption": "Toàn cảnh Lễ kỷ niệm 60 năm thành lập Trường."
+    },
+    {
+     "type": "list",
+     "items": [
+      "Trao Huân chương và bằng khen cho các tập thể, cá nhân tiêu biểu",
+      "Ra mắt Quỹ học bổng 60 năm HUMG",
+      "Khánh thành không gian truyền thống của Nhà trường"
+     ]
+    },
+    "Buổi lễ khép lại với chương trình nghệ thuật đặc sắc do sinh viên và cựu sinh viên biểu diễn, thể hiện niềm tự hào và gắn bó với mái trường."
+   ],
+   "docs": [
+    {
+     "name": "Diễn văn kỷ niệm 60 năm thành lập Trường",
+     "meta": "PDF · 640 KB"
+    }
+   ]
+  },
+  {
+   "slug": "humg-top-10-dai-hoc-ky-thuat",
+   "category": "Tin tức",
+   "date": "10/05/2025",
+   "views": 986,
+   "unit": "Phòng KHCN",
+   "title": "HUMG lọt Top 10 trường đại học kỹ thuật hàng đầu Việt Nam",
+   "excerpt": "Theo bảng xếp hạng năm 2025, Trường Đại học Mỏ – Địa chất được ghi nhận trong nhóm 10 cơ sở đào tạo kỹ thuật hàng đầu cả nước.",
+   "tags": [
+    "Xếp hạng",
+    "Chất lượng",
+    "Đào tạo"
+   ],
+   "body": [
+    "Kết quả xếp hạng dựa trên các tiêu chí về chất lượng đào tạo, năng lực nghiên cứu, công bố quốc tế, tỷ lệ việc làm của sinh viên sau tốt nghiệp và mức độ hội nhập quốc tế.",
+    {
+     "type": "h2",
+     "text": "Thế mạnh về nghiên cứu ứng dụng"
+    },
+    "HUMG được đánh giá cao ở các nhóm ngành mũi nhọn: kỹ thuật mỏ, địa chất, dầu khí, trắc địa – bản đồ, cùng năng lực chuyển giao công nghệ cho doanh nghiệp.",
+    {
+     "type": "list",
+     "items": [
+      "650+ công bố khoa học trong 5 năm gần đây",
+      "Hàng chục đề tài cấp Nhà nước, cấp Bộ được nghiệm thu",
+      "Mạng lưới hơn 200 doanh nghiệp đối tác"
+     ]
+    },
+    "Nhà trường xác định tiếp tục đầu tư cho phòng thí nghiệm trọng điểm, chương trình đào tạo quốc tế và các nhóm nghiên cứu mạnh."
+   ],
+   "docs": []
+  },
+  {
+   "slug": "nghien-cuu-vat-lieu-moi-khai-thac-ben-vung",
+   "category": "Nghiên cứu",
+   "date": "06/05/2025",
+   "views": 742,
+   "unit": "Khoa Mỏ",
+   "title": "Nghiên cứu vật liệu mới trong khai thác bền vững",
+   "excerpt": "Nhóm nghiên cứu của HUMG phát triển vật liệu gia cố mới giúp nâng cao an toàn và giảm tác động môi trường trong khai thác hầm lò.",
+   "tags": [
+    "Vật liệu mới",
+    "Khai thác mỏ",
+    "Môi trường"
+   ],
+   "body": [
+    "Đề tài tập trung vào việc phát triển loại vật liệu gia cố có độ bền cao, thân thiện môi trường, thay thế một phần vật liệu truyền thống trong chống giữ lò.",
+    {
+     "type": "h2",
+     "text": "Kết quả thử nghiệm"
+    },
+    "Thử nghiệm tại hiện trường cho thấy vật liệu mới giúp giảm 20% chi phí chống giữ và tăng đáng kể hệ số an toàn của công trình ngầm.",
+    {
+     "type": "quote",
+     "text": "“Chúng tôi hướng đến các giải pháp vừa hiệu quả kinh tế, vừa giảm phát thải và rác thải trong quá trình khai thác.”"
+    },
+    "Kết quả nghiên cứu đã được công bố trên tạp chí quốc tế uy tín và đang được chuyển giao thử nghiệm cho một số đơn vị khai thác."
+   ],
+   "docs": [
+    {
+     "name": "Tóm tắt kết quả nghiên cứu",
+     "meta": "PDF · 1.1 MB"
+    }
+   ]
+  },
+  {
+   "slug": "sinh-vien-humg-dat-giai-cao-iot-toan-quoc",
+   "category": "Tin tức",
+   "date": "02/05/2025",
+   "views": 1527,
+   "unit": "Khoa CNTT",
+   "title": "Sinh viên HUMG đạt giải cao tại cuộc thi IoT toàn quốc",
+   "excerpt": "Đội tuyển sinh viên Khoa Công nghệ thông tin giành giải Nhì chung cuộc với sản phẩm giám sát môi trường mỏ theo thời gian thực.",
+   "tags": [
+    "Sinh viên",
+    "IoT",
+    "Cuộc thi"
+   ],
+   "body": [
+    "Sản phẩm dự thi là hệ thống cảm biến – IoT giám sát các thông số khí, bụi, nhiệt độ trong khu vực khai thác và cảnh báo sớm nguy cơ mất an toàn.",
+    {
+     "type": "img",
+     "label": "Đội tuyển HUMG tại vòng chung kết",
+     "caption": "Đội tuyển sinh viên HUMG tại vòng chung kết cuộc thi."
+    },
+    "Ban giám khảo đánh giá cao tính ứng dụng thực tiễn và khả năng triển khai của giải pháp trong điều kiện mỏ hầm lò Việt Nam.",
+    {
+     "type": "list",
+     "items": [
+      "Giải Nhì chung cuộc toàn quốc",
+      "Giải “Sản phẩm có tính ứng dụng cao”",
+      "Được doanh nghiệp đề nghị hợp tác thử nghiệm"
+     ]
+    }
+   ],
+   "docs": []
+  },
+  {
+   "slug": "hoi-thao-quoc-te-trac-dia-gis-2025",
+   "category": "Sự kiện",
+   "date": "14/05/2025",
+   "views": 1235,
+   "unit": "Khoa Trắc địa – Bản đồ",
+   "title": "Hội thảo quốc tế về Trắc địa và GIS 2025",
+   "excerpt": "HUMG chủ trì tổ chức thành công Hội thảo quốc tế về Trắc địa và GIS 2025 với hơn 200 đại biểu trong nước và quốc tế.",
+   "tags": [
+    "Hội thảo",
+    "Trắc địa",
+    "GIS"
+   ],
+   "body": [
+    "Trong hai ngày 13–14/05/2025, Trường Đại học Mỏ – Địa chất đã tổ chức Hội thảo quốc tế về Trắc địa và GIS với chủ đề “Ứng dụng trí tuệ nhân tạo kết hợp dữ liệu viễn thám và GIS phục vụ quy hoạch đô thị”.",
+    {
+     "type": "h2",
+     "text": "Diễn đàn học thuật uy tín"
+    },
+    "Hội thảo quy tụ các nhà khoa học, chuyên gia và doanh nghiệp công nghệ đến từ nhiều quốc gia, cùng trao đổi về xu hướng mới trong lĩnh vực trắc địa, bản đồ và GIS.",
+    {
+     "type": "quote",
+     "text": "“Đây là cơ hội quan trọng để kết nối nghiên cứu và ứng dụng, thúc đẩy chuyển giao công nghệ trong thời đại số.”"
+    },
+    "Hội thảo mở ra nhiều cơ hội hợp tác nghiên cứu và đào tạo giữa HUMG với các đối tác quốc tế."
+   ],
+   "docs": [
+    {
+     "name": "Báo cáo tổng kết Hội thảo Trắc địa & GIS 2025",
+     "meta": "PDF · 4.2 MB"
+    }
+   ]
+  },
+  {
+   "slug": "humg-ky-ket-hop-tac-dai-hoc-aachen",
+   "category": "Hợp tác",
+   "date": "28/04/2025",
+   "views": 640,
+   "unit": "Phòng Hợp tác quốc tế",
+   "title": "HUMG ký kết hợp tác với Đại học RWTH Aachen (CHLB Đức)",
+   "excerpt": "Hai trường ký biên bản ghi nhớ hợp tác trong đào tạo, trao đổi giảng viên – sinh viên và nghiên cứu chung về khai thác bền vững.",
+   "tags": [
+    "Hợp tác quốc tế",
+    "CHLB Đức",
+    "MOU"
+   ],
+   "body": [
+    "Lễ ký kết diễn ra tại HUMG với sự chứng kiến của lãnh đạo hai trường và đại diện doanh nghiệp trong lĩnh vực khai khoáng.",
+    {
+     "type": "list",
+     "items": [
+      "Trao đổi sinh viên, giảng viên hằng năm",
+      "Đồng hướng dẫn nghiên cứu sinh",
+      "Nghiên cứu chung về khai thác bền vững và kinh tế tuần hoàn"
+     ]
+    },
+    "Hợp tác mở ra cơ hội học tập và nghiên cứu ở môi trường quốc tế cho sinh viên, học viên của Nhà trường."
+   ],
+   "docs": []
+  },
+  {
+   "slug": "thong-bao-tuyen-sinh-dai-hoc-2026",
+   "category": "Tuyển sinh",
+   "date": "20/05/2026",
+   "views": 3120,
+   "unit": "Phòng Đào tạo",
+   "title": "Thông báo tuyển sinh đại học chính quy năm 2026",
+   "excerpt": "Trường Đại học Mỏ – Địa chất thông báo tuyển sinh đại học chính quy năm 2026 với 52 chương trình đào tạo và 5 phương thức xét tuyển.",
+   "tags": [
+    "Tuyển sinh",
+    "2026",
+    "Đại học chính quy"
+   ],
+   "body": [
+    "Năm 2026, HUMG tuyển sinh 52 chương trình đào tạo trình độ đại học, trong đó có các chương trình chất lượng cao và chương trình liên kết quốc tế.",
+    {
+     "type": "h2",
+     "text": "Phương thức xét tuyển"
+    },
+    {
+     "type": "list",
+     "items": [
+      "Xét tuyển thẳng và ưu tiên xét tuyển",
+      "Xét kết quả thi tốt nghiệp THPT",
+      "Xét học bạ THPT",
+      "Xét tuyển kết hợp",
+      "Xét kết quả kỳ thi ĐGNL của ĐHQG Hà Nội"
+     ]
+    },
+    "Thí sinh theo dõi mốc thời gian và hướng dẫn đăng ký trực tuyến tại chuyên trang Tuyển sinh của Nhà trường."
+   ],
+   "docs": [
+    {
+     "name": "Đề án tuyển sinh 2026",
+     "meta": "PDF · 1.2 MB"
+    },
+    {
+     "name": "Mẫu đơn đăng ký xét tuyển",
+     "meta": "DOCX · 256 KB"
+    }
+   ]
+  },
+  {
+   "slug": "chuong-trinh-hoc-bong-phat-trien-nguon-nhan-luc",
+   "category": "Thông báo",
+   "date": "25/04/2026",
+   "views": 880,
+   "unit": "Phòng CTSV",
+   "title": "Chương trình học bổng phát triển nguồn nhân lực năm học 2025 – 2026",
+   "excerpt": "Nhà trường phối hợp cùng doanh nghiệp triển khai chương trình học bổng dành cho sinh viên các ngành kỹ thuật mũi nhọn.",
+   "tags": [
+    "Học bổng",
+    "Sinh viên",
+    "Doanh nghiệp"
+   ],
+   "body": [
+    "Chương trình dành cho sinh viên có kết quả học tập tốt, tích cực tham gia nghiên cứu và hoạt động cộng đồng, ưu tiên các ngành kỹ thuật mỏ, dầu khí, địa chất và trắc địa.",
+    {
+     "type": "list",
+     "items": [
+      "Giá trị học bổng: từ 50% đến 100% học phí năm học",
+      "Cơ hội thực tập và tuyển dụng tại doanh nghiệp tài trợ",
+      "Cố vấn nghề nghiệp từ chuyên gia doanh nghiệp"
+     ]
+    },
+    "Hồ sơ đăng ký nộp tại Phòng Công tác chính trị & Sinh viên trước ngày hết hạn thông báo."
+   ],
+   "docs": [
+    {
+     "name": "Mẫu hồ sơ đăng ký học bổng",
+     "meta": "DOCX · 34 KB"
+    }
+   ]
+  },
+  {
+   "slug": "nghiem-thu-de-tai-cap-bo-khai-thac-than-ham-lo",
+   "category": "Nghiên cứu",
+   "date": "18/04/2026",
+   "views": 512,
+   "unit": "Phòng KHCN",
+   "title": "Nghiệm thu đề tài cấp Bộ về công nghệ khai thác than hầm lò",
+   "excerpt": "Đề tài nghiên cứu công nghệ khai thác than hầm lò thân thiện môi trường được Hội đồng đánh giá xuất sắc.",
+   "tags": [
+    "Đề tài cấp Bộ",
+    "Khai thác than",
+    "Nghiệm thu"
+   ],
+   "body": [
+    "Đề tài do nhóm nghiên cứu Khoa Mỏ chủ trì, tập trung vào giải pháp giảm tổn thất tài nguyên và giảm phát thải trong khai thác than hầm lò.",
+    {
+     "type": "quote",
+     "text": "“Kết quả đề tài có thể áp dụng ngay tại nhiều mỏ than vùng Quảng Ninh.”"
+    },
+    "Hội đồng nghiệm thu đánh giá đề tài đạt loại xuất sắc và đề nghị tiếp tục hỗ trợ chuyển giao vào thực tiễn sản xuất."
+   ],
+   "docs": [
+    {
+     "name": "Báo cáo tóm tắt đề tài (2024)",
+     "meta": "PDF · 1.3 MB"
+    }
+   ]
+  },
+  {
+   "slug": "ngay-hoi-viec-lam-ket-noi-doanh-nghiep-2025",
+   "category": "Sự kiện",
+   "date": "25/04/2025",
+   "views": 2103,
+   "unit": "Phòng CTSV",
+   "title": "Ngày hội việc làm & Kết nối doanh nghiệp 2025",
+   "excerpt": "Hơn 50 doanh nghiệp tham gia tuyển dụng và giao lưu cùng sinh viên HUMG tại Ngày hội việc làm năm 2025.",
+   "tags": [
+    "Việc làm",
+    "Doanh nghiệp",
+    "Sinh viên"
+   ],
+   "body": [
+    "Ngày hội mang đến hàng nghìn vị trí việc làm và thực tập cho sinh viên năm cuối, cùng nhiều hoạt động tư vấn nghề nghiệp, kỹ năng phỏng vấn và viết CV.",
+    {
+     "type": "list",
+     "items": [
+      "Hơn 50 doanh nghiệp trong và ngoài ngành",
+      "Hàng nghìn vị trí việc làm – thực tập",
+      "Phỏng vấn trực tiếp tại gian hàng"
+     ]
+    },
+    "Nhiều sinh viên đã nhận được lời mời phỏng vấn và thư mời thực tập ngay tại sự kiện."
+   ],
+   "docs": []
+  }
+ ],
+ "events": [
+  {
+   "slug": "hoi-thao-khoa-hoc-quoc-te-dia-chat-khoang-san",
+   "title": "Hội thảo khoa học quốc tế về Địa chất và Khoáng sản",
+   "date": "20/05/2026",
+   "day": "20",
+   "month": "THG 5",
+   "time": "08:00 – 17:00",
+   "place": "Hội trường A, HUMG",
+   "placeFull": "Hội trường A, Tầng 2, Nhà A – Trường Đại học Mỏ - Địa chất, 18 Phố Viên, Hà Nội",
+   "organizer": "Khoa Địa chất & Phòng Hợp tác quốc tế",
+   "audience": "Giảng viên, nhà khoa học, nghiên cứu sinh, doanh nghiệp",
+   "contact": "hoithao.diachat@humg.edu.vn",
+   "status": "Sắp diễn ra",
+   "desc": [
+    "Hội thảo là diễn đàn để các nhà khoa học trong nước và quốc tế trao đổi kết quả nghiên cứu mới nhất trong lĩnh vực địa chất, khoáng sản và tài nguyên bền vững.",
+    {
+     "type": "list",
+     "items": [
+      "Địa chất khu vực và kiến tạo",
+      "Tài nguyên khoáng sản và đánh giá trữ lượng",
+      "Địa chất môi trường và tai biến địa chất",
+      "Ứng dụng AI – viễn thám trong thăm dò"
+     ]
+    }
+   ],
+   "agenda": [
+    {
+     "time": "08:00",
+     "item": "Đón tiếp đại biểu & khai mạc"
+    },
+    {
+     "time": "09:00",
+     "item": "Báo cáo phiên toàn thể"
+    },
+    {
+     "time": "10:30",
+     "item": "Các phiên chuyên đề song song"
+    },
+    {
+     "time": "13:30",
+     "item": "Phiên poster & triển lãm thiết bị"
+    },
+    {
+     "time": "15:30",
+     "item": "Thảo luận bàn tròn & bế mạc"
+    }
+   ]
+  },
+  {
+   "slug": "ngay-hoi-viec-lam-ket-noi-doanh-nghiep-2025",
+   "title": "Ngày hội việc làm & Kết nối doanh nghiệp 2025",
+   "date": "25/05/2026",
+   "day": "25",
+   "month": "THG 5",
+   "time": "07:30 – 16:30",
+   "place": "Sân vận động HUMG",
+   "placeFull": "Sân vận động & Nhà thi đấu đa năng – Trường Đại học Mỏ - Địa chất",
+   "organizer": "Phòng Công tác chính trị & Sinh viên",
+   "audience": "Sinh viên năm cuối, cựu sinh viên, doanh nghiệp",
+   "contact": "vieclam@humg.edu.vn",
+   "status": "Sắp diễn ra",
+   "desc": [
+    "Sự kiện kết nối sinh viên với hơn 50 doanh nghiệp tuyển dụng, cùng chuỗi hội thảo kỹ năng nghề nghiệp và phỏng vấn trực tiếp tại gian hàng."
+   ],
+   "agenda": [
+    {
+     "time": "07:30",
+     "item": "Khai mạc & tham quan gian hàng"
+    },
+    {
+     "time": "09:00",
+     "item": "Hội thảo “Kỹ năng phỏng vấn & viết CV”"
+    },
+    {
+     "time": "10:30",
+     "item": "Phỏng vấn trực tiếp tại gian hàng doanh nghiệp"
+    },
+    {
+     "time": "14:00",
+     "item": "Talkshow “Khởi nghiệp từ ghế nhà trường”"
+    },
+    {
+     "time": "16:00",
+     "item": "Tổng kết & trao quà may mắn"
+    }
+   ]
+  },
+  {
+   "slug": "le-bao-ve-luan-an-tien-si-dot-1-2025",
+   "title": "Lễ bảo vệ luận án Tiến sĩ đợt 1 năm 2025",
+   "date": "30/05/2026",
+   "day": "30",
+   "month": "THG 5",
+   "time": "08:00 – 12:00",
+   "place": "Phòng 602, Nhà A",
+   "placeFull": "Phòng họp 602, Tầng 6, Nhà A – Trường Đại học Mỏ - Địa chất",
+   "organizer": "Phòng Đào tạo Sau đại học",
+   "audience": "Hội đồng, nghiên cứu sinh, khách mời",
+   "contact": "saudaihoc@humg.edu.vn",
+   "status": "Sắp diễn ra",
+   "desc": [
+    "Buổi bảo vệ luận án Tiến sĩ cấp Trường của nghiên cứu sinh chuyên ngành Kỹ thuật Địa chất, theo quy định của Bộ Giáo dục và Đào tạo."
+   ],
+   "agenda": [
+    {
+     "time": "08:00",
+     "item": "Công bố quyết định thành lập Hội đồng"
+    },
+    {
+     "time": "08:15",
+     "item": "Nghiên cứu sinh trình bày luận án"
+    },
+    {
+     "time": "09:00",
+     "item": "Phản biện & hỏi đáp"
+    },
+    {
+     "time": "11:00",
+     "item": "Hội đồng họp riêng & công bố kết quả"
+    }
+   ]
+  },
+  {
+   "slug": "toa-dam-chuyen-doi-so-trong-dao-tao",
+   "title": "Tọa đàm chuyển đổi số trong đào tạo đại học",
+   "date": "05/06/2026",
+   "day": "05",
+   "month": "THG 6",
+   "time": "14:00 – 17:00",
+   "place": "Hội trường B, HUMG",
+   "placeFull": "Hội trường B, Tầng 1, Nhà C – Trường Đại học Mỏ - Địa chất",
+   "organizer": "Trung tâm CNTT & Phòng Đào tạo",
+   "audience": "Cán bộ, giảng viên toàn trường",
+   "contact": "cntt@humg.edu.vn",
+   "status": "Sắp diễn ra",
+   "desc": [
+    "Tọa đàm chia sẻ kinh nghiệm ứng dụng nền tảng số, dữ liệu và AI trong tổ chức đào tạo, khảo thí và quản trị nhà trường."
+   ],
+   "agenda": [
+    {
+     "time": "14:00",
+     "item": "Báo cáo đề dẫn"
+    },
+    {
+     "time": "14:40",
+     "item": "Tham luận từ các khoa"
+    },
+    {
+     "time": "15:40",
+     "item": "Thảo luận & đề xuất"
+    },
+    {
+     "time": "16:40",
+     "item": "Kết luận tọa đàm"
+    }
+   ]
+  },
+  {
+   "slug": "giai-bong-da-sinh-vien-humg-2025",
+   "title": "Khai mạc Giải bóng đá sinh viên HUMG 2025",
+   "date": "12/06/2026",
+   "day": "12",
+   "month": "THG 6",
+   "time": "15:30 – 18:00",
+   "place": "Sân vận động HUMG",
+   "placeFull": "Sân vận động Trường Đại học Mỏ - Địa chất",
+   "organizer": "Đoàn Thanh niên – Hội Sinh viên",
+   "audience": "Sinh viên toàn trường",
+   "contact": "doanthanhnien@humg.edu.vn",
+   "status": "Sắp diễn ra",
+   "desc": [
+    "Giải đấu thường niên với sự tham gia của các đội tuyển đến từ tất cả các khoa, hứa hẹn nhiều trận cầu sôi động."
+   ],
+   "agenda": [
+    {
+     "time": "15:30",
+     "item": "Lễ khai mạc & diễu hành các đội"
+    },
+    {
+     "time": "16:00",
+     "item": "Trận đấu khai mạc"
+    },
+    {
+     "time": "17:45",
+     "item": "Trao cờ lưu niệm"
+    }
+   ]
+  },
+  {
+   "slug": "workshop-ky-nang-mem-cho-tan-sinh-vien",
+   "title": "Workshop kỹ năng mềm cho tân sinh viên",
+   "date": "18/06/2026",
+   "day": "18",
+   "month": "THG 6",
+   "time": "08:30 – 11:30",
+   "place": "Hội trường A, HUMG",
+   "placeFull": "Hội trường A, Tầng 2, Nhà A – Trường Đại học Mỏ - Địa chất",
+   "organizer": "Trung tâm Hỗ trợ sinh viên",
+   "audience": "Tân sinh viên khóa mới",
+   "contact": "htsv@humg.edu.vn",
+   "status": "Sắp diễn ra",
+   "desc": [
+    "Trang bị cho tân sinh viên kỹ năng quản lý thời gian, làm việc nhóm, thuyết trình và thích nghi với môi trường đại học."
+   ],
+   "agenda": [
+    {
+     "time": "08:30",
+     "item": "Khởi động & làm quen"
+    },
+    {
+     "time": "09:00",
+     "item": "Chuyên đề “Học đại học đúng cách”"
+    },
+    {
+     "time": "10:15",
+     "item": "Thực hành làm việc nhóm"
+    },
+    {
+     "time": "11:15",
+     "item": "Hỏi đáp & tổng kết"
+    }
+   ]
+  }
+ ],
+ "newsCategories": [
+  "Tin tức",
+  "Thông báo",
+  "Tuyển sinh",
+  "Hợp tác",
+  "Nghiên cứu",
+  "Sự kiện"
+ ],
+ "podcasts": [
+  {
+   "slug": "chuyen-nghe-dia-chat",
+   "title": "Chuyện nghề Địa chất",
+   "date": "10/05/2026",
+   "episode": "Tập 05",
+   "duration": "32:10",
+   "host": "TS. Trần Văn A",
+   "plays": 1240,
+   "desc": "Trò chuyện cùng những người làm nghề địa chất: hành trình vào nghề, gian nan hiện trường và niềm vui khám phá.",
+   "notes": [
+    "Khách mời: kỹ sư địa chất công trình",
+    "Chủ đề: khảo sát địa chất cho công trình ngầm",
+    "Q&A từ thính giả sinh viên"
+   ]
+  },
+  {
+   "slug": "hanh-trinh-khoi-nghiep-cuu-sv",
+   "title": "Hành trình khởi nghiệp của cựu sinh viên",
+   "date": "26/04/2026",
+   "episode": "Tập 04",
+   "duration": "28:45",
+   "host": "ThS. Nguyễn Thị B",
+   "plays": 980,
+   "desc": "Câu chuyện khởi nghiệp trong lĩnh vực công nghệ đo đạc – bản đồ của một nhóm cựu sinh viên HUMG.",
+   "notes": [
+    "Từ đồ án tốt nghiệp đến sản phẩm thương mại",
+    "Gọi vốn và xây dựng đội ngũ",
+    "Lời khuyên cho sinh viên muốn khởi nghiệp"
+   ]
+  },
+  {
+   "slug": "hoi-dap-tuyen-sinh-2026",
+   "title": "Hỏi đáp tuyển sinh 2026",
+   "date": "05/05/2026",
+   "episode": "Tập 03",
+   "duration": "21:30",
+   "host": "Phòng Đào tạo",
+   "plays": 2150,
+   "desc": "Giải đáp trực tiếp các thắc mắc phổ biến của thí sinh và phụ huynh về kỳ tuyển sinh 2026.",
+   "notes": [
+    "Phương thức xét tuyển & tổ hợp môn",
+    "Học phí và chính sách học bổng",
+    "Cơ hội việc làm theo nhóm ngành"
+   ]
+  },
+  {
+   "slug": "song-xanh-trong-khai-thac-mo",
+   "title": "Sống xanh trong khai thác mỏ",
+   "date": "18/04/2026",
+   "episode": "Tập 02",
+   "duration": "26:05",
+   "host": "PGS.TS. Lê Văn D",
+   "plays": 760,
+   "desc": "Bàn về khai thác mỏ bền vững, hoàn nguyên môi trường và kinh tế tuần hoàn trong ngành khoáng sản.",
+   "notes": [
+    "Xu hướng ESG trong ngành mỏ",
+    "Công nghệ giảm phát thải",
+    "Vai trò của kỹ sư trẻ"
+   ]
+  }
+ ],
+ "searchPages": [
+  {
+   "type": "Trang",
+   "title": "Khoa học & Công nghệ",
+   "excerpt": "Trang thông tin về hoạt động nghiên cứu, công bố, đề tài và chuyển giao công nghệ của HUMG.",
+   "to": "/nghien-cuu"
+  },
+  {
+   "type": "Trang",
+   "title": "Chương trình đào tạo",
+   "excerpt": "Danh mục các chương trình đào tạo đại học, sau đại học và liên kết quốc tế.",
+   "to": "/hoc-tap/chuong-trinh-dao-tao"
+  },
+  {
+   "type": "Trang",
+   "title": "Thư viện số HUMG",
+   "excerpt": "CSDL khoa học, sách – tạp chí điện tử, luận văn – luận án và tài liệu số.",
+   "to": "/thu-vien-so"
+  },
+  {
+   "type": "Trang",
+   "title": "Cổng sinh viên",
+   "excerpt": "Thông tin, dịch vụ và hỗ trợ dành riêng cho sinh viên HUMG.",
+   "to": "/sinh-vien"
+  },
+  {
+   "type": "Tài liệu",
+   "title": "Đề án tuyển sinh 2026 (PDF)",
+   "excerpt": "Toàn văn đề án tuyển sinh đại học chính quy năm 2026 · PDF · 1.2 MB.",
+   "to": "/hoc-tap/tuyen-sinh"
+  },
+  {
+   "type": "Tài liệu",
+   "title": "Quy chế đào tạo đại học chính quy (PDF)",
+   "excerpt": "Quy chế học vụ áp dụng cho hệ đại học chính quy · PDF · 1.6 MB.",
+   "to": "/hoc-tap/thong-tin-chung"
+  }
+ ],
+ "videos": [
+  {
+   "slug": "humg-60-nam-mot-chang-duong",
+   "title": "HUMG – 60 năm một chặng đường",
+   "date": "12/05/2026",
+   "duration": "15:24",
+   "channel": "HUMG Media",
+   "views": 8420,
+   "desc": "Phim tài liệu nhìn lại chặng đường 60 năm xây dựng và phát triển của Trường Đại học Mỏ - Địa chất."
+  },
+  {
+   "slug": "gioi-thieu-nganh-ky-thuat-mo",
+   "title": "Giới thiệu ngành Kỹ thuật Mỏ",
+   "date": "28/04/2026",
+   "duration": "06:12",
+   "channel": "Tư vấn tuyển sinh",
+   "views": 3110,
+   "desc": "Tổng quan về ngành Kỹ thuật Mỏ: chương trình đào tạo, cơ hội nghề nghiệp và chia sẻ từ cựu sinh viên."
+  },
+  {
+   "slug": "campus-tour-humg",
+   "title": "Campus tour Trường Đại học Mỏ - Địa chất",
+   "date": "15/04/2026",
+   "duration": "08:47",
+   "channel": "HUMG Media",
+   "views": 5230,
+   "desc": "Dạo quanh khuôn viên, giảng đường, thư viện, phòng thí nghiệm và khu ký túc xá của HUMG."
+  },
+  {
+   "slug": "huong-dan-dang-ky-xet-tuyen",
+   "title": "Hướng dẫn đăng ký xét tuyển trực tuyến",
+   "date": "05/05/2026",
+   "duration": "04:58",
+   "channel": "Tư vấn tuyển sinh",
+   "views": 6740,
+   "desc": "Các bước đăng ký xét tuyển trực tuyến vào HUMG năm 2026, kèm lưu ý quan trọng cho thí sinh."
+  }
+ ]
+}

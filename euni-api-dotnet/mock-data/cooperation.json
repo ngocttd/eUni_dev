@@ -1,0 +1,1055 @@
+{
+ "coopFields": [
+  "Đào tạo & Trao đổi học thuật",
+  "Nghiên cứu chung & Đồng công bố",
+  "Chuyển giao công nghệ",
+  "Thực tập & Việc làm cho sinh viên",
+  "Phát triển chương trình & Kiểm định",
+  "Đồng hướng dẫn nghiên cứu sinh"
+ ],
+ "coopHub": {
+  "modules": [
+   {
+    "icon": "handshake",
+    "title": "Danh sách đối tác",
+    "desc": "Đối tác trong nước và quốc tế của HUMG.",
+    "to": "/hop-tac/doi-tac"
+   },
+   {
+    "icon": "building",
+    "title": "Đối tác trong nước",
+    "desc": "Doanh nghiệp, viện, trường và cơ quan quản lý.",
+    "to": "/hop-tac/doi-tac-trong-nuoc"
+   },
+   {
+    "icon": "globe",
+    "title": "Đối tác quốc tế",
+    "desc": "Trường, viện và tổ chức từ 46 quốc gia.",
+    "to": "/hop-tac/doi-tac-quoc-te"
+   },
+   {
+    "icon": "layers",
+    "title": "Chương trình / Dự án",
+    "desc": "Liên kết đào tạo, nghiên cứu chung, dự án tài trợ.",
+    "to": "/hop-tac/chuong-trinh-du-an"
+   },
+   {
+    "icon": "users",
+    "title": "Chương trình trao đổi",
+    "desc": "Trao đổi sinh viên, giảng viên hai chiều.",
+    "to": "/hop-tac/trao-doi"
+   },
+   {
+    "icon": "user",
+    "title": "Sinh viên quốc tế",
+    "desc": "Tiếp nhận và hỗ trợ sinh viên nước ngoài.",
+    "to": "/hop-tac/sinh-vien-quoc-te"
+   },
+   {
+    "icon": "graduation",
+    "title": "Giảng viên quốc tế",
+    "desc": "Thỉnh giảng, nghiên cứu viên thăm, đồng hướng dẫn.",
+    "to": "/hop-tac/giang-vien-quoc-te"
+   },
+   {
+    "icon": "rocket",
+    "title": "Cơ hội hợp tác",
+    "desc": "Lĩnh vực ưu tiên và cách đề xuất hợp tác.",
+    "to": "/hop-tac/co-hoi-hop-tac"
+   },
+   {
+    "icon": "award",
+    "title": "Thành tựu hợp tác",
+    "desc": "Kết quả nổi bật trong hội nhập quốc tế.",
+    "to": "/gioi-thieu/thanh-tuu"
+   }
+  ],
+  "stats": [
+   {
+    "value": "128",
+    "label": "Đối tác trong & ngoài nước"
+   },
+   {
+    "value": "46",
+    "label": "Quốc gia có quan hệ hợp tác"
+   },
+   {
+    "value": "24",
+    "label": "Chương trình liên kết đào tạo"
+   },
+   {
+    "value": "350+",
+    "label": "Lượt trao đổi SV – GV / năm"
+   }
+  ],
+  "quickLinks": [
+   {
+    "label": "Danh sách đối tác",
+    "to": "/hop-tac/doi-tac"
+   },
+   {
+    "label": "Chương trình trao đổi",
+    "to": "/hop-tac/trao-doi"
+   },
+   {
+    "label": "Mẫu đề xuất hợp tác",
+    "to": "/hoc-tap/bieu-mau"
+   },
+   {
+    "label": "Cơ hội hợp tác",
+    "to": "/hop-tac/co-hoi-hop-tac"
+   }
+  ],
+  "notices": [
+   {
+    "date": "18/05/2026",
+    "title": "HUMG ký kết hợp tác với Đại học RWTH Aachen (CHLB Đức)"
+   },
+   {
+    "date": "10/05/2026",
+    "title": "Thông báo tuyển chọn sinh viên tham gia chương trình trao đổi AIMS"
+   },
+   {
+    "date": "02/05/2026",
+    "title": "Chương trình học bổng đồng hướng dẫn nghiên cứu sinh Việt – Hàn"
+   }
+  ],
+  "yearActivity": {
+   "year": 2025,
+   "items": [
+    {
+     "value": "18",
+     "label": "Thỏa thuận / MOU đã ký"
+    },
+    {
+     "value": "36",
+     "label": "Hội thảo / hội nghị quốc tế"
+    },
+    {
+     "value": "124",
+     "label": "Bài báo công bố quốc tế"
+    },
+    {
+     "value": "78",
+     "label": "Lượt giảng viên trao đổi"
+    },
+    {
+     "value": "154",
+     "label": "Lượt sinh viên trao đổi"
+    }
+   ]
+  }
+ },
+ "coopNav": [
+  {
+   "label": "Tổng quan hợp tác",
+   "to": "/hop-tac",
+   "icon": "home"
+  },
+  {
+   "label": "Danh sách đối tác",
+   "to": "/hop-tac/doi-tac",
+   "icon": "handshake"
+  },
+  {
+   "label": "Đối tác trong nước",
+   "to": "/hop-tac/doi-tac-trong-nuoc",
+   "icon": "building"
+  },
+  {
+   "label": "Đối tác quốc tế",
+   "to": "/hop-tac/doi-tac-quoc-te",
+   "icon": "globe"
+  },
+  {
+   "label": "Chương trình / Dự án",
+   "to": "/hop-tac/chuong-trinh-du-an",
+   "icon": "layers"
+  },
+  {
+   "label": "Chương trình trao đổi",
+   "to": "/hop-tac/trao-doi",
+   "icon": "rocket"
+  },
+  {
+   "label": "Sinh viên quốc tế",
+   "to": "/hop-tac/sinh-vien-quoc-te",
+   "icon": "users"
+  },
+  {
+   "label": "Giảng viên quốc tế",
+   "to": "/hop-tac/giang-vien-quoc-te",
+   "icon": "user"
+  },
+  {
+   "label": "Cơ hội hợp tác",
+   "to": "/hop-tac/co-hoi-hop-tac",
+   "icon": "target"
+  }
+ ],
+ "coopProgramTypes": [
+  "Tất cả",
+  "Liên kết đào tạo",
+  "Nghiên cứu chung",
+  "Trao đổi",
+  "Dự án tài trợ",
+  "Đồng hướng dẫn NCS"
+ ],
+ "coopPrograms": [
+  {
+   "scope": "Song phương",
+   "objectives": [
+    "Tăng cường năng lực đào tạo và nghiên cứu của hai bên",
+    "Thúc đẩy trao đổi học thuật, đồng công bố và chuyển giao công nghệ",
+    "Tạo cơ hội học tập, thực tập và nghiên cứu ở môi trường quốc tế"
+   ],
+   "results": [
+    "Trao đổi hàng chục lượt sinh viên, giảng viên mỗi năm",
+    "Nhiều công bố khoa học chung trên tạp chí quốc tế",
+    "Xây dựng, cập nhật chương trình đào tạo theo chuẩn quốc tế"
+   ],
+   "docs": [
+    {
+     "name": "Biên bản ghi nhớ hợp tác (MOU)",
+     "meta": "PDF · 1.1 MB"
+    },
+    {
+     "name": "Kế hoạch triển khai giai đoạn 2024 – 2027",
+     "meta": "PDF · 860 KB"
+    }
+   ],
+   "id": "ncs-viet-duc",
+   "title": "Chương trình đồng hướng dẫn nghiên cứu sinh Việt – Đức",
+   "partner": "RWTH Aachen University",
+   "type": "Đồng hướng dẫn NCS",
+   "field": "Khai thác bền vững",
+   "startYear": 2016,
+   "endYear": 2027,
+   "status": "Đang thực hiện",
+   "summary": "NCS thực hiện luận án dưới sự đồng hướng dẫn của giảng viên HUMG và RWTH Aachen, có thời gian nghiên cứu tại Đức."
+  },
+  {
+   "scope": "Song phương",
+   "objectives": [
+    "Tăng cường năng lực đào tạo và nghiên cứu của hai bên",
+    "Thúc đẩy trao đổi học thuật, đồng công bố và chuyển giao công nghệ",
+    "Tạo cơ hội học tập, thực tập và nghiên cứu ở môi trường quốc tế"
+   ],
+   "results": [
+    "Trao đổi hàng chục lượt sinh viên, giảng viên mỗi năm",
+    "Nhiều công bố khoa học chung trên tạp chí quốc tế",
+    "Xây dựng, cập nhật chương trình đào tạo theo chuẩn quốc tế"
+   ],
+   "docs": [
+    {
+     "name": "Biên bản ghi nhớ hợp tác (MOU)",
+     "meta": "PDF · 1.1 MB"
+    },
+    {
+     "name": "Kế hoạch triển khai giai đoạn 2024 – 2027",
+     "meta": "PDF · 860 KB"
+    }
+   ],
+   "id": "trao-doi-freiberg",
+   "title": "Chương trình trao đổi sinh viên với TU Bergakademie Freiberg",
+   "partner": "TU Bergakademie Freiberg",
+   "type": "Trao đổi",
+   "field": "Địa chất – Kỹ thuật Mỏ",
+   "startYear": 2012,
+   "endYear": 2026,
+   "status": "Đang thực hiện",
+   "summary": "Sinh viên hai trường trao đổi một học kỳ, công nhận tín chỉ lẫn nhau, kèm khóa thực địa chung."
+  },
+  {
+   "scope": "Đa phương",
+   "objectives": [
+    "Tăng cường năng lực đào tạo và nghiên cứu của hai bên",
+    "Thúc đẩy trao đổi học thuật, đồng công bố và chuyển giao công nghệ",
+    "Tạo cơ hội học tập, thực tập và nghiên cứu ở môi trường quốc tế"
+   ],
+   "results": [
+    "Trao đổi hàng chục lượt sinh viên, giảng viên mỗi năm",
+    "Nhiều công bố khoa học chung trên tạp chí quốc tế",
+    "Xây dựng, cập nhật chương trình đào tạo theo chuẩn quốc tế"
+   ],
+   "docs": [
+    {
+     "name": "Biên bản ghi nhớ hợp tác (MOU)",
+     "meta": "PDF · 1.1 MB"
+    },
+    {
+     "name": "Kế hoạch triển khai giai đoạn 2024 – 2027",
+     "meta": "PDF · 860 KB"
+    }
+   ],
+   "id": "aims-queensland",
+   "title": "Chương trình trao đổi khu vực AIMS",
+   "partner": "The University of Queensland",
+   "type": "Trao đổi",
+   "field": "Kỹ thuật Mỏ – An toàn",
+   "startYear": 2018,
+   "endYear": 2027,
+   "status": "Đang thực hiện",
+   "summary": "Chương trình trao đổi sinh viên các nước ASEAN – Australia, HUMG là thành viên đại diện lĩnh vực mỏ – địa chất."
+  },
+  {
+   "scope": "Song phương",
+   "objectives": [
+    "Tăng cường năng lực đào tạo và nghiên cứu của hai bên",
+    "Thúc đẩy trao đổi học thuật, đồng công bố và chuyển giao công nghệ",
+    "Tạo cơ hội học tập, thực tập và nghiên cứu ở môi trường quốc tế"
+   ],
+   "results": [
+    "Trao đổi hàng chục lượt sinh viên, giảng viên mỗi năm",
+    "Nhiều công bố khoa học chung trên tạp chí quốc tế",
+    "Xây dựng, cập nhật chương trình đào tạo theo chuẩn quốc tế"
+   ],
+   "docs": [
+    {
+     "name": "Biên bản ghi nhớ hợp tác (MOU)",
+     "meta": "PDF · 1.1 MB"
+    },
+    {
+     "name": "Kế hoạch triển khai giai đoạn 2024 – 2027",
+     "meta": "PDF · 860 KB"
+    }
+   ],
+   "id": "jica-diakythuat",
+   "title": "Dự án tăng cường năng lực đào tạo địa kỹ thuật",
+   "partner": "JICA",
+   "type": "Dự án tài trợ",
+   "field": "Địa kỹ thuật – Phòng chống thiên tai",
+   "startYear": 2020,
+   "endYear": 2025,
+   "status": "Đã nghiệm thu",
+   "summary": "Dự án ODA hỗ trợ trang thiết bị phòng thí nghiệm, đào tạo giảng viên và xây dựng học phần địa kỹ thuật."
+  },
+  {
+   "scope": "Song phương",
+   "objectives": [
+    "Tăng cường năng lực đào tạo và nghiên cứu của hai bên",
+    "Thúc đẩy trao đổi học thuật, đồng công bố và chuyển giao công nghệ",
+    "Tạo cơ hội học tập, thực tập và nghiên cứu ở môi trường quốc tế"
+   ],
+   "results": [
+    "Trao đổi hàng chục lượt sinh viên, giảng viên mỗi năm",
+    "Nhiều công bố khoa học chung trên tạp chí quốc tế",
+    "Xây dựng, cập nhật chương trình đào tạo theo chuẩn quốc tế"
+   ],
+   "docs": [
+    {
+     "name": "Biên bản ghi nhớ hợp tác (MOU)",
+     "meta": "PDF · 1.1 MB"
+    },
+    {
+     "name": "Kế hoạch triển khai giai đoạn 2024 – 2027",
+     "meta": "PDF · 860 KB"
+    }
+   ],
+   "id": "kigam-khoang-san",
+   "title": "Nghiên cứu chung về thăm dò khoáng sản kim loại hiếm",
+   "partner": "KIGAM",
+   "type": "Nghiên cứu chung",
+   "field": "Tài nguyên khoáng sản",
+   "startYear": 2022,
+   "endYear": 2026,
+   "status": "Đang thực hiện",
+   "summary": "Hợp tác điều tra, phân tích và đánh giá tiềm năng khoáng sản kim loại hiếm khu vực Tây Bắc Việt Nam."
+  },
+  {
+   "scope": "Song phương",
+   "objectives": [
+    "Tăng cường năng lực đào tạo và nghiên cứu của hai bên",
+    "Thúc đẩy trao đổi học thuật, đồng công bố và chuyển giao công nghệ",
+    "Tạo cơ hội học tập, thực tập và nghiên cứu ở môi trường quốc tế"
+   ],
+   "results": [
+    "Trao đổi hàng chục lượt sinh viên, giảng viên mỗi năm",
+    "Nhiều công bố khoa học chung trên tạp chí quốc tế",
+    "Xây dựng, cập nhật chương trình đào tạo theo chuẩn quốc tế"
+   ],
+   "docs": [
+    {
+     "name": "Biên bản ghi nhớ hợp tác (MOU)",
+     "meta": "PDF · 1.1 MB"
+    },
+    {
+     "name": "Kế hoạch triển khai giai đoạn 2024 – 2027",
+     "meta": "PDF · 860 KB"
+    }
+   ],
+   "id": "lien-ket-cntt",
+   "title": "Chương trình liên kết đào tạo Công nghệ thông tin 2+2",
+   "partner": "Đại học đối tác (Australia / Hàn Quốc)",
+   "type": "Liên kết đào tạo",
+   "field": "Công nghệ thông tin",
+   "startYear": 2023,
+   "endYear": 2028,
+   "status": "Đang tuyển sinh",
+   "summary": "Sinh viên học 2 năm tại HUMG và 2 năm tại trường đối tác, nhận bằng của trường đối tác."
+  },
+  {
+   "scope": "Song phương",
+   "objectives": [
+    "Tăng cường năng lực đào tạo và nghiên cứu của hai bên",
+    "Thúc đẩy trao đổi học thuật, đồng công bố và chuyển giao công nghệ",
+    "Tạo cơ hội học tập, thực tập và nghiên cứu ở môi trường quốc tế"
+   ],
+   "results": [
+    "Trao đổi hàng chục lượt sinh viên, giảng viên mỗi năm",
+    "Nhiều công bố khoa học chung trên tạp chí quốc tế",
+    "Xây dựng, cập nhật chương trình đào tạo theo chuẩn quốc tế"
+   ],
+   "docs": [
+    {
+     "name": "Biên bản ghi nhớ hợp tác (MOU)",
+     "meta": "PDF · 1.1 MB"
+    },
+    {
+     "name": "Kế hoạch triển khai giai đoạn 2024 – 2027",
+     "meta": "PDF · 860 KB"
+    }
+   ],
+   "id": "tkv-dat-hang",
+   "title": "Đặt hàng đào tạo và nghiên cứu công nghệ khai thác cho TKV",
+   "partner": "Tập đoàn TKV",
+   "type": "Dự án tài trợ",
+   "field": "Khai thác mỏ",
+   "startYear": 2021,
+   "endYear": 2026,
+   "status": "Đang thực hiện",
+   "summary": "TKV đặt hàng đào tạo kỹ sư, cấp học bổng và phối hợp nghiên cứu giải pháp công nghệ cho các mỏ than."
+  },
+  {
+   "scope": "Song phương",
+   "objectives": [
+    "Tăng cường năng lực đào tạo và nghiên cứu của hai bên",
+    "Thúc đẩy trao đổi học thuật, đồng công bố và chuyển giao công nghệ",
+    "Tạo cơ hội học tập, thực tập và nghiên cứu ở môi trường quốc tế"
+   ],
+   "results": [
+    "Trao đổi hàng chục lượt sinh viên, giảng viên mỗi năm",
+    "Nhiều công bố khoa học chung trên tạp chí quốc tế",
+    "Xây dựng, cập nhật chương trình đào tạo theo chuẩn quốc tế"
+   ],
+   "docs": [
+    {
+     "name": "Biên bản ghi nhớ hợp tác (MOU)",
+     "meta": "PDF · 1.1 MB"
+    },
+    {
+     "name": "Kế hoạch triển khai giai đoạn 2024 – 2027",
+     "meta": "PDF · 860 KB"
+    }
+   ],
+   "id": "vast-de-tai",
+   "title": "Đề tài phối hợp cấp Nhà nước về khoa học Trái đất",
+   "partner": "Viện Hàn lâm KH&CN Việt Nam",
+   "type": "Nghiên cứu chung",
+   "field": "Khoa học Trái đất",
+   "startYear": 2023,
+   "endYear": 2027,
+   "status": "Đang thực hiện",
+   "summary": "HUMG và VAST đồng chủ trì đề tài nghiên cứu về tai biến địa chất và quản lý tài nguyên bền vững."
+  }
+ ],
+ "exchange": {
+  "intro": "HUMG triển khai nhiều chương trình trao đổi sinh viên và giảng viên hai chiều với các trường đối tác, giúp người học tiếp cận môi trường học thuật quốc tế và tích lũy tín chỉ được công nhận.",
+  "programs": [
+   {
+    "name": "Erasmus+ (Liên minh châu Âu)",
+    "partner": "AGH Krakow, TU Freiberg",
+    "dur": "1 học kỳ",
+    "level": "Sinh viên, học viên"
+   },
+   {
+    "name": "AIMS – ASEAN International Mobility for Students",
+    "partner": "Các trường ASEAN & Australia",
+    "dur": "1 học kỳ",
+    "level": "Sinh viên đại học"
+   },
+   {
+    "name": "Trao đổi song phương Việt – Đức",
+    "partner": "RWTH Aachen, TU Freiberg",
+    "dur": "3 – 6 tháng",
+    "level": "Sinh viên, NCS"
+   },
+   {
+    "name": "Khóa học mùa hè quốc tế (Summer School)",
+    "partner": "Nhiều đối tác",
+    "dur": "2 – 4 tuần",
+    "level": "Sinh viên, giảng viên trẻ"
+   }
+  ],
+  "steps": [
+   {
+    "title": "Xem thông báo & chọn chương trình",
+    "text": "Theo dõi thông báo của Phòng HTQT về đợt tuyển chọn và trường tiếp nhận."
+   },
+   {
+    "title": "Nộp hồ sơ đăng ký",
+    "text": "Bảng điểm, chứng chỉ ngoại ngữ, thư động lực, kế hoạch học tập."
+   },
+   {
+    "title": "Phỏng vấn & xét chọn",
+    "text": "Hội đồng xét chọn dựa trên kết quả học tập, ngoại ngữ và kế hoạch."
+   },
+   {
+    "title": "Hoàn tất thủ tục & lên đường",
+    "text": "Xin visa, đăng ký học phần tại trường đối tác, hoàn tất thủ tục bảo hiểm."
+   }
+  ],
+  "benefits": [
+   "Được công nhận tín chỉ khi hoàn thành học phần ở trường đối tác",
+   "Nhiều chương trình có học bổng hỗ trợ sinh hoạt phí và vé máy bay",
+   "Trải nghiệm môi trường học thuật, văn hóa và mạng lưới quốc tế"
+  ],
+  "eligibility": [
+   "Là sinh viên, học viên đang học tại HUMG, không trong thời gian bị kỷ luật",
+   "Điểm trung bình tích lũy đạt yêu cầu của từng chương trình (thường ≥ 2,5/4)",
+   "Trình độ ngoại ngữ đáp ứng yêu cầu của trường tiếp nhận"
+  ],
+  "docs": [
+   {
+    "name": "Hướng dẫn tham gia chương trình trao đổi",
+    "meta": "PDF · 1.0 MB"
+   },
+   {
+    "name": "Mẫu kế hoạch học tập (Learning Agreement)",
+    "meta": "DOCX · 38 KB"
+   }
+  ],
+  "faqs": [
+   {
+    "q": "Chi phí tham gia trao đổi là bao nhiêu?",
+    "a": "Tùy chương trình. Nhiều chương trình như Erasmus+ có học bổng chi trả phần lớn sinh hoạt phí; sinh viên thường tự lo một phần chi phí cá nhân."
+   },
+   {
+    "q": "Học phí tại trường đối tác có phải đóng không?",
+    "a": "Với các chương trình trao đổi có ký thỏa thuận, sinh viên vẫn đóng học phí tại HUMG và được miễn học phí tại trường đối tác."
+   }
+  ]
+ },
+ "intlLecturers": {
+  "intro": "HUMG mời giảng viên, nhà khoa học quốc tế đến giảng dạy, nghiên cứu và tham gia đồng hướng dẫn nghiên cứu sinh, góp phần quốc tế hóa hoạt động học thuật.",
+  "programs": [
+   {
+    "name": "Giáo sư thỉnh giảng",
+    "text": "Giảng dạy học phần, chuyên đề ngắn hạn cho học viên cao học và NCS."
+   },
+   {
+    "name": "Nhà khoa học thăm (Visiting Researcher)",
+    "text": "Làm việc tại nhóm nghiên cứu của HUMG từ 1 đến 12 tháng."
+   },
+   {
+    "name": "Đồng hướng dẫn nghiên cứu sinh",
+    "text": "Phối hợp với giảng viên HUMG hướng dẫn luận án tiến sĩ."
+   },
+   {
+    "name": "Báo cáo viên hội thảo quốc tế",
+    "text": "Trình bày báo cáo mời tại các hội nghị do HUMG tổ chức."
+   }
+  ],
+  "steps": [
+   {
+    "title": "Kết nối & đề xuất",
+    "text": "Khoa / nhóm nghiên cứu đề xuất mời chuyên gia, gửi Phòng HTQT."
+   },
+   {
+    "title": "Xây dựng kế hoạch làm việc",
+    "text": "Thống nhất nội dung, thời gian, kinh phí và sản phẩm dự kiến."
+   },
+   {
+    "title": "Hoàn tất thủ tục mời",
+    "text": "Thư mời chính thức, hỗ trợ visa, bảo hiểm và nơi ở."
+   },
+   {
+    "title": "Triển khai & tổng kết",
+    "text": "Thực hiện hoạt động, đánh giá kết quả và định hướng hợp tác tiếp theo."
+   }
+  ],
+  "benefits": [
+   "Hỗ trợ chi phí đi lại, lưu trú và thù lao theo quy định",
+   "Được bố trí văn phòng làm việc, truy cập thư viện và phòng thí nghiệm",
+   "Kết nối với mạng lưới nhà khoa học và doanh nghiệp tại Việt Nam"
+  ],
+  "docs": [
+   {
+    "name": "Quy định về mời chuyên gia nước ngoài",
+    "meta": "PDF · 940 KB"
+   },
+   {
+    "name": "Mẫu kế hoạch làm việc của chuyên gia",
+    "meta": "DOCX · 32 KB"
+   }
+  ]
+ },
+ "intlStudents": {
+  "intro": "HUMG tiếp nhận sinh viên, học viên quốc tế theo học các chương trình cấp bằng và ngắn hạn, cùng hệ thống dịch vụ hỗ trợ toàn diện.",
+  "stats": [
+   {
+    "value": "120+",
+    "label": "Sinh viên quốc tế đang học"
+   },
+   {
+    "value": "15",
+    "label": "Quốc gia"
+   },
+   {
+    "value": "8",
+    "label": "Chương trình bằng tiếng Anh"
+   },
+   {
+    "value": "24/7",
+    "label": "Hỗ trợ sinh viên"
+   }
+  ],
+  "programs": [
+   {
+    "name": "Chương trình cấp bằng đại học / sau đại học",
+    "dur": "2 – 4,5 năm",
+    "note": "Tiếng Việt hoặc tiếng Anh, có khóa tiếng Việt dự bị"
+   },
+   {
+    "name": "Trao đổi tín chỉ (1 – 2 học kỳ)",
+    "dur": "4 – 10 tháng",
+    "note": "Theo thỏa thuận giữa các trường"
+   },
+   {
+    "name": "Khóa học mùa hè về Khoa học Trái đất",
+    "dur": "2 – 4 tuần",
+    "note": "Gồm học lý thuyết và thực địa"
+   },
+   {
+    "name": "Thực tập nghiên cứu tại phòng thí nghiệm",
+    "dur": "1 – 6 tháng",
+    "note": "Dành cho sinh viên, NCS quốc tế"
+   }
+  ],
+  "steps": [
+   {
+    "title": "Tìm hiểu & chọn chương trình",
+    "text": "Xem thông tin ngành, ngôn ngữ giảng dạy, học phí và điều kiện đầu vào."
+   },
+   {
+    "title": "Nộp hồ sơ trực tuyến",
+    "text": "Bằng cấp, bảng điểm (hợp pháp hóa lãnh sự), hộ chiếu, chứng chỉ ngoại ngữ."
+   },
+   {
+    "title": "Nhận thư mời nhập học",
+    "text": "Sau khi hồ sơ được duyệt, Nhà trường gửi thư mời và hướng dẫn thủ tục."
+   },
+   {
+    "title": "Xin visa & nhập học",
+    "text": "Xin visa du học, đăng ký nơi ở, tham gia tuần định hướng cho sinh viên quốc tế."
+   }
+  ],
+  "support": [
+   {
+    "icon": "file",
+    "title": "Hỗ trợ visa & cư trú",
+    "text": "Hướng dẫn thủ tục visa, gia hạn tạm trú, đăng ký với cơ quan chức năng."
+   },
+   {
+    "icon": "heart",
+    "title": "Ký túc xá & đời sống",
+    "text": "Ưu tiên chỗ ở trong ký túc xá, hỗ trợ hòa nhập văn hóa."
+   },
+   {
+    "icon": "book",
+    "title": "Khóa tiếng Việt",
+    "text": "Khóa tiếng Việt dự bị và bổ trợ trong quá trình học."
+   },
+   {
+    "icon": "user",
+    "title": "Cố vấn & buddy",
+    "text": "Mỗi sinh viên quốc tế có một sinh viên HUMG đồng hành."
+   }
+  ],
+  "docs": [
+   {
+    "name": "Cẩm nang dành cho sinh viên quốc tế",
+    "meta": "PDF · 2.4 MB"
+   },
+   {
+    "name": "Danh mục chương trình giảng dạy bằng tiếng Anh",
+    "meta": "PDF · 720 KB"
+   }
+  ],
+  "faqs": [
+   {
+    "q": "Sinh viên quốc tế có bắt buộc biết tiếng Việt không?",
+    "a": "Không bắt buộc với các chương trình giảng dạy bằng tiếng Anh. Với chương trình tiếng Việt, sinh viên học khóa dự bị tiếng Việt trước khi vào chuyên ngành."
+   },
+   {
+    "q": "Học phí cho sinh viên quốc tế như thế nào?",
+    "a": "Học phí được công bố theo từng chương trình, thường cao hơn hệ trong nước; có học bổng cho sinh viên xuất sắc và theo hiệp định."
+   }
+  ],
+  "contact": {
+   "phone": "024.3838.3831",
+   "email": "iso@humg.edu.vn"
+  }
+ },
+ "opportunities": {
+  "intro": "HUMG hoan nghênh hợp tác với các trường, viện, doanh nghiệp và tổ chức trong và ngoài nước trên tinh thần bình đẳng, cùng có lợi và phát triển bền vững.",
+  "forms": [
+   {
+    "icon": "graduation",
+    "title": "Hợp tác đào tạo",
+    "text": "Liên kết đào tạo, đồng cấp bằng, trao đổi sinh viên – giảng viên, phát triển chương trình."
+   },
+   {
+    "icon": "flask",
+    "title": "Hợp tác nghiên cứu",
+    "text": "Đề tài, dự án chung; đồng công bố; đồng hướng dẫn nghiên cứu sinh."
+   },
+   {
+    "icon": "handshake",
+    "title": "Chuyển giao & Dịch vụ KHCN",
+    "text": "Chuyển giao công nghệ, tư vấn kỹ thuật, phân tích – thí nghiệm."
+   },
+   {
+    "icon": "briefcase",
+    "title": "Hợp tác doanh nghiệp",
+    "text": "Đặt hàng đào tạo, học bổng, thực tập, tuyển dụng và tài trợ nghiên cứu."
+   }
+  ],
+  "priorities": [
+   "Khai thác mỏ bền vững, an toàn và chuyển đổi xanh",
+   "Địa chất, tài nguyên khoáng sản và khoáng sản chiến lược",
+   "Trắc địa – Bản đồ, GIS, viễn thám và giám sát tài nguyên – môi trường",
+   "Chuyển đổi số, trí tuệ nhân tạo và dữ liệu lớn trong khoa học Trái đất",
+   "Môi trường, phòng chống thiên tai và phát triển bền vững"
+  ],
+  "commitments": [
+   "Đầu mối tiếp nhận và phản hồi đề xuất trong vòng 10 ngày làm việc",
+   "Bố trí nhóm chuyên gia và nguồn lực phù hợp cho từng nội dung hợp tác",
+   "Hỗ trợ thủ tục pháp lý, sở hữu trí tuệ và truyền thông kết quả hợp tác"
+  ],
+  "steps": [
+   {
+    "title": "Gửi đề xuất hợp tác",
+    "text": "Qua email htqt@humg.edu.vn hoặc biểu mẫu đề xuất trực tuyến."
+   },
+   {
+    "title": "Trao đổi & thống nhất nội dung",
+    "text": "Làm việc với đơn vị chuyên môn để xác định phạm vi và hình thức hợp tác."
+   },
+   {
+    "title": "Ký kết thỏa thuận",
+    "text": "Ký MOU hoặc hợp đồng hợp tác theo quy định."
+   },
+   {
+    "title": "Triển khai & đánh giá",
+    "text": "Thực hiện theo kế hoạch, đánh giá định kỳ và mở rộng hợp tác."
+   }
+  ],
+  "contact": {
+   "phone": "024.3838.3831",
+   "email": "htqt@humg.edu.vn"
+  }
+ },
+ "partnerCategories": [
+  "Tất cả",
+  "Trường đại học",
+  "Viện nghiên cứu",
+  "Doanh nghiệp",
+  "Tổ chức chính phủ",
+  "Tổ chức quốc tế"
+ ],
+ "partners": [
+  {
+   "activities": [
+    "Trao đổi giảng viên, sinh viên và cán bộ nghiên cứu",
+    "Đồng tổ chức hội thảo khoa học và khóa học ngắn hạn",
+    "Nghiên cứu chung, đồng công bố khoa học",
+    "Chia sẻ học liệu, phòng thí nghiệm và cơ sở dữ liệu"
+   ],
+   "id": "rwth-aachen",
+   "name": "RWTH Aachen University",
+   "country": "CHLB Đức",
+   "type": "Quốc tế",
+   "category": "Trường đại học",
+   "since": 2015,
+   "mou": 2026,
+   "fields": [
+    "Khai thác bền vững",
+    "Kinh tế tuần hoàn",
+    "Đồng hướng dẫn NCS"
+   ],
+   "desc": "Một trong những đại học kỹ thuật hàng đầu châu Âu, hợp tác với HUMG trong đào tạo sau đại học và nghiên cứu về khai thác mỏ bền vững.",
+   "programs": [
+    "Đồng hướng dẫn nghiên cứu sinh Việt – Đức",
+    "Nghiên cứu chung về hoàn nguyên mỏ"
+   ]
+  },
+  {
+   "activities": [
+    "Trao đổi giảng viên, sinh viên và cán bộ nghiên cứu",
+    "Đồng tổ chức hội thảo khoa học và khóa học ngắn hạn",
+    "Nghiên cứu chung, đồng công bố khoa học",
+    "Chia sẻ học liệu, phòng thí nghiệm và cơ sở dữ liệu"
+   ],
+   "id": "tu-freiberg",
+   "name": "TU Bergakademie Freiberg",
+   "country": "CHLB Đức",
+   "type": "Quốc tế",
+   "category": "Trường đại học",
+   "since": 2008,
+   "mou": 2022,
+   "fields": [
+    "Địa chất",
+    "Kỹ thuật Mỏ",
+    "Vật liệu"
+   ],
+   "desc": "Đại học mỏ lâu đời nhất thế giới, đối tác truyền thống của HUMG trong đào tạo và nghiên cứu khoa học Trái đất.",
+   "programs": [
+    "Trao đổi sinh viên song phương",
+    "Khóa học mùa hè về địa chất"
+   ]
+  },
+  {
+   "activities": [
+    "Trao đổi giảng viên, sinh viên và cán bộ nghiên cứu",
+    "Đồng tổ chức hội thảo khoa học và khóa học ngắn hạn",
+    "Nghiên cứu chung, đồng công bố khoa học",
+    "Chia sẻ học liệu, phòng thí nghiệm và cơ sở dữ liệu"
+   ],
+   "id": "kigam",
+   "name": "KIGAM – Viện Địa chất & Tài nguyên khoáng sản Hàn Quốc",
+   "country": "Hàn Quốc",
+   "type": "Quốc tế",
+   "category": "Viện nghiên cứu",
+   "since": 2012,
+   "mou": 2024,
+   "fields": [
+    "Tài nguyên khoáng sản",
+    "Địa vật lý",
+    "Chuyển giao công nghệ"
+   ],
+   "desc": "Viện nghiên cứu quốc gia của Hàn Quốc, hợp tác với HUMG về thăm dò khoáng sản và đào tạo nghiên cứu sinh.",
+   "programs": [
+    "Học bổng đồng hướng dẫn NCS Việt – Hàn"
+   ]
+  },
+  {
+   "activities": [
+    "Trao đổi giảng viên, sinh viên và cán bộ nghiên cứu",
+    "Đồng tổ chức hội thảo khoa học và khóa học ngắn hạn",
+    "Nghiên cứu chung, đồng công bố khoa học",
+    "Chia sẻ học liệu, phòng thí nghiệm và cơ sở dữ liệu"
+   ],
+   "id": "agh-krakow",
+   "name": "AGH University of Krakow",
+   "country": "Ba Lan",
+   "type": "Quốc tế",
+   "category": "Trường đại học",
+   "since": 2010,
+   "mou": 2021,
+   "fields": [
+    "Kỹ thuật Mỏ",
+    "Trắc địa",
+    "Môi trường"
+   ],
+   "desc": "Đại học khoa học và công nghệ hàng đầu Ba Lan, hợp tác trao đổi sinh viên và nghiên cứu chung.",
+   "programs": [
+    "Trao đổi sinh viên Erasmus+"
+   ]
+  },
+  {
+   "activities": [
+    "Trao đổi giảng viên, sinh viên và cán bộ nghiên cứu",
+    "Đồng tổ chức hội thảo khoa học và khóa học ngắn hạn",
+    "Nghiên cứu chung, đồng công bố khoa học",
+    "Chia sẻ học liệu, phòng thí nghiệm và cơ sở dữ liệu"
+   ],
+   "id": "uq-australia",
+   "name": "The University of Queensland",
+   "country": "Australia",
+   "type": "Quốc tế",
+   "category": "Trường đại học",
+   "since": 2016,
+   "mou": 2023,
+   "fields": [
+    "Khai thác mỏ",
+    "An toàn",
+    "Quản trị tài nguyên"
+   ],
+   "desc": "Đối tác của HUMG trong lĩnh vực kỹ thuật mỏ và quản trị tài nguyên khoáng sản, đồng tổ chức hội thảo quốc tế.",
+   "programs": [
+    "Chương trình trao đổi AIMS",
+    "Hội thảo quốc tế về khai thác mỏ"
+   ]
+  },
+  {
+   "activities": [
+    "Trao đổi giảng viên, sinh viên và cán bộ nghiên cứu",
+    "Đồng tổ chức hội thảo khoa học và khóa học ngắn hạn",
+    "Nghiên cứu chung, đồng công bố khoa học",
+    "Chia sẻ học liệu, phòng thí nghiệm và cơ sở dữ liệu"
+   ],
+   "id": "jica",
+   "name": "JICA – Cơ quan Hợp tác quốc tế Nhật Bản",
+   "country": "Nhật Bản",
+   "type": "Quốc tế",
+   "category": "Tổ chức quốc tế",
+   "since": 2009,
+   "mou": 2020,
+   "fields": [
+    "Đào tạo nhân lực",
+    "Phòng chống thiên tai",
+    "Môi trường"
+   ],
+   "desc": "Hỗ trợ HUMG các dự án tăng cường năng lực đào tạo, nghiên cứu về địa kỹ thuật và phòng chống thiên tai.",
+   "programs": [
+    "Dự án tăng cường năng lực địa kỹ thuật"
+   ]
+  },
+  {
+   "activities": [
+    "Trao đổi giảng viên, sinh viên và cán bộ nghiên cứu",
+    "Đồng tổ chức hội thảo khoa học và khóa học ngắn hạn",
+    "Nghiên cứu chung, đồng công bố khoa học",
+    "Chia sẻ học liệu, phòng thí nghiệm và cơ sở dữ liệu"
+   ],
+   "id": "bgr-germany",
+   "name": "BGR – Viện Khoa học Địa chất & Tài nguyên Liên bang Đức",
+   "country": "CHLB Đức",
+   "type": "Quốc tế",
+   "category": "Tổ chức chính phủ",
+   "since": 2011,
+   "mou": 2019,
+   "fields": [
+    "Địa chất",
+    "Nước ngầm",
+    "Khoáng sản"
+   ],
+   "desc": "Cơ quan địa chất liên bang Đức, hợp tác với HUMG trong điều tra tài nguyên và đào tạo chuyên gia.",
+   "programs": [
+    "Nghiên cứu chung về nước ngầm"
+   ]
+  },
+  {
+   "activities": [
+    "Trao đổi giảng viên, sinh viên và cán bộ nghiên cứu",
+    "Đồng tổ chức hội thảo khoa học và khóa học ngắn hạn",
+    "Nghiên cứu chung, đồng công bố khoa học",
+    "Chia sẻ học liệu, phòng thí nghiệm và cơ sở dữ liệu"
+   ],
+   "id": "vinacomin",
+   "name": "Tập đoàn Công nghiệp Than – Khoáng sản Việt Nam (TKV)",
+   "country": "Việt Nam",
+   "type": "Trong nước",
+   "category": "Doanh nghiệp",
+   "since": 1996,
+   "mou": 2025,
+   "fields": [
+    "Khai thác than",
+    "An toàn mỏ",
+    "Đào tạo nhân lực"
+   ],
+   "desc": "Đối tác chiến lược của HUMG, tiếp nhận sinh viên thực tập, đặt hàng đào tạo và phối hợp nghiên cứu công nghệ khai thác.",
+   "programs": [
+    "Đặt hàng đào tạo kỹ sư mỏ",
+    "Nghiên cứu công nghệ khai thác than hầm lò"
+   ]
+  },
+  {
+   "activities": [
+    "Trao đổi giảng viên, sinh viên và cán bộ nghiên cứu",
+    "Đồng tổ chức hội thảo khoa học và khóa học ngắn hạn",
+    "Nghiên cứu chung, đồng công bố khoa học",
+    "Chia sẻ học liệu, phòng thí nghiệm và cơ sở dữ liệu"
+   ],
+   "id": "pvn",
+   "name": "Tập đoàn Dầu khí Việt Nam (Petrovietnam)",
+   "country": "Việt Nam",
+   "type": "Trong nước",
+   "category": "Doanh nghiệp",
+   "since": 1998,
+   "mou": 2024,
+   "fields": [
+    "Dầu khí",
+    "Địa vật lý",
+    "Việc làm"
+   ],
+   "desc": "Phối hợp đào tạo, tiếp nhận thực tập và tuyển dụng sinh viên các ngành dầu khí, địa vật lý.",
+   "programs": [
+    "Ngày hội việc làm ngành Dầu khí"
+   ]
+  },
+  {
+   "activities": [
+    "Trao đổi giảng viên, sinh viên và cán bộ nghiên cứu",
+    "Đồng tổ chức hội thảo khoa học và khóa học ngắn hạn",
+    "Nghiên cứu chung, đồng công bố khoa học",
+    "Chia sẻ học liệu, phòng thí nghiệm và cơ sở dữ liệu"
+   ],
+   "id": "vast",
+   "name": "Viện Hàn lâm Khoa học & Công nghệ Việt Nam (VAST)",
+   "country": "Việt Nam",
+   "type": "Trong nước",
+   "category": "Viện nghiên cứu",
+   "since": 2005,
+   "mou": 2023,
+   "fields": [
+    "Nghiên cứu cơ bản",
+    "Đồng công bố",
+    "Đào tạo sau ĐH"
+   ],
+   "desc": "Hợp tác nghiên cứu cơ bản, đồng hướng dẫn nghiên cứu sinh và chia sẻ phòng thí nghiệm.",
+   "programs": [
+    "Đề tài phối hợp cấp Nhà nước"
+   ]
+  },
+  {
+   "activities": [
+    "Trao đổi giảng viên, sinh viên và cán bộ nghiên cứu",
+    "Đồng tổ chức hội thảo khoa học và khóa học ngắn hạn",
+    "Nghiên cứu chung, đồng công bố khoa học",
+    "Chia sẻ học liệu, phòng thí nghiệm và cơ sở dữ liệu"
+   ],
+   "id": "dgmv",
+   "name": "Tổng cục Địa chất & Khoáng sản Việt Nam",
+   "country": "Việt Nam",
+   "type": "Trong nước",
+   "category": "Tổ chức chính phủ",
+   "since": 1990,
+   "mou": 2022,
+   "fields": [
+    "Điều tra địa chất",
+    "Bản đồ",
+    "Chính sách khoáng sản"
+   ],
+   "desc": "Cơ quan quản lý nhà nước về địa chất – khoáng sản, phối hợp đào tạo và tư vấn chính sách.",
+   "programs": [
+    "Tập huấn cán bộ địa chất"
+   ]
+  },
+  {
+   "activities": [
+    "Trao đổi giảng viên, sinh viên và cán bộ nghiên cứu",
+    "Đồng tổ chức hội thảo khoa học và khóa học ngắn hạn",
+    "Nghiên cứu chung, đồng công bố khoa học",
+    "Chia sẻ học liệu, phòng thí nghiệm và cơ sở dữ liệu"
+   ],
+   "id": "schlumberger",
+   "name": "SLB (Schlumberger) Việt Nam",
+   "country": "Việt Nam",
+   "type": "Trong nước",
+   "category": "Doanh nghiệp",
+   "since": 2013,
+   "mou": 2021,
+   "fields": [
+    "Dịch vụ dầu khí",
+    "Phần mềm chuyên ngành",
+    "Học bổng"
+   ],
+   "desc": "Tài trợ phần mềm chuyên ngành, học bổng và tiếp nhận thực tập sinh ngành dầu khí – địa vật lý.",
+   "programs": [
+    "Học bổng SLB cho sinh viên dầu khí"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,865 @@
+{
+ "admission": {
+  "tiles": [
+   {
+    "icon": "book",
+    "title": "Thông tin tuyển sinh",
+    "desc": "Chỉ tiêu, ngành, tổ hợp xét tuyển."
+   },
+   {
+    "icon": "layers",
+    "title": "Phương thức xét tuyển",
+    "desc": "Các phương thức & điều kiện."
+   },
+   {
+    "icon": "file",
+    "title": "Hồ sơ & Giấy tờ",
+    "desc": "Danh mục hồ sơ cần chuẩn bị."
+   },
+   {
+    "icon": "clock",
+    "title": "Thời gian tuyển sinh",
+    "desc": "Mốc thời gian quan trọng."
+   },
+   {
+    "icon": "check",
+    "title": "Hướng dẫn đăng ký",
+    "desc": "Quy trình đăng ký trực tuyến."
+   },
+   {
+    "icon": "headphones",
+    "title": "Câu hỏi thường gặp",
+    "desc": "Giải đáp thắc mắc tuyển sinh."
+   }
+  ],
+  "quota": {
+   "columns": [
+    "STT",
+    "Trình độ",
+    "Hình thức đào tạo",
+    "Chỉ tiêu (dự kiến)",
+    "Ghi chú"
+   ],
+   "rows": [
+    [
+     "1",
+     "Đại học chính quy",
+     "Chuẩn",
+     "2.850",
+     "Xét THPT & ĐGNL"
+    ],
+    [
+     "2",
+     "Đại học chính quy (CLC)",
+     "Chất lượng cao",
+     "450",
+     "Học phí theo chương trình"
+    ],
+    [
+     "3",
+     "Liên thông đại học",
+     "VLVH",
+     "300",
+     "Xét tuyển theo quy định"
+    ],
+    [
+     "4",
+     "Đại học vừa làm vừa học",
+     "VLVH",
+     "200",
+     "Xét tuyển theo ngành"
+    ],
+    [
+     "5",
+     "Văn bằng 2",
+     "VLVH",
+     "150",
+     "Xét tuyển theo ngành"
+    ]
+   ]
+  },
+  "methods": [
+   {
+    "title": "Xét tuyển thẳng & ưu tiên xét tuyển",
+    "text": "Theo quy định của Bộ GD&ĐT và Nhà trường."
+   },
+   {
+    "title": "Xét tuyển bằng kết quả thi tốt nghiệp THPT",
+    "text": "Theo tổ hợp môn phù hợp từng ngành."
+   },
+   {
+    "title": "Xét tuyển bằng kết quả học tập THPT (học bạ)",
+    "text": "Xét điểm 3 năm hoặc 5 học kỳ."
+   },
+   {
+    "title": "Xét tuyển kết hợp",
+    "text": "Kết hợp chứng chỉ quốc tế, giải thưởng, phỏng vấn…"
+   },
+   {
+    "title": "Xét tuyển bằng kết quả kỳ thi ĐGNL của ĐHQG Hà Nội",
+    "text": "Theo ngưỡng đảm bảo chất lượng."
+   }
+  ],
+  "majors": [
+   "Kỹ thuật Mỏ",
+   "Kỹ thuật Dầu khí",
+   "Kỹ thuật Địa chất",
+   "Quản lý đất đai",
+   "Công nghệ thông tin",
+   "Kỹ thuật Điều khiển & Tự động hóa",
+   "Kế toán",
+   "Quản trị kinh doanh"
+  ],
+  "docs": [
+   {
+    "name": "Đề án tuyển sinh 2026",
+    "meta": "PDF · 1.2 MB"
+   },
+   {
+    "name": "Quy chế tuyển sinh 2026",
+    "meta": "PDF · 892 KB"
+   },
+   {
+    "name": "Hướng dẫn đăng ký xét tuyển",
+    "meta": "PDF · 1.5 MB"
+   },
+   {
+    "name": "Mẫu đơn đăng ký xét tuyển",
+    "meta": "DOCX · 256 KB"
+   },
+   {
+    "name": "Danh mục ngành đào tạo",
+    "meta": "PDF · 776 KB"
+   }
+  ],
+  "links": [
+   {
+    "label": "Quy chế tuyển sinh",
+    "to": "/hoc-tap/tuyen-sinh/quy-che"
+   },
+   {
+    "label": "Tra cứu điểm chuẩn các năm",
+    "to": "/hoc-tap/tuyen-sinh/diem-chuan"
+   },
+   {
+    "label": "Video giới thiệu ngành",
+    "to": "/hoc-tap/tuyen-sinh/video-nganh"
+   },
+   {
+    "label": "Hướng dẫn đăng ký",
+    "to": "/hoc-tap/tuyen-sinh/huong-dan"
+   },
+   {
+    "label": "Tư vấn tuyển sinh trực tuyến",
+    "to": "/hoc-tap/tuyen-sinh/tu-van"
+   }
+  ],
+  "news": [
+   {
+    "date": "20/05/2026",
+    "title": "Thông báo tuyển sinh đại học chính quy năm 2026"
+   },
+   {
+    "date": "18/05/2026",
+    "title": "Hướng dẫn đăng ký xét tuyển trực tuyến năm 2026"
+   },
+   {
+    "date": "15/05/2026",
+    "title": "Danh sách ngành & tổ hợp xét tuyển 2026"
+   },
+   {
+    "date": "12/05/2026",
+    "title": "Một số thay đổi trong Quy chế tuyển sinh 2026"
+   }
+  ],
+  "faqs": [
+   {
+    "q": "HUMG xét tuyển bằng những phương thức nào?",
+    "a": "Nhà trường sử dụng 5 phương thức: xét tuyển thẳng, xét điểm thi tốt nghiệp THPT, xét học bạ, xét tuyển kết hợp và xét kết quả kỳ thi ĐGNL của ĐHQG Hà Nội."
+   },
+   {
+    "q": "Thời gian nhận hồ sơ xét học bạ khi nào?",
+    "a": "Thường bắt đầu từ tháng 3 và kết thúc trước khi có kết quả thi tốt nghiệp THPT. Mốc cụ thể công bố trong Đề án tuyển sinh hằng năm."
+   },
+   {
+    "q": "Học phí chương trình chất lượng cao là bao nhiêu?",
+    "a": "Học phí thu theo từng chương trình, công bố công khai trong Đề án tuyển sinh và trên trang Học phí – Học bổng."
+   },
+   {
+    "q": "Có chính sách học bổng cho tân sinh viên không?",
+    "a": "Có. Nhà trường cấp học bổng cho thủ khoa, á khoa, thí sinh đạt giải quốc gia/quốc tế và sinh viên có hoàn cảnh khó khăn học tốt."
+   }
+  ]
+ },
+ "contact": {
+  "cards": [
+   {
+    "icon": "phone",
+    "label": "Điện thoại",
+    "value": "024.3838.3806"
+   },
+   {
+    "icon": "mail",
+    "label": "Email",
+    "value": "humg@humg.edu.vn"
+   },
+   {
+    "icon": "map-pin",
+    "label": "Địa chỉ",
+    "value": "18 Phố Viên, Đức Thắng, Bắc Từ Liêm, Hà Nội"
+   },
+   {
+    "icon": "clock",
+    "label": "Giờ làm việc",
+    "value": "Thứ 2 – Thứ 6: 07:30 – 17:00"
+   },
+   {
+    "icon": "facebook",
+    "label": "Facebook",
+    "value": "facebook.com/humg.edu.vn"
+   },
+   {
+    "icon": "zalo",
+    "label": "Zalo",
+    "value": "Zalo Official HUMG"
+   }
+  ],
+  "subjects": [
+   "Tuyển sinh & Đào tạo",
+   "Hợp tác & Doanh nghiệp",
+   "Công tác sinh viên",
+   "Nghiên cứu khoa học",
+   "Khác"
+  ],
+  "hours": [
+   [
+    "Thứ 2 – Thứ 6",
+    "07:30 – 17:00"
+   ],
+   [
+    "Thứ 7",
+    "07:30 – 11:30"
+   ],
+   [
+    "Chủ nhật",
+    "Nghỉ"
+   ]
+  ],
+  "transport": [
+   {
+    "icon": "map-pin",
+    "title": "Ô tô",
+    "text": "Từ trung tâm Hà Nội khoảng 30 phút."
+   },
+   {
+    "icon": "grid",
+    "title": "Xe buýt",
+    "text": "Tuyến 18, 75, 57, 60A — điểm dừng ĐH Mỏ - Địa chất."
+   },
+   {
+    "icon": "layers",
+    "title": "Tàu điện",
+    "text": "Tuyến 3 (Nhổn – Ga Hà Nội), ga gần nhất: Minh Khai."
+   }
+  ],
+  "faqs": [
+   {
+    "q": "Thời gian làm việc của Nhà trường?",
+    "a": "Các phòng ban làm việc từ 07:30 đến 17:00 các ngày trong tuần (nghỉ trưa 11:30 – 13:00)."
+   },
+   {
+    "q": "Tôi muốn tham quan trường có cần đăng ký trước không?",
+    "a": "Đoàn tham quan vui lòng liên hệ Phòng Công tác chính trị & Sinh viên trước ít nhất 3 ngày làm việc để được sắp xếp."
+   },
+   {
+    "q": "Làm thế nào để gửi hồ sơ tuyển sinh?",
+    "a": "Nộp trực tuyến qua cổng tuyển sinh hoặc gửi bưu điện về Phòng Đào tạo, kèm theo lệ phí xét tuyển theo quy định."
+   }
+  ]
+ },
+ "digilib": {
+  "access": [
+   {
+    "icon": "flask",
+    "title": "CSDL Khoa học",
+    "desc": "Scopus, ScienceDirect, IEEE Xplore, SpringerLink…",
+    "to": "/thu-vien/csdl-khoa-hoc"
+   },
+   {
+    "icon": "book",
+    "title": "Sách điện tử",
+    "desc": "Giáo trình, sách chuyên khảo bản số.",
+    "to": "/thu-vien/tim-kiem?loai=S%C3%A1ch"
+   },
+   {
+    "icon": "newspaper",
+    "title": "Tạp chí điện tử",
+    "desc": "Bài báo toàn văn trong nước và quốc tế.",
+    "to": "/thu-vien/tim-kiem?loai=T%E1%BA%A1p%20ch%C3%AD"
+   },
+   {
+    "icon": "file",
+    "title": "Luận văn – Luận án",
+    "desc": "Kho luận văn thạc sĩ, luận án tiến sĩ đã số hóa.",
+    "to": "/thu-vien/tim-kiem?loai=Lu%E1%BA%ADn%20v%C4%83n"
+   },
+   {
+    "icon": "layers",
+    "title": "Tài liệu số",
+    "desc": "Bài giảng, học liệu và tài liệu số khác.",
+    "to": "/thu-vien/tim-kiem?loai=T%C3%A0i%20li%E1%BB%87u%20s%E1%BB%91"
+   },
+   {
+    "icon": "headphones",
+    "title": "Hướng dẫn sử dụng",
+    "desc": "Đăng ký thẻ, tra cứu, mượn – trả và trích dẫn.",
+    "to": "/thu-vien/huong-dan"
+   }
+  ],
+  "resources": [
+   {
+    "name": "Scopus",
+    "meta": "24.000.000+ tài liệu"
+   },
+   {
+    "name": "ScienceDirect",
+    "meta": "19.000.000+ tài liệu"
+   },
+   {
+    "name": "IEEE Xplore",
+    "meta": "6.500.000+ tài liệu"
+   },
+   {
+    "name": "SpringerLink",
+    "meta": "4.000+ tạp chí"
+   },
+   {
+    "name": "Thư viện sách in",
+    "meta": "120.000+ đầu sách"
+   }
+  ],
+  "latest": [
+   {
+    "title": "Giáo trình Trắc địa cơ sở",
+    "author": "Nguyễn Văn A",
+    "year": 2024,
+    "type": "Sách"
+   },
+   {
+    "title": "Đo đạc GPS trong trắc địa",
+    "author": "Trần Thị B",
+    "year": 2023,
+    "type": "Ebook"
+   },
+   {
+    "title": "Ứng dụng GIS trong quản lý đất đai",
+    "author": "Lê Văn C",
+    "year": 2024,
+    "type": "Sách"
+   },
+   {
+    "title": "Cơ học đá ứng dụng trong khai thác mỏ",
+    "author": "GS.TS Hoàng Văn H",
+    "year": 2022,
+    "type": "Giáo trình"
+   },
+   {
+    "title": "Địa vật lý giếng khoan nâng cao",
+    "author": "Phạm Văn C",
+    "year": 2023,
+    "type": "Ebook"
+   },
+   {
+    "title": "Kinh tế tài nguyên khoáng sản",
+    "author": "Đỗ Văn G",
+    "year": 2024,
+    "type": "Giáo trình"
+   },
+   {
+    "title": "Xử lý ảnh viễn thám với học sâu",
+    "author": "Hoàng Văn E",
+    "year": 2025,
+    "type": "Tài liệu số"
+   },
+   {
+    "title": "An toàn lao động trong khai thác hầm lò",
+    "author": "Trần Văn A",
+    "year": 2022,
+    "type": "Sách"
+   }
+  ],
+  "stats": [
+   {
+    "value": "120.000+",
+    "label": "Sách điện tử"
+   },
+   {
+    "value": "50.000+",
+    "label": "Tạp chí điện tử"
+   },
+   {
+    "value": "15+",
+    "label": "CSDL trực tuyến"
+   },
+   {
+    "value": "8.500+",
+    "label": "Lượt truy cập / tháng"
+   }
+  ],
+  "help": [
+   {
+    "label": "Hướng dẫn tìm kiếm tài liệu",
+    "to": "/thu-vien/huong-dan"
+   },
+   {
+    "label": "Hướng dẫn trích dẫn (APA 7th)",
+    "to": "/thu-vien/huong-dan"
+   },
+   {
+    "label": "Quy định sử dụng thư viện số",
+    "to": "/thu-vien/huong-dan"
+   },
+   {
+    "label": "Đặt mượn tài liệu",
+    "to": "/thu-vien/tai-lieu-cua-toi"
+   },
+   {
+    "label": "Gửi yêu cầu hỗ trợ",
+    "to": "/lien-he"
+   }
+  ]
+ },
+ "elearning": {
+  "tiles": [
+   {
+    "icon": "play",
+    "title": "Vào lớp học",
+    "desc": "Truy cập lớp học phần đang theo học.",
+    "to": "/dang-nhap"
+   },
+   {
+    "icon": "book",
+    "title": "Khóa học của tôi",
+    "desc": "Danh sách khóa học đã đăng ký.",
+    "to": "/dang-nhap"
+   },
+   {
+    "icon": "layers",
+    "title": "Học liệu số",
+    "desc": "Bài giảng, slide, video, tài liệu tham khảo.",
+    "to": "/thu-vien-so"
+   },
+   {
+    "icon": "headphones",
+    "title": "Hướng dẫn sử dụng",
+    "desc": "Tài liệu & video hướng dẫn LMS.",
+    "to": "/hoc-tap/huong-dan"
+   }
+  ],
+  "systems": [
+   {
+    "name": "LMS HUMG",
+    "desc": "Hệ thống quản lý học tập chính",
+    "to": "#"
+   },
+   {
+    "name": "Microsoft Teams",
+    "desc": "Lớp học trực tuyến & họp",
+    "to": "#"
+   },
+   {
+    "name": "Zoom Meeting",
+    "desc": "Phòng học ảo dự phòng",
+    "to": "#"
+   },
+   {
+    "name": "Thư viện số",
+    "desc": "Tài nguyên học thuật",
+    "to": "/thu-vien-so"
+   }
+  ],
+  "courses": [
+   {
+    "title": "Nhập môn Lập trình",
+    "meta": "Khoa CNTT · 45 bài giảng"
+   },
+   {
+    "title": "Cơ sở kỹ thuật Địa chất",
+    "meta": "Khoa Địa chất · 38 bài giảng"
+   },
+   {
+    "title": "Trắc địa đại cương",
+    "meta": "Khoa Trắc địa – Bản đồ · 30 bài giảng"
+   },
+   {
+    "title": "An toàn trong khai thác mỏ",
+    "meta": "Khoa Mỏ · 26 bài giảng"
+   }
+  ],
+  "docs": [
+   {
+    "name": "Hướng dẫn đăng nhập LMS cho sinh viên",
+    "meta": "PDF · 1.1 MB"
+   },
+   {
+    "name": "Hướng dẫn nộp bài & làm bài kiểm tra",
+    "meta": "PDF · 940 KB"
+   },
+   {
+    "name": "Hướng dẫn giảng viên tạo lớp học phần",
+    "meta": "PDF · 1.6 MB"
+   }
+  ]
+ },
+ "forms": {
+  "categories": [
+   {
+    "name": "Đào tạo",
+    "docs": [
+     {
+      "name": "Đơn xin nghỉ học tạm thời",
+      "meta": "DOCX · 32 KB"
+     },
+     {
+      "name": "Đơn xin học lại / học cải thiện",
+      "meta": "DOCX · 28 KB"
+     },
+     {
+      "name": "Đơn xin chuyển ngành / chuyển trường",
+      "meta": "DOCX · 30 KB"
+     },
+     {
+      "name": "Đơn xin phúc khảo điểm",
+      "meta": "DOCX · 26 KB"
+     }
+    ]
+   },
+   {
+    "name": "Học phí – Học bổng",
+    "docs": [
+     {
+      "name": "Đơn xin gia hạn học phí",
+      "meta": "DOCX · 24 KB"
+     },
+     {
+      "name": "Đơn xin cấp học bổng khuyến khích học tập",
+      "meta": "DOCX · 30 KB"
+     },
+     {
+      "name": "Đơn xin miễn / giảm học phí",
+      "meta": "DOCX · 28 KB"
+     }
+    ]
+   },
+   {
+    "name": "Công tác sinh viên",
+    "docs": [
+     {
+      "name": "Đơn xin xác nhận sinh viên",
+      "meta": "DOCX · 22 KB"
+     },
+     {
+      "name": "Đơn xin vay vốn ngân hàng chính sách",
+      "meta": "DOCX · 26 KB"
+     },
+     {
+      "name": "Đơn xin ở ký túc xá",
+      "meta": "DOCX · 24 KB"
+     }
+    ]
+   },
+   {
+    "name": "Nghiên cứu khoa học",
+    "docs": [
+     {
+      "name": "Mẫu thuyết minh đề tài NCKH sinh viên",
+      "meta": "DOCX · 120 KB"
+     },
+     {
+      "name": "Mẫu báo cáo tổng kết đề tài",
+      "meta": "DOCX · 96 KB"
+     }
+    ]
+   },
+   {
+    "name": "Hành chính",
+    "docs": [
+     {
+      "name": "Giấy đề nghị thanh toán",
+      "meta": "DOCX · 40 KB"
+     },
+     {
+      "name": "Đơn đăng ký sử dụng phòng học / hội trường",
+      "meta": "DOCX · 34 KB"
+     }
+    ]
+   }
+  ]
+ },
+ "utilityGroups": [
+  {
+   "title": "Dành cho tất cả",
+   "items": [
+    {
+     "icon": "calendar",
+     "title": "Lịch công tác",
+     "desc": "Lịch tuần & thông báo điều hành của Nhà trường.",
+     "to": "/lich-cong-tac"
+    },
+    {
+     "icon": "library",
+     "title": "Thư viện số",
+     "desc": "CSDL khoa học, sách – tạp chí điện tử, luận văn.",
+     "to": "/thu-vien-so"
+    },
+    {
+     "icon": "play",
+     "title": "E-learning & LMS",
+     "desc": "Lớp học trực tuyến, khóa học, học liệu số.",
+     "to": "/hoc-tap/e-learning"
+    },
+    {
+     "icon": "search",
+     "title": "Tra cứu tuyển sinh",
+     "desc": "Ngành đào tạo, phương thức xét tuyển, điểm chuẩn.",
+     "to": "/hoc-tap/tuyen-sinh"
+    },
+    {
+     "icon": "file",
+     "title": "Biểu mẫu",
+     "desc": "Kho biểu mẫu đào tạo, học phí, hành chính.",
+     "to": "/hoc-tap/bieu-mau"
+    },
+    {
+     "icon": "mail",
+     "title": "Webmail",
+     "desc": "Hộp thư điện tử @humg.edu.vn.",
+     "to": "/webmail"
+    },
+    {
+     "icon": "award",
+     "title": "Tra cứu văn bằng",
+     "desc": "Xác minh văn bằng, chứng chỉ đã cấp.",
+     "to": "/tien-ich"
+    },
+    {
+     "icon": "bell",
+     "title": "Thông báo",
+     "desc": "Thông báo chung, học vụ, tài chính.",
+     "to": "/tin-tuc"
+    }
+   ]
+  },
+  {
+   "title": "Sinh viên",
+   "items": [
+    {
+     "icon": "grid",
+     "title": "Cổng sinh viên My eUni",
+     "desc": "Kết quả học tập, lịch thi, học phí, biểu mẫu.",
+     "to": "/euni/sinh-vien"
+    },
+    {
+     "icon": "award",
+     "title": "Tra cứu điểm",
+     "desc": "Điểm học phần, GPA, tiến độ tích lũy tín chỉ.",
+     "to": "/euni/sinh-vien/ket-qua-hoc-tap"
+    },
+    {
+     "icon": "file",
+     "title": "Đăng ký môn học",
+     "desc": "Đăng ký học phần theo tiến độ đào tạo.",
+     "to": "/euni/sinh-vien/tien-do-hoc-tap"
+    },
+    {
+     "icon": "briefcase",
+     "title": "Việc làm & Thực tập",
+     "desc": "Cơ hội việc làm, thực tập, ngày hội tuyển dụng.",
+     "to": "/doi-song/viec-lam-khoi-nghiep"
+    }
+   ]
+  },
+  {
+   "title": "Giảng viên / Cán bộ",
+   "items": [
+    {
+     "icon": "grid",
+     "title": "Cổng cán bộ My eUni",
+     "desc": "Lịch giảng dạy, quản lý lớp – học phần, NCKH.",
+     "to": "/euni/giang-vien"
+    },
+    {
+     "icon": "flask",
+     "title": "CSDL khoa học",
+     "desc": "Đề tài, công bố, hồ sơ khoa học cá nhân.",
+     "to": "/euni/giang-vien/csdl-khoa-hoc"
+    },
+    {
+     "icon": "file",
+     "title": "Dịch vụ hành chính",
+     "desc": "Đăng ký phòng, thiết bị, thủ tục nội bộ.",
+     "to": "/giang-vien/tien-ich"
+    },
+    {
+     "icon": "mail",
+     "title": "Email nội bộ",
+     "desc": "Hộp thư công vụ, danh bạ nội bộ.",
+     "to": "/webmail"
+    }
+   ]
+  }
+ ],
+ "webmail": {
+  "docs": [
+   {
+    "name": "Hướng dẫn đăng nhập Webmail lần đầu",
+    "meta": "PDF · 780 KB"
+   },
+   {
+    "name": "Cấu hình email trên điện thoại (IMAP/SMTP)",
+    "meta": "PDF · 1.0 MB"
+   },
+   {
+    "name": "Cấu hình email trên Outlook",
+    "meta": "PDF · 1.2 MB"
+   },
+   {
+    "name": "Quy định sử dụng hộp thư điện tử @humg.edu.vn",
+    "meta": "PDF · 640 KB"
+   }
+  ],
+  "faqs": [
+   {
+    "q": "Tài khoản email được cấp cho những ai?",
+    "a": "Toàn bộ cán bộ, giảng viên và sinh viên chính quy của Trường được cấp một hộp thư @humg.edu.vn khi nhập học / tiếp nhận công tác."
+   },
+   {
+    "q": "Quên mật khẩu email thì làm thế nào?",
+    "a": "Liên hệ Trung tâm CNTT (phòng 201, Nhà A) hoặc gửi yêu cầu qua cổng hỗ trợ kèm ảnh thẻ để được cấp lại."
+   },
+   {
+    "q": "Dung lượng hộp thư là bao nhiêu?",
+    "a": "Mặc định 15 GB cho sinh viên và 50 GB cho cán bộ, có thể mở rộng theo nhu cầu công việc."
+   }
+  ],
+  "links": [
+   {
+    "label": "Cổng hỗ trợ CNTT"
+   },
+   {
+    "label": "Danh bạ điện thoại nội bộ"
+   },
+   {
+    "label": "Phần mềm bản quyền cho HUMG"
+   }
+  ]
+ },
+ "workCalendar": {
+  "week": "Tuần 21 (18/05 – 24/05/2026)",
+  "days": [
+   {
+    "day": "Thứ Hai",
+    "date": "18/05",
+    "events": [
+     {
+      "time": "08:00",
+      "title": "Giao ban Ban Giám hiệu",
+      "place": "Phòng họp A",
+      "unit": "Văn phòng"
+     },
+     {
+      "time": "14:00",
+      "title": "Họp Hội đồng Khoa học & Đào tạo",
+      "place": "Phòng họp B",
+      "unit": "Phòng ĐT"
+     }
+    ]
+   },
+   {
+    "day": "Thứ Ba",
+    "date": "19/05",
+    "events": [
+     {
+      "time": "09:00",
+      "title": "Làm việc với đoàn ĐH Queensland",
+      "place": "Phòng Khánh tiết",
+      "unit": "Phòng HTQT"
+     }
+    ]
+   },
+   {
+    "day": "Thứ Tư",
+    "date": "20/05",
+    "events": [
+     {
+      "time": "08:00",
+      "title": "Hội thảo KH quốc tế về Địa chất & Khoáng sản",
+      "place": "Hội trường A",
+      "unit": "Khoa Địa chất"
+     },
+     {
+      "time": "15:00",
+      "title": "Họp xét học bổng học kỳ II",
+      "place": "Phòng họp B",
+      "unit": "Phòng CTSV"
+     }
+    ]
+   },
+   {
+    "day": "Thứ Năm",
+    "date": "21/05",
+    "events": [
+     {
+      "time": "14:00",
+      "title": "Bảo vệ luận án Tiến sĩ cấp Trường",
+      "place": "Phòng 602, Nhà A",
+      "unit": "Phòng ĐT Sau ĐH"
+     }
+    ]
+   },
+   {
+    "day": "Thứ Sáu",
+    "date": "22/05",
+    "events": [
+     {
+      "time": "08:30",
+      "title": "Tập huấn công tác tuyển sinh 2026",
+      "place": "Hội trường B",
+      "unit": "Phòng ĐT"
+     }
+    ]
+   },
+   {
+    "day": "Thứ Bảy",
+    "date": "23/05",
+    "events": [
+     {
+      "time": "07:30",
+      "title": "Ngày hội hiến máu tình nguyện",
+      "place": "Sảnh Nhà C",
+      "unit": "Đoàn Thanh niên"
+     }
+    ]
+   },
+   {
+    "day": "Chủ Nhật",
+    "date": "24/05",
+    "events": []
+   }
+  ],
+  "notices": [
+   {
+    "date": "16/05/2026",
+    "title": "Thông báo lịch nghỉ lễ và bố trí trực trong dịp lễ"
+   },
+   {
+    "date": "14/05/2026",
+    "title": "Kế hoạch tổ chức Lễ kỷ niệm 60 năm thành lập Trường"
+   },
+   {
+    "date": "10/05/2026",
+    "title": "Thông báo rà soát khối lượng giảng dạy học kỳ II"
+   }
+  ]
+ }
+}

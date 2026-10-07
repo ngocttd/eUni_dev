@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F9FF9D9C-BD99-4621-A032-F34D6DDB2045}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HUMG.CMS.Api", "src\HUMG.CMS.Api\HUMG.CMS.Api.csproj", "{9B39E8FD-1AA2-418C-9C52-4479864AFC72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HUMG.CMS.Application", "src\HUMG.CMS.Application\HUMG.CMS.Application.csproj", "{33A32C75-51E3-42DB-9202-7FC64F64CBF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HUMG.CMS.Domain", "src\HUMG.CMS.Domain\HUMG.CMS.Domain.csproj", "{CC6724E6-54D9-423C-8519-FDA456A1CBF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HUMG.CMS.Infrastructure", "src\HUMG.CMS.Infrastructure\HUMG.CMS.Infrastructure.csproj", "{E49A5FEA-6C1D-4306-9CF1-980C88951399}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{49946AB9-63D6-4F43-A11F-B626DF407E16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HUMG.CMS.Tests", "tests\HUMG.CMS.Tests\HUMG.CMS.Tests.csproj", "{A17C7024-6715-4ADF-8182-4EDDDCE7D151}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9B39E8FD-1AA2-418C-9C52-4479864AFC72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B39E8FD-1AA2-418C-9C52-4479864AFC72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B39E8FD-1AA2-418C-9C52-4479864AFC72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B39E8FD-1AA2-418C-9C52-4479864AFC72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33A32C75-51E3-42DB-9202-7FC64F64CBF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33A32C75-51E3-42DB-9202-7FC64F64CBF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33A32C75-51E3-42DB-9202-7FC64F64CBF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33A32C75-51E3-42DB-9202-7FC64F64CBF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC6724E6-54D9-423C-8519-FDA456A1CBF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC6724E6-54D9-423C-8519-FDA456A1CBF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC6724E6-54D9-423C-8519-FDA456A1CBF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC6724E6-54D9-423C-8519-FDA456A1CBF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E49A5FEA-6C1D-4306-9CF1-980C88951399}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E49A5FEA-6C1D-4306-9CF1-980C88951399}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E49A5FEA-6C1D-4306-9CF1-980C88951399}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E49A5FEA-6C1D-4306-9CF1-980C88951399}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A17C7024-6715-4ADF-8182-4EDDDCE7D151}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A17C7024-6715-4ADF-8182-4EDDDCE7D151}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A17C7024-6715-4ADF-8182-4EDDDCE7D151}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A17C7024-6715-4ADF-8182-4EDDDCE7D151}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9B39E8FD-1AA2-418C-9C52-4479864AFC72} = {F9FF9D9C-BD99-4621-A032-F34D6DDB2045}
+		{33A32C75-51E3-42DB-9202-7FC64F64CBF1} = {F9FF9D9C-BD99-4621-A032-F34D6DDB2045}
+		{CC6724E6-54D9-423C-8519-FDA456A1CBF9} = {F9FF9D9C-BD99-4621-A032-F34D6DDB2045}
+		{E49A5FEA-6C1D-4306-9CF1-980C88951399} = {F9FF9D9C-BD99-4621-A032-F34D6DDB2045}
+		{A17C7024-6715-4ADF-8182-4EDDDCE7D151} = {49946AB9-63D6-4F43-A11F-B626DF407E16}
+	EndGlobalSection
+EndGlobal

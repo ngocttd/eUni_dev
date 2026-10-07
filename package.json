@@ -1,10 +1,12 @@
 {
   "name": "euni-workspace",
   "private": true,
-  "description": "HUMG eUni — workspace gồm 2 app Next.js (euni-public, euni-admin) và gateway mock (euni-api-mock). Mỗi thư mục là một repo git độc lập.",
+  "description": "HUMG eUni — workspace gồm 2 app Next.js (euni-public, euni-admin), gateway mock (euni-api-mock) và cms-api .NET + PostgreSQL (euni-api-dotnet). Mỗi thư mục là một repo git độc lập.",
   "scripts": {
     "install:all": "npm --prefix euni-api-mock install && npm --prefix euni-public install && npm --prefix euni-admin install",
     "dev:api": "npm --prefix euni-api-mock run dev",
+    "dev:api:dotnet": "dotnet run --project euni-api-dotnet/src/HUMG.CMS.Api",
+    "test:api:dotnet": "node euni-api-dotnet/tests/contract/smoke.mjs",
     "dev:public": "npm --prefix euni-public run dev",
     "dev:admin": "npm --prefix euni-admin run dev",
     "build:all": "npm --prefix euni-public run build && npm --prefix euni-admin run build",

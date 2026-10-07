@@ -1,0 +1,447 @@
+{
+ "audiences": [
+  {
+   "id": "thi-sinh",
+   "icon": "graduation",
+   "color": "#1976d2",
+   "title": "Thí sinh",
+   "desc": "Tuyển sinh, ngành học, chương trình đào tạo.",
+   "to": "/hoc-tap/tuyen-sinh"
+  },
+  {
+   "id": "sinh-vien",
+   "icon": "user",
+   "color": "#0f9d8c",
+   "title": "Sinh viên",
+   "desc": "Học tập, rèn luyện, đời sống sinh viên.",
+   "to": "/sinh-vien"
+  },
+  {
+   "id": "phu-huynh",
+   "icon": "users",
+   "color": "#f57c00",
+   "title": "Phụ huynh",
+   "desc": "Theo dõi kết quả học tập và học phí của con.",
+   "to": "/phu-huynh"
+  },
+  {
+   "id": "cuu-sinh-vien",
+   "icon": "award",
+   "color": "#7b3fe4",
+   "title": "Cựu sinh viên",
+   "desc": "Kết nối & phát triển cộng đồng.",
+   "to": "/cuu-sinh-vien"
+  },
+  {
+   "id": "giang-vien",
+   "icon": "briefcase",
+   "color": "#2e7d32",
+   "title": "Giảng viên",
+   "desc": "Giảng dạy, nghiên cứu, quản lý công việc.",
+   "to": "/giang-vien"
+  },
+  {
+   "id": "doi-tac",
+   "icon": "handshake",
+   "color": "#3949ab",
+   "title": "Đối tác",
+   "desc": "Hợp tác, liên kết, phát triển bền vững.",
+   "to": "/hop-tac"
+  }
+ ],
+ "featuredNews": {
+  "id": "le-ky-niem-60-nam",
+  "slug": "le-ky-niem-60-nam-thanh-lap",
+  "tag": "Tin tức",
+  "date": "15/05/2025",
+  "title": "Lễ kỷ niệm 60 năm thành lập Trường Đại học Mỏ – Địa chất",
+  "excerpt": "Sáng ngày 15/05/2025, Trường Đại học Mỏ – Địa chất đã long trọng tổ chức Lễ kỷ niệm 60 năm thành lập, ôn lại chặng đường xây dựng và phát triển của Nhà trường."
+ },
+ "heroChips": [
+  "Trường đại học công lập",
+  "60 năm truyền thống",
+  "Đa ngành – Đa lĩnh vực"
+ ],
+ "heroSlides": [
+  {
+   "id": "sl-60-nam",
+   "kicker": "60 NĂM",
+   "title": "XÂY DỰNG, ĐỔI MỚI\nVÀ PHÁT TRIỂN",
+   "years": "1966 – 2026",
+   "motto": "Tri thức · Bản lĩnh · Sáng tạo · Hội nhập",
+   "primary": {
+    "label": "Khám phá HUMG",
+    "to": "/gioi-thieu"
+   },
+   "accent": {
+    "label": "Tuyển sinh 2026",
+    "to": "/hoc-tap/tuyen-sinh"
+   }
+  },
+  {
+   "id": "sl-tuyen-sinh",
+   "kicker": "TUYỂN SINH ĐẠI HỌC 2026",
+   "title": "CHỌN NGÀNH TƯƠNG LAI\nTẠI HUMG",
+   "years": "52 chương trình đào tạo",
+   "motto": "5 phương thức xét tuyển · Học bổng đến 100% học phí",
+   "primary": {
+    "label": "Xem thông tin tuyển sinh",
+    "to": "/hoc-tap/tuyen-sinh"
+   },
+   "accent": {
+    "label": "Đăng ký tư vấn",
+    "to": "/lien-he"
+   }
+  },
+  {
+   "id": "sl-nghien-cuu",
+   "kicker": "KHOA HỌC & CÔNG NGHỆ",
+   "title": "KIẾN TẠO TRI THỨC\nCHUYỂN GIAO GIÁ TRỊ",
+   "years": "142 đề tài · 650+ công bố quốc tế",
+   "motto": "Địa chất · Mỏ · Dầu khí · Trắc địa – Bản đồ · CNTT",
+   "primary": {
+    "label": "Khám phá nghiên cứu",
+    "to": "/nghien-cuu"
+   },
+   "accent": {
+    "label": "Nhóm nghiên cứu mạnh",
+    "to": "/nghien-cuu/nhom-nghien-cuu"
+   }
+  },
+  {
+   "id": "sl-doi-song",
+   "kicker": "ĐỜI SỐNG SINH VIÊN",
+   "title": "TRẢI NGHIỆM ĐẠI HỌC\nTRỌN VẸN TẠI HUMG",
+   "years": "200+ CLB & đội nhóm",
+   "motto": "Ký túc xá · Thể thao – Văn hóa · Khởi nghiệp · Việc làm",
+   "primary": {
+    "label": "Khám phá đời sống",
+    "to": "/doi-song"
+   },
+   "accent": {
+    "label": "Câu lạc bộ sinh viên",
+    "to": "/doi-song/cau-lac-bo"
+   }
+  },
+  {
+   "id": "sl-hop-tac",
+   "kicker": "HỢP TÁC & HỘI NHẬP",
+   "title": "KẾT NỐI TRI THỨC\nMỞ RỘNG TƯƠNG LAI",
+   "years": "128 đối tác · 46 quốc gia",
+   "motto": "Đào tạo · Nghiên cứu chung · Trao đổi sinh viên & giảng viên",
+   "primary": {
+    "label": "Khám phá hợp tác",
+    "to": "/hop-tac"
+   },
+   "accent": {
+    "label": "Đối tác quốc tế",
+    "to": "/hop-tac/doi-tac-quoc-te"
+   }
+  }
+ ],
+ "heroStats": [
+  {
+   "value": "60+",
+   "label": "Năm phát triển"
+  },
+  {
+   "value": "20.000+",
+   "label": "Sinh viên, học viên"
+  },
+  {
+   "value": "52",
+   "label": "Chương trình đào tạo"
+  },
+  {
+   "value": "600+",
+   "label": "Giảng viên, cán bộ"
+  }
+ ],
+ "mediaTabs": [
+  {
+   "key": "anh",
+   "label": "Thư viện ảnh",
+   "items": [
+    {
+     "label": "Toàn cảnh Lễ kỷ niệm 60 năm",
+     "size": "wide"
+    },
+    {
+     "label": "Phòng thí nghiệm trọng điểm",
+     "size": "small"
+    },
+    {
+     "label": "Hoạt động sinh viên",
+     "size": "small"
+    }
+   ]
+  },
+  {
+   "key": "video",
+   "label": "Video",
+   "items": [
+    {
+     "label": "HUMG – 60 năm một chặng đường",
+     "size": "wide"
+    },
+    {
+     "label": "Giới thiệu ngành Kỹ thuật Mỏ",
+     "size": "small"
+    },
+    {
+     "label": "Campus tour HUMG",
+     "size": "small"
+    }
+   ]
+  },
+  {
+   "key": "podcast",
+   "label": "Podcast",
+   "items": [
+    {
+     "label": "Chuyện nghề Địa chất",
+     "size": "wide"
+    },
+    {
+     "label": "Hành trình khởi nghiệp cựu SV",
+     "size": "small"
+    },
+    {
+     "label": "Hỏi đáp tuyển sinh 2026",
+     "size": "small"
+    }
+   ]
+  }
+ ],
+ "newsList": [
+  {
+   "id": "n1",
+   "slug": "humg-top-10-dai-hoc-ky-thuat",
+   "tag": "Tin tức",
+   "date": "10/05/2025",
+   "title": "HUMG lọt Top 10 trường đại học kỹ thuật hàng đầu Việt Nam"
+  },
+  {
+   "id": "n2",
+   "slug": "nghien-cuu-vat-lieu-moi-khai-thac-ben-vung",
+   "tag": "Nghiên cứu",
+   "date": "06/05/2025",
+   "title": "Nghiên cứu vật liệu mới trong khai thác bền vững"
+  },
+  {
+   "id": "n3",
+   "slug": "sinh-vien-humg-dat-giai-cao-iot-toan-quoc",
+   "tag": "Sinh viên",
+   "date": "02/05/2025",
+   "title": "Sinh viên HUMG đạt giải cao tại cuộc thi IoT toàn quốc"
+  }
+ ],
+ "partners": [
+  {
+   "name": "Vinacomin",
+   "short": "TKV",
+   "color": "#0057a8"
+  },
+  {
+   "name": "Petrovietnam",
+   "short": "PVN",
+   "color": "#e2231a"
+  },
+  {
+   "name": "BGR – CHLB Đức",
+   "short": "BGR",
+   "color": "#004b87"
+  },
+  {
+   "name": "KIGAM – Hàn Quốc",
+   "short": "KIGAM",
+   "color": "#1a7f5a"
+  },
+  {
+   "name": "JICA – Nhật Bản",
+   "short": "JICA",
+   "color": "#e60012"
+  },
+  {
+   "name": "ĐH Bách khoa Hà Nội",
+   "short": "HUST",
+   "color": "#9e1b32"
+  },
+  {
+   "name": "The University of Queensland",
+   "short": "UQ",
+   "color": "#51247a"
+  },
+  {
+   "name": "AGH – Ba Lan",
+   "short": "AGH",
+   "color": "#00693e"
+  },
+  {
+   "name": "PVEP",
+   "short": "PVEP",
+   "color": "#0067b1"
+  },
+  {
+   "name": "Viện HLKH&CN Việt Nam",
+   "short": "VAST",
+   "color": "#003f87"
+  },
+  {
+   "name": "Halliburton",
+   "short": "HAL",
+   "color": "#e21836"
+  },
+  {
+   "name": "SLB (Schlumberger)",
+   "short": "SLB",
+   "color": "#0014dc"
+  },
+  {
+   "name": "Tổng cục Địa chất & Khoáng sản",
+   "short": "DGMV",
+   "color": "#1f6f43"
+  },
+  {
+   "name": "Tập đoàn Hóa chất Việt Nam",
+   "short": "VCI",
+   "color": "#0060a9"
+  }
+ ],
+ "quickLinks": [
+  {
+   "label": "Lịch công tác",
+   "icon": "calendar",
+   "to": "/lich-cong-tac"
+  },
+  {
+   "label": "Thư viện số",
+   "icon": "library",
+   "to": "/thu-vien-so"
+  },
+  {
+   "label": "E-learning",
+   "icon": "play",
+   "to": "/hoc-tap/e-learning"
+  },
+  {
+   "label": "Tra cứu tuyển sinh",
+   "icon": "search",
+   "to": "/hoc-tap/tuyen-sinh"
+  },
+  {
+   "label": "Biểu mẫu",
+   "icon": "file",
+   "to": "/hoc-tap/bieu-mau"
+  },
+  {
+   "label": "Webmail",
+   "icon": "mail",
+   "to": "/webmail"
+  },
+  {
+   "label": "Tiện ích khác",
+   "icon": "grid",
+   "to": "/tien-ich"
+  },
+  {
+   "label": "Liên hệ",
+   "icon": "phone",
+   "to": "/lien-he"
+  }
+ ],
+ "strengths": [
+  {
+   "icon": "flask",
+   "title": "Đào tạo gắn thực tiễn",
+   "text": "Chương trình cập nhật, hệ thống phòng thí nghiệm và thực hành hiện đại."
+  },
+  {
+   "icon": "award",
+   "title": "Nghiên cứu & Chuyển giao",
+   "text": "Nhóm nghiên cứu mạnh, hàng trăm công bố quốc tế và sản phẩm chuyển giao."
+  },
+  {
+   "icon": "graduation",
+   "title": "Học bổng & Hỗ trợ",
+   "text": "Học bổng đến 100% học phí cùng quỹ đồng hành và hỗ trợ sinh viên."
+  },
+  {
+   "icon": "briefcase",
+   "title": "Việc làm sau tốt nghiệp",
+   "text": "Mạng lưới doanh nghiệp rộng, ngày hội việc làm và kết nối tuyển dụng."
+  }
+ ],
+ "universityStats": [
+  {
+   "value": "60+",
+   "label": "Năm phát triển",
+   "sub": "1966 – 2026"
+  },
+  {
+   "value": "20.000+",
+   "label": "Sinh viên, học viên",
+   "sub": "Tính đến 2025"
+  },
+  {
+   "value": "600+",
+   "label": "Giảng viên, cán bộ",
+   "sub": "Tính đến 2025"
+  },
+  {
+   "value": "12",
+   "label": "Đơn vị trực thuộc"
+  },
+  {
+   "value": "52",
+   "label": "Chương trình đào tạo"
+  }
+ ],
+ "upcomingEvents": [
+  {
+   "id": "e1",
+   "slug": "hoi-thao-khoa-hoc-quoc-te-dia-chat-khoang-san",
+   "day": "20",
+   "month": "THG 5",
+   "title": "Hội thảo khoa học quốc tế về Địa chất và Khoáng sản",
+   "place": "Hội trường A, HUMG",
+   "time": "08:00 – 17:00"
+  },
+  {
+   "id": "e2",
+   "slug": "ngay-hoi-viec-lam-ket-noi-doanh-nghiep-2025",
+   "day": "25",
+   "month": "THG 5",
+   "title": "Ngày hội việc làm & Kết nối doanh nghiệp 2025",
+   "place": "Sân vận động HUMG",
+   "time": "07:30 – 16:30"
+  },
+  {
+   "id": "e3",
+   "slug": "le-bao-ve-luan-an-tien-si-dot-1-2025",
+   "day": "30",
+   "month": "THG 5",
+   "title": "Lễ bảo vệ luận án Tiến sĩ đợt 1 năm 2025",
+   "place": "Phòng 602, Nhà A",
+   "time": "08:00 – 12:00"
+  },
+  {
+   "id": "e4",
+   "slug": "toa-dam-chuyen-doi-so-trong-dao-tao",
+   "day": "05",
+   "month": "THG 6",
+   "title": "Tọa đàm chuyển đổi số trong đào tạo đại học",
+   "place": "Hội trường B, HUMG",
+   "time": "14:00 – 17:00"
+  },
+  {
+   "id": "e5",
+   "slug": "giai-bong-da-sinh-vien-humg-2025",
+   "day": "12",
+   "month": "THG 6",
+   "title": "Khai mạc Giải bóng đá sinh viên HUMG 2025",
+   "place": "Sân vận động HUMG",
+   "time": "15:30 – 18:00"
+  }
+ ]
+}

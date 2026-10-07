@@ -1,0 +1,1217 @@
+{
+ "psDashboard": {
+  "stats": [
+   {
+    "value": "3.25",
+    "unit": "/ 4.0",
+    "label": "Điểm TB tích lũy"
+   },
+   {
+    "value": "72",
+    "unit": "/ 140",
+    "label": "Số tín chỉ tích lũy"
+   },
+   {
+    "value": "Khá",
+    "label": "Xếp loại học lực"
+   },
+   {
+    "value": "85",
+    "unit": "/ 100",
+    "label": "Điểm rèn luyện"
+   }
+  ],
+  "termInfo": [
+   [
+    "Học kỳ",
+    "HK2 (2024 – 2025)"
+   ],
+   [
+    "Chương trình",
+    "Kỹ thuật Trắc địa – Bản đồ"
+   ],
+   [
+    "Niên khóa",
+    "K69"
+   ],
+   [
+    "Cố vấn học tập",
+    "TS. Nguyễn Văn B"
+   ],
+   [
+    "Email",
+    "nguyenvana@humg.edu.vn"
+   ]
+  ],
+  "today": {
+   "date": "Thứ 2 · 12/05/2025",
+   "rows": [
+    {
+     "time": "07:30 – 10:15",
+     "course": "Trắc địa đại cương",
+     "room": "P.A5-201",
+     "lecturer": "ThS. Trần Văn C"
+    }
+   ]
+  },
+  "notices": [
+   {
+    "date": "10/05/2025",
+    "title": "Lịch thi học kỳ 2 (2024 – 2025)"
+   },
+   {
+    "date": "05/05/2025",
+    "title": "Thông báo đóng học phí HK2"
+   },
+   {
+    "date": "03/05/2025",
+    "title": "Học bổng khuyến khích học tập HK2"
+   }
+  ],
+  "progress": {
+   "done": 72,
+   "total": 140,
+   "pct": 51
+  },
+  "quickLinks": [
+   {
+    "icon": "compass",
+    "label": "Đăng ký học phần",
+    "to": "/euni/sinh-vien/dang-ky-mon-hoc"
+   },
+   {
+    "icon": "award",
+    "label": "Xem kết quả học tập",
+    "to": "/euni/sinh-vien/ket-qua-hoc-tap"
+   },
+   {
+    "icon": "file",
+    "label": "Thanh toán học phí",
+    "to": "/euni/sinh-vien/hoc-phi"
+   },
+   {
+    "icon": "layers",
+    "label": "Đơn từ – Biểu mẫu",
+    "to": "/euni/sinh-vien/bieu-mau"
+   },
+   {
+    "icon": "bell",
+    "label": "Thông báo",
+    "to": "/euni/sinh-vien/thong-bao"
+   },
+   {
+    "icon": "headphones",
+    "label": "Gửi ticket hỗ trợ",
+    "to": "/euni/sinh-vien/ho-tro"
+   }
+  ]
+ },
+ "psForms": {
+  "categories": [
+   "Tất cả loại",
+   "Học vụ",
+   "Học phí – Học bổng",
+   "Công tác sinh viên",
+   "Tốt nghiệp"
+  ],
+  "list": [
+   {
+    "name": "Đơn xin xác nhận sinh viên",
+    "category": "Công tác sinh viên",
+    "format": "PDF"
+   },
+   {
+    "name": "Đơn xin gia hạn học phí",
+    "category": "Học phí – Học bổng",
+    "format": "DOCX"
+   },
+   {
+    "name": "Đơn xin cấp học bổng KKHT",
+    "category": "Học phí – Học bổng",
+    "format": "DOCX"
+   },
+   {
+    "name": "Đơn đề nghị cấp bảng điểm",
+    "category": "Học vụ",
+    "format": "PDF"
+   },
+   {
+    "name": "Đơn xin bảo lưu kết quả học tập",
+    "category": "Học vụ",
+    "format": "DOCX"
+   },
+   {
+    "name": "Đơn xin học lại / cải thiện",
+    "category": "Học vụ",
+    "format": "DOCX"
+   },
+   {
+    "name": "Đơn xin phúc khảo điểm thi",
+    "category": "Học vụ",
+    "format": "DOCX"
+   },
+   {
+    "name": "Đơn xin xét tốt nghiệp",
+    "category": "Tốt nghiệp",
+    "format": "PDF"
+   }
+  ],
+  "mine": [
+   [
+    "DT2025-014",
+    "Đơn xin xác nhận sinh viên",
+    "02/09/2025",
+    "Đã duyệt"
+   ],
+   [
+    "DT2025-011",
+    "Đơn đề nghị cấp bảng điểm",
+    "20/08/2025",
+    "Đang xử lý"
+   ]
+  ]
+ },
+ "psLibrary": {
+  "tiles": [
+   {
+    "icon": "book",
+    "title": "Sách điện tử",
+    "to": "/thu-vien/tim-kiem?loai=S%C3%A1ch"
+   },
+   {
+    "icon": "layers",
+    "title": "Tài liệu số",
+    "to": "/thu-vien/tim-kiem?loai=T%C3%A0i%20li%E1%BB%87u%20s%E1%BB%91"
+   },
+   {
+    "icon": "graduation",
+    "title": "Luận văn – Đồ án",
+    "to": "/thu-vien/tim-kiem?loai=Lu%E1%BA%ADn%20v%C4%83n"
+   },
+   {
+    "icon": "newspaper",
+    "title": "Bài báo – Tạp chí",
+    "to": "/thu-vien/tim-kiem?loai=T%E1%BA%A1p%20ch%C3%AD"
+   },
+   {
+    "icon": "flask",
+    "title": "CSDL khoa học",
+    "to": "/thu-vien/csdl-khoa-hoc"
+   },
+   {
+    "icon": "compass",
+    "title": "Hướng dẫn sử dụng",
+    "to": "/thu-vien/huong-dan"
+   }
+  ],
+  "elearning": [
+   {
+    "icon": "play",
+    "title": "LMS HUMG",
+    "desc": "Đăng nhập hệ thống lớp học",
+    "href": "https://lms.humg.edu.vn"
+   },
+   {
+    "icon": "globe",
+    "title": "Zoom",
+    "desc": "Phòng học trực tuyến",
+    "href": "https://zoom.us"
+   },
+   {
+    "icon": "grid",
+    "title": "Microsoft 365",
+    "desc": "Tài khoản sinh viên",
+    "href": "https://portal.office.com"
+   },
+   {
+    "icon": "compass",
+    "title": "Hướng dẫn sử dụng",
+    "desc": "Tài liệu & video hướng dẫn",
+    "href": "/thu-vien/huong-dan"
+   }
+  ],
+  "borrowing": [
+   [
+    "Giáo trình Trắc địa đại cương",
+    "Sách",
+    "20/04/2025",
+    "20/05/2025",
+    "Còn 6 ngày"
+   ],
+   [
+    "Cơ sở GIS và bản đồ số",
+    "Ebook",
+    "01/05/2025",
+    "01/06/2025",
+    "Còn 17 ngày"
+   ]
+  ]
+ },
+ "psNotifications": {
+  "tabs": [
+   "Tất cả",
+   "Học tập",
+   "Tài chính",
+   "Đào tạo",
+   "Khác"
+  ],
+  "total": 12,
+  "list": [
+   {
+    "icon": "calendar",
+    "title": "Lịch thi học kỳ 2 (2024 – 2025)",
+    "cat": "Đào tạo",
+    "unread": true,
+    "desc": "Nhà trường thông báo lịch thi học kỳ 2 năm 2024 – 2025. Sinh viên xem chi tiết trên cổng đào tạo.",
+    "date": "10/05/2025 09:30"
+   },
+   {
+    "icon": "file",
+    "title": "Thông báo đóng học phí HK2",
+    "cat": "Tài chính",
+    "unread": true,
+    "desc": "Sinh viên hoàn thành học phí trước ngày 31/05/2025. Trân trọng!",
+    "date": "05/05/2025 14:20"
+   },
+   {
+    "icon": "award",
+    "title": "Học bổng khuyến khích học tập",
+    "cat": "Đào tạo",
+    "unread": false,
+    "desc": "Nhà trường triển khai xét học bổng HK2 (2024 – 2025). Hạn nộp hồ sơ: 25/05/2025.",
+    "date": "08/05/2025 11:15"
+   },
+   {
+    "icon": "users",
+    "title": "Tập huấn kỹ năng mềm cho sinh viên",
+    "cat": "Khác",
+    "unread": false,
+    "desc": "Đăng ký tham gia chương trình tập huấn kỹ năng mềm tháng 5/2025.",
+    "date": "02/05/2025 16:45"
+   },
+   {
+    "icon": "grid",
+    "title": "Cập nhật phiên bản eUni Portal",
+    "cat": "Khác",
+    "unread": false,
+    "desc": "Phiên bản mới đã cập nhật nhiều tính năng hữu ích. Trải nghiệm ngay!",
+    "date": "01/05/2025 09:00"
+   },
+   {
+    "icon": "book",
+    "title": "Mở đăng ký học phần học kỳ hè 2025",
+    "cat": "Học tập",
+    "unread": false,
+    "desc": "Cổng đăng ký học phần học kỳ hè mở từ 20/05 đến 30/05/2025.",
+    "date": "28/04/2025 08:10"
+   },
+   {
+    "icon": "check",
+    "title": "Khảo sát chất lượng giảng dạy HK2",
+    "cat": "Học tập",
+    "unread": false,
+    "desc": "Sinh viên thực hiện khảo sát trước 20/05/2025 để đủ điều kiện xem điểm.",
+    "date": "25/04/2025 10:00"
+   }
+  ]
+ },
+ "psProgress": {
+  "program": "Kỹ thuật Trắc địa – Bản đồ · K69 (2021 – 2026)",
+  "overall": {
+   "total": 140,
+   "done": 72,
+   "remain": 68,
+   "pct": 51
+  },
+  "credits": [
+   {
+    "label": "Học phần bắt buộc",
+    "done": 48,
+    "total": 92,
+    "pct": 52
+   },
+   {
+    "label": "Học phần tự chọn",
+    "done": 8,
+    "total": 18,
+    "pct": 44
+   },
+   {
+    "label": "Giáo dục đại cương",
+    "done": 16,
+    "total": 30,
+    "pct": 53
+   }
+  ],
+  "next": [
+   "Hoàn thành học phần Thực tập tốt nghiệp (học kỳ 1/2025 – 2026).",
+   "Đăng ký nhóm đề tài đồ án tốt nghiệp khi đủ 120 tín chỉ.",
+   "Đạt chuẩn đầu ra ngoại ngữ (bậc 3/6) trước khi xét tốt nghiệp."
+  ]
+ },
+ "psRegCourses": {
+  "window": "Đợt đăng ký HK2 2025 – 2026 · mở đến 23:59 ngày 18/01/2026",
+  "conditions": [
+   {
+    "label": "Đã hoàn tất học phí học kỳ trước",
+    "ok": true
+   },
+   {
+    "label": "Không bị cảnh báo học vụ",
+    "ok": true
+   },
+   {
+    "label": "Trong thời gian mở đăng ký",
+    "ok": true
+   },
+   {
+    "label": "Chưa vượt quá 24 tín chỉ / học kỳ",
+    "ok": true
+   }
+  ],
+  "types": [
+   "Tất cả",
+   "Bắt buộc",
+   "Tự chọn"
+  ],
+  "offered": [
+   {
+    "code": "TRC301",
+    "name": "Trắc địa công trình",
+    "credits": 3,
+    "type": "Bắt buộc",
+    "group": "TDCT-01",
+    "schedule": "Thứ 3, Tiết 1–3",
+    "seats": 12
+   },
+   {
+    "code": "BDS301",
+    "name": "Thành lập bản đồ địa hình",
+    "credits": 3,
+    "type": "Bắt buộc",
+    "group": "BDDH-01",
+    "schedule": "Thứ 2, Tiết 4–6",
+    "seats": 8
+   },
+   {
+    "code": "GIS310",
+    "name": "Phân tích không gian GIS",
+    "credits": 3,
+    "type": "Tự chọn",
+    "group": "PTKG-01",
+    "schedule": "Thứ 5, Tiết 1–3",
+    "seats": 5
+   },
+   {
+    "code": "VTM320",
+    "name": "Xử lý ảnh viễn thám",
+    "credits": 3,
+    "type": "Tự chọn",
+    "group": "XLA-01",
+    "schedule": "Thứ 4, Tiết 7–9",
+    "seats": 0
+   },
+   {
+    "code": "TRC390",
+    "name": "Đồ án Trắc địa – Bản đồ",
+    "credits": 2,
+    "type": "Bắt buộc",
+    "group": "DATD-01",
+    "schedule": "Thứ 6, Tiết 7–9",
+    "seats": 3
+   },
+   {
+    "code": "EN302",
+    "name": "Tiếng Anh chuyên ngành 2",
+    "credits": 3,
+    "type": "Bắt buộc",
+    "group": "AV-01",
+    "schedule": "Thứ 5, Tiết 4–6",
+    "seats": 20
+   }
+  ],
+  "maxCredits": 24
+ },
+ "psRegIntern": {
+  "round": "Đợt thực tập doanh nghiệp · từ 15/01/2026 đến 15/04/2026",
+  "conditions": [
+   {
+    "label": "Là sinh viên năm thứ 3 trở lên",
+    "ok": true
+   },
+   {
+    "label": "Tích lũy tối thiểu 60 tín chỉ",
+    "ok": true,
+    "detail": "Hiện tại: 72 tín chỉ"
+   },
+   {
+    "label": "Đã hoàn thành học phần Kỹ năng nghề nghiệp",
+    "ok": true
+   },
+   {
+    "label": "Không nợ học phí",
+    "ok": true
+   }
+  ],
+  "companies": [
+   {
+    "name": "Công ty CP Đo đạc & Bản đồ Việt Nam",
+    "role": "Kỹ thuật viên Trắc địa",
+    "slots": 5,
+    "place": "Hà Nội",
+    "deadline": "20/12/2025"
+   },
+   {
+    "name": "Tổng công ty Tài nguyên & Môi trường",
+    "role": "Thực tập sinh GIS",
+    "slots": 8,
+    "place": "Hà Nội",
+    "deadline": "25/12/2025"
+   },
+   {
+    "name": "Viện Khoa học Đo đạc và Bản đồ",
+    "role": "Thực tập sinh Viễn thám",
+    "slots": 3,
+    "place": "Hà Nội",
+    "deadline": "18/12/2025"
+   },
+   {
+    "name": "Công ty TNHH Bản đồ số",
+    "role": "Thực tập sinh WebGIS",
+    "slots": 2,
+    "place": "Hà Nội",
+    "deadline": "22/12/2025"
+   }
+  ]
+ },
+ "psRegThesis": {
+  "round": "Đăng ký đồ án tốt nghiệp · Học kỳ 2 năm học 2025 – 2026",
+  "conditions": [
+   {
+    "label": "Tích lũy tối thiểu 120 tín chỉ",
+    "ok": false,
+    "detail": "Hiện tại: 72 / 120 tín chỉ"
+   },
+   {
+    "label": "GPA tích lũy ≥ 2.0 (hệ 4)",
+    "ok": true,
+    "detail": "GPA hiện tại: 3.25"
+   },
+   {
+    "label": "Đã hoàn thành học phần Thực tập tốt nghiệp",
+    "ok": false,
+    "detail": "Chưa đăng ký thực tập"
+   },
+   {
+    "label": "Không nợ học phí",
+    "ok": true
+   }
+  ],
+  "advisors": [
+   "TS. Lê Văn D – GIS, phân tích không gian",
+   "TS. Vũ Thị E – Viễn thám, xử lý ảnh",
+   "ThS. Trần Văn C – Trắc địa công trình"
+  ],
+  "topics": [
+   "Ứng dụng WebGIS trong quản lý đất đai cấp xã",
+   "Xử lý ảnh viễn thám giám sát biến động lớp phủ",
+   "Xây dựng mô hình số độ cao từ dữ liệu GNSS – RTK",
+   "(Tự đề xuất đề tài)"
+  ]
+ },
+ "psResults": {
+  "terms": [
+   "HK1 (2024 – 2025)",
+   "HK2 (2023 – 2024)",
+   "HK1 (2023 – 2024)"
+  ],
+  "summary": [
+   {
+    "value": "3.54",
+    "label": "Điểm TB học kỳ"
+   },
+   {
+    "value": "72",
+    "label": "Số tín chỉ tích lũy"
+   },
+   {
+    "value": "3.25",
+    "label": "Điểm TB tích lũy"
+   },
+   {
+    "value": "Khá",
+    "label": "Xếp loại"
+   }
+  ],
+  "courses": [
+   [
+    "1",
+    "TRC101",
+    "Trắc địa đại cương",
+    "3",
+    "B+",
+    "3.5"
+   ],
+   [
+    "2",
+    "GIS101",
+    "GIS cơ bản",
+    "3",
+    "A-",
+    "3.7"
+   ],
+   [
+    "3",
+    "VTM101",
+    "Viễn thám cơ bản",
+    "3",
+    "A",
+    "4.0"
+   ],
+   [
+    "4",
+    "BDS101",
+    "Đo vẽ bản đồ số",
+    "3",
+    "A",
+    "4.0"
+   ],
+   [
+    "5",
+    "KNGS101",
+    "Kỹ thuật GNSS",
+    "3",
+    "B+",
+    "3.5"
+   ],
+   [
+    "6",
+    "PL101",
+    "Pháp luật đại cương",
+    "2",
+    "B",
+    "3.0"
+   ],
+   [
+    "7",
+    "TUDLY01",
+    "Tư duy về kỹ năng số",
+    "2",
+    "A",
+    "4.0"
+   ],
+   [
+    "8",
+    "NN201",
+    "Ngoại ngữ 2",
+    "2",
+    "B+",
+    "3.5"
+   ]
+  ],
+  "cumulative": {
+   "columns": [
+    "Năm học",
+    "Giai đoạn",
+    "Số TC",
+    "Điểm TB (hệ 4)",
+    "Xếp loại"
+   ],
+   "rows": [
+    [
+     "2021 – 2022",
+     "Năm thứ nhất",
+     "32",
+     "3.10",
+     "Khá"
+    ],
+    [
+     "2022 – 2023",
+     "Năm thứ hai",
+     "34",
+     "3.22",
+     "Khá"
+    ],
+    [
+     "2023 – 2024",
+     "Năm thứ ba",
+     "36",
+     "3.28",
+     "Khá"
+    ],
+    [
+     "2024 – 2025",
+     "HK1",
+     "18",
+     "3.25",
+     "Khá"
+    ]
+   ]
+  }
+ },
+ "psSchedule": {
+  "terms": [
+   "HK2 (2024 – 2025)",
+   "HK1 (2024 – 2025)"
+  ],
+  "weeks": [
+   "Tuần 20 (12/05 – 18/05/2025)",
+   "Tuần 21 (19/05 – 25/05/2025)",
+   "Tuần 19 (05/05 – 11/05/2025)"
+  ],
+  "dayDates": [
+   "12/05",
+   "13/05",
+   "14/05",
+   "15/05",
+   "16/05",
+   "17/05",
+   "18/05"
+  ],
+  "hours": [
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17
+  ],
+  "timetable": [
+   {
+    "day": 0,
+    "start": 7.5,
+    "end": 10.25,
+    "course": "Trắc địa đại cương",
+    "room": "A5-201",
+    "type": "ly-thuyet"
+   },
+   {
+    "day": 1,
+    "start": 7.5,
+    "end": 9.75,
+    "course": "GIS cơ sở dữ liệu số",
+    "room": "A5-105",
+    "type": "ly-thuyet"
+   },
+   {
+    "day": 2,
+    "start": 9.5,
+    "end": 11.75,
+    "course": "Tin học GNSS",
+    "room": "A5-301",
+    "type": "ly-thuyet"
+   },
+   {
+    "day": 3,
+    "start": 7.5,
+    "end": 10.25,
+    "course": "Đo vẽ bản đồ số",
+    "room": "TH Trắc địa 2",
+    "type": "thuc-hanh"
+   },
+   {
+    "day": 3,
+    "start": 13,
+    "end": 15.25,
+    "course": "Viễn thám ứng dụng",
+    "room": "A5-204",
+    "type": "tu-chon"
+   },
+   {
+    "day": 4,
+    "start": 9.5,
+    "end": 11.75,
+    "course": "Viễn thám cơ bản",
+    "room": "A5-108",
+    "type": "ly-thuyet"
+   },
+   {
+    "day": 5,
+    "start": 13,
+    "end": 15.25,
+    "course": "Pháp luật đại cương",
+    "room": "B2-401",
+    "type": "ly-thuyet"
+   }
+  ],
+  "exams": [
+   [
+    "Trắc địa đại cương",
+    "TRC101",
+    "02/06/2025",
+    "Ca 1 (07:30)",
+    "P.A5-201",
+    "Tự luận"
+   ],
+   [
+    "GIS cơ bản",
+    "GIS101",
+    "05/06/2025",
+    "Ca 2 (09:30)",
+    "P.A5-105",
+    "Thực hành trên máy"
+   ],
+   [
+    "Viễn thám cơ bản",
+    "VTM101",
+    "09/06/2025",
+    "Ca 1 (07:30)",
+    "P.A5-108",
+    "Trắc nghiệm"
+   ],
+   [
+    "Kỹ thuật GNSS",
+    "KNGS101",
+    "12/06/2025",
+    "Ca 3 (13:30)",
+    "P.A5-301",
+    "Tự luận + bài tập"
+   ]
+  ]
+ },
+ "psServices": {
+  "tiles": [
+   {
+    "icon": "file",
+    "title": "Cấp giấy xác nhận sinh viên"
+   },
+   {
+    "icon": "award",
+    "title": "Sao y bảng điểm"
+   },
+   {
+    "icon": "check",
+    "title": "Khảo sát ý kiến"
+   },
+   {
+    "icon": "grid",
+    "title": "Đăng ký mượn thiết bị"
+   },
+   {
+    "icon": "building",
+    "title": "Đặt phòng học nhóm"
+   },
+   {
+    "icon": "headphones",
+    "title": "Góp ý – Phản ánh"
+   }
+  ],
+  "requests": [
+   [
+    "RQ2025-021",
+    "Cấp giấy xác nhận sinh viên",
+    "02/09/2025",
+    "Đã hoàn thành"
+   ],
+   [
+    "RQ2025-018",
+    "Sao y bảng điểm",
+    "18/08/2025",
+    "Đang xử lý"
+   ],
+   [
+    "RQ2025-015",
+    "Đặt phòng học nhóm",
+    "14/08/2025",
+    "Đã hủy"
+   ]
+  ]
+ },
+ "psSettings": {
+  "account": [
+   [
+    "Tên đăng nhập",
+    "21SC01234"
+   ],
+   [
+    "Email nhà trường",
+    "nguyenvana@humg.edu.vn"
+   ],
+   [
+    "Số điện thoại",
+    "0987 654 321"
+   ],
+   [
+    "Xác thực 2 lớp (2FA)",
+    "Chưa bật"
+   ]
+  ],
+  "prefs": [
+   {
+    "key": "email",
+    "label": "Nhận thông báo qua email",
+    "on": true
+   },
+   {
+    "key": "sms",
+    "label": "Nhận thông báo qua SMS",
+    "on": false
+   },
+   {
+    "key": "push",
+    "label": "Thông báo đẩy trên trình duyệt",
+    "on": true
+   },
+   {
+    "key": "newsletter",
+    "label": "Nhận bản tin sự kiện của Trường",
+    "on": false
+   }
+  ],
+  "sessions": [
+   [
+    "Chrome · Windows",
+    "Hà Nội, Việt Nam",
+    "16/05/2025 10:30",
+    "Phiên hiện tại"
+   ],
+   [
+    "eUni Mobile · Android",
+    "Hà Nội, Việt Nam",
+    "15/05/2025 20:14",
+    "Đăng xuất"
+   ],
+   [
+    "Safari · macOS",
+    "Nam Định, Việt Nam",
+    "28/04/2025 19:02",
+    "Đăng xuất"
+   ]
+  ]
+ },
+ "psStudent": {
+  "name": "Nguyễn Văn A",
+  "mssv": "21SC01234",
+  "dob": "12/04/2003",
+  "gender": "Nam",
+  "faculty": "Khoa Trắc địa – Bản đồ và Quản lý đất đai",
+  "class": "K69 – Kỹ thuật Trắc địa – Bản đồ",
+  "program": "Kỹ thuật Trắc địa – Bản đồ",
+  "cohort": "K69 (2021 – 2026)",
+  "email": "nguyenvana@humg.edu.vn",
+  "personalEmail": "nguyenvana.hd@gmail.com",
+  "phone": "0987 654 321",
+  "address": "12 Nguyễn Du, TP. Nam Định, tỉnh Nam Định",
+  "cccd": "001203045678",
+  "hometown": "Nam Định",
+  "currentAddress": "KTX Mỏ – Địa chất, Phố Viên, Bắc Từ Liêm, Hà Nội",
+  "advisor": "TS. Nguyễn Văn B",
+  "emergency": {
+   "name": "Nguyễn Văn Bình",
+   "relation": "Bố",
+   "phone": "0912 345 678",
+   "address": "TP. Nam Định, Nam Định"
+  },
+  "family": [
+   [
+    "Họ tên bố",
+    "Nguyễn Văn Bình"
+   ],
+   [
+    "Nghề nghiệp",
+    "Kỹ sư xây dựng"
+   ],
+   [
+    "Điện thoại",
+    "0912 345 678"
+   ],
+   [
+    "Họ tên mẹ",
+    "Trần Thị Hoa"
+   ],
+   [
+    "Nghề nghiệp",
+    "Giáo viên"
+   ],
+   [
+    "Điện thoại",
+    "0913 222 444"
+   ],
+   [
+    "Hộ khẩu thường trú",
+    "12 Nguyễn Du, TP. Nam Định, Nam Định"
+   ]
+  ],
+  "studyHistory": [
+   [
+    "2021 – 2022",
+    "Năm thứ nhất",
+    "32",
+    "3.10",
+    "Khá"
+   ],
+   [
+    "2022 – 2023",
+    "Năm thứ hai",
+    "34",
+    "3.22",
+    "Khá"
+   ],
+   [
+    "2023 – 2024",
+    "Năm thứ ba",
+    "36",
+    "3.28",
+    "Khá"
+   ],
+   [
+    "2024 – 2025",
+    "Năm thứ tư (đang học)",
+    "18",
+    "3.25",
+    "Khá"
+   ]
+  ],
+  "documents": [
+   [
+    "Căn cước công dân",
+    "Bản sao",
+    "Đã xác thực"
+   ],
+   [
+    "Bằng tốt nghiệp THPT",
+    "Bản sao công chứng",
+    "Đã xác thực"
+   ],
+   [
+    "Học bạ THPT",
+    "Bản sao công chứng",
+    "Đã xác thực"
+   ],
+   [
+    "Giấy khai sinh",
+    "Bản sao",
+    "Đã xác thực"
+   ],
+   [
+    "Ảnh thẻ 3×4",
+    "Đã nộp",
+    "Đã xác thực"
+   ],
+   [
+    "Giấy chứng nhận đối tượng ưu tiên",
+    "Chưa nộp",
+    "Chờ bổ sung"
+   ]
+  ]
+ },
+ "psStudyCorner": {
+  "plan": {
+   "done": 72,
+   "required": 18,
+   "total": 140,
+   "remain": 68,
+   "pct": 51
+  },
+  "courses": [
+   {
+    "code": "TRC201",
+    "name": "Trắc địa cao cấp",
+    "credits": 3,
+    "lecturer": "ThS. Trần Văn C",
+    "status": "Đang học"
+   },
+   {
+    "code": "GIS201",
+    "name": "Hệ thống thông tin địa lý nâng cao",
+    "credits": 3,
+    "lecturer": "TS. Lê Văn D",
+    "status": "Đang học"
+   },
+   {
+    "code": "VTM201",
+    "name": "Viễn thám ứng dụng",
+    "credits": 3,
+    "lecturer": "TS. Vũ Thị E",
+    "status": "Đang học"
+   },
+   {
+    "code": "BDS201",
+    "name": "Bản đồ số và WebGIS",
+    "credits": 3,
+    "lecturer": "ThS. Hoàng Văn F",
+    "status": "Đang học"
+   },
+   {
+    "code": "GNSS201",
+    "name": "Định vị vệ tinh GNSS",
+    "credits": 2,
+    "lecturer": "ThS. Nguyễn Văn G",
+    "status": "Đang học"
+   },
+   {
+    "code": "EN301",
+    "name": "Tiếng Anh chuyên ngành",
+    "credits": 3,
+    "lecturer": "ThS. Lê Thị S",
+    "status": "Đang học"
+   }
+  ]
+ },
+ "psTerm": "Học kỳ 2 · Năm học 2024 – 2025",
+ "psTickets": {
+  "stats": [
+   {
+    "value": "5",
+    "label": "Tất cả",
+    "key": "all",
+    "icon": "layers"
+   },
+   {
+    "value": "2",
+    "label": "Đang xử lý",
+    "key": "Đang xử lý",
+    "icon": "clock"
+   },
+   {
+    "value": "1",
+    "label": "Chờ phản hồi",
+    "key": "Chờ phản hồi",
+    "icon": "bell"
+   },
+   {
+    "value": "2",
+    "label": "Đã hoàn thành",
+    "key": "Đã hoàn thành",
+    "icon": "check"
+   },
+   {
+    "value": "0",
+    "label": "Đã đóng",
+    "key": "Đã đóng",
+    "icon": "x"
+   }
+  ],
+  "statuses": [
+   "Tất cả trạng thái",
+   "Đang xử lý",
+   "Chờ phản hồi",
+   "Đã hoàn thành",
+   "Đã đóng"
+  ],
+  "categories": [
+   "Học tập",
+   "Tài chính",
+   "Dịch vụ",
+   "Đào tạo",
+   "Khác"
+  ],
+  "list": [
+   {
+    "id": "#TK202505050101",
+    "title": "Không xem được điểm môn học",
+    "cat": "Học tập",
+    "status": "Đang xử lý",
+    "updated": "15/05/2025 10:20"
+   },
+   {
+    "id": "#TK202505050702",
+    "title": "Thanh toán học phí bị lỗi",
+    "cat": "Tài chính",
+    "status": "Chờ phản hồi",
+    "updated": "14/05/2025 16:10"
+   },
+   {
+    "id": "#TK202504280431",
+    "title": "Cấp lại thẻ sinh viên",
+    "cat": "Dịch vụ",
+    "status": "Đã hoàn thành",
+    "updated": "12/05/2025 09:45"
+   },
+   {
+    "id": "#TK202504150288",
+    "title": "Hướng dẫn đăng ký môn học",
+    "cat": "Đào tạo",
+    "status": "Đã hoàn thành",
+    "updated": "10/05/2025 14:30"
+   },
+   {
+    "id": "#TK202505050505",
+    "title": "Góp ý giao diện eUni Portal",
+    "cat": "Khác",
+    "status": "Đã đóng",
+    "updated": "05/05/2025 11:05"
+   }
+  ]
+ },
+ "psTuition": {
+  "asOf": "16/05/2025",
+  "balance": "1.250.000 đ",
+  "term": {
+   "name": "HK2 (2024 – 2025)",
+   "total": "12.870.000 đ",
+   "paid": "11.620.000 đ",
+   "due": "1.250.000 đ",
+   "deadline": "31/05/2025"
+  },
+  "fees": [
+   [
+    "Học phí HK2 (2024 – 2025)",
+    "12.000.000",
+    "31/05/2025",
+    "Đã thanh toán"
+   ],
+   [
+    "Bảo hiểm y tế",
+    "870.000",
+    "31/05/2025",
+    "Đã thanh toán"
+   ],
+   [
+    "Lệ phí thư viện",
+    "100.000",
+    "31/05/2025",
+    "Chưa thanh toán"
+   ]
+  ],
+  "history": [
+   [
+    "12/03/2025",
+    "Nộp học phí HK2 (2024 – 2025) — đợt 1",
+    "8.000.000 đ",
+    "Chuyển khoản",
+    "Thành công"
+   ],
+   [
+    "02/04/2025",
+    "Nộp học phí HK2 (2024 – 2025) — đợt 2",
+    "3.620.000 đ",
+    "VNPay",
+    "Thành công"
+   ],
+   [
+    "20/09/2024",
+    "Nộp học phí HK1 (2024 – 2025)",
+    "12.400.000 đ",
+    "Chuyển khoản",
+    "Thành công"
+   ],
+   [
+    "15/03/2025",
+    "Nhận học bổng KKHT HK1 (2024 – 2025)",
+    "+3.600.000 đ",
+    "Chuyển khoản",
+    "Thành công"
+   ]
+  ],
+  "scholarships": [
+   [
+    "HK1 (2024 – 2025)",
+    "Học bổng KKHT loại Khá",
+    "3.600.000 đ",
+    "Đã chi trả"
+   ],
+   [
+    "HK2 (2023 – 2024)",
+    "Học bổng KKHT loại Khá",
+    "3.420.000 đ",
+    "Đã chi trả"
+   ]
+  ]
+ }
+}

@@ -8,6 +8,7 @@ euni_api_ready/
 ├─ euni-public/       REPO 1 — Website công khai + My eUni Portal (sinh viên/giảng viên/phụ huynh/lãnh đạo) + đăng nhập   :3002
 ├─ euni-admin/        REPO 2 — CMS quản trị nội dung                                                                    :3001
 ├─ euni-api-mock/     Gateway giả lập + HỢP ĐỒNG API cho backend (contract/) + schema PostgreSQL tham khảo (database/)  :3000
+├─ euni-api-dotnet/   REPO 4 — cms-api bản .NET 8 + PostgreSQL (RLS theo tenant), cùng hợp đồng với mock: thay thế mock mà FE không đổi  :3000
 ├─ docs/              Cấu trúc website, quy trình Git, ghi chú chuyển đổi
 ├─ design/            Wireframe & sitemap gốc (PNG)
 ├─ tools/migration/   Công cụ đã dùng để chuyển đổi + bộ kiểm thử (e2e, đồng bộ CMS, crawl) — không thuộc repo nào
@@ -68,6 +69,7 @@ menu đầu trang/chân trang, banner theo vị trí và hạn hiển thị, tra
 
 | File | Nội dung |
 |---|---|
+| [docs/DOTNET_API_ASSESSMENT.md](docs/DOTNET_API_ASSESSMENT.md) | **Đánh giá tác động** khi chuyển mock Node sang .NET (admin/web có bị ảnh hưởng không) + kết quả kiểm chứng; hướng dẫn repo mới: [euni-api-dotnet/README.md](euni-api-dotnet/README.md) |
 | [docs/design/CMS_DESIGN.md](docs/design/CMS_DESIGN.md) | **Thiết kế CMS giai đoạn 1** (.NET · PostgreSQL · Redis · MinIO): multi-tenant, đăng nhập qua Identity Server (tài khoản trường + M365), song ngữ, workflow + hẹn giờ, phân quyền mức bản ghi, revision / soft delete / audit, tin tức vs thông báo, tìm kiếm tiếng Việt |
 | [euni-api-mock/database/v2/schema.sql](euni-api-mock/database/v2/schema.sql) | DDL PostgreSQL đích cho backend (RLS theo tenant, unaccent + pg_trgm) + `test.sql` |
 | [docs/SITE_STRUCTURE.md](docs/SITE_STRUCTURE.md) | Cấu trúc website sau khi tách: repo, thư mục, sơ đồ route, luồng dữ liệu |

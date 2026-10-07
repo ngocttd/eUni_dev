@@ -1,0 +1,18 @@
+# Chạy thử cả API + PostgreSQL:  docker compose up --build   → http://127.0.0.1:3000
+services:
+  db:
+    image: postgres:16
+    environment: { POSTGRES_PASSWORD: postgres }
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./database/cms-api/compose-init.sql:/docker-entrypoint-initdb.d/10-roles.sql:ro
+    healthcheck: { test: ['CMD-SHELL', 'pg_isready -U postgres'], interval: 5s, retries: 10 }
+  api:
+    build: .
+    depends_on: { db: { condition: service_healthy } }
+    ports: ['3000:3000']
+    environment:
+      DATABASE_URL: Host=db;Database=euni_cms;Username=cms_app;Password=cms_app_dev
+      DATABASE_ADMIN_URL: Host=db;Database=euni_cms;Username=cms_admin;Password=cms_admin_dev
+      CORS_ORIGINS: http://localhost:3001,http://localhost:3002
+volumes: { pgdata: {} }

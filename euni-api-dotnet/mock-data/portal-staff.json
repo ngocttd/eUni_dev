@@ -1,0 +1,1529 @@
+{
+ "pgAdmin": {
+  "tasks": [
+   [
+    "Tham gia hội đồng xét tốt nghiệp đợt 1 năm 2025",
+    "P.ĐT",
+    "20/05/2025",
+    "Chưa bắt đầu"
+   ],
+   [
+    "Xây dựng đề cương chi tiết học phần DTC061A",
+    "Khoa TĐ-BĐ",
+    "25/05/2025",
+    "Đang thực hiện"
+   ],
+   [
+    "Báo cáo tổng kết đề tài cấp trường năm 2024",
+    "P.KH&CN",
+    "30/05/2025",
+    "Chưa bắt đầu"
+   ],
+   [
+    "Chấm bài thi kết thúc học phần HK2 (DVM063B)",
+    "P.ĐT",
+    "05/06/2025",
+    "Chưa bắt đầu"
+   ],
+   [
+    "Tham gia tập huấn ứng dụng phần mềm eUni Portal",
+    "P.CNTT",
+    "10/06/2025",
+    "Chưa bắt đầu"
+   ]
+  ],
+  "docs": [
+   [
+    "CV-2025-118",
+    "Công văn về kế hoạch thao giảng cấp Khoa",
+    "Khoa TĐ-BĐ",
+    "12/05/2025",
+    "Đã nhận"
+   ],
+   [
+    "CV-2025-102",
+    "Thông báo đăng ký đề tài NCKH cấp Trường 2026",
+    "P.KH&CN",
+    "28/04/2025",
+    "Đã nhận"
+   ],
+   [
+    "HS-2025-045",
+    "Hồ sơ đề nghị thanh toán giờ giảng vượt định mức",
+    "Cá nhân",
+    "05/05/2025",
+    "Chờ duyệt"
+   ]
+  ],
+  "monthLabel": "Tháng 05/2025",
+  "todayDate": "16/05/2025",
+  "agenda": [
+   {
+    "time": "08:00",
+    "title": "Họp Khoa Trắc địa – Bản đồ",
+    "place": "Phòng họp A1-201"
+   },
+   {
+    "time": "14:00",
+    "title": "Làm việc với doanh nghiệp",
+    "place": "Phòng họp B1-102"
+   }
+  ],
+  "weekEvents": [
+   [
+    "Thứ 2 · 12/05",
+    "14:00",
+    "Sinh hoạt chuyên môn Bộ môn",
+    "VP Bộ môn"
+   ],
+   [
+    "Thứ 4 · 14/05",
+    "09:00",
+    "Dự giờ đồng nghiệp – Lớp LGN048A",
+    "A1-102"
+   ],
+   [
+    "Thứ 6 · 16/05",
+    "08:00",
+    "Họp Khoa Trắc địa – Bản đồ",
+    "A1-201"
+   ],
+   [
+    "Thứ 6 · 16/05",
+    "14:00",
+    "Làm việc với doanh nghiệp",
+    "B1-102"
+   ]
+  ]
+ },
+ "pgClasses": {
+  "terms": [
+   "HK2 (2024 – 2025)",
+   "HK1 (2024 – 2025)"
+  ],
+  "tools": [
+   {
+    "icon": "users",
+    "title": "Danh sách sinh viên",
+    "to": "/euni/giang-vien/quan-ly-lop-hoc/danh-sach-sinh-vien"
+   },
+   {
+    "icon": "check",
+    "title": "Điểm danh",
+    "to": "/euni/giang-vien/quan-ly-lop-hoc/diem-danh"
+   },
+   {
+    "icon": "award",
+    "title": "Nhập điểm",
+    "to": "/euni/giang-vien/quan-ly-lop-hoc/nhap-diem"
+   },
+   {
+    "icon": "file",
+    "title": "Bài tập – Đề thi",
+    "to": "/euni/giang-vien/quan-ly-lop-hoc/bai-tap-de-thi"
+   },
+   {
+    "icon": "layers",
+    "title": "Tài liệu học tập",
+    "to": "/euni/giang-vien/quan-ly-lop-hoc/tai-lieu-hoc-tap"
+   },
+   {
+    "icon": "grid",
+    "title": "Thống kê lớp",
+    "to": "/euni/giang-vien/quan-ly-lop-hoc/thong-ke-lop"
+   }
+  ],
+  "list": [
+   {
+    "code": "DTC061A",
+    "course": "Trắc địa đại cương",
+    "group": "01",
+    "size": "45/50",
+    "term": "HK2 (2024 – 2025)"
+   },
+   {
+    "code": "DVM063B",
+    "course": "Đo vẽ bản đồ số",
+    "group": "02",
+    "size": "42/45",
+    "term": "HK2 (2024 – 2025)"
+   },
+   {
+    "code": "LGN048A",
+    "course": "Hệ thống thông tin địa lý",
+    "group": "01",
+    "size": "38/40",
+    "term": "HK2 (2024 – 2025)"
+   }
+  ],
+  "notices": [
+   {
+    "date": "15/05/2025",
+    "title": "Thông báo lịch thi kết thúc học phần – Lớp DTC061A"
+   },
+   {
+    "date": "14/05/2025",
+    "title": "Cập nhật bài tập tuần 8 – Lớp LGN048A"
+   },
+   {
+    "date": "13/05/2025",
+    "title": "Nhắc nhở nộp bài tập nhóm – Lớp DVM063B"
+   }
+  ]
+ },
+ "pgDashboard": {
+  "today": "Thứ Sáu, 16/05/2025",
+  "stats": [
+   {
+    "value": "4",
+    "label": "Lịch dạy hôm nay",
+    "icon": "calendar"
+   },
+   {
+    "value": "3",
+    "label": "Lớp đang giảng dạy",
+    "icon": "users"
+   },
+   {
+    "value": "128",
+    "label": "Sinh viên phụ trách",
+    "icon": "user"
+   },
+   {
+    "value": "2",
+    "label": "Thông báo mới",
+    "icon": "bell"
+   }
+  ],
+  "todayClasses": [
+   {
+    "time": "07:30 – 09:15",
+    "course": "Trắc địa đại cương",
+    "group": "DTC061A – Lớp 01",
+    "room": "A1-201",
+    "status": "Đang diễn ra"
+   },
+   {
+    "time": "09:30 – 11:15",
+    "course": "Đo vẽ bản đồ số",
+    "group": "DVM063B – Lớp 02",
+    "room": "A3-305",
+    "status": "Sắp diễn ra"
+   },
+   {
+    "time": "13:00 – 14:45",
+    "course": "Hệ thống thông tin địa lý",
+    "group": "LGN048A – Lớp 01",
+    "room": "A1-102",
+    "status": "Sắp diễn ra"
+   }
+  ],
+  "notices": [
+   {
+    "date": "15/05/2025",
+    "title": "Thông báo họp Khoa tháng 5/2025"
+   },
+   {
+    "date": "14/05/2025",
+    "title": "Lịch thi học kỳ 2 năm 2024 – 2025"
+   },
+   {
+    "date": "15/05/2025",
+    "title": "Hướng dẫn nộp minh chứng NCKH"
+   }
+  ],
+  "research": [
+   {
+    "value": "12",
+    "label": "Đề tài / Dự án"
+   },
+   {
+    "value": "8",
+    "label": "Bài báo"
+   },
+   {
+    "value": "2",
+    "label": "Hội thảo"
+   }
+  ],
+  "admin": [
+   {
+    "value": "3",
+    "label": "Nhiệm vụ đang xử lý"
+   },
+   {
+    "value": "1",
+    "label": "Hồ sơ chờ duyệt"
+   }
+  ]
+ },
+ "pgFinance": {
+  "asOf": "16/05/2025",
+  "summary": [
+   {
+    "value": "18.500.000 đ",
+    "label": "Lương tháng 05/2025 (tạm tính)"
+   },
+   {
+    "value": "3.200.000 đ",
+    "label": "Giờ giảng vượt định mức"
+   },
+   {
+    "value": "1.500.000 đ",
+    "label": "Phụ cấp ưu đãi nghề"
+   },
+   {
+    "value": "250 giờ",
+    "label": "Giờ giảng quy đổi (năm học)"
+   }
+  ],
+  "payslips": [
+   [
+    "Tháng 04/2025",
+    "18.100.000 đ",
+    "2.400.000 đ",
+    "20.500.000 đ",
+    "Đã chi trả"
+   ],
+   [
+    "Tháng 03/2025",
+    "18.100.000 đ",
+    "1.800.000 đ",
+    "19.900.000 đ",
+    "Đã chi trả"
+   ],
+   [
+    "Tháng 02/2025",
+    "18.100.000 đ",
+    "0 đ",
+    "18.100.000 đ",
+    "Đã chi trả"
+   ]
+  ],
+  "teachingLoad": [
+   [
+    "HK1 (2024 – 2025)",
+    "135",
+    "120",
+    "+15"
+   ],
+   [
+    "HK2 (2024 – 2025)",
+    "115",
+    "120",
+    "-5"
+   ]
+  ],
+  "grants": [
+   [
+    "ĐT.2024.15 – UAV & AI thành lập bản đồ 3D",
+    "Chủ nhiệm",
+    "450.000.000 đ",
+    "60%"
+   ],
+   [
+    "ĐT.2024.31 – GIS phân vùng nguy cơ lũ quét",
+    "Thành viên",
+    "300.000.000 đ",
+    "40%"
+   ]
+  ]
+ },
+ "pgGrades": {
+  "terms": [
+   "HK2 (2024 – 2025)",
+   "HK1 (2024 – 2025)"
+  ],
+  "classes": [
+   "DTC061A – Trắc địa đại cương (01)",
+   "DVM063B – Đo vẽ bản đồ số (02)",
+   "LGN048A – Hệ thống thông tin địa lý (01)"
+  ],
+  "columns": [
+   "STT",
+   "Mã SV",
+   "Họ và tên",
+   "Chuyên cần (10%)",
+   "Kiểm tra (20%)",
+   "Giữa kỳ (30%)",
+   "Cuối kỳ (40%)",
+   "Tổng kết",
+   "Xếp loại"
+  ],
+  "rows": [
+   [
+    "1",
+    "22DTC001",
+    "Nguyễn Minh Anh",
+    "9.0",
+    "7.5",
+    "8.0",
+    "8.5",
+    "8.20",
+    "Giỏi"
+   ],
+   [
+    "2",
+    "22DTC002",
+    "Trần Thị Bích Ngọc",
+    "8.5",
+    "8.0",
+    "7.5",
+    "8.0",
+    "7.95",
+    "Giỏi"
+   ],
+   [
+    "3",
+    "22DTC003",
+    "Phạm Văn Cường",
+    "7.5",
+    "6.5",
+    "7.0",
+    "7.5",
+    "7.15",
+    "Khá"
+   ],
+   [
+    "4",
+    "22DTC004",
+    "Lê Hoàng Dũng",
+    "8.0",
+    "7.5",
+    "7.0",
+    "8.0",
+    "7.65",
+    "Khá"
+   ],
+   [
+    "5",
+    "22DTC005",
+    "Vũ Thị Hải Yến",
+    "6.5",
+    "6.0",
+    "6.5",
+    "7.0",
+    "6.60",
+    "Trung bình"
+   ]
+  ],
+  "total": 45,
+  "stats": [
+   {
+    "value": "45",
+    "label": "Sĩ số lớp"
+   },
+   {
+    "value": "45",
+    "label": "Đã nhập điểm"
+   },
+   {
+    "value": "7.26",
+    "label": "Điểm TB lớp"
+   },
+   {
+    "value": "95.6%",
+    "label": "Tỷ lệ đạt"
+   }
+  ]
+ },
+ "pgInternship": {
+  "rounds": [
+   "Đợt 1 · 2025 – 2026",
+   "Đợt 2 · 2024 – 2025"
+  ],
+  "statuses": [
+   "Tất cả",
+   "Đang thực tập",
+   "Chờ xác nhận DN",
+   "Hoàn thành",
+   "Hủy"
+  ],
+  "companies": [
+   "Tất cả",
+   "Công ty CP Công nghệ ABC",
+   "FPT Software",
+   "Viettel Solutions",
+   "Công ty TNHH Bản đồ số"
+  ],
+  "stats": [
+   {
+    "value": "18",
+    "label": "SV đang thực tập"
+   },
+   {
+    "value": "4",
+    "label": "Chờ xác nhận DN"
+   },
+   {
+    "value": "32",
+    "label": "Hoàn thành (tích lũy)"
+   },
+   {
+    "value": "12",
+    "label": "Doanh nghiệp đối tác"
+   }
+  ],
+  "list": [
+   [
+    "2151000123",
+    "Trần Văn A",
+    "D21CNTT1",
+    "Công ty CP Công nghệ ABC",
+    "Lập trình viên Fresher",
+    "15/01 – 15/04/2026",
+    "Ông Đỗ Minh (Team Lead)",
+    "Đang thực tập"
+   ],
+   [
+    "2151000188",
+    "Lê Thị B",
+    "D21CNTT1",
+    "FPT Software",
+    "Thực tập sinh QA",
+    "15/01 – 15/04/2026",
+    "Bà Ngô Hà (QA Manager)",
+    "Đang thực tập"
+   ],
+   [
+    "2151000205",
+    "Nguyễn Quang C",
+    "D21CNTT2",
+    "Viettel Solutions",
+    "Thực tập sinh Data",
+    "15/01 – 15/04/2026",
+    "Ông Lê Sơn",
+    "Chờ xác nhận DN"
+   ],
+   [
+    "2151000241",
+    "Phạm Thu D",
+    "D21CNTT2",
+    "Công ty TNHH Bản đồ số",
+    "Thực tập sinh GIS – Web",
+    "15/01 – 15/04/2026",
+    "Bà Trần Mai",
+    "Đang thực tập"
+   ],
+   [
+    "2051000077",
+    "Vũ Thị F",
+    "D20CNTT1",
+    "FPT Software",
+    "Thực tập sinh Dev",
+    "01/2025 – 04/2025",
+    "Ông Phạm Hùng",
+    "Hoàn thành"
+   ]
+  ]
+ },
+ "pgMaterials": {
+  "types": [
+   "Tất cả loại",
+   "Bài giảng",
+   "Video học phần",
+   "Slide",
+   "Tài liệu tham khảo"
+  ],
+  "tiles": [
+   {
+    "icon": "book",
+    "title": "Bài giảng",
+    "meta": "120 tài liệu",
+    "to": "/euni/giang-vien/hoc-lieu-so/bai-giang"
+   },
+   {
+    "icon": "play",
+    "title": "Video học phần",
+    "meta": "36 video",
+    "to": "/euni/giang-vien/hoc-lieu-so/video-hoc-phan"
+   },
+   {
+    "icon": "file",
+    "title": "Slide",
+    "meta": "85 tệp",
+    "to": "/euni/giang-vien/hoc-lieu-so/slide"
+   },
+   {
+    "icon": "layers",
+    "title": "Tài liệu tham khảo",
+    "meta": "64 tài liệu",
+    "to": "/euni/giang-vien/hoc-lieu-so/tai-lieu-tham-khao"
+   }
+  ],
+  "latest": [
+   [
+    "Bài giảng chương 5 – Cơ sở dữ liệu phân tán",
+    "PPTX",
+    "18/09/2025"
+   ],
+   [
+    "Video hướng dẫn Lab 02",
+    "MP4",
+    "18/09/2025"
+   ],
+   [
+    "Đề bài tập lớn 2 – Cơ sở dữ liệu",
+    "DOCX",
+    "17/09/2025"
+   ]
+  ]
+ },
+ "pgModules": {
+  "tools": [
+   {
+    "icon": "file",
+    "title": "Đề cương học phần",
+    "to": "/euni/giang-vien/quan-ly-hoc-phan/de-cuong"
+   },
+   {
+    "icon": "calendar",
+    "title": "Kế hoạch giảng dạy",
+    "to": "/euni/giang-vien/quan-ly-hoc-phan/ke-hoach-giang-day"
+   },
+   {
+    "icon": "layers",
+    "title": "Học liệu cần thiết",
+    "to": "/euni/giang-vien/quan-ly-hoc-phan/hoc-lieu-can-thiet"
+   },
+   {
+    "icon": "award",
+    "title": "Đánh giá",
+    "to": "/euni/giang-vien/quan-ly-hoc-phan/danh-gia"
+   },
+   {
+    "icon": "grid",
+    "title": "Báo cáo",
+    "to": "/euni/giang-vien/quan-ly-hoc-phan/bao-cao"
+   }
+  ],
+  "list": [
+   {
+    "code": "IT3210",
+    "course": "Cơ sở dữ liệu nâng cao",
+    "credits": 3,
+    "groups": 1,
+    "status": "Đang giảng"
+   },
+   {
+    "code": "IT3105",
+    "course": "Lập trình Web",
+    "credits": 3,
+    "groups": 2,
+    "status": "Đang giảng"
+   },
+   {
+    "code": "IT3990",
+    "course": "Đồ án chuyên ngành",
+    "credits": 2,
+    "groups": 1,
+    "status": "Đang giảng"
+   },
+   {
+    "code": "IT2011",
+    "course": "Cấu trúc dữ liệu và giải thuật",
+    "credits": 3,
+    "groups": 1,
+    "status": "Chuẩn bị"
+   }
+  ]
+ },
+ "pgNotifications": {
+  "tabs": [
+   "Tất cả",
+   "Đào tạo",
+   "Nghiên cứu",
+   "Hành chính",
+   "Khác"
+  ],
+  "total": 14,
+  "list": [
+   {
+    "icon": "users",
+    "title": "Thông báo họp Khoa tháng 5/2025",
+    "cat": "Hành chính",
+    "unread": true,
+    "desc": "Kính mời toàn thể giảng viên tham dự họp Khoa lúc 08:00 ngày 16/05/2025 tại phòng A1-201.",
+    "date": "15/05/2025 08:00"
+   },
+   {
+    "icon": "calendar",
+    "title": "Lịch thi học kỳ 2 năm 2024 – 2025",
+    "cat": "Đào tạo",
+    "unread": true,
+    "desc": "Phòng Đào tạo ban hành lịch thi kết thúc học phần HK2. Giảng viên kiểm tra ca coi thi được phân công.",
+    "date": "14/05/2025 16:20"
+   },
+   {
+    "icon": "flask",
+    "title": "Hướng dẫn nộp minh chứng NCKH",
+    "cat": "Nghiên cứu",
+    "unread": false,
+    "desc": "Giảng viên nộp minh chứng bài báo, đề tài năm 2024 trước ngày 30/05/2025.",
+    "date": "15/05/2025 09:10"
+   },
+   {
+    "icon": "award",
+    "title": "Đăng ký đề tài NCKH cấp Trường năm 2026",
+    "cat": "Nghiên cứu",
+    "unread": false,
+    "desc": "Hạn đăng ký thuyết minh đề tài: 20/06/2025.",
+    "date": "10/05/2025 10:00"
+   },
+   {
+    "icon": "file",
+    "title": "Kê khai giờ giảng vượt định mức HK1",
+    "cat": "Hành chính",
+    "unread": false,
+    "desc": "Giảng viên hoàn thành kê khai trên cổng trước 25/05/2025.",
+    "date": "06/05/2025 14:30"
+   },
+   {
+    "icon": "grid",
+    "title": "Cập nhật phiên bản eUni Portal",
+    "cat": "Khác",
+    "unread": false,
+    "desc": "Bổ sung phân hệ Quản lý điểm và Công tác – Hành chính.",
+    "date": "01/05/2025 09:00"
+   },
+   {
+    "icon": "book",
+    "title": "Tập huấn phương pháp giảng dạy tích cực",
+    "cat": "Đào tạo",
+    "unread": false,
+    "desc": "Đăng ký tham gia lớp tập huấn ngày 28/05/2025.",
+    "date": "28/04/2025 08:10"
+   }
+  ]
+ },
+ "pgProfile": {
+  "sections": [
+   "Thông tin cá nhân",
+   "Thông tin công tác",
+   "Trình độ – Học hàm",
+   "Quá trình công tác",
+   "Giấy tờ – Minh chứng",
+   "Cài đặt bảo mật"
+  ],
+  "personal": [
+   [
+    "Họ và tên",
+    "Nguyễn Văn A"
+   ],
+   [
+    "Ngày sinh",
+    "08/02/1985"
+   ],
+   [
+    "Giới tính",
+    "Nam"
+   ],
+   [
+    "CCCD",
+    "001085xxxxxx"
+   ],
+   [
+    "Điện thoại",
+    "0987 654 321"
+   ],
+   [
+    "Email",
+    "nguyenvana@humg.edu.vn"
+   ],
+   [
+    "Địa chỉ",
+    "Số 5 ngõ 12 Phố Viên, Bắc Từ Liêm, Hà Nội"
+   ]
+  ],
+  "work": [
+   [
+    "Mã cán bộ",
+    "GV0411"
+   ],
+   [
+    "Đơn vị",
+    "Khoa Trắc địa – Bản đồ và Quản lý đất đai"
+   ],
+   [
+    "Bộ môn",
+    "Bộ môn Trắc địa phổ thông và Sai số"
+   ],
+   [
+    "Chức danh",
+    "Giảng viên chính"
+   ],
+   [
+    "Ngạch / bậc",
+    "Giảng viên chính (V.07.01.02) · Bậc 3"
+   ],
+   [
+    "Ngày vào trường",
+    "01/09/2010"
+   ]
+  ],
+  "degrees": [
+   [
+    "Tiến sĩ Kỹ thuật Trắc địa – Bản đồ",
+    "Trường ĐH Mỏ – Địa chất",
+    "2016"
+   ],
+   [
+    "Thạc sĩ Kỹ thuật Trắc địa",
+    "Trường ĐH Mỏ – Địa chất",
+    "2010"
+   ],
+   [
+    "Kỹ sư Trắc địa – Bản đồ",
+    "Trường ĐH Mỏ – Địa chất",
+    "2008"
+   ]
+  ],
+  "history": [
+   [
+    "2010 – 2016",
+    "Giảng viên",
+    "Bộ môn Trắc địa phổ thông và Sai số"
+   ],
+   [
+    "2016 – 2021",
+    "Giảng viên",
+    "Bộ môn Trắc địa phổ thông và Sai số"
+   ],
+   [
+    "2021 – nay",
+    "Giảng viên chính",
+    "Bộ môn Trắc địa phổ thông và Sai số"
+   ]
+  ],
+  "documents": [
+   [
+    "Quyết định tuyển dụng",
+    "Bản sao",
+    "Đã xác thực"
+   ],
+   [
+    "Bằng Tiến sĩ",
+    "Bản sao công chứng",
+    "Đã xác thực"
+   ],
+   [
+    "Chứng chỉ bồi dưỡng chức danh nghề nghiệp",
+    "Bản sao",
+    "Đã xác thực"
+   ],
+   [
+    "Lý lịch khoa học (cập nhật 2025)",
+    "Chưa nộp",
+    "Chờ bổ sung"
+   ]
+  ]
+ },
+ "pgResearch": {
+  "tabs": [
+   "Đề tài – Dự án",
+   "Bài báo",
+   "Hội thảo",
+   "Sáng chế",
+   "Sách – Giáo trình"
+  ],
+  "quickStats": [
+   {
+    "value": "12",
+    "label": "Đề tài / Dự án"
+   },
+   {
+    "value": "8",
+    "label": "Bài báo khoa học"
+   },
+   {
+    "value": "2",
+    "label": "Hội thảo"
+   },
+   {
+    "value": "1",
+    "label": "Sáng chế"
+   }
+  ],
+  "projects": [
+   [
+    "Nghiên cứu ứng dụng UAV và AI trong thành lập bản đồ 3D phục vụ quy hoạch đô thị",
+    "Chủ nhiệm",
+    "Trường",
+    "2024",
+    "Đang thực hiện"
+   ],
+   [
+    "Nghiên cứu công nghệ khai thác khoáng sản thân thiện môi trường",
+    "Thành viên",
+    "Bộ",
+    "2023",
+    "Đang thực hiện"
+   ],
+   [
+    "Ứng dụng GIS trong đánh giá phân vùng nguy cơ lũ quét tại khu vực miền núi phía Bắc",
+    "Chủ nhiệm",
+    "Trường",
+    "2024",
+    "Đang thực hiện"
+   ],
+   [
+    "Đánh giá tiềm năng và giải pháp khai thác năng lượng gió tại Việt Nam",
+    "Thành viên",
+    "Trường",
+    "2022",
+    "Đã nghiệm thu"
+   ]
+  ],
+  "papers": [
+   [
+    "Ứng dụng học sâu phân loại lớp phủ mặt đất từ ảnh Sentinel-2",
+    "Tác giả chính",
+    "Tạp chí KHKT Mỏ – Địa chất",
+    "2024",
+    "Đã xuất bản"
+   ],
+   [
+    "Đánh giá độ chính xác mô hình số độ cao từ dữ liệu UAV",
+    "Đồng tác giả",
+    "Hội nghị GIS toàn quốc",
+    "2023",
+    "Đã xuất bản"
+   ],
+   [
+    "A WebGIS approach for land-use monitoring in Vietnam",
+    "Tác giả chính",
+    "Journal of Geoinformatics",
+    "2023",
+    "Đã xuất bản"
+   ]
+  ],
+  "conferences": [
+   [
+    "Hội nghị khoa học Trắc địa – Bản đồ toàn quốc 2024",
+    "Báo cáo viên",
+    "Hà Nội",
+    "2024",
+    "Đã tham dự"
+   ],
+   [
+    "International Symposium on GIS & Remote Sensing",
+    "Poster",
+    "Bangkok",
+    "2023",
+    "Đã tham dự"
+   ]
+  ],
+  "patents": [
+   [
+    "Thiết bị hỗ trợ đo đạc địa hình tích hợp GNSS – IMU",
+    "Đồng tác giả",
+    "Giải pháp hữu ích",
+    "2023",
+    "Đã chấp nhận đơn"
+   ]
+  ],
+  "books": [
+   [
+    "Giáo trình Trắc địa đại cương",
+    "Chủ biên",
+    "NXB Giao thông vận tải",
+    "2022",
+    "Đã xuất bản"
+   ],
+   [
+    "Hệ thống thông tin địa lý – Lý thuyết và thực hành",
+    "Đồng tác giả",
+    "NXB Khoa học và Kỹ thuật",
+    "2021",
+    "Đã xuất bản"
+   ]
+  ]
+ },
+ "pgSchedule": {
+  "weeks": [
+   "Tuần 20 (12/05 – 18/05/2025)",
+   "Tuần 21 (19/05 – 25/05/2025)",
+   "Tuần 19 (05/05 – 11/05/2025)"
+  ],
+  "dayDates": [
+   "12/05",
+   "13/05",
+   "14/05",
+   "15/05",
+   "16/05",
+   "17/05",
+   "18/05"
+  ],
+  "hours": [
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17
+  ],
+  "timetable": [
+   {
+    "day": 0,
+    "start": 7.5,
+    "end": 9.25,
+    "course": "Trắc địa đại cương",
+    "room": "A1-201",
+    "group": "DTC061A",
+    "type": "giang-lt"
+   },
+   {
+    "day": 2,
+    "start": 9.5,
+    "end": 11.25,
+    "course": "Đo vẽ bản đồ số",
+    "room": "A3-305",
+    "group": "DVM063B",
+    "type": "giang-th"
+   },
+   {
+    "day": 3,
+    "start": 9.5,
+    "end": 11.25,
+    "course": "Viễn thám cơ bản",
+    "room": "A1-103",
+    "group": "VTN011",
+    "type": "giang-lt"
+   },
+   {
+    "day": 1,
+    "start": 13,
+    "end": 15,
+    "course": "Hệ thống thông tin địa lý",
+    "room": "A1-102",
+    "group": "LGN048A",
+    "type": "giang-th"
+   },
+   {
+    "day": 2,
+    "start": 13,
+    "end": 15,
+    "course": "Trắc địa ứng dụng",
+    "room": "A1-001",
+    "group": "DTC063A",
+    "type": "huong-dan"
+   }
+  ],
+  "listView": [
+   [
+    "Thứ 2 · 12/05",
+    "07:30 – 09:15",
+    "Trắc địa đại cương",
+    "DTC061A",
+    "A1-201",
+    "Lý thuyết"
+   ],
+   [
+    "Thứ 3 · 13/05",
+    "13:00 – 15:00",
+    "Hệ thống thông tin địa lý",
+    "LGN048A",
+    "A1-102",
+    "Thực hành"
+   ],
+   [
+    "Thứ 4 · 14/05",
+    "09:30 – 11:15",
+    "Đo vẽ bản đồ số",
+    "DVM063B",
+    "A3-305",
+    "Thực hành"
+   ],
+   [
+    "Thứ 4 · 14/05",
+    "13:00 – 15:00",
+    "Trắc địa ứng dụng",
+    "DTC063A",
+    "A1-001",
+    "Hướng dẫn"
+   ],
+   [
+    "Thứ 5 · 15/05",
+    "09:30 – 11:15",
+    "Viễn thám cơ bản",
+    "VTN011",
+    "A1-103",
+    "Lý thuyết"
+   ]
+  ]
+ },
+ "pgScholar": {
+  "tabs": [
+   "Bài báo",
+   "Đề tài",
+   "Hội thảo",
+   "Sách"
+  ],
+  "papers": [
+   {
+    "title": "Ứng dụng trí tuệ nhân tạo trong đào tạo giáo dục đại học",
+    "venue": "Tạp chí Khoa học & Công nghệ, Số 45(2024)",
+    "authors": "Nguyễn Văn An, Trần Thị B",
+    "year": 2024
+   },
+   {
+    "title": "A Hybrid Model for Student Performance Prediction",
+    "venue": "Journal of Educational Technology, DOI 10.xxxx",
+    "authors": "Nguyen V. A. et al.",
+    "year": 2023
+   },
+   {
+    "title": "Xây dựng hệ thống quản lý học liệu tích hợp",
+    "venue": "Kỷ yếu Hội nghị Khoa học trẻ HUMG",
+    "authors": "Nguyễn Văn An, Lê Văn C",
+    "year": 2023
+   }
+  ],
+  "projectsMine": [
+   [
+    "ĐT.2024.15",
+    "Nghiên cứu mô hình dự báo kết quả học tập",
+    "Chủ nhiệm",
+    "2024 – 2026",
+    "Đang thực hiện"
+   ],
+   [
+    "ĐT.2023.08",
+    "Hệ thống khuyến nghị học liệu cá nhân hóa",
+    "Thành viên",
+    "2023 – 2025",
+    "Đang thực hiện"
+   ],
+   [
+    "ĐT.2022.04",
+    "Phân tích dữ liệu lớn giáo dục",
+    "Thành viên",
+    "2022 – 2023",
+    "Đã nghiệm thu"
+   ]
+  ]
+ },
+ "pgSettings": {
+  "account": [
+   [
+    "Tên đăng nhập",
+    "GV0411"
+   ],
+   [
+    "Email nhà trường",
+    "nguyenvana@humg.edu.vn"
+   ],
+   [
+    "Số điện thoại",
+    "0987 654 321"
+   ],
+   [
+    "Xác thực 2 lớp (2FA)",
+    "Đang bật"
+   ]
+  ],
+  "prefs": [
+   {
+    "key": "email",
+    "label": "Nhận thông báo qua email",
+    "on": true
+   },
+   {
+    "key": "sms",
+    "label": "Nhận thông báo qua SMS",
+    "on": false
+   },
+   {
+    "key": "push",
+    "label": "Thông báo đẩy trên trình duyệt",
+    "on": true
+   },
+   {
+    "key": "class",
+    "label": "Nhắc lịch giảng dạy trước 30 phút",
+    "on": true
+   }
+  ],
+  "sessions": [
+   [
+    "Chrome · Windows",
+    "Hà Nội, Việt Nam",
+    "16/05/2025 07:45",
+    "Phiên hiện tại"
+   ],
+   [
+    "eUni Mobile · iOS",
+    "Hà Nội, Việt Nam",
+    "15/05/2025 21:10",
+    "Đăng xuất"
+   ]
+  ]
+ },
+ "pgStaff": {
+  "name": "Nguyễn Văn A",
+  "displayName": "TS. Nguyễn Văn A",
+  "degree": "TS.",
+  "code": "GV0411",
+  "title": "Giảng viên chính",
+  "role": "Giảng viên",
+  "faculty": "Khoa Trắc địa – Bản đồ và Quản lý đất đai",
+  "department": "Bộ môn Trắc địa phổ thông và Sai số",
+  "email": "nguyenvana@humg.edu.vn",
+  "phone": "0987 654 321",
+  "dob": "08/02/1985",
+  "gender": "Nam",
+  "cccd": "001085xxxxxx",
+  "address": "Số 5 ngõ 12 Phố Viên, Bắc Từ Liêm, Hà Nội",
+  "joinedAt": "01/09/2010"
+ },
+ "pgStudents": {
+  "groups": [
+   "IT3210 – CSDL-K68",
+   "IT3105 – CNTT-K69-1",
+   "IT3105 – CNTT-K69-2",
+   "IT3990 – HTTT-K66"
+  ],
+  "stats": [
+   {
+    "value": "48",
+    "label": "Tổng số SV"
+   },
+   {
+    "value": "46",
+    "label": "Đang học"
+   },
+   {
+    "value": "2",
+    "label": "Tạm dừng"
+   },
+   {
+    "value": "0",
+    "label": "Đã thôi học"
+   }
+  ],
+  "list": [
+   [
+    "2151000123",
+    "Trần Văn A",
+    "CSDL-K68",
+    "tranvana@st.humg.edu.vn",
+    "Đang học"
+   ],
+   [
+    "2151000188",
+    "Lê Thị B",
+    "CSDL-K68",
+    "lethib@st.humg.edu.vn",
+    "Đang học"
+   ],
+   [
+    "2151000205",
+    "Nguyễn Quang C",
+    "CSDL-K68",
+    "nguyenquangc@st.humg.edu.vn",
+    "Đang học"
+   ],
+   [
+    "2151000241",
+    "Phạm Thu D",
+    "CSDL-K68",
+    "phamthud@st.humg.edu.vn",
+    "Tạm dừng"
+   ],
+   [
+    "2151000317",
+    "Hoàng Văn E",
+    "CSDL-K68",
+    "hoangvane@st.humg.edu.vn",
+    "Đang học"
+   ]
+  ]
+ },
+ "pgSupervision": {
+  "kinds": [
+   "Tất cả",
+   "Đồ án tốt nghiệp",
+   "Khóa luận tốt nghiệp",
+   "Luận văn thạc sĩ",
+   "Luận án tiến sĩ"
+  ],
+  "statuses": [
+   "Tất cả",
+   "Đang hướng dẫn",
+   "Chuẩn bị bảo vệ",
+   "Đã bảo vệ",
+   "Tạm dừng"
+  ],
+  "stats": [
+   {
+    "value": "9",
+    "label": "Đang hướng dẫn"
+   },
+   {
+    "value": "3",
+    "label": "Chuẩn bị bảo vệ"
+   },
+   {
+    "value": "21",
+    "label": "Đã bảo vệ (tích lũy)"
+   },
+   {
+    "value": "2",
+    "label": "NCS đang hướng dẫn"
+   }
+  ],
+  "list": [
+   [
+    "2151000123",
+    "Trần Văn A",
+    "Đồ án tốt nghiệp",
+    "Hệ khuyến nghị học liệu cá nhân hóa",
+    "09/2025",
+    45,
+    "Đang hướng dẫn"
+   ],
+   [
+    "2151000188",
+    "Lê Thị B",
+    "Đồ án tốt nghiệp",
+    "Phát hiện gian lận thi trực tuyến bằng học sâu",
+    "09/2025",
+    30,
+    "Đang hướng dẫn"
+   ],
+   [
+    "2151000205",
+    "Nguyễn Quang C",
+    "Khóa luận tốt nghiệp",
+    "Nền tảng quản lý đồ án tốt nghiệp",
+    "09/2025",
+    60,
+    "Chuẩn bị bảo vệ"
+   ],
+   [
+    "CH2300145",
+    "Phạm Thu D",
+    "Luận văn thạc sĩ",
+    "Tối ưu truy vấn trên CSDL phân tán",
+    "03/2024",
+    80,
+    "Chuẩn bị bảo vệ"
+   ],
+   [
+    "NCS2100012",
+    "Hoàng Văn E",
+    "Luận án tiến sĩ",
+    "Mô hình dự báo kết quả học tập quy mô lớn",
+    "10/2022",
+    55,
+    "Đang hướng dẫn"
+   ],
+   [
+    "2051000077",
+    "Vũ Thị F",
+    "Đồ án tốt nghiệp",
+    "Ứng dụng thị giác máy tính trong điểm danh",
+    "02/2025",
+    100,
+    "Đã bảo vệ"
+   ]
+  ]
+ },
+ "pgSyllabus": {
+  "modules": [
+   "IT3210 – Cơ sở dữ liệu nâng cao",
+   "IT3105 – Lập trình Web",
+   "IT3990 – Đồ án chuyên ngành"
+  ],
+  "info": {
+   "name": "Cơ sở dữ liệu nâng cao",
+   "credits": 3,
+   "term": "HK1 2025 – 2026",
+   "faculty": "Khoa CNTT"
+  },
+  "files": [
+   [
+    "Bài giảng chương 1 – Mô hình dữ liệu",
+    "PPTX",
+    "02/09/2025"
+   ],
+   [
+    "Bài giảng chương 2 – Tối ưu truy vấn",
+    "PPTX",
+    "09/09/2025"
+   ],
+   [
+    "Đề bài thực hành tuần 1",
+    "DOCX",
+    "05/09/2025"
+   ],
+   [
+    "Hướng dẫn cài đặt Lab",
+    "PDF",
+    "01/09/2025"
+   ]
+  ],
+  "plan": [
+   [
+    "Tuần 1 – 3",
+    "Mô hình quan hệ, chuẩn hóa",
+    "Lý thuyết + bài tập"
+   ],
+   [
+    "Tuần 4 – 6",
+    "Chỉ mục, tối ưu truy vấn",
+    "Lý thuyết + thực hành"
+   ],
+   [
+    "Tuần 7 – 10",
+    "Giao dịch, đồng thời, phục hồi",
+    "Lý thuyết + thực hành"
+   ],
+   [
+    "Tuần 11 – 15",
+    "CSDL phân tán, NoSQL, đồ án nhóm",
+    "Thực hành + báo cáo"
+   ]
+  ]
+ },
+ "pgTerm": "Học kỳ 2 · Năm học 2024 – 2025",
+ "pgTickets": {
+  "stats": [
+   {
+    "value": "4",
+    "label": "Tất cả",
+    "icon": "layers"
+   },
+   {
+    "value": "1",
+    "label": "Đang xử lý",
+    "icon": "clock"
+   },
+   {
+    "value": "1",
+    "label": "Chờ phản hồi",
+    "icon": "bell"
+   },
+   {
+    "value": "2",
+    "label": "Đã hoàn thành",
+    "icon": "check"
+   },
+   {
+    "value": "0",
+    "label": "Đã đóng",
+    "icon": "x"
+   }
+  ],
+  "statuses": [
+   "Tất cả trạng thái",
+   "Đang xử lý",
+   "Chờ phản hồi",
+   "Đã hoàn thành",
+   "Đã đóng"
+  ],
+  "categories": [
+   "Đào tạo",
+   "Nghiên cứu",
+   "Hạ tầng CNTT",
+   "Tài chính",
+   "Khác"
+  ],
+  "list": [
+   {
+    "id": "#TKG202505050110",
+    "title": "Không mở được chức năng nhập điểm lớp DTC061A",
+    "cat": "Đào tạo",
+    "status": "Đang xử lý",
+    "updated": "15/05/2025 11:05"
+   },
+   {
+    "id": "#TKG202505040820",
+    "title": "Đề nghị cấp tài khoản phần mềm xử lý ảnh viễn thám",
+    "cat": "Hạ tầng CNTT",
+    "status": "Chờ phản hồi",
+    "updated": "14/05/2025 09:40"
+   },
+   {
+    "id": "#TKG202504280331",
+    "title": "Sai số giờ giảng quy đổi HK1",
+    "cat": "Tài chính",
+    "status": "Đã hoàn thành",
+    "updated": "10/05/2025 15:20"
+   },
+   {
+    "id": "#TKG202504150255",
+    "title": "Xin cấp lại quyền truy cập kho học liệu số",
+    "cat": "Hạ tầng CNTT",
+    "status": "Đã hoàn thành",
+    "updated": "08/05/2025 10:10"
+   }
+  ]
+ },
+ "pgTools": {
+  "utilities": [
+   {
+    "icon": "calendar",
+    "title": "Lịch cá nhân",
+    "to": "/euni/giang-vien/tien-ich-elearning/lich-ca-nhan"
+   },
+   {
+    "icon": "file",
+    "title": "Ghi chú",
+    "to": "/euni/giang-vien/tien-ich-elearning/ghi-chu"
+   },
+   {
+    "icon": "check",
+    "title": "Công việc",
+    "to": "/euni/giang-vien/tien-ich-elearning/cong-viec"
+   },
+   {
+    "icon": "layers",
+    "title": "Cloud lưu trữ",
+    "to": "/euni/giang-vien/tien-ich-elearning/cloud"
+   },
+   {
+    "icon": "phone",
+    "title": "Kết nối CNTT",
+    "to": "/euni/giang-vien/tien-ich-elearning/ket-noi-cntt"
+   }
+  ],
+  "elearning": [
+   {
+    "icon": "play",
+    "title": "LMS HUMG",
+    "desc": "Quản lý lớp học phần"
+   },
+   {
+    "icon": "globe",
+    "title": "Tạo lớp học ảo (Zoom)",
+    "desc": "Phòng học trực tuyến"
+   },
+   {
+    "icon": "grid",
+    "title": "Microsoft 365",
+    "desc": "Tài khoản giảng viên"
+   },
+   {
+    "icon": "grid",
+    "title": "Google Workspace",
+    "desc": "Email & cộng tác"
+   },
+   {
+    "icon": "check",
+    "title": "Turnitin",
+    "desc": "Kiểm tra trùng lặp"
+   },
+   {
+    "icon": "library",
+    "title": "Thư viện số",
+    "desc": "Tra cứu tài nguyên"
+   }
+  ]
+ }
+}

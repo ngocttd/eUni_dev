@@ -1,0 +1,580 @@
+{
+ "admission": {
+  "tiles": [
+   {
+    "icon": "book",
+    "title": "Thông tin tuyển sinh",
+    "desc": "Chỉ tiêu, ngành, tổ hợp xét tuyển."
+   },
+   {
+    "icon": "layers",
+    "title": "Phương thức xét tuyển",
+    "desc": "Các phương thức & điều kiện."
+   },
+   {
+    "icon": "file",
+    "title": "Hồ sơ & Giấy tờ",
+    "desc": "Danh mục hồ sơ cần chuẩn bị."
+   },
+   {
+    "icon": "clock",
+    "title": "Thời gian tuyển sinh",
+    "desc": "Mốc thời gian quan trọng."
+   },
+   {
+    "icon": "check",
+    "title": "Hướng dẫn đăng ký",
+    "desc": "Quy trình đăng ký trực tuyến."
+   },
+   {
+    "icon": "headphones",
+    "title": "Câu hỏi thường gặp",
+    "desc": "Giải đáp thắc mắc tuyển sinh."
+   }
+  ],
+  "quota": {
+   "columns": [
+    "STT",
+    "Trình độ",
+    "Hình thức đào tạo",
+    "Chỉ tiêu (dự kiến)",
+    "Ghi chú"
+   ],
+   "rows": [
+    [
+     "1",
+     "Đại học chính quy",
+     "Chuẩn",
+     "2.850",
+     "Xét THPT & ĐGNL"
+    ],
+    [
+     "2",
+     "Đại học chính quy (CLC)",
+     "Chất lượng cao",
+     "450",
+     "Học phí theo chương trình"
+    ],
+    [
+     "3",
+     "Liên thông đại học",
+     "VLVH",
+     "300",
+     "Xét tuyển theo quy định"
+    ],
+    [
+     "4",
+     "Đại học vừa làm vừa học",
+     "VLVH",
+     "200",
+     "Xét tuyển theo ngành"
+    ],
+    [
+     "5",
+     "Văn bằng 2",
+     "VLVH",
+     "150",
+     "Xét tuyển theo ngành"
+    ]
+   ]
+  },
+  "methods": [
+   {
+    "title": "Xét tuyển thẳng & ưu tiên xét tuyển",
+    "text": "Theo quy định của Bộ GD&ĐT và Nhà trường."
+   },
+   {
+    "title": "Xét tuyển bằng kết quả thi tốt nghiệp THPT",
+    "text": "Theo tổ hợp môn phù hợp từng ngành."
+   },
+   {
+    "title": "Xét tuyển bằng kết quả học tập THPT (học bạ)",
+    "text": "Xét điểm 3 năm hoặc 5 học kỳ."
+   },
+   {
+    "title": "Xét tuyển kết hợp",
+    "text": "Kết hợp chứng chỉ quốc tế, giải thưởng, phỏng vấn…"
+   },
+   {
+    "title": "Xét tuyển bằng kết quả kỳ thi ĐGNL của ĐHQG Hà Nội",
+    "text": "Theo ngưỡng đảm bảo chất lượng."
+   }
+  ],
+  "majors": [
+   "Kỹ thuật Mỏ",
+   "Kỹ thuật Dầu khí",
+   "Kỹ thuật Địa chất",
+   "Quản lý đất đai",
+   "Công nghệ thông tin",
+   "Kỹ thuật Điều khiển & Tự động hóa",
+   "Kế toán",
+   "Quản trị kinh doanh"
+  ],
+  "docs": [
+   {
+    "name": "Đề án tuyển sinh 2026",
+    "meta": "PDF · 1.2 MB"
+   },
+   {
+    "name": "Quy chế tuyển sinh 2026",
+    "meta": "PDF · 892 KB"
+   },
+   {
+    "name": "Hướng dẫn đăng ký xét tuyển",
+    "meta": "PDF · 1.5 MB"
+   },
+   {
+    "name": "Mẫu đơn đăng ký xét tuyển",
+    "meta": "DOCX · 256 KB"
+   },
+   {
+    "name": "Danh mục ngành đào tạo",
+    "meta": "PDF · 776 KB"
+   }
+  ],
+  "links": [
+   {
+    "label": "Quy chế tuyển sinh",
+    "to": "/hoc-tap/tuyen-sinh/quy-che"
+   },
+   {
+    "label": "Tra cứu điểm chuẩn các năm",
+    "to": "/hoc-tap/tuyen-sinh/diem-chuan"
+   },
+   {
+    "label": "Video giới thiệu ngành",
+    "to": "/hoc-tap/tuyen-sinh/video-nganh"
+   },
+   {
+    "label": "Hướng dẫn đăng ký",
+    "to": "/hoc-tap/tuyen-sinh/huong-dan"
+   },
+   {
+    "label": "Tư vấn tuyển sinh trực tuyến",
+    "to": "/hoc-tap/tuyen-sinh/tu-van"
+   }
+  ],
+  "news": [
+   {
+    "date": "20/05/2026",
+    "title": "Thông báo tuyển sinh đại học chính quy năm 2026"
+   },
+   {
+    "date": "18/05/2026",
+    "title": "Hướng dẫn đăng ký xét tuyển trực tuyến năm 2026"
+   },
+   {
+    "date": "15/05/2026",
+    "title": "Danh sách ngành & tổ hợp xét tuyển 2026"
+   },
+   {
+    "date": "12/05/2026",
+    "title": "Một số thay đổi trong Quy chế tuyển sinh 2026"
+   }
+  ],
+  "faqs": [
+   {
+    "q": "HUMG xét tuyển bằng những phương thức nào?",
+    "a": "Nhà trường sử dụng 5 phương thức: xét tuyển thẳng, xét điểm thi tốt nghiệp THPT, xét học bạ, xét tuyển kết hợp và xét kết quả kỳ thi ĐGNL của ĐHQG Hà Nội."
+   },
+   {
+    "q": "Thời gian nhận hồ sơ xét học bạ khi nào?",
+    "a": "Thường bắt đầu từ tháng 3 và kết thúc trước khi có kết quả thi tốt nghiệp THPT. Mốc cụ thể công bố trong Đề án tuyển sinh hằng năm."
+   },
+   {
+    "q": "Học phí chương trình chất lượng cao là bao nhiêu?",
+    "a": "Học phí thu theo từng chương trình, công bố công khai trong Đề án tuyển sinh và trên trang Học phí – Học bổng."
+   },
+   {
+    "q": "Có chính sách học bổng cho tân sinh viên không?",
+    "a": "Có. Nhà trường cấp học bổng cho thủ khoa, á khoa, thí sinh đạt giải quốc gia/quốc tế và sinh viên có hoàn cảnh khó khăn học tốt."
+   }
+  ]
+ },
+ "admissionAdvisory": {
+  "channels": [
+   {
+    "icon": "phone",
+    "label": "Hotline tuyển sinh",
+    "value": "0888 123 456 (08:00 – 21:00 hằng ngày)"
+   },
+   {
+    "icon": "mail",
+    "label": "Email",
+    "value": "tuyensinh@humg.edu.vn"
+   },
+   {
+    "icon": "zalo",
+    "label": "Zalo OA",
+    "value": "HUMG Tuyển sinh"
+   },
+   {
+    "icon": "facebook",
+    "label": "Fanpage",
+    "value": "facebook.com/tuyensinhHUMG"
+   }
+  ],
+  "note": "Điền thông tin bên dưới, cán bộ tư vấn sẽ liên hệ lại trong 24 giờ làm việc."
+ },
+ "admissionBenchmarks": {
+  "years": [
+   "2025",
+   "2024",
+   "2023"
+  ],
+  "method": "Điểm thi tốt nghiệp THPT",
+  "data": {
+   "2023": [
+    [
+     "Công nghệ thông tin",
+     "23.00",
+     "23.60"
+    ],
+    [
+     "Kỹ thuật Điều khiển & Tự động hóa",
+     "21.75",
+     "22.40"
+    ],
+    [
+     "Kỹ thuật Dầu khí",
+     "20.50",
+     "21.10"
+    ],
+    [
+     "Kỹ thuật Mỏ",
+     "18.00",
+     "18.60"
+    ],
+    [
+     "Kỹ thuật Địa chất",
+     "16.50",
+     "17.00"
+    ],
+    [
+     "Quản trị kinh doanh",
+     "20.75",
+     "21.30"
+    ],
+    [
+     "Kế toán",
+     "20.25",
+     "20.80"
+    ],
+    [
+     "Quản lý đất đai",
+     "18.50",
+     "19.00"
+    ]
+   ],
+   "2024": [
+    [
+     "Công nghệ thông tin",
+     "23.80",
+     "24.40"
+    ],
+    [
+     "Kỹ thuật Điều khiển & Tự động hóa",
+     "22.50",
+     "23.20"
+    ],
+    [
+     "Kỹ thuật Dầu khí",
+     "21.25",
+     "22.00"
+    ],
+    [
+     "Kỹ thuật Mỏ",
+     "18.75",
+     "19.40"
+    ],
+    [
+     "Kỹ thuật Địa chất",
+     "17.50",
+     "18.00"
+    ],
+    [
+     "Quản trị kinh doanh",
+     "21.50",
+     "22.10"
+    ],
+    [
+     "Kế toán",
+     "21.00",
+     "21.60"
+    ],
+    [
+     "Quản lý đất đai",
+     "19.50",
+     "20.10"
+    ]
+   ],
+   "2025": [
+    [
+     "Công nghệ thông tin",
+     "24.50",
+     "25.10"
+    ],
+    [
+     "Kỹ thuật Điều khiển & Tự động hóa",
+     "23.10",
+     "24.00"
+    ],
+    [
+     "Kỹ thuật Dầu khí",
+     "22.00",
+     "22.75"
+    ],
+    [
+     "Kỹ thuật Mỏ",
+     "19.50",
+     "20.10"
+    ],
+    [
+     "Kỹ thuật Địa chất",
+     "18.00",
+     "18.50"
+    ],
+    [
+     "Quản trị kinh doanh",
+     "22.25",
+     "22.90"
+    ],
+    [
+     "Kế toán",
+     "21.80",
+     "22.40"
+    ],
+    [
+     "Quản lý đất đai",
+     "20.10",
+     "20.80"
+    ]
+   ]
+  }
+ },
+ "admissionCombos": {
+  "columns": [
+   "Ngành",
+   "Mã ngành",
+   "Tổ hợp xét tuyển"
+  ],
+  "rows": [
+   [
+    "Kỹ thuật Mỏ",
+    "7520601",
+    "A00, A01, B00, D07"
+   ],
+   [
+    "Kỹ thuật Dầu khí",
+    "7520604",
+    "A00, A01, D07"
+   ],
+   [
+    "Kỹ thuật Địa chất",
+    "7520501",
+    "A00, A01, B00, D07"
+   ],
+   [
+    "Kỹ thuật Trắc địa – Bản đồ",
+    "7520503",
+    "A00, A01, D01"
+   ],
+   [
+    "Quản lý đất đai",
+    "7850103",
+    "A00, A01, C04, D01"
+   ],
+   [
+    "Công nghệ thông tin",
+    "7480201",
+    "A00, A01, D01, D07"
+   ],
+   [
+    "Kỹ thuật Điều khiển & Tự động hóa",
+    "7520216",
+    "A00, A01, D07"
+   ],
+   [
+    "Kỹ thuật Môi trường",
+    "7520320",
+    "A00, A01, B00, D07"
+   ],
+   [
+    "Kế toán",
+    "7340301",
+    "A00, A01, D01, C04"
+   ],
+   [
+    "Quản trị kinh doanh",
+    "7340101",
+    "A00, A01, D01, C04"
+   ]
+  ]
+ },
+ "admissionDossier": {
+  "common": [
+   "Phiếu đăng ký xét tuyển theo mẫu của Nhà trường",
+   "Học bạ THPT (bản sao công chứng)",
+   "Bằng tốt nghiệp THPT hoặc giấy chứng nhận tốt nghiệp tạm thời (bản sao công chứng)",
+   "Căn cước công dân (bản sao) và 02 ảnh 3×4 chụp trong 6 tháng gần nhất",
+   "Giấy chứng nhận đối tượng ưu tiên, khu vực (nếu có)"
+  ],
+  "bySpecial": [
+   [
+    "Xét tuyển thẳng",
+    "Giấy chứng nhận đạt giải quốc gia / quốc tế; hồ sơ theo quy chế tuyển thẳng của Bộ GD&ĐT."
+   ],
+   [
+    "Xét tuyển kết hợp",
+    "Chứng chỉ ngoại ngữ quốc tế còn hạn (IELTS, TOEFL…), chứng chỉ SAT/ACT hoặc minh chứng thành tích."
+   ],
+   [
+    "Xét kết quả ĐGNL",
+    "Giấy báo điểm kỳ thi Đánh giá năng lực của ĐHQG Hà Nội năm 2026."
+   ]
+  ],
+  "submit": "Nộp trực tuyến trên Cổng tuyển sinh HUMG hoặc gửi chuyển phát về Phòng Đào tạo – Trường Đại học Mỏ - Địa chất, 18 Phố Viên, Đức Thắng, Bắc Từ Liêm, Hà Nội."
+ },
+ "admissionRegulations": [
+  {
+   "name": "Đề án tuyển sinh trình độ đại học năm 2026",
+   "meta": "PDF · 1.2 MB"
+  },
+  {
+   "name": "Quy chế tuyển sinh đại học (Bộ GD&ĐT)",
+   "meta": "PDF · 980 KB"
+  },
+  {
+   "name": "Quy định xét tuyển thẳng và ưu tiên xét tuyển",
+   "meta": "PDF · 640 KB"
+  },
+  {
+   "name": "Hướng dẫn quy đổi điểm chứng chỉ ngoại ngữ",
+   "meta": "PDF · 420 KB"
+  },
+  {
+   "name": "Bảng phân chia khu vực và đối tượng ưu tiên",
+   "meta": "PDF · 380 KB"
+  }
+ ],
+ "admissionTimeline": [
+  {
+   "phase": "Xét tuyển sớm (học bạ, ĐGNL, kết hợp)",
+   "time": "01/03 – 30/05/2026",
+   "note": "Nộp trực tuyến trên Cổng tuyển sinh HUMG"
+  },
+  {
+   "phase": "Thi tốt nghiệp THPT",
+   "time": "26/06 – 29/06/2026",
+   "note": "Theo lịch của Bộ GD&ĐT"
+  },
+  {
+   "phase": "Đăng ký nguyện vọng trên Cổng Bộ GD&ĐT",
+   "time": "10/07 – 25/07/2026",
+   "note": "Không giới hạn số nguyện vọng"
+  },
+  {
+   "phase": "Lọc ảo & xử lý nguyện vọng",
+   "time": "26/07 – 15/08/2026",
+   "note": ""
+  },
+  {
+   "phase": "Công bố điểm chuẩn & kết quả trúng tuyển",
+   "time": "20/08/2026",
+   "note": "Tra cứu trên website Nhà trường"
+  },
+  {
+   "phase": "Xác nhận nhập học trực tuyến",
+   "time": "Trước 27/08/2026",
+   "note": "Bắt buộc để giữ chỗ"
+  },
+  {
+   "phase": "Nhập học & tuần sinh hoạt công dân",
+   "time": "18/08 – 24/08/2026",
+   "note": "Theo thông báo của Khoa"
+  }
+ ],
+ "admissionVideos": [
+  {
+   "title": "Giới thiệu ngành Công nghệ thông tin",
+   "meta": "05:20 · Khoa CNTT"
+  },
+  {
+   "title": "Giới thiệu ngành Kỹ thuật Dầu khí",
+   "meta": "04:45 · Khoa Dầu khí"
+  },
+  {
+   "title": "Giới thiệu ngành Kỹ thuật Mỏ",
+   "meta": "06:10 · Khoa Mỏ"
+  },
+  {
+   "title": "Giới thiệu ngành Quản lý đất đai",
+   "meta": "04:30 · Khoa Trắc địa – Bản đồ"
+  },
+  {
+   "title": "Một ngày của sinh viên HUMG",
+   "meta": "03:50 · Truyền thông HUMG"
+  },
+  {
+   "title": "Cơ hội việc làm sau tốt nghiệp",
+   "meta": "05:05 · Trung tâm Hỗ trợ sinh viên"
+  }
+ ],
+ "admissionsNav": [
+  {
+   "label": "Tổng quan tuyển sinh",
+   "to": "/hoc-tap/tuyen-sinh",
+   "icon": "home"
+  },
+  {
+   "label": "Thông tin tuyển sinh",
+   "to": "/hoc-tap/tuyen-sinh/thong-tin",
+   "icon": "newspaper"
+  },
+  {
+   "label": "Phương thức xét tuyển",
+   "to": "/hoc-tap/tuyen-sinh/phuong-thuc",
+   "icon": "layers"
+  },
+  {
+   "label": "Hồ sơ & Giấy tờ",
+   "to": "/hoc-tap/tuyen-sinh/ho-so",
+   "icon": "file"
+  },
+  {
+   "label": "Thời gian tuyển sinh",
+   "to": "/hoc-tap/tuyen-sinh/thoi-gian",
+   "icon": "calendar"
+  },
+  {
+   "label": "Hướng dẫn đăng ký",
+   "to": "/hoc-tap/tuyen-sinh/huong-dan",
+   "icon": "check"
+  },
+  {
+   "label": "Tra cứu điểm chuẩn",
+   "to": "/hoc-tap/tuyen-sinh/diem-chuan",
+   "icon": "search"
+  },
+  {
+   "label": "Quy chế tuyển sinh",
+   "to": "/hoc-tap/tuyen-sinh/quy-che",
+   "icon": "shield"
+  },
+  {
+   "label": "Video giới thiệu ngành",
+   "to": "/hoc-tap/tuyen-sinh/video-nganh",
+   "icon": "play"
+  },
+  {
+   "label": "Tư vấn tuyển sinh",
+   "to": "/hoc-tap/tuyen-sinh/tu-van",
+   "icon": "phone"
+  },
+  {
+   "label": "Câu hỏi thường gặp",
+   "to": "/hoc-tap/tuyen-sinh/hoi-dap",
+   "icon": "mail"
+  }
+ ]
+}

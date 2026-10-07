@@ -6,7 +6,7 @@ import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
-for (const repo of ['euni-public', 'euni-admin', 'euni-api-mock']) {
+for (const repo of ['euni-public', 'euni-admin', 'euni-api-mock', 'euni-api-dotnet']) {
   const cwd = join(root, repo)
   if (existsSync(join(cwd, '.git'))) { console.log(`• ${repo}: đã có git`); continue }
   execSync('git init -b main', { cwd, stdio: 'inherit' })
