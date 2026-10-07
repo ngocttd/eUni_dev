@@ -29,6 +29,8 @@ public interface IDocumentStore
 
     /// <summary>Đánh dấu có thay đổi cần ghi (dùng khi sửa trực tiếp bản ghi đã lấy ra).</summary>
     void MarkDirty();
+    /// <summary>Đăng ký bù trừ cho tác vụ ngoài database đã thực hiện trong use case (vd. xóa file đã upload); chạy khi transaction bị hủy, bỏ khi commit. Lỗi bù trừ được ném, không nuốt.</summary>
+    void OnDiscard(Func<Task> compensation);
     /// <summary>Ghi mọi thay đổi trong một transaction rồi commit.</summary>
     void Flush();
     /// <summary>Bỏ mọi thay đổi chưa ghi (rollback).</summary>

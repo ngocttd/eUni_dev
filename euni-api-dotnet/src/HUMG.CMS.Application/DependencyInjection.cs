@@ -1,3 +1,4 @@
+using HUMG.CMS.Application.Abstractions;
 using HUMG.CMS.Application.Common;
 using HUMG.CMS.Application.Features;
 using HUMG.CMS.Application.Features.AccessControl;
@@ -29,6 +30,7 @@ public static class DependencyInjection
         s.AddScoped<DirectoryService>(); s.AddScoped<UserContextService>(); s.AddScoped<DashboardService>();
         s.AddScoped<MediaService>(); s.AddScoped<SettingsService>(); s.AddScoped<BackupService>();
         s.AddSingleton<DatasetService>();
+        s.AddSingleton<IOutboxHandler, AnnouncementFanOutHandler>();
         return s;
     }
 }

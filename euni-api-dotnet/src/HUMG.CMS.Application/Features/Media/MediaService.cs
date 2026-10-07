@@ -46,7 +46,9 @@ public sealed class MediaService
         var name = req.FileName;
         var m = Regex.Match(name, @"\.([^.]+)$");
         var ext = m.Success ? m.Groups[1].Value.ToLowerInvariant() : "";
-        var stored = await _files.SaveAsync(req.Content, name, ct);
+        var stored = await _files.SaveAsync(req.Content, name, _ctx.Tenant, req.ContentType, ct);
+        // Upload file và ghi DB là một quy trình cần BÙ TRỪ: file đã lên storage nhưng transaction DB hủy/lỗi → xóa file (lỗi xóa được ném, không nuốt)
+        _store.OnDiscard(() => _files.DeleteAsync(stored.Key));
         var row = _store.Insert("media", new JsonObject
         {
             ["tenantId"] = _ctx.Tenant, ["fileName"] = name, ["kind"] = KindOf(req.ContentType, ext), ["ext"] = ext, ["mimeType"] = req.ContentType, ["sizeBytes"] = stored.SizeBytes,

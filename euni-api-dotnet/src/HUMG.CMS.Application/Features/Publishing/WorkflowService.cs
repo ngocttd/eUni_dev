@@ -104,6 +104,16 @@ public sealed class WorkflowService
         });
     }
 
+    /// <summary>
+    /// Ghi sự kiện outbox trong cùng transaction (docs: "dùng outbox cho công việc cần khởi phát từ giao dịch ghi, như lịch xuất bản").
+    /// <c>availableAt</c> = thời điểm xuất bản với bài hẹn giờ → worker chỉ xử lý khi đến hạn.
+    /// </summary>
+    private void Enqueue(IWorkflowProfile p, JsonObject r, string kind, string? availableAt = null) =>
+        _store.Insert("outbox", Doc.Obj(
+            ("tenantId", _ctx.Tenant), ("type", $"{(p.Type == "news" ? "News" : "Announcement")}{kind}"),
+            ("payload", Doc.Obj(("entityType", p.Type), ("entityId", r.Long("id")), ("tenantId", _ctx.Tenant), ("title", r.Str("title")), ("action", kind), ("publishAt", availableAt ?? r.Str("publishAt")), ("actor", Sub))),
+            ("availableAt", availableAt ?? Now()), ("processedAt", null), ("attempts", 0), ("lastError", null)));
+
     private void History(IWorkflowProfile p, JsonObject r, string action, string? from, string? to, string? note) =>
         _store.Insert("workflowHistory", new JsonObject
         {
@@ -128,9 +138,12 @@ public sealed class WorkflowService
         if (r.Str("status") != WorkflowStatus.Draft || r.Str("createdBy") != Sub) Need(p, r.Str("status") == WorkflowStatus.Published ? "publish" : "edit", r);
         if (Doc.Truthy(r.Get("pendingRevisionId"))) throw HttpError.Conflict("Bản ghi có bản sửa đổi chờ duyệt — duyệt hoặc từ chối bản đó trước.");
         var before = ContentOf(r);
-        _store.Update(p.Collection, r.Id(), Doc.Merge(patch, Doc.Obj(("version", (r.Long("version") ?? 1) + 1), ("updatedAt", Now()), ("updatedBy", Sub))));
+        // version mới phải lớn hơn mọi revision đã có (kể cả bản đề xuất bị từ chối) để (entity_type, entity_id, version) luôn duy nhất
+        var nextVersion = Math.Max(r.Long("version") ?? 1, RevisionsOf(p, r).Select(v => v.Long("version") ?? 0).DefaultIfEmpty(0).Max()) + 1;
+        _store.Update(p.Collection, r.Id(), Doc.Merge(patch, Doc.Obj(("version", nextVersion), ("updatedAt", Now()), ("updatedBy", Sub))));
         var rev2 = SaveRevision(p, r, reason ?? "Cập nhật");
         _audit.Log($"{p.Type}.update", p.Type, r, AuditService.Diff(before, ContentOf(r)), Doc.Obj(("revisionVersion", rev2.Long("version"))));
+        if (r.Str("status") == WorkflowStatus.Published) Enqueue(p, r, "Updated");
         return (false, rev2);
     }
 
@@ -203,6 +216,7 @@ public sealed class WorkflowService
         if (!_access.Allowed(p.Type, r).Contains("delete")) throw HttpError.Forbidden("Bạn không có quyền xóa bản ghi này.");
         _store.Update(p.Collection, r.Id(), Doc.Obj(("deletedAt", Now()), ("deletedBy", Sub)));
         _audit.Log($"{p.Type}.delete", p.Type, r);
+        if (r.Str("status") == WorkflowStatus.Published) Enqueue(p, r, "Deleted");
     }
 
     public JsonObject Restore(IWorkflowProfile p, string id)
@@ -252,6 +266,7 @@ public sealed class WorkflowService
                 rev["state"] = "current";
                 _store.Update(p.Collection, r.Id(), Doc.Merge(ContentOf(rev.Get("snapshot") as JsonObject), Doc.Obj(("version", rev.Long("version")), ("pendingRevisionId", null), ("updatedAt", Now()), ("updatedBy", Sub))));
                 _audit.Log($"{p.Type}.update", p.Type, r, AuditService.Diff(before, ContentOf(r)), Doc.Obj(("revisionVersion", rev.Long("version"))));
+                if (r.Str("status") == WorkflowStatus.Published) Enqueue(p, r, "Updated");
             }
             _store.MarkDirty();
             History(p, r, action, r.Str("status"), r.Str("status"), note);
@@ -276,6 +291,8 @@ public sealed class WorkflowService
         }
         if (action == "archive") foreach (var kv in p.OnArchive(b)) patch[kv.Key] = kv.Value?.DeepClone();
         _store.Update(p.Collection, r.Id(), patch);
+        if (t.To == WorkflowStatus.Published) Enqueue(p, r, "Published", patch.Str("publishAt"));
+        else if (from == WorkflowStatus.Published) Enqueue(p, r, action == "archive" ? "Recalled" : "Unpublished");
         History(p, r, action, from, t.To, note);
         _audit.Log($"{p.Type}.{action}", p.Type, r, new JsonObject { ["status"] = new JsonArray(from, t.To) });
     }

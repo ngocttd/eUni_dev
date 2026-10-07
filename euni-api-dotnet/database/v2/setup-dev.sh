@@ -12,4 +12,4 @@ DO \$\$ BEGIN
 END \$\$;
 SELECT 'CREATE DATABASE ${DB} OWNER cms_admin' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname='${DB}')\gexec
 SQL
-echo "✔ database ${DB}, role cms_admin / cms_app sẵn sàng. Ứng dụng tự áp schema khi khởi động (hoặc: psql -U cms_admin -d ${DB} -f database/cms-api/schema.sql)"
+echo "✔ database ${DB}, role cms_admin / cms_app sẵn sàng. Ứng dụng tự áp schema khi khởi động (hoặc: psql -U cms_admin -d ${DB} -f database/v2/schema.sql -f database/v2/amendments.sql)"

@@ -4,6 +4,10 @@ using HUMG.CMS.Infrastructure.Persistence;
 using HUMG.CMS.Infrastructure.Security;
 using HUMG.CMS.Infrastructure.Storage;
 using Microsoft.Extensions.DependencyInjection;
+using HUMG.CMS.Infrastructure.Outbox;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Npgsql;
 
 namespace HUMG.CMS.Infrastructure;
@@ -21,9 +25,12 @@ public static class DependencyInjection
         s.AddSingleton(o);
         s.AddSingleton<IMockData>(mock);
         s.AddSingleton<IDataMaintenance>(new PostgresDataMaintenance(adminSource, mock, o.Migrate));
+        s.AddSingleton<IOutboxHandler, LoggingOutboxHandler>();
+        s.AddSingleton(sp => new OutboxRelay(adminSource, sp.GetServices<IOutboxHandler>(), sp.GetRequiredService<ILogger<OutboxRelay>>(), TimeSpan.FromSeconds(o.OutboxPollSeconds)));
+        if (o.OutboxRelay) s.AddHostedService(sp => sp.GetRequiredService<OutboxRelay>());
         s.AddScoped<IDocumentStore>(sp => new PostgresDocumentStore(appSource, sp.GetRequiredService<RequestContext>()));
-        s.AddSingleton<ITokenService>(new Hs256TokenService(o.JwtSecret, o.JwtExpiresIn));
-        s.AddSingleton<IFileStorage>(new LocalFileStorage(o.UploadDir));
+        s.AddSingleton<ITokenService>(o.AuthMode.Equals("oidc", StringComparison.OrdinalIgnoreCase) ? new OidcTokenService(o.Oidc) : new Hs256TokenService(o.JwtSecret, o.JwtExpiresIn));
+        s.AddSingleton<IFileStorage>(o.StorageProvider.Equals("s3", StringComparison.OrdinalIgnoreCase) ? new S3FileStorage(o.S3) : new LocalFileStorage(o.UploadDir));
         return s;
     }
 

@@ -117,5 +117,20 @@ DO $$ BEGIN
   RAISE EXCEPTION 'audit_logs không được phép UPDATE';
 EXCEPTION WHEN insufficient_privilege THEN NULL; END $$;
 
+-- 7) (v2.1) đọc nhiều tenant có chủ đích nhưng GHI chỉ một tenant
+SET LOCAL app.tenant_id = 'humg';
+SELECT set_config('app.tenant_ids', 'humg,cntt', true);
+DO $$ BEGIN
+  IF (SELECT count(*) FROM cms.news) = 0 THEN RAISE EXCEPTION 'đọc đa trang phải thấy tin của humg'; END IF;
+  BEGIN
+    INSERT INTO cms.news (tenant_id, status, author_sub, created_by) VALUES ('cntt', 'draft', 'x', 'x');
+    RAISE EXCEPTION 'đọc được cntt không có nghĩa là ghi được vào cntt';
+  EXCEPTION WHEN insufficient_privilege THEN NULL; END;
+END $$;
+SELECT set_config('app.tenant_ids', 'cntt', true);   -- chỉ đọc cntt (không có dữ liệu) trong khi tenant ghi là humg
+DO $$ BEGIN
+  IF (SELECT count(*) FROM cms.news) <> 0 THEN RAISE EXCEPTION 'app.tenant_ids phải quyết định phạm vi đọc'; END IF;
+END $$;
+
 \echo 'v2 schema: tất cả kiểm tra đạt'
 ROLLBACK;

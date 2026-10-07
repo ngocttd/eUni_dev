@@ -14,6 +14,9 @@ jobs:
           --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
     env:
       PGPASSWORD: postgres
+      TEST_DATABASE_URL: Host=localhost;Database=euni_cms;Username=cms_app;Password=cms_app_dev
+      TEST_DATABASE_ADMIN_URL: Host=localhost;Database=euni_cms;Username=cms_admin;Password=cms_admin_dev
+      TEST_S3_ENDPOINT: http://127.0.0.1:5555
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
@@ -24,23 +27,24 @@ jobs:
         run: |
           psql -h localhost -U postgres -v ON_ERROR_STOP=1 -c "CREATE ROLE cms_admin LOGIN BYPASSRLS PASSWORD 'cms_admin_dev'" \
             -c "CREATE ROLE cms_app LOGIN NOBYPASSRLS PASSWORD 'cms_app_dev'" -c "CREATE DATABASE euni_cms OWNER cms_admin"
+      - name: Máy chủ S3 tương thích (moto) cho kiểm thử object storage
+        run: pip install "moto[server]" && (moto_server -H 127.0.0.1 -p 5555 &) && sleep 3
       - run: dotnet build -c Release
-      - name: Kiểm thử đơn vị + RLS trên PostgreSQL
-        env:
-          TEST_DATABASE_URL: Host=localhost;Database=euni_cms;Username=cms_app;Password=cms_app_dev
-          TEST_DATABASE_ADMIN_URL: Host=localhost;Database=euni_cms;Username=cms_admin;Password=cms_admin_dev
+      - name: Kiểm thử đơn vị + RLS + outbox + S3 + OIDC
         run: dotnet test -c Release --no-build
-      - name: Kiểm thử hợp đồng/hành vi API (123 kiểm tra của mock, chạy vào bản .NET)
+      - name: Kiểm thử hợp đồng/hành vi API (118 kiểm tra của mock, chạy vào bản .NET) + outbox
         run: |
           dotnet src/HUMG.CMS.Api/bin/Release/net8.0/HUMG.CMS.Api.dll &
-          sleep 8
+          sleep 10
           SMOKE_URL=http://127.0.0.1:3000 node tests/contract/smoke.mjs
+          API_URL=http://127.0.0.1:3000 node tests/contract/outbox.mjs
         env:
           PORT: '3000'
           API_LOG: 'false'
+          OUTBOX_POLL_SECONDS: '2'
           DATABASE_URL: Host=localhost;Database=euni_cms;Username=cms_app;Password=cms_app_dev
           DATABASE_ADMIN_URL: Host=localhost;Database=euni_cms;Username=cms_admin;Password=cms_admin_dev
-      - name: Kiểm thử schema v2 (RLS bảng con)
+      - name: Kiểm thử schema v2 (+ v2.1): RLS bảng con, đọc đa trang
         run: |
           psql -h localhost -U postgres -c "CREATE DATABASE euni_v2"
-          psql -h localhost -U postgres -d euni_v2 -v ON_ERROR_STOP=1 -q -f database/v2/schema.sql -f database/v2/test.sql
+          psql -h localhost -U postgres -d euni_v2 -v ON_ERROR_STOP=1 -q -f database/v2/schema.sql -f database/v2/amendments.sql -f database/v2/test.sql

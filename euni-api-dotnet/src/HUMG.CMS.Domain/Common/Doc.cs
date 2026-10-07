@@ -10,7 +10,7 @@ namespace HUMG.CMS.Domain.Common;
 public static class Doc
 {
     /// <summary>Tùy chọn xuất JSON giống <c>JSON.stringify</c>: không escape ký tự Unicode/HTML.</summary>
-    public static readonly JsonSerializerOptions Raw = new() { Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
+    public static readonly JsonSerializerOptions Raw = new() { Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping, TypeInfoResolver = new System.Text.Json.Serialization.Metadata.DefaultJsonTypeInfoResolver() };
     public static string Stringify(JsonNode? n) => n?.ToJsonString(Raw) ?? "null";
 
     public static JsonNode? Get(this JsonObject o, string key) => o.TryGetPropertyValue(key, out var v) ? v : null;
@@ -102,8 +102,17 @@ public static class Doc
     public static JsonArray Arr(IEnumerable<JsonNode?> items) => new(items.Select(i => i?.DeepClone()).ToArray());
     public static JsonArray ArrOf(IEnumerable<string> items) => new(items.Select(x => (JsonNode?)JsonValue.Create(x)).ToArray());
 
-    /// <summary>So sánh JSON theo giá trị (JS: JSON.stringify(a) === JSON.stringify(b)).</summary>
-    public static bool SameJson(JsonNode? a, JsonNode? b) => Stringify(a) == Stringify(b);
+    /// <summary>So sánh JSON theo giá trị, KHÔNG phụ thuộc thứ tự khóa (jsonb của PostgreSQL không giữ thứ tự khóa).</summary>
+    public static bool SameJson(JsonNode? a, JsonNode? b) => Canonical(a) == Canonical(b);
+
+    private static string Canonical(JsonNode? n) => Stringify(Sorted(n));
+    private static JsonNode? Sorted(JsonNode? n) => n switch
+    {
+        JsonObject o => new JsonObject(o.OrderBy(kv => kv.Key, StringComparer.Ordinal).Select(kv => KeyValuePair.Create(kv.Key, Sorted(kv.Value)))),
+        JsonArray a => new JsonArray(a.Select(Sorted).ToArray()),
+        null => null,
+        _ => n.DeepClone(),
+    };
 
     /// <summary>`String(x)` cho khóa so sánh id/scope.</summary>
     public static string KeyOf(JsonNode? n) => AsString(n) ?? "";

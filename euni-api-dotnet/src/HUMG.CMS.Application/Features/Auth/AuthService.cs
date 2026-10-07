@@ -63,6 +63,7 @@ public sealed class AuthService
     /// </summary>
     public JsonObject Login(JsonObject body)
     {
+        if (!_tokens.CanIssue) throw new HttpError(501, "Đăng nhập do Identity Server đảm nhiệm (AUTH_MODE=oidc); auth-api mock đã tắt.");
         var role = body.Str("role");
         var demoRole = role == "leader" ? "manager" : role;
         if (!string.IsNullOrEmpty(demoRole) && RoleCatalog.DemoSub.ContainsKey(demoRole))
@@ -96,5 +97,5 @@ public sealed class AuthService
         Current(t) is { } u ? new JsonObject { ["user"] = u } : throw HttpError.Unauthorized("Chưa đăng nhập.");
 
     public JsonObject Refresh(UserPrincipal? t) =>
-        Current(t) is { } u ? new JsonObject { ["accessToken"] = Sign(u), ["user"] = u.DeepClone() } : throw HttpError.Unauthorized("Phiên đã hết hạn.");
+        !_tokens.CanIssue ? throw new HttpError(501, "Làm mới token do Identity Server đảm nhiệm (AUTH_MODE=oidc).") : Current(t) is { } u ? new JsonObject { ["accessToken"] = Sign(u), ["user"] = u.DeepClone() } : throw HttpError.Unauthorized("Phiên đã hết hạn.");
 }

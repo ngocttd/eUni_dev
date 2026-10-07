@@ -33,6 +33,20 @@ var options = new InfrastructureOptions
     Migrate = !string.Equals(Environment.GetEnvironmentVariable("DB_MIGRATE"), "false", StringComparison.OrdinalIgnoreCase),
     MockDataDir = Path.GetFullPath(env("MOCK_DATA_DIR", Path.Combine(root, "mock-data"))),
     UploadDir = Path.GetFullPath(env("UPLOAD_DIR", Path.Combine(root, "uploads"))),
+    OutboxRelay = !string.Equals(Environment.GetEnvironmentVariable("OUTBOX_RELAY"), "false", StringComparison.OrdinalIgnoreCase),
+    OutboxPollSeconds = int.TryParse(Environment.GetEnvironmentVariable("OUTBOX_POLL_SECONDS"), out var ops) ? ops : 5,
+    StorageProvider = env("STORAGE_PROVIDER", "local"),
+    S3 = new HUMG.CMS.Infrastructure.Storage.S3Options
+    {
+        Endpoint = env("S3_ENDPOINT", "http://127.0.0.1:9000"), AccessKey = env("S3_ACCESS_KEY", "minioadmin"), SecretKey = env("S3_SECRET_KEY", "minioadmin"),
+        Region = env("S3_REGION", "us-east-1"), Bucket = env("S3_BUCKET", "cms-public"), ForcePathStyle = !string.Equals(Environment.GetEnvironmentVariable("S3_FORCE_PATH_STYLE"), "false", StringComparison.OrdinalIgnoreCase),
+    },
+    AuthMode = env("AUTH_MODE", "mock"),
+    Oidc = new HUMG.CMS.Infrastructure.Security.OidcOptions
+    {
+        Authority = env("OIDC_AUTHORITY", ""), Audience = env("OIDC_AUDIENCE", "cms-api"), RoleClient = env("OIDC_ROLE_CLIENT", "cms-api"),
+        RequireHttpsMetadata = !string.Equals(Environment.GetEnvironmentVariable("OIDC_REQUIRE_HTTPS"), "false", StringComparison.OrdinalIgnoreCase),
+    },
     JwtSecret = env("JWT_SECRET", "dev-only-change-me"),
     JwtExpiresIn = env("JWT_EXPIRES_IN", "8h"),
 };
@@ -66,8 +80,25 @@ app.UseApiErrors(logger);
 app.UseCors();
 if (logRequests) app.Use(async (http, next) => { Console.WriteLine($"{http.Request.Method} {http.Request.PathBase}{http.Request.Path}{http.Request.QueryString}"); await next(); });
 
-Directory.CreateDirectory(options.UploadDir);
-app.UseStaticFiles(new StaticFileOptions { FileProvider = new PhysicalFileProvider(options.UploadDir), RequestPath = "/cms-api/uploads", ServeUnknownFileTypes = true });
+if (options.StorageProvider.Equals("s3", StringComparison.OrdinalIgnoreCase))
+{
+    // file công khai nằm ở object storage: API phục vụ qua cùng URL tương đối cms-api/uploads/{object_key} (FE không đổi)
+    var files = app.Services.GetRequiredService<HUMG.CMS.Application.Abstractions.IFileStorage>();
+    app.Use(async (http, next) =>
+    {
+        if (!HttpMethods.IsGet(http.Request.Method) || !http.Request.Path.StartsWithSegments("/cms-api/uploads", out var rest)) { await next(); return; }
+        var obj = await files.OpenReadAsync(Uri.UnescapeDataString(rest.Value!.TrimStart('/')), http.RequestAborted);
+        if (obj is null) { http.Response.StatusCode = 404; return; }
+        await using var content = obj.Content;
+        http.Response.ContentType = obj.ContentType; if (obj.Length is { } n) http.Response.ContentLength = n;
+        await content.CopyToAsync(http.Response.Body, http.RequestAborted);
+    });
+}
+else
+{
+    Directory.CreateDirectory(options.UploadDir);
+    app.UseStaticFiles(new StaticFileOptions { FileProvider = new PhysicalFileProvider(options.UploadDir), RequestPath = "/cms-api/uploads", ServeUnknownFileTypes = true });
+}
 
 app.UseJsonNotFound();
 app.UseSerialized();
@@ -100,7 +131,7 @@ app.MapGet("/", () => R.Ok(new System.Text.Json.Nodes.JsonObject
 }));
 app.MapGet("/docs/openapi.json", () => File.Exists(openApi) ? Results.File(openApi, "application/json") : R.Status(404, new System.Text.Json.Nodes.JsonObject { ["message"] = "Không có openapi.json." }));
 
-Console.WriteLine($"✔ eUni API gateway (.NET): http://{host}:{port}");
+app.Lifetime.ApplicationStarted.Register(() => Console.WriteLine($"✔ eUni API gateway (.NET): http://{host}:{port}"));   // in sau khi Kestrel đã lắng nghe
 app.Run();
 
 public partial class Program;

@@ -23,7 +23,14 @@ if (!NET) { await start('dotnet', [join(root, 'src/HUMG.CMS.Api/bin/Debug/net8.0
 
 const ISO = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:\d{2})$/
 const diffs = []
+let currentUrl = ''
+// Bảng dùng chung nhiều collection (home_blocks, media_items) cấp id từ một dãy số nên id khác mock Node (mỗi collection một dãy)
+const SHARED_ID = /hero-slides|quick-links|audiences|strengths|partners|site-stats|\/albums|\/videos|\/podcasts|\/public\/home|site-content|\/dashboard/
 function same(a, b, path) {
+  // lược đồ quan hệ có thêm cột thời gian tạo/sửa (NOT NULL) và translations rỗng mà mock không ghi
+  if (a == null && b != null && /\.(createdAt|updatedAt)$/.test(path) && typeof b === 'string') return
+  if (a == null && b != null && typeof b === 'object' && !Array.isArray(b) && !Object.keys(b).length && /\.translations$/.test(path)) return
+  if (SHARED_ID.test(currentUrl) && /\.id$/.test(path) && typeof a === 'number' && typeof b === 'number') return
   if (a == null && b == null) return
   if (a == null || b == null) { if ((a ?? b) === '' || (Array.isArray(a ?? b) && !(a ?? b).length)) return; return diffs.push(`${path}: ${JSON.stringify(a)?.slice(0, 80)} ≠ ${JSON.stringify(b)?.slice(0, 80)}`) }
   if (typeof a === 'string' && typeof b === 'string' && ISO.test(a) && ISO.test(b)) { if (Math.abs(Date.parse(a) - Date.parse(b)) < 120000) return }
@@ -60,7 +67,7 @@ let n = 0, bad = 0, known = 0
 async function cmp(method, path, opts = {}) {
   const who = opts.as ? tokens[opts.as] : null
   const [a, b] = await Promise.all([call(NODE, method, path, { ...opts, token: who?.node }), call(NET, method, path, { ...opts, token: who?.net })])
-  n++; diffs.length = 0
+  n++; diffs.length = 0; currentUrl = path
   if (a.status !== b.status) diffs.push(`status ${a.status} ≠ ${b.status}`)
   else same(a.data, b.data, '$')
   if (!(a.etag ?? '').startsWith('W/') && a.etag !== b.etag) diffs.push(`ETag ${a.etag} ≠ ${b.etag}`)

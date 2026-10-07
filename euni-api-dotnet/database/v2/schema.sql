@@ -99,7 +99,8 @@ CREATE TABLE IF NOT EXISTS cms.user_directory (
 );
 CREATE INDEX IF NOT EXISTS ix_user_dir_search ON cms.user_directory USING gin (search_text gin_trgm_ops);
 CREATE UNIQUE INDEX IF NOT EXISTS uq_user_dir_email ON cms.user_directory (lower(email)) WHERE email IS NOT NULL;
-CREATE UNIQUE INDEX IF NOT EXISTS uq_user_dir_staff ON cms.user_directory (staff_code) WHERE staff_code IS NOT NULL;
+-- (v2.1) không UNIQUE: dữ liệu mẫu có mã cán bộ trùng giữa hai tài khoản demo; IdS thật bảo đảm duy nhất
+CREATE INDEX IF NOT EXISTS ix_user_dir_staff ON cms.user_directory (staff_code) WHERE staff_code IS NOT NULL;
 CREATE UNIQUE INDEX IF NOT EXISTS uq_user_dir_student ON cms.user_directory (student_code) WHERE student_code IS NOT NULL;
 
 -- ============================================================================
@@ -573,8 +574,9 @@ CREATE POLICY p_tenant ON cms.content_shares USING (cms.current_tenant() IN (ten
 
 -- Role ứng dụng: không BYPASSRLS, audit chỉ INSERT/SELECT
 DO $$ BEGIN
-  CREATE ROLE cms_app NOLOGIN NOBYPASSRLS;
-EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+  -- role thường do DBA tạo trước (database/v2/setup-dev.sh, có LOGIN); chỉ tạo khi chưa có để cms_admin không cần quyền CREATEROLE
+  IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'cms_app') THEN CREATE ROLE cms_app NOLOGIN NOBYPASSRLS; END IF;
+END $$;
 GRANT USAGE ON SCHEMA cms TO cms_app;
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA cms TO cms_app;
 GRANT USAGE ON ALL SEQUENCES IN SCHEMA cms TO cms_app;
@@ -585,7 +587,8 @@ REVOKE INSERT, UPDATE, DELETE ON cms.org_units, cms.tenants, cms.tenant_domains,
 -- 9. VIEW / HÀM TRUY VẤN MẪU
 -- ============================================================================
 -- Tin công khai (đã đến giờ đăng, chưa hết hạn) — website đọc qua view này
-CREATE OR REPLACE VIEW cms.v_news_live WITH (security_invoker = true) AS
+DROP VIEW IF EXISTS cms.v_news_live;   -- n.* đổi khi bảng news có thêm cột (amendments) nên phải tạo lại
+CREATE VIEW cms.v_news_live WITH (security_invoker = true) AS
 SELECT n.*, t.lang, t.slug, t.title, t.excerpt, t.body_html, t.meta_title, t.meta_description
 FROM cms.news n JOIN cms.news_translations t ON t.news_id = n.id
 WHERE n.status = 'published' AND n.deleted_at IS NULL AND n.publish_at <= now()

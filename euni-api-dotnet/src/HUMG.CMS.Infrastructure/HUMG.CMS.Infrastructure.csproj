@@ -5,7 +5,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AWSSDK.S3" Version="3.7.405.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.2" />
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="8.1.2" />
+    <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="8.1.2" />
     <PackageReference Include="Npgsql" Version="8.0.5" />
   </ItemGroup>
 
@@ -16,7 +21,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="..\..\database\cms-api\schema.sql" LogicalName="schema.sql" />
+    <EmbeddedResource Include="..\..\database\v2\schema.sql" LogicalName="schema.sql" />
+    <EmbeddedResource Include="..\..\database\v2\amendments.sql" LogicalName="amendments.sql" />
   </ItemGroup>
 
 </Project>
