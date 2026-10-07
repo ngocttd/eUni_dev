@@ -100,6 +100,8 @@ Khác biệt **chủ ý** so với mock Node: (1) `GET announcements/{id}/stats`
 
 ## Chưa làm / ghi chú vận hành
 
+Danh sách đầy đủ các phần chưa làm: [`../docs/DOTNET_API_CON_LAI.md`](../docs/DOTNET_API_CON_LAI.md).
+
 - `docker-compose.yml` (API + PostgreSQL + MinIO) chưa chạy thử vì môi trường dựng không có Docker; `S3FileStorage` được kiểm thử bằng máy chủ S3 tương thích (moto), chưa chạy với MinIO thật.
 - Tìm kiếm công khai vẫn lọc trong bộ nhớ sau khi nạp bản ghi; chuyển sang `search_text` (unaccent + pg_trgm) có sẵn ở v2 khi dữ liệu lớn.
 - Bucket `cms-private` (đính kèm thông báo, presigned URL) chưa làm; file đính kèm thông báo hiện chỉ lưu tiêu đề/mô tả.
