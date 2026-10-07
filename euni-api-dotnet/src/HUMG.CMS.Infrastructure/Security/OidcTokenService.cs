@@ -12,14 +12,31 @@ namespace HUMG.CMS.Infrastructure.Security;
 
 public sealed class OidcOptions
 {
-    /// <summary>Issuer của Identity Server (Keycloak/Duende…): khóa công khai lấy qua <c>{Authority}/.well-known/openid-configuration</c>.</summary>
+    /// <summary>Issuer của nhà cung cấp OIDC: khóa công khai lấy qua <c>{Authority}/.well-known/openid-configuration</c>. Entra ID: <c>https://login.microsoftonline.com/{tenant}/v2.0</c>.</summary>
     public string Authority { get; set; } = "";
-    /// <summary>Audience của API (access token <c>aud=cms-api</c>).</summary>
-    public string Audience { get; set; } = "cms-api";
+    /// <summary>Issuer hợp lệ bổ sung (Entra: access token v1 có issuer <c>https://sts.windows.net/{tenant}/</c>).</summary>
+    public string[] ExtraIssuers { get; set; } = Array.Empty<string>();
+    /// <summary>Audience hợp lệ. Entra: id_token có aud = client id; access token cho API có aud = <c>api://{client id}</c> (hoặc client id).</summary>
+    public string[] Audiences { get; set; } = { "cms-api" };
     /// <summary>Client id để đọc client role trong <c>resource_access.{client}.roles</c> (Keycloak).</summary>
     public string RoleClient { get; set; } = "cms-api";
+    /// <summary>Entra: claim <c>groups</c> là object id của nhóm → role (cms.admin, staff…). Không đặt = bỏ qua nhóm.</summary>
+    public Dictionary<string, string[]> GroupRoles { get; set; } = new();
     public bool RequireHttpsMetadata { get; set; } = true;
     public TimeSpan ClockSkew { get; set; } = TimeSpan.FromMinutes(1);
+
+    /// <summary>Cấu hình sẵn cho Microsoft Entra ID (tenant + app SPA đăng ký ở Azure).</summary>
+    public static OidcOptions ForEntra(string tenantId, string clientId, string[]? audiences = null) => new()
+    {
+        Authority = $"https://login.microsoftonline.com/{tenantId}/v2.0",
+        ExtraIssuers = new[] { $"https://sts.windows.net/{tenantId}/" },
+        Audiences = audiences is { Length: > 0 } ? audiences : new[] { clientId, $"api://{clientId}" },
+    };
+
+    /// <summary>"groupId=cms.admin;groupId2=cms.editor,staff" → bảng nhóm → role.</summary>
+    public static Dictionary<string, string[]> ParseGroupRoles(string? v) =>
+        (v ?? "").Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).Select(x => x.Split('=', 2)).Where(p => p.Length == 2)
+            .ToDictionary(p => p[0].Trim(), p => p[1].Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries), StringComparer.OrdinalIgnoreCase);
 }
 
 /// <summary>
@@ -46,6 +63,8 @@ public sealed class OidcTokenService : ITokenService
     public OidcTokenService(OidcOptions o, IEnumerable<SecurityKey> keys) { _o = o; _keys = () => keys; }
 
     public bool CanIssue => false;
+    /// <summary>Token ngoài không mang đủ role/đơn vị/tenant của CMS → quyền chi tiết lấy từ danh bạ (khớp theo sub hoặc email).</summary>
+    public bool ResolvesFromDirectory => true;
     public string Issue(IReadOnlyDictionary<string, object?> claims) => throw new NotSupportedException("Token do Identity Server phát hành.");
 
     public UserPrincipal? Read(string? authorizationHeader)
@@ -55,8 +74,8 @@ public sealed class OidcTokenService : ITokenService
         {
             var p = new TokenValidationParameters
             {
-                ValidIssuer = _o.Authority.TrimEnd('/'), ValidateIssuer = true,
-                ValidAudience = _o.Audience, ValidateAudience = true,
+                ValidIssuers = new[] { _o.Authority.TrimEnd('/') }.Concat(_o.ExtraIssuers).ToArray(), ValidateIssuer = true,
+                ValidAudiences = _o.Audiences, ValidateAudience = true,
                 ValidateLifetime = true, RequireExpirationTime = true, ClockSkew = _o.ClockSkew,
                 RequireSignedTokens = true, IssuerSigningKeys = _keys(), ValidateIssuerSigningKey = true,
                 ValidAlgorithms = new[] { SecurityAlgorithms.RsaSha256, SecurityAlgorithms.RsaSha384, SecurityAlgorithms.RsaSha512, SecurityAlgorithms.EcdsaSha256, SecurityAlgorithms.EcdsaSha384 },
@@ -79,11 +98,15 @@ public sealed class OidcTokenService : ITokenService
 
     private UserPrincipal? ToPrincipal(JsonObject? c)
     {
-        if (c is null || !Doc.Truthy(c.Get("sub"))) return null;
+        // Entra: `sub` chỉ duy nhất theo từng ứng dụng; `oid` là định danh ổn định của người dùng trong tenant
+        var sub = Doc.Truthy(c?.Get("oid")) ? c!.Str("oid") : c?.Str("sub");
+        if (c is null || string.IsNullOrEmpty(sub)) return null;
         var roles = Many(c.Get("roles")).Concat(Many((c.Get("realm_access") as JsonObject)?.Get("roles")))
-            .Concat(Many(((c.Get("resource_access") as JsonObject)?.Get(_o.RoleClient) as JsonObject)?.Get("roles"))).Distinct().ToList();
+            .Concat(Many(((c.Get("resource_access") as JsonObject)?.Get(_o.RoleClient) as JsonObject)?.Get("roles")))
+            .Concat(Many(c.Get("groups")).SelectMany(g => _o.GroupRoles.TryGetValue(g, out var r) ? r : Array.Empty<string>())).Distinct().ToList();
         var tenants = Many(c.Get("tenants")).ToList(); if (tenants.Count == 0) tenants.Add("humg");
-        return new UserPrincipal(c.Str("sub")!, c.Str("name") ?? c.Str("preferred_username"), c.Str("email"), null, roles, RoleCatalog.PermissionsOf(roles), tenants,
+        var email = (c.Str("email") ?? c.Str("preferred_username") ?? c.Str("upn"))?.Trim().ToLowerInvariant();
+        return new UserPrincipal(sub, c.Str("name") ?? c.Str("preferred_username"), email, null, roles, RoleCatalog.PermissionsOf(roles), tenants,
             Many(c.Get("units")).ToList(), c.Str("staff_code"), c.Str("student_code"));
     }
 }

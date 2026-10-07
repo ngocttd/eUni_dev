@@ -6,6 +6,8 @@ public interface ITokenService
 {
     /// <summary>true: tự phát hành token (mock đóng vai Identity Server); false: chỉ kiểm tra token do IdS thật phát hành.</summary>
     bool CanIssue { get; }
+    /// <summary>true: token không mang đủ role/đơn vị/tenant của CMS → <c>IdentityResolver</c> bổ sung từ danh bạ (khớp theo sub hoặc email).</summary>
+    bool ResolvesFromDirectory { get; }
     /// <summary>Phát hành token (mock: đóng vai Identity Server).</summary>
     string Issue(IReadOnlyDictionary<string, object?> claims);
     /// <summary>Đọc và kiểm tra token từ header Authorization; null nếu thiếu/sai/hết hạn.</summary>

@@ -69,7 +69,7 @@ menu đầu trang/chân trang, banner theo vị trí và hạn hiển thị, tra
 
 | File | Nội dung |
 |---|---|
-| [docs/DOTNET_API_ASSESSMENT.md](docs/DOTNET_API_ASSESSMENT.md) | **Đánh giá tác động** khi chuyển mock Node sang .NET (admin/web có bị ảnh hưởng không) + kết quả kiểm chứng; hướng dẫn repo mới: [euni-api-dotnet/README.md](euni-api-dotnet/README.md) · phần chưa làm: [docs/DOTNET_API_CON_LAI.md](docs/DOTNET_API_CON_LAI.md) · **trang hướng dẫn triển khai**: [docs/huong-dan-trien-khai-dotnet.html](docs/huong-dan-trien-khai-dotnet.html) |
+| [euni-api-dotnet/docs/danh-gia-tac-dong.md](euni-api-dotnet/docs/danh-gia-tac-dong.md) | **Đánh giá tác động** khi chuyển mock Node sang .NET (admin/web có bị ảnh hưởng không) + kết quả kiểm chứng; hướng dẫn repo mới: [euni-api-dotnet/README.md](euni-api-dotnet/README.md) · phần chưa làm: [euni-api-dotnet/docs/con-lai.md](euni-api-dotnet/docs/con-lai.md) · **trang hướng dẫn triển khai**: [euni-api-dotnet/docs/huong-dan-trien-khai.html](euni-api-dotnet/docs/huong-dan-trien-khai.html) |
 | [docs/design/CMS_DESIGN.md](docs/design/CMS_DESIGN.md) | **Thiết kế CMS giai đoạn 1** (.NET · PostgreSQL · Redis · MinIO): multi-tenant, đăng nhập qua Identity Server (tài khoản trường + M365), song ngữ, workflow + hẹn giờ, phân quyền mức bản ghi, revision / soft delete / audit, tin tức vs thông báo, tìm kiếm tiếng Việt |
 | [euni-api-mock/database/v2/schema.sql](euni-api-mock/database/v2/schema.sql) | DDL PostgreSQL đích cho backend (RLS theo tenant, unaccent + pg_trgm) + `test.sql` |
 | [docs/SITE_STRUCTURE.md](docs/SITE_STRUCTURE.md) | Cấu trúc website sau khi tách: repo, thư mục, sơ đồ route, luồng dữ liệu |

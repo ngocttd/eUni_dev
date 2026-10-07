@@ -92,3 +92,10 @@ Khác biệt hành vi **chủ ý** so với mock: (1) `GET announcements/{id}/st
 | Khởi động trên database trống | tự áp lược đồ v2 + bổ sung và nạp dữ liệu mẫu; chạy qua `BASE_PATH` lẫn không tiền tố; `AUTH_MODE=oidc`: login 501, token mock bị từ chối 401 |
 
 Chưa kiểm chứng: `docker-compose.yml` (không có Docker trong môi trường dựng), MinIO thật (đã thử S3 tương thích), IdS thật (đã thử bằng khóa RSA cục bộ + discovery giả lập).
+
+## Cập nhật sau đánh giá (SSO Entra, seed, tách 3 repo)
+
+- API hỗ trợ `AUTH_MODE=oidc` với Microsoft Entra (`OIDC_PROVIDER=entra`), định danh theo `oid`, ghép danh bạ theo email (`IdentityResolver`), `CMS_BOOTSTRAP_ADMINS` cho admin đầu tiên.
+- Dữ liệu nạp thẳng vào PostgreSQL: tự seed, `--init-db`, hoặc `database/v2/seed-data.sql`.
+- Kiểm thử: 64 xUnit, smoke 118/118, parity 724 request (0 khác biệt ngoài ý muốn).
+- Hướng dẫn triển khai khi tách `euni-admin`, `euni-public`, `euni-api-dotnet` thành 3 repo: `huong-dan-trien-khai.html`. README của 2 FE sau khi tách cần sửa các link `../docs/...` và `euni-api-mock`.

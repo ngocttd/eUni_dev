@@ -3,7 +3,7 @@
 Bản **.NET** của `euni-api-mock` (Node.js), xây theo tài liệu *Kiến trúc code cms-api*: **modular monolith** một API – một database,
 dữ liệu **đọc/ghi trực tiếp từ PostgreSQL (lược đồ quan hệ v2)**, cô lập tenant bằng **Row-Level Security**.
 Giữ **nguyên hợp đồng HTTP** của mock (`contract/API_CONTRACT.md`) nên `euni-admin` và `euni-public` **không phải sửa gì** —
-chỉ cần chạy API ở cổng 3000 (hoặc đổi `NEXT_PUBLIC_API_GATEWAY_URL`). Đánh giá tác động: [`../docs/DOTNET_API_ASSESSMENT.md`](../docs/DOTNET_API_ASSESSMENT.md).
+chỉ cần chạy API ở cổng 3000 (hoặc đổi `NEXT_PUBLIC_API_GATEWAY_URL`). Đánh giá tác động: [`docs/danh-gia-tac-dong.md`](docs/danh-gia-tac-dong.md) · **Hướng dẫn triển khai (trang web, kể cả khi tách 3 repo): [`docs/huong-dan-trien-khai.html`](docs/huong-dan-trien-khai.html)** · thiết kế: [`docs/CMS_DESIGN.md`](docs/CMS_DESIGN.md).
 
 > `euni-api-mock` (Node) vẫn giữ nguyên để đối chiếu. Chỉ chạy **một** trong hai ở cổng 3000.
 
@@ -18,7 +18,9 @@ sudo -u postgres ./database/v2/setup-dev.sh             # DB euni_cms, role cms_
 dotnet run --project src/HUMG.CMS.Api
 ```
 
-Tài khoản mẫu, tenant, token… giống mock: xem `../euni-api-mock/README.md` (`tvanminh` / `Humg@2025`, `X-Tenant: cntt`, …).
+Tài khoản dev (`AUTH_MODE=mock`, mật khẩu `Humg@2025`): `tvanminh` (cms.admin, mọi trang) · `nthoa` (biên tập trang Trường) · `pvloc` (biên tập Khoa CNTT) ·
+`vthuong` (duyệt thông báo P.Đào tạo) · `ltmai` (tác giả) · `dvtung` (CTV chuyên mục Nghiên cứu). Cổng demo: `POST /auth-api/api/v1/auth/login {"role":"student"|"lecturer"|"staff"|"parent"|"manager"}`.
+Tenant mẫu `humg` (mặc định) và `cntt` (gửi `X-Tenant: cntt`).
 `POST /cms-api/api/v1/dev/reset` đặt lại dữ liệu mẫu (chỉ để phát triển).
 
 | Biến | Ý nghĩa |
@@ -27,9 +29,25 @@ Tài khoản mẫu, tenant, token… giống mock: xem `../euni-api-mock/README.
 | `DATABASE_ADMIN_URL` | Kết nối **bảo trì**: role `cms_admin` (BYPASSRLS) — áp lược đồ, nạp dữ liệu mẫu, sao lưu/phục hồi, `/dev/reset`, worker outbox |
 | `DB_MIGRATE=false` | Không tự áp `database/v2/schema.sql` + `amendments.sql` khi khởi động (DBA tự chạy) |
 | `STORAGE_PROVIDER` | `local` (đĩa, mặc định) hoặc `s3` (MinIO/S3): `S3_ENDPOINT` `S3_ACCESS_KEY` `S3_SECRET_KEY` `S3_BUCKET` (cms-public) `S3_REGION` `S3_FORCE_PATH_STYLE` |
-| `AUTH_MODE` | `mock` (mặc định: tự phát hành JWT HS256 như IdS khi dev) hoặc `oidc` (chỉ kiểm tra token của Identity Server: `OIDC_AUTHORITY` `OIDC_AUDIENCE`=cms-api `OIDC_ROLE_CLIENT` `OIDC_REQUIRE_HTTPS`) |
+| `AUTH_MODE` | `mock` (mặc định: tự phát hành JWT HS256 khi dev) hoặc `oidc` (chỉ kiểm tra token của nhà cung cấp định danh) |
+| `OIDC_PROVIDER=entra` | **Microsoft Entra ID**: `ENTRA_TENANT_ID`, `ENTRA_CLIENT_ID` (cùng giá trị `NEXT_PUBLIC_SSO_TENANT_ID` / `NEXT_PUBLIC_SSO_CLIENT_ID` của hai website). Tự suy ra issuer v2 + v1, audience = client id và `api://{client id}` |
+| `OIDC_AUTHORITY` `OIDC_AUDIENCE` `OIDC_ROLE_CLIENT` `OIDC_REQUIRE_HTTPS` | Nhà cung cấp OIDC khác (Keycloak, Identity Server…) |
+| `OIDC_GROUP_ROLES` | Entra: `groupObjectId=cms.admin;groupObjectId2=cms.editor,staff` (claim `groups` → role) |
+| `CMS_BOOTSTRAP_ADMINS` | Danh sách email (phân tách dấu phẩy) tự có vai trò `cms.admin` khi đăng nhập SSO — tài khoản quản trị đầu tiên |
 | `OUTBOX_RELAY=false` · `OUTBOX_POLL_SECONDS` | Tắt worker outbox cùng API (chạy tiến trình riêng) · chu kỳ quét (mặc định 5s) |
 | `PORT` `HOST` `BASE_PATH` `CORS_ORIGINS` `JWT_SECRET` `JWT_EXPIRES_IN` `API_LOG` | Như mock Node (`BASE_PATH` mặc định `/euni-mock-api`; nhận cả URL có và không có tiền tố) |
+
+## Nạp dữ liệu vào database
+
+| Cách | Khi nào | Lệnh |
+|---|---|---|
+| **Tự động** | Mặc định: API khởi động, thấy database TRỐNG → áp lược đồ + nạp dữ liệu (mẫu, mốc ngày tính theo hôm nay) | `dotnet run --project src/HUMG.CMS.Api` |
+| **Lệnh khởi tạo** | Muốn nạp trước khi chạy dịch vụ (CI/CD, bước triển khai) | `dotnet HUMG.CMS.Api.dll --init-db` (thêm `--fresh` để xóa sạch và nạp lại) |
+| **File SQL** | DBA nạp tay, không chạy ứng dụng | `psql -f database/v2/schema.sql -f database/v2/amendments.sql` rồi `psql -f database/v2/seed-data.sql` (role `cms_admin`, database trống) |
+
+Dữ liệu nạp gồm: 2 tenant (`humg`, `cntt`), cây đơn vị, danh bạ + tài khoản demo, tin tức + bản dịch + revision, thông báo, danh mục, trang + menu, banner, sự kiện, album/video/podcast,
+khối trang chủ, cấu hình theo tenant, phân quyền, nhật ký. **Đây là dữ liệu demo**; khi dùng SSO thật, đặt `CMS_BOOTSTRAP_ADMINS` để có quản trị viên đầu tiên rồi thay dần bằng dữ liệu thật
+(danh bạ `cms.user_directory`, đơn vị `cms.org_units` do job đồng bộ từ IdS/QLNS ghi bằng role `cms_admin`).
 
 ## Kiến trúc
 
@@ -87,9 +105,9 @@ Application/Api chỉ biết `IDocumentStore`, nên có thể thay bằng `CmsDb
 dotnet test                                        # 50 test; đặt TEST_DATABASE_URL, TEST_DATABASE_ADMIN_URL (và TEST_S3_ENDPOINT) để chạy phần PostgreSQL/S3
 node tests/contract/smoke.mjs                      # 118 kiểm tra hành vi API (tự chạy API ở cổng 3999, DB SMOKE_DB, mặc định euni_cms)
 API_URL=http://127.0.0.1:3000 node tests/contract/outbox.mjs     # cần API chạy với OUTBOX_POLL_SECONDS=2
-node tools/parity.mjs                              # đối chiếu mock Node ↔ .NET (cần ../euni-api-mock đã npm ci; DB PARITY_DB, mặc định euni_parity)
+node tools/parity.mjs                              # đối chiếu mock Node ↔ .NET (cần clone euni-api-mock và `npm ci`: MOCK_DIR=…; DB PARITY_DB, mặc định euni_parity)
 psql -d <db trống> -f database/v2/schema.sql -f database/v2/amendments.sql -f database/v2/test.sql   # schema v2 (kể cả RLS bảng con, đọc đa trang)
-node ../tools/migration/sync-test.mjs              # 25 kịch bản CMS → website (cần API :3000 + euni-public :3002)
+node tests/e2e/sync-test.mjs                      # 25 kịch bản CMS → website (cần API :3000 + euni-public :3002)
 CHROME=… PLAYWRIGHT=… node tests/ui/admin-routes.mjs   # giao diện euni-admin thật (cần API :3000 + euni-admin :3001)
 ```
 
@@ -100,7 +118,7 @@ Khác biệt **chủ ý** so với mock Node: (1) `GET announcements/{id}/stats`
 
 ## Chưa làm / ghi chú vận hành
 
-Danh sách đầy đủ các phần chưa làm: [`../docs/DOTNET_API_CON_LAI.md`](../docs/DOTNET_API_CON_LAI.md).
+Danh sách đầy đủ các phần chưa làm: [`docs/con-lai.md`](docs/con-lai.md).
 
 - `docker-compose.yml` (API + PostgreSQL + MinIO) chưa chạy thử vì môi trường dựng không có Docker; `S3FileStorage` được kiểm thử bằng máy chủ S3 tương thích (moto), chưa chạy với MinIO thật.
 - Tìm kiếm công khai vẫn lọc trong bộ nhớ sau khi nạp bản ghi; chuyển sang `search_text` (unaccent + pg_trgm) có sẵn ở v2 khi dữ liệu lớn.

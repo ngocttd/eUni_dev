@@ -54,7 +54,10 @@ public static class Middleware
     public static IApplicationBuilder UseRequestContext(this IApplicationBuilder app) => app.Use(async (http, next) =>
     {
         var ctx = http.RequestServices.GetRequiredService<RequestContext>();
-        ctx.User = http.RequestServices.GetRequiredService<ITokenService>().Read(http.Request.Headers.Authorization.FirstOrDefault());
+        var tokens = http.RequestServices.GetRequiredService<ITokenService>();
+        ctx.User = tokens.Read(http.Request.Headers.Authorization.FirstOrDefault());
+        // token của Entra/IdS chỉ chứng minh "bạn là ai": role/đơn vị/tenant bổ sung từ danh bạ CMS; người bị khóa → coi như chưa đăng nhập
+        if (ctx.User is not null && tokens.ResolvesFromDirectory) ctx.User = http.RequestServices.GetRequiredService<HUMG.CMS.Application.Features.Auth.IdentityResolver>().Resolve(ctx.User);
         ctx.Ip = http.Connection.RemoteIpAddress?.ToString();
         ctx.UserAgent = http.Request.Headers.UserAgent.FirstOrDefault();
         ctx.IfMatch = http.Request.Headers.TryGetValue("If-Match", out var im) ? im.FirstOrDefault() : null;

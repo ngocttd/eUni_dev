@@ -25,6 +25,17 @@ string FindRoot()
             if (Directory.Exists(Path.Combine(d.FullName, "mock-data"))) return d.FullName;
     return AppContext.BaseDirectory;
 }
+HUMG.CMS.Infrastructure.Security.OidcOptions BuildOidc()
+{
+    string[] list(string v) => v.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+    var o = env("OIDC_PROVIDER", "") == "entra"
+        ? HUMG.CMS.Infrastructure.Security.OidcOptions.ForEntra(env("ENTRA_TENANT_ID", ""), env("ENTRA_CLIENT_ID", ""), env("OIDC_AUDIENCE", "") is { Length: > 0 } a ? list(a) : null)
+        : new HUMG.CMS.Infrastructure.Security.OidcOptions { Authority = env("OIDC_AUTHORITY", ""), Audiences = list(env("OIDC_AUDIENCE", "cms-api")) };
+    o.RoleClient = env("OIDC_ROLE_CLIENT", "cms-api");
+    o.GroupRoles = HUMG.CMS.Infrastructure.Security.OidcOptions.ParseGroupRoles(Environment.GetEnvironmentVariable("OIDC_GROUP_ROLES"));
+    o.RequireHttpsMetadata = !string.Equals(Environment.GetEnvironmentVariable("OIDC_REQUIRE_HTTPS"), "false", StringComparison.OrdinalIgnoreCase);
+    return o;
+}
 var root = FindRoot();
 var options = new InfrastructureOptions
 {
@@ -42,11 +53,7 @@ var options = new InfrastructureOptions
         Region = env("S3_REGION", "us-east-1"), Bucket = env("S3_BUCKET", "cms-public"), ForcePathStyle = !string.Equals(Environment.GetEnvironmentVariable("S3_FORCE_PATH_STYLE"), "false", StringComparison.OrdinalIgnoreCase),
     },
     AuthMode = env("AUTH_MODE", "mock"),
-    Oidc = new HUMG.CMS.Infrastructure.Security.OidcOptions
-    {
-        Authority = env("OIDC_AUTHORITY", ""), Audience = env("OIDC_AUDIENCE", "cms-api"), RoleClient = env("OIDC_ROLE_CLIENT", "cms-api"),
-        RequireHttpsMetadata = !string.Equals(Environment.GetEnvironmentVariable("OIDC_REQUIRE_HTTPS"), "false", StringComparison.OrdinalIgnoreCase),
-    },
+    Oidc = BuildOidc(),
     JwtSecret = env("JWT_SECRET", "dev-only-change-me"),
     JwtExpiresIn = env("JWT_EXPIRES_IN", "8h"),
 };
@@ -57,7 +64,11 @@ var basePath = "/" + env("BASE_PATH", "/euni-mock-api").Trim('/');
 var origins = env("CORS_ORIGINS", "").Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 var openApi = Path.Combine(root, "contract", "openapi.json");
 
-builder.Services.AddInfrastructure(options).AddApplication();
+var identity = new HUMG.CMS.Application.Features.Auth.IdentityOptions
+{
+    BootstrapAdmins = env("CMS_BOOTSTRAP_ADMINS", "").Split(new[] { ',', ';', ' ' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).Select(x => x.ToLowerInvariant()).ToHashSet(),
+};
+builder.Services.AddInfrastructure(options).AddApplication(identity);
 builder.Services.AddSingleton<RequestGate>();
 builder.Services.AddCors(o => o.AddDefaultPolicy(p =>
 {
@@ -68,7 +79,16 @@ builder.Services.AddCors(o => o.AddDefaultPolicy(p =>
 var app = builder.Build();
 var logger = app.Services.GetRequiredService<ILoggerFactory>().CreateLogger("HUMG.CMS");
 var logRequests = !string.Equals(Environment.GetEnvironmentVariable("API_LOG"), "false", StringComparison.OrdinalIgnoreCase);
-app.Services.GetRequiredService<HUMG.CMS.Application.Abstractions.IDataMaintenance>().EnsureReady(); // áp lược đồ + nạp dữ liệu mẫu nếu database trống
+var maintenance = app.Services.GetRequiredService<HUMG.CMS.Application.Abstractions.IDataMaintenance>();
+if (args.Contains("--init-db"))
+{
+    // dotnet HUMG.CMS.Api.dll --init-db [--fresh]  → áp lược đồ + nạp dữ liệu (mẫu) vào database rồi thoát; --fresh: xóa sạch và nạp lại
+    maintenance.EnsureReady();
+    if (args.Contains("--fresh")) maintenance.Reset();
+    Console.WriteLine(args.Contains("--fresh") ? "✔ Đã dựng lại database và nạp dữ liệu." : "✔ Database sẵn sàng (lược đồ đã áp, dữ liệu đã nạp nếu database trống).");
+    return;
+}
+maintenance.EnsureReady(); // áp lược đồ + nạp dữ liệu mẫu nếu database trống
 
 /*
  * Khi deploy, mock được tích hợp qua API gateway: https://api-gateway-demo.humg.edu.vn/euni-mock-api (hoặc /euni-api cho bản .NET).

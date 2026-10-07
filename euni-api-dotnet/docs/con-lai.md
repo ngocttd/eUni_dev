@@ -1,6 +1,6 @@
 # euni-api-dotnet — các phần chưa làm
 
-Cập nhật: sau khi chuyển sang lược đồ quan hệ v2, outbox, S3/MinIO, OIDC. Nội dung đã làm và kết quả kiểm chứng: [DOTNET_API_ASSESSMENT.md](DOTNET_API_ASSESSMENT.md) · [euni-api-dotnet/README.md](../euni-api-dotnet/README.md).
+Cập nhật: sau khi chuyển sang lược đồ quan hệ v2, outbox, S3/MinIO, OIDC. Nội dung đã làm và kết quả kiểm chứng: [danh-gia-tac-dong.md](danh-gia-tac-dong.md) · [README.md](../README.md) · [huong-dan-trien-khai.html](huong-dan-trien-khai.html).
 
 ## 1. Chưa kiểm chứng được (đã viết nhưng chưa chạy thật)
 
@@ -8,7 +8,8 @@ Cập nhật: sau khi chuyển sang lược đồ quan hệ v2, outbox, S3/MinIO
 |---|---|---|
 | `docker-compose.yml` (API + PostgreSQL + MinIO) | Đã viết, chưa chạy vì môi trường dựng không có Docker | Chạy `docker compose up --build`, kiểm tra API lên và upload file đi vào MinIO |
 | MinIO thật | `S3FileStorage` chỉ thử với máy chủ S3 tương thích (moto) | Chạy test với MinIO thật: `TEST_S3_ENDPOINT=<minio>` rồi `dotnet test`; thử `S3_FORCE_PATH_STYLE`, bucket, quyền |
-| Identity Server thật (`AUTH_MODE=oidc`) | Thử bằng khóa RSA cục bộ + discovery giả lập | Đăng ký audience `cms-api`, kiểm tra tên claim thật của IdS (`roles`, `realm_access`, `resource_access`, `tenants`, `units`, `staff_code`, `student_code`); chỉnh `OidcTokenService.ToPrincipal` nếu khác. Không đổi cấu hình SSO/gateway |
+| Đăng nhập Microsoft Entra ID thật (tenant `c852d62b-…`, app SPA `5a7cce06-…`) | API đã hỗ trợ (`AUTH_MODE=oidc`, `OIDC_PROVIDER=entra`): tải được discovery + JWKS thật của tenant (test `TEST_ENTRA_LIVE=1`), kiểm tra issuer v2/v1, audience, ghép danh bạ theo email, app role/nhóm → role CMS, `CMS_BOOTSTRAP_ADMINS`. **Chưa thử với một lần đăng nhập thật** (cần tài khoản người dùng) | Ở Azure: đăng ký Redirect URI của hai website (loại SPA), tạo **App roles** `cms.admin`… và gán cho người dùng/nhóm (FE `euni-admin` quyết định vào `/cms` dựa trên claim `roles` trong id_token), đặt `CMS_BOOTSTRAP_ADMINS`; đăng nhập thử và xem `/me/context` |
+| Nhà cung cấp OIDC khác (Keycloak/Identity Server) | Hỗ trợ qua `OIDC_AUTHORITY`/`OIDC_AUDIENCE`, mới thử bằng khóa cục bộ + discovery giả lập | Kiểm tra tên claim thật, chỉnh `OidcTokenService.ToPrincipal` nếu khác |
 | CI GitHub Actions (`euni-api-dotnet/.github/workflows/ci.yml`) | Chưa chạy trên GitHub | Đẩy lên repo có Actions, sửa lỗi môi trường nếu có (moto, PostgreSQL service, quyền role) |
 | Bộ e2e giao diện cũ (`tools/migration/e2e-cms-write*.mjs`, `e2e-v2`, `e2e-tenants`, `e2e-logout`) | 21/33 bước lỗi trên cả mock Node lẫn .NET (kết quả giống hệt): script lỗi thời so với giao diện hiện tại (selector, dữ liệu mong đợi) | Cập nhật selector/kỳ vọng theo giao diện `euni-admin` hiện tại, rồi chạy lại để có bộ e2e ghi dữ liệu qua UI |
 

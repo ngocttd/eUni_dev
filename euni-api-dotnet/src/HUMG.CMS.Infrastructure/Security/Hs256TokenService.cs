@@ -15,6 +15,7 @@ namespace HUMG.CMS.Infrastructure.Security;
 public sealed class Hs256TokenService : ITokenService
 {
     public bool CanIssue => true;
+    public bool ResolvesFromDirectory => false;
     private readonly byte[] _key;
     private readonly TimeSpan _ttl;
 

@@ -20,7 +20,7 @@ if (!process.env.SMOKE_URL) {
   const env = { ...process.env, PORT: String(PORT), HOST: '127.0.0.1', STORE_FILE: join(dir, 'store.json'), API_LOG: 'false', ASPNETCORE_ENVIRONMENT: 'Development', UPLOAD_DIR: join(dir, 'uploads'),
     DATABASE_URL: process.env.DATABASE_URL || pg('cms_app', 'cms_app_dev'), DATABASE_ADMIN_URL: process.env.DATABASE_ADMIN_URL || pg('cms_admin', 'cms_admin_dev') }
   if (process.env.SMOKE_TARGET === 'node') {
-    server = spawn(process.execPath, ['src/server.js'], { cwd: join(root, '..', 'euni-api-mock'), env, stdio: ['ignore', 'pipe', 'inherit'] })
+    server = spawn(process.execPath, ['src/server.js'], { cwd: process.env.MOCK_DIR || join(root, '..', 'euni-api-mock'), env, stdio: ['ignore', 'pipe', 'inherit'] })
   } else {
     const dll = join(root, 'src', 'HUMG.CMS.Api', 'bin', 'Debug', 'net8.0', 'HUMG.CMS.Api.dll')
     server = existsSync(dll)

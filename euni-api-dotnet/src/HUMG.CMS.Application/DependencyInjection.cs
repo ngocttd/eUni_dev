@@ -20,11 +20,12 @@ namespace HUMG.CMS.Application;
 public static class DependencyInjection
 {
     /// <summary>Đăng ký use case (scoped theo request). Cần <c>IDocumentStore</c>, <c>ITokenService</c>, <c>IFileStorage</c>, <c>IMockData</c> từ Infrastructure.</summary>
-    public static IServiceCollection AddApplication(this IServiceCollection s)
+    public static IServiceCollection AddApplication(this IServiceCollection s, IdentityOptions? identity = null)
     {
+        s.AddSingleton(identity ?? new IdentityOptions());
         s.AddScoped<RequestContext>();
         s.AddScoped<AccessService>(); s.AddScoped<AuthorizationService>(); s.AddScoped<GrantService>();
-        s.AddScoped<AuditService>(); s.AddScoped<AuthService>(); s.AddScoped<TenantService>();
+        s.AddScoped<AuditService>(); s.AddScoped<IdentityResolver>(); s.AddScoped<AuthService>(); s.AddScoped<TenantService>();
         s.AddScoped<WorkflowService>(); s.AddScoped<NewsProfile>(); s.AddScoped<AnnouncementProfile>(); s.AddScoped<AnnouncementService>();
         s.AddScoped<PublicSiteService>(); s.AddScoped<ResourceCrudService>();
         s.AddScoped<DirectoryService>(); s.AddScoped<UserContextService>(); s.AddScoped<DashboardService>();

@@ -1,4 +1,5 @@
 // Đối chiếu phản hồi giữa mock Node (euni-api-mock) và bản .NET trên cùng một dữ liệu mẫu mới nạp.
+//   MOCK_DIR=<thư mục euni-api-mock đã npm ci; mặc định ../euni-api-mock>
 //   node tools/parity.mjs                tự khởi động hai server (cổng 3996/3997): Node dùng file tạm, .NET dùng PostgreSQL (PARITY_DB, mặc định euni_parity)
 //   NODE_URL=… DOTNET_URL=… node tools/parity.mjs   so sánh hai server đang chạy (cần cùng trạng thái dữ liệu: POST /cms-api/api/v1/dev/reset)
 // So sánh theo ngữ nghĩa JSON: null ≡ vắng mặt; thời điểm ISO lệch < 2 phút coi là bằng (dữ liệu mẫu tính theo "hôm nay").
@@ -18,7 +19,7 @@ const start = (cmd, args, cwd, port, tag) => new Promise((ok, fail) => {
   procs.push(p); p.stdout.on('data', (d) => /gateway/.test(String(d)) && ok()); p.on('exit', () => fail(new Error(`${tag} exited`)))
 })
 let NODE = process.env.NODE_URL, NET = process.env.DOTNET_URL
-if (!NODE) { await start(process.execPath, ['src/server.js'], join(root, '..', 'euni-api-mock'), 3997, 'node'); NODE = 'http://127.0.0.1:3997' }
+if (!NODE) { await start(process.execPath, ['src/server.js'], (process.env.MOCK_DIR || join(root, '..', 'euni-api-mock')), 3997, 'node'); NODE = 'http://127.0.0.1:3997' }
 if (!NET) { await start('dotnet', [join(root, 'src/HUMG.CMS.Api/bin/Debug/net8.0/HUMG.CMS.Api.dll')], root, 3996, 'net'); NET = 'http://127.0.0.1:3996' }
 
 const ISO = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:\d{2})$/

@@ -13,7 +13,7 @@ public class OidcTokenTests
 {
     private const string Issuer = "https://id.humg.edu.vn";
     private static readonly RsaSecurityKey Key = new(RSA.Create(2048)) { KeyId = "k1" };
-    private static readonly OidcOptions Opt = new() { Authority = Issuer, Audience = "cms-api", RoleClient = "cms-api" };
+    private static readonly OidcOptions Opt = new() { Authority = Issuer, Audiences = new[] { "cms-api" }, RoleClient = "cms-api" };
 
     private static string Token(Dictionary<string, object>? claims = null, string issuer = Issuer, string audience = "cms-api", SecurityKey? key = null, DateTime? expires = null, string alg = SecurityAlgorithms.RsaSha256)
     {
@@ -75,7 +75,7 @@ public class OidcTokenTests
                 var bytes = Encoding.UTF8.GetBytes(body); ctx.Response.ContentType = "application/json"; await ctx.Response.OutputStream.WriteAsync(bytes); ctx.Response.Close();
             }
         });
-        var svc = new OidcTokenService(new OidcOptions { Authority = url.TrimEnd('/'), Audience = "cms-api", RequireHttpsMetadata = false });
+        var svc = new OidcTokenService(new OidcOptions { Authority = url.TrimEnd('/'), Audiences = new[] { "cms-api" }, RequireHttpsMetadata = false });
         // issuer trong token phải khớp Authority đã cấu hình
         var token = Token(issuer: url.TrimEnd('/'));
         Assert.Equal("u-123", svc.Read("Bearer " + token)?.Sub);
